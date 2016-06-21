@@ -1,0 +1,23 @@
+language: ruby
+rvm:
+- '2.2.5'
+sudo: false
+cache: bundler
+env:
+  global:
+  - RUBY_GC_HEAP_GROWTH_MAX_SLOTS=300000
+  - RUBY_GC_HEAP_INIT_SLOTS=600000
+  - RUBY_GC_HEAP_GROWTH_FACTOR=1.25
+addons:
+  postgresql: '9.4'
+before_install:
+- source ${TRAVIS_BUILD_DIR}/tools/ci/before_install.sh
+script:
+- bundle exec bin/rails app:test:manageiq-providers-amazon:setup app:test:manageiq-providers-amazon
+notifications:
+  webhooks:
+    urls:
+    - https://webhooks.gitter.im/e/7af45001fe6b7a4039f2
+    on_success: change
+    on_failure: always
+    on_start: never

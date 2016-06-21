@@ -8,7 +8,7 @@ if defined?(RSpec) && defined?(RSpec::Core::RakeTask)
     desc "Run all amazon specs"
     RSpec::Core::RakeTask.new('manageiq-providers-amazon' => [:initialize, "evm:compile_sti_loader"]) do |t|
       EvmTestHelper.init_rspec_task(t)
-      t.pattern = FileList['gems/manageiq-providers-amazon/spec/**/*_spec.rb']
+      t.pattern = FileList[ENGINE_ROOT + '/spec/models/**/*_spec.rb']
     end
   end
-end # ifdef
+end

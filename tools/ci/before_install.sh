@@ -1,0 +1,15 @@
+set -e
+
+git clone https://github.com/durandom/manageiq.git --branch aws_move_to_gem --depth 1 spec/manageiq
+cd spec/manageiq
+echo "1" > REGION
+cp certs/v2_key.dev certs/v2_key
+cp config/database.pg.yml config/database.yml
+cd -
+
+echo "gem: --no-ri --no-rdoc --no-document" > ~/.gemrc
+travis_retry gem install bundler -v ">= 1.11.1"
+
+psql -c "CREATE USER root SUPERUSER PASSWORD 'smartvm';" -U postgres
+export BUNDLE_WITHOUT=development
+export BUNDLE_GEMFILE=${PWD}/Gemfile

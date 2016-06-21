@@ -11,7 +11,8 @@ Gem::Specification.new do |s|
   s.description = "Amazon AWS Provider for ManageIQ"
   s.licenses    = ["Apache-2.0"]
 
-  s.files = Dir["{app,lib}/**/*"]
+  s.files = Dir["{app,config.lib}/**/*"]
 
   s.add_dependency("aws-sdk", ["~>2.2.19"])
+  s.add_dependency "rails", ">= 5.0.0.rc2", "< 5.1"
 end
