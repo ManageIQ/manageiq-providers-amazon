@@ -19,7 +19,11 @@ gem "rails",                           "~> 5.0.x", :git => "git://github.com/rai
 gem "rspec-rails",      "~>3.5.x"
 gem "ezcrypto",                "=0.7",              :require => false
 gem "more_core_extensions",    "~>2.0.0",           :require => false
-gem "linux_block_device", ">=0.1.0", :require => false
+
+if RbConfig::CONFIG["host_os"].include?("linux")
+  gem "linux_block_device", ">=0.1.0", :require => false
+end
+
 gem "memory_buffer",           ">=0.1.0",           :require => false
 gem "addressable",             "~> 2.4",            :require => false
 gem "pg",                      "~>0.18.2",          :require => false
