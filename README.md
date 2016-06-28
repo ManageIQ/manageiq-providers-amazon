@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/manageiq-providers-amazon.svg)](http://badge.fury.io/rb/manageiq-providers-amazon)
 [![Build Status](https://travis-ci.org/ManageIQ/manageiq-providers-amazon.svg)](https://travis-ci.org/ManageIQ/manageiq-providers-amazon)
 [![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon)
-[![Coverage Status](https://coveralls.io/repos/ManageIQ/manageiq-providers-amazon/badge.svg)](https://coveralls.io/github/ManageIQ/manageiq-providers-amazon)
+[![Test Coverage](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/badges/coverage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/coverage)
 [![Dependency Status](https://gemnasium.com/ManageIQ/manageiq-providers-amazon.svg)](https://gemnasium.com/ManageIQ/manageiq-providers-amazon)
 
 ManageIQ plugin for the Amazon EC2 provider.
