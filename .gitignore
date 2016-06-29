@@ -1,34 +1,15 @@
-# /
-*.cmd
-*.pyc
-*.sln
-*.sublime-project
-*.sublime-workspace
-*.suo
-*.swp
-.bundle/
-.idea/
-.loadpath
-.project
-.redcar/
-.rubocop-*
-.ruby-version
-.tags
-coverage/
-Gemfile.dev.rb
-Gemfile.lock*
-nbproject/
-Thumbs.db
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
 
-config/settings.local.yml
-config/settings/*.local.yml
-config/environments/*.local.yml
+/config/settings.local.yml
+/config/settings/*.local.yml
+/config/environments/*.local.yml
 
-# log/
-log/*.gz
-log/*.log
-log/*.txt
-log/call_graph_*.html
-
-# tmp/
-tmp/*
+/spec/manageiq
