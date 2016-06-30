@@ -28,6 +28,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
   end
 
   def translate_exception(err)
+    require 'aws-sdk'
     case err
     when Aws::EC2::Errors::SignatureDoesNotMatch
       MiqException::MiqHostError.new "SignatureMismatch - check your AWS Secret Access Key and signing method"
@@ -70,14 +71,12 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     #
 
     def raw_connect(access_key_id, secret_access_key, service, region, proxy_uri = nil)
-      proxy_uri ||= VMDB::Util.http_proxy_uri
-
       require 'aws-sdk'
       Aws.const_get(service)::Resource.new(
         :access_key_id     => access_key_id,
         :secret_access_key => secret_access_key,
         :region            => region,
-        :http_proxy        => proxy_uri,
+        :http_proxy        => proxy_uri || VMDB::Util.http_proxy_uri,
         :logger            => $aws_log,
         :log_level         => :debug,
         :log_formatter     => Aws::Log::Formatter.new(Aws::Log::Formatter.default.pattern.chomp)
