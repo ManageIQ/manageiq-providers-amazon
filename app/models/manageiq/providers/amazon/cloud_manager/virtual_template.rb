@@ -1,3 +1,8 @@
 class ManageIQ::Providers::Amazon::CloudManager::VirtualTemplate < ::ManageIQ::Providers::CloudManager::VirtualTemplate
-  validates :cloud_subnet_id, :availability_zone_id, :ems_ref, :presence => true
+  validates :cloud_network, :availability_zone,
+            :ems_ref, :flavor, :presence => true
+
+  belongs_to :cloud_network
+  belongs_to :availability_zone
+  belongs_to :flavor
 end
