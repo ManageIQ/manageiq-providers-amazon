@@ -17,8 +17,10 @@ describe ManageIQ::Providers::Amazon::CloudManager do
   end
 
   describe ".discover" do
-    let(:ec2_user) { "0123456789ABCDEFGHIJ" }
-    let(:ec2_pass) { "ABCDEFGHIJKLMNO1234567890abcdefghijklmno" }
+    let(:ec2_user) { FactoryGirl.build(:authentication).userid }
+    let(:ec2_pass) { FactoryGirl.build(:authentication).password }
+    let(:ec2_user_other) { 'user_other' }
+    let(:ec2_pass_other) { 'pass_other' }
     subject { described_class.discover(ec2_user, ec2_pass) }
 
     before do
@@ -40,8 +42,7 @@ describe ManageIQ::Providers::Amazon::CloudManager do
     def assert_region_on_another_account(ems, name)
       expect(ems.name).to eq(name)
       expect(ems.provider_region).to eq(name.split(" ").first)
-      default_auth = FactoryGirl.build(:authentication)
-      expect(ems.auth_user_pwd).to eq([default_auth.userid, default_auth.password])
+      expect(ems.auth_user_pwd).to eq([ec2_user_other, ec2_pass_other])
     end
 
     context "on greenfield amazon" do
@@ -121,9 +122,10 @@ describe ManageIQ::Providers::Amazon::CloudManager do
 
       context "with records on other account" do
         def create_ems_on_other_account(name)
-          FactoryGirl.create(:ems_amazon_with_authentication_on_other_account,
-                             :name            => name,
-                             :provider_region => "us-west-1")
+          cloud_manager = FactoryGirl.create(:ems_amazon,
+                                             :name            => name,
+                                             :provider_region => "us-west-1")
+          cloud_manager.authentications << FactoryGirl.create(:authentication, :userid => ec2_user_other, :password => ec2_pass_other)
         end
 
         it "with the same name" do
@@ -147,8 +149,8 @@ describe ManageIQ::Providers::Amazon::CloudManager do
           expect(emses.count).to eq(4)
           assert_region(emses[0], "us-east-1")
           assert_region_on_another_account(emses[1], "us-west-1")
-          assert_region_on_another_account(emses[2], "us-west-1 #{ec2_user}")
-          assert_region(emses[3], "us-west-1 1")
+          assert_region_on_another_account(emses[3], "us-west-1 #{ec2_user}")
+          assert_region(emses[2], "us-west-1 1")
         end
 
         it "with the same name, backup name, and secondary backup name" do
@@ -162,9 +164,9 @@ describe ManageIQ::Providers::Amazon::CloudManager do
           expect(emses.count).to eq(5)
           assert_region(emses[0], "us-east-1")
           assert_region_on_another_account(emses[1], "us-west-1")
-          assert_region_on_another_account(emses[2], "us-west-1 #{ec2_user}")
-          assert_region_on_another_account(emses[3], "us-west-1 1")
-          assert_region(emses[4], "us-west-1 2")
+          assert_region_on_another_account(emses[4], "us-west-1 #{ec2_user}")
+          assert_region_on_another_account(emses[2], "us-west-1 1")
+          assert_region(emses[3], "us-west-1 2")
         end
       end
     end
