@@ -20,7 +20,6 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   require_nested :Vm
 
   OrchestrationTemplateCfn.register_eligible_manager(self)
-  ExtManagementSystem.register_cloud_discovery_type('amazon' => 'ec2')
 
   include ManageIQ::Providers::Amazon::ManagerMixin
 
@@ -45,6 +44,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   before_validation :ensure_managers
 
   supports :provisioning
+  supports :discovery
 
   def ensure_managers
     build_network_manager unless network_manager
