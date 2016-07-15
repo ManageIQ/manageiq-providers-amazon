@@ -5,6 +5,7 @@
 [![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon)
 [![Test Coverage](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/badges/coverage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/coverage)
 [![Dependency Status](https://gemnasium.com/ManageIQ/manageiq-providers-amazon.svg)](https://gemnasium.com/ManageIQ/manageiq-providers-amazon)
+[![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-amazon/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-amazon/master)
 
 ManageIQ plugin for the Amazon EC2 provider.
 
