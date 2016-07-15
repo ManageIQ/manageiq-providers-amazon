@@ -22,7 +22,7 @@ gem "uuidtools",               "~>2.1.3",           :require => false
 gem "rails",                           "~> 5.0.x", :git => "git://github.com/rails/rails.git", :branch => "5-0-stable"
 gem "rspec-rails",      "~>3.5.x"
 gem "ezcrypto",                "=0.7",              :require => false
-gem "more_core_extensions",    "~>2.0.0",           :require => false
+gem "more_core_extensions",    "~>3.0.0",           :require => false
 
 if RbConfig::CONFIG["host_os"].include?("linux")
   gem "linux_block_device", ">=0.1.0", :require => false
@@ -44,7 +44,7 @@ gem "paperclip",                      "~>4.3.0"
 gem "ruby_parser",                    "~>3.7",     :require => false
 gem "secure_headers",                 "~>3.0.0"
 gem "sprockets-es6",                  "~>0.9.0",  :require => "sprockets/es6"
-gem "linux_admin",             "~>0.16.0",          :require => false
+gem "linux_admin",             "~>0.17.0",          :require => false
 gem "memoist",                 "~>0.14.0",          :require => false
 gem "default_value_for",              "~>3.0.2.alpha-miq.1", :git => "git://github.com/jrafanie/default_value_for.git", :branch => "rails-50" # https://github.com/FooBarWidget/default_value_for/pull/57
 gem "dalli",                          "~>2.7.4",   :require => false
@@ -69,3 +69,4 @@ gem "rubywbem",            :require => false, :git => "git://github.com/ManageIQ
 gem "net_app_manageability",          ">=0.1.0",   :require => false
 gem "coveralls",                    :require => false
 gem "hawkular-client",         "=2.0.0",            :require => false
+gem "rbvmomi",                 "~>1.8.0",           :require => false
