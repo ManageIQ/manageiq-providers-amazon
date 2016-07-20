@@ -44,6 +44,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   before_validation :ensure_managers
 
   supports :provisioning
+  supports :regions
   supports :discovery
 
   def ensure_managers
