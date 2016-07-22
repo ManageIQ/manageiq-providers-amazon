@@ -1,5 +1,7 @@
 # manageiq-providers-amazon
 
+[![Join the chat at https://gitter.im/ManageIQ/manageiq-providers-amazon](https://badges.gitter.im/ManageIQ/manageiq-providers-amazon.svg)](https://gitter.im/ManageIQ/manageiq-providers-amazon?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Gem Version](https://badge.fury.io/rb/manageiq-providers-amazon.svg)](http://badge.fury.io/rb/manageiq-providers-amazon)
 [![Build Status](https://travis-ci.org/ManageIQ/manageiq-providers-amazon.svg)](https://travis-ci.org/ManageIQ/manageiq-providers-amazon)
 [![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon)
