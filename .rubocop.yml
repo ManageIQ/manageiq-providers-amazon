@@ -1,0 +1,39 @@
+inherit_from:
+- https://raw.githubusercontent.com/ManageIQ/guides/master/.rubocop.yml
+#
+# Overrides
+#
+GlobalVars:
+  AllowedVariables:
+  # Loggers
+  - $audit_log
+  - $api_log
+  - $aws_log
+  - $fog_log
+  - $log
+  - $miq_ae_logger
+  - $policy_log
+  - $rails_log
+  - $rhevm_log
+  - $kube_log
+  - $mw_log
+  - $scvmm_log
+  - $vim_log
+  - $websocket_log
+  # In Automate methods
+  - $evm
+#
+# Special Exclusions
+#
+AllCops:
+  TargetRubyVersion: 2.2
+  Exclude:
+    - gems/pending/VMwareWebService/wsdl41/vimws25MappingRegistry.rb
+    - db/schema.rb
+    - vendor/**/*
+ClassAndModuleCamelCase:
+  Exclude:
+    - lib/miq_automation_engine/service_models/*.rb
+FileName:
+  Exclude:
+    - lib/miq_automation_engine/service_models/*.rb
