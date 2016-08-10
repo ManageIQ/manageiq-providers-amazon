@@ -41,36 +41,74 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     end
   end
 
+  def expected_table_counts
+    {
+      :auth_private_key              => 12,
+      :ext_management_system         => 2,
+      :flavor                        => 56,
+      :availability_zone             => 5,
+      :vm_or_template                => 57,
+      :vm                            => 37,
+      :miq_template                  => 20,
+      :disk                          => 16,
+      :guest_device                  => 0,
+      :hardware                      => 57,
+      :network                       => 26,
+      :operating_system              => 0,
+      :snapshot                      => 0,
+      :system_service                => 0,
+      :relationship                  => 38,
+      :miq_queue                     => 60,
+      :orchestration_template        => 3,
+      :orchestration_stack           => 4,
+      :orchestration_stack_parameter => 10,
+      :orchestration_stack_output    => 1,
+      :orchestration_stack_resource  => 45,
+      :security_group                => 37,
+      :firewall_rule                 => 99,
+      :network_port                  => 46,
+      :cloud_network                 => 5,
+      :floating_ip                   => 5,
+      :network_router                => 0,
+      :cloud_subnet                  => 10,
+      :custom_attribute              => 0
+    }
+  end
+
   def assert_table_counts
-    expect(ExtManagementSystem.count).to eq(2)
-    expect(Flavor.count).to eq(56)
-    expect(AvailabilityZone.count).to eq(5)
-    expect(FloatingIp.count).to eq(5)
-    expect(AuthPrivateKey.count).to eq(12)
-    expect(CloudNetwork.count).to eq(5)
-    expect(CloudSubnet.count).to eq(10)
-    expect(OrchestrationTemplate.count).to eq(2)
-    expect(OrchestrationStack.count).to eq(2)
-    expect(OrchestrationStackParameter.count).to eq(5)
-    expect(OrchestrationStackOutput.count).to eq(1)
-    expect(OrchestrationStackResource.count).to eq(24)
-    expect(SecurityGroup.count).to eq(36)
-    expect(FirewallRule.count).to eq(94)
-    expect(VmOrTemplate.count).to eq(47)
-    expect(Vm.count).to eq(27)
-    expect(MiqTemplate.count).to eq(20)
+    actual = {
+      :auth_private_key              => AuthPrivateKey.count,
+      :ext_management_system         => ExtManagementSystem.count,
+      :flavor                        => Flavor.count,
+      :availability_zone             => AvailabilityZone.count,
+      :vm_or_template                => VmOrTemplate.count,
+      :vm                            => Vm.count,
+      :miq_template                  => MiqTemplate.count,
+      :disk                          => Disk.count,
+      :guest_device                  => GuestDevice.count,
+      :hardware                      => Hardware.count,
+      :network                       => Network.count,
+      :operating_system              => OperatingSystem.count,
+      :snapshot                      => Snapshot.count,
+      :system_service                => SystemService.count,
+      :relationship                  => Relationship.count,
+      :miq_queue                     => MiqQueue.count,
+      :orchestration_template        => OrchestrationTemplate.count,
+      :orchestration_stack           => OrchestrationStack.count,
+      :orchestration_stack_parameter => OrchestrationStackParameter.count,
+      :orchestration_stack_output    => OrchestrationStackOutput.count,
+      :orchestration_stack_resource  => OrchestrationStackResource.count,
+      :security_group                => SecurityGroup.count,
+      :firewall_rule                 => FirewallRule.count,
+      :network_port                  => NetworkPort.count,
+      :cloud_network                 => CloudNetwork.count,
+      :floating_ip                   => FloatingIp.count,
+      :network_router                => NetworkRouter.count,
+      :cloud_subnet                  => CloudSubnet.count,
+      :custom_attribute              => CustomAttribute.count
+    }
 
-    expect(CustomAttribute.count).to eq(0)
-    expect(Disk.count).to eq(14)
-    expect(GuestDevice.count).to eq(0)
-    expect(Hardware.count).to eq(47)
-    expect(Network.count).to eq(15)
-    expect(OperatingSystem.count).to eq(0) # TODO: Should this be 13 (set on all vms)?
-    expect(Snapshot.count).to eq(0)
-    expect(SystemService.count).to eq(0)
-
-    expect(Relationship.count).to eq(26)
-    expect(MiqQueue.count).to eq(50)
+    expect(actual).to eq expected_table_counts
   end
 
   def assert_ems
@@ -79,18 +117,19 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :uid_ems     => nil
     )
 
-    expect(@ems.flavors.size).to eq(56)
-    expect(@ems.availability_zones.size).to eq(5)
-    expect(@ems.floating_ips.size).to eq(5)
-    expect(@ems.key_pairs.size).to eq(12)
-    expect(@ems.cloud_networks.size).to eq(5)
-    expect(@ems.security_groups.size).to eq(36)
-    expect(@ems.vms_and_templates.size).to eq(47)
-    expect(@ems.vms.size).to eq(27)
-    expect(@ems.miq_templates.size).to eq(20)
-    expect(@ems.orchestration_stacks.size).to eq(2)
+    expect(@ems.flavors.size).to eql(expected_table_counts[:flavor])
+    expect(@ems.availability_zones.size).to eql(expected_table_counts[:availability_zone])
+    expect(@ems.vms_and_templates.size).to eql(expected_table_counts[:vm_or_template])
+    expect(@ems.security_groups.size).to eql(expected_table_counts[:security_group])
+    expect(@ems.network_ports.size).to eql(expected_table_counts[:network_port])
+    expect(@ems.cloud_networks.size).to eql(expected_table_counts[:cloud_network])
+    expect(@ems.floating_ips.size).to eql(expected_table_counts[:floating_ip])
+    expect(@ems.network_routers.size).to eql(expected_table_counts[:network_router])
+    expect(@ems.cloud_subnets.size).to eql(expected_table_counts[:cloud_subnet])
+    expect(@ems.miq_templates.size).to eq(expected_table_counts[:miq_template])
 
-    expect(@ems.direct_orchestration_stacks.size).to eq(1)
+    expect(@ems.orchestration_stacks.size).to eql(expected_table_counts[:orchestration_stack])
+    expect(@ems.direct_orchestration_stacks.size).to eql(3)
   end
 
   def assert_specific_flavor
@@ -450,7 +489,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :power_state           => "on",
       :location              => "unknown",
       :tools_status          => nil,
-      :boot_time             => "2013-09-23T20:11:52.000",
+      :boot_time             => "2016-08-10 15:34:32.000000000 +0000",
       :standby_action        => nil,
       :connection_state      => nil,
       :cpu_affinity          => nil,
@@ -480,15 +519,15 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
   def assert_specific_orchestration_stack
     stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.where(
-      :name => "EmsRefreshSpec-JoeV-050").first
+      :name => "EmsRefreshSpecStack").first
     expect(stack.status_reason)
-      .to eq("The following resource(s) failed to create: [WebServerWaitCondition, IPAddress]. ")
+      .to eq("The following resource(s) failed to create: [IPAddress]. ")
 
     @orch_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.where(
-      :name => "EmsRefreshSpec-JoeV-050-WebServerInstance-1KRT71SKWBZ1I").first
+      :name => "EmsRefreshSpecStack-WebServerInstance-KA9UQBMIC3NR").first
     expect(@orch_stack).to have_attributes(
       :status  => "CREATE_COMPLETE",
-      :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpec-JoeV-050-WebServerInstance-1KRT71SKWBZ1I/bff036f0-ba27-11e5-b4be-500c5242948e",
+      :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance-KA9UQBMIC3NR/8be435c0-5f20-11e6-9323-50d5cafe7636",
     )
     expect(@orch_stack.description).to start_with("AWS CloudFormation Sample Template WordPress_Simple:")
 
@@ -517,7 +556,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(resources[3]).to have_attributes(
       :name                   => "WebServer",
       :logical_resource       => "WebServer",
-      :physical_resource      => "i-7c3c64fd",
+      :physical_resource      => "i-df132341",
       :resource_category      => "AWS::EC2::Instance",
       :resource_status        => "CREATE_COMPLETE",
       :resource_status_reason => nil,
@@ -529,7 +568,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(outputs.size).to eq(1)
     expect(outputs[0]).to have_attributes(
       :key         => "WebsiteURL",
-      :value       => "http://ec2-54-205-48-36.compute-1.amazonaws.com/wordpress",
+      :value       => "http://ec2-54-158-72-174.compute-1.amazonaws.com/wordpress",
       :description => "WordPress Website"
     )
   end
@@ -542,20 +581,20 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(@orch_stack.orchestration_template).to eq(@orch_template)
 
     # orchestration stack can be nested
-    parent_stack = OrchestrationStack.where(:name => "EmsRefreshSpec-JoeV-050").first
+    parent_stack = OrchestrationStack.where(:name => "EmsRefreshSpecStack").first
     expect(@orch_stack.parent).to eq(parent_stack)
 
     # orchestration stack can have vms
-    vm = Vm.where(:name => "i-7c3c64fd").first
+    vm = Vm.where(:name => "i-df132341").first
     expect(vm.orchestration_stack).to eq(@orch_stack)
 
     # orchestration stack can have security groups
     sg = SecurityGroup.where(
-      :name => "EmsRefreshSpec-JoeV-050-WebServerInstance-1KRT71SKWBZ1I-WebServerSecurityGroup-13RL8S2C6ZWI1").first
+      :name => "EmsRefreshSpecStack-WebServerInstance-KA9UQBMIC3NR-WebServerSecurityGroup-1P9L0V2V3NYRX").first
     expect(sg.orchestration_stack).to eq(@orch_stack)
 
     # orchestration stack can have cloud networks
-    vpc = CloudNetwork.where(:name => "vpc-d7b4c7b3").first
+    vpc = CloudNetwork.where(:name => "vpc-d7c3a8b0").first
     expect(vpc.orchestration_stack).to eq(parent_stack)
   end
 
