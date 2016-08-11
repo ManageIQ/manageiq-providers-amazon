@@ -50,26 +50,26 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :ext_management_system         => 2,
       :flavor                        => 56,
       :availability_zone             => 5,
-      :vm_or_template                => 47,
-      :vm                            => 27,
+      :vm_or_template                => 48,
+      :vm                            => 28,
       :miq_template                  => 20,
       :disk                          => 14,
       :guest_device                  => 0,
-      :hardware                      => 47,
-      :network                       => 15,
+      :hardware                      => 48,
+      :network                       => 17,
       :operating_system              => 0,
       :snapshot                      => 0,
       :system_service                => 0,
       :relationship                  => 30,
-      :miq_queue                     => 50,
-      :orchestration_template        => 3,
+      :miq_queue                     => 51,
+      :orchestration_template        => 4,
       :orchestration_stack           => 4,
       :orchestration_stack_parameter => 10,
       :orchestration_stack_output    => 1,
-      :orchestration_stack_resource  => 45,
+      :orchestration_stack_resource  => 43,
       :security_group                => 37,
       :firewall_rule                 => 99,
-      :network_port                  => 33,
+      :network_port                  => 37,
       :cloud_network                 => 5,
       :floating_ip                   => 5,
       :network_router                => 0,
@@ -693,7 +693,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   end
 
   def assert_specific_orchestration_template
-    @orch_template = OrchestrationTemplateCfn.where(:md5 => "e929859521d64ac28ee29f8526d33e8f").first
+    @orch_template = OrchestrationTemplateCfn.where(:md5 => "1c67b49b780587c4e2756ba029a8844b").first
     expect(@orch_template.description).to start_with("AWS CloudFormation Sample Template WordPress_Simple:")
     expect(@orch_template.content).to start_with("{\n  \"AWSTemplateFormatVersion\" : \"2010-09-09\",")
     expect(@orch_template).to have_attributes(:draft => false, :orderable => false)
@@ -703,13 +703,15 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.where(
       :name => "EmsRefreshSpecStack").first
     expect(stack.status_reason)
-      .to eq("The following resource(s) failed to create: [IPAddress]. ")
+      .to eq("The following resource(s) failed to create: [OutBoundHTTPNetworkAclEntry, IPAddress, Route, "\
+             "InboundSSHNetworkAclEntry, WebServerWaitCondition, InboundResponsePortsNetworkAclEntry, "\
+             "OutBoundHTTPSNetworkAclEntry, InboundHTTPNetworkAclEntry]. ")
 
     @orch_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.where(
-      :name => "EmsRefreshSpecStack-WebServerInstance-KA9UQBMIC3NR").first
+      :name => "EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W").first
     expect(@orch_stack).to have_attributes(
       :status  => "CREATE_COMPLETE",
-      :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance-KA9UQBMIC3NR/8be435c0-5f20-11e6-9323-50d5cafe7636",
+      :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W/72cb3f90-5fb9-11e6-ab2c-50d501eed2b3",
     )
     expect(@orch_stack.description).to start_with("AWS CloudFormation Sample Template WordPress_Simple:")
 
@@ -732,13 +734,13 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
   def assert_specific_orchestration_stack_resources
     resources = @orch_stack.resources.order("ems_ref")
-    expect(resources.size).to eq(4)
+    expect(resources.size).to eq(2)
 
     # assert one of the resource models
-    expect(resources[3]).to have_attributes(
+    expect(resources[1]).to have_attributes(
       :name                   => "WebServer",
       :logical_resource       => "WebServer",
-      :physical_resource      => "i-df132341",
+      :physical_resource      => "i-d7754a49",
       :resource_category      => "AWS::EC2::Instance",
       :resource_status        => "CREATE_COMPLETE",
       :resource_status_reason => nil,
@@ -750,7 +752,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(outputs.size).to eq(1)
     expect(outputs[0]).to have_attributes(
       :key         => "WebsiteURL",
-      :value       => "http://ec2-54-158-72-174.compute-1.amazonaws.com/wordpress",
+      :value       => "http://ec2-23-23-39-34.compute-1.amazonaws.com/wordpress",
       :description => "WordPress Website"
     )
   end
@@ -767,16 +769,16 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(@orch_stack.parent).to eq(parent_stack)
 
     # orchestration stack can have vms
-    vm = Vm.where(:name => "i-df132341").first
+    vm = Vm.where(:name => "i-d7754a49").first
     expect(vm.orchestration_stack).to eq(@orch_stack)
 
     # orchestration stack can have security groups
     sg = SecurityGroup.where(
-      :name => "EmsRefreshSpecStack-WebServerInstance-KA9UQBMIC3NR-WebServerSecurityGroup-1P9L0V2V3NYRX").first
+      :name => "EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W-WebServerSecurityGroup-K60KWXZHGJDE").first
     expect(sg.orchestration_stack).to eq(@orch_stack)
 
     # orchestration stack can have cloud networks
-    vpc = CloudNetwork.where(:name => "vpc-d7c3a8b0").first
+    vpc = CloudNetwork.where(:name => "vpc-08d9b36f").first
     expect(vpc.orchestration_stack).to eq(parent_stack)
   end
 
