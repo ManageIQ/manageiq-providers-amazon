@@ -394,6 +394,15 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :hostname    => "ip-10-65-160-22.ec2.internal"
     )
 
+    expect(v.load_balancers.collect(&:name)).to match_array ["EmsRefreshSpec-LoadBalancer"]
+    expect(v.load_balancer_health_checks.collect(&:ems_ref)).to match_array ["EmsRefreshSpec-LoadBalancer"]
+    expect(v.load_balancer_listeners.collect(&:ems_ref)).to match_array ["EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__"]
+    expect(v.load_balancer_health_check_states).to match_array ["OutOfService"]
+    healt_check_states_with_reason = [
+      "Status: OutOfService, Status Reason: Instance has failed at least the UnhealthyThreshold number of health checks consecutively."
+    ]
+    expect(v.load_balancer_health_check_states_with_reason).to match_array healt_check_states_with_reason
+
     v.with_relationship_type("genealogy") do
       expect(v.parent).to eq(@template)
     end
@@ -511,6 +520,20 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(v.cloud_networks.first).to eq(@cn)
     expect(v.cloud_subnets.first).to eq(@subnet)
     expect(v.security_groups).to eq([@sg_on_cn])
+
+    expect(v.load_balancers.collect(&:name)).to match_array ["EmSRefreshSpecVPCELB", "EmSRefreshSpecVPCELB2"]
+    expect(v.load_balancer_health_checks.collect(&:ems_ref)).to match_array ["EmSRefreshSpecVPCELB", "EmSRefreshSpecVPCELB2"]
+    listeners = [
+      "EmSRefreshSpecVPCELB2__TCP__2222__TCP__22__", "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__",
+      "EmSRefreshSpecVPCELB__TCP__22__TCP__22__"
+    ]
+    expect(v.load_balancer_listeners.collect(&:ems_ref)).to match_array listeners
+    expect(v.load_balancer_health_check_states).to match_array ["OutOfService", "OutOfService"]
+    healt_check_states_with_reason = [
+      "Status: OutOfService, Status Reason: Instance has failed at least the UnhealthyThreshold number of health checks consecutively.",
+      "Status: OutOfService, Status Reason: Instance has failed at least the UnhealthyThreshold number of health checks consecutively."
+    ]
+    expect(v.load_balancer_health_check_states_with_reason).to match_array healt_check_states_with_reason
   end
 
   def assert_specific_load_balancers
