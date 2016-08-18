@@ -537,7 +537,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   end
 
   def assert_specific_load_balancers
-    @elb_non_vpc = ManageIQ::Providers::Amazon::CloudManager::LoadBalancer.where(
+    @elb_non_vpc = ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer.where(
       :name => "EmsRefreshSpec-LoadBalancer").first
     expect(@elb_non_vpc).to have_attributes(
                               "ems_ref"         => "EmsRefreshSpec-LoadBalancer",
@@ -548,7 +548,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
     expect(@elb_non_vpc.ext_management_system).to eq(@ems.network_manager)
 
-    @elb = ManageIQ::Providers::Amazon::CloudManager::LoadBalancer.where(
+    @elb = ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer.where(
       :name => "EmSRefreshSpecVPCELB").first
     expect(@elb).to have_attributes(
                       "ems_ref"         => "EmSRefreshSpecVPCELB",
@@ -563,7 +563,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     # expect(@elb.cloud_subnets).to eq(..)
     # expect(@elb.network_ports).to eq(..)
 
-    @elb2 = ManageIQ::Providers::Amazon::CloudManager::LoadBalancer.where(
+    @elb2 = ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer.where(
       :name => "EmSRefreshSpecVPCELB2").first
     expect(@elb2).to have_attributes(
                        "ems_ref"         => "EmSRefreshSpecVPCELB2",
