@@ -6,7 +6,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
   def initialize(ems, options = nil)
     @ems        = ems
     @aws_ec2    = ems.connect
-    @aws_elb    = @ems.connect(:service => :ElasticLoadBalancing)
+    @aws_elb    = ems.connect(:service => :ElasticLoadBalancing)
     @data       = {}
     @data_index = {}
     @options    = options || {}
@@ -94,11 +94,11 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     load_balancers.each do |lb|
       new_lb = @data_index.fetch_path(:load_balancer_pools, lb.load_balancer_name)
       load_balancer_pool_members = lb.instances.collect { |m| parse_load_balancer_pool_member(m) }
-      load_balancer_pool_members.each do |x|
+      load_balancer_pool_members.each do |member|
         # Store all unique pool members
-        if @data_index.fetch_path(:load_balancer_pool_members, x[:ems_ref]).blank?
-          @data_index.store_path(:load_balancer_pool_members, x[:ems_ref], x)
-          @data[:load_balancer_pool_members] << x
+        if @data_index.fetch_path(:load_balancer_pool_members, member[:ems_ref]).blank?
+          @data_index.store_path(:load_balancer_pool_members, member[:ems_ref], member)
+          @data[:load_balancer_pool_members] << member
         end
       end
 
@@ -232,8 +232,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
   end
 
   def parse_load_balancer_pool(lb)
-    uid  = lb.load_balancer_name
-    name ||= uid
+    uid = name = lb.load_balancer_name
 
     new_result = {
       :type          => self.class.load_balancer_pool_type,
@@ -291,9 +290,9 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     port         = target_match[2].to_i
     url_path     = target_match[3]
 
-    matched_listener = @data.fetch_path(:load_balancer_listeners).detect do |x|
-      x[:load_balancer][:ems_ref] == lb.load_balancer_name && x[:instance_port] == port &&
-        x[:instance_protocol] == protocol
+    matched_listener = @data.fetch_path(:load_balancer_listeners).detect do |listener|
+      listener[:load_balancer][:ems_ref] == lb.load_balancer_name && listener[:instance_port] == port &&
+        listener[:instance_protocol] == protocol
     end
 
     new_result = {
