@@ -13,7 +13,7 @@ addons:
 before_install:
 - source ${TRAVIS_BUILD_DIR}/tools/ci/before_install.sh
 script:
-- bundle exec bin/rails app:test:manageiq-providers-amazon:setup app:test:manageiq-providers-amazon
+- bundle exec bin/rails app:test:providers:amazon:setup app:test:providers:amazon
 notifications:
   webhooks:
     urls:
