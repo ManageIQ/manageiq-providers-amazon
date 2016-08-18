@@ -6,6 +6,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
   def initialize(ems, options = nil)
     @ems        = ems
     @aws_ec2    = ems.connect
+    @aws_elb    = ems.connect(:service => :ElasticLoadBalancing)
     @data       = {}
     @data_index = {}
     @options    = options || {}
@@ -19,6 +20,10 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     get_cloud_networks
     get_security_groups
     get_network_ports
+    get_load_balancers
+    get_load_balancer_pools
+    get_load_balancer_listeners
+    get_load_balancer_health_checks
     get_floating_ips
     $aws_log.info("#{log_header}...Complete")
 
@@ -39,6 +44,10 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
 
   def security_groups
     @security_groups ||= @aws_ec2.security_groups
+  end
+
+  def load_balancers
+    @load_balancers ||= @aws_elb.client.describe_load_balancers.load_balancer_descriptions
   end
 
   def get_cloud_networks
@@ -69,6 +78,49 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
   def get_outbound_firewall_rules(sg)
     sg.ip_permissions_egress.collect { |perm| parse_firewall_rule(perm, "outbound") }.flatten
   end
+
+  def get_load_balancers
+    process_collection(load_balancers, :load_balancers) { |lb| parse_load_balancer(lb) }
+  end
+
+  def get_load_balancer_pools
+    process_collection(load_balancers, :load_balancer_pools) { |lb| parse_load_balancer_pool(lb) }
+    get_load_balancer_pool_members
+  end
+
+  def get_load_balancer_pool_members
+    @data[:load_balancer_pool_members] = []
+
+    load_balancers.each do |lb|
+      new_lb = @data_index.fetch_path(:load_balancer_pools, lb.load_balancer_name)
+      load_balancer_pool_members = lb.instances.collect { |m| parse_load_balancer_pool_member(m) }
+      load_balancer_pool_members.each do |member|
+        # Store all unique pool members
+        if @data_index.fetch_path(:load_balancer_pool_members, member[:ems_ref]).blank?
+          @data_index.store_path(:load_balancer_pool_members, member[:ems_ref], member)
+          @data[:load_balancer_pool_members] << member
+        end
+      end
+
+      # fill M:N relation of pool to pool members
+      new_lb[:load_balancer_pool_member_pools] = load_balancer_pool_members.collect do |x|
+        {:load_balancer_pool_member => @data_index.fetch_path(:load_balancer_pool_members, x[:ems_ref])}
+      end
+    end
+  end
+
+  def get_load_balancer_listeners
+    load_balancers.each do |lb|
+      process_collection(lb.listener_descriptions, :load_balancer_listeners) do|listener|
+        parse_load_balancer_listener(lb, listener)
+      end
+    end
+  end
+
+  def get_load_balancer_health_checks
+    process_collection(load_balancers, :load_balancer_health_checks) { |lb| parse_load_balancer_health_check(lb) }
+  end
+
 
   def get_floating_ips
     ips = @aws_ec2.client.describe_addresses.addresses
@@ -167,6 +219,108 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     ret
   end
 
+  def parse_load_balancer(lb)
+    uid = lb.load_balancer_name
+
+    new_result = {
+      :type    => self.class.load_balancer_type,
+      :ems_ref => uid,
+      :name    => uid,
+    }
+
+    return uid, new_result
+  end
+
+  def parse_load_balancer_pool(lb)
+    uid = name = lb.load_balancer_name
+
+    new_result = {
+      :type          => self.class.load_balancer_pool_type,
+      :ems_ref       => uid,
+      :name          => name,
+    }
+
+    return uid, new_result
+  end
+
+  def parse_load_balancer_pool_member(member)
+    uid = member.instance_id
+
+    {
+      :type    => self.class.load_balancer_pool_member_type,
+      :ems_ref => uid,
+      # TODO(lsmola) AWS always associates to eth0 of the instances, we do not collect that info now, we need to do that
+      # :network_port => get eth0 network_port
+      :vm      => parent_manager_fetch_path(:vms, uid)
+    }
+  end
+
+  def parse_load_balancer_listener(lb, listener_struct)
+    listener = listener_struct.listener
+
+    uid = "#{lb.load_balancer_name}__#{listener.protocol}__#{listener.load_balancer_port}__"\
+          "#{listener.instance_protocol}__#{listener.instance_port}__#{listener.ssl_certificate_id}"
+
+    new_result = {
+      :type                         => self.class.load_balancer_listener_type,
+      :ems_ref                      => uid,
+      :load_balancer_protocol       => listener.protocol,
+      :load_balancer_port           => listener.load_balancer_port,
+      :instance_protocol            => listener.instance_protocol,
+      :instance_port                => listener.instance_port,
+      :load_balancer                => @data_index.fetch_path(:load_balancers, lb.load_balancer_name),
+      :load_balancer_listener_pools => [
+        {:load_balancer_pool => @data_index.fetch_path(:load_balancer_pools, lb.load_balancer_name)}]
+    }
+
+    return uid, new_result
+  end
+
+  def parse_load_balancer_health_check(lb)
+    uid = lb.load_balancer_name
+
+    health_check_members = @aws_elb.client.describe_instance_health(:load_balancer_name => lb.load_balancer_name)
+    health_check_members = health_check_members.instance_states.collect do |m|
+      parse_load_balancer_health_check_member(m)
+    end
+
+    health_check = lb.health_check
+    target_match = health_check.target.match(/^(\w+)\:(\d+)\/?(.*?)$/)
+    protocol     = target_match[1]
+    port         = target_match[2].to_i
+    url_path     = target_match[3]
+
+    matched_listener = @data.fetch_path(:load_balancer_listeners).detect do |listener|
+      listener[:load_balancer][:ems_ref] == lb.load_balancer_name && listener[:instance_port] == port &&
+        listener[:instance_protocol] == protocol
+    end
+
+    new_result = {
+      :type                               => self.class.load_balancer_health_check_type,
+      :ems_ref                            => uid,
+      :protocol                           => protocol,
+      :port                               => port,
+      :url_path                           => url_path,
+      :interval                           => health_check.interval,
+      :timeout                            => health_check.timeout,
+      :unhealthy_threshold                => health_check.unhealthy_threshold,
+      :healthy_threshold                  => health_check.healthy_threshold,
+      :load_balancer                      => @data_index.fetch_path(:load_balancers, lb.load_balancer_name),
+      :load_balancer_listener             => matched_listener,
+      :load_balancer_health_check_members => health_check_members
+    }
+
+    return uid, new_result
+  end
+
+  def parse_load_balancer_health_check_member(member)
+    {
+      :load_balancer_pool_member => @data_index.fetch_path(:load_balancer_pool_members, member.instance_id),
+      :status                    => member.state,
+      :status_reason             => member.description
+    }
+  end
+
   def parse_floating_ip(ip)
     address = uid = ip.public_ip
 
@@ -176,6 +330,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
       :address            => address,
       :fixed_ip_address   => ip.private_ip_address,
       :cloud_network_only => ip.domain["vpc"] ? true : false,
+      # TODO(lsmola) can we set our fake network_port here, for old EC2 instances?
       :network_port       => @data_index.fetch_path(:network_ports, ip.network_interface_id),
       :vm                 => parent_manager_fetch_path(:vms, ip.instance_id)
     }
@@ -243,6 +398,26 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
   end
 
   class << self
+    def load_balancer_type
+      ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer.name
+    end
+
+    def load_balancer_listener_type
+      ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener.name
+    end
+
+    def load_balancer_health_check_type
+      ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck.name
+    end
+
+    def load_balancer_pool_type
+      ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPool.name
+    end
+
+    def load_balancer_pool_member_type
+      ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPoolMember.name
+    end
+
     def security_group_type
       ManageIQ::Providers::Amazon::NetworkManager::SecurityGroup.name
     end

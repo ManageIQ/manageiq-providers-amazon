@@ -35,42 +35,83 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       assert_specific_vm_powered_off
       assert_specific_vm_on_cloud_network
       assert_specific_vm_in_other_region
+      assert_specific_load_balancers
+      assert_specific_load_balancer_listeners
+      assert_specific_load_balancer_health_checks
       assert_specific_orchestration_template
       assert_specific_orchestration_stack
       assert_relationship_tree
     end
   end
 
+  def expected_table_counts
+    {
+      :auth_private_key              => 12,
+      :ext_management_system         => 2,
+      :flavor                        => 56,
+      :availability_zone             => 5,
+      :vm_or_template                => 48,
+      :vm                            => 28,
+      :miq_template                  => 20,
+      :disk                          => 14,
+      :guest_device                  => 0,
+      :hardware                      => 48,
+      :network                       => 17,
+      :operating_system              => 0,
+      :snapshot                      => 0,
+      :system_service                => 0,
+      :relationship                  => 30,
+      :miq_queue                     => 51,
+      :orchestration_template        => 4,
+      :orchestration_stack           => 4,
+      :orchestration_stack_parameter => 10,
+      :orchestration_stack_output    => 1,
+      :orchestration_stack_resource  => 43,
+      :security_group                => 37,
+      :firewall_rule                 => 99,
+      :network_port                  => 37,
+      :cloud_network                 => 5,
+      :floating_ip                   => 5,
+      :network_router                => 0,
+      :cloud_subnet                  => 10,
+      :custom_attribute              => 0
+    }
+  end
+
   def assert_table_counts
-    expect(ExtManagementSystem.count).to eq(2)
-    expect(Flavor.count).to eq(56)
-    expect(AvailabilityZone.count).to eq(5)
-    expect(FloatingIp.count).to eq(5)
-    expect(AuthPrivateKey.count).to eq(12)
-    expect(CloudNetwork.count).to eq(5)
-    expect(CloudSubnet.count).to eq(10)
-    expect(OrchestrationTemplate.count).to eq(2)
-    expect(OrchestrationStack.count).to eq(2)
-    expect(OrchestrationStackParameter.count).to eq(5)
-    expect(OrchestrationStackOutput.count).to eq(1)
-    expect(OrchestrationStackResource.count).to eq(24)
-    expect(SecurityGroup.count).to eq(36)
-    expect(FirewallRule.count).to eq(94)
-    expect(VmOrTemplate.count).to eq(47)
-    expect(Vm.count).to eq(27)
-    expect(MiqTemplate.count).to eq(20)
+    actual = {
+      :auth_private_key              => AuthPrivateKey.count,
+      :ext_management_system         => ExtManagementSystem.count,
+      :flavor                        => Flavor.count,
+      :availability_zone             => AvailabilityZone.count,
+      :vm_or_template                => VmOrTemplate.count,
+      :vm                            => Vm.count,
+      :miq_template                  => MiqTemplate.count,
+      :disk                          => Disk.count,
+      :guest_device                  => GuestDevice.count,
+      :hardware                      => Hardware.count,
+      :network                       => Network.count,
+      :operating_system              => OperatingSystem.count,
+      :snapshot                      => Snapshot.count,
+      :system_service                => SystemService.count,
+      :relationship                  => Relationship.count,
+      :miq_queue                     => MiqQueue.count,
+      :orchestration_template        => OrchestrationTemplate.count,
+      :orchestration_stack           => OrchestrationStack.count,
+      :orchestration_stack_parameter => OrchestrationStackParameter.count,
+      :orchestration_stack_output    => OrchestrationStackOutput.count,
+      :orchestration_stack_resource  => OrchestrationStackResource.count,
+      :security_group                => SecurityGroup.count,
+      :firewall_rule                 => FirewallRule.count,
+      :network_port                  => NetworkPort.count,
+      :cloud_network                 => CloudNetwork.count,
+      :floating_ip                   => FloatingIp.count,
+      :network_router                => NetworkRouter.count,
+      :cloud_subnet                  => CloudSubnet.count,
+      :custom_attribute              => CustomAttribute.count
+    }
 
-    expect(CustomAttribute.count).to eq(0)
-    expect(Disk.count).to eq(14)
-    expect(GuestDevice.count).to eq(0)
-    expect(Hardware.count).to eq(47)
-    expect(Network.count).to eq(15)
-    expect(OperatingSystem.count).to eq(0) # TODO: Should this be 13 (set on all vms)?
-    expect(Snapshot.count).to eq(0)
-    expect(SystemService.count).to eq(0)
-
-    expect(Relationship.count).to eq(26)
-    expect(MiqQueue.count).to eq(50)
+    expect(actual).to eq expected_table_counts
   end
 
   def assert_ems
@@ -79,18 +120,19 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :uid_ems     => nil
     )
 
-    expect(@ems.flavors.size).to eq(56)
-    expect(@ems.availability_zones.size).to eq(5)
-    expect(@ems.floating_ips.size).to eq(5)
-    expect(@ems.key_pairs.size).to eq(12)
-    expect(@ems.cloud_networks.size).to eq(5)
-    expect(@ems.security_groups.size).to eq(36)
-    expect(@ems.vms_and_templates.size).to eq(47)
-    expect(@ems.vms.size).to eq(27)
-    expect(@ems.miq_templates.size).to eq(20)
-    expect(@ems.orchestration_stacks.size).to eq(2)
+    expect(@ems.flavors.size).to eql(expected_table_counts[:flavor])
+    expect(@ems.availability_zones.size).to eql(expected_table_counts[:availability_zone])
+    expect(@ems.vms_and_templates.size).to eql(expected_table_counts[:vm_or_template])
+    expect(@ems.security_groups.size).to eql(expected_table_counts[:security_group])
+    expect(@ems.network_ports.size).to eql(expected_table_counts[:network_port])
+    expect(@ems.cloud_networks.size).to eql(expected_table_counts[:cloud_network])
+    expect(@ems.floating_ips.size).to eql(expected_table_counts[:floating_ip])
+    expect(@ems.network_routers.size).to eql(expected_table_counts[:network_router])
+    expect(@ems.cloud_subnets.size).to eql(expected_table_counts[:cloud_subnet])
+    expect(@ems.miq_templates.size).to eq(expected_table_counts[:miq_template])
 
-    expect(@ems.direct_orchestration_stacks.size).to eq(1)
+    expect(@ems.orchestration_stacks.size).to eql(expected_table_counts[:orchestration_stack])
+    expect(@ems.direct_orchestration_stacks.size).to eql(3)
   end
 
   def assert_specific_flavor
@@ -352,6 +394,15 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :hostname    => "ip-10-65-160-22.ec2.internal"
     )
 
+    expect(v.load_balancers.collect(&:name)).to match_array ["EmsRefreshSpec-LoadBalancer"]
+    expect(v.load_balancer_health_checks.collect(&:ems_ref)).to match_array ["EmsRefreshSpec-LoadBalancer"]
+    expect(v.load_balancer_listeners.collect(&:ems_ref)).to match_array ["EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__"]
+    expect(v.load_balancer_health_check_states).to match_array ["OutOfService"]
+    healt_check_states_with_reason = [
+      "Status: OutOfService, Status Reason: Instance has failed at least the UnhealthyThreshold number of health checks consecutively."
+    ]
+    expect(v.load_balancer_health_check_states_with_reason).to match_array healt_check_states_with_reason
+
     v.with_relationship_type("genealogy") do
       expect(v.parent).to eq(@template)
     end
@@ -450,7 +501,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :power_state           => "on",
       :location              => "unknown",
       :tools_status          => nil,
-      :boot_time             => "2013-09-23T20:11:52.000",
+      :boot_time             => "2016-08-10 15:34:32.000000000 +0000",
       :standby_action        => nil,
       :connection_state      => nil,
       :cpu_affinity          => nil,
@@ -469,10 +520,203 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(v.cloud_networks.first).to eq(@cn)
     expect(v.cloud_subnets.first).to eq(@subnet)
     expect(v.security_groups).to eq([@sg_on_cn])
+
+    expect(v.load_balancers.collect(&:name)).to match_array ["EmSRefreshSpecVPCELB", "EmSRefreshSpecVPCELB2"]
+    expect(v.load_balancer_health_checks.collect(&:ems_ref)).to match_array ["EmSRefreshSpecVPCELB", "EmSRefreshSpecVPCELB2"]
+    listeners = [
+      "EmSRefreshSpecVPCELB2__TCP__2222__TCP__22__", "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__",
+      "EmSRefreshSpecVPCELB__TCP__22__TCP__22__"
+    ]
+    expect(v.load_balancer_listeners.collect(&:ems_ref)).to match_array listeners
+    expect(v.load_balancer_health_check_states).to match_array ["OutOfService", "OutOfService"]
+    healt_check_states_with_reason = [
+      "Status: OutOfService, Status Reason: Instance has failed at least the UnhealthyThreshold number of health checks consecutively.",
+      "Status: OutOfService, Status Reason: Instance has failed at least the UnhealthyThreshold number of health checks consecutively."
+    ]
+    expect(v.load_balancer_health_check_states_with_reason).to match_array healt_check_states_with_reason
+  end
+
+  def assert_specific_load_balancers
+    @elb_non_vpc = ManageIQ::Providers::Amazon::CloudManager::LoadBalancer.where(
+      :name => "EmsRefreshSpec-LoadBalancer").first
+    expect(@elb_non_vpc).to have_attributes(
+                              "ems_ref"         => "EmsRefreshSpec-LoadBalancer",
+                              "name"            => "EmsRefreshSpec-LoadBalancer",
+                              "description"     => nil,
+                              "cloud_tenant_id" => nil,
+                              "type"            => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer")
+
+    expect(@elb_non_vpc.ext_management_system).to eq(@ems.network_manager)
+
+    @elb = ManageIQ::Providers::Amazon::CloudManager::LoadBalancer.where(
+      :name => "EmSRefreshSpecVPCELB").first
+    expect(@elb).to have_attributes(
+                      "ems_ref"         => "EmSRefreshSpecVPCELB",
+                      "name"            => "EmSRefreshSpecVPCELB",
+                      "description"     => nil,
+                      "cloud_tenant_id" => nil,
+                      "type"            => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer")
+
+    expect(@elb.ext_management_system).to eq(@ems.network_manager)
+    # TODO(lsmola)
+    # expect(@elb.availability_zones).to eq(@az)
+    # expect(@elb.cloud_subnets).to eq(..)
+    # expect(@elb.network_ports).to eq(..)
+
+    @elb2 = ManageIQ::Providers::Amazon::CloudManager::LoadBalancer.where(
+      :name => "EmSRefreshSpecVPCELB2").first
+    expect(@elb2).to have_attributes(
+                       "ems_ref"         => "EmSRefreshSpecVPCELB2",
+                       "name"            => "EmSRefreshSpecVPCELB2",
+                       "description"     => nil,
+                       "cloud_tenant_id" => nil,
+                       "type"            => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer")
+
+    expect(@elb2.ext_management_system).to eq(@ems.network_manager)
+
+    expect(@elb.vms.count).to eq 2
+    expect(@elb.load_balancer_pool_members.count).to eq 2
+    expect(@elb.load_balancer_pool_members.first.ext_management_system).to eq @ems.network_manager
+    expect(@elb.vms.first.ext_management_system).to eq @ems
+    expect(@elb.vms.collect(&:name)).to match_array ["EmsRefreshSpec-PoweredOn-VPC", "VMstate-8"]
+
+    expect(@elb.vms).to match_array @elb2.vms
+    expect(@elb.load_balancer_pool_members).to match_array @elb2.load_balancer_pool_members
+
+    expect(@elb_non_vpc.load_balancer_pool_members.count).to eq 1
+    expect(@elb_non_vpc.vms.first.name).to eq "EmsRefreshSpec-PoweredOn-Basic3"
+  end
+
+  def assert_specific_load_balancer_listeners
+    expect(@elb_non_vpc.load_balancer_listeners.count).to eq 1
+    expect(@elb.load_balancer_listeners.count).to eq 2
+    expect(@elb2.load_balancer_listeners.count).to eq 1
+
+    @listener_non_vpc = @elb_non_vpc.load_balancer_listeners
+                          .where(:ems_ref => "EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__").first
+    expect(@listener_non_vpc).to have_attributes(
+                                   "ems_ref"                => "EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__",
+                                   "name"                   => nil,
+                                   "description"            => nil,
+                                   "load_balancer_protocol" => "HTTP",
+                                   "load_balancer_port"     => 80,
+                                   "instance_protocol"      => "HTTP",
+                                   "instance_port"          => 80,
+                                   "cloud_tenant_id"        => nil,
+                                   "type"                   => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
+                                 )
+    expect(@listener_non_vpc.ext_management_system).to eq(@ems.network_manager)
+
+    listener_1 = @elb.load_balancer_listeners
+                   .where(:ems_ref => "EmSRefreshSpecVPCELB__TCP__22__TCP__22__").first
+    expect(listener_1).to have_attributes(
+                            "ems_ref"                => "EmSRefreshSpecVPCELB__TCP__22__TCP__22__",
+                            "name"                   => nil,
+                            "description"            => nil,
+                            "load_balancer_protocol" => "TCP",
+                            "load_balancer_port"     => 22,
+                            "instance_protocol"      => "TCP",
+                            "instance_port"          => 22,
+                            "cloud_tenant_id"        => nil,
+                            "type"                   => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
+                          )
+    expect(listener_1.ext_management_system).to eq(@ems.network_manager)
+
+    @listener_2 = @elb.load_balancer_listeners
+                    .where(:ems_ref => "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__").first
+    expect(@listener_2).to have_attributes(
+                             "ems_ref"                => "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__",
+                             "name"                   => nil,
+                             "description"            => nil,
+                             "load_balancer_protocol" => "HTTP",
+                             "load_balancer_port"     => 80,
+                             "instance_protocol"      => "HTTP",
+                             "instance_port"          => 80,
+                             "cloud_tenant_id"        => nil,
+                             "type"                   => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
+                           )
+    expect(@listener_2.ext_management_system).to eq(@ems.network_manager)
+
+    @listener_3 = @elb2.load_balancer_listeners.first
+    expect(@listener_3).to have_attributes(
+                             "ems_ref"                => "EmSRefreshSpecVPCELB2__TCP__2222__TCP__22__",
+                             "name"                   => nil,
+                             "description"            => nil,
+                             "load_balancer_protocol" => "TCP",
+                             "load_balancer_port"     => 2222,
+                             "instance_protocol"      => "TCP",
+                             "instance_port"          => 22,
+                             "cloud_tenant_id"        => nil,
+                             "type"                   => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
+                           )
+    expect(@listener_3.ext_management_system).to eq(@ems.network_manager)
+  end
+
+  def assert_specific_load_balancer_health_checks
+    expect(@elb_non_vpc.load_balancer_health_checks.count).to eq 1
+
+    health_check_non_vpc = @elb_non_vpc.load_balancer_health_checks.first
+    expect(health_check_non_vpc).to have_attributes(
+                                      "ems_ref"             => "EmsRefreshSpec-LoadBalancer",
+                                      "name"                => nil,
+                                      "protocol"            => "TCP",
+                                      "port"                => 22,
+                                      "url_path"            => "",
+                                      "interval"            => 30,
+                                      "timeout"             => 5,
+                                      "healthy_threshold"   => 10,
+                                      "unhealthy_threshold" => 2,
+                                      "cloud_tenant_id"     => nil,
+                                      "type"                => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck"
+                                    )
+
+    expect(health_check_non_vpc.load_balancer_listener).to eq nil
+
+    expect(@elb.load_balancer_health_checks.count).to eq 1
+
+    health_check_1 = @elb.load_balancer_health_checks.first
+    expect(health_check_1).to have_attributes(
+                                "ems_ref"             => "EmSRefreshSpecVPCELB",
+                                "name"                => nil,
+                                "protocol"            => "HTTP",
+                                "port"                => 80,
+                                "url_path"            => "index.html",
+                                "interval"            => 30,
+                                "timeout"             => 5,
+                                "healthy_threshold"   => 10,
+                                "unhealthy_threshold" => 2,
+                                "cloud_tenant_id"     => nil,
+                                "type"                => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck"
+                              )
+
+    expect(health_check_1.load_balancer_listener).to eq @listener_2
+
+    expect(@elb2.load_balancer_health_checks.count).to eq 1
+
+    health_check_2 = @elb2.load_balancer_health_checks.first
+    expect(health_check_2).to have_attributes(
+                                "ems_ref"             => "EmSRefreshSpecVPCELB2",
+                                "name"                => nil,
+                                "protocol"            => "TCP",
+                                "port"                => 22,
+                                "url_path"            => "",
+                                "interval"            => 30,
+                                "timeout"             => 5,
+                                "healthy_threshold"   => 10,
+                                "unhealthy_threshold" => 2,
+                                "cloud_tenant_id"     => nil,
+                                "type"                => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck"
+                              )
+
+    expect(health_check_2.load_balancer_listener).to eq @listener_3
+
+    expect(health_check_1.load_balancer_pool_members.count).to eq 2
+    expect(health_check_1.load_balancer_pool_members).to match_array health_check_2.load_balancer_pool_members
+    expect(health_check_1.vms).to match_array health_check_2.vms
   end
 
   def assert_specific_orchestration_template
-    @orch_template = OrchestrationTemplateCfn.where(:md5 => "e929859521d64ac28ee29f8526d33e8f").first
+    @orch_template = OrchestrationTemplateCfn.where(:md5 => "1c67b49b780587c4e2756ba029a8844b").first
     expect(@orch_template.description).to start_with("AWS CloudFormation Sample Template WordPress_Simple:")
     expect(@orch_template.content).to start_with("{\n  \"AWSTemplateFormatVersion\" : \"2010-09-09\",")
     expect(@orch_template).to have_attributes(:draft => false, :orderable => false)
@@ -480,15 +724,17 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
   def assert_specific_orchestration_stack
     stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.where(
-      :name => "EmsRefreshSpec-JoeV-050").first
+      :name => "EmsRefreshSpecStack").first
     expect(stack.status_reason)
-      .to eq("The following resource(s) failed to create: [WebServerWaitCondition, IPAddress]. ")
+      .to eq("The following resource(s) failed to create: [OutBoundHTTPNetworkAclEntry, IPAddress, Route, "\
+             "InboundSSHNetworkAclEntry, WebServerWaitCondition, InboundResponsePortsNetworkAclEntry, "\
+             "OutBoundHTTPSNetworkAclEntry, InboundHTTPNetworkAclEntry]. ")
 
     @orch_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.where(
-      :name => "EmsRefreshSpec-JoeV-050-WebServerInstance-1KRT71SKWBZ1I").first
+      :name => "EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W").first
     expect(@orch_stack).to have_attributes(
       :status  => "CREATE_COMPLETE",
-      :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpec-JoeV-050-WebServerInstance-1KRT71SKWBZ1I/bff036f0-ba27-11e5-b4be-500c5242948e",
+      :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W/72cb3f90-5fb9-11e6-ab2c-50d501eed2b3",
     )
     expect(@orch_stack.description).to start_with("AWS CloudFormation Sample Template WordPress_Simple:")
 
@@ -511,13 +757,13 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
   def assert_specific_orchestration_stack_resources
     resources = @orch_stack.resources.order("ems_ref")
-    expect(resources.size).to eq(4)
+    expect(resources.size).to eq(2)
 
     # assert one of the resource models
-    expect(resources[3]).to have_attributes(
+    expect(resources[1]).to have_attributes(
       :name                   => "WebServer",
       :logical_resource       => "WebServer",
-      :physical_resource      => "i-7c3c64fd",
+      :physical_resource      => "i-d7754a49",
       :resource_category      => "AWS::EC2::Instance",
       :resource_status        => "CREATE_COMPLETE",
       :resource_status_reason => nil,
@@ -529,7 +775,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(outputs.size).to eq(1)
     expect(outputs[0]).to have_attributes(
       :key         => "WebsiteURL",
-      :value       => "http://ec2-54-205-48-36.compute-1.amazonaws.com/wordpress",
+      :value       => "http://ec2-23-23-39-34.compute-1.amazonaws.com/wordpress",
       :description => "WordPress Website"
     )
   end
@@ -542,20 +788,20 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(@orch_stack.orchestration_template).to eq(@orch_template)
 
     # orchestration stack can be nested
-    parent_stack = OrchestrationStack.where(:name => "EmsRefreshSpec-JoeV-050").first
+    parent_stack = OrchestrationStack.where(:name => "EmsRefreshSpecStack").first
     expect(@orch_stack.parent).to eq(parent_stack)
 
     # orchestration stack can have vms
-    vm = Vm.where(:name => "i-7c3c64fd").first
+    vm = Vm.where(:name => "i-d7754a49").first
     expect(vm.orchestration_stack).to eq(@orch_stack)
 
     # orchestration stack can have security groups
     sg = SecurityGroup.where(
-      :name => "EmsRefreshSpec-JoeV-050-WebServerInstance-1KRT71SKWBZ1I-WebServerSecurityGroup-13RL8S2C6ZWI1").first
+      :name => "EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W-WebServerSecurityGroup-K60KWXZHGJDE").first
     expect(sg.orchestration_stack).to eq(@orch_stack)
 
     # orchestration stack can have cloud networks
-    vpc = CloudNetwork.where(:name => "vpc-d7b4c7b3").first
+    vpc = CloudNetwork.where(:name => "vpc-08d9b36f").first
     expect(vpc.orchestration_stack).to eq(parent_stack)
   end
 
