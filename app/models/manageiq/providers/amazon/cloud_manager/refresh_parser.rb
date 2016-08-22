@@ -200,9 +200,9 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     status = instance.state.name
     return if @options.ignore_terminated_instances && status.to_sym == :terminated
 
-    uid    = instance.id
-    name   = get_from_tags(instance, :name)
-    name ||= uid
+    uid  = instance.id
+    name = get_from_tags(instance, :name)
+    name = name.blank? ? uid : name
 
     flavor_uid = instance.instance_type
     @known_flavors << flavor_uid
