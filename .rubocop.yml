@@ -1,0 +1,10 @@
+inherit_from:
+- https://raw.githubusercontent.com/ManageIQ/guides/master/.rubocop.yml
+#
+# Overrides
+#
+GlobalVars:
+  AllowedVariables:
+  # Loggers
+  - $aws_log
+  - $log
