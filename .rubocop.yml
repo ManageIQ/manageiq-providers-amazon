@@ -6,16 +6,5 @@ inherit_from:
 GlobalVars:
   AllowedVariables:
   # Loggers
-  - $audit_log
-  - $api_log
   - $aws_log
-  - $fog_log
   - $log
-  - $miq_ae_logger
-  - $policy_log
-  - $rails_log
-  - $mw_log
-  - $vim_log
-  - $websocket_log
-  # In Automate methods
-  - $evm
