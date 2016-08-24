@@ -15,20 +15,6 @@ class ManageIQ::Providers::Amazon::CloudManager::Vm < ManageIQ::Providers::Cloud
     "unknown"       => "terminated",
   }.freeze
 
-  has_many :cloud_networks, :through => :cloud_subnets
-
-  def cloud_network
-    # TODO(lsmola) NetworkProvider Backwards compatibility layer with simplified architecture where VM has only one
-    # network. Put this into ManageIQ::Providers::CloudManager::Vm when NetworkProvider is done in all providers
-    cloud_networks.first
-  end
-
-  def cloud_subnet
-    # TODO(lsmola) NetworkProvider Backwards compatibility layer with simplified architecture where VM has only one
-    # network. Put this into ManageIQ::Providers::CloudManager::Vm when NetworkProvider is done in all providers
-    cloud_subnets.first
-  end
-
   def provider_object(connection = nil)
     connection ||= ext_management_system.connect
     connection.instance(ems_ref)
