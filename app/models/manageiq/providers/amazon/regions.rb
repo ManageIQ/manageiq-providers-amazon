@@ -56,11 +56,6 @@ module ManageIQ
           :hostname    => "ec2.sa-east-1.amazonaws.com",
           :description => "South America (Sao Paulo)",
         },
-        "us-gov-west-1"  => {
-          :name        => "us-gov-west-1",
-          :hostname    => "ec2.us-gov-west-1.amazonaws.com",
-          :description => "GovCloud (US)",
-        }
       }
 
       REGIONS_BY_HOSTNAME =
