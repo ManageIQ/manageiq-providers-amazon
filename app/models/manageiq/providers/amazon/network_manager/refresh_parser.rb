@@ -26,6 +26,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     get_load_balancer_health_checks
     get_ec2_floating_ips_and_ports
     get_floating_ips
+    get_public_ips
     $aws_log.info("#{log_header}...Complete")
 
     @data
@@ -49,6 +50,10 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
 
   def load_balancers
     @load_balancers ||= @aws_elb.client.describe_load_balancers.load_balancer_descriptions
+  end
+
+  def network_ports
+    @network_ports ||= @aws_ec2.client.describe_network_interfaces.network_interfaces
   end
 
   def get_cloud_networks
@@ -129,8 +134,25 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     process_collection(ips, :floating_ips) { |ip| parse_floating_ip(ip) }
   end
 
+  def get_public_ips
+    public_ips = []
+    network_ports.each do |network_port|
+      network_port.private_ip_addresses.each do |private_address|
+        if private_address.association && !(public_ip = private_address.association.public_ip).blank?
+          unless @data_index.fetch_path(:floating_ips, public_ip)
+            public_ips << {
+              :network_port_id    => network_port.network_interface_id,
+              :private_ip_address => private_address.private_ip_address,
+              :public_ip_address  => public_ip
+            }
+          end
+        end
+      end
+    end
+    process_collection(public_ips, :floating_ips) { |public_ip| parse_public_ip(public_ip) }
+  end
+
   def get_network_ports
-    network_ports = @aws_ec2.client.describe_network_interfaces.network_interfaces
     process_collection(network_ports, :network_ports) { |n| parse_network_port(n) }
   end
 
@@ -354,6 +376,21 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
       :cloud_network_only => false,
       :network_port       => @data_index.fetch_path(:network_ports, instance.id),
       :vm                 => parent_manager_fetch_path(:vms, instance.id)
+    }
+
+    return uid, new_result
+  end
+
+  def parse_public_ip(public_ip)
+    address = uid = public_ip[:public_ip_address]
+    new_result = {
+      :type               => self.class.floating_ip_type,
+      :ems_ref            => uid,
+      :address            => address,
+      :fixed_ip_address   => public_ip[:private_ip_address],
+      :cloud_network_only => true,
+      :network_port       => @data_index.fetch_path(:network_ports, public_ip[:network_port_id]),
+      :vm                 => @data_index.fetch_path(:network_ports, public_ip[:network_port_id], :device)
     }
 
     return uid, new_result
