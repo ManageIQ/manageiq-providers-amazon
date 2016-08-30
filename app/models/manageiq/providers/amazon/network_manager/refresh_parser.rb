@@ -24,6 +24,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     get_load_balancer_pools
     get_load_balancer_listeners
     get_load_balancer_health_checks
+    get_ec2_floating_ips_and_ports
     get_floating_ips
     $aws_log.info("#{log_header}...Complete")
 
@@ -121,17 +122,22 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     process_collection(load_balancers, :load_balancer_health_checks) { |lb| parse_load_balancer_health_check(lb) }
   end
 
-
   def get_floating_ips
     ips = @aws_ec2.client.describe_addresses.addresses
+    # Take only floating ips that are not already in stored by ec2 flaoting_ips
+    ips = ips.select { |floating_ip| @data_index.fetch_path(:floating_ips, floating_ip.public_ip).nil? }
     process_collection(ips, :floating_ips) { |ip| parse_floating_ip(ip) }
   end
 
   def get_network_ports
     network_ports = @aws_ec2.client.describe_network_interfaces.network_interfaces
-    instances     = @aws_ec2.instances
     process_collection(network_ports, :network_ports) { |n| parse_network_port(n) }
-    process_collection(instances, :network_ports) { |x| parse_network_port_inferred_from_instance(x) }
+  end
+
+  def get_ec2_floating_ips_and_ports
+    instances = @aws_ec2.instances.select { |instance| instance.network_interfaces.blank? }
+    process_collection(instances, :network_ports) { |instance| parse_network_port_inferred_from_instance(instance) }
+    process_collection(instances, :floating_ips) { |instance| parse_floating_ip_inferred_from_instance(instance) }
   end
 
   def parse_cloud_network(vpc)
@@ -330,9 +336,24 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
       :address            => address,
       :fixed_ip_address   => ip.private_ip_address,
       :cloud_network_only => ip.domain["vpc"] ? true : false,
-      # TODO(lsmola) can we set our fake network_port here, for old EC2 instances?
       :network_port       => @data_index.fetch_path(:network_ports, ip.network_interface_id),
       :vm                 => parent_manager_fetch_path(:vms, ip.instance_id)
+    }
+
+    return uid, new_result
+  end
+
+  def parse_floating_ip_inferred_from_instance(instance)
+    address = uid = instance.public_ip_address
+
+    new_result = {
+      :type               => self.class.floating_ip_type,
+      :ems_ref            => uid,
+      :address            => address,
+      :fixed_ip_address   => instance.private_ip_address,
+      :cloud_network_only => false,
+      :network_port       => @data_index.fetch_path(:network_ports, instance.id),
+      :vm                 => parent_manager_fetch_path(:vms, instance.id)
     }
 
     return uid, new_result
@@ -375,8 +396,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
 
   def parse_network_port_inferred_from_instance(instance)
     # Create network_port placeholder for old EC2 instances, those do not have interface nor subnet nor VPC
-    # require 'byebug'; byebug
-    return nil, nil unless instance.network_interfaces.blank?
+    cloud_subnet_network_ports = [parse_cloud_subnet_network_port(instance, nil)]
 
     uid    = instance.id
     name   = get_from_tags(instance, :name)
@@ -385,15 +405,16 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     device = parent_manager_fetch_path(:vms, uid)
 
     new_result = {
-      :type            => self.class.network_port_type,
-      :name            => name,
-      :ems_ref         => uid,
-      :status          => nil,
-      :mac_address     => nil,
-      :device_owner    => nil,
-      :device_ref      => nil,
-      :device          => device,
-      :security_groups => instance.security_groups.to_a.collect do |sg|
+      :type                       => self.class.network_port_type,
+      :name                       => name,
+      :ems_ref                    => uid,
+      :status                     => nil,
+      :mac_address                => nil,
+      :device_owner               => nil,
+      :device_ref                 => nil,
+      :device                     => device,
+      :cloud_subnet_network_ports => cloud_subnet_network_ports,
+      :security_groups            => instance.security_groups.to_a.collect do |sg|
         @data_index.fetch_path(:security_groups, sg.group_id)
       end.compact,
     }
