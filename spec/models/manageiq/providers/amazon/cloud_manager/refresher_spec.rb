@@ -2,7 +2,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   before(:each) do
     _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
     @ems = FactoryGirl.create(:ems_amazon, :zone => zone)
-    @ems.update_authentication(:default => {:userid => "0123456789ABCDEFGHIJ", :password => "ABCDEFGHIJK LMNO1234567890abcdefghijklmno"})
+    @ems.update_authentication(:default => {:userid => "0123456789ABCDEFGHIJ", :password => "ABCDEFGHIJKLMNO1234567890abcdefghijklmno"})
   end
 
   it ".ems_type" do
@@ -34,7 +34,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       assert_specific_vm_powered_on
       assert_specific_vm_powered_off
       assert_specific_vm_on_cloud_network
-      assert_specific_vm_on_cloud_network_1
+      assert_specific_vm_on_cloud_network_public_ip
       assert_specific_vm_in_other_region
       assert_specific_load_balancers
       assert_specific_load_balancer_listeners
@@ -561,32 +561,32 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(v.load_balancer_health_check_states_with_reason).to match_array healt_check_states_with_reason
   end
 
-  def assert_specific_vm_on_cloud_network_1
+  def assert_specific_vm_on_cloud_network_public_ip
     v = ManageIQ::Providers::Amazon::CloudManager::Vm.where(:name => "EmsRefreshSpec-PoweredOn-VPC1").first
     expect(v).to have_attributes(
-                   :template              => false,
-                   :ems_ref               => "i-c72af2f6",
-                   :ems_ref_obj           => nil,
-                   :uid_ems               => "i-c72af2f6",
-                   :vendor                => "amazon",
-                   :power_state           => "on",
-                   :location              => "unknown",
-                   :tools_status          => nil,
-                   :boot_time             => "2016-08-30 07:17:58.000000000 +0000",
-                   :standby_action        => nil,
-                   :connection_state      => nil,
-                   :cpu_affinity          => nil,
-                   :memory_reserve        => nil,
-                   :memory_reserve_expand => nil,
-                   :memory_limit          => nil,
-                   :memory_shares         => nil,
-                   :memory_shares_level   => nil,
-                   :cpu_reserve           => nil,
-                   :cpu_reserve_expand    => nil,
-                   :cpu_limit             => nil,
-                   :cpu_shares            => nil,
-                   :cpu_shares_level      => nil
-                 )
+      :template              => false,
+      :ems_ref               => "i-c72af2f6",
+      :ems_ref_obj           => nil,
+      :uid_ems               => "i-c72af2f6",
+      :vendor                => "amazon",
+      :power_state           => "on",
+      :location              => "unknown",
+      :tools_status          => nil,
+      :boot_time             => "2016-08-30 07:17:58.000000000 +0000",
+      :standby_action        => nil,
+      :connection_state      => nil,
+      :cpu_affinity          => nil,
+      :memory_reserve        => nil,
+      :memory_reserve_expand => nil,
+      :memory_limit          => nil,
+      :memory_shares         => nil,
+      :memory_shares_level   => nil,
+      :cpu_reserve           => nil,
+      :cpu_reserve_expand    => nil,
+      :cpu_limit             => nil,
+      :cpu_shares            => nil,
+      :cpu_shares_level      => nil
+    )
 
     expect(v.cloud_networks.first).to eq(@cn)
     expect(v.cloud_subnets.first).to eq(@subnet)
