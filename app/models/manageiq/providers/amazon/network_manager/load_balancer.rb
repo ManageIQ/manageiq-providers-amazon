@@ -8,7 +8,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer < ::LoadBalancer
       service.client.register_instances_with_load_balancer(:load_balancer_name => load_balancer_name,
                                                            :instances          => options[:vms])
       service.client.configure_health_check(:load_balancer_name => load_balancer_name,
-                                            :health_check       => options[:load_balancer_health_checks].first)
+                                            :health_check       => options[:load_balancer_health_checks])
     end
     return load_balancer_name
   rescue => err
