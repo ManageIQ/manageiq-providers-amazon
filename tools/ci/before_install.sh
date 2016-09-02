@@ -13,3 +13,11 @@ travis_retry gem install bundler -v ">= 1.11.1"
 psql -c "CREATE USER root SUPERUSER PASSWORD 'smartvm';" -U postgres
 export BUNDLE_WITHOUT=development
 export BUNDLE_GEMFILE=${PWD}/Gemfile
+
+# suites that need bower assets to work: javascript, vmdb
+if [[ "$TEST_SUITE" = "javascript" ]] || [[ "$TEST_SUITE" = "vmdb" ]]; then
+  which bower || npm install -g bower
+  bower install --allow-root -F --config.analytics=false
+fi
+
+set +v
