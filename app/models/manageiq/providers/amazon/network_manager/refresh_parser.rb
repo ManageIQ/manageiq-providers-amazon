@@ -350,14 +350,16 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
   end
 
   def parse_floating_ip(ip)
-    address = uid = ip.public_ip
+    cloud_network_only = ip.domain["vpc"] ? true : false
+    address            = ip.public_ip
+    uid                = cloud_network_only ? ip.allocation_id : ip.public_ip
 
     new_result = {
       :type               => self.class.floating_ip_type,
       :ems_ref            => uid,
       :address            => address,
       :fixed_ip_address   => ip.private_ip_address,
-      :cloud_network_only => ip.domain["vpc"] ? true : false,
+      :cloud_network_only => cloud_network_only,
       :network_port       => @data_index.fetch_path(:network_ports, ip.network_interface_id),
       :vm                 => parent_manager_fetch_path(:vms, ip.instance_id)
     }
