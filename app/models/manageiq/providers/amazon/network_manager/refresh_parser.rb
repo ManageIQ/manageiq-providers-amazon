@@ -130,7 +130,10 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
   def get_floating_ips
     ips = @aws_ec2.client.describe_addresses.addresses
     # Take only floating ips that are not already in stored by ec2 flaoting_ips
-    ips = ips.select { |floating_ip| @data_index.fetch_path(:floating_ips, floating_ip.public_ip).nil? }
+    ips = ips.select do |floating_ip|
+      floating_ip_id = floating_ip.allocation_id.blank? ? floating_ip.public_ip : floating_ip.allocation_id
+      @data_index.fetch_path(:floating_ips, floating_ip_id).nil?
+    end
     process_collection(ips, :floating_ips) { |ip| parse_floating_ip(ip) }
   end
 
@@ -139,7 +142,9 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     network_ports.each do |network_port|
       network_port.private_ip_addresses.each do |private_address|
         if private_address.association && !(public_ip = private_address.association.public_ip).blank?
-          unless @data_index.fetch_path(:floating_ips, public_ip)
+          allocation_id  = private_address.association.allocation_id
+          floating_ip_id = allocation_id.blank? ? public_ip : allocation_id
+          unless @data_index.fetch_path(:floating_ips, floating_ip_id)
             public_ips << {
               :network_port_id    => network_port.network_interface_id,
               :private_ip_address => private_address.private_ip_address,
