@@ -179,7 +179,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(@ip1).to have_attributes(
       :address            => "54.208.119.197",
       :fixed_ip_address   => "10.0.0.254",
-      :ems_ref            => "54.208.119.197",
+      :ems_ref            => "eipalloc-ce53d7a0",
       :cloud_network_only => true
     )
 
