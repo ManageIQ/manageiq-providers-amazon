@@ -74,8 +74,9 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
     context "security_groups" do
       context "non cloud network" do
         it "#get_targets_for_ems" do
-          sg = FactoryGirl.create(:security_group_amazon, :name => "sg_1", :ext_management_system => ems)
-          ems.security_groups << sg
+          sg = FactoryGirl.create(:security_group_amazon,
+                                  :name                  => "sg_1",
+                                  :ext_management_system => ems.network_manager)
           filtered = workflow.send(:get_targets_for_ems, ems, :cloud_filter, SecurityGroup,
                                    'security_groups.non_cloud_network')
           expect(filtered.size).to eq(1)
@@ -85,10 +86,11 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
 
       context "cloud network" do
         it "#get_targets_for_ems" do
-          cn1 = FactoryGirl.create(:cloud_network, :ext_management_system => ems)
-          sg_cn = FactoryGirl.create(:security_group_amazon, :name => "sg_2", :ext_management_system => ems,
-                                     :cloud_network => cn1)
-          ems.security_groups << sg_cn
+          cn1 = FactoryGirl.create(:cloud_network, :ext_management_system => ems.network_manager)
+          sg_cn = FactoryGirl.create(:security_group_amazon,
+                                     :name                  => "sg_2",
+                                     :ext_management_system => ems.network_manager,
+                                     :cloud_network         => cn1)
           filtered = workflow.send(:get_targets_for_ems, ems, :cloud_filter, SecurityGroup, 'security_groups')
           expect(filtered.size).to eq(1)
           expect(filtered.first.name).to eq(sg_cn.name)
