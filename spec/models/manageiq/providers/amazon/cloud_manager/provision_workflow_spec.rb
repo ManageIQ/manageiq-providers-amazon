@@ -74,6 +74,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
     context "security_groups" do
       context "non cloud network" do
         it "#get_targets_for_ems" do
+          ems = FactoryGirl.create(:ems_amazon_network)
           sg = FactoryGirl.create(:security_group_amazon, :name => "sg_1", :ext_management_system => ems)
           ems.security_groups << sg
           filtered = workflow.send(:get_targets_for_ems, ems, :cloud_filter, SecurityGroup,
@@ -85,6 +86,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
 
       context "cloud network" do
         it "#get_targets_for_ems" do
+          ems = FactoryGirl.create(:ems_amazon_network)
           cn1 = FactoryGirl.create(:cloud_network, :ext_management_system => ems)
           sg_cn = FactoryGirl.create(:security_group_amazon, :name => "sg_2", :ext_management_system => ems,
                                      :cloud_network => cn1)
