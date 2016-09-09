@@ -293,9 +293,9 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
       :type                         => self.class.load_balancer_listener_type,
       :ems_ref                      => uid,
       :load_balancer_protocol       => listener.protocol,
-      :load_balancer_port           => listener.load_balancer_port,
+      :load_balancer_port_range     => (listener.load_balancer_port.to_i..listener.load_balancer_port.to_i),
       :instance_protocol            => listener.instance_protocol,
-      :instance_port                => listener.instance_port,
+      :instance_port_range          => (listener.instance_port.to_i..listener.instance_port.to_i),
       :load_balancer                => @data_index.fetch_path(:load_balancers, lb.load_balancer_name),
       :load_balancer_listener_pools => [
         {:load_balancer_pool => @data_index.fetch_path(:load_balancer_pools, lb.load_balancer_name)}]
