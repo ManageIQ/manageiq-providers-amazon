@@ -319,7 +319,8 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     url_path     = target_match[3]
 
     matched_listener = @data.fetch_path(:load_balancer_listeners).detect do |listener|
-      listener[:load_balancer][:ems_ref] == lb.load_balancer_name && listener[:instance_port] == port &&
+      listener[:load_balancer][:ems_ref] == lb.load_balancer_name &&
+      listener[:instance_port_range] == (port.to_i..port.to_i) &&
         listener[:instance_protocol] == protocol
     end
 
