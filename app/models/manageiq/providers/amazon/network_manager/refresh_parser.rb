@@ -356,7 +356,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
   end
 
   def parse_floating_ip(ip)
-    cloud_network_only = ip.domain["vpc"] ? true : false
+    cloud_network_only = ip.domain == "vpc" ? true : false
     address            = ip.public_ip
     uid                = cloud_network_only ? ip.allocation_id : ip.public_ip
 
