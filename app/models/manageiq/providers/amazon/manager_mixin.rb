@@ -23,8 +23,9 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     username = options[:user] || authentication_userid(options[:auth_type])
     password = options[:pass] || authentication_password(options[:auth_type])
     service  = options[:service] || :EC2
+    proxy    = options[:proxy_uri] || http_proxy_uri
 
-    self.class.raw_connect(username, password, service, provider_region, options[:proxy_uri])
+    self.class.raw_connect(username, password, service, provider_region, proxy)
   end
 
   def translate_exception(err)
@@ -76,7 +77,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
         :access_key_id     => access_key_id,
         :secret_access_key => secret_access_key,
         :region            => region,
-        :http_proxy        => proxy_uri || VMDB::Util.http_proxy_uri,
+        :http_proxy        => proxy_uri,
         :logger            => $aws_log,
         :log_level         => :debug,
         :log_formatter     => Aws::Log::Formatter.new(Aws::Log::Formatter.default.pattern.chomp)
