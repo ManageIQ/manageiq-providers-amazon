@@ -13,17 +13,21 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     initialize_dto_collections
   end
 
-  def initialize_dto_collections
-    @data[:cloud_subnet_network_ports] = CloudSubnetNetworkPort.dto_collection
-    @data[:network_ports]              = self.class.network_port_type.dto_collection
-    @data[:cloud_subnets]              = self.class.cloud_subnet_type.dto_collection
-    @data[:cloud_networks]             = self.class.cloud_network_type.dto_collection
-    @data[:security_groups]            = self.class.security_group_type.dto_collection
-    @data[:firewall_rules]             = FirewallRule.dto_collection
-    @data[:load_balancer_pools]        = self.class.load_balancer_pool_type.dto_collection
-    @data[:load_balancer_pool_members] = self.class.load_balancer_pool_member_type.dto_collection
-    @data[:load_balancer_pool_member_pools] = LoadBalancerPoolMemberPool.dto_collection
+  def add_dto_collection(model_class, parent, association)
+    @data[association] = model_class.dto_collection(parent, association)
+  end
 
+  def initialize_dto_collections
+    add_dto_collection(CloudSubnetNetworkPort, @ems, :cloud_subnet_network_ports)
+    add_dto_collection(self.class.network_port_type, @ems, :network_ports)
+    add_dto_collection(self.class.cloud_subnet_type, @ems, :cloud_subnets)
+    add_dto_collection(self.class.cloud_network_type, @ems, :cloud_networks)
+    add_dto_collection(self.class.security_group_type, @ems, :security_groups)
+    add_dto_collection(FirewallRule, @ems, :firewall_rules)
+    add_dto_collection(self.class.load_balancer_type, @ems, :load_balancers)
+    add_dto_collection(self.class.load_balancer_pool_type, @ems, :load_balancer_pools)
+    add_dto_collection(self.class.load_balancer_pool_member_type, @ems, :load_balancer_pool_members)
+    add_dto_collection(LoadBalancerPoolMemberPool, @ems, :load_balancer_pool_member_pools)
   end
 
   def ems_inv_to_hashes
@@ -91,7 +95,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
       # new_sg[:firewall_rules] = get_inbound_firewall_rules(sg) + get_outbound_firewall_rules(sg)
       (get_outbound_firewall_rules(sg) + get_inbound_firewall_rules(sg)).each do |rule|
         rule[:resource] = resource_sg
-        @data[:firewall_rules].new_dto(rule)
+        @data[:firewall_rules] << @data[:firewall_rules].new_dto(rule)
       end
     end
   end
@@ -361,11 +365,11 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     port         = target_match[2].to_i
     url_path     = target_match[3]
 
-    matched_listener = @data.fetch_path(:load_balancer_listeners).detect do |listener|
-      listener[:load_balancer][:ems_ref] == lb.load_balancer_name &&
-        listener[:instance_port_range] == (port.to_i..port.to_i) &&
-        listener[:instance_protocol] == protocol
-    end
+    # matched_listener = @data.fetch_path(:load_balancer_listeners).detect do |listener|
+    #   listener[:load_balancer][:ems_ref] == lb.load_balancer_name &&
+    #     listener[:instance_port_range] == (port.to_i..port.to_i) &&
+    #     listener[:instance_protocol] == protocol
+    # end
 
     new_result = {
       :type                               => self.class.load_balancer_health_check_type.name,
@@ -378,7 +382,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
       :unhealthy_threshold                => health_check.unhealthy_threshold,
       :healthy_threshold                  => health_check.healthy_threshold,
       :load_balancer                      => @data_index.fetch_path(:load_balancers, lb.load_balancer_name),
-      :load_balancer_listener             => matched_listener,
+      # :load_balancer_listener             => matched_listener,
       :load_balancer_health_check_members => health_check_members
     }
 
