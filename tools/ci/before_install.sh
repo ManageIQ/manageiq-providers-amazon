@@ -1,6 +1,6 @@
 set -e
 
-git clone https://github.com/ManageIQ/manageiq.git --depth 1 spec/manageiq
+git clone https://github.com/ManageIQ/manageiq.git --branch euwe --depth 1 spec/manageiq
 cd spec/manageiq
 
 which bower || npm install -g bower
