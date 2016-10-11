@@ -12,7 +12,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     end
 
     before(:all) do
-      output = ["Name", "Scaling", "Collect", "Parse Legacy", "Parse Targetted", "Saving", "Total"]
+      output = ["Name", "Object Count", "Scaling", "Collect", "Parse Legacy", "Parse Targetted", "Saving", "Total"]
 
       open(Rails.root.join('log', 'benchmark_results.csv'), 'a') do |f|
         f.puts output.join(",")
@@ -95,10 +95,10 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   def refresh
     EmsRefresh.refresh(@ems.network_manager)
     @ems.reload
+    write_benchmark_results
+
     assert_table_counts
     assert_ems
-
-    write_benchmark_results
   end
 
   def write_benchmark_results
@@ -118,6 +118,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
                               :ems_refresh=>([\d\.e-]+).*?/x)
     output = []
     output << "Scaling #{scaling_factor} total_objects #{expected_table_counts.values.sum}"
+    output << expected_table_counts.values.sum
     output << scaling_factor
     output += matched[1..5].map { |x| x.to_f.round(2) }
     open(Rails.root.join('log', 'benchmark_results.csv'), 'a') do |f|
