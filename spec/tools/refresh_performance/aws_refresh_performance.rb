@@ -8,7 +8,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     before(:each) do
       _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
       @ems = FactoryGirl.create(:ems_amazon, :zone => zone, :name => ems_name)
-      @ems.update_authentication(:default => {:userid => "0123456789ABCDEFGHIJ", :password => "ABCDEFGHIJKLMNO1234567890abcdefghijklmno"})
+      @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
     end
 
     before(:all) do
@@ -102,7 +102,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   end
 
   def write_benchmark_results
-    detected  = File.readlines(Rails.root.join('log', 'evm.log')).reverse_each.detect do |s|
+    detected = File.readlines(Rails.root.join('log', 'evm.log')).reverse_each.detect do |s|
       s.include?(ems_name) && s.include?("Complete - Timings")
     end
 
@@ -172,9 +172,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :orchestration_stack_resource      => 0,
       :security_group                    => test_counts[:security_group_count],
       :firewall_rule                     => firewall_rule_count,
-      :network_port                      => test_counts[:instance_ec2_count] + test_counts[:network_port_count] ,
+      :network_port                      => test_counts[:instance_ec2_count] + test_counts[:network_port_count],
       :cloud_network                     => test_counts[:vpc_count],
-      :floating_ip                       => test_counts[:floating_ip_count] + test_counts[:network_port_count] ,
+      :floating_ip                       => test_counts[:floating_ip_count] + test_counts[:network_port_count],
       :network_router                    => 0,
       :cloud_subnet                      => test_counts[:subnet_count],
       :custom_attribute                  => 0,
@@ -237,9 +237,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     ems = @ems.network_manager
 
     expect(ems).to have_attributes(
-                     :api_version => nil, # TODO: Should be 3.0
-                     :uid_ems     => nil
-                   )
+      :api_version => nil, # TODO: Should be 3.0
+      :uid_ems     => nil
+    )
 
     expect(ems.flavors.size).to eql(expected_table_counts[:flavor])
     expect(ems.availability_zones.size).to eql(expected_table_counts[:availability_zone])

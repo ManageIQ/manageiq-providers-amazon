@@ -109,7 +109,8 @@ module AwsStubs
       }
     end
 
-    (test_counts[:instance_vpc_count]..(test_counts[:instance_vpc_count] + test_counts[:instance_ec2_count] - 1)).each do |i|
+    ec2_max_instances = (test_counts[:instance_vpc_count] + test_counts[:instance_ec2_count] - 1)
+    (test_counts[:instance_vpc_count]..ec2_max_instances).each do |i|
       instances << {
         :instance_id => "instance_#{i}"
       }
@@ -159,18 +160,18 @@ module AwsStubs
     mocked_lbs = []
     expected_table_counts[:load_balancer].times do |i|
       instances = []
-      test_counts[:load_balancer_instances_count].times do |i|
+      test_counts[:load_balancer_instances_count].times do |ins|
         instance             = OpenStruct.new
-        instance.instance_id = "instance_#{i}"
+        instance.instance_id = "instance_#{ins}"
         instances << instance
       end
 
-      health_check                    = OpenStruct.new
-      health_check.target             = "TCP:22"
-      health_check.interval           = 30
-      health_check.timeout            = 5
-      health_check.unhealthy_threshold= 2
-      health_check.healthy_threshold  = 10
+      health_check                     = OpenStruct.new
+      health_check.target              = "TCP:22"
+      health_check.interval            = 30
+      health_check.timeout             = 5
+      health_check.unhealthy_threshold = 2
+      health_check.healthy_threshold   = 10
 
       listener                    = OpenStruct.new
       listener.protocol           = "TCP"
@@ -221,7 +222,7 @@ module AwsStubs
       health.description = "Instance has failed at least the UnhealthyThreshold number of health checks consecutively."
       mocked_instance_healths << health
     end
-    state_output.instance_states  = mocked_instance_healths
+    state_output.instance_states = mocked_instance_healths
     state_output
   end
 end

@@ -8,7 +8,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     before(:each) do
       _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
       @ems = FactoryGirl.create(:ems_amazon, :zone => zone)
-      @ems.update_authentication(:default => {:userid => "0123456789ABCDEFGHIJ", :password => "ABCDEFGHIJKLMNO1234567890abcdefghijklmno"})
+      @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
     end
 
     let(:ec2_user) { FactoryGirl.build(:authentication).userid }
@@ -30,7 +30,6 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     end
 
     it "will perform a full refresh" do
-
       2.times do # Run twice to verify that a second run with existing data does not change anything
         @ems.reload
 
@@ -90,9 +89,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :orchestration_stack_resource      => 0,
       :security_group                    => test_counts[:security_group_count],
       :firewall_rule                     => firewall_rule_count,
-      :network_port                      => test_counts[:instance_ec2_count] + test_counts[:network_port_count] ,
+      :network_port                      => test_counts[:instance_ec2_count] + test_counts[:network_port_count],
       :cloud_network                     => test_counts[:vpc_count],
-      :floating_ip                       => test_counts[:floating_ip_count] + test_counts[:network_port_count] ,
+      :floating_ip                       => test_counts[:floating_ip_count] + test_counts[:network_port_count],
       :network_router                    => 0,
       # TODO(lsmola) the stubbed API can't do filter and we don't do unique check. Instead of test_counts[:subnet_count]
       # we have them multiplied by networks
