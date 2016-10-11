@@ -13,5 +13,5 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config.lib}/**/*"]
 
-  s.add_dependency("aws-sdk", ["~>2.2.19"])
+  s.add_dependency("aws-sdk", ["~>2"])
 end
