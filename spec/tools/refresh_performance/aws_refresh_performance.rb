@@ -11,6 +11,14 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       @ems.update_authentication(:default => {:userid => "0123456789ABCDEFGHIJ", :password => "ABCDEFGHIJKLMNO1234567890abcdefghijklmno"})
     end
 
+    before(:all) do
+      output = ["Name", "Scaling", "Collect", "Parse Legacy", "Parse Targetted", "Saving", "Total"]
+
+      open(Rails.root.join('log', 'benchmark_results.csv'), 'a') do |f|
+        f.puts output.join(",")
+      end
+    end
+
     let(:ec2_user) { FactoryGirl.build(:authentication).userid }
     let(:ec2_pass) { FactoryGirl.build(:authentication).password }
     let(:ec2_user_other) { 'user_other' }
@@ -56,9 +64,27 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       end
     end
 
-    context "with data scaled 4x" do
-      let(:data_scaling) { 4 }
-      let(:ems_name) { "ems_scaled_4x" }
+    context "with data scaled 5x" do
+      let(:data_scaling) { 5 }
+      let(:ems_name) { "ems_scaled_5x" }
+
+      it "will perform a full refresh" do
+        refresh
+      end
+    end
+
+    context "with data scaled 10x" do
+      let(:data_scaling) { 10 }
+      let(:ems_name) { "ems_scaled_10x" }
+
+      it "will perform a full refresh" do
+        refresh
+      end
+    end
+
+    context "with data scaled 20x" do
+      let(:data_scaling) { 20 }
+      let(:ems_name) { "ems_scaled_20x" }
 
       it "will perform a full refresh" do
         refresh
@@ -82,6 +108,20 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
 
     open(Rails.root.join('log', 'benchmark_results.log'), 'a') do |f|
       f.puts detected
+    end
+
+    # Get also a chart displayable format
+    matched = detected.match(/:collect_inventory_for_targets=>([\d\.e-]+).*?
+                              :parse_legacy_inventory=>([\d\.e-]+).*?
+                              :parse_targeted_inventory=>([\d\.e-]+).*?
+                              :save_inventory=>([\d\.e-]+).*?
+                              :ems_refresh=>([\d\.e-]+).*?/x)
+    output = []
+    output << "Scaling #{scaling_factor} total_objects #{expected_table_counts.values.sum}"
+    output << scaling_factor
+    output += matched[1..5].map { |x| x.to_f.round(2) }
+    open(Rails.root.join('log', 'benchmark_results.csv'), 'a') do |f|
+      f.puts output.join(",")
     end
   end
 
