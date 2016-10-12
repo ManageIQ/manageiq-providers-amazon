@@ -13,26 +13,49 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     initialize_dto_collections
   end
 
-  def add_dto_collection(model_class, parent, association)
-    @data[association] = model_class.dto_collection(parent, association)
+  def add_dto_collection(model_class, association, manager_ref = nil)
+    @data[association] = ::ManagerRefresh::DtoCollection.new(model_class,
+                                                             :parent      => @ems,
+                                                             :association => association,
+                                                             :manager_ref => manager_ref)
   end
 
   def initialize_dto_collections
-    add_dto_collection(CloudSubnetNetworkPort, @ems, :cloud_subnet_network_ports)
-    add_dto_collection(self.class.network_port_type, @ems, :network_ports)
-    add_dto_collection(self.class.floating_ip_type, @ems, :floating_ips)
-    add_dto_collection(self.class.cloud_subnet_type, @ems, :cloud_subnets)
-    add_dto_collection(self.class.cloud_network_type, @ems, :cloud_networks)
-    add_dto_collection(self.class.security_group_type, @ems, :security_groups)
-    add_dto_collection(FirewallRule, @ems, :firewall_rules)
-    add_dto_collection(self.class.load_balancer_type, @ems, :load_balancers)
-    add_dto_collection(self.class.load_balancer_pool_type, @ems, :load_balancer_pools)
-    add_dto_collection(self.class.load_balancer_pool_member_type, @ems, :load_balancer_pool_members)
-    add_dto_collection(LoadBalancerPoolMemberPool, @ems, :load_balancer_pool_member_pools)
-    add_dto_collection(self.class.load_balancer_listener_type, @ems, :load_balancer_listeners)
-    add_dto_collection(LoadBalancerListenerPool, @ems, :load_balancer_listener_pools)
-    add_dto_collection(self.class.load_balancer_health_check_type, @ems, :load_balancer_health_checks)
-    add_dto_collection(LoadBalancerHealthCheckMember, @ems, :load_balancer_health_check_members)
+    add_dto_collection(CloudSubnetNetworkPort,
+                       :cloud_subnet_network_ports,
+                       [:address, :cloud_subnet, :network_port])
+    add_dto_collection(self.class.network_port_type,
+                       :network_ports)
+    add_dto_collection(self.class.floating_ip_type,
+                       :floating_ips)
+    add_dto_collection(self.class.cloud_subnet_type,
+                       :cloud_subnets)
+    add_dto_collection(self.class.cloud_network_type,
+                       :cloud_networks)
+    add_dto_collection(self.class.security_group_type,
+                       :security_groups)
+    add_dto_collection(FirewallRule,
+                       :firewall_rules,
+                       [:resource, :source_security_group, :direction, :host_protocol, :port, :end_port, :source_ip_range])
+    add_dto_collection(self.class.load_balancer_type,
+                       :load_balancers)
+    add_dto_collection(self.class.load_balancer_pool_type,
+                       :load_balancer_pools)
+    add_dto_collection(self.class.load_balancer_pool_member_type,
+                       :load_balancer_pool_members)
+    add_dto_collection(LoadBalancerPoolMemberPool,
+                       :load_balancer_pool_member_pools,
+                       [:load_balancer_pool, :load_balancer_pool_member])
+    add_dto_collection(self.class.load_balancer_listener_type,
+                       :load_balancer_listeners)
+    add_dto_collection(LoadBalancerListenerPool,
+                       :load_balancer_listener_pools,
+                       [:load_balancer_listener, :load_balancer_pool])
+    add_dto_collection(self.class.load_balancer_health_check_type,
+                       :load_balancer_health_checks)
+    add_dto_collection(LoadBalancerHealthCheckMember,
+                       :load_balancer_health_check_members,
+                       [:load_balancer_health_check, :load_balancer_pool_member])
   end
 
   def ems_inv_to_hashes
