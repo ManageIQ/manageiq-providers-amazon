@@ -5,51 +5,98 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   include AwsStubs
 
   describe "refresh" do
-    it "will perform a full refresh" do
+    before do
       _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
-      @ems = FactoryGirl.create(:ems_amazon, :zone => zone)
+      @ems                 = FactoryGirl.create(:ems_amazon, :zone => zone)
       @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
       EvmSpecHelper.local_miq_server(:zone => Zone.seed)
-      allow(Settings.ems_refresh).to receive(:ec2_network).and_return({dto_refresh: true})
-      with_aws_stubbed(stub_responses) do
-        2.times do # Run twice to verify that a second run with existing data does not change anything
-          @ems.reload
 
-          EmsRefresh.refresh(@ems.network_manager)
+      allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_batch_saving => true,
+                                                                       :dto_refresh      => true})
+    end
+    [{:dto_batch_saving => true, :dto_refresh => true},
+     {:dto_batch_saving => false, :dto_refresh => true},
+     {:dto_batch_saving => false, :dto_refresh => false}
+    ].each do |settings|
+      context "with settings #{settings}" do
+        it "2 refreshes, first creates all entities, second updates all entitites" do
+          2.times do
+            # Make sure we don't do any delete&create instead of update
+            allow_any_instance_of(ApplicationRecord).to(
+              receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
+                                         "causing create&delete instead of update"))
+            allow_any_instance_of(ActiveRecord::Associations::CollectionProxy).to(
+              receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
+                                         "causing create&delete instead of update"))
 
-          @ems.reload
+            refresh_spec
+          end
+        end
 
-          assert_table_counts
-          assert_ems
+        it "2 refreshes, first creates all entities, second updates exiting and deletes missing entitites" do
+          @data_scaling = 2
+          2.times do
+            refresh_spec
+            @data_scaling -= 1
+          end
+        end
+
+        it "2 refreshes, first creates all entities, second updates existing and creates new entitites" do
+          @data_scaling = 1
+          2.times do
+            # Make sure we don't do any delete&create instead of update
+            allow_any_instance_of(ApplicationRecord).to(
+              receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
+                                         "causing create&delete instead of update"))
+            allow_any_instance_of(ActiveRecord::Associations::CollectionProxy).to(
+              receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
+                                         "causing create&delete instead of update"))
+            refresh_spec
+            @data_scaling += 1
+          end
         end
       end
     end
   end
 
+  def refresh_spec
+    @ems.reload
+
+
+    with_aws_stubbed(stub_responses) do
+      EmsRefresh.refresh(@ems.network_manager)
+    end
+
+    @ems.reload
+
+    assert_table_counts
+    assert_ems
+  end
+
   def stub_responses
     {
-        :elasticloadbalancing => {
-            :describe_load_balancers => {
-                :load_balancer_descriptions => mocked_load_balancers
-            },
-            :describe_instance_health => {
-                :instance_states => mocked_instance_health
-            }
+      :elasticloadbalancing => {
+        :describe_load_balancers  => {
+          :load_balancer_descriptions => mocked_load_balancers
         },
-        :ec2 => {
-            :describe_regions            => {
-                :regions => [
-                    {:region_name => 'us-east-1'},
-                    {:region_name => 'us-west-1'},
-                ]
-            },
-            :describe_instances          => mocked_instances,
-            :describe_vpcs               => mocked_vpcs,
-            :describe_subnets            => mocked_subnets,
-            :describe_security_groups    => mocked_security_groups,
-            :describe_network_interfaces => mocked_network_ports,
-            :describe_addresses          => mocked_floating_ips
+        :describe_instance_health => {
+          :instance_states => mocked_instance_health
         }
+      },
+      :ec2                  => {
+        :describe_regions            => {
+          :regions => [
+            {:region_name => 'us-east-1'},
+            {:region_name => 'us-west-1'},
+          ]
+        },
+        :describe_instances          => mocked_instances,
+        :describe_vpcs               => mocked_vpcs,
+        :describe_subnets            => mocked_subnets,
+        :describe_security_groups    => mocked_security_groups,
+        :describe_network_interfaces => mocked_network_ports,
+        :describe_addresses          => mocked_floating_ips
+      }
     }
   end
 
@@ -73,9 +120,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :operating_system                  => 0,
       :snapshot                          => 0,
       :system_service                    => 0,
-      :relationship                      => 0,
-      :miq_queue                         => 2,
-      :orchestration_template            => 0,
+      # :relationship                      => 0,
+      # :miq_queue                         => 2,
+      # :orchestration_template            => 0,
       :orchestration_stack               => 0,
       :orchestration_stack_parameter     => 0,
       :orchestration_stack_output        => 0,
@@ -93,8 +140,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :load_balancer                     => test_counts[:load_balancer_count],
       :load_balancer_pool                => test_counts[:load_balancer_count],
       :load_balancer_pool_member         => test_counts[:load_balancer_instances_count],
-      # TODO(lsmola) again, no unique check, the data are getting crazy
-      # :load_balancer_pool_member_pool    => test_counts[:load_balancer_count] * test_counts[:load_balancer_instances_count],
+      :load_balancer_pool_member_pool    => test_counts[:load_balancer_count] * test_counts[:load_balancer_instances_count],
       :load_balancer_listener            => test_counts[:load_balancer_count],
       :load_balancer_listener_pool       => test_counts[:load_balancer_count],
       :load_balancer_health_check        => test_counts[:load_balancer_count],
@@ -118,9 +164,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :operating_system                  => OperatingSystem.count,
       :snapshot                          => Snapshot.count,
       :system_service                    => SystemService.count,
-      :relationship                      => Relationship.count,
-      :miq_queue                         => MiqQueue.count,
-      :orchestration_template            => OrchestrationTemplate.count,
+      # :relationship                      => Relationship.count,
+      # :miq_queue                         => MiqQueue.count,
+      # :orchestration_template            => OrchestrationTemplate.count,
       :orchestration_stack               => OrchestrationStack.count,
       :orchestration_stack_parameter     => OrchestrationStackParameter.count,
       :orchestration_stack_output        => OrchestrationStackOutput.count,
@@ -136,8 +182,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :load_balancer                     => LoadBalancer.count,
       :load_balancer_pool                => LoadBalancerPool.count,
       :load_balancer_pool_member         => LoadBalancerPoolMember.count,
-      # TODO(lsmola) again, no unique check, the data are getting crazy
-      # :load_balancer_pool_member_pool    => LoadBalancerPoolMemberPool.count,
+      :load_balancer_pool_member_pool    => LoadBalancerPoolMemberPool.count,
       :load_balancer_listener            => LoadBalancerListener.count,
       :load_balancer_listener_pool       => LoadBalancerListenerPool.count,
       :load_balancer_health_check        => LoadBalancerHealthCheck.count,
@@ -151,9 +196,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     ems = @ems.network_manager
 
     expect(ems).to have_attributes(
-      :api_version => nil, # TODO: Should be 3.0
-      :uid_ems     => nil
-    )
+                     :api_version => nil, # TODO: Should be 3.0
+                     :uid_ems     => nil
+                   )
 
     expect(ems.flavors.size).to eql(expected_table_counts[:flavor])
     expect(ems.availability_zones.size).to eql(expected_table_counts[:availability_zone])

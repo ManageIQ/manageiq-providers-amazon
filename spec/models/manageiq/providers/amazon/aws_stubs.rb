@@ -109,10 +109,9 @@ module AwsStubs
       }
     end
 
-    ec2_max_instances = (test_counts[:instance_vpc_count] + test_counts[:instance_ec2_count] - 1)
-    (test_counts[:instance_vpc_count]..ec2_max_instances).each do |i|
+    test_counts[:instance_ec2_count].times.each do |i|
       instances << {
-        :instance_id => "instance_#{i}"
+        :instance_id => "instance_ec2#{i}"
       }
     end
 
