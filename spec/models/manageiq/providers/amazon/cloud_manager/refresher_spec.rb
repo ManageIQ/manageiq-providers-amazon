@@ -757,8 +757,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       "type"                => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck"
     )
 
-    # TODO(lsmola) missing relation on aws side
-    # expect(health_check_1.load_balancer_listener).to eq @listener_2
+    expect(health_check_1.load_balancer_listener).to eq @listener_2
 
     expect(@elb2.load_balancer_health_checks.count).to eq 1
 
@@ -777,8 +776,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       "type"                => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck"
     )
 
-    # TODO(lsmola) missing relation on aws side
-    # expect(health_check_2.load_balancer_listener).to eq @listener_3
+    expect(health_check_2.load_balancer_listener).to eq @listener_3
 
     expect(health_check_1.load_balancer_pool_members.count).to eq 2
     expect(health_check_1.load_balancer_pool_members).to match_array health_check_2.load_balancer_pool_members

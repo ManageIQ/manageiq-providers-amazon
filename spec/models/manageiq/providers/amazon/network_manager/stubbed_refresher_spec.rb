@@ -30,6 +30,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     end
 
     it "will perform a full refresh" do
+      allow(Settings.ems_refresh).to receive(:ec2_network).and_return({dto_refresh: true})
       2.times do # Run twice to verify that a second run with existing data does not change anything
         @ems.reload
 
