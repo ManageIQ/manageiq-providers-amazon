@@ -70,14 +70,6 @@ class ManageIQ::Providers::Amazon::CloudManager::Vm < ManageIQ::Providers::Cloud
     POWER_STATES[raw_power_state.to_s] || "terminated"
   end
 
-  def validate_migrate
-    validate_supported
-  end
-
-  def validate_smartstate_analysis
-    validate_unsupported("Smartstate Analysis")
-  end
-
   def validate_timeline
     {:available => false,
      :message   => _("Timeline is not available for %{model}") % {:model => ui_lookup(:model => self.class.to_s)}}
