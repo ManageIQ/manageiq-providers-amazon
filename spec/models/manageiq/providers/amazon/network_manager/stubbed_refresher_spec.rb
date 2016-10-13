@@ -10,9 +10,8 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       @ems = FactoryGirl.create(:ems_amazon, :zone => zone)
       @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
       EvmSpecHelper.local_miq_server(:zone => Zone.seed)
-      stub_load_balancer_service
       allow(Settings.ems_refresh).to receive(:ec2_network).and_return({dto_refresh: true})
-      with_aws_stubbed(:ec2 => stub_responses) do
+      with_aws_stubbed(stub_responses) do
         2.times do # Run twice to verify that a second run with existing data does not change anything
           @ems.reload
 
@@ -29,18 +28,28 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
 
   def stub_responses
     {
-      :describe_regions            => {
-        :regions => [
-          {:region_name => 'us-east-1'},
-          {:region_name => 'us-west-1'},
-        ]
-      },
-      :describe_instances          => mocked_instances,
-      :describe_vpcs               => mocked_vpcs,
-      :describe_subnets            => mocked_subnets,
-      :describe_security_groups    => mocked_security_groups,
-      :describe_network_interfaces => mocked_network_ports,
-      :describe_addresses          => mocked_floating_ips
+        :elasticloadbalancing => {
+            :describe_load_balancers => {
+                :load_balancer_descriptions => mocked_load_balancers
+            },
+            :describe_instance_health => {
+                :instance_states => mocked_instance_health
+            }
+        },
+        :ec2 => {
+            :describe_regions            => {
+                :regions => [
+                    {:region_name => 'us-east-1'},
+                    {:region_name => 'us-west-1'},
+                ]
+            },
+            :describe_instances          => mocked_instances,
+            :describe_vpcs               => mocked_vpcs,
+            :describe_subnets            => mocked_subnets,
+            :describe_security_groups    => mocked_security_groups,
+            :describe_network_interfaces => mocked_network_ports,
+            :describe_addresses          => mocked_floating_ips
+        }
     }
   end
 

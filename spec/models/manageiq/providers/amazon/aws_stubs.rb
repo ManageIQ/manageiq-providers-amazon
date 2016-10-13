@@ -142,20 +142,6 @@ module AwsStubs
     {:subnets => mocked_subnets}
   end
 
-  def stub_load_balancer_service
-    # TODO(lsmola) seems like Aws doesn't support stubbing of load balancing. Trying to pass stubs using
-    # Aws.config[:ElasticLoadBalancing] fails. We will stub it by rspec for now.
-
-    require 'aws-sdk'
-    allow_any_instance_of(Aws.const_get('ElasticLoadBalancing')::Resource).to(
-      receive_message_chain(
-        :client, :describe_load_balancers, :load_balancer_descriptions).and_return(mocked_load_balancers))
-
-    allow_any_instance_of(Aws.const_get('ElasticLoadBalancing')::Resource).to(
-      receive_message_chain(
-        :client, :describe_instance_health).and_return(mocked_instance_health))
-  end
-
   def mocked_load_balancers
     mocked_lbs = []
     expected_table_counts[:load_balancer].times do |i|
@@ -163,7 +149,7 @@ module AwsStubs
       test_counts[:load_balancer_instances_count].times do |ins|
         instance             = OpenStruct.new
         instance.instance_id = "instance_#{ins}"
-        instances << instance
+        instances << instance.to_h
       end
 
       health_check                     = OpenStruct.new
@@ -181,7 +167,7 @@ module AwsStubs
       listener.ssl_certificate_id = nil
 
       listener_desc              = OpenStruct.new
-      listener_desc.listener     = listener
+      listener_desc.listener     = listener.to_h
       listener_desc.policy_names = []
 
       source_security_group             = OpenStruct.new
@@ -193,26 +179,24 @@ module AwsStubs
       lb.dns_name                      = "EmSRefreshSpecVPCELB#{i}-1206960929.us-east-1.elb.amazonaws.com"
       lb.canonical_hosted_zone_name    = "EmSRefreshSpecVPCELB#{i}-1206960929.us-east-1.elb.amazonaws.com"
       lb.canonical_hosted_zone_name_id = "Z35SXDOTRQ7X7#{i}"
-      lb.listener_descriptions         = [listener_desc]
-      lb.policies                      = []
+      lb.listener_descriptions         = [listener_desc.to_h]
+      lb.policies                      = {}
       lb.backend_server_descriptions   = []
       lb.availability_zones            = ["us-east-1d", "us-east-1e"]
       lb.subnets                       = ["subnet_1", "subnet_2"]
       lb.vpc_id                        = "vpc-ff49ff91"
       lb.instances                     = instances
-      lb.health_check                  = health_check
-      lb.source_security_group         = source_security_group
+      lb.health_check                  = health_check.to_h
+      lb.source_security_group         = source_security_group.to_h
       lb.security_groups               = ["sg-0d2cd677"]
-      lb.created_time                  = "2016-08-10 14:17:09 UTC"
+      lb.created_time                  = Time.parse("2016-08-10 14:17:09 UTC")
       lb.scheme                        = "internet-facing"
-      mocked_lbs << lb
+      mocked_lbs << lb.to_h
     end
     mocked_lbs
   end
 
   def mocked_instance_health
-    state_output = OpenStruct.new
-
     mocked_instance_healths = []
     expected_table_counts[:load_balancer_pool_member].times do |i|
       health             = OpenStruct.new
@@ -220,9 +204,8 @@ module AwsStubs
       health.state       = "OutOfService"
       health.reason_code = "Instance"
       health.description = "Instance has failed at least the UnhealthyThreshold number of health checks consecutively."
-      mocked_instance_healths << health
+      mocked_instance_healths << health.to_h
     end
-    state_output.instance_states = mocked_instance_healths
-    state_output
+    mocked_instance_healths
   end
 end
