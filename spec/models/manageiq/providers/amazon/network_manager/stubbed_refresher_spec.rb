@@ -5,41 +5,24 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   include AwsStubs
 
   describe "refresh" do
-    before(:each) do
+    it "will perform a full refresh" do
       _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
       @ems = FactoryGirl.create(:ems_amazon, :zone => zone)
       @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
-    end
-
-    let(:ec2_user) { FactoryGirl.build(:authentication).userid }
-    let(:ec2_pass) { FactoryGirl.build(:authentication).password }
-    let(:ec2_user_other) { 'user_other' }
-    let(:ec2_pass_other) { 'pass_other' }
-    subject { described_class.discover(ec2_user, ec2_pass) }
-
-    before do
       EvmSpecHelper.local_miq_server(:zone => Zone.seed)
-
       stub_load_balancer_service
-    end
-
-    around do |example|
-      with_aws_stubbed(:ec2 => stub_responses) do
-        example.run
-      end
-    end
-
-    it "will perform a full refresh" do
       allow(Settings.ems_refresh).to receive(:ec2_network).and_return({dto_refresh: true})
-      2.times do # Run twice to verify that a second run with existing data does not change anything
-        @ems.reload
+      with_aws_stubbed(:ec2 => stub_responses) do
+        2.times do # Run twice to verify that a second run with existing data does not change anything
+          @ems.reload
 
-        EmsRefresh.refresh(@ems.network_manager)
+          EmsRefresh.refresh(@ems.network_manager)
 
-        @ems.reload
+          @ems.reload
 
-        assert_table_counts
-        assert_ems
+          assert_table_counts
+          assert_ems
+        end
       end
     end
   end
