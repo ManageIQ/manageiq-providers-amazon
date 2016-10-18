@@ -62,6 +62,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
     $aws_log.info("#{log_header}...")
     # The order of the below methods does matter, because there are inner dependencies of the data!
     get_cloud_networks
+    get_cloud_subnets
     get_security_groups
     get_network_ports
     get_load_balancers
@@ -105,8 +106,9 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
     process_dto_collection(vpcs, :cloud_networks) { |vpc| parse_cloud_network(vpc) }
   end
 
-  def get_cloud_subnets(uid, subnets)
-    process_dto_collection(subnets, :cloud_subnets) { |s| parse_cloud_subnet(s, uid) }
+  def get_cloud_subnets
+    cloud_subnets = @aws_ec2.client.describe_subnets[:subnets]
+    process_dto_collection(cloud_subnets, :cloud_subnets) { |s| parse_cloud_subnet(s) }
   end
 
   def get_security_groups
@@ -214,9 +216,6 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
 
     status = (vpc.state == :available) ? "active" : "inactive"
 
-    subnets = @aws_ec2.client.describe_subnets(:filters => [{:name => "vpc-id", :values => [vpc.vpc_id]}])[:subnets]
-    get_cloud_subnets(uid, subnets)
-
     new_result = {
       :type                => self.class.cloud_network_type.name,
       :ems_ref             => uid,
@@ -230,7 +229,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
     return uid, new_result
   end
 
-  def parse_cloud_subnet(subnet, cloud_network_uid)
+  def parse_cloud_subnet(subnet)
     uid = subnet.subnet_id
 
     name = get_from_tags(subnet, :name)
@@ -243,7 +242,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :cidr              => subnet.cidr_block,
       :status            => subnet.state.try(:to_s),
       :availability_zone => parent_manager_fetch_path(:availability_zones, subnet.availability_zone),
-      :cloud_network     => @data[:cloud_networks].lazy_find(cloud_network_uid),
+      :cloud_network     => @data[:cloud_networks].lazy_find(subnet.vpc_id),
     }
 
     return uid, new_result

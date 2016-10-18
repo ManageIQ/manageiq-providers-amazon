@@ -48,34 +48,34 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   def expected_table_counts
     {
       :auth_private_key              => 12,
-      :ext_management_system         => 2,
-      :flavor                        => 56,
       :availability_zone             => 5,
-      :vm_or_template                => 55,
-      :vm                            => 35,
-      :miq_template                  => 20,
-      :disk                          => 17,
+      :cloud_network                 => 5,
+      :cloud_subnet                  => 10,
+      :custom_attribute              => 0,
+      :disk                          => 15,
+      :ext_management_system         => 2,
+      :firewall_rule                 => 100,
+      :flavor                        => 56,
+      :floating_ip                   => 17,
       :guest_device                  => 0,
-      :hardware                      => 55,
-      :network                       => 29,
+      :hardware                      => 56,
+      :miq_queue                     => 59,
+      :miq_template                  => 20,
+      :network                       => 28,
+      :network_port                  => 42,
+      :network_router                => 0,
       :operating_system              => 0,
+      :orchestration_stack           => 6,
+      :orchestration_stack_output    => 1,
+      :orchestration_stack_parameter => 15,
+      :orchestration_stack_resource  => 50,
+      :orchestration_template        => 5,
+      :relationship                  => 38,
+      :security_group                => 38,
       :snapshot                      => 0,
       :system_service                => 0,
-      :relationship                  => 38,
-      :miq_queue                     => 58,
-      :orchestration_template        => 4,
-      :orchestration_stack           => 4,
-      :orchestration_stack_parameter => 10,
-      :orchestration_stack_output    => 1,
-      :orchestration_stack_resource  => 43,
-      :security_group                => 37,
-      :firewall_rule                 => 99,
-      :network_port                  => 41,
-      :cloud_network                 => 5,
-      :floating_ip                   => 19,
-      :network_router                => 0,
-      :cloud_subnet                  => 10,
-      :custom_attribute              => 0
+      :vm                            => 36,
+      :vm_or_template                => 56
     }
   end
 
@@ -133,7 +133,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(@ems.miq_templates.size).to eq(expected_table_counts[:miq_template])
 
     expect(@ems.orchestration_stacks.size).to eql(expected_table_counts[:orchestration_stack])
-    expect(@ems.direct_orchestration_stacks.size).to eql(3)
+    expect(@ems.direct_orchestration_stacks.size).to eql(4)
   end
 
   def assert_specific_flavor
