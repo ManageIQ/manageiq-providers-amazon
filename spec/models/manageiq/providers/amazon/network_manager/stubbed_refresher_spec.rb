@@ -10,14 +10,17 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       @ems                 = FactoryGirl.create(:ems_amazon, :zone => zone)
       @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
       EvmSpecHelper.local_miq_server(:zone => Zone.seed)
-
-      allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_batch_saving => true,
-                                                                       :dto_refresh      => true})
     end
+
+    # Test all kinds of refreshes, DTO refresh, DTO with batch saving and the original refresh
     [{:dto_batch_saving => true, :dto_refresh => true},
      {:dto_batch_saving => false, :dto_refresh => true},
      {:dto_batch_saving => false, :dto_refresh => false}
     ].each do |settings|
+      before do
+        allow(Settings.ems_refresh).to receive(:ec2_network).and_return(settings)
+      end
+
       context "with settings #{settings}" do
         it "2 refreshes, first creates all entities, second updates all entitites" do
           2.times do
@@ -47,12 +50,20 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
             # Make sure we don't do any delete&create instead of update
             allow_any_instance_of(ApplicationRecord).to(
               receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
-                                         "causing create&delete instead of update"))
+                                         " causing create&delete instead of update"))
             allow_any_instance_of(ActiveRecord::Associations::CollectionProxy).to(
               receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
-                                         "causing create&delete instead of update"))
+                                         " causing create&delete instead of update"))
             refresh_spec
             @data_scaling += 1
+          end
+        end
+
+        it "2 refreshes, first creates all entities, second deletes all entitites" do
+          @data_scaling = 1
+          2.times do
+            refresh_spec
+            @data_scaling -= 1
           end
         end
       end
@@ -61,7 +72,6 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
 
   def refresh_spec
     @ems.reload
-
 
     with_aws_stubbed(stub_responses) do
       EmsRefresh.refresh(@ems.network_manager)
@@ -133,9 +143,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :cloud_network                     => test_counts[:vpc_count],
       :floating_ip                       => test_counts[:floating_ip_count] + test_counts[:network_port_count],
       :network_router                    => 0,
-      # TODO(lsmola) the stubbed API can't do filter and we don't do unique check. Instead of test_counts[:subnet_count]
-      # we have them multiplied by networks
-      # :cloud_subnet                      => test_counts[:subnet_count] * test_counts[:vpc_count],
+      :cloud_subnet                      => test_counts[:subnet_count],
       :custom_attribute                  => 0,
       :load_balancer                     => test_counts[:load_balancer_count],
       :load_balancer_pool                => test_counts[:load_balancer_count],
@@ -177,7 +185,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :cloud_network                     => CloudNetwork.count,
       :floating_ip                       => FloatingIp.count,
       :network_router                    => NetworkRouter.count,
-      # :cloud_subnet                      => CloudSubnet.count,
+      :cloud_subnet                      => CloudSubnet.count,
       :custom_attribute                  => CustomAttribute.count,
       :load_balancer                     => LoadBalancer.count,
       :load_balancer_pool                => LoadBalancerPool.count,
@@ -208,7 +216,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     expect(ems.cloud_networks.size).to eql(expected_table_counts[:cloud_network])
     expect(ems.floating_ips.size).to eql(expected_table_counts[:floating_ip])
     expect(ems.network_routers.size).to eql(expected_table_counts[:network_router])
-    # expect(ems.cloud_subnets.size).to eql(expected_table_counts[:cloud_subnet])
+    expect(ems.cloud_subnets.size).to eql(expected_table_counts[:cloud_subnet])
     expect(ems.miq_templates.size).to eq(expected_table_counts[:miq_template])
 
     expect(ems.orchestration_stacks.size).to eql(expected_table_counts[:orchestration_stack])
