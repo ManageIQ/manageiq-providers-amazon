@@ -542,9 +542,9 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(v.network_ports.first.floating_ips.count).to eq(1)
     expect(v.network_ports.first.floating_ips).to eq([@ip1])
     expect(v.network_ports.first.floating_ip_addresses).to eq([@ip1.address])
-    expect(v.network_ports.first.fixed_ip_addresses).to eq([@ip1.fixed_ip_address])
-    expect(v.network_ports.first.ipaddresses).to eq([@ip1.fixed_ip_address, @ip1.address])
-    expect(v.ipaddresses).to eq([@ip1.fixed_ip_address, @ip1.address])
+    expect(v.network_ports.first.fixed_ip_addresses).to eq([@ip1.fixed_ip_address, '10.0.0.208'])
+    expect(v.network_ports.first.ipaddresses).to eq([@ip1.fixed_ip_address, '10.0.0.208', @ip1.address])
+    expect(v.ipaddresses).to eq([@ip1.fixed_ip_address, '10.0.0.208', @ip1.address])
 
     expect(v.load_balancers.collect(&:name)).to match_array ["EmSRefreshSpecVPCELB", "EmSRefreshSpecVPCELB2"]
     expect(v.load_balancer_health_checks.collect(&:ems_ref)).to match_array ["EmSRefreshSpecVPCELB", "EmSRefreshSpecVPCELB2"]
