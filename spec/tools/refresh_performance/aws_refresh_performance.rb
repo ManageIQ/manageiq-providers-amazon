@@ -36,8 +36,8 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
         context "with batched dto" do
           let(:ems_name) { "bached_dto_ems_scaled_#{data_scaling}x" }
           it "will perform a full refresh" do
-            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({dto_batch_saving: true,
-                                                                             dto_refresh:      true})
+            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_batch_saving => true,
+                                                                             :dto_refresh      => true})
             refresh
           end
         end
@@ -46,8 +46,8 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
           let(:ems_name) { "non_bached_dto_ems_scaled_#{data_scaling}x" }
 
           it "will perform a full refresh" do
-            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({dto_batch_saving: false,
-                                                                             dto_refresh:      true})
+            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_batch_saving => false,
+                                                                             :dto_refresh      => true})
             refresh
           end
         end
@@ -56,9 +56,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
           let(:ems_name) { "non_dto_ems_scaled_#{data_scaling}x" }
 
           it "will perform a full refresh" do
-          allow(Settings.ems_refresh).to receive(:ec2_network).and_return({dto_batch_saving: false,
-                                                                           dto_refresh:      false})
-          refresh
+            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_batch_saving => false,
+                                                                             :dto_refresh      => false})
+            refresh
           end
         end
       end
@@ -127,14 +127,14 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   def stub_responses
     {
       :elasticloadbalancing => {
-        :describe_load_balancers => {
+        :describe_load_balancers  => {
           :load_balancer_descriptions => mocked_load_balancers
         },
         :describe_instance_health => {
           :instance_states => mocked_instance_health
         }
       },
-      :ec2 => {
+      :ec2                  => {
         :describe_regions            => {
           :regions => [
             {:region_name => 'us-east-1'},
