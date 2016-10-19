@@ -18,7 +18,22 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
                                                              :manager_ref => manager_ref)
   end
 
+  def add_cloud_manager_db_cached_dto(model_class, association, manager_ref = nil)
+    @data[association] = ::ManagerRefresh::DtoCollection.new(model_class,
+                                                             :parent      => @ems.parent_manager,
+                                                             :association => association,
+                                                             :manager_ref => manager_ref,
+                                                             :strategy    => :local_db_cache_all)
+  end
+
   def initialize_dto_collections
+    add_cloud_manager_db_cached_dto(ManageIQ::Providers::Amazon::CloudManager::Vm,
+                                   :vms)
+    add_cloud_manager_db_cached_dto(ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
+                                   :orchestration_stacks)
+    add_cloud_manager_db_cached_dto(ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone,
+                                   :availability_zones)
+
     add_dto_collection(CloudSubnetNetworkPort,
                        :cloud_subnet_network_ports,
                        [:address, :cloud_subnet, :network_port])
@@ -78,17 +93,6 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
   end
 
   private
-
-  def parent_manager_fetch_path(collection, ems_ref)
-    @parent_manager_data ||= {}
-    return @parent_manager_data.fetch_path(collection, ems_ref) if @parent_manager_data.has_key_path?(collection,
-                                                                                                      ems_ref)
-
-    @parent_manager_data.store_path(collection,
-                                    ems_ref,
-                                    @ems.public_send(collection).try(:where, :ems_ref => ems_ref).try(:first))
-  end
-
   def security_groups
     @security_groups ||= @aws_ec2.security_groups
   end
@@ -223,8 +227,8 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :cidr                => vpc.cidr_block,
       :status              => status,
       :enabled             => true,
-      :orchestration_stack => parent_manager_fetch_path(:orchestration_stacks,
-                                                        get_from_tags(vpc, "aws:cloudformation:stack-id")),
+      :orchestration_stack => @data[:orchestration_stacks].lazy_find(
+        get_from_tags(vpc, "aws:cloudformation:stack-id")),
     }
     return uid, new_result
   end
@@ -241,7 +245,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :name              => name,
       :cidr              => subnet.cidr_block,
       :status            => subnet.state.try(:to_s),
-      :availability_zone => parent_manager_fetch_path(:availability_zones, subnet.availability_zone),
+      :availability_zone => @data[:availability_zones].lazy_find(subnet.availability_zone),
       :cloud_network     => @data[:cloud_networks].lazy_find(subnet.vpc_id),
     }
 
@@ -257,8 +261,8 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :name                => sg.group_name,
       :description         => sg.description.try(:truncate, 255),
       :cloud_network       => @data[:cloud_networks].lazy_find(sg.vpc_id),
-      :orchestration_stack => parent_manager_fetch_path(:orchestration_stacks,
-                                                        get_from_tags(sg, "aws:cloudformation:stack-id")),
+      :orchestration_stack => @data[:orchestration_stacks].lazy_find(
+        get_from_tags(sg, "aws:cloudformation:stack-id")),
     }
     return uid, new_result
   end
@@ -332,7 +336,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :ems_ref => uid,
       # TODO(lsmola) AWS always associates to eth0 of the instances, we do not collect that info now, we need to do that
       # :network_port => get eth0 network_port
-      :vm      => parent_manager_fetch_path(:vms, uid)
+      :vm      => @data[:vms].lazy_find(uid)
     }
     return uid, new_result
   end
@@ -425,7 +429,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :fixed_ip_address   => ip.private_ip_address,
       :cloud_network_only => cloud_network_only,
       :network_port       => @data[:network_ports].lazy_find(ip.network_interface_id),
-      :vm                 => parent_manager_fetch_path(:vms, ip.instance_id)
+      :vm                 => @data[:vms].lazy_find(ip.instance_id)
     }
 
     return uid, new_result
@@ -441,7 +445,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :fixed_ip_address   => instance.private_ip_address,
       :cloud_network_only => false,
       :network_port       => @data[:network_ports].lazy_find(instance.id),
-      :vm                 => parent_manager_fetch_path(:vms, instance.id)
+      :vm                 => @data[:vms].lazy_find(instance.id)
     }
 
     return uid, new_result
@@ -481,7 +485,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       @data[:cloud_subnet_network_ports] << parse_cloud_subnet_network_port(uid, network_port.subnet_id, x)
     end
 
-    device          = parent_manager_fetch_path(:vms, network_port.try(:attachment).try(:instance_id))
+    device          = @data[:vms].lazy_find(network_port.try(:attachment).try(:instance_id))
     security_groups = network_port.groups.blank? ? [] : network_port.groups.map do |x|
       @data[:security_groups].lazy_find(x.group_id)
     end
@@ -508,7 +512,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
     # Create network_port placeholder for old EC2 instances, those do not have interface nor subnet nor VPC
     @data[:cloud_subnet_network_ports] << parse_cloud_subnet_network_port(uid, nil, instance)
 
-    device = parent_manager_fetch_path(:vms, uid)
+    device = @data[:vms].lazy_find(uid)
 
     new_result = {
       :type            => self.class.network_port_type.name,
