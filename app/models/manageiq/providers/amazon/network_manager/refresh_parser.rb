@@ -18,6 +18,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     $aws_log.info("#{log_header}...")
     # The order of the below methods does matter, because there are inner dependencies of the data!
     get_cloud_networks
+    get_cloud_subnets
     get_security_groups
     get_network_ports
     get_load_balancers
@@ -61,8 +62,9 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     process_collection(vpcs, :cloud_networks) { |vpc| parse_cloud_network(vpc) }
   end
 
-  def get_cloud_subnets(subnets)
-    process_collection(subnets, :cloud_subnets) { |s| parse_cloud_subnet(s) }
+  def get_cloud_subnets
+    cloud_subnets = @aws_ec2.client.describe_subnets[:subnets]
+    process_collection(cloud_subnets, :cloud_subnets) { |s| parse_cloud_subnet(s) }
   end
 
   def get_security_groups
@@ -175,10 +177,6 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
 
     status  = (vpc.state == :available) ? "active" : "inactive"
 
-    subnets = @aws_ec2.client.describe_subnets(:filters => [{:name => "vpc-id", :values => [vpc.vpc_id]}])[:subnets]
-    get_cloud_subnets(subnets)
-    cloud_subnets = subnets.collect { |s| @data_index.fetch_path(:cloud_subnets, s.subnet_id) }
-
     new_result = {
       :type                => self.class.cloud_network_type,
       :ems_ref             => uid,
@@ -188,7 +186,6 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
       :enabled             => true,
       :orchestration_stack => parent_manager_fetch_path(:orchestration_stacks,
                                                         get_from_tags(vpc, "aws:cloudformation:stack-id")),
-      :cloud_subnets       => cloud_subnets,
     }
     return uid, new_result
   end
@@ -205,7 +202,8 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
       :name              => name,
       :cidr              => subnet.cidr_block,
       :status            => subnet.state.try(:to_s),
-      :availability_zone => parent_manager_fetch_path(:availability_zones, subnet.availability_zone)
+      :availability_zone => parent_manager_fetch_path(:availability_zones, subnet.availability_zone),
+      :cloud_network     => @data_index.fetch_path(:cloud_networks, subnet.vpc_id),
     }
 
     return uid, new_result
