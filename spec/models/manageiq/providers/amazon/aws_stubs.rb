@@ -1,6 +1,6 @@
 module AwsStubs
   def scaling_factor
-    try(:data_scaling) || 1
+    @data_scaling || try(:data_scaling) || 1
   end
 
   def test_counts
