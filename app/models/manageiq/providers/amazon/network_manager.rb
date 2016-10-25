@@ -7,7 +7,6 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
   require_nested :LoadBalancerListener
   require_nested :LoadBalancerPool
   require_nested :LoadBalancerPoolMember
-  require_nested :LoadBalancerServiceOptionConverter
   require_nested :NetworkPort
   require_nested :NetworkRouter
   require_nested :RefreshParser
