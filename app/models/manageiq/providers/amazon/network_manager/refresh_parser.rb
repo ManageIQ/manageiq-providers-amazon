@@ -118,6 +118,8 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
   end
 
   def get_load_balancer_listeners
+    # Initialize the data, otherwise the saving code will not catch this when empty
+    @data[:load_balancer_listeners] ||= []
     load_balancers.each do |lb|
       process_collection(lb.listener_descriptions, :load_balancer_listeners) do|listener|
         parse_load_balancer_listener(lb, listener)
