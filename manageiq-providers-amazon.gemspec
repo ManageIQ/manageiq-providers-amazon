@@ -6,9 +6,9 @@ Gem::Specification.new do |s|
   s.name        = "manageiq-providers-amazon"
   s.version     = ManageIQ::Providers::Amazon::VERSION
   s.authors     = ["ManageIQ Developers"]
-  s.homepage    = "https://github.com/ManageIQ/manageiq"
-  s.summary     = "Amazon AWS Provider for ManageIQ"
-  s.description = "Amazon AWS Provider for ManageIQ"
+  s.homepage    = "https://github.com/ManageIQ/manageiq-providers-amazon"
+  s.summary     = "Amazon Provider for ManageIQ"
+  s.description = "Amazon Provider for ManageIQ"
   s.licenses    = ["Apache-2.0"]
 
   s.files = Dir["{app,config.lib}/**/*"]
