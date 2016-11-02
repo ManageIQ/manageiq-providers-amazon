@@ -187,12 +187,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       d[:hardware] = @data[:hardwares].lazy_find(instance.id)
     end
 
-    process_dto_collection(disks, :disks) { |x| parse_disk(x) }
-  end
-
-  def parse_disk(x)
-    # TODO(lsmola) remove the need for returning tuple, the id is not used
-    return nil, x
+    process_dto_collection(disks, :disks) { |x| x }
   end
 
   def parse_flavor(flavor)
@@ -200,7 +195,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
 
     cpus = flavor[:vcpu]
 
-    new_result = {
+    {
       :type                     => ManageIQ::Providers::Amazon::CloudManager::Flavor.name,
       :ems_ref                  => uid,
       :name                     => name,
@@ -218,8 +213,6 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       :ephemeral_disk_size      => flavor[:instance_store_size],
       :ephemeral_disk_count     => flavor[:instance_store_volumes]
     }
-
-    return uid, new_result
   end
 
   def parse_availability_zone(az)
@@ -227,40 +220,33 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
 
     # power_state = (az.state == :available) ? "on" : "off",
 
-    new_result = {
+    {
       :type    => ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.name,
       :ems_ref => uid,
       :name    => name,
     }
-
-    return uid, new_result
   end
 
   def parse_key_pair(kp)
-    name = uid = kp.key_name
+    name = kp.key_name
 
-    new_result = {
+    {
       :type        => self.class.key_pair_type,
       :name        => name,
       :fingerprint => kp.key_fingerprint
     }
-
-    return uid, new_result
   end
 
   def parse_image_hardware(image)
-    uid      = image.image_id
     guest_os = (image.platform == "windows") ? "windows" : "linux"
 
-    new_result = {
+    {
       :guest_os            => guest_os,
       :bitness             => architecture_to_bitness(image.architecture),
       :virtualization_type => image.virtualization_type,
       :root_device_type    => image.root_device_type,
       :vm_or_template      => @data[:miq_templates].lazy_find(image.image_id)
     }
-
-    return uid, new_result
   end
 
 
@@ -275,7 +261,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
     name ||= $1 if location =~ /^(.+?)(\.(image|img))?\.manifest\.xml$/
     name ||= uid
 
-    new_result = {
+    {
       :type               => ManageIQ::Providers::Amazon::CloudManager::Template.name,
       :uid_ems            => uid,
       :ems_ref            => uid,
@@ -288,8 +274,6 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       # per image, since we already know whether it's a public image
       :publicly_available => is_public,
     }
-
-    return uid, new_result
   end
 
   def parse_instance(instance)
@@ -308,7 +292,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
     name = get_from_tags(instance, :name)
     name = name.blank? ? uid : name
 
-    new_result = {
+    {
       :type                => ManageIQ::Providers::Amazon::CloudManager::Vm.name,
       :uid_ems             => uid,
       :ems_ref             => uid,
@@ -324,8 +308,6 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       :orchestration_stack => @data[:orchestration_stacks].lazy_find(
         get_from_tags(instance, "aws:cloudformation:stack-id")),
     }
-
-    return uid, new_result
   end
 
   def parse_instance_hardware(instance, flavor)
@@ -334,7 +316,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
 
     uid  = instance.id
 
-    new_result = {
+    {
       :bitness              => architecture_to_bitness(instance.architecture),
       :virtualization_type  => instance.virtualization_type,
       :root_device_type     => instance.root_device_type,
@@ -346,7 +328,6 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       :guest_os             => @data[:hardwares].lazy_find(instance.image_id, :path => [:guest_os]),
       :vm_or_template       => @data[:vms].lazy_find(uid)
     }
-    return uid, new_result
   end
 
   def parse_hardware_public_network(instance)
@@ -359,7 +340,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
 
     new_result = nil if new_result[:ipaddress].blank?
 
-    return nil, new_result
+    new_result
   end
 
   def parse_hardware_private_network(instance)
@@ -372,7 +353,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
 
     new_result = nil if new_result[:ipaddress].blank?
 
-    return nil, new_result
+    new_result
   end
 
   def parse_stack(stack)
@@ -383,7 +364,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
     get_stack_parameters(stack)
     get_stack_template(stack)
 
-    new_result = {
+    {
       :type                   => ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.name,
       :ems_ref                => uid,
       :name                   => stack.name,
@@ -393,14 +374,13 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       :parent                 => @data[:orchestration_stacks_resources].lazy_find(uid, :path => [:stack]),
       :orchestration_template => @data[:orchestration_templates].lazy_find(stack.stack_id)
     }
-    return uid, new_result
   end
 
   def parse_stack_template(stack)
     # Only need a temporary unique identifier for the template. Using the stack id is the cheapest way.
     uid = stack.stack_id
 
-    new_result = {
+    {
       :type        => "OrchestrationTemplateCfn",
       :ems_ref     => uid,
       :name        => stack.name,
@@ -408,35 +388,32 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       :content     => stack.client.get_template(:stack_name => stack.name).template_body,
       :orderable   => false
     }
-    return uid, new_result
   end
 
   def parse_stack_parameter(param_key, param_val, stack_id)
     uid = compose_ems_ref(stack_id, param_key)
-    new_result = {
+    {
       :ems_ref => uid,
       :stack   => @data[:orchestration_stacks].lazy_find(stack_id),
       :name    => param_key,
       :value   => param_val
     }
-    return uid, new_result
   end
 
   def parse_stack_output(output, stack_id)
     uid = compose_ems_ref(stack_id, output.output_key)
-    new_result = {
+    {
       :ems_ref     => uid,
       :stack       => @data[:orchestration_stacks].lazy_find(stack_id),
       :key         => output.output_key,
       :value       => output.output_value,
       :description => output.description
     }
-    return uid, new_result
   end
 
   def parse_stack_resource(resource, stack_id)
     uid = resource.physical_resource_id
-    new_result = {
+    {
       :ems_ref                => uid,
       :stack                  => @data[:orchestration_stacks].lazy_find(stack_id),
       :name                   => resource.logical_resource_id,
@@ -447,7 +424,6 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       :resource_status_reason => resource.resource_status_reason,
       :last_updated           => resource.last_updated_timestamp
     }
-    return uid, new_result
   end
 
   class << self
