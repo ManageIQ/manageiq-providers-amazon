@@ -437,6 +437,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
 
   def parse_floating_ip_inferred_from_instance(instance)
     address = uid = instance.public_ip_address
+    return nil if uid.blank?
 
     new_result = {
       :type               => self.class.floating_ip_type.name,
