@@ -46,7 +46,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
                        [:name])
 
     # TODO(lsmola) do refactoring, we shouldn't need this custom saving block
-    orchestration_template_save_block = -> (_ems, dto_collection) do
+    orchestration_template_save_block = lambda do |_ems, dto_collection|
       hashes = dto_collection.data.map(&:attributes)
 
       templates = OrchestrationTemplate.find_or_create_by_contents(hashes)
@@ -70,8 +70,8 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
     get_key_pairs
     get_stacks
     get_private_images if @options.get_private_images
-    get_shared_images  if @options.get_shared_images
-    get_public_images  if @options.get_public_images
+    get_shared_images if @options.get_shared_images
+    get_public_images if @options.get_public_images
     get_instances
     $aws_log.info("#{log_header}...Complete")
 
@@ -116,23 +116,34 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
   end
 
   def get_images(images, is_public = false)
-    process_dto_collection(images, :miq_templates) { |image| parse_image(image, is_public) }
+    process_dto_collection(images, :miq_templates) do |image|
+      get_image_hardware(image)
+
+      parse_image(image, is_public)
+    end
   end
 
   def get_image_hardware(image)
-    process_dto_collection([image], :hardwares) { |image| parse_image_hardware(image) }
+    process_dto_collection([image], :hardwares) { |img| parse_image_hardware(img) }
   end
 
   def get_stacks
     stacks = @aws_cloud_formation.stacks
-    process_dto_collection(stacks, :orchestration_stacks) { |stack| parse_stack(stack) }
+    process_dto_collection(stacks, :orchestration_stacks) do |stack|
+      get_stack_resources(stack)
+      get_stack_outputs(stack)
+      get_stack_parameters(stack)
+      get_stack_template(stack)
+
+      parse_stack(stack)
+    end
   end
 
   def get_stack_parameters(stack)
-    parameters = stack.parameters.each_with_object({}) { |sp, hash| hash[sp.parameter_key] = sp.parameter_value }
+    parameters = stack.parameters
 
-    process_dto_collection(parameters, :orchestration_stacks_parameters) do |param_key, param_val|
-      parse_stack_parameter(param_key, param_val, stack.stack_id)
+    process_dto_collection(parameters, :orchestration_stacks_parameters) do |parameter|
+      parse_stack_parameter(parameter, stack)
     end
   end
 
@@ -140,7 +151,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
     outputs = stack.outputs
 
     process_dto_collection(outputs, :orchestration_stacks_outputs) do |output|
-      parse_stack_output(output, stack.stack_id)
+      parse_stack_output(output, stack)
     end
   end
 
@@ -151,7 +162,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
     resources.reject! { |r| r.physical_resource_id.nil? }
 
     process_dto_collection(resources, :orchestration_stacks_resources) do |resource|
-      parse_stack_resource(resource, stack.stack_id)
+      parse_stack_resource(resource, stack)
     end
   end
 
@@ -161,16 +172,28 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
 
   def get_instances
     instances = @aws_ec2.instances
-    process_dto_collection(instances, :vms) { |instance| parse_instance(instance) }
+    process_dto_collection(instances, :vms) do |instance|
+      # TODO(lsmola) we have a non lazy dependency, can we remove that?
+      flavor = @data[:flavors].find(instance.instance_type) || @data[:flavors].find("unknown")
+
+      get_instance_hardware(instance, flavor)
+
+      parse_instance(instance, flavor)
+    end
   end
 
   def get_instance_hardware(instance, flavor)
-    process_dto_collection([instance], :hardwares) { |instance| parse_instance_hardware(instance, flavor) }
+    process_dto_collection([instance], :hardwares) do |i|
+      get_hardware_networks(i)
+      get_hardware_disks(i, flavor)
+
+      parse_instance_hardware(i, flavor)
+    end
   end
 
   def get_hardware_networks(instance)
-    process_dto_collection([instance], :networks) { |instance| parse_hardware_private_network(instance) }
-    process_dto_collection([instance], :networks) { |instance| parse_hardware_public_network(instance) }
+    process_dto_collection([instance], :networks) { |i| parse_hardware_private_network(i) }
+    process_dto_collection([instance], :networks) { |i| parse_hardware_public_network(i) }
   end
 
   def get_hardware_disks(instance, flavor)
@@ -193,15 +216,13 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
   def parse_flavor(flavor)
     name = uid = flavor[:name]
 
-    cpus = flavor[:vcpu]
-
     {
       :type                     => ManageIQ::Providers::Amazon::CloudManager::Flavor.name,
       :ems_ref                  => uid,
       :name                     => name,
       :description              => flavor[:description],
       :enabled                  => !flavor[:disabled],
-      :cpus                     => cpus,
+      :cpus                     => flavor[:vcpu],
       :cpu_cores                => 1,
       :memory                   => flavor[:memory],
       :supports_32_bit          => flavor[:architecture].include?(:i386),
@@ -217,8 +238,6 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
 
   def parse_availability_zone(az)
     name = uid = az.zone_name
-
-    # power_state = (az.state == :available) ? "on" : "off",
 
     {
       :type    => ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.name,
@@ -249,10 +268,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
     }
   end
 
-
   def parse_image(image, is_public)
-    get_image_hardware(image)
-
     uid      = image.image_id
     location = image.image_location
 
@@ -276,15 +292,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
     }
   end
 
-  def parse_instance(instance)
-    flavor_uid = instance.instance_type
-    # Do we need to filter out the disabled flavors? We should just hide them in provision dialog really
-    # @known_flavors << flavor_uid
-    flavor = @data[:flavors].find(flavor_uid) ||
-      @data[:flavors].find("unknown")
-
-    get_instance_hardware(instance, flavor)
-
+  def parse_instance(instance, flavor)
     status = instance.state.name
     return if @options.ignore_terminated_instances && status.to_sym == :terminated
 
@@ -311,11 +319,6 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
   end
 
   def parse_instance_hardware(instance, flavor)
-    get_hardware_networks(instance)
-    get_hardware_disks(instance, flavor)
-
-    uid  = instance.id
-
     {
       :bitness              => architecture_to_bitness(instance.architecture),
       :virtualization_type  => instance.virtualization_type,
@@ -326,7 +329,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       :memory_mb            => flavor[:memory] / 1.megabyte,
       :disk_capacity        => flavor[:ephemeral_disk_size],
       :guest_os             => @data[:hardwares].lazy_find(instance.image_id, :path => [:guest_os]),
-      :vm_or_template       => @data[:vms].lazy_find(uid)
+      :vm_or_template       => @data[:vms].lazy_find(instance.id)
     }
   end
 
@@ -358,12 +361,6 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
 
   def parse_stack(stack)
     uid = stack.stack_id.to_s
-
-    get_stack_resources(stack)
-    get_stack_outputs(stack)
-    get_stack_parameters(stack)
-    get_stack_template(stack)
-
     {
       :type                   => ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.name,
       :ems_ref                => uid,
@@ -372,17 +369,14 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       :status                 => stack.stack_status,
       :status_reason          => stack.stack_status_reason,
       :parent                 => @data[:orchestration_stacks_resources].lazy_find(uid, :path => [:stack]),
-      :orchestration_template => @data[:orchestration_templates].lazy_find(stack.stack_id)
+      :orchestration_template => @data[:orchestration_templates].lazy_find(uid)
     }
   end
 
   def parse_stack_template(stack)
-    # Only need a temporary unique identifier for the template. Using the stack id is the cheapest way.
-    uid = stack.stack_id
-
     {
       :type        => "OrchestrationTemplateCfn",
-      :ems_ref     => uid,
+      :ems_ref     => stack.stack_id,
       :name        => stack.name,
       :description => stack.description,
       :content     => stack.client.get_template(:stack_name => stack.name).template_body,
@@ -390,32 +384,34 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
     }
   end
 
-  def parse_stack_parameter(param_key, param_val, stack_id)
-    uid = compose_ems_ref(stack_id, param_key)
+  def parse_stack_parameter(parameter, stack)
+    stack_id  = stack.stack_id
+    param_key = parameter.parameter_key
     {
-      :ems_ref => uid,
+      :ems_ref => compose_ems_ref(stack_id, param_key),
       :stack   => @data[:orchestration_stacks].lazy_find(stack_id),
       :name    => param_key,
-      :value   => param_val
+      :value   => parameter.parameter_value
     }
   end
 
-  def parse_stack_output(output, stack_id)
-    uid = compose_ems_ref(stack_id, output.output_key)
+  def parse_stack_output(output, stack)
+    output_key = output.output_key
+    stack_id   = stack.stack_id
     {
-      :ems_ref     => uid,
+      :ems_ref     => compose_ems_ref(stack_id, output.output_key),
       :stack       => @data[:orchestration_stacks].lazy_find(stack_id),
-      :key         => output.output_key,
+      :key         => output_key,
       :value       => output.output_value,
       :description => output.description
     }
   end
 
-  def parse_stack_resource(resource, stack_id)
+  def parse_stack_resource(resource, stack)
     uid = resource.physical_resource_id
     {
       :ems_ref                => uid,
-      :stack                  => @data[:orchestration_stacks].lazy_find(stack_id),
+      :stack                  => @data[:orchestration_stacks].lazy_find(stack.stack_id),
       :name                   => resource.logical_resource_id,
       :logical_resource       => resource.logical_resource_id,
       :physical_resource      => uid,
