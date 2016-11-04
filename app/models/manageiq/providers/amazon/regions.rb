@@ -11,6 +11,11 @@ module ManageIQ
           :hostname    => "ec2.us-east-1.amazonaws.com",
           :description => "US East (Northern Virginia)",
         },
+        "us-east-2"      => {
+          :name        => "us-east-2",
+          :hostname    => "ec2.us-east-2.amazonaws.com",
+          :description => "US East (Ohio)",
+        },
         "us-west-1"      => {
           :name        => "us-west-1",
           :hostname    => "ec2.us-west-1.amazonaws.com",
