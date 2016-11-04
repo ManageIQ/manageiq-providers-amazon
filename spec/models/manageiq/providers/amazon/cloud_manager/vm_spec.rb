@@ -1,8 +1,8 @@
 require_relative '../aws_helper'
 
 describe ManageIQ::Providers::Amazon::CloudManager::Vm do
-  let(:ems)                   { FactoryGirl.create(:ems_amazon_with_authentication) }
-  let(:vm)                    { FactoryGirl.create(:vm_perf_amazon, :ext_management_system => ems) }
+  let(:ems) { FactoryGirl.create(:ems_amazon_with_authentication) }
+  let(:vm)  { FactoryGirl.create(:vm_amazon, :ems_ref => "amazon-perf-vm", :ext_management_system => ems) }
 
   context "#is_available?" do
     let(:power_state_on)        { "running" }
