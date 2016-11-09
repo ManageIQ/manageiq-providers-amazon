@@ -438,7 +438,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerR
       :fixed_ip_address   => public_ip[:private_ip_address],
       :cloud_network_only => true,
       :network_port       => @data[:network_ports].lazy_find(public_ip[:network_port_id]),
-      :vm                 => @data[:network_ports].lazy_find(public_ip[:network_port_id], :path => [:device])
+      :vm                 => @data[:network_ports].lazy_find(public_ip[:network_port_id], :key => :device)
     }
   end
 
