@@ -13,28 +13,27 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(described_class.ems_type).to eq(:ec2)
   end
 
-  # Test all kinds of DTO refreshes, DTO refresh, DTO with batch saving
-  [{:dto_batch_saving => true, :dto_refresh => true},
-   {:dto_batch_saving => false, :dto_refresh => true},
+  # Test all kinds of DTO refreshes, DTO refresh, DTO with recursive saving strategy
+  [{:dto_refresh => true},
+   {:dto_saving_strategy => :recursive, :dto_refresh => true},
   ].each do |dto_settings|
-    before(:each) do
-      settings = OpenStruct.new
-      settings.dto_batch_saving   = dto_settings[:dto_batch_saving]
-      settings.dto_refresh        = dto_settings[:dto_refresh]
-      settings.get_private_images = true
-      settings.get_shared_images  = true
-      settings.get_public_images  = false
-
-      allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
-      allow(Settings.ems_refresh).to receive(:ec2_network).and_return(dto_settings)
-    end
-
     context "with settings #{dto_settings}" do
+      before(:each) do
+        settings = OpenStruct.new
+        settings.dto_batch_saving   = dto_settings[:dto_batch_saving]
+        settings.dto_refresh        = dto_settings[:dto_refresh]
+        settings.get_private_images = true
+        settings.get_shared_images  = true
+        settings.get_public_images  = false
+
+        allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
+        allow(Settings.ems_refresh).to receive(:ec2_network).and_return(dto_settings)
+      end
+
       it "will perform a full refresh" do
         2.times do # Run twice to verify that a second run with existing data does not change anything
           @ems.reload
-
-          VCR.use_cassette(described_class.name.underscore) do
+          VCR.use_cassette(described_class.name.underscore + '_dto') do
             EmsRefresh.refresh(@ems)
             EmsRefresh.refresh(@ems.network_manager)
           end
