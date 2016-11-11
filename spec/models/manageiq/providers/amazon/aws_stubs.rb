@@ -33,6 +33,21 @@ module AwsStubs
     }
   end
 
+  def assert_do_not_delete
+    allow_any_instance_of(ApplicationRecord).to(
+      receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
+                                 " causing create&delete instead of update"))
+    allow_any_instance_of(ActiveRecord::Associations::CollectionProxy).to(
+      receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
+                                 " causing create&delete instead of update"))
+    allow_any_instance_of(ApplicationRecord).to(
+      receive(:disconnect_inv).and_raise("Not allowed delete operation detected. The probable cause is a wrong"\
+                                         " manager_ref causing create&disconnect_inv instead of update"))
+    allow_any_instance_of(ActiveRecord::Associations::CollectionProxy).to(
+      receive(:disconnect_inv).and_raise("Not allowed delete operation detected. The probable cause is a wrong"\
+                                         "manager_ref causing create&disconnect_inv instead of update"))
+  end
+
   def mocked_floating_ips
     floating_ips = []
     test_counts[:floating_ip_count].times do |i|
