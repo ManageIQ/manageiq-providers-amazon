@@ -13,24 +13,19 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     end
 
     # Test all kinds of refreshes, DTO refresh, DTO with batch saving and the original refresh
-    [{:dto_batch_saving => true, :dto_refresh => true},
-     {:dto_batch_saving => false, :dto_refresh => true},
-     {:dto_batch_saving => false, :dto_refresh => false}
+    [{:dto_refresh => true},
+     {:dto_saving_strategy => :recursive, :dto_refresh => true},
+     {:dto_refresh => false}
     ].each do |settings|
-      before do
-        allow(Settings.ems_refresh).to receive(:ec2_network).and_return(settings)
-      end
-
       context "with settings #{settings}" do
+        before :each do
+          allow(Settings.ems_refresh).to receive(:ec2_network).and_return(settings)
+        end
+
         it "2 refreshes, first creates all entities, second updates all entitites" do
           2.times do
             # Make sure we don't do any delete&create instead of update
-            allow_any_instance_of(ApplicationRecord).to(
-              receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
-                                         "causing create&delete instead of update"))
-            allow_any_instance_of(ActiveRecord::Associations::CollectionProxy).to(
-              receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
-                                         "causing create&delete instead of update"))
+            assert_do_not_delete
 
             refresh_spec
           end
@@ -48,12 +43,8 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
           @data_scaling = 1
           2.times do
             # Make sure we don't do any delete&create instead of update
-            allow_any_instance_of(ApplicationRecord).to(
-              receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
-                                         " causing create&delete instead of update"))
-            allow_any_instance_of(ActiveRecord::Associations::CollectionProxy).to(
-              receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
-                                         " causing create&delete instead of update"))
+            assert_do_not_delete
+
             refresh_spec
             @data_scaling += 1
           end
@@ -115,6 +106,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       (test_counts[:outbound_firewall_rule_per_security_group_count] +
         test_counts[:outbound_firewall_rule_per_security_group_count])
 
+    floating_ip_count = test_counts[:floating_ip_count] + test_counts[:network_port_count] +
+      test_counts[:instance_ec2_count]
+
     {
       :auth_private_key                  => 0,
       :ext_management_system             => 2,
@@ -141,7 +135,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :firewall_rule                     => firewall_rule_count,
       :network_port                      => test_counts[:instance_ec2_count] + test_counts[:network_port_count],
       :cloud_network                     => test_counts[:vpc_count],
-      :floating_ip                       => test_counts[:floating_ip_count] + test_counts[:network_port_count],
+      :floating_ip                       => floating_ip_count,
       :network_router                    => 0,
       :cloud_subnet                      => test_counts[:subnet_count],
       :custom_attribute                  => 0,
