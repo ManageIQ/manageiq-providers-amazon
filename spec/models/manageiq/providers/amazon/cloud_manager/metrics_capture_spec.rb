@@ -2,16 +2,16 @@ require_relative "../aws_helper"
 
 describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
   let(:ems) { FactoryGirl.create(:ems_amazon_with_authentication) }
-  let(:vm) { FactoryGirl.build(:vm_perf_amazon, :ext_management_system => ems) }
+  let(:vm)  { FactoryGirl.build(:vm_amazon, :ems_ref => "amazon-perf-vm", :ext_management_system => ems) }
 
   context "#perf_collect_metrics" do
     it "raises an error when no EMS is defined" do
-      vm = FactoryGirl.build(:vm_perf_amazon, :ext_management_system => nil)
+      vm = FactoryGirl.build(:vm_amazon, :ext_management_system => nil)
       expect { vm.perf_collect_metrics('interval_name') }.to raise_error(RuntimeError, /No EMS defined/)
     end
 
     it "raises an error with no EMS credentials defined" do
-      vm = FactoryGirl.build(:vm_perf_amazon, :ext_management_system => FactoryGirl.create(:ems_amazon))
+      vm = FactoryGirl.build(:vm_amazon, :ext_management_system => FactoryGirl.create(:ems_amazon))
       expect { vm.perf_collect_metrics('interval_name') }.to raise_error(RuntimeError, /no credentials defined/)
     end
 
