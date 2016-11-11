@@ -32,30 +32,30 @@ module AwsRefresherSpecCommon
       :cloud_network                 => 5,
       :cloud_subnet                  => 10,
       :custom_attribute              => 0,
-      :disk                          => 15,
+      :disk                          => 11,
       :ext_management_system         => 2,
-      :firewall_rule                 => 100,
+      :firewall_rule                 => 101,
       :flavor                        => 56,
-      :floating_ip                   => 17,
+      :floating_ip                   => 13,
       :guest_device                  => 0,
-      :hardware                      => 56,
-      :miq_queue                     => 59,
+      :hardware                      => 55,
+      :miq_queue                     => 58,
       :miq_template                  => 20,
-      :network                       => 28,
-      :network_port                  => 42,
+      :network                       => 23,
+      :network_port                  => 41,
       :network_router                => 0,
       :operating_system              => 0,
-      :orchestration_stack           => 6,
+      :orchestration_stack           => 8,
       :orchestration_stack_output    => 1,
-      :orchestration_stack_parameter => 15,
-      :orchestration_stack_resource  => 50,
+      :orchestration_stack_parameter => 20,
+      :orchestration_stack_resource  => 56,
       :orchestration_template        => 5,
-      :relationship                  => 38,
-      :security_group                => 38,
+      :relationship                  => 36,
+      :security_group                => 39,
       :snapshot                      => 0,
       :system_service                => 0,
-      :vm                            => 36,
-      :vm_or_template                => 56
+      :vm                            => 35,
+      :vm_or_template                => 55
     }
   end
 
@@ -113,7 +113,7 @@ module AwsRefresherSpecCommon
     expect(@ems.miq_templates.size).to eq(expected_table_counts[:miq_template])
 
     expect(@ems.orchestration_stacks.size).to eql(expected_table_counts[:orchestration_stack])
-    expect(@ems.direct_orchestration_stacks.size).to eql(4)
+    expect(@ems.direct_orchestration_stacks.size).to eql(5)
   end
 
   def assert_specific_flavor
