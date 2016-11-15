@@ -219,27 +219,27 @@ module AwsRefresherSpecCommon
     )
 
     expected_firewall_rules = [
-      {:host_protocol => "ICMP", :direction => "inbound", :port => -1, :end_port => -1,    :source_ip_range => "0.0.0.0/0",  :source_security_group_id => nil},
-      {:host_protocol => "ICMP", :direction => "inbound", :port => -1, :end_port => -1,    :source_ip_range => nil,          :source_security_group_id => @sg.id},
-      {:host_protocol => "ICMP", :direction => "inbound", :port => 0,  :end_port => -1,    :source_ip_range => "1.2.3.4/30", :source_security_group_id => nil},
-      {:host_protocol => "TCP",  :direction => "inbound", :port => 0,  :end_port => 65535, :source_ip_range => "0.0.0.0/0",  :source_security_group_id => nil},
-      {:host_protocol => "TCP",  :direction => "inbound", :port => 1,  :end_port => 2,     :source_ip_range => "1.2.3.4/30", :source_security_group_id => nil},
-      {:host_protocol => "TCP",  :direction => "inbound", :port => 3,  :end_port => 4,     :source_ip_range => nil,          :source_security_group_id => @sg.id},
-      {:host_protocol => "TCP",  :direction => "inbound", :port => 80, :end_port => 80,    :source_ip_range => "0.0.0.0/0",  :source_security_group_id => nil},
-      {:host_protocol => "TCP",  :direction => "inbound", :port => 80, :end_port => 80,    :source_ip_range => "1.2.3.4/30", :source_security_group_id => nil},
-      {:host_protocol => "TCP",  :direction => "inbound", :port => 80, :end_port => 80,    :source_ip_range => nil,          :source_security_group_id => @sg.id},
-      {:host_protocol => "UDP",  :direction => "inbound", :port => 0,  :end_port => 65535, :source_ip_range => "0.0.0.0/0",  :source_security_group_id => nil},
-      {:host_protocol => "UDP",  :direction => "inbound", :port => 1,  :end_port => 2,     :source_ip_range => "1.2.3.4/30", :source_security_group_id => nil},
-      {:host_protocol => "UDP",  :direction => "inbound", :port => 3,  :end_port => 4,     :source_ip_range => nil,          :source_security_group_id => @sg.id}
+      {:host_protocol => "ICMP", :direction => "inbound", :port => -1, :end_port => -1,     :source_ip_range => "0.0.0.0/0",  :source_security_group_id => nil},
+      {:host_protocol => "ICMP", :direction => "inbound", :port => -1, :end_port => -1,     :source_ip_range => nil,          :source_security_group_id => @sg.id},
+      {:host_protocol => "ICMP", :direction => "inbound", :port => 0,  :end_port => -1,     :source_ip_range => "1.2.3.4/30", :source_security_group_id => nil},
+      {:host_protocol => "TCP",  :direction => "inbound", :port => 0,  :end_port => 65_535, :source_ip_range => "0.0.0.0/0",  :source_security_group_id => nil},
+      {:host_protocol => "TCP",  :direction => "inbound", :port => 1,  :end_port => 2,      :source_ip_range => "1.2.3.4/30", :source_security_group_id => nil},
+      {:host_protocol => "TCP",  :direction => "inbound", :port => 3,  :end_port => 4,      :source_ip_range => nil,          :source_security_group_id => @sg.id},
+      {:host_protocol => "TCP",  :direction => "inbound", :port => 80, :end_port => 80,     :source_ip_range => "0.0.0.0/0",  :source_security_group_id => nil},
+      {:host_protocol => "TCP",  :direction => "inbound", :port => 80, :end_port => 80,     :source_ip_range => "1.2.3.4/30", :source_security_group_id => nil},
+      {:host_protocol => "TCP",  :direction => "inbound", :port => 80, :end_port => 80,     :source_ip_range => nil,          :source_security_group_id => @sg.id},
+      {:host_protocol => "UDP",  :direction => "inbound", :port => 0,  :end_port => 65_535, :source_ip_range => "0.0.0.0/0",  :source_security_group_id => nil},
+      {:host_protocol => "UDP",  :direction => "inbound", :port => 1,  :end_port => 2,      :source_ip_range => "1.2.3.4/30", :source_security_group_id => nil},
+      {:host_protocol => "UDP",  :direction => "inbound", :port => 3,  :end_port => 4,      :source_ip_range => nil,          :source_security_group_id => @sg.id}
     ]
 
     expect(@sg.firewall_rules.size).to eq(12)
     @sg.firewall_rules
-      .order(:host_protocol, :direction, :port, :end_port, :source_ip_range, :source_security_group_id)
-      .zip(expected_firewall_rules)
-      .each do |actual, expected|
-        expect(actual).to have_attributes(expected)
-      end
+       .order(:host_protocol, :direction, :port, :end_port, :source_ip_range, :source_security_group_id)
+       .zip(expected_firewall_rules)
+       .each do |actual, expected|
+       expect(actual).to have_attributes(expected)
+    end
   end
 
   def assert_specific_security_group_on_cloud_network
@@ -526,14 +526,16 @@ module AwsRefresherSpecCommon
     expect(v.network_ports.first.ipaddresses).to eq([@ip1.fixed_ip_address, '10.0.0.208', @ip1.address])
     expect(v.ipaddresses).to eq([@ip1.fixed_ip_address, '10.0.0.208', @ip1.address])
 
-    expect(v.load_balancers.collect(&:name)).to match_array ["EmSRefreshSpecVPCELB", "EmSRefreshSpecVPCELB2"]
-    expect(v.load_balancer_health_checks.collect(&:ems_ref)).to match_array ["EmSRefreshSpecVPCELB", "EmSRefreshSpecVPCELB2"]
-    listeners = [
-      "EmSRefreshSpecVPCELB2__TCP__2222__TCP__22__", "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__",
-      "EmSRefreshSpecVPCELB__TCP__22__TCP__22__"
-    ]
+    expect(v.load_balancers.collect(&:name)).to match_array %w(EmSRefreshSpecVPCELB EmSRefreshSpecVPCELB2)
+    expect(v.load_balancer_health_checks.collect(&:ems_ref)).to match_array %w(EmSRefreshSpecVPCELB
+                                                                               EmSRefreshSpecVPCELB2)
+    listeners = %w(
+      EmSRefreshSpecVPCELB2__TCP__2222__TCP__22__
+      EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__
+      EmSRefreshSpecVPCELB__TCP__22__TCP__22__
+    )
     expect(v.load_balancer_listeners.collect(&:ems_ref)).to match_array listeners
-    expect(v.load_balancer_health_check_states).to match_array ["OutOfService", "OutOfService"]
+    expect(v.load_balancer_health_check_states).to match_array %w(OutOfService OutOfService)
     healt_check_states_with_reason = [
       "Status: OutOfService, Status Reason: Instance has failed at least the UnhealthyThreshold number of health checks consecutively.",
       "Status: OutOfService, Status Reason: Instance has failed at least the UnhealthyThreshold number of health checks consecutively."
@@ -641,7 +643,7 @@ module AwsRefresherSpecCommon
     expect(@elb2.load_balancer_listeners.count).to eq 1
 
     @listener_non_vpc = @elb_non_vpc.load_balancer_listeners
-                          .where(:ems_ref => "EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__").first
+                                    .where(:ems_ref => "EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__").first
     expect(@listener_non_vpc).to have_attributes(
       "ems_ref"                  => "EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__",
       "name"                     => nil,
@@ -656,7 +658,7 @@ module AwsRefresherSpecCommon
     expect(@listener_non_vpc.ext_management_system).to eq(@ems.network_manager)
 
     listener_1 = @elb.load_balancer_listeners
-                   .where(:ems_ref => "EmSRefreshSpecVPCELB__TCP__22__TCP__22__").first
+                     .where(:ems_ref => "EmSRefreshSpecVPCELB__TCP__22__TCP__22__").first
     expect(listener_1).to have_attributes(
       "ems_ref"                  => "EmSRefreshSpecVPCELB__TCP__22__TCP__22__",
       "name"                     => nil,
@@ -671,7 +673,7 @@ module AwsRefresherSpecCommon
     expect(listener_1.ext_management_system).to eq(@ems.network_manager)
 
     @listener_2 = @elb.load_balancer_listeners
-                    .where(:ems_ref => "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__").first
+                      .where(:ems_ref => "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__").first
     expect(@listener_2).to have_attributes(
       "ems_ref"                  => "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__",
       "name"                     => nil,
@@ -836,7 +838,7 @@ module AwsRefresherSpecCommon
     expect(@orch_stack.parent).to eq(parent_stack)
 
     # orchestration stack can have vms
-    vm = Vm.where(:name => "i-d7754a49").first
+    # vm = Vm.where(:name => "i-d7754a49").first
     # TODO(lsmola) deployment of the VCR nested Orchestration Stack is broken, I need to fix the templates
     # expect(vm.orchestration_stack).to eq(@orch_stack)
 
