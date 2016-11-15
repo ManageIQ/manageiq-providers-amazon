@@ -50,7 +50,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       hashes = dto_collection.data.map(&:attributes)
 
       templates = OrchestrationTemplate.find_or_create_by_contents(hashes)
-      dto_collection.data.zip(templates).each { |dto, template| dto.build_object(template) }
+      dto_collection.data.zip(templates).each { |dto, template| dto.object = template }
     end
 
     @data[:orchestration_templates] = ::ManagerRefresh::DtoCollection.new(
@@ -312,7 +312,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       :flavor              => flavor,
       :genealogy_parent    => @data[:miq_templates].lazy_find(instance.image_id),
       :key_pairs           => [@data[:key_pairs].lazy_find(instance.key_name)].compact,
-      :location            => @data[:networks].lazy_find("#{uid}__public", :path => [:hostname], :default => 'unknown'),
+      :location            => @data[:networks].lazy_find("#{uid}__public", :key => :hostname, :default => 'unknown'),
       :orchestration_stack => @data[:orchestration_stacks].lazy_find(
         get_from_tags(instance, "aws:cloudformation:stack-id")),
     }
@@ -328,7 +328,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       :cpu_total_cores      => flavor[:cpus],
       :memory_mb            => flavor[:memory] / 1.megabyte,
       :disk_capacity        => flavor[:ephemeral_disk_size],
-      :guest_os             => @data[:hardwares].lazy_find(instance.image_id, :path => [:guest_os]),
+      :guest_os             => @data[:hardwares].lazy_find(instance.image_id, :key => :guest_os),
       :vm_or_template       => @data[:vms].lazy_find(instance.id)
     }
   end
@@ -368,7 +368,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       :description            => stack.description,
       :status                 => stack.stack_status,
       :status_reason          => stack.stack_status_reason,
-      :parent                 => @data[:orchestration_stacks_resources].lazy_find(uid, :path => [:stack]),
+      :parent                 => @data[:orchestration_stacks_resources].lazy_find(uid, :key => :stack),
       :orchestration_template => @data[:orchestration_templates].lazy_find(uid)
     }
   end

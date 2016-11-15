@@ -3,20 +3,49 @@ module AwsStubs
     @data_scaling || try(:data_scaling) || 1
   end
 
-  def test_counts
+  def disconnect_inv_factor
+    # The entities like VM are disconnected instead of deleted, for comparing, we set how many was disconnected and
+    # we add them to the total count
+    @disconnect_inv_count || 0
+  end
+
+  def test_counts(scaling = nil)
+    scaling ||= scaling_factor
     {
-      :load_balancer_count                             => scaling_factor * 20,
-      :instance_vpc_count                              => scaling_factor * 20,
-      :instance_ec2_count                              => scaling_factor * 20,
-      :load_balancer_instances_count                   => scaling_factor * 10,
-      :vpc_count                                       => scaling_factor * 20,
-      :subnet_count                                    => scaling_factor * 20,
-      :network_port_count                              => scaling_factor * 20,
-      :floating_ip_count                               => scaling_factor * 20,
-      :security_group_count                            => scaling_factor * 20,
-      :inbound_firewall_rule_per_security_group_count  => scaling_factor * 5,
-      :outbound_firewall_rule_per_security_group_count => scaling_factor * 5,
+      :load_balancer_count                             => scaling * 20,
+      :availability_zone_count                         => scaling * 5,
+      :instance_vpc_count                              => scaling * 20,
+      :instance_ec2_count                              => scaling * 20,
+      :image_count                                     => scaling * 20,
+      :key_pair_count                                  => scaling * 20,
+      :stack_count                                     => scaling * 20,
+      :stack_resource_count                            => scaling * 20,
+      :stack_parameter_count                           => scaling * 20,
+      :stack_output_count                              => scaling * 20,
+      :load_balancer_instances_count                   => scaling * 10,
+      :vpc_count                                       => scaling * 20,
+      :subnet_count                                    => scaling * 20,
+      :network_port_count                              => scaling * 20,
+      :floating_ip_count                               => scaling * 20,
+      :security_group_count                            => scaling * 20,
+      :inbound_firewall_rule_per_security_group_count  => scaling * 5,
+      :outbound_firewall_rule_per_security_group_count => scaling * 5,
     }
+  end
+
+  def assert_do_not_delete
+    allow_any_instance_of(ApplicationRecord).to(
+      receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
+                                 " causing create&delete instead of update"))
+    allow_any_instance_of(ActiveRecord::Associations::CollectionProxy).to(
+      receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
+                                 " causing create&delete instead of update"))
+    allow_any_instance_of(ApplicationRecord).to(
+      receive(:disconnect_inv).and_raise("Not allowed delete operation detected. The probable cause is a wrong"\
+                                         " manager_ref causing create&disconnect_inv instead of update"))
+    allow_any_instance_of(ActiveRecord::Associations::CollectionProxy).to(
+      receive(:disconnect_inv).and_raise("Not allowed delete operation detected. The probable cause is a wrong"\
+                                         "manager_ref causing create&disconnect_inv instead of update"))
   end
 
   def mocked_floating_ips
@@ -102,6 +131,13 @@ module AwsStubs
     test_counts[:instance_vpc_count].times do |i|
       instances << {
         :instance_id        => "instance_#{i}",
+        :instance_type      => 'm3.medium',
+        :image_id           => "image_id_#{i}",
+        :private_ip_address => "10.#{(i / 255) == 0 ? 0 : i % (i / 255)}.#{i / 255}.#{i % 255}",
+        :public_ip_address  => "40.#{(i / 255) == 0 ? 0 : i % (i / 255)}.#{i / 255}.#{i % 255}",
+        :state              => {:name => 'running'},
+        :architecture       => 'x86_64',
+        :placement          => {:availability_zone => "us-east-1e"},
         :network_interfaces => [
           {
             :network_interface_id => "interface_#{i}"
@@ -111,11 +147,124 @@ module AwsStubs
 
     test_counts[:instance_ec2_count].times.each do |i|
       instances << {
-        :instance_id => "instance_ec2#{i}"
+        :instance_id        => "instance_ec2#{i}",
+        :instance_type      => 'm3.medium',
+        :image_id           => "image_id_#{i}",
+        :private_ip_address => "11.#{(i / 255) == 0 ? 0 : i % (i / 255)}.#{i / 255}.#{i % 255}",
+        :public_ip_address  => "41.#{(i / 255) == 0 ? 0 : i % (i / 255)}.#{i / 255}.#{i % 255}",
+        :state              => {:name => 'running'},
+        :architecture       => 'x86_64',
+        :placement          => {:availability_zone => "us-east-1e"},
       }
     end
 
     {:reservations => [{:instances => instances}]}
+  end
+
+  def mocked_images
+    mocked_images = []
+    test_counts[:image_count].times do |i|
+      mocked_images << {
+        :image_id       => "image_id_#{i}",
+        :image_location => "image_location_#{i}",
+        :kernel_id      => "aki_#{i}",
+        :ramdisk_id     => "ari_#{i}",
+        :architecture   => 'x86_64',
+        :state          => "available"
+      }
+    end
+
+    {:images => mocked_images}
+  end
+
+  def mocked_key_pairs
+    mocked_key_pairs = []
+    test_counts[:key_pair_count].times do |i|
+      mocked_key_pairs << {
+        :key_name        => "key_pair_#{i}",
+        :key_fingerprint => "66:e9:a2:2a:7f:6d:89:b2:71:3f:1y:eb:a8:95:9f:c3:f6:ce:c7:56"
+      }
+    end
+
+    {:key_pairs => mocked_key_pairs}
+  end
+
+  def mocked_stacks
+    mocked_stacks = []
+    test_counts[:stack_count].times do |i|
+      mocked_stacks << {
+        :stack_name    => "stack_name_#{i}",
+        :stack_id      => "stack_id_#{i}",
+        :description   => "stack_dec_#{i}",
+        :stack_status  => 'CREATE_COMPLETE',
+        :creation_time => Time.now,
+        :parameters    => mocked_stack_parameters,
+        :outputs       => mocked_stack_outputs
+      }
+    end
+
+    {:stacks => mocked_stacks}
+  end
+
+  def mocked_stack_resources
+    mocked_stack_resources = []
+    test_counts[:stack_count].times do |stack_index|
+      stack_resources = []
+      test_counts[:stack_resource_count].times do |i|
+        stack_resources << {
+          :physical_resource_id   => ":stack/stack_name_#{stack_index}-stack_id_#{stack_index}/stack_physical_resource_id_#{i}",
+          :logical_resource_id    => "logical_resource_id_#{i}",
+          :resource_type          => "AWS::EC2::InternetGateway",
+          :last_updated_timestamp => Time.now,
+          :resource_status        => 'CREATE_COMPLETE'
+        }
+      end
+      mocked_stack_resources << {:stack_resource_summaries => stack_resources}
+    end
+
+    mocked_stack_resources
+  end
+
+  def mocked_stack_parameters
+    mocked_stack_parameters = []
+    test_counts[:stack_parameter_count].times do |i|
+      mocked_stack_parameters << {
+        :parameter_key   => "stack_parameter_key#{i}",
+        :parameter_value => "stack_parameter_value_#{i}"
+      }
+    end
+
+    mocked_stack_parameters
+  end
+
+  def mocked_stack_outputs
+    mocked_stack_outputs = []
+    test_counts[:stack_output_count].times do |i|
+      mocked_stack_outputs << {
+        :output_key   => "stack_output_key#{i}",
+        :output_value => "stack_output_value_#{i}"
+      }
+    end
+
+    mocked_stack_outputs
+  end
+
+  def mocked_regions
+    {
+      :regions => [
+        {:region_name => 'us-east-1'},
+        {:region_name => 'us-west-1'},
+      ]
+    }
+  end
+
+  def mocked_availability_zones
+    {:availability_zones => [
+      {:zone_name => "us-east-1a", :region_name => "us-east-1", :state => "available"},
+      {:zone_name => "us-east-1b", :region_name => "us-east-1", :state => "available"},
+      {:zone_name => "us-east-1c", :region_name => "us-east-1", :state => "available"},
+      {:zone_name => "us-east-1d", :region_name => "us-east-1", :state => "available"},
+      {:zone_name => "us-east-1e", :region_name => "us-east-1", :state => "available"}]}
   end
 
   def mocked_vpcs

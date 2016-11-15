@@ -1,38 +1,22 @@
-class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
+class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerRefresh::RefreshParserDto
   include ManageIQ::Providers::Amazon::RefreshHelperMethods
 
   def initialize(ems, options = nil)
-    @ems        = ems
-    @aws_ec2    = ems.connect
-    @aws_elb    = ems.connect(:service => :ElasticLoadBalancing)
-    @data       = {:_dto_collection => true}
-    @data_index = {}
-    @options    = options || {}
+    super
+
+    @aws_ec2 = ems.connect
+    @aws_elb = ems.connect(:service => :ElasticLoadBalancing)
+
     initialize_dto_collections
-  end
-
-  def add_dto_collection(model_class, association, manager_ref = nil)
-    @data[association] = ::ManagerRefresh::DtoCollection.new(model_class,
-                                                             :parent      => @ems,
-                                                             :association => association,
-                                                             :manager_ref => manager_ref)
-  end
-
-  def add_cloud_manager_db_cached_dto(model_class, association, manager_ref = nil)
-    @data[association] = ::ManagerRefresh::DtoCollection.new(model_class,
-                                                             :parent      => @ems.parent_manager,
-                                                             :association => association,
-                                                             :manager_ref => manager_ref,
-                                                             :strategy    => :local_db_cache_all)
   end
 
   def initialize_dto_collections
     add_cloud_manager_db_cached_dto(ManageIQ::Providers::Amazon::CloudManager::Vm,
-                                   :vms)
+                                    :vms)
     add_cloud_manager_db_cached_dto(ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
-                                   :orchestration_stacks)
+                                    :orchestration_stacks)
     add_cloud_manager_db_cached_dto(ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone,
-                                   :availability_zones)
+                                    :availability_zones)
 
     add_dto_collection(CloudSubnetNetworkPort,
                        :cloud_subnet_network_ports,
@@ -81,9 +65,6 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
     get_security_groups
     get_network_ports
     get_load_balancers
-    get_load_balancer_pools
-    get_load_balancer_listeners
-    get_load_balancer_health_checks
     get_ec2_floating_ips_and_ports
     get_floating_ips
     get_public_ips
@@ -95,10 +76,6 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
   private
   def security_groups
     @security_groups ||= @aws_ec2.security_groups
-  end
-
-  def load_balancers
-    @load_balancers ||= @aws_elb.client.describe_load_balancers.load_balancer_descriptions
   end
 
   def network_ports
@@ -116,57 +93,89 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
   end
 
   def get_security_groups
-    process_dto_collection(security_groups, :security_groups) { |sg| parse_security_group(sg) }
-    get_firewall_rules
-  end
+    process_dto_collection(security_groups, :security_groups) do |sg|
+      get_outbound_firewall_rules(sg)
+      get_inbound_firewall_rules(sg)
 
-  def get_firewall_rules
-    security_groups.each do |sg|
-      # new_sg = @data_index.fetch_path(:security_groups, sg.group_id)
-      resource_sg = @data[:security_groups].lazy_find(sg.group_id)
-      # new_sg[:firewall_rules] = get_inbound_firewall_rules(sg) + get_outbound_firewall_rules(sg)
-      (get_outbound_firewall_rules(sg) + get_inbound_firewall_rules(sg)).each do |rule|
-        rule[:resource] = resource_sg
-        @data[:firewall_rules] << @data[:firewall_rules].new_dto(rule)
-      end
+      parse_security_group(sg)
     end
   end
 
   def get_inbound_firewall_rules(sg)
-    sg.ip_permissions.collect { |perm| parse_firewall_rule(perm, "inbound") }.flatten
+    parsed_rules = sg.ip_permissions.collect { |perm| parse_firewall_rule(perm, "inbound", sg) }.flatten
+    process_dto_collection(parsed_rules, :firewall_rules) { |firewall_rule| firewall_rule }
   end
 
   def get_outbound_firewall_rules(sg)
-    sg.ip_permissions_egress.collect { |perm| parse_firewall_rule(perm, "outbound") }.flatten
+    parsed_rules = sg.ip_permissions_egress.collect { |perm| parse_firewall_rule(perm, "outbound", sg) }.flatten
+    process_dto_collection(parsed_rules, :firewall_rules) { |firewall_rule| firewall_rule }
   end
 
   def get_load_balancers
-    process_dto_collection(load_balancers, :load_balancers) { |lb| parse_load_balancer(lb) }
-  end
+    load_balancers = @aws_elb.client.describe_load_balancers.load_balancer_descriptions
 
-  def get_load_balancer_pools
-    process_dto_collection(load_balancers, :load_balancer_pools) { |lb| parse_load_balancer_pool(lb) }
-    get_load_balancer_pool_members
-  end
+    process_dto_collection(load_balancers, :load_balancers) do |lb|
+      get_load_balancer_pools(lb)
+      get_load_balancer_pool_members(lb)
+      get_load_balancer_listeners(lb)
+      get_load_balancer_health_checks(lb)
 
-  def get_load_balancer_pool_members
-    load_balancers.each do |lb|
-      process_dto_collection(lb.instances, :load_balancer_pool_members) do |m|
-        parse_load_balancer_pool_member(lb.load_balancer_name, m)
-      end
+      parse_load_balancer(lb)
     end
   end
 
-  def get_load_balancer_listeners
-    load_balancers.each do |lb|
-      process_dto_collection(lb.listener_descriptions, :load_balancer_listeners) do |listener|
-        parse_load_balancer_listener(lb, listener)
-      end
+  def get_load_balancer_pools(load_balancer)
+    process_dto_collection([load_balancer], :load_balancer_pools) { |lb| parse_load_balancer_pool(lb) }
+  end
+
+  def get_load_balancer_pool_members(lb)
+    process_dto_collection(lb.instances, :load_balancer_pool_members) do |member|
+      get_load_balancer_balancer_pool_member_pools(lb, member)
+
+      parse_load_balancer_pool_member(member)
     end
   end
 
-  def get_load_balancer_health_checks
-    process_dto_collection(load_balancers, :load_balancer_health_checks) { |lb| parse_load_balancer_health_check(lb) }
+  def get_load_balancer_balancer_pool_member_pools(lb, member)
+    process_dto_collection([member], :load_balancer_pool_member_pools) do |m|
+      parse_load_balancer_pool_member_pools(lb, m)
+    end
+  end
+
+  def listener_uid(lb, listener)
+    "#{lb.load_balancer_name}__#{listener.protocol}__#{listener.load_balancer_port}__"\
+    "#{listener.instance_protocol}__#{listener.instance_port}__#{listener.ssl_certificate_id}"
+  end
+
+  def get_load_balancer_listeners(lb)
+    process_dto_collection(lb.listener_descriptions, :load_balancer_listeners) do |listener|
+      listener = listener.listener
+
+      get_load_balancer_listener_pool(listener, lb)
+
+      parse_load_balancer_listener(lb, listener)
+    end
+  end
+
+  def get_load_balancer_listener_pool(listener, lb)
+    process_dto_collection([listener], :load_balancer_listener_pools) do |l|
+      parse_load_balancer_listener_pool(l, lb)
+    end
+  end
+
+  def get_load_balancer_health_checks(load_balancer)
+    process_dto_collection([load_balancer], :load_balancer_health_checks) do |lb|
+      get_load_balancer_health_check_members(lb)
+
+      parse_load_balancer_health_check(lb)
+    end
+  end
+
+  def get_load_balancer_health_check_members(lb)
+    health_check_members = @aws_elb.client.describe_instance_health(:load_balancer_name => lb.load_balancer_name)
+    process_dto_collection(health_check_members.instance_states, :load_balancer_health_check_members) do |m|
+      parse_load_balancer_health_check_member(lb, m)
+    end
   end
 
   def get_floating_ips
@@ -179,7 +188,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
     network_ports.each do |network_port|
       network_port.private_ip_addresses.each do |private_address|
         if private_address.association && !(public_ip = private_address.association.public_ip).blank? &&
-           private_address.association.allocation_id.blank?
+          private_address.association.allocation_id.blank?
 
           public_ips << {
             :network_port_id    => network_port.network_interface_id,
@@ -192,24 +201,33 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
     process_dto_collection(public_ips, :floating_ips) { |public_ip| parse_public_ip(public_ip) }
   end
 
-  def process_dto_collection(collection, key)
-    collection.each do |item|
-      uid, new_result = yield(item)
-      next if uid.nil?
+  def get_network_ports
+    process_dto_collection(network_ports, :network_ports) do |n|
+      get_cloud_subnet_network_ports(n)
 
-      dto = @data[key].new_dto(new_result)
-      @data[key] << dto
+      parse_network_port(n)
     end
   end
 
-  def get_network_ports
-    process_dto_collection(network_ports, :network_ports) { |n| parse_network_port(n) }
+  def get_cloud_subnet_network_ports(network_port)
+    process_dto_collection(network_port.private_ip_addresses, :cloud_subnet_network_ports) do |address|
+      parse_cloud_subnet_network_port(network_port, address)
+    end
   end
 
   def get_ec2_floating_ips_and_ports
     instances = @aws_ec2.instances.select { |instance| instance.network_interfaces.blank? }
-    process_dto_collection(instances, :network_ports) { |instance| parse_network_port_inferred_from_instance(instance) }
+    process_dto_collection(instances, :network_ports) do |instance|
+      get_ec2_cloud_subnet_network_port(instance)
+
+      parse_network_port_inferred_from_instance(instance)
+    end
     process_dto_collection(instances, :floating_ips) { |instance| parse_floating_ip_inferred_from_instance(instance) }
+  end
+
+  def get_ec2_cloud_subnet_network_port(instance)
+    # Create network_port placeholder for old EC2 instances, those do not have interface nor subnet nor VPC
+    process_dto_collection([instance], :cloud_subnet_network_ports) { |i| parse_ec2_cloud_subnet_network_port(i) }
   end
 
   def parse_cloud_network(vpc)
@@ -220,7 +238,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
 
     status = (vpc.state == :available) ? "active" : "inactive"
 
-    new_result = {
+    {
       :type                => self.class.cloud_network_type.name,
       :ems_ref             => uid,
       :name                => name,
@@ -230,7 +248,6 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :orchestration_stack => @data[:orchestration_stacks].lazy_find(
         get_from_tags(vpc, "aws:cloudformation:stack-id")),
     }
-    return uid, new_result
   end
 
   def parse_cloud_subnet(subnet)
@@ -239,7 +256,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
     name = get_from_tags(subnet, :name)
     name ||= uid
 
-    new_result = {
+    {
       :type              => self.class.cloud_subnet_type.name,
       :ems_ref           => uid,
       :name              => name,
@@ -248,14 +265,12 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :availability_zone => @data[:availability_zones].lazy_find(subnet.availability_zone),
       :cloud_network     => @data[:cloud_networks].lazy_find(subnet.vpc_id),
     }
-
-    return uid, new_result
   end
 
   def parse_security_group(sg)
     uid = sg.group_id
 
-    new_result = {
+    {
       :type                => self.class.security_group_type.name,
       :ems_ref             => uid,
       :name                => sg.group_name,
@@ -264,12 +279,11 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :orchestration_stack => @data[:orchestration_stacks].lazy_find(
         get_from_tags(sg, "aws:cloudformation:stack-id")),
     }
-    return uid, new_result
   end
 
   # TODO: Should ICMP protocol values have their own 2 columns, or
   #   should they override port and end_port like the Amazon API.
-  def parse_firewall_rule(perm, direction)
+  def parse_firewall_rule(perm, direction, sg)
     ret = []
 
     common = {
@@ -277,6 +291,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :host_protocol => perm.ip_protocol.to_s.upcase,
       :port          => perm.from_port,
       :end_port      => perm.to_port,
+      :resource      => @data[:security_groups].lazy_find(sg.group_id)
     }
 
     perm.user_id_group_pairs.each do |g|
@@ -297,124 +312,89 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
   def parse_load_balancer(lb)
     uid = lb.load_balancer_name
 
-    new_result = {
+    {
       :type    => self.class.load_balancer_type.name,
       :ems_ref => uid,
       :name    => uid,
     }
-
-    return uid, new_result
   end
 
   def parse_load_balancer_pool(lb)
-    uid = name = lb.load_balancer_name
+    uid = lb.load_balancer_name
 
-    new_result = {
+    {
       :type    => self.class.load_balancer_pool_type.name,
       :ems_ref => uid,
-      :name    => name,
+      :name    => uid,
     }
-
-    return uid, new_result
   end
 
-  def parse_load_balancer_pool_member_pools(lb_pool_uid, member_uid)
-    new_result = {
-        :load_balancer_pool        => @data[:load_balancer_pools].lazy_find(lb_pool_uid),
-        :load_balancer_pool_member => @data[:load_balancer_pool_members].lazy_find(member_uid)
+  def parse_load_balancer_pool_member_pools(lb, member)
+    {
+      :load_balancer_pool        => @data[:load_balancer_pools].lazy_find(lb.load_balancer_name),
+      :load_balancer_pool_member => @data[:load_balancer_pool_members].lazy_find(member.instance_id)
     }
-    @data[:load_balancer_pool_member_pools].new_dto(new_result)
   end
 
-  def parse_load_balancer_pool_member(lb_pool_uid, member)
+  def parse_load_balancer_pool_member(member)
     uid = member.instance_id
-
-    @data[:load_balancer_pool_member_pools] << parse_load_balancer_pool_member_pools(lb_pool_uid, uid)
-
-    new_result = {
+    {
       :type    => self.class.load_balancer_pool_member_type.name,
       :ems_ref => uid,
       # TODO(lsmola) AWS always associates to eth0 of the instances, we do not collect that info now, we need to do that
       # :network_port => get eth0 network_port
       :vm      => @data[:vms].lazy_find(uid)
     }
-    return uid, new_result
   end
 
-  def parse_load_balancer_listener_pool(listener_uid, pool_uid)
-    new_result = {
-      :load_balancer_listener => @data[:load_balancer_listeners].lazy_find(listener_uid),
-      :load_balancer_pool     => @data[:load_balancer_pools].lazy_find(pool_uid)
+  def parse_load_balancer_listener_pool(listener, lb)
+    {
+      :load_balancer_listener => @data[:load_balancer_listeners].lazy_find(listener_uid(lb, listener)),
+      :load_balancer_pool     => @data[:load_balancer_pools].lazy_find(lb.load_balancer_name)
     }
-    @data[:load_balancer_listener_pools].new_dto(new_result)
   end
 
-  def parse_load_balancer_listener(lb, listener_struct)
-    listener = listener_struct.listener
-
-    uid = "#{lb.load_balancer_name}__#{listener.protocol}__#{listener.load_balancer_port}__"\
-          "#{listener.instance_protocol}__#{listener.instance_port}__#{listener.ssl_certificate_id}"
-
-    @data[:load_balancer_listener_pools] << parse_load_balancer_listener_pool(uid, lb.load_balancer_name)
-
-    new_result = {
-      :type                         => self.class.load_balancer_listener_type.name,
-      :ems_ref                      => uid,
-      :load_balancer_protocol       => listener.protocol,
-      :load_balancer_port_range     => (listener.load_balancer_port.to_i..listener.load_balancer_port.to_i),
-      :instance_protocol            => listener.instance_protocol,
-      :instance_port_range          => (listener.instance_port.to_i..listener.instance_port.to_i),
-      :load_balancer                => @data[:load_balancers].lazy_find(lb.load_balancer_name),
+  def parse_load_balancer_listener(lb, listener)
+    {
+      :type                     => self.class.load_balancer_listener_type.name,
+      :ems_ref                  => listener_uid(lb, listener),
+      :load_balancer_protocol   => listener.protocol,
+      :load_balancer_port_range => (listener.load_balancer_port.to_i..listener.load_balancer_port.to_i),
+      :instance_protocol        => listener.instance_protocol,
+      :instance_port_range      => (listener.instance_port.to_i..listener.instance_port.to_i),
+      :load_balancer            => @data[:load_balancers].lazy_find(lb.load_balancer_name),
     }
-
-    return uid, new_result
   end
 
   def parse_load_balancer_health_check(lb)
-    uid = lb.load_balancer_name
-
-    health_check_members = @aws_elb.client.describe_instance_health(:load_balancer_name => lb.load_balancer_name)
-    health_check_members.instance_states.collect do |m|
-      @data[:load_balancer_health_check_members] << parse_load_balancer_health_check_member(uid, m)
-    end
-
+    uid          = lb.load_balancer_name
     health_check = lb.health_check
     target_match = health_check.target.match(/^(\w+)\:(\d+)\/?(.*?)$/)
     protocol     = target_match[1]
     port         = target_match[2].to_i
     url_path     = target_match[3]
 
-    # matched_listener = @data.fetch_path(:load_balancer_listeners).detect do |listener|
-    #   listener[:load_balancer][:ems_ref] == lb.load_balancer_name &&
-    #     listener[:instance_port_range] == (port.to_i..port.to_i) &&
-    #     listener[:instance_protocol] == protocol
-    # end
-
-    new_result   = {
-      :type                               => self.class.load_balancer_health_check_type.name,
-      :ems_ref                            => uid,
-      :protocol                           => protocol,
-      :port                               => port,
-      :url_path                           => url_path,
-      :interval                           => health_check.interval,
-      :timeout                            => health_check.timeout,
-      :unhealthy_threshold                => health_check.unhealthy_threshold,
-      :healthy_threshold                  => health_check.healthy_threshold,
-      :load_balancer                      => @data[:load_balancers].lazy_find(lb.load_balancer_name),
-      # :load_balancer_listener             => matched_listener,
+    {
+      :type                => self.class.load_balancer_health_check_type.name,
+      :ems_ref             => uid,
+      :protocol            => protocol,
+      :port                => port,
+      :url_path            => url_path,
+      :interval            => health_check.interval,
+      :timeout             => health_check.timeout,
+      :unhealthy_threshold => health_check.unhealthy_threshold,
+      :healthy_threshold   => health_check.healthy_threshold,
+      :load_balancer       => @data[:load_balancers].lazy_find(lb.load_balancer_name),
     }
-
-    return uid, new_result
   end
 
-  def parse_load_balancer_health_check_member(health_check_uid, member)
-    new_result ={
-      :load_balancer_health_check => @data[:load_balancer_health_checks].lazy_find(health_check_uid),
+  def parse_load_balancer_health_check_member(lb, member)
+    {
+      :load_balancer_health_check => @data[:load_balancer_health_checks].lazy_find(lb.load_balancer_name),
       :load_balancer_pool_member  => @data[:load_balancer_pool_members].lazy_find(member.instance_id),
       :status                     => member.state,
       :status_reason              => member.description
     }
-    @data[:load_balancer_health_check_members].new_dto(new_result)
   end
 
   def parse_floating_ip(ip)
@@ -422,7 +402,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
     address            = ip.public_ip
     uid                = cloud_network_only ? ip.allocation_id : ip.public_ip
 
-    new_result = {
+    {
       :type               => self.class.floating_ip_type.name,
       :ems_ref            => uid,
       :address            => address,
@@ -431,14 +411,13 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :network_port       => @data[:network_ports].lazy_find(ip.network_interface_id),
       :vm                 => @data[:vms].lazy_find(ip.instance_id)
     }
-
-    return uid, new_result
   end
 
   def parse_floating_ip_inferred_from_instance(instance)
     address = uid = instance.public_ip_address
+    return nil if uid.blank?
 
-    new_result = {
+    {
       :type               => self.class.floating_ip_type.name,
       :ems_ref            => uid,
       :address            => address,
@@ -447,47 +426,45 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :network_port       => @data[:network_ports].lazy_find(instance.id),
       :vm                 => @data[:vms].lazy_find(instance.id)
     }
-
-    return uid, new_result
   end
 
   def parse_public_ip(public_ip)
-    address    = uid = public_ip[:public_ip_address]
+    address = uid = public_ip[:public_ip_address]
 
-    new_result = {
+    {
       :type               => self.class.floating_ip_type.name,
       :ems_ref            => uid,
       :address            => address,
       :fixed_ip_address   => public_ip[:private_ip_address],
       :cloud_network_only => true,
       :network_port       => @data[:network_ports].lazy_find(public_ip[:network_port_id]),
-      :vm                 => @data[:network_ports].lazy_find(public_ip[:network_port_id], :path => [:device])
+      :vm                 => @data[:network_ports].lazy_find(public_ip[:network_port_id], :key => :device)
     }
-
-    return uid, new_result
   end
 
-  def parse_cloud_subnet_network_port(network_port_id, subnet_id, cloud_subnet_network_port)
-    hash = {
-      :address      => cloud_subnet_network_port.private_ip_address,
-      :cloud_subnet => @data[:cloud_subnets].lazy_find(subnet_id),
-      :network_port => @data[:network_ports].lazy_find(network_port_id)
+  def parse_cloud_subnet_network_port(network_port, address)
+    {
+      :address      => address.private_ip_address,
+      :cloud_subnet => @data[:cloud_subnets].lazy_find(network_port.subnet_id),
+      :network_port => @data[:network_ports].lazy_find(network_port.network_interface_id)
     }
-    @data[:cloud_subnet_network_ports].new_dto(hash)
+  end
+
+  def parse_ec2_cloud_subnet_network_port(instance)
+    {
+      :address      => instance.private_ip_address,
+      :cloud_subnet => nil,
+      :network_port => @data[:network_ports].lazy_find(instance.id)
+    }
   end
 
   def parse_network_port(network_port)
-    uid = network_port.network_interface_id
-    network_port.private_ip_addresses.map do |x|
-      @data[:cloud_subnet_network_ports] << parse_cloud_subnet_network_port(uid, network_port.subnet_id, x)
-    end
-
-    device          = @data[:vms].lazy_find(network_port.try(:attachment).try(:instance_id))
+    uid             = network_port.network_interface_id
     security_groups = network_port.groups.blank? ? [] : network_port.groups.map do |x|
       @data[:security_groups].lazy_find(x.group_id)
     end
 
-    new_result = {
+    {
       :type            => self.class.network_port_type.name,
       :name            => uid,
       :ems_ref         => uid,
@@ -495,10 +472,9 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :mac_address     => network_port.mac_address,
       :device_owner    => network_port.try(:attachment).try(:instance_owner_id),
       :device_ref      => network_port.try(:attachment).try(:instance_id),
-      :device          => device,
+      :device          => @data[:vms].lazy_find(network_port.try(:attachment).try(:instance_id)),
       :security_groups => security_groups,
     }
-    return uid, new_result
   end
 
   def parse_network_port_inferred_from_instance(instance)
@@ -506,12 +482,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
     name = get_from_tags(instance, :name)
     name ||= uid
 
-    # Create network_port placeholder for old EC2 instances, those do not have interface nor subnet nor VPC
-    @data[:cloud_subnet_network_ports] << parse_cloud_subnet_network_port(uid, nil, instance)
-
-    device = @data[:vms].lazy_find(uid)
-
-    new_result = {
+    {
       :type            => self.class.network_port_type.name,
       :name            => name,
       :ems_ref         => uid,
@@ -519,12 +490,11 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto
       :mac_address     => nil,
       :device_owner    => nil,
       :device_ref      => nil,
-      :device          => device,
+      :device          => @data[:vms].lazy_find(uid),
       :security_groups => instance.security_groups.to_a.collect do |sg|
         @data[:security_groups].lazy_find(sg.group_id)
       end.compact,
     }
-    return uid, new_result
   end
 
   class << self
