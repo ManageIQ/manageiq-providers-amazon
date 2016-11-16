@@ -323,12 +323,6 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     port         = target_match[2].to_i
     url_path     = target_match[3]
 
-    matched_listener = @data.fetch_path(:load_balancer_listeners).detect do |listener|
-      listener[:load_balancer][:ems_ref] == lb.load_balancer_name &&
-        listener[:instance_port_range] == (port.to_i..port.to_i) &&
-        listener[:instance_protocol] == protocol
-    end
-
     new_result = {
       :type                               => self.class.load_balancer_health_check_type,
       :ems_ref                            => uid,
@@ -340,7 +334,6 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
       :unhealthy_threshold                => health_check.unhealthy_threshold,
       :healthy_threshold                  => health_check.healthy_threshold,
       :load_balancer                      => @data_index.fetch_path(:load_balancers, lb.load_balancer_name),
-      :load_balancer_listener             => matched_listener,
       :load_balancer_health_check_members => health_check_members
     }
 

@@ -14,12 +14,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155449Z
+      - 20161111T081348Z
       X-Amz-Content-Sha256:
       - 00ad084f6657f391cc081b511414e5a0151d37e459c47574856ebc7b503e1208
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=02368fb1eca19c04e3276e8951c3b142545e021032e507b734ebca9ffcbb7528
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=a45723ca92876b6e09d24d0060044f5ca09d95a7bc4e1088a5b6caa8ad4a4392
       Content-Length:
       - '51'
       Accept:
@@ -36,7 +36,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:54:50 GMT
+      - Fri, 11 Nov 2016 08:13:48 GMT
       Server:
       - AmazonEC2
     body:
@@ -44,7 +44,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeAvailabilityZonesResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>19d7eb3a-8d59-41d2-91e5-ff3d44e1ca63</requestId>
+            <requestId>93f98aa4-aa5f-46c6-b7f3-9fba55d39dfd</requestId>
             <availabilityZoneInfo>
                 <item>
                     <zoneName>us-east-1a</zoneName>
@@ -78,8 +78,8 @@ http_interactions:
                 </item>
             </availabilityZoneInfo>
         </DescribeAvailabilityZonesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:54:50 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:13:49 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -94,12 +94,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155450Z
+      - 20161111T081349Z
       X-Amz-Content-Sha256:
       - 208df215e6f64d70884e47bbb68f4c6060658385788d286291bb8fa315ce748a
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=554df1bef64a99425e6832ad94b2be8882fb637d651d5d4c301171420f8b27b3
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=eb793a18a41e59b0bb742ae8793f839e7c087b598ff0052fc74f2df2acd5f706
       Content-Length:
       - '42'
       Accept:
@@ -116,7 +116,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:54:51 GMT
+      - Fri, 11 Nov 2016 08:13:49 GMT
       Server:
       - AmazonEC2
     body:
@@ -124,7 +124,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeKeyPairsResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>41bc1e79-fffb-4dac-aa99-25a6936fe8d8</requestId>
+            <requestId>2912551d-f78c-4e1d-ab65-4daeaf76be1b</requestId>
             <keySet>
                 <item>
                     <keyName>bd</keyName>
@@ -176,8 +176,8 @@ http_interactions:
                 </item>
             </keySet>
         </DescribeKeyPairsResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:54:51 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:13:50 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -192,12 +192,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155451Z
+      - 20161111T081350Z
       X-Amz-Content-Sha256:
       - 1c0d327d16f37b15838ca07a3964664f2dcff8d7051d9f1d87552e7df79be01f
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=86035c116bc84060f6e35dd659b13f291e66c77b06511c909c0af054126ae715
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ae7330691dbd9b0b57325043d762ee994d335a9bc9ce5861ebfc6bced8839fcd
       Content-Length:
       - '40'
       Accept:
@@ -208,7 +208,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 2eb7ff19-a827-11e6-81c0-51e9bb93c21e
+      - c75f58b3-a7e6-11e6-b4bb-2d9de317b63d
       Content-Type:
       - text/xml
       Content-Length:
@@ -216,7 +216,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:54:51 GMT
+      - Fri, 11 Nov 2016 08:13:50 GMT
     body:
       encoding: UTF-8
       string: |
@@ -232,7 +232,6 @@ http_interactions:
                 <StackStatus>CREATE_FAILED</StackStatus>
                 <DisableRollback>true</DisableRollback>
                 <Tags/>
-                <StackStatusReason>The following resource(s) failed to create: [WaitCondition]. </StackStatusReason>
                 <Parameters>
                   <member>
                     <ParameterKey>DBRootPassword</ParameterKey>
@@ -243,6 +242,7 @@ http_interactions:
                     <ParameterValue>t1.micro</ParameterValue>
                   </member>
                 </Parameters>
+                <StackStatusReason>The following resource(s) failed to create: [WaitCondition]. </StackStatusReason>
               </member>
               <member>
                 <CreationTime>2016-11-08T22:29:24.059Z</CreationTime>
@@ -253,7 +253,6 @@ http_interactions:
                 <StackStatus>CREATE_FAILED</StackStatus>
                 <DisableRollback>true</DisableRollback>
                 <Tags/>
-                <StackStatusReason>The following resource(s) failed to create: [InternetGateway, WebServerInstance, VPC]. </StackStatusReason>
                 <Parameters>
                   <member>
                     <ParameterKey>KeyName</ParameterKey>
@@ -268,6 +267,7 @@ http_interactions:
                     <ParameterValue>c1.medium</ParameterValue>
                   </member>
                 </Parameters>
+                <StackStatusReason>The following resource(s) failed to create: [InternetGateway, WebServerInstance, VPC]. </StackStatusReason>
               </member>
               <member>
                 <CreationTime>2016-08-30T15:34:30.956Z</CreationTime>
@@ -278,7 +278,6 @@ http_interactions:
                 <StackStatus>CREATE_FAILED</StackStatus>
                 <DisableRollback>true</DisableRollback>
                 <Tags/>
-                <StackStatusReason>The following resource(s) failed to create: [WaitCondition]. </StackStatusReason>
                 <Parameters>
                   <member>
                     <ParameterKey>DBRootPassword</ParameterKey>
@@ -289,6 +288,7 @@ http_interactions:
                     <ParameterValue>t1.micro</ParameterValue>
                   </member>
                 </Parameters>
+                <StackStatusReason>The following resource(s) failed to create: [WaitCondition]. </StackStatusReason>
               </member>
               <member>
                 <CreationTime>2016-08-30T15:34:24.719Z</CreationTime>
@@ -299,7 +299,6 @@ http_interactions:
                 <StackStatus>CREATE_FAILED</StackStatus>
                 <DisableRollback>true</DisableRollback>
                 <Tags/>
-                <StackStatusReason>The following resource(s) failed to create: [InternetGateway, WebServerInstance, VPC]. </StackStatusReason>
                 <Parameters>
                   <member>
                     <ParameterKey>KeyName</ParameterKey>
@@ -314,6 +313,7 @@ http_interactions:
                     <ParameterValue>c1.medium</ParameterValue>
                   </member>
                 </Parameters>
+                <StackStatusReason>The following resource(s) failed to create: [InternetGateway, WebServerInstance, VPC]. </StackStatusReason>
               </member>
               <member>
                 <Outputs>
@@ -357,7 +357,6 @@ http_interactions:
                 <StackStatus>CREATE_FAILED</StackStatus>
                 <DisableRollback>true</DisableRollback>
                 <Tags/>
-                <StackStatusReason>The following resource(s) failed to create: [OutBoundHTTPNetworkAclEntry, IPAddress, Route, InboundSSHNetworkAclEntry, WebServerWaitCondition, InboundResponsePortsNetworkAclEntry, OutBoundHTTPSNetworkAclEntry, InboundHTTPNetworkAclEntry]. </StackStatusReason>
                 <Parameters>
                   <member>
                     <ParameterKey>KeyName</ParameterKey>
@@ -372,6 +371,7 @@ http_interactions:
                     <ParameterValue>t1.micro</ParameterValue>
                   </member>
                 </Parameters>
+                <StackStatusReason>The following resource(s) failed to create: [OutBoundHTTPNetworkAclEntry, IPAddress, Route, InboundSSHNetworkAclEntry, WebServerWaitCondition, InboundResponsePortsNetworkAclEntry, OutBoundHTTPSNetworkAclEntry, InboundHTTPNetworkAclEntry]. </StackStatusReason>
               </member>
               <member>
                 <CreationTime>2016-05-31T21:23:04.757Z</CreationTime>
@@ -403,7 +403,6 @@ http_interactions:
                 <StackStatus>DELETE_FAILED</StackStatus>
                 <DisableRollback>true</DisableRollback>
                 <Tags/>
-                <StackStatusReason>The following resource(s) failed to delete: [Subnet, VPC]. </StackStatusReason>
                 <Parameters>
                   <member>
                     <ParameterKey>KeyName</ParameterKey>
@@ -418,15 +417,16 @@ http_interactions:
                     <ParameterValue>m1.small</ParameterValue>
                   </member>
                 </Parameters>
+                <StackStatusReason>The following resource(s) failed to delete: [Subnet, VPC]. </StackStatusReason>
               </member>
             </Stacks>
           </DescribeStacksResult>
           <ResponseMetadata>
-            <RequestId>2eb7ff19-a827-11e6-81c0-51e9bb93c21e</RequestId>
+            <RequestId>c75f58b3-a7e6-11e6-b4bb-2d9de317b63d</RequestId>
           </ResponseMetadata>
         </DescribeStacksResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:54:52 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:13:51 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -441,12 +441,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155452Z
+      - 20161111T081351Z
       X-Amz-Content-Sha256:
       - fe34ea8014feaf36e5f46cb785cdb5a3354c374564b54a6d47b3c84c14051c46
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=e176c190826b1126c97676812f99b111bef34c4c58933e31e5bea8acd7d126fe
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=123a72e040635e7e96df2c152c88eda0119771d612ea7efa69ff4c0edb44a15d
       Content-Length:
       - '91'
       Accept:
@@ -457,7 +457,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 2f32111e-a827-11e6-aa16-33b040eb3c15
+      - c8334a8b-a7e6-11e6-816f-b73b251adf28
       Content-Type:
       - text/xml
       Content-Length:
@@ -465,7 +465,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:54:52 GMT
+      - Fri, 11 Nov 2016 08:13:52 GMT
     body:
       encoding: UTF-8
       string: |
@@ -504,11 +504,11 @@ http_interactions:
             </StackResourceSummaries>
           </ListStackResourcesResult>
           <ResponseMetadata>
-            <RequestId>2f32111e-a827-11e6-aa16-33b040eb3c15</RequestId>
+            <RequestId>c8334a8b-a7e6-11e6-816f-b73b251adf28</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:54:53 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:13:52 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -523,12 +523,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155453Z
+      - 20161111T081352Z
       X-Amz-Content-Sha256:
       - d6f68c455cd18a14e98d55620153d7030f7d39a03bec3b766a64b42ada77a031
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=045df2be698212dcb2e10f4bb333f69152a3c07a63b649c1e4a4639fa4157146
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ec0527acdc9b0e6284181dadad3e57fb0d8873040645b6e284f965fa655990dd
       Content-Length:
       - '84'
       Accept:
@@ -539,7 +539,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 2fc57834-a827-11e6-8b05-770899e3597f
+      - c8cf8aa6-a7e6-11e6-a60e-bb36dc804fb1
       Content-Type:
       - text/xml
       Content-Length:
@@ -547,7 +547,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:54:53 GMT
+      - Fri, 11 Nov 2016 08:13:53 GMT
     body:
       encoding: UTF-8
       string: "<GetTemplateResponse xmlns=\"http://cloudformation.amazonaws.com/doc/2010-05-15/\">\n
@@ -686,10 +686,10 @@ http_interactions:
         ]}, &quot;/wordpress&quot;]] },\n      &quot;Description&quot; : &quot;WordPress
         Website&quot;\n    }\n  }\n}\n</TemplateBody>\n    <StagesAvailable>\n      <member>Original</member>\n
         \     <member>Processed</member>\n    </StagesAvailable>\n  </GetTemplateResult>\n
-        \ <ResponseMetadata>\n    <RequestId>2fc57834-a827-11e6-8b05-770899e3597f</RequestId>\n
+        \ <ResponseMetadata>\n    <RequestId>c8cf8aa6-a7e6-11e6-a60e-bb36dc804fb1</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:54:54 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:13:53 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -704,12 +704,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155454Z
+      - 20161111T081353Z
       X-Amz-Content-Sha256:
       - 41582c8c7e8a8309b7afa90946ac43b6efe0205bc42f1f9404b9191f91875d50
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1d2a638f123c2b2cbd0d9e19da7e62c94f31a6a33d291ebac3bb758bdcd157d8
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=6b9a438525daa51af9119eb69c12defbf8471a90961e276e0e9267276050edce
       Content-Length:
       - '60'
       Accept:
@@ -720,7 +720,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 3056e1e0-a827-11e6-a686-c5149b6d0f30
+      - c964020f-a7e6-11e6-9385-5546b4ac8840
       Content-Type:
       - text/xml
       Content-Length:
@@ -728,7 +728,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:54:54 GMT
+      - Fri, 11 Nov 2016 08:13:53 GMT
     body:
       encoding: UTF-8
       string: |
@@ -767,11 +767,11 @@ http_interactions:
             </StackResourceSummaries>
           </ListStackResourcesResult>
           <ResponseMetadata>
-            <RequestId>3056e1e0-a827-11e6-a686-c5149b6d0f30</RequestId>
+            <RequestId>c964020f-a7e6-11e6-9385-5546b4ac8840</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:54:55 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:13:54 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -786,12 +786,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155455Z
+      - 20161111T081354Z
       X-Amz-Content-Sha256:
       - 9142b472b497907876e2b0fad411ded4e7977379f1106aa53f3ff31f575f6bc3
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=3ba2e1e1183fe2d343bf8c934b225f4f00776f5ba903a8809b062f1af97c91ef
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1d7d0df4c5ebc7068d667d8b1c1e7813896e353a844c838be5676e10716a2cb0
       Content-Length:
       - '53'
       Accept:
@@ -802,7 +802,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 31015381-a827-11e6-952a-2bf657ea6623
+      - c9ef03f5-a7e6-11e6-9e2b-615311550e9d
       Content-Type:
       - text/xml
       Content-Length:
@@ -810,7 +810,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:54:56 GMT
+      - Fri, 11 Nov 2016 08:13:55 GMT
     body:
       encoding: UTF-8
       string: "<GetTemplateResponse xmlns=\"http://cloudformation.amazonaws.com/doc/2010-05-15/\">\n
@@ -953,10 +953,10 @@ http_interactions:
         \     &quot;Value&quot; :  { &quot;Ref&quot; : &quot;IPAddress&quot; }\n    }\n
         \ }\n}\n\n</TemplateBody>\n    <StagesAvailable>\n      <member>Original</member>\n
         \     <member>Processed</member>\n    </StagesAvailable>\n  </GetTemplateResult>\n
-        \ <ResponseMetadata>\n    <RequestId>31015381-a827-11e6-952a-2bf657ea6623</RequestId>\n
+        \ <ResponseMetadata>\n    <RequestId>c9ef03f5-a7e6-11e6-9e2b-615311550e9d</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:54:56 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:13:56 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -971,12 +971,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155456Z
+      - 20161111T081356Z
       X-Amz-Content-Sha256:
       - 6ba8c2185b64a7fdff3ab5df920101d59159abb8f4076f3ca1d93f60088d5bae
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=cfdcefd45149f6add39912d99a75c22a15ab256db19a54f6e92fc4280f715131
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=3eaeda5614b9ccb0b0ffbdbf143ac989fe41025df5a4a937fc3c65b88263e4c1
       Content-Length:
       - '91'
       Accept:
@@ -987,7 +987,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 31e2b203-a827-11e6-8b05-770899e3597f
+      - cab4ec24-a7e6-11e6-9e2b-615311550e9d
       Content-Type:
       - text/xml
       Content-Length:
@@ -995,7 +995,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:54:57 GMT
+      - Fri, 11 Nov 2016 08:13:56 GMT
     body:
       encoding: UTF-8
       string: |
@@ -1034,11 +1034,11 @@ http_interactions:
             </StackResourceSummaries>
           </ListStackResourcesResult>
           <ResponseMetadata>
-            <RequestId>31e2b203-a827-11e6-8b05-770899e3597f</RequestId>
+            <RequestId>cab4ec24-a7e6-11e6-9e2b-615311550e9d</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:54:57 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:13:56 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -1053,12 +1053,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155457Z
+      - 20161111T081356Z
       X-Amz-Content-Sha256:
       - 141648850ede1644acb2915da2807c8d55efe7d66299c62889a404957732722b
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=277bd90ac291de8d17139b97f407a640f822030a710a26d7b683d16dd1305ec7
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=208a561ff926ea2f918310c47e51a045f27a2b68d074edbcf3432b74c7cfb954
       Content-Length:
       - '84'
       Accept:
@@ -1069,7 +1069,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 326aa760-a827-11e6-b766-975195a78b1f
+      - cb6291e0-a7e6-11e6-b4f3-2712dc345f07
       Content-Type:
       - text/xml
       Content-Length:
@@ -1077,7 +1077,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:54:58 GMT
+      - Fri, 11 Nov 2016 08:13:57 GMT
     body:
       encoding: UTF-8
       string: "<GetTemplateResponse xmlns=\"http://cloudformation.amazonaws.com/doc/2010-05-15/\">\n
@@ -1216,10 +1216,10 @@ http_interactions:
         ]}, &quot;/wordpress&quot;]] },\n      &quot;Description&quot; : &quot;WordPress
         Website&quot;\n    }\n  }\n}\n</TemplateBody>\n    <StagesAvailable>\n      <member>Original</member>\n
         \     <member>Processed</member>\n    </StagesAvailable>\n  </GetTemplateResult>\n
-        \ <ResponseMetadata>\n    <RequestId>326aa760-a827-11e6-b766-975195a78b1f</RequestId>\n
+        \ <ResponseMetadata>\n    <RequestId>cb6291e0-a7e6-11e6-b4f3-2712dc345f07</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:54:58 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:13:58 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -1234,12 +1234,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155458Z
+      - 20161111T081358Z
       X-Amz-Content-Sha256:
       - 7887dd37fcd038a1c5070b3ddb6437329615ce1e449e5d088d267bf7ac6eee41
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=949ccb491f33d9024178ed5223f3875fb0dab89659c0d8a28ffd24a8a70c6499
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=689b644bbbfa63b39bd333686dc8f32b3bf406c1254c0092b43d435913141b7b
       Content-Length:
       - '59'
       Accept:
@@ -1250,7 +1250,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 32f61e5c-a827-11e6-bb3c-39bc08951a2f
+      - cbf24e2f-a7e6-11e6-b927-652f60a2b67c
       Content-Type:
       - text/xml
       Content-Length:
@@ -1258,7 +1258,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:54:58 GMT
+      - Fri, 11 Nov 2016 08:13:57 GMT
     body:
       encoding: UTF-8
       string: |
@@ -1298,11 +1298,11 @@ http_interactions:
             </StackResourceSummaries>
           </ListStackResourcesResult>
           <ResponseMetadata>
-            <RequestId>32f61e5c-a827-11e6-bb3c-39bc08951a2f</RequestId>
+            <RequestId>cbf24e2f-a7e6-11e6-b927-652f60a2b67c</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:54:59 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:13:58 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -1317,12 +1317,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155459Z
+      - 20161111T081358Z
       X-Amz-Content-Sha256:
       - 560091ed24c140928c5d05fde86598e34f42a5b07d603e8c34507cf837fb4816
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=0b34d584a1d7ed0b7979f6c1830b084ac78f1348ab6f8d9f6bcae5b3a38ed22a
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=57e344ce5db5107bbf711e077984b48d5137b47e2e7771e37f8962109c2dc5d6
       Content-Length:
       - '52'
       Accept:
@@ -1333,7 +1333,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 336421f1-a827-11e6-8bd7-211cd0233a13
+      - cc86c5e0-a7e6-11e6-9eed-a39a17af493b
       Content-Type:
       - text/xml
       Content-Length:
@@ -1341,7 +1341,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:54:59 GMT
+      - Fri, 11 Nov 2016 08:13:59 GMT
     body:
       encoding: UTF-8
       string: "<GetTemplateResponse xmlns=\"http://cloudformation.amazonaws.com/doc/2010-05-15/\">\n
@@ -1484,10 +1484,10 @@ http_interactions:
         \     &quot;Value&quot; :  { &quot;Ref&quot; : &quot;IPAddress&quot; }\n    }\n
         \ }\n}\n\n</TemplateBody>\n    <StagesAvailable>\n      <member>Original</member>\n
         \     <member>Processed</member>\n    </StagesAvailable>\n  </GetTemplateResult>\n
-        \ <ResponseMetadata>\n    <RequestId>336421f1-a827-11e6-8bd7-211cd0233a13</RequestId>\n
+        \ <ResponseMetadata>\n    <RequestId>cc86c5e0-a7e6-11e6-9eed-a39a17af493b</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:00 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:13:59 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -1502,12 +1502,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155500Z
+      - 20161111T081359Z
       X-Amz-Content-Sha256:
       - a75466cd97f64a6a8294eb9c65eee6a49ab0f3ca7be290cee7b3aa70a5a7fac8
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=bd182ad446b15bc154de1b8363ec4beb3dd12451b7b1b1a27a5529ebcda6543b
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=80a19254ac12649af50b1aba57a49bcce39ca171981fe2ae724c369b669156a3
       Content-Length:
       - '106'
       Accept:
@@ -1518,13 +1518,13 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 33ee60f7-a827-11e6-bbfc-8f204622c151
+      - cd03be0f-a7e6-11e6-afa0-892d399223a5
       Content-Type:
       - text/xml
       Content-Length:
       - '1117'
       Date:
-      - Fri, 11 Nov 2016 15:55:00 GMT
+      - Fri, 11 Nov 2016 08:14:00 GMT
     body:
       encoding: UTF-8
       string: |
@@ -1548,11 +1548,11 @@ http_interactions:
             </StackResourceSummaries>
           </ListStackResourcesResult>
           <ResponseMetadata>
-            <RequestId>33ee60f7-a827-11e6-bbfc-8f204622c151</RequestId>
+            <RequestId>cd03be0f-a7e6-11e6-afa0-892d399223a5</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:01 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:00 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -1567,12 +1567,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155501Z
+      - 20161111T081400Z
       X-Amz-Content-Sha256:
       - 7d9caf43ed432818e6909673fd2fa82ea51d912ab6aac7479eb69e1af7b2e66d
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=0fb4349f005f2e9b04306a2dc86bd7b50a0bb5cc647ee9df0745ac9abfa19dce
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=dfe9fb07fc40a4c353d27848c339645bba97e7984580cfdc06558576495ea9f2
       Content-Length:
       - '99'
       Accept:
@@ -1583,7 +1583,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 346f778d-a827-11e6-952a-2bf657ea6623
+      - cd8ac8ff-a7e6-11e6-8076-e5b8f34c34df
       Content-Type:
       - text/xml
       Content-Length:
@@ -1591,7 +1591,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:01 GMT
+      - Fri, 11 Nov 2016 08:14:00 GMT
     body:
       encoding: UTF-8
       string: "<GetTemplateResponse xmlns=\"http://cloudformation.amazonaws.com/doc/2010-05-15/\">\n
@@ -1697,10 +1697,10 @@ http_interactions:
         },\n      &quot;Description&quot; : &quot;WordPress Website&quot;\n    }\n
         \ }\n}\n</TemplateBody>\n    <StagesAvailable>\n      <member>Original</member>\n
         \     <member>Processed</member>\n    </StagesAvailable>\n  </GetTemplateResult>\n
-        \ <ResponseMetadata>\n    <RequestId>346f778d-a827-11e6-952a-2bf657ea6623</RequestId>\n
+        \ <ResponseMetadata>\n    <RequestId>cd8ac8ff-a7e6-11e6-8076-e5b8f34c34df</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:02 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:01 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -1715,12 +1715,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155502Z
+      - 20161111T081401Z
       X-Amz-Content-Sha256:
       - 5129d3e8ebb78afbee802141b221fa01c75c48ea0420549a3a199f5af6b9849c
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=71424bb8f2b46b4bca1ae49c43e6fa9cc388ea28765252d774b2219e72bc01ee
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=41ce1b66b1f4bfe59ea259e6b0ced391b3ffb9ad8e4a8ecd9451c861de04a262
       Content-Length:
       - '74'
       Accept:
@@ -1731,7 +1731,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 352707f7-a827-11e6-8eea-6711d977a481
+      - ce4e3faf-a7e6-11e6-9385-5546b4ac8840
       Content-Type:
       - text/xml
       Content-Length:
@@ -1739,7 +1739,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:02 GMT
+      - Fri, 11 Nov 2016 08:14:01 GMT
     body:
       encoding: UTF-8
       string: |
@@ -1883,11 +1883,11 @@ http_interactions:
             </StackResourceSummaries>
           </ListStackResourcesResult>
           <ResponseMetadata>
-            <RequestId>352707f7-a827-11e6-8eea-6711d977a481</RequestId>
+            <RequestId>ce4e3faf-a7e6-11e6-9385-5546b4ac8840</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:03 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:03 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -1902,12 +1902,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155503Z
+      - 20161111T081403Z
       X-Amz-Content-Sha256:
       - 4dc6d77a6dbb5ed8a7f7ff3b24280515d1c3b34596643cdface7d23473f3237f
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=9028eccdd8e64cfcad78a63e49f351aad0a600f85ba1188fe8de16b0507c3f46
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=7a4c5f4b8b2d0eb53f4078b3530aa3ba29cf5bde343db6f52e75193ae4b31df2
       Content-Length:
       - '67'
       Accept:
@@ -1918,7 +1918,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 35e94663-a827-11e6-8b05-770899e3597f
+      - cf197eac-a7e6-11e6-8f48-752d032c6bb6
       Content-Type:
       - text/xml
       Content-Length:
@@ -1926,7 +1926,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:03 GMT
+      - Fri, 11 Nov 2016 08:14:04 GMT
     body:
       encoding: UTF-8
       string: |
@@ -2192,11 +2192,11 @@ http_interactions:
             </StagesAvailable>
           </GetTemplateResult>
           <ResponseMetadata>
-            <RequestId>35e94663-a827-11e6-8b05-770899e3597f</RequestId>
+            <RequestId>cf197eac-a7e6-11e6-8f48-752d032c6bb6</RequestId>
           </ResponseMetadata>
         </GetTemplateResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:04 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:04 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -2211,12 +2211,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155504Z
+      - 20161111T081404Z
       X-Amz-Content-Sha256:
       - 455cb51237e2e5593066002e120ed14729cde444402b3e65ce44b405f176ea48
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=82c89b4a9bdffe0cc7be587bbabc6f307cb22536d9b26a620f611dd802a59072
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=eae7d9e9901bd473e73574e01ac97594cad7e67b2bb60ed3a99f7cc584bf0ca6
       Content-Length:
       - '59'
       Accept:
@@ -2227,13 +2227,13 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 367f44aa-a827-11e6-b766-975195a78b1f
+      - cfcd1768-a7e6-11e6-9968-b13e8b013872
       Content-Type:
       - text/xml
       Content-Length:
       - '1707'
       Date:
-      - Fri, 11 Nov 2016 15:55:05 GMT
+      - Fri, 11 Nov 2016 08:14:04 GMT
     body:
       encoding: UTF-8
       string: |
@@ -2264,11 +2264,11 @@ http_interactions:
             </StackResourceSummaries>
           </ListStackResourcesResult>
           <ResponseMetadata>
-            <RequestId>367f44aa-a827-11e6-b766-975195a78b1f</RequestId>
+            <RequestId>cfcd1768-a7e6-11e6-9968-b13e8b013872</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:05 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:05 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -2283,12 +2283,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155505Z
+      - 20161111T081405Z
       X-Amz-Content-Sha256:
       - 19077d4668c66bfb18e7457137d2ab41bd81fac619725e1988b29cecf99c3742
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b730b23417347fddb890a9f67cacb8de711dd7af2799dd503a9c911665341944
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1bea8931fd821d3ba19ea8366d16135078531d296fed550ea651e30ef32e6e56
       Content-Length:
       - '52'
       Accept:
@@ -2299,7 +2299,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 36fb2bf3-a827-11e6-8109-5bab36060f11
+      - d0616858-a7e6-11e6-9eed-a39a17af493b
       Content-Type:
       - text/xml
       Content-Length:
@@ -2307,7 +2307,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:06 GMT
+      - Fri, 11 Nov 2016 08:14:06 GMT
     body:
       encoding: UTF-8
       string: "<GetTemplateResponse xmlns=\"http://cloudformation.amazonaws.com/doc/2010-05-15/\">\n
@@ -2446,10 +2446,10 @@ http_interactions:
         ]}, &quot;/wordpress&quot;]] },\n      &quot;Description&quot; : &quot;WordPress
         Website&quot;\n    }\n  }\n}\n</TemplateBody>\n    <StagesAvailable>\n      <member>Original</member>\n
         \     <member>Processed</member>\n    </StagesAvailable>\n  </GetTemplateResult>\n
-        \ <ResponseMetadata>\n    <RequestId>36fb2bf3-a827-11e6-8109-5bab36060f11</RequestId>\n
+        \ <ResponseMetadata>\n    <RequestId>d0616858-a7e6-11e6-9eed-a39a17af493b</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:06 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:06 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -2464,12 +2464,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155506Z
+      - 20161111T081406Z
       X-Amz-Content-Sha256:
       - 83bcef007e9d341d9e8ea1194852604404f99f7481cf1b583db7fdf046ecdcbe
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=be8e8a21972c5d6ec6c20fe70027877661873aac6b9a3f49f6b84120e0d66049
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=c84482eb92478de3926345f27c503b26994d497a5b8ad06063acd092a9d4efa7
       Content-Length:
       - '78'
       Accept:
@@ -2480,7 +2480,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 378d80b8-a827-11e6-8903-1ffb4e74370a
+      - d0ef50eb-a7e6-11e6-a836-c5a9d8a1a3d6
       Content-Type:
       - text/xml
       Content-Length:
@@ -2488,7 +2488,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:07 GMT
+      - Fri, 11 Nov 2016 08:14:06 GMT
     body:
       encoding: UTF-8
       string: |
@@ -2640,11 +2640,11 @@ http_interactions:
             </StackResourceSummaries>
           </ListStackResourcesResult>
           <ResponseMetadata>
-            <RequestId>378d80b8-a827-11e6-8903-1ffb4e74370a</RequestId>
+            <RequestId>d0ef50eb-a7e6-11e6-a836-c5a9d8a1a3d6</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:07 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:07 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -2659,12 +2659,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155507Z
+      - 20161111T081407Z
       X-Amz-Content-Sha256:
       - 36e3b98d6f07edf43b8c134cb7dc2f885bf57531905df5b58eac94a4c1b78426
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1caf003fe416f75a885f47b27796e42d8f2c76433f11dd8315badf4d1f3a2e8d
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=97a4404a283f11d25771b1476ee9dfaf2e0d52c139ff0b7353c928fe61ed182f
       Content-Length:
       - '71'
       Accept:
@@ -2675,7 +2675,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 37feb8a6-a827-11e6-b9b9-77a6ab3742ed
+      - d189e262-a7e6-11e6-a748-0f767e826427
       Content-Type:
       - text/xml
       Content-Length:
@@ -2683,7 +2683,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:07 GMT
+      - Fri, 11 Nov 2016 08:14:07 GMT
     body:
       encoding: UTF-8
       string: |
@@ -2949,11 +2949,11 @@ http_interactions:
             </StagesAvailable>
           </GetTemplateResult>
           <ResponseMetadata>
-            <RequestId>37feb8a6-a827-11e6-b9b9-77a6ab3742ed</RequestId>
+            <RequestId>d189e262-a7e6-11e6-a748-0f767e826427</RequestId>
           </ResponseMetadata>
         </GetTemplateResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:08 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:08 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -2968,12 +2968,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155508Z
+      - 20161111T081408Z
       X-Amz-Content-Sha256:
       - 41ec66f98b8c9cb94c12742361835f2460416ab287007f7ce8e2dfb12eee5802
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=dd2798c0aaac4cc156100a0172d0ba6b6f997afe791e6fc99427b200a1b856d6
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=0c3486d5151f0b1cb1a6d272a6c7715bed650c392c47dc7a5c4d1b8cda8db13c
       Content-Length:
       - '103'
       Accept:
@@ -2990,7 +2990,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:08 GMT
+      - Fri, 11 Nov 2016 08:14:08 GMT
       Server:
       - AmazonEC2
     body:
@@ -2998,7 +2998,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>b5fa89ce-28b5-4952-af64-135eeac8952b</requestId>
+            <requestId>409beedc-348e-4dc6-9176-b39f53607a08</requestId>
             <imagesSet>
                 <item>
                     <imageId>ami-20e90e49</imageId>
@@ -3661,8 +3661,8 @@ http_interactions:
                 </item>
             </imagesSet>
         </DescribeImagesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:09 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:09 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -3677,12 +3677,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155509Z
+      - 20161111T081409Z
       X-Amz-Content-Sha256:
       - baf70c4c12fd649b20327c01cf193d41596d743d1e6c48609e7a94c28c47c4aa
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1585c8fc42691bbabcf5b506e63371543864eec549ce605fcd2339bd2387e12e
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ccec7efd4caf6d4afc7ba2ee3b64828c85f2628884ae241037dfaec1c2aa4b8c
       Content-Length:
       - '110'
       Accept:
@@ -3699,7 +3699,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:09 GMT
+      - Fri, 11 Nov 2016 08:14:10 GMT
       Server:
       - AmazonEC2
     body:
@@ -3707,11 +3707,11 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>9953fd9f-3a39-432c-8004-8faebc9bd944</requestId>
+            <requestId>f7ec1912-802f-400d-9b8c-976fc9db832d</requestId>
             <imagesSet/>
         </DescribeImagesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:10 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:10 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -3726,12 +3726,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155510Z
+      - 20161111T081410Z
       X-Amz-Content-Sha256:
       - d83056a1aac745ed69dbd2081c98416e27b917c7a61a6a31d5f72bf823045a2f
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b16dd63cc68fdc00656e3bdf5f8dc6cd56ec3cdd54c93814f70529d899bc9b2f
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1339b489e3ba4fe764924ca3aff59de6f08218093af955d568a36cc990ff658b
       Content-Length:
       - '43'
       Accept:
@@ -3748,7 +3748,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:10 GMT
+      - Fri, 11 Nov 2016 08:14:11 GMT
       Server:
       - AmazonEC2
     body:
@@ -3756,7 +3756,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>9acc3ea6-d0c5-4833-9c12-017fdb1877ba</requestId>
+            <requestId>3396d8b5-c6f0-475b-a0d5-d7eb2f1b954f</requestId>
             <reservationSet>
                 <item>
                     <reservationId>r-0a5941b4</reservationId>
@@ -6870,8 +6870,8 @@ http_interactions:
                 </item>
             </reservationSet>
         </DescribeInstancesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:14 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:13 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -6886,12 +6886,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155518Z
+      - 20161111T081414Z
       X-Amz-Content-Sha256:
       - e0e50b5400e46911fcef7a8bc8c68812a05770c50cd595cb20eeba12b5976bea
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b1c82739002eacaac4f25c232700c5816b8dc2ccbad112aa67987faf70d727cd
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=3e1730b3bd3eed3a7dbd9ed49c18ab63ac40cccf0d047f2d9840341cf099512b
       Content-Length:
       - '38'
       Accept:
@@ -6908,7 +6908,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:19 GMT
+      - Fri, 11 Nov 2016 08:14:15 GMT
       Server:
       - AmazonEC2
     body:
@@ -6916,7 +6916,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeVpcsResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>6f98f7fc-125c-4f2a-bee8-607e6ba51b0d</requestId>
+            <requestId>8af85385-02db-4870-94d7-0a83c0ac26b8</requestId>
             <vpcSet>
                 <item>
                     <vpcId>vpc-a06de3c5</vpcId>
@@ -7008,8 +7008,8 @@ http_interactions:
                 </item>
             </vpcSet>
         </DescribeVpcsResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:19 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:16 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -7024,12 +7024,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155519Z
+      - 20161111T081416Z
       X-Amz-Content-Sha256:
       - c1bea707c6712d663099f5cd4eafdfa00ac2f10c2ea250cfff5b41dfc07b5ada
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=4f20836ea14d21a4378e934e52fff7d54883986a2c6b2adc65f3a1551b4e1d00
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=dcc2ee697845fe14da52d5e363aabced7f855f3985de476138388a5cb28ab107
       Content-Length:
       - '41'
       Accept:
@@ -7046,7 +7046,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:19 GMT
+      - Fri, 11 Nov 2016 08:14:16 GMT
       Server:
       - AmazonEC2
     body:
@@ -7054,7 +7054,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeSubnetsResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>418afaf8-99b8-424b-9f20-636c3f6aeb38</requestId>
+            <requestId>6d5bef8f-0c7f-404c-a268-f63cb07cfd19</requestId>
             <subnetSet>
                 <item>
                     <subnetId>subnet-16c70477</subnetId>
@@ -7218,8 +7218,8 @@ http_interactions:
                 </item>
             </subnetSet>
         </DescribeSubnetsResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:20 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:17 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -7234,12 +7234,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155520Z
+      - 20161111T081417Z
       X-Amz-Content-Sha256:
       - 0b87da4d4344ade7d0df2cbf3ca8468138d62a20090d2ad157134dafd992add4
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=18a4c2fe27aa4b90aaccdac851a20e83bd5e770e37e184ed5274808eaf0ad6c7
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=9139764bdabdad61d2e6b406915b2a1bfc1e864d7f7b20b4b9649bdb3aee68b0
       Content-Length:
       - '48'
       Accept:
@@ -7256,7 +7256,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:20 GMT
+      - Fri, 11 Nov 2016 08:14:17 GMT
       Server:
       - AmazonEC2
     body:
@@ -7264,7 +7264,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeSecurityGroupsResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>25063726-31f9-4b96-9c68-8f1df8f2c093</requestId>
+            <requestId>7a75ec3e-6a52-4477-b9bd-2c8d67ac0795</requestId>
             <securityGroupInfo>
                 <item>
                     <ownerId>200278856672</ownerId>
@@ -8788,1578 +8788,8 @@ http_interactions:
                 </item>
             </securityGroupInfo>
         </DescribeSecurityGroupsResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:22 GMT
-- request:
-    method: post
-    uri: https://ec2.us-east-1.amazonaws.com/
-    body:
-      encoding: UTF-8
-      string: Action=DescribeSecurityGroups&Version=2016-09-15
-    headers:
-      Content-Type:
-      - application/x-www-form-urlencoded; charset=utf-8
-      Accept-Encoding:
-      - ''
-      User-Agent:
-      - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
-      X-Amz-Date:
-      - 20161111T155522Z
-      X-Amz-Content-Sha256:
-      - 0b87da4d4344ade7d0df2cbf3ca8468138d62a20090d2ad157134dafd992add4
-      Authorization:
-      - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=0aecea4dacf7687517444ae9c46f5e51618a5be46933dec850b5608833eead85
-      Content-Length:
-      - '48'
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      Date:
-      - Fri, 11 Nov 2016 15:55:22 GMT
-      Server:
-      - AmazonEC2
-    body:
-      encoding: UTF-8
-      string: |-
-        <?xml version="1.0" encoding="UTF-8"?>
-        <DescribeSecurityGroupsResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>bd1f53c5-63c9-471d-8acb-235963bd66f9</requestId>
-            <securityGroupInfo>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-347f9b5d</groupId>
-                    <groupName>default</groupName>
-                    <groupDescription>default group</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>0</fromPort>
-                            <toPort>65535</toPort>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-347f9b5d</groupId>
-                                    <groupName>default</groupName>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>udp</ipProtocol>
-                            <fromPort>0</fromPort>
-                            <toPort>65535</toPort>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-347f9b5d</groupId>
-                                    <groupName>default</groupName>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>icmp</ipProtocol>
-                            <fromPort>-1</fromPort>
-                            <toPort>-1</toPort>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-347f9b5d</groupId>
-                                    <groupName>default</groupName>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>173.251.12.162/32</cidrIp>
-                                </item>
-                                <item>
-                                    <cidrIp>173.3.66.15/32</cidrIp>
-                                </item>
-                                <item>
-                                    <cidrIp>54.144.206.129/32</cidrIp>
-                                </item>
-                                <item>
-                                    <cidrIp>54.159.148.134/32</cidrIp>
-                                </item>
-                                <item>
-                                    <cidrIp>66.187.233.202/32</cidrIp>
-                                </item>
-                                <item>
-                                    <cidrIp>67.84.73.186/32</cidrIp>
-                                </item>
-                                <item>
-                                    <cidrIp>75.127.178.26/32</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>3389</fromPort>
-                            <toPort>3389</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>173.251.12.162/32</cidrIp>
-                                </item>
-                                <item>
-                                    <cidrIp>68.193.242.16/32</cidrIp>
-                                </item>
-                                <item>
-                                    <cidrIp>75.127.178.26/32</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>443</fromPort>
-                            <toPort>443</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>66.187.233.202/32</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-038e8a69</groupId>
-                    <groupName>EmsRefreshSpec-SecurityGroup1</groupName>
-                    <groupDescription>EmsRefreshSpec-SecurityGroup1</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>3</fromPort>
-                            <toPort>4</toPort>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-038e8a69</groupId>
-                                    <groupName>EmsRefreshSpec-SecurityGroup1</groupName>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>80</fromPort>
-                            <toPort>80</toPort>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-038e8a69</groupId>
-                                    <groupName>EmsRefreshSpec-SecurityGroup1</groupName>
-                                </item>
-                            </groups>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                                <item>
-                                    <cidrIp>1.2.3.4/30</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>udp</ipProtocol>
-                            <fromPort>3</fromPort>
-                            <toPort>4</toPort>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-038e8a69</groupId>
-                                    <groupName>EmsRefreshSpec-SecurityGroup1</groupName>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>icmp</ipProtocol>
-                            <fromPort>-1</fromPort>
-                            <toPort>-1</toPort>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-038e8a69</groupId>
-                                    <groupName>EmsRefreshSpec-SecurityGroup1</groupName>
-                                </item>
-                            </groups>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>0</fromPort>
-                            <toPort>65535</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>udp</ipProtocol>
-                            <fromPort>0</fromPort>
-                            <toPort>65535</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>1</fromPort>
-                            <toPort>2</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>1.2.3.4/30</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>udp</ipProtocol>
-                            <fromPort>1</fromPort>
-                            <toPort>2</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>1.2.3.4/30</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>icmp</ipProtocol>
-                            <fromPort>0</fromPort>
-                            <toPort>-1</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>1.2.3.4/30</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-12898d78</groupId>
-                    <groupName>EmsRefreshSpec-SecurityGroup2</groupName>
-                    <groupDescription>EmsRefreshSpec-SecurityGroup2</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>80</fromPort>
-                            <toPort>80</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>1.2.3.4/30</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-8ff13799</groupId>
-                    <groupName>EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W-WebServerSecurityGroup-K60KWXZHGJDE</groupName>
-                    <groupDescription>Enable HTTP access via port 80</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>80</fromPort>
-                            <toPort>80</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                    <tagSet>
-                        <item>
-                            <key>aws:cloudformation:stack-name</key>
-                            <value>EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W</value>
-                        </item>
-                        <item>
-                            <key>aws:cloudformation:logical-id</key>
-                            <value>WebServerSecurityGroup</value>
-                        </item>
-                        <item>
-                            <key>aws:cloudformation:stack-id</key>
-                            <value>arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W/72cb3f90-5fb9-11e6-ab2c-50d501eed2b3</value>
-                        </item>
-                    </tagSet>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-df1a57b2</groupId>
-                    <groupName>launch-wizard-1</groupName>
-                    <groupDescription>launch-wizard-1 created 2015-08-31T15:34:54.783-04:00</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-b9a6e1d4</groupId>
-                    <groupName>launch-wizard-8</groupName>
-                    <groupDescription>launch-wizard-8 created 2015-08-24T13:58:30.920-04:00</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-b92991d4</groupId>
-                    <groupName>mgfcfmevms</groupName>
-                    <groupDescription>For MGF VMs</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>0</fromPort>
-                            <toPort>65535</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>66.187.233.202/32</cidrIp>
-                                </item>
-                                <item>
-                                    <cidrIp>71.234.237.32/32</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>443</fromPort>
-                            <toPort>443</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>66.187.233.202/32</cidrIp>
-                                </item>
-                                <item>
-                                    <cidrIp>71.234.237.32/32</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-208e6849</groupId>
-                    <groupName>miq-internal</groupName>
-                    <groupDescription>Access from ManageIQ internal only</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>75.127.178.24/29</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>3389</fromPort>
-                            <toPort>3389</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>75.127.178.24/29</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-9eba0af5</groupId>
-                    <groupName>quicklaunch-1</groupName>
-                    <groupDescription>quicklaunch-1</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-3966bc2f</groupId>
-                    <groupName>stack-WebServerInstance-1OTANAXF1UIF-WebServerSecurityGroup-1K1MFS4TJUFIK</groupName>
-                    <groupDescription>Enable HTTP access via port 80</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>80</fromPort>
-                            <toPort>80</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                    <tagSet>
-                        <item>
-                            <key>aws:cloudformation:logical-id</key>
-                            <value>WebServerSecurityGroup</value>
-                        </item>
-                        <item>
-                            <key>aws:cloudformation:stack-id</key>
-                            <value>arn:aws:cloudformation:us-east-1:200278856672:stack/stack-WebServerInstance-1OTANAXF1UIF/d1640fc0-a602-11e6-a1b8-50d5ca63261e</value>
-                        </item>
-                        <item>
-                            <key>aws:cloudformation:stack-name</key>
-                            <value>stack-WebServerInstance-1OTANAXF1UIF</value>
-                        </item>
-                    </tagSet>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-a72de1b1</groupId>
-                    <groupName>test-WebServerInstance-1GN0RWHWVQ178-WebServerSecurityGroup-1O2YDDXMRGBEK</groupName>
-                    <groupDescription>Enable HTTP access via port 80</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>80</fromPort>
-                            <toPort>80</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                    <tagSet>
-                        <item>
-                            <key>aws:cloudformation:stack-name</key>
-                            <value>test-WebServerInstance-1GN0RWHWVQ178</value>
-                        </item>
-                        <item>
-                            <key>aws:cloudformation:logical-id</key>
-                            <value>WebServerSecurityGroup</value>
-                        </item>
-                        <item>
-                            <key>aws:cloudformation:stack-id</key>
-                            <value>arn:aws:cloudformation:us-east-1:200278856672:stack/test-WebServerInstance-1GN0RWHWVQ178/3e63bd50-6ec7-11e6-8e58-500c28604c82</value>
-                        </item>
-                    </tagSet>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-097f9b60</groupId>
-                    <groupName>webserver</groupName>
-                    <groupDescription>Ruby on Rails</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>80</fromPort>
-                            <toPort>80</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>3306</fromPort>
-                            <toPort>3306</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-bf799dd6</groupId>
-                    <groupName>win-test</groupName>
-                    <groupDescription>Windows AMI Test</groupDescription>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>80</fromPort>
-                            <toPort>80</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>1443</fromPort>
-                            <toPort>1443</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>3389</fromPort>
-                            <toPort>3389</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress/>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-1e2cf271</groupId>
-                    <groupName>default</groupName>
-                    <groupDescription>default VPC security group</groupDescription>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-1e2cf271</groupId>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-24362241</groupId>
-                    <groupName>default</groupName>
-                    <groupDescription>default VPC security group</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-24362241</groupId>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-a493cddd</groupId>
-                    <groupName>default</groupName>
-                    <groupDescription>default VPC security group</groupDescription>
-                    <vpcId>vpc-aee2a6ca</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-a493cddd</groupId>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-e0365199</groupId>
-                    <groupName>default</groupName>
-                    <groupDescription>default VPC security group</groupDescription>
-                    <vpcId>vpc-d7b4c7b3</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-e0365199</groupId>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-e7e82f9d</groupId>
-                    <groupName>default</groupName>
-                    <groupDescription>default VPC security group</groupDescription>
-                    <vpcId>vpc-08d9b36f</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-e7e82f9d</groupId>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-c00e19a5</groupId>
-                    <groupName>DemoSecGroup-Allowed</groupName>
-                    <groupDescription>80 and 443</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>80</fromPort>
-                            <toPort>80</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>443</fromPort>
-                            <toPort>443</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-10362275</groupId>
-                    <groupName>DemoSecurityGroup</groupName>
-                    <groupDescription>for AWS Demos</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-10362275</groupId>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>3306</fromPort>
-                            <toPort>3306</toPort>
-                            <groups>
-                                <item>
-                                    <userId>200278856672</userId>
-                                    <groupId>sg-10362275</groupId>
-                                </item>
-                            </groups>
-                            <ipRanges/>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                    <tagSet>
-                        <item>
-                            <key>Name</key>
-                            <value>DemoSecGroup-Disallowed</value>
-                        </item>
-                    </tagSet>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-80f755ef</groupId>
-                    <groupName>EmsRefreshSpec-SecurityGroup-VPC</groupName>
-                    <groupDescription>EmsRefreshSpec-SecurityGroup-VPC</groupDescription>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>icmp</ipProtocol>
-                            <fromPort>-1</fromPort>
-                            <toPort>-1</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-ddf730a7</groupId>
-                    <groupName>EmsRefreshSpecStack-InstanceSecurityGroup-JZGN7EHCQ9ON</groupName>
-                    <groupDescription>Enable SSH access via port 22</groupDescription>
-                    <vpcId>vpc-08d9b36f</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>80</fromPort>
-                            <toPort>80</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                    <tagSet>
-                        <item>
-                            <key>aws:cloudformation:stack-name</key>
-                            <value>EmsRefreshSpecStack</value>
-                        </item>
-                        <item>
-                            <key>aws:cloudformation:stack-id</key>
-                            <value>arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack/6f60c460-5fb9-11e6-9cb7-500c28604ce6</value>
-                        </item>
-                        <item>
-                            <key>aws:cloudformation:logical-id</key>
-                            <value>InstanceSecurityGroup</value>
-                        </item>
-                    </tagSet>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-f0d92a94</groupId>
-                    <groupName>launch-wizard-1</groupName>
-                    <groupDescription>launch-wizard-1 created 2014-12-15T17:32:09.146-05:00</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-56a5d231</groupId>
-                    <groupName>launch-wizard-10</groupName>
-                    <groupDescription>launch-wizard-10 created 2015-08-24T14:06:10.925-04:00</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-1facdb78</groupId>
-                    <groupName>launch-wizard-11</groupName>
-                    <groupDescription>launch-wizard-11 created 2015-08-24T14:22:34.811-04:00</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-7c69ed05</groupId>
-                    <groupName>launch-wizard-12</groupName>
-                    <groupDescription>launch-wizard-12 created 2016-01-06T08:47:42.418-05:00</groupDescription>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-dfe6c6a6</groupId>
-                    <groupName>launch-wizard-13</groupName>
-                    <groupDescription>launch-wizard-13 created 2016-01-28T11:02:45.992-05:00</groupDescription>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                        <item>
-                            <ipProtocol>udp</ipProtocol>
-                            <fromPort>19132</fromPort>
-                            <toPort>19132</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-cd64e2b4</groupId>
-                    <groupName>launch-wizard-14</groupName>
-                    <groupDescription>launch-wizard-14 created 2016-01-06T18:06:11.447-05:00</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-6b62e412</groupId>
-                    <groupName>launch-wizard-15</groupName>
-                    <groupDescription>launch-wizard-15 created 2016-01-06T18:07:46.074-05:00</groupDescription>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-67af5d03</groupId>
-                    <groupName>launch-wizard-2</groupName>
-                    <groupDescription>launch-wizard-2 created 2014-12-16T11:24:47.439-05:00</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-b5d624d1</groupId>
-                    <groupName>launch-wizard-3</groupName>
-                    <groupDescription>launch-wizard-3 created 2014-12-16T16:24:52.047-05:00</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>173.3.23.48/32</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-9ed82afa</groupId>
-                    <groupName>launch-wizard-4</groupName>
-                    <groupDescription>launch-wizard-4 created 2014-12-16T16:49:57.781-05:00</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>173.3.23.48/32</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-03ff5a67</groupId>
-                    <groupName>launch-wizard-5</groupName>
-                    <groupDescription>launch-wizard-5 created 2015-01-29T14:42:40.334-05:00</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-d2fb5eb6</groupId>
-                    <groupName>launch-wizard-6</groupName>
-                    <groupDescription>launch-wizard-6 created 2015-01-29T14:59:03.773-05:00</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-43cb9c27</groupId>
-                    <groupName>launch-wizard-7</groupName>
-                    <groupDescription>launch-wizard-7 created 2015-04-28T12:59:48.381-04:00</groupDescription>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <ipPermissions/>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-1da7d07a</groupId>
-                    <groupName>launch-wizard-9</groupName>
-                    <groupDescription>launch-wizard-9 created 2015-08-24T14:02:53.560-04:00</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-999c6efd</groupId>
-                    <groupName>mk_test</groupName>
-                    <groupDescription>MK</groupDescription>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>22</fromPort>
-                            <toPort>22</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>173.3.23.48/32</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-0d2cd677</groupId>
-                    <groupName>quick-create-1</groupName>
-                    <groupDescription>quick-create-1 created on Wednesday, August 10, 2016 at 4:16:22 PM UTC+2</groupDescription>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>2222</fromPort>
-                            <toPort>2222</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-                <item>
-                    <ownerId>200278856672</ownerId>
-                    <groupId>sg-9593cdec</groupId>
-                    <groupName>rds-launch-wizard</groupName>
-                    <groupDescription>Created from the RDS Management Console</groupDescription>
-                    <vpcId>vpc-aee2a6ca</vpcId>
-                    <ipPermissions>
-                        <item>
-                            <ipProtocol>tcp</ipProtocol>
-                            <fromPort>3306</fromPort>
-                            <toPort>3306</toPort>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>67.85.25.156/32</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissions>
-                    <ipPermissionsEgress>
-                        <item>
-                            <ipProtocol>-1</ipProtocol>
-                            <groups/>
-                            <ipRanges>
-                                <item>
-                                    <cidrIp>0.0.0.0/0</cidrIp>
-                                </item>
-                            </ipRanges>
-                            <prefixListIds/>
-                        </item>
-                    </ipPermissionsEgress>
-                </item>
-            </securityGroupInfo>
-        </DescribeSecurityGroupsResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:23 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:19 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -10374,12 +8804,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155523Z
+      - 20161111T081419Z
       X-Amz-Content-Sha256:
       - 3421c36aca218db644f06c8686ceae4bc8a65aecff0ce68358bda245aa7ceba3
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=d2dc2db80e373618370c8caa74a907f9e5760b53e58bbf9673a718441004c30a
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=07d82e07afd447ea02188e7d1aed9e7538dbfc44010a84fd67d59454d318b2d6
       Content-Length:
       - '51'
       Accept:
@@ -10396,7 +8826,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:23 GMT
+      - Fri, 11 Nov 2016 08:14:20 GMT
       Server:
       - AmazonEC2
     body:
@@ -10404,108 +8834,19 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeNetworkInterfacesResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>bc310944-d10b-4be8-bb0d-261dc72474fc</requestId>
+            <requestId>25575144-3764-4cd7-a499-d236d01cd563</requestId>
             <networkInterfaceSet>
                 <item>
-                    <networkInterfaceId>eni-a3902b84</networkInterfaceId>
-                    <subnetId>subnet-f849ff96</subnetId>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <availabilityZone>us-east-1e</availabilityZone>
-                    <description>Primary network interface</description>
-                    <ownerId>200278856672</ownerId>
-                    <requesterManaged>false</requesterManaged>
-                    <status>in-use</status>
-                    <macAddress>12:80:72:db:8c:81</macAddress>
-                    <privateIpAddress>10.0.0.109</privateIpAddress>
-                    <sourceDestCheck>true</sourceDestCheck>
-                    <groupSet>
-                        <item>
-                            <groupId>sg-80f755ef</groupId>
-                            <groupName>EmsRefreshSpec-SecurityGroup-VPC</groupName>
-                        </item>
-                    </groupSet>
-                    <attachment>
-                        <attachmentId>eni-attach-12a4c3e2</attachmentId>
-                        <instanceId>i-fb694e66</instanceId>
-                        <instanceOwnerId>200278856672</instanceOwnerId>
-                        <deviceIndex>0</deviceIndex>
-                        <status>attached</status>
-                        <attachTime>2016-05-10T20:56:37.000Z</attachTime>
-                        <deleteOnTermination>true</deleteOnTermination>
-                    </attachment>
-                    <tagSet/>
-                    <privateIpAddressesSet>
-                        <item>
-                            <privateIpAddress>10.0.0.109</privateIpAddress>
-                            <primary>true</primary>
-                        </item>
-                    </privateIpAddressesSet>
-                </item>
-                <item>
-                    <networkInterfaceId>eni-ad25f7cc</networkInterfaceId>
-                    <subnetId>subnet-f849ff96</subnetId>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <availabilityZone>us-east-1e</availabilityZone>
-                    <description>Primary network interface</description>
-                    <ownerId>200278856672</ownerId>
-                    <requesterManaged>false</requesterManaged>
-                    <status>in-use</status>
-                    <macAddress>22:d8:dc:13:0c:ca</macAddress>
-                    <privateIpAddress>10.0.0.254</privateIpAddress>
-                    <sourceDestCheck>true</sourceDestCheck>
-                    <groupSet>
-                        <item>
-                            <groupId>sg-80f755ef</groupId>
-                            <groupName>EmsRefreshSpec-SecurityGroup-VPC</groupName>
-                        </item>
-                    </groupSet>
-                    <attachment>
-                        <attachmentId>eni-attach-05fac66f</attachmentId>
-                        <instanceId>i-8b5739f2</instanceId>
-                        <instanceOwnerId>200278856672</instanceOwnerId>
-                        <deviceIndex>0</deviceIndex>
-                        <status>attached</status>
-                        <attachTime>2013-09-23T20:11:52.000Z</attachTime>
-                        <deleteOnTermination>true</deleteOnTermination>
-                    </attachment>
-                    <association>
-                        <publicIp>54.208.119.197</publicIp>
-                        <publicDnsName/>
-                        <ipOwnerId>200278856672</ipOwnerId>
-                        <allocationId>eipalloc-ce53d7a0</allocationId>
-                        <associationId>eipassoc-cc6e58f1</associationId>
-                    </association>
-                    <tagSet/>
-                    <privateIpAddressesSet>
-                        <item>
-                            <privateIpAddress>10.0.0.254</privateIpAddress>
-                            <primary>true</primary>
-                            <association>
-                                <publicIp>54.208.119.197</publicIp>
-                                <publicDnsName/>
-                                <ipOwnerId>200278856672</ipOwnerId>
-                                <allocationId>eipalloc-ce53d7a0</allocationId>
-                                <associationId>eipassoc-cc6e58f1</associationId>
-                            </association>
-                        </item>
-                        <item>
-                            <privateIpAddress>10.0.0.208</privateIpAddress>
-                            <privateDnsName/>
-                            <primary>false</primary>
-                        </item>
-                    </privateIpAddressesSet>
-                </item>
-                <item>
-                    <networkInterfaceId>eni-e3c830f6</networkInterfaceId>
+                    <networkInterfaceId>eni-ae3883bc</networkInterfaceId>
                     <subnetId>subnet-ac904787</subnetId>
                     <vpcId>vpc-a06de3c5</vpcId>
                     <availabilityZone>us-east-1e</availabilityZone>
-                    <description/>
+                    <description>Primary network interface</description>
                     <ownerId>200278856672</ownerId>
                     <requesterManaged>false</requesterManaged>
                     <status>in-use</status>
-                    <macAddress>12:1c:a1:b9:1b:5e</macAddress>
-                    <privateIpAddress>10.0.1.18</privateIpAddress>
+                    <macAddress>12:94:bc:3e:83:c3</macAddress>
+                    <privateIpAddress>10.0.1.82</privateIpAddress>
                     <sourceDestCheck>true</sourceDestCheck>
                     <groupSet>
                         <item>
@@ -10514,18 +8855,79 @@ http_interactions:
                         </item>
                     </groupSet>
                     <attachment>
-                        <attachmentId>eni-attach-bf942b15</attachmentId>
-                        <instanceId>i-71eb1841</instanceId>
+                        <attachmentId>eni-attach-88c59223</attachmentId>
+                        <instanceId>i-9a5564ab</instanceId>
                         <instanceOwnerId>200278856672</instanceOwnerId>
                         <deviceIndex>0</deviceIndex>
                         <status>attached</status>
-                        <attachTime>2016-10-13T22:32:59.000Z</attachTime>
+                        <attachTime>2016-09-28T23:58:09.000Z</attachTime>
                         <deleteOnTermination>true</deleteOnTermination>
                     </attachment>
                     <tagSet/>
                     <privateIpAddressesSet>
                         <item>
-                            <privateIpAddress>10.0.1.18</privateIpAddress>
+                            <privateIpAddress>10.0.1.82</privateIpAddress>
+                            <primary>true</primary>
+                        </item>
+                    </privateIpAddressesSet>
+                </item>
+                <item>
+                    <networkInterfaceId>eni-f3a492ef</networkInterfaceId>
+                    <subnetId>subnet-16c70477</subnetId>
+                    <vpcId>vpc-ff49ff91</vpcId>
+                    <availabilityZone>us-east-1d</availabilityZone>
+                    <description/>
+                    <ownerId>200278856672</ownerId>
+                    <requesterManaged>false</requesterManaged>
+                    <status>in-use</status>
+                    <macAddress>0e:97:dd:f0:6e:20</macAddress>
+                    <privateIpAddress>10.0.1.72</privateIpAddress>
+                    <sourceDestCheck>true</sourceDestCheck>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-1e2cf271</groupId>
+                            <groupName>default</groupName>
+                        </item>
+                    </groupSet>
+                    <attachment>
+                        <attachmentId>eni-attach-477eabf0</attachmentId>
+                        <instanceId>i-cf9590d9</instanceId>
+                        <instanceOwnerId>200278856672</instanceOwnerId>
+                        <deviceIndex>0</deviceIndex>
+                        <status>attached</status>
+                        <attachTime>2016-10-10T20:44:15.000Z</attachTime>
+                        <deleteOnTermination>true</deleteOnTermination>
+                    </attachment>
+                    <tagSet/>
+                    <privateIpAddressesSet>
+                        <item>
+                            <privateIpAddress>10.0.1.72</privateIpAddress>
+                            <primary>true</primary>
+                        </item>
+                    </privateIpAddressesSet>
+                </item>
+                <item>
+                    <networkInterfaceId>eni-3f67fd15</networkInterfaceId>
+                    <subnetId>subnet-1852bb33</subnetId>
+                    <vpcId>vpc-a06de3c5</vpcId>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <description>Primary network interface</description>
+                    <ownerId>200278856672</ownerId>
+                    <requesterManaged>false</requesterManaged>
+                    <status>available</status>
+                    <macAddress>12:ab:25:25:79:4c</macAddress>
+                    <privateIpAddress>10.0.0.129</privateIpAddress>
+                    <sourceDestCheck>true</sourceDestCheck>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-24362241</groupId>
+                            <groupName>default</groupName>
+                        </item>
+                    </groupSet>
+                    <tagSet/>
+                    <privateIpAddressesSet>
+                        <item>
+                            <privateIpAddress>10.0.0.129</privateIpAddress>
                             <primary>true</primary>
                         </item>
                     </privateIpAddressesSet>
@@ -10561,41 +8963,6 @@ http_interactions:
                     <privateIpAddressesSet>
                         <item>
                             <privateIpAddress>10.0.1.213</privateIpAddress>
-                            <primary>true</primary>
-                        </item>
-                    </privateIpAddressesSet>
-                </item>
-                <item>
-                    <networkInterfaceId>eni-f7d72fe2</networkInterfaceId>
-                    <subnetId>subnet-ac904787</subnetId>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <availabilityZone>us-east-1e</availabilityZone>
-                    <description/>
-                    <ownerId>200278856672</ownerId>
-                    <requesterManaged>false</requesterManaged>
-                    <status>in-use</status>
-                    <macAddress>12:b3:7b:16:2f:f4</macAddress>
-                    <privateIpAddress>10.0.1.113</privateIpAddress>
-                    <sourceDestCheck>true</sourceDestCheck>
-                    <groupSet>
-                        <item>
-                            <groupId>sg-24362241</groupId>
-                            <groupName>default</groupName>
-                        </item>
-                    </groupSet>
-                    <attachment>
-                        <attachmentId>eni-attach-ad952a07</attachmentId>
-                        <instanceId>i-e2eb18d2</instanceId>
-                        <instanceOwnerId>200278856672</instanceOwnerId>
-                        <deviceIndex>0</deviceIndex>
-                        <status>attached</status>
-                        <attachTime>2016-10-13T22:33:04.000Z</attachTime>
-                        <deleteOnTermination>true</deleteOnTermination>
-                    </attachment>
-                    <tagSet/>
-                    <privateIpAddressesSet>
-                        <item>
-                            <privateIpAddress>10.0.1.113</privateIpAddress>
                             <primary>true</primary>
                         </item>
                     </privateIpAddressesSet>
@@ -10642,6 +9009,41 @@ http_interactions:
                                 <publicDnsName/>
                                 <ipOwnerId>amazon-elb</ipOwnerId>
                             </association>
+                        </item>
+                    </privateIpAddressesSet>
+                </item>
+                <item>
+                    <networkInterfaceId>eni-8f1bb462</networkInterfaceId>
+                    <subnetId>subnet-d4f656a2</subnetId>
+                    <vpcId>vpc-d7b4c7b3</vpcId>
+                    <availabilityZone>us-east-1b</availabilityZone>
+                    <description/>
+                    <ownerId>200278856672</ownerId>
+                    <requesterManaged>false</requesterManaged>
+                    <status>in-use</status>
+                    <macAddress>0a:ed:fd:c4:5b:e0</macAddress>
+                    <privateIpAddress>10.0.0.161</privateIpAddress>
+                    <sourceDestCheck>true</sourceDestCheck>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-e0365199</groupId>
+                            <groupName>default</groupName>
+                        </item>
+                    </groupSet>
+                    <attachment>
+                        <attachmentId>eni-attach-47dd8af3</attachmentId>
+                        <instanceId>i-27dedcbe</instanceId>
+                        <instanceOwnerId>200278856672</instanceOwnerId>
+                        <deviceIndex>0</deviceIndex>
+                        <status>attached</status>
+                        <attachTime>2016-11-09T21:50:04.000Z</attachTime>
+                        <deleteOnTermination>true</deleteOnTermination>
+                    </attachment>
+                    <tagSet/>
+                    <privateIpAddressesSet>
+                        <item>
+                            <privateIpAddress>10.0.0.161</privateIpAddress>
+                            <primary>true</primary>
                         </item>
                     </privateIpAddressesSet>
                 </item>
@@ -10726,44 +9128,44 @@ http_interactions:
                     </privateIpAddressesSet>
                 </item>
                 <item>
-                    <networkInterfaceId>eni-3805ff22</networkInterfaceId>
-                    <subnetId>subnet-16c70477</subnetId>
+                    <networkInterfaceId>eni-040bf414</networkInterfaceId>
+                    <subnetId>subnet-f849ff96</subnetId>
                     <vpcId>vpc-ff49ff91</vpcId>
-                    <availabilityZone>us-east-1d</availabilityZone>
-                    <description>ELB EmSRefreshSpecVPCELB2</description>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <description>ELB EmSRefreshSpecVPCELB</description>
                     <ownerId>200278856672</ownerId>
                     <requesterId>210368014644</requesterId>
                     <requesterManaged>true</requesterManaged>
                     <status>in-use</status>
-                    <macAddress>0e:c1:80:41:f2:43</macAddress>
-                    <privateIpAddress>10.0.1.50</privateIpAddress>
+                    <macAddress>12:9e:89:3f:5d:71</macAddress>
+                    <privateIpAddress>10.0.0.21</privateIpAddress>
                     <sourceDestCheck>true</sourceDestCheck>
                     <groupSet>
                         <item>
-                            <groupId>sg-0d2cd677</groupId>
-                            <groupName>quick-create-1</groupName>
+                            <groupId>sg-80f755ef</groupId>
+                            <groupName>EmsRefreshSpec-SecurityGroup-VPC</groupName>
                         </item>
                     </groupSet>
                     <attachment>
-                        <attachmentId>eni-attach-327a5ae6</attachmentId>
+                        <attachmentId>eni-attach-60e197c9</attachmentId>
                         <instanceOwnerId>amazon-elb</instanceOwnerId>
                         <deviceIndex>1</deviceIndex>
                         <status>attached</status>
-                        <attachTime>2016-08-11T15:29:46.000Z</attachTime>
+                        <attachTime>2016-08-11T17:21:38.000Z</attachTime>
                         <deleteOnTermination>false</deleteOnTermination>
                     </attachment>
                     <association>
-                        <publicIp>52.206.189.251</publicIp>
+                        <publicIp>52.206.159.72</publicIp>
                         <publicDnsName/>
                         <ipOwnerId>amazon-elb</ipOwnerId>
                     </association>
                     <tagSet/>
                     <privateIpAddressesSet>
                         <item>
-                            <privateIpAddress>10.0.1.50</privateIpAddress>
+                            <privateIpAddress>10.0.0.21</privateIpAddress>
                             <primary>true</primary>
                             <association>
-                                <publicIp>52.206.189.251</publicIp>
+                                <publicIp>52.206.159.72</publicIp>
                                 <publicDnsName/>
                                 <ipOwnerId>amazon-elb</ipOwnerId>
                             </association>
@@ -10771,7 +9173,7 @@ http_interactions:
                     </privateIpAddressesSet>
                 </item>
                 <item>
-                    <networkInterfaceId>eni-2b3cc33e</networkInterfaceId>
+                    <networkInterfaceId>eni-be0240ac</networkInterfaceId>
                     <subnetId>subnet-ac904787</subnetId>
                     <vpcId>vpc-a06de3c5</vpcId>
                     <availabilityZone>us-east-1e</availabilityZone>
@@ -10779,8 +9181,8 @@ http_interactions:
                     <ownerId>200278856672</ownerId>
                     <requesterManaged>false</requesterManaged>
                     <status>in-use</status>
-                    <macAddress>12:ae:0c:a5:b2:44</macAddress>
-                    <privateIpAddress>10.0.1.9</privateIpAddress>
+                    <macAddress>12:4f:e4:b6:69:db</macAddress>
+                    <privateIpAddress>10.0.1.254</privateIpAddress>
                     <sourceDestCheck>true</sourceDestCheck>
                     <groupSet>
                         <item>
@@ -10789,24 +9191,24 @@ http_interactions:
                         </item>
                     </groupSet>
                     <attachment>
-                        <attachmentId>eni-attach-3c209296</attachmentId>
-                        <instanceId>i-64d92954</instanceId>
+                        <attachmentId>eni-attach-360c1b9d</attachmentId>
+                        <instanceId>i-2f63681e</instanceId>
                         <instanceOwnerId>200278856672</instanceOwnerId>
                         <deviceIndex>0</deviceIndex>
                         <status>attached</status>
-                        <attachTime>2016-10-13T17:58:42.000Z</attachTime>
+                        <attachTime>2016-10-04T20:45:55.000Z</attachTime>
                         <deleteOnTermination>true</deleteOnTermination>
                     </attachment>
                     <tagSet/>
                     <privateIpAddressesSet>
                         <item>
-                            <privateIpAddress>10.0.1.9</privateIpAddress>
+                            <privateIpAddress>10.0.1.254</privateIpAddress>
                             <primary>true</primary>
                         </item>
                     </privateIpAddressesSet>
                 </item>
                 <item>
-                    <networkInterfaceId>eni-d4cae2d0</networkInterfaceId>
+                    <networkInterfaceId>eni-a4dd1da2</networkInterfaceId>
                     <subnetId>subnet-d4f656a2</subnetId>
                     <vpcId>vpc-d7b4c7b3</vpcId>
                     <availabilityZone>us-east-1b</availabilityZone>
@@ -10814,8 +9216,8 @@ http_interactions:
                     <ownerId>200278856672</ownerId>
                     <requesterManaged>false</requesterManaged>
                     <status>in-use</status>
-                    <macAddress>0a:2e:26:d6:2c:63</macAddress>
-                    <privateIpAddress>10.0.0.149</privateIpAddress>
+                    <macAddress>0a:c6:4f:eb:2b:a7</macAddress>
+                    <privateIpAddress>10.0.0.150</privateIpAddress>
                     <sourceDestCheck>true</sourceDestCheck>
                     <groupSet>
                         <item>
@@ -10824,18 +9226,88 @@ http_interactions:
                         </item>
                     </groupSet>
                     <attachment>
-                        <attachmentId>eni-attach-aa458578</attachmentId>
-                        <instanceId>i-1c7c6d12</instanceId>
+                        <attachmentId>eni-attach-a8ebad1a</attachmentId>
+                        <instanceId>i-28d1cc3f</instanceId>
                         <instanceOwnerId>200278856672</instanceOwnerId>
                         <deviceIndex>0</deviceIndex>
                         <status>attached</status>
-                        <attachTime>2016-08-24T13:39:32.000Z</attachTime>
+                        <attachTime>2016-09-23T18:42:14.000Z</attachTime>
                         <deleteOnTermination>true</deleteOnTermination>
                     </attachment>
                     <tagSet/>
                     <privateIpAddressesSet>
                         <item>
-                            <privateIpAddress>10.0.0.149</privateIpAddress>
+                            <privateIpAddress>10.0.0.150</privateIpAddress>
+                            <primary>true</primary>
+                        </item>
+                    </privateIpAddressesSet>
+                </item>
+                <item>
+                    <networkInterfaceId>eni-f7d72fe2</networkInterfaceId>
+                    <subnetId>subnet-ac904787</subnetId>
+                    <vpcId>vpc-a06de3c5</vpcId>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <description/>
+                    <ownerId>200278856672</ownerId>
+                    <requesterManaged>false</requesterManaged>
+                    <status>in-use</status>
+                    <macAddress>12:b3:7b:16:2f:f4</macAddress>
+                    <privateIpAddress>10.0.1.113</privateIpAddress>
+                    <sourceDestCheck>true</sourceDestCheck>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-24362241</groupId>
+                            <groupName>default</groupName>
+                        </item>
+                    </groupSet>
+                    <attachment>
+                        <attachmentId>eni-attach-ad952a07</attachmentId>
+                        <instanceId>i-e2eb18d2</instanceId>
+                        <instanceOwnerId>200278856672</instanceOwnerId>
+                        <deviceIndex>0</deviceIndex>
+                        <status>attached</status>
+                        <attachTime>2016-10-13T22:33:04.000Z</attachTime>
+                        <deleteOnTermination>true</deleteOnTermination>
+                    </attachment>
+                    <tagSet/>
+                    <privateIpAddressesSet>
+                        <item>
+                            <privateIpAddress>10.0.1.113</privateIpAddress>
+                            <primary>true</primary>
+                        </item>
+                    </privateIpAddressesSet>
+                </item>
+                <item>
+                    <networkInterfaceId>eni-e3c830f6</networkInterfaceId>
+                    <subnetId>subnet-ac904787</subnetId>
+                    <vpcId>vpc-a06de3c5</vpcId>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <description/>
+                    <ownerId>200278856672</ownerId>
+                    <requesterManaged>false</requesterManaged>
+                    <status>in-use</status>
+                    <macAddress>12:1c:a1:b9:1b:5e</macAddress>
+                    <privateIpAddress>10.0.1.18</privateIpAddress>
+                    <sourceDestCheck>true</sourceDestCheck>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-24362241</groupId>
+                            <groupName>default</groupName>
+                        </item>
+                    </groupSet>
+                    <attachment>
+                        <attachmentId>eni-attach-bf942b15</attachmentId>
+                        <instanceId>i-71eb1841</instanceId>
+                        <instanceOwnerId>200278856672</instanceOwnerId>
+                        <deviceIndex>0</deviceIndex>
+                        <status>attached</status>
+                        <attachTime>2016-10-13T22:32:59.000Z</attachTime>
+                        <deleteOnTermination>true</deleteOnTermination>
+                    </attachment>
+                    <tagSet/>
+                    <privateIpAddressesSet>
+                        <item>
+                            <privateIpAddress>10.0.1.18</privateIpAddress>
                             <primary>true</primary>
                         </item>
                     </privateIpAddressesSet>
@@ -10876,142 +9348,36 @@ http_interactions:
                     </privateIpAddressesSet>
                 </item>
                 <item>
-                    <networkInterfaceId>eni-f3a492ef</networkInterfaceId>
-                    <subnetId>subnet-16c70477</subnetId>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <availabilityZone>us-east-1d</availabilityZone>
+                    <networkInterfaceId>eni-d4cae2d0</networkInterfaceId>
+                    <subnetId>subnet-d4f656a2</subnetId>
+                    <vpcId>vpc-d7b4c7b3</vpcId>
+                    <availabilityZone>us-east-1b</availabilityZone>
                     <description/>
                     <ownerId>200278856672</ownerId>
                     <requesterManaged>false</requesterManaged>
                     <status>in-use</status>
-                    <macAddress>0e:97:dd:f0:6e:20</macAddress>
-                    <privateIpAddress>10.0.1.72</privateIpAddress>
+                    <macAddress>0a:2e:26:d6:2c:63</macAddress>
+                    <privateIpAddress>10.0.0.149</privateIpAddress>
                     <sourceDestCheck>true</sourceDestCheck>
                     <groupSet>
                         <item>
-                            <groupId>sg-1e2cf271</groupId>
+                            <groupId>sg-e0365199</groupId>
                             <groupName>default</groupName>
                         </item>
                     </groupSet>
                     <attachment>
-                        <attachmentId>eni-attach-477eabf0</attachmentId>
-                        <instanceId>i-cf9590d9</instanceId>
+                        <attachmentId>eni-attach-aa458578</attachmentId>
+                        <instanceId>i-1c7c6d12</instanceId>
                         <instanceOwnerId>200278856672</instanceOwnerId>
                         <deviceIndex>0</deviceIndex>
                         <status>attached</status>
-                        <attachTime>2016-10-10T20:44:15.000Z</attachTime>
+                        <attachTime>2016-08-24T13:39:32.000Z</attachTime>
                         <deleteOnTermination>true</deleteOnTermination>
                     </attachment>
                     <tagSet/>
                     <privateIpAddressesSet>
                         <item>
-                            <privateIpAddress>10.0.1.72</privateIpAddress>
-                            <primary>true</primary>
-                        </item>
-                    </privateIpAddressesSet>
-                </item>
-                <item>
-                    <networkInterfaceId>eni-3f67fd15</networkInterfaceId>
-                    <subnetId>subnet-1852bb33</subnetId>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <availabilityZone>us-east-1e</availabilityZone>
-                    <description>Primary network interface</description>
-                    <ownerId>200278856672</ownerId>
-                    <requesterManaged>false</requesterManaged>
-                    <status>available</status>
-                    <macAddress>12:ab:25:25:79:4c</macAddress>
-                    <privateIpAddress>10.0.0.129</privateIpAddress>
-                    <sourceDestCheck>true</sourceDestCheck>
-                    <groupSet>
-                        <item>
-                            <groupId>sg-24362241</groupId>
-                            <groupName>default</groupName>
-                        </item>
-                    </groupSet>
-                    <tagSet/>
-                    <privateIpAddressesSet>
-                        <item>
-                            <privateIpAddress>10.0.0.129</privateIpAddress>
-                            <primary>true</primary>
-                        </item>
-                    </privateIpAddressesSet>
-                </item>
-                <item>
-                    <networkInterfaceId>eni-ca1de1da</networkInterfaceId>
-                    <subnetId>subnet-f849ff96</subnetId>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <availabilityZone>us-east-1e</availabilityZone>
-                    <description>ELB EmSRefreshSpecVPCELB2</description>
-                    <ownerId>200278856672</ownerId>
-                    <requesterId>210368014644</requesterId>
-                    <requesterManaged>true</requesterManaged>
-                    <status>in-use</status>
-                    <macAddress>12:93:f9:93:f3:29</macAddress>
-                    <privateIpAddress>10.0.0.120</privateIpAddress>
-                    <sourceDestCheck>true</sourceDestCheck>
-                    <groupSet>
-                        <item>
-                            <groupId>sg-0d2cd677</groupId>
-                            <groupName>quick-create-1</groupName>
-                        </item>
-                    </groupSet>
-                    <attachment>
-                        <attachmentId>eni-attach-b3ea9d1a</attachmentId>
-                        <instanceOwnerId>amazon-elb</instanceOwnerId>
-                        <deviceIndex>1</deviceIndex>
-                        <status>attached</status>
-                        <attachTime>2016-08-11T15:29:45.000Z</attachTime>
-                        <deleteOnTermination>false</deleteOnTermination>
-                    </attachment>
-                    <association>
-                        <publicIp>54.175.99.3</publicIp>
-                        <publicDnsName/>
-                        <ipOwnerId>amazon-elb</ipOwnerId>
-                    </association>
-                    <tagSet/>
-                    <privateIpAddressesSet>
-                        <item>
-                            <privateIpAddress>10.0.0.120</privateIpAddress>
-                            <primary>true</primary>
-                            <association>
-                                <publicIp>54.175.99.3</publicIp>
-                                <publicDnsName/>
-                                <ipOwnerId>amazon-elb</ipOwnerId>
-                            </association>
-                        </item>
-                    </privateIpAddressesSet>
-                </item>
-                <item>
-                    <networkInterfaceId>eni-ae3883bc</networkInterfaceId>
-                    <subnetId>subnet-ac904787</subnetId>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <availabilityZone>us-east-1e</availabilityZone>
-                    <description>Primary network interface</description>
-                    <ownerId>200278856672</ownerId>
-                    <requesterManaged>false</requesterManaged>
-                    <status>in-use</status>
-                    <macAddress>12:94:bc:3e:83:c3</macAddress>
-                    <privateIpAddress>10.0.1.82</privateIpAddress>
-                    <sourceDestCheck>true</sourceDestCheck>
-                    <groupSet>
-                        <item>
-                            <groupId>sg-24362241</groupId>
-                            <groupName>default</groupName>
-                        </item>
-                    </groupSet>
-                    <attachment>
-                        <attachmentId>eni-attach-88c59223</attachmentId>
-                        <instanceId>i-9a5564ab</instanceId>
-                        <instanceOwnerId>200278856672</instanceOwnerId>
-                        <deviceIndex>0</deviceIndex>
-                        <status>attached</status>
-                        <attachTime>2016-09-28T23:58:09.000Z</attachTime>
-                        <deleteOnTermination>true</deleteOnTermination>
-                    </attachment>
-                    <tagSet/>
-                    <privateIpAddressesSet>
-                        <item>
-                            <privateIpAddress>10.0.1.82</privateIpAddress>
+                            <privateIpAddress>10.0.0.149</privateIpAddress>
                             <primary>true</primary>
                         </item>
                     </privateIpAddressesSet>
@@ -11064,7 +9430,52 @@ http_interactions:
                     </privateIpAddressesSet>
                 </item>
                 <item>
-                    <networkInterfaceId>eni-bec13eab</networkInterfaceId>
+                    <networkInterfaceId>eni-ca1de1da</networkInterfaceId>
+                    <subnetId>subnet-f849ff96</subnetId>
+                    <vpcId>vpc-ff49ff91</vpcId>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <description>ELB EmSRefreshSpecVPCELB2</description>
+                    <ownerId>200278856672</ownerId>
+                    <requesterId>210368014644</requesterId>
+                    <requesterManaged>true</requesterManaged>
+                    <status>in-use</status>
+                    <macAddress>12:93:f9:93:f3:29</macAddress>
+                    <privateIpAddress>10.0.0.120</privateIpAddress>
+                    <sourceDestCheck>true</sourceDestCheck>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-0d2cd677</groupId>
+                            <groupName>quick-create-1</groupName>
+                        </item>
+                    </groupSet>
+                    <attachment>
+                        <attachmentId>eni-attach-b3ea9d1a</attachmentId>
+                        <instanceOwnerId>amazon-elb</instanceOwnerId>
+                        <deviceIndex>1</deviceIndex>
+                        <status>attached</status>
+                        <attachTime>2016-08-11T15:29:45.000Z</attachTime>
+                        <deleteOnTermination>false</deleteOnTermination>
+                    </attachment>
+                    <association>
+                        <publicIp>54.175.99.3</publicIp>
+                        <publicDnsName/>
+                        <ipOwnerId>amazon-elb</ipOwnerId>
+                    </association>
+                    <tagSet/>
+                    <privateIpAddressesSet>
+                        <item>
+                            <privateIpAddress>10.0.0.120</privateIpAddress>
+                            <primary>true</primary>
+                            <association>
+                                <publicIp>54.175.99.3</publicIp>
+                                <publicDnsName/>
+                                <ipOwnerId>amazon-elb</ipOwnerId>
+                            </association>
+                        </item>
+                    </privateIpAddressesSet>
+                </item>
+                <item>
+                    <networkInterfaceId>eni-2b3cc33e</networkInterfaceId>
                     <subnetId>subnet-ac904787</subnetId>
                     <vpcId>vpc-a06de3c5</vpcId>
                     <availabilityZone>us-east-1e</availabilityZone>
@@ -11072,8 +9483,8 @@ http_interactions:
                     <ownerId>200278856672</ownerId>
                     <requesterManaged>false</requesterManaged>
                     <status>in-use</status>
-                    <macAddress>12:2e:a2:57:47:14</macAddress>
-                    <privateIpAddress>10.0.1.114</privateIpAddress>
+                    <macAddress>12:ae:0c:a5:b2:44</macAddress>
+                    <privateIpAddress>10.0.1.9</privateIpAddress>
                     <sourceDestCheck>true</sourceDestCheck>
                     <groupSet>
                         <item>
@@ -11082,8 +9493,8 @@ http_interactions:
                         </item>
                     </groupSet>
                     <attachment>
-                        <attachmentId>eni-attach-5b2092f1</attachmentId>
-                        <instanceId>i-c1d828f1</instanceId>
+                        <attachmentId>eni-attach-3c209296</attachmentId>
+                        <instanceId>i-64d92954</instanceId>
                         <instanceOwnerId>200278856672</instanceOwnerId>
                         <deviceIndex>0</deviceIndex>
                         <status>attached</status>
@@ -11093,122 +9504,7 @@ http_interactions:
                     <tagSet/>
                     <privateIpAddressesSet>
                         <item>
-                            <privateIpAddress>10.0.1.114</privateIpAddress>
-                            <primary>true</primary>
-                        </item>
-                    </privateIpAddressesSet>
-                </item>
-                <item>
-                    <networkInterfaceId>eni-040bf414</networkInterfaceId>
-                    <subnetId>subnet-f849ff96</subnetId>
-                    <vpcId>vpc-ff49ff91</vpcId>
-                    <availabilityZone>us-east-1e</availabilityZone>
-                    <description>ELB EmSRefreshSpecVPCELB</description>
-                    <ownerId>200278856672</ownerId>
-                    <requesterId>210368014644</requesterId>
-                    <requesterManaged>true</requesterManaged>
-                    <status>in-use</status>
-                    <macAddress>12:9e:89:3f:5d:71</macAddress>
-                    <privateIpAddress>10.0.0.21</privateIpAddress>
-                    <sourceDestCheck>true</sourceDestCheck>
-                    <groupSet>
-                        <item>
-                            <groupId>sg-80f755ef</groupId>
-                            <groupName>EmsRefreshSpec-SecurityGroup-VPC</groupName>
-                        </item>
-                    </groupSet>
-                    <attachment>
-                        <attachmentId>eni-attach-60e197c9</attachmentId>
-                        <instanceOwnerId>amazon-elb</instanceOwnerId>
-                        <deviceIndex>1</deviceIndex>
-                        <status>attached</status>
-                        <attachTime>2016-08-11T17:21:38.000Z</attachTime>
-                        <deleteOnTermination>false</deleteOnTermination>
-                    </attachment>
-                    <association>
-                        <publicIp>52.206.159.72</publicIp>
-                        <publicDnsName/>
-                        <ipOwnerId>amazon-elb</ipOwnerId>
-                    </association>
-                    <tagSet/>
-                    <privateIpAddressesSet>
-                        <item>
-                            <privateIpAddress>10.0.0.21</privateIpAddress>
-                            <primary>true</primary>
-                            <association>
-                                <publicIp>52.206.159.72</publicIp>
-                                <publicDnsName/>
-                                <ipOwnerId>amazon-elb</ipOwnerId>
-                            </association>
-                        </item>
-                    </privateIpAddressesSet>
-                </item>
-                <item>
-                    <networkInterfaceId>eni-a4dd1da2</networkInterfaceId>
-                    <subnetId>subnet-d4f656a2</subnetId>
-                    <vpcId>vpc-d7b4c7b3</vpcId>
-                    <availabilityZone>us-east-1b</availabilityZone>
-                    <description/>
-                    <ownerId>200278856672</ownerId>
-                    <requesterManaged>false</requesterManaged>
-                    <status>in-use</status>
-                    <macAddress>0a:c6:4f:eb:2b:a7</macAddress>
-                    <privateIpAddress>10.0.0.150</privateIpAddress>
-                    <sourceDestCheck>true</sourceDestCheck>
-                    <groupSet>
-                        <item>
-                            <groupId>sg-e0365199</groupId>
-                            <groupName>default</groupName>
-                        </item>
-                    </groupSet>
-                    <attachment>
-                        <attachmentId>eni-attach-a8ebad1a</attachmentId>
-                        <instanceId>i-28d1cc3f</instanceId>
-                        <instanceOwnerId>200278856672</instanceOwnerId>
-                        <deviceIndex>0</deviceIndex>
-                        <status>attached</status>
-                        <attachTime>2016-09-23T18:42:14.000Z</attachTime>
-                        <deleteOnTermination>true</deleteOnTermination>
-                    </attachment>
-                    <tagSet/>
-                    <privateIpAddressesSet>
-                        <item>
-                            <privateIpAddress>10.0.0.150</privateIpAddress>
-                            <primary>true</primary>
-                        </item>
-                    </privateIpAddressesSet>
-                </item>
-                <item>
-                    <networkInterfaceId>eni-be0240ac</networkInterfaceId>
-                    <subnetId>subnet-ac904787</subnetId>
-                    <vpcId>vpc-a06de3c5</vpcId>
-                    <availabilityZone>us-east-1e</availabilityZone>
-                    <description/>
-                    <ownerId>200278856672</ownerId>
-                    <requesterManaged>false</requesterManaged>
-                    <status>in-use</status>
-                    <macAddress>12:4f:e4:b6:69:db</macAddress>
-                    <privateIpAddress>10.0.1.254</privateIpAddress>
-                    <sourceDestCheck>true</sourceDestCheck>
-                    <groupSet>
-                        <item>
-                            <groupId>sg-24362241</groupId>
-                            <groupName>default</groupName>
-                        </item>
-                    </groupSet>
-                    <attachment>
-                        <attachmentId>eni-attach-360c1b9d</attachmentId>
-                        <instanceId>i-2f63681e</instanceId>
-                        <instanceOwnerId>200278856672</instanceOwnerId>
-                        <deviceIndex>0</deviceIndex>
-                        <status>attached</status>
-                        <attachTime>2016-10-04T20:45:55.000Z</attachTime>
-                        <deleteOnTermination>true</deleteOnTermination>
-                    </attachment>
-                    <tagSet/>
-                    <privateIpAddressesSet>
-                        <item>
-                            <privateIpAddress>10.0.1.254</privateIpAddress>
+                            <privateIpAddress>10.0.1.9</privateIpAddress>
                             <primary>true</primary>
                         </item>
                     </privateIpAddressesSet>
@@ -11249,44 +9545,178 @@ http_interactions:
                     </privateIpAddressesSet>
                 </item>
                 <item>
-                    <networkInterfaceId>eni-8f1bb462</networkInterfaceId>
-                    <subnetId>subnet-d4f656a2</subnetId>
-                    <vpcId>vpc-d7b4c7b3</vpcId>
-                    <availabilityZone>us-east-1b</availabilityZone>
-                    <description/>
+                    <networkInterfaceId>eni-a3902b84</networkInterfaceId>
+                    <subnetId>subnet-f849ff96</subnetId>
+                    <vpcId>vpc-ff49ff91</vpcId>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <description>Primary network interface</description>
                     <ownerId>200278856672</ownerId>
                     <requesterManaged>false</requesterManaged>
                     <status>in-use</status>
-                    <macAddress>0a:ed:fd:c4:5b:e0</macAddress>
-                    <privateIpAddress>10.0.0.161</privateIpAddress>
+                    <macAddress>12:80:72:db:8c:81</macAddress>
+                    <privateIpAddress>10.0.0.109</privateIpAddress>
                     <sourceDestCheck>true</sourceDestCheck>
                     <groupSet>
                         <item>
-                            <groupId>sg-e0365199</groupId>
-                            <groupName>default</groupName>
+                            <groupId>sg-80f755ef</groupId>
+                            <groupName>EmsRefreshSpec-SecurityGroup-VPC</groupName>
                         </item>
                     </groupSet>
                     <attachment>
-                        <attachmentId>eni-attach-47dd8af3</attachmentId>
-                        <instanceId>i-27dedcbe</instanceId>
+                        <attachmentId>eni-attach-12a4c3e2</attachmentId>
+                        <instanceId>i-fb694e66</instanceId>
                         <instanceOwnerId>200278856672</instanceOwnerId>
                         <deviceIndex>0</deviceIndex>
                         <status>attached</status>
-                        <attachTime>2016-11-09T21:50:04.000Z</attachTime>
+                        <attachTime>2016-05-10T20:56:37.000Z</attachTime>
                         <deleteOnTermination>true</deleteOnTermination>
                     </attachment>
                     <tagSet/>
                     <privateIpAddressesSet>
                         <item>
-                            <privateIpAddress>10.0.0.161</privateIpAddress>
+                            <privateIpAddress>10.0.0.109</privateIpAddress>
                             <primary>true</primary>
+                        </item>
+                    </privateIpAddressesSet>
+                </item>
+                <item>
+                    <networkInterfaceId>eni-bec13eab</networkInterfaceId>
+                    <subnetId>subnet-ac904787</subnetId>
+                    <vpcId>vpc-a06de3c5</vpcId>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <description/>
+                    <ownerId>200278856672</ownerId>
+                    <requesterManaged>false</requesterManaged>
+                    <status>in-use</status>
+                    <macAddress>12:2e:a2:57:47:14</macAddress>
+                    <privateIpAddress>10.0.1.114</privateIpAddress>
+                    <sourceDestCheck>true</sourceDestCheck>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-24362241</groupId>
+                            <groupName>default</groupName>
+                        </item>
+                    </groupSet>
+                    <attachment>
+                        <attachmentId>eni-attach-5b2092f1</attachmentId>
+                        <instanceId>i-c1d828f1</instanceId>
+                        <instanceOwnerId>200278856672</instanceOwnerId>
+                        <deviceIndex>0</deviceIndex>
+                        <status>attached</status>
+                        <attachTime>2016-10-13T17:58:42.000Z</attachTime>
+                        <deleteOnTermination>true</deleteOnTermination>
+                    </attachment>
+                    <tagSet/>
+                    <privateIpAddressesSet>
+                        <item>
+                            <privateIpAddress>10.0.1.114</privateIpAddress>
+                            <primary>true</primary>
+                        </item>
+                    </privateIpAddressesSet>
+                </item>
+                <item>
+                    <networkInterfaceId>eni-3805ff22</networkInterfaceId>
+                    <subnetId>subnet-16c70477</subnetId>
+                    <vpcId>vpc-ff49ff91</vpcId>
+                    <availabilityZone>us-east-1d</availabilityZone>
+                    <description>ELB EmSRefreshSpecVPCELB2</description>
+                    <ownerId>200278856672</ownerId>
+                    <requesterId>210368014644</requesterId>
+                    <requesterManaged>true</requesterManaged>
+                    <status>in-use</status>
+                    <macAddress>0e:c1:80:41:f2:43</macAddress>
+                    <privateIpAddress>10.0.1.50</privateIpAddress>
+                    <sourceDestCheck>true</sourceDestCheck>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-0d2cd677</groupId>
+                            <groupName>quick-create-1</groupName>
+                        </item>
+                    </groupSet>
+                    <attachment>
+                        <attachmentId>eni-attach-327a5ae6</attachmentId>
+                        <instanceOwnerId>amazon-elb</instanceOwnerId>
+                        <deviceIndex>1</deviceIndex>
+                        <status>attached</status>
+                        <attachTime>2016-08-11T15:29:46.000Z</attachTime>
+                        <deleteOnTermination>false</deleteOnTermination>
+                    </attachment>
+                    <association>
+                        <publicIp>52.206.189.251</publicIp>
+                        <publicDnsName/>
+                        <ipOwnerId>amazon-elb</ipOwnerId>
+                    </association>
+                    <tagSet/>
+                    <privateIpAddressesSet>
+                        <item>
+                            <privateIpAddress>10.0.1.50</privateIpAddress>
+                            <primary>true</primary>
+                            <association>
+                                <publicIp>52.206.189.251</publicIp>
+                                <publicDnsName/>
+                                <ipOwnerId>amazon-elb</ipOwnerId>
+                            </association>
+                        </item>
+                    </privateIpAddressesSet>
+                </item>
+                <item>
+                    <networkInterfaceId>eni-ad25f7cc</networkInterfaceId>
+                    <subnetId>subnet-f849ff96</subnetId>
+                    <vpcId>vpc-ff49ff91</vpcId>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <description>Primary network interface</description>
+                    <ownerId>200278856672</ownerId>
+                    <requesterManaged>false</requesterManaged>
+                    <status>in-use</status>
+                    <macAddress>22:d8:dc:13:0c:ca</macAddress>
+                    <privateIpAddress>10.0.0.254</privateIpAddress>
+                    <sourceDestCheck>true</sourceDestCheck>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-80f755ef</groupId>
+                            <groupName>EmsRefreshSpec-SecurityGroup-VPC</groupName>
+                        </item>
+                    </groupSet>
+                    <attachment>
+                        <attachmentId>eni-attach-05fac66f</attachmentId>
+                        <instanceId>i-8b5739f2</instanceId>
+                        <instanceOwnerId>200278856672</instanceOwnerId>
+                        <deviceIndex>0</deviceIndex>
+                        <status>attached</status>
+                        <attachTime>2013-09-23T20:11:52.000Z</attachTime>
+                        <deleteOnTermination>true</deleteOnTermination>
+                    </attachment>
+                    <association>
+                        <publicIp>54.208.119.197</publicIp>
+                        <publicDnsName/>
+                        <ipOwnerId>200278856672</ipOwnerId>
+                        <allocationId>eipalloc-ce53d7a0</allocationId>
+                        <associationId>eipassoc-cc6e58f1</associationId>
+                    </association>
+                    <tagSet/>
+                    <privateIpAddressesSet>
+                        <item>
+                            <privateIpAddress>10.0.0.254</privateIpAddress>
+                            <primary>true</primary>
+                            <association>
+                                <publicIp>54.208.119.197</publicIp>
+                                <publicDnsName/>
+                                <ipOwnerId>200278856672</ipOwnerId>
+                                <allocationId>eipalloc-ce53d7a0</allocationId>
+                                <associationId>eipassoc-cc6e58f1</associationId>
+                            </association>
+                        </item>
+                        <item>
+                            <privateIpAddress>10.0.0.208</privateIpAddress>
+                            <privateDnsName/>
+                            <primary>false</primary>
                         </item>
                     </privateIpAddressesSet>
                 </item>
             </networkInterfaceSet>
         </DescribeNetworkInterfacesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:26 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:21 GMT
 - request:
     method: post
     uri: https://elasticloadbalancing.us-east-1.amazonaws.com/
@@ -11301,12 +9731,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155526Z
+      - 20161111T081421Z
       X-Amz-Content-Sha256:
       - 236069f72bf74f0c7ddff0a34b0defa8a21d1d6a897e588764e1b2ff6319f94a
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/elasticloadbalancing/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=99d695a7e23cb94c9b17daae631fae54455e38561516d5c84afc942fc8b56928
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=970ea1bc7e653b5ce4afc09fe6b09488b019a4274c17b38dde5de5e2039bf2a7
       Content-Length:
       - '47'
       Accept:
@@ -11317,7 +9747,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 435937c5-a827-11e6-91a7-f5e738f08f63
+      - da05d235-a7e6-11e6-9f9b-c99429eb601a
       Content-Type:
       - text/xml
       Content-Length:
@@ -11325,7 +9755,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:26 GMT
+      - Fri, 11 Nov 2016 08:14:21 GMT
     body:
       encoding: UTF-8
       string: |
@@ -11503,11 +9933,11 @@ http_interactions:
             </LoadBalancerDescriptions>
           </DescribeLoadBalancersResult>
           <ResponseMetadata>
-            <RequestId>435937c5-a827-11e6-91a7-f5e738f08f63</RequestId>
+            <RequestId>da05d235-a7e6-11e6-9f9b-c99429eb601a</RequestId>
           </ResponseMetadata>
         </DescribeLoadBalancersResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:26 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:22 GMT
 - request:
     method: post
     uri: https://elasticloadbalancing.us-east-1.amazonaws.com/
@@ -11522,12 +9952,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155526Z
+      - 20161111T081422Z
       X-Amz-Content-Sha256:
       - 3af90022526a6f5460a9813c88cc0b96b9ad472999bfeedaccd286147e93047b
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/elasticloadbalancing/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=fc2ef060a07af1b31bc5b83ea8ba451aa9d46811bbdc055b806ab4e14d3ff030
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=39f57d3e09ba5f09280d6aaebdde97e06876a0e02b252d2a47653a3af5b1e563
       Content-Length:
       - '93'
       Accept:
@@ -11538,13 +9968,13 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 43c65141-a827-11e6-8380-6bfed0268173
+      - daa2129b-a7e6-11e6-9ac9-17d4ddc09748
       Content-Type:
       - text/xml
       Content-Length:
       - '629'
       Date:
-      - Fri, 11 Nov 2016 15:55:26 GMT
+      - Fri, 11 Nov 2016 08:14:22 GMT
     body:
       encoding: UTF-8
       string: |
@@ -11560,11 +9990,11 @@ http_interactions:
             </InstanceStates>
           </DescribeInstanceHealthResult>
           <ResponseMetadata>
-            <RequestId>43c65141-a827-11e6-8380-6bfed0268173</RequestId>
+            <RequestId>daa2129b-a7e6-11e6-9ac9-17d4ddc09748</RequestId>
           </ResponseMetadata>
         </DescribeInstanceHealthResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:27 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:23 GMT
 - request:
     method: post
     uri: https://elasticloadbalancing.us-east-1.amazonaws.com/
@@ -11579,12 +10009,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155527Z
+      - 20161111T081423Z
       X-Amz-Content-Sha256:
       - e3ca7eaa1d39176b50c00e34e89f3aaf68b84ce556b8e5b1d9242affcccfd5d4
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/elasticloadbalancing/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=0809a5858cac06188afb2e1d16acbfd3d7a4bb06a53ae587e9af5430cbf5ba20
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b81d66066831978502047d54dd06cb107f0db2edfdd9cdd39a0459ef5b4e2e2e
       Content-Length:
       - '86'
       Accept:
@@ -11595,13 +10025,13 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 445a0577-a827-11e6-b883-59ccabfe1312
+      - db4ef3cd-a7e6-11e6-9f9b-c99429eb601a
       Content-Type:
       - text/xml
       Content-Length:
       - '847'
       Date:
-      - Fri, 11 Nov 2016 15:55:27 GMT
+      - Fri, 11 Nov 2016 08:14:23 GMT
     body:
       encoding: UTF-8
       string: |
@@ -11623,11 +10053,11 @@ http_interactions:
             </InstanceStates>
           </DescribeInstanceHealthResult>
           <ResponseMetadata>
-            <RequestId>445a0577-a827-11e6-b883-59ccabfe1312</RequestId>
+            <RequestId>db4ef3cd-a7e6-11e6-9f9b-c99429eb601a</RequestId>
           </ResponseMetadata>
         </DescribeInstanceHealthResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:28 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:24 GMT
 - request:
     method: post
     uri: https://elasticloadbalancing.us-east-1.amazonaws.com/
@@ -11642,12 +10072,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155528Z
+      - 20161111T081424Z
       X-Amz-Content-Sha256:
       - 906dd8e8fc282f77d697b9b88544cfc4963e06d223e5d72254f984144f015d1f
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/elasticloadbalancing/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=09ffaced3186c94c2299a1480298be5dc890d7d3604b84b393cccd236ba22e77
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=786a5bbd27602681d82e627c94012b6a22ddbfce93dd5166560584a5a30d838f
       Content-Length:
       - '87'
       Accept:
@@ -11658,13 +10088,13 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 4505614a-a827-11e6-b164-59a375676129
+      - dbda92d3-a7e6-11e6-a440-43f1c83b922d
       Content-Type:
       - text/xml
       Content-Length:
       - '847'
       Date:
-      - Fri, 11 Nov 2016 15:55:28 GMT
+      - Fri, 11 Nov 2016 08:14:24 GMT
     body:
       encoding: UTF-8
       string: |
@@ -11686,11 +10116,11 @@ http_interactions:
             </InstanceStates>
           </DescribeInstanceHealthResult>
           <ResponseMetadata>
-            <RequestId>4505614a-a827-11e6-b164-59a375676129</RequestId>
+            <RequestId>dbda92d3-a7e6-11e6-a440-43f1c83b922d</RequestId>
           </ResponseMetadata>
         </DescribeInstanceHealthResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:29 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:25 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -11705,12 +10135,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155529Z
+      - 20161111T081425Z
       X-Amz-Content-Sha256:
       - d83056a1aac745ed69dbd2081c98416e27b917c7a61a6a31d5f72bf823045a2f
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=a83e96adcd7b753778db5dcc743117ecf46b00b2a6d8b1e12bebde9636a403e7
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ece598ee9a974cbba1c6e34ee03615af32dce1e6a83179b36c162fd418b66c86
       Content-Length:
       - '43'
       Accept:
@@ -11727,7 +10157,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:30 GMT
+      - Fri, 11 Nov 2016 08:14:25 GMT
       Server:
       - AmazonEC2
     body:
@@ -11735,7 +10165,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>6f3c613f-9ea5-40a0-8f52-6d55fd95a87d</requestId>
+            <requestId>241a02b9-b642-41b2-b9cf-5c5f0c1e1f5d</requestId>
             <reservationSet>
                 <item>
                     <reservationId>r-0a5941b4</reservationId>
@@ -14849,8 +13279,8 @@ http_interactions:
                 </item>
             </reservationSet>
         </DescribeInstancesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:31 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:27 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -14865,12 +13295,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.6.18 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20161111T155531Z
+      - 20161111T081427Z
       X-Amz-Content-Sha256:
       - 684b023bd0b7e9d96a094cf03793eb46a25691fd6e6e8fdde6c44f3515b0255e
       Authorization:
       - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20161111/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=d570d43b4fecc311b2554bb9821c8d61635fd693cac962efbfd424a26d85b1b8
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=01c77917d2641fdfb23eae9983bdfb6f937d2072115d3ae3c60ffea5849e1bd8
       Content-Length:
       - '43'
       Accept:
@@ -14887,7 +13317,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 11 Nov 2016 15:55:32 GMT
+      - Fri, 11 Nov 2016 08:14:27 GMT
       Server:
       - AmazonEC2
     body:
@@ -14895,7 +13325,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeAddressesResponse xmlns="http://ec2.amazonaws.com/doc/2016-09-15/">
-            <requestId>e7dd9a5f-2ee0-4815-870f-db0827f64681</requestId>
+            <requestId>b3c4151a-5b16-4fa3-8bff-e675c5d84387</requestId>
             <addressesSet>
                 <item>
                     <publicIp>54.221.202.53</publicIp>
@@ -14918,11 +13348,6 @@ http_interactions:
                     <domain>vpc</domain>
                 </item>
                 <item>
-                    <publicIp>54.80.134.186</publicIp>
-                    <allocationId>eipalloc-9b6d09a7</allocationId>
-                    <domain>vpc</domain>
-                </item>
-                <item>
                     <publicIp>54.208.119.197</publicIp>
                     <allocationId>eipalloc-ce53d7a0</allocationId>
                     <domain>vpc</domain>
@@ -14932,8 +13357,13 @@ http_interactions:
                     <networkInterfaceOwnerId>200278856672</networkInterfaceOwnerId>
                     <privateIpAddress>10.0.0.254</privateIpAddress>
                 </item>
+                <item>
+                    <publicIp>54.80.134.186</publicIp>
+                    <allocationId>eipalloc-9b6d09a7</allocationId>
+                    <domain>vpc</domain>
+                </item>
             </addressesSet>
         </DescribeAddressesResponse>
-    http_version:
-  recorded_at: Fri, 11 Nov 2016 15:55:32 GMT
+    http_version: 
+  recorded_at: Fri, 11 Nov 2016 08:14:28 GMT
 recorded_with: VCR 3.0.3
