@@ -258,6 +258,10 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
 
   def parse_image_hardware(image)
     guest_os = (image.platform == "windows") ? "windows" : "linux"
+    if guest_os == "linux"
+      guest_os = OperatingSystem.normalize_os_name(image.image_location)
+      guest_os = "linux" if guest_os == "unknown"
+    end
 
     {
       :guest_os            => guest_os,
