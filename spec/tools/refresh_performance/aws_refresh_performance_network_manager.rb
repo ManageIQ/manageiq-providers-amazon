@@ -29,15 +29,15 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       end
     end
 
-    [5].each do |data_scaling|
+    [1].each do |data_scaling|
       context "with data scaled for #{data_scaling}" do
         let(:data_scaling) { data_scaling }
 
-        context "with batched dto" do
-          let(:ems_name) { "bached_dto_ems_scaled_#{data_scaling}x" }
+        context "with dto" do
+          let(:ems_name) { "dto_ems_scaled_#{data_scaling}x" }
           it "will perform a full refresh" do
-            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_batch_saving => true,
-                                                                             :dto_refresh      => true})
+            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_saving_strategy => nil,
+                                                                             :dto_refresh         => true})
             refresh
           end
         end
@@ -46,8 +46,8 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
           let(:ems_name) { "non_bached_dto_ems_scaled_#{data_scaling}x" }
 
           it "will perform a full refresh" do
-            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_batch_saving => false,
-                                                                             :dto_refresh      => true})
+            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_saving_strategy => :recursive,
+                                                                             :dto_refresh         => true})
             refresh
           end
         end
@@ -56,13 +56,24 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
           let(:ems_name) { "non_dto_ems_scaled_#{data_scaling}x" }
 
           it "will perform a full refresh" do
-            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_batch_saving => false,
-                                                                             :dto_refresh      => false})
+            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_refresh      => false})
             refresh
           end
         end
       end
     end
+  end
+
+  def test_counts(scaling = nil)
+    scaling ||= scaling_factor
+
+    super.merge({
+      :instance_vpc_count                              => scaling * 2000,
+      :instance_ec2_count                              => scaling * 2000,
+      :load_balancer_instances_count                   => scaling * 2000,
+      :network_port_count                              => scaling * 3000,
+      :floating_ip_count                               => scaling * 2000,
+    })
   end
 
   def refresh
@@ -156,6 +167,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       (test_counts[:outbound_firewall_rule_per_security_group_count] +
         test_counts[:outbound_firewall_rule_per_security_group_count])
 
+    floating_ip_count = test_counts[:floating_ip_count] + test_counts[:network_port_count] +
+      test_counts[:instance_ec2_count]
+
     {
       :auth_private_key                  => 0,
       :ext_management_system             => 2,
@@ -182,9 +196,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :firewall_rule                     => firewall_rule_count,
       :network_port                      => test_counts[:instance_ec2_count] + test_counts[:network_port_count],
       :cloud_network                     => test_counts[:vpc_count],
-      :floating_ip                       => test_counts[:floating_ip_count] + test_counts[:network_port_count],
+      :floating_ip                       => floating_ip_count,
       :network_router                    => 0,
-      # :cloud_subnet                      => test_counts[:subnet_count],
+      :cloud_subnet                      => test_counts[:subnet_count],
       :custom_attribute                  => 0,
       :load_balancer                     => test_counts[:load_balancer_count],
       :load_balancer_pool                => test_counts[:load_balancer_count],
@@ -226,7 +240,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :cloud_network                     => CloudNetwork.count,
       :floating_ip                       => FloatingIp.count,
       :network_router                    => NetworkRouter.count,
-      # :cloud_subnet                      => CloudSubnet.count,
+      :cloud_subnet                      => CloudSubnet.count,
       :custom_attribute                  => CustomAttribute.count,
       :load_balancer                     => LoadBalancer.count,
       :load_balancer_pool                => LoadBalancerPool.count,
