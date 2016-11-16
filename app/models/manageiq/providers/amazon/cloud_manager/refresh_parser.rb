@@ -166,8 +166,12 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     uid      = image.image_id
     location = image.image_location
     guest_os = (image.platform == "windows") ? "windows" : "linux"
+    if guest_os == "linux"
+      guest_os = OperatingSystem.normalize_os_name(location)
+      guest_os = "linux" if guest_os == "unknown"
+    end
 
-    name     = get_from_tags(image, :name)
+    name = get_from_tags(image, :name)
     name ||= image.name
     name ||= $1 if location =~ /^(.+?)(\.(image|img))?\.manifest\.xml$/
     name ||= uid
