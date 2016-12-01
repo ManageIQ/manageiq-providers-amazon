@@ -41,7 +41,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
            :to        => :network_manager,
            :allow_nil => true
 
-  before_validation :ensure_managers
+  before_create :ensure_managers
 
   supports :provisioning
   supports :regions
