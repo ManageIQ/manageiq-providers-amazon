@@ -5,7 +5,7 @@ require 'pathname'
 APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
 
 Dir.chdir APP_ROOT do
-  if File.exists?("spec/manageiq")
+  if File.exist?("spec/manageiq")
     puts "== Updating manageiq sample app =="
     system "cd spec/manageiq && git pull"
   else
