@@ -1,0 +1,29 @@
+---
+ems:
+  :ems_amazon:
+:ems_refresh:
+  :ec2:
+    :get_private_images: true
+    :get_shared_images: true
+    :get_public_images: false
+    # configure an array of filters to be added to describe_images
+    # see: http://docs.aws.amazon.com/sdkforruby/api/Aws/EC2/Client.html#describe_images-instance_method
+    :public_images_filters:
+      - :name: image-type
+        :values:
+          - machine
+    :ignore_terminated_instances: true
+:log:
+  :level_aws: info
+  :level_aws_in_evm: error
+:workers:
+  :worker_base:
+    :event_catcher:
+      :event_catcher_amazon:
+        :poll: 15.seconds
+    :queue_worker_base:
+      :ems_metrics_collector_worker:
+        :ems_metrics_collector_worker_amazon: {}
+      :ems_refresh_worker:
+        :ems_refresh_worker_amazon: {}
+        :ems_refresh_worker_amazon_network: {}
