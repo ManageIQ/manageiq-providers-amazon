@@ -84,7 +84,10 @@ module ManageIQ
       }
 
       def self.regions
-        REGIONS.except(*Array(Settings.ems.ems_amazon.try!(:disabled_regions)))
+        additional_regions = Hash(Settings.ems.ems_amazon.try!(:additional_regions)).stringify_keys
+        disabled_regions   = Array(Settings.ems.ems_amazon.try!(:disabled_regions))
+
+        REGIONS.merge(additional_regions).except(*disabled_regions)
       end
 
       def self.regions_by_hostname
