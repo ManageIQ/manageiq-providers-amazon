@@ -13,28 +13,28 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     end
 
     # Test all kinds of refreshes, DTO refresh, DTO with batch saving and the original refresh
-    [{:dto_refresh => true},
-     {:dto_saving_strategy => :recursive, :dto_refresh => true},
-     {:dto_refresh => false}
-    ].each do |dto_settings|
-      context "with settings #{dto_settings}" do
+    [{:inventory_object_refresh => true},
+     {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},
+     {:inventory_object_refresh => false}
+    ].each do |inventory_object_settings|
+      context "with settings #{inventory_object_settings}" do
         before :each do
-          settings                     = OpenStruct.new
-          settings.dto_refresh         = dto_settings[:dto_refresh]
-          settings.dto_saving_strategy = dto_settings[:dto_saving_strategy]
-          settings.get_private_images  = true
-          settings.get_shared_images   = false
-          settings.get_public_images   = false
+          settings                                  = OpenStruct.new
+          settings.inventory_object_refresh         = inventory_object_settings[:inventory_object_refresh]
+          settings.inventory_object_saving_strategy = inventory_object_settings[:inventory_object_saving_strategy]
+          settings.get_private_images               = true
+          settings.get_shared_images                = false
+          settings.get_public_images                = false
 
           allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
-          @dto_settings = dto_settings
+          @inventory_object_settings = inventory_object_settings
         end
 
         it "2 refreshes, first creates all entities, second updates all entitites" do
           2.times do
             # Make sure we don't do any delete&create instead of update
-            # TODO(lsmola) :dto_refresh => false is doing some non allowed deletes, investigate
-            assert_do_not_delete if @dto_settings[:dto_refresh]
+            # TODO(lsmola) :inventory_object_refresh => false is doing some non allowed deletes, investigate
+            assert_do_not_delete if @inventory_object_settings[:inventory_object_refresh]
 
             refresh_spec
           end
@@ -54,8 +54,8 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
           @data_scaling = 1
           2.times do
             # Make sure we don't do any delete&create instead of update
-            # TODO(lsmola) :dto_refresh => false is doing some non allowed deletes, investigate
-            assert_do_not_delete if @dto_settings[:dto_refresh]
+            # TODO(lsmola) :inventory_object_refresh => false is doing some non allowed deletes, investigate
+            assert_do_not_delete if @inventory_object_settings[:inventory_object_refresh]
 
             refresh_spec
             @data_scaling += 1
@@ -134,7 +134,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :auth_private_key                  => test_counts[:key_pair_count],
       :ext_management_system             => 2,
       # TODO(lsmola) collect all flavors for original refresh
-      :flavor                            => @dto_settings[:dto_refresh] ? 57 : 56,
+      :flavor                            => @inventory_object_settings[:inventory_object_refresh] ? 57 : 56,
       :availability_zone                 => 5,
       :vm_or_template                    => vm_count_plus_disconnect_inv + image_count_plus_disconnect_inv,
       :vm                                => vm_count_plus_disconnect_inv,

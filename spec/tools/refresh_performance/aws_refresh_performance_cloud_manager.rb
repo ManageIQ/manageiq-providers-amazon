@@ -7,7 +7,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   describe "refresh" do
     before(:each) do
       _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
-      @ems = FactoryGirl.create(:ems_amazon, :zone => zone, :name => ems_name)
+      @ems                 = FactoryGirl.create(:ems_amazon, :zone => zone, :name => ems_name)
       @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
     end
 
@@ -33,16 +33,16 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       context "with data scaled for #{data_scaling}" do
         let(:data_scaling) { data_scaling }
 
-        context "with dto" do
-          let(:ems_name) { "dto_ems_scaled_#{data_scaling}x" }
+        context "with inventory_object" do
+          let(:ems_name) { "inventory_object_ems_scaled_#{data_scaling}x" }
           it "will perform a full refresh" do
-            @dto_settings                = {:dto_saving_strategy => nil, :dto_refresh => true}
-            settings                     = OpenStruct.new
-            settings.dto_refresh         = @dto_settings[:dto_refresh]
-            settings.dto_saving_strategy = @dto_settings[:dto_saving_strategy]
-            settings.get_private_images  = true
-            settings.get_shared_images   = false
-            settings.get_public_images   = false
+            @inventory_object_settings                = {:inventory_object_saving_strategy => nil, :inventory_object_refresh => true}
+            settings                                  = OpenStruct.new
+            settings.inventory_object_refresh         = @inventory_object_settings[:inventory_object_refresh]
+            settings.inventory_object_saving_strategy = @inventory_object_settings[:inventory_object_saving_strategy]
+            settings.get_private_images               = true
+            settings.get_shared_images                = false
+            settings.get_public_images                = false
 
             allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
 
@@ -50,17 +50,17 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           end
         end
 
-        context "with recursive saving dto" do
-          let(:ems_name) { "non_bached_dto_ems_scaled_#{data_scaling}x" }
+        context "with recursive saving inventory_object" do
+          let(:ems_name) { "non_bached_inventory_object_ems_scaled_#{data_scaling}x" }
 
           it "will perform a full refresh" do
-            @dto_settings                = {:dto_saving_strategy => :recursive, :dto_refresh => true}
-            settings                     = OpenStruct.new
-            settings.dto_refresh         = @dto_settings[:dto_refresh]
-            settings.dto_saving_strategy = @dto_settings[:dto_saving_strategy]
-            settings.get_private_images  = true
-            settings.get_shared_images   = false
-            settings.get_public_images   = false
+            @inventory_object_settings                = {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true}
+            settings                                  = OpenStruct.new
+            settings.inventory_object_refresh         = @inventory_object_settings[:inventory_object_refresh]
+            settings.inventory_object_saving_strategy = @inventory_object_settings[:inventory_object_saving_strategy]
+            settings.get_private_images               = true
+            settings.get_shared_images                = false
+            settings.get_public_images                = false
 
             allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
 
@@ -68,17 +68,17 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           end
         end
 
-        context "with non dto" do
-          let(:ems_name) { "non_dto_ems_scaled_#{data_scaling}x" }
+        context "with non inventory_object" do
+          let(:ems_name) { "non_inventory_object_ems_scaled_#{data_scaling}x" }
 
           it "will perform a full refresh" do
-            @dto_settings                = {:dto_refresh => false}
-            settings                     = OpenStruct.new
-            settings.dto_refresh         = @dto_settings[:dto_refresh]
-            settings.dto_saving_strategy = @dto_settings[:dto_saving_strategy]
-            settings.get_private_images  = true
-            settings.get_shared_images   = false
-            settings.get_public_images   = false
+            @inventory_object_settings                = {:inventory_object_refresh => false}
+            settings                                  = OpenStruct.new
+            settings.inventory_object_refresh         = @inventory_object_settings[:inventory_object_refresh]
+            settings.inventory_object_saving_strategy = @inventory_object_settings[:inventory_object_saving_strategy]
+            settings.get_private_images               = true
+            settings.get_shared_images                = false
+            settings.get_public_images                = false
 
             allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
 
@@ -93,15 +93,15 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     scaling ||= scaling_factor
 
     super.merge({
-      :instance_vpc_count                              => scaling * 8000,
-      :instance_ec2_count                              => scaling * 2000,
-      :image_count                                     => scaling * 30000,
-      :key_pair_count                                  => scaling * 200,
-      :stack_count                                     => scaling * 800,
-      :stack_resource_count                            => scaling * 40,
-      :stack_parameter_count                           => scaling * 20,
-      :stack_output_count                              => scaling * 20,
-    })
+                  :instance_vpc_count    => scaling * 8000,
+                  :instance_ec2_count    => scaling * 2000,
+                  :image_count           => scaling * 30000,
+                  :key_pair_count        => scaling * 200,
+                  :stack_count           => scaling * 800,
+                  :stack_resource_count  => scaling * 40,
+                  :stack_parameter_count => scaling * 20,
+                  :stack_output_count    => scaling * 20,
+                })
   end
 
   def refresh
@@ -154,7 +154,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
                               :parse_targeted_inventory=>([\d\.e-]+).*?
                               :save_inventory=>([\d\.e-]+).*?
                               :ems_refresh=>([\d\.e-]+).*?/x)
-    output = []
+    output  = []
     output << "#{ems_name} - #{subname}"
     output << expected_table_counts.values.sum
     output << scaling
@@ -195,7 +195,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :auth_private_key                  => test_counts[:key_pair_count],
       :ext_management_system             => 2,
       # TODO(lsmola) collect all flavors for original refresh
-      :flavor                            => @dto_settings[:dto_refresh] ? 57 : 56,
+      :flavor                            => @inventory_object_settings[:inventory_object_refresh] ? 57 : 56,
       :availability_zone                 => 5,
       :vm_or_template                    => vm_count_plus_disconnect_inv + image_count_plus_disconnect_inv,
       :vm                                => vm_count_plus_disconnect_inv,
@@ -281,9 +281,9 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     ems = @ems
 
     expect(ems).to have_attributes(
-      :api_version => nil, # TODO: Should be 3.0
-      :uid_ems     => nil
-    )
+                     :api_version => nil, # TODO: Should be 3.0
+                     :uid_ems     => nil
+                   )
 
     expect(ems.flavors.size).to eql(expected_table_counts[:flavor])
     expect(ems.availability_zones.size).to eql(expected_table_counts[:availability_zone])

@@ -1,6 +1,6 @@
 # TODO: Separate collection from parsing (perhaps collecting in parallel a la RHEVM)
 
-class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Providers::CloudManager::RefreshParserDto
+class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < ManageIQ::Providers::CloudManager::RefreshParserInventoryObject
   include ManageIQ::Providers::Amazon::RefreshHelperMethods
 
   def initialize(ems, options = Config::Options.new)
@@ -10,50 +10,50 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
     @aws_cloud_formation = ems.connect(:service => :CloudFormation)
     @known_flavors       = Set.new
 
-    initialize_dto_collections
+    initialize_inventory_collections
   end
 
-  def initialize_dto_collections
-    add_dto_collection(ManageIQ::Providers::Amazon::CloudManager::Vm,
-                       :vms)
-    add_dto_collection(ManageIQ::Providers::Amazon::CloudManager::Template,
-                       :miq_templates)
-    add_dto_collection(Hardware,
-                       :hardwares,
-                       [:vm_or_template])
-    add_dto_collection(Network,
-                       :networks,
-                       [:hardware, :description])
-    add_dto_collection(Disk,
-                       :disks,
-                       [:hardware, :device_name])
-    add_dto_collection(ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
-                       :orchestration_stacks)
-    add_dto_collection(ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone,
-                       :availability_zones)
-    add_dto_collection(ManageIQ::Providers::Amazon::CloudManager::Flavor,
-                       :flavors)
-    add_dto_collection(ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
-                       :orchestration_stacks)
-    add_dto_collection(OrchestrationStackOutput,
-                       :orchestration_stacks_outputs)
-    add_dto_collection(OrchestrationStackParameter,
-                       :orchestration_stacks_parameters)
-    add_dto_collection(OrchestrationStackResource,
-                       :orchestration_stacks_resources)
-    add_dto_collection(ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair,
-                       :key_pairs,
-                       [:name])
+  def initialize_inventory_collections
+    add_inventory_collection(ManageIQ::Providers::Amazon::CloudManager::Vm,
+                             :vms)
+    add_inventory_collection(ManageIQ::Providers::Amazon::CloudManager::Template,
+                             :miq_templates)
+    add_inventory_collection(Hardware,
+                             :hardwares,
+                             [:vm_or_template])
+    add_inventory_collection(Network,
+                             :networks,
+                             [:hardware, :description])
+    add_inventory_collection(Disk,
+                             :disks,
+                             [:hardware, :device_name])
+    add_inventory_collection(ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
+                             :orchestration_stacks)
+    add_inventory_collection(ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone,
+                             :availability_zones)
+    add_inventory_collection(ManageIQ::Providers::Amazon::CloudManager::Flavor,
+                             :flavors)
+    add_inventory_collection(ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
+                             :orchestration_stacks)
+    add_inventory_collection(OrchestrationStackOutput,
+                             :orchestration_stacks_outputs)
+    add_inventory_collection(OrchestrationStackParameter,
+                             :orchestration_stacks_parameters)
+    add_inventory_collection(OrchestrationStackResource,
+                             :orchestration_stacks_resources)
+    add_inventory_collection(ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair,
+                             :key_pairs,
+                             [:name])
 
     # TODO(lsmola) do refactoring, we shouldn't need this custom saving block
-    orchestration_template_save_block = lambda do |_ems, dto_collection|
-      hashes = dto_collection.data.map(&:attributes)
+    orchestration_template_save_block = lambda do |_ems, inventory_collection|
+      hashes = inventory_collection.data.map(&:attributes)
 
       templates = OrchestrationTemplate.find_or_create_by_contents(hashes)
-      dto_collection.data.zip(templates).each { |dto, template| dto.object = template }
+      inventory_collection.data.zip(templates).each { |inventory_object, template| inventory_object.object = template }
     end
 
-    @data[:orchestration_templates] = ::ManagerRefresh::DtoCollection.new(
+    @data[:orchestration_templates] = ::ManagerRefresh::InventoryCollection.new(
       OrchestrationTemplateCfn,
       :parent            => @ems,
       :association       => :orchestration_templates,
@@ -81,17 +81,17 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
   private
 
   def get_flavors
-    process_dto_collection(ManageIQ::Providers::Amazon::InstanceTypes.all, :flavors) { |flavor| parse_flavor(flavor) }
+    process_inventory_collection(ManageIQ::Providers::Amazon::InstanceTypes.all, :flavors) { |flavor| parse_flavor(flavor) }
   end
 
   def get_availability_zones
     azs = @aws_ec2.client.describe_availability_zones[:availability_zones]
-    process_dto_collection(azs, :availability_zones) { |az| parse_availability_zone(az) }
+    process_inventory_collection(azs, :availability_zones) { |az| parse_availability_zone(az) }
   end
 
   def get_key_pairs
     kps = @aws_ec2.client.describe_key_pairs[:key_pairs]
-    process_dto_collection(kps, :key_pairs) { |kp| parse_key_pair(kp) }
+    process_inventory_collection(kps, :key_pairs) { |kp| parse_key_pair(kp) }
   end
 
   def get_private_images
@@ -116,7 +116,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
   end
 
   def get_images(images, is_public = false)
-    process_dto_collection(images, :miq_templates) do |image|
+    process_inventory_collection(images, :miq_templates) do |image|
       get_image_hardware(image)
 
       parse_image(image, is_public)
@@ -124,12 +124,12 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
   end
 
   def get_image_hardware(image)
-    process_dto_collection([image], :hardwares) { |img| parse_image_hardware(img) }
+    process_inventory_collection([image], :hardwares) { |img| parse_image_hardware(img) }
   end
 
   def get_stacks
     stacks = @aws_cloud_formation.stacks
-    process_dto_collection(stacks, :orchestration_stacks) do |stack|
+    process_inventory_collection(stacks, :orchestration_stacks) do |stack|
       get_stack_resources(stack)
       get_stack_outputs(stack)
       get_stack_parameters(stack)
@@ -142,7 +142,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
   def get_stack_parameters(stack)
     parameters = stack.parameters
 
-    process_dto_collection(parameters, :orchestration_stacks_parameters) do |parameter|
+    process_inventory_collection(parameters, :orchestration_stacks_parameters) do |parameter|
       parse_stack_parameter(parameter, stack)
     end
   end
@@ -150,7 +150,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
   def get_stack_outputs(stack)
     outputs = stack.outputs
 
-    process_dto_collection(outputs, :orchestration_stacks_outputs) do |output|
+    process_inventory_collection(outputs, :orchestration_stacks_outputs) do |output|
       parse_stack_output(output, stack)
     end
   end
@@ -161,18 +161,18 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
     # physical_resource_id can be empty if the resource was not successfully created; ignore such
     resources.reject! { |r| r.physical_resource_id.nil? }
 
-    process_dto_collection(resources, :orchestration_stacks_resources) do |resource|
+    process_inventory_collection(resources, :orchestration_stacks_resources) do |resource|
       parse_stack_resource(resource, stack)
     end
   end
 
   def get_stack_template(stack)
-    process_dto_collection([stack], :orchestration_templates) { |the_stack| parse_stack_template(the_stack) }
+    process_inventory_collection([stack], :orchestration_templates) { |the_stack| parse_stack_template(the_stack) }
   end
 
   def get_instances
     instances = @aws_ec2.instances
-    process_dto_collection(instances, :vms) do |instance|
+    process_inventory_collection(instances, :vms) do |instance|
       # TODO(lsmola) we have a non lazy dependency, can we remove that?
       flavor = @data[:flavors].find(instance.instance_type) || @data[:flavors].find("unknown")
 
@@ -183,7 +183,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
   end
 
   def get_instance_hardware(instance, flavor)
-    process_dto_collection([instance], :hardwares) do |i|
+    process_inventory_collection([instance], :hardwares) do |i|
       get_hardware_networks(i)
       get_hardware_disks(i, flavor)
 
@@ -192,8 +192,8 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
   end
 
   def get_hardware_networks(instance)
-    process_dto_collection([instance], :networks) { |i| parse_hardware_private_network(i) }
-    process_dto_collection([instance], :networks) { |i| parse_hardware_public_network(i) }
+    process_inventory_collection([instance], :networks) { |i| parse_hardware_private_network(i) }
+    process_inventory_collection([instance], :networks) { |i| parse_hardware_public_network(i) }
   end
 
   def get_hardware_disks(instance, flavor)
@@ -210,7 +210,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserDto < ManageIQ::Pr
       d[:hardware] = @data[:hardwares].lazy_find(instance.id)
     end
 
-    process_dto_collection(disks, :disks) { |x| x }
+    process_inventory_collection(disks, :disks) { |x| x }
   end
 
   def parse_flavor(flavor)

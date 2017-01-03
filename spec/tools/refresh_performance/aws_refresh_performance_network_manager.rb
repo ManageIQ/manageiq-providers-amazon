@@ -7,7 +7,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   describe "refresh" do
     before(:each) do
       _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
-      @ems = FactoryGirl.create(:ems_amazon, :zone => zone, :name => ems_name)
+      @ems                 = FactoryGirl.create(:ems_amazon, :zone => zone, :name => ems_name)
       @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
     end
 
@@ -33,30 +33,30 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       context "with data scaled for #{data_scaling}" do
         let(:data_scaling) { data_scaling }
 
-        context "with dto" do
-          let(:ems_name) { "dto_ems_scaled_#{data_scaling}x" }
+        context "with inventory_object" do
+          let(:ems_name) { "inventory_object_ems_scaled_#{data_scaling}x" }
           it "will perform a full refresh" do
-            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_saving_strategy => nil,
-                                                                             :dto_refresh         => true})
+            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:inventory_object_saving_strategy => nil,
+                                                                             :inventory_object_refresh         => true})
             refresh
           end
         end
 
-        context "with non batched dto" do
-          let(:ems_name) { "non_bached_dto_ems_scaled_#{data_scaling}x" }
+        context "with non batched inventory_object" do
+          let(:ems_name) { "non_bached_inventory_object_ems_scaled_#{data_scaling}x" }
 
           it "will perform a full refresh" do
-            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_saving_strategy => :recursive,
-                                                                             :dto_refresh         => true})
+            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:inventory_object_saving_strategy => :recursive,
+                                                                             :inventory_object_refresh         => true})
             refresh
           end
         end
 
-        context "with non dto" do
-          let(:ems_name) { "non_dto_ems_scaled_#{data_scaling}x" }
+        context "with non inventory_object" do
+          let(:ems_name) { "non_inventory_object_ems_scaled_#{data_scaling}x" }
 
           it "will perform a full refresh" do
-            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:dto_refresh      => false})
+            allow(Settings.ems_refresh).to receive(:ec2_network).and_return({:inventory_object_refresh => false})
             refresh
           end
         end
@@ -68,12 +68,12 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     scaling ||= scaling_factor
 
     super.merge({
-      :instance_vpc_count                              => scaling * 2000,
-      :instance_ec2_count                              => scaling * 2000,
-      :load_balancer_instances_count                   => scaling * 2000,
-      :network_port_count                              => scaling * 3000,
-      :floating_ip_count                               => scaling * 2000,
-    })
+                  :instance_vpc_count            => scaling * 2000,
+                  :instance_ec2_count            => scaling * 2000,
+                  :load_balancer_instances_count => scaling * 2000,
+                  :network_port_count            => scaling * 3000,
+                  :floating_ip_count             => scaling * 2000,
+                })
   end
 
   def refresh
@@ -125,7 +125,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
                               :parse_targeted_inventory=>([\d\.e-]+).*?
                               :save_inventory=>([\d\.e-]+).*?
                               :ems_refresh=>([\d\.e-]+).*?/x)
-    output = []
+    output  = []
     output << "#{ems_name} - #{subname}"
     output << expected_table_counts.values.sum
     output << scaling
@@ -259,9 +259,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     ems = @ems.network_manager
 
     expect(ems).to have_attributes(
-      :api_version => nil, # TODO: Should be 3.0
-      :uid_ems     => nil
-    )
+                     :api_version => nil, # TODO: Should be 3.0
+                     :uid_ems     => nil
+                   )
 
     expect(ems.flavors.size).to eql(expected_table_counts[:flavor])
     expect(ems.availability_zones.size).to eql(expected_table_counts[:availability_zone])

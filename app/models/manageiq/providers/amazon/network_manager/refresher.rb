@@ -3,8 +3,8 @@ module ManageIQ::Providers
     include ::EmsRefresh::Refreshers::EmsRefresherMixin
 
     def parse_legacy_inventory(ems)
-      if refresher_options.try(:[], :dto_refresh)
-        ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto.ems_inv_to_hashes(ems, refresher_options)
+      if refresher_options.try(:[], :inventory_object_refresh)
+        ManageIQ::Providers::Amazon::NetworkManager::RefreshParserInventoryObject.ems_inv_to_hashes(ems, refresher_options)
       else
         ManageIQ::Providers::Amazon::NetworkManager::RefreshParser.ems_inv_to_hashes(ems, refresher_options)
       end

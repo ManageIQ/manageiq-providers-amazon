@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerRefresh::RefreshParserDto
+class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserInventoryObject < ::ManagerRefresh::RefreshParserInventoryObject
   include ManageIQ::Providers::Amazon::RefreshHelperMethods
 
   def initialize(ems, options = nil)
@@ -7,50 +7,50 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerR
     @aws_ec2 = ems.connect
     @aws_elb = ems.connect(:service => :ElasticLoadBalancing)
 
-    initialize_dto_collections
+    initialize_inventory_collections
   end
 
-  def initialize_dto_collections
-    add_cloud_manager_db_cached_dto(ManageIQ::Providers::Amazon::CloudManager::Vm,
+  def initialize_inventory_collections
+    add_cloud_manager_db_cached_inventory_object(ManageIQ::Providers::Amazon::CloudManager::Vm,
                                     :vms)
-    add_cloud_manager_db_cached_dto(ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
+    add_cloud_manager_db_cached_inventory_object(ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
                                     :orchestration_stacks)
-    add_cloud_manager_db_cached_dto(ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone,
+    add_cloud_manager_db_cached_inventory_object(ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone,
                                     :availability_zones)
 
-    add_dto_collection(CloudSubnetNetworkPort,
+    add_inventory_collection(CloudSubnetNetworkPort,
                        :cloud_subnet_network_ports,
                        [:address, :cloud_subnet, :network_port])
-    add_dto_collection(self.class.network_port_type,
+    add_inventory_collection(self.class.network_port_type,
                        :network_ports)
-    add_dto_collection(self.class.floating_ip_type,
+    add_inventory_collection(self.class.floating_ip_type,
                        :floating_ips)
-    add_dto_collection(self.class.cloud_subnet_type,
+    add_inventory_collection(self.class.cloud_subnet_type,
                        :cloud_subnets)
-    add_dto_collection(self.class.cloud_network_type,
+    add_inventory_collection(self.class.cloud_network_type,
                        :cloud_networks)
-    add_dto_collection(self.class.security_group_type,
+    add_inventory_collection(self.class.security_group_type,
                        :security_groups)
-    add_dto_collection(FirewallRule,
+    add_inventory_collection(FirewallRule,
                        :firewall_rules,
                        [:resource, :source_security_group, :direction, :host_protocol, :port, :end_port, :source_ip_range])
-    add_dto_collection(self.class.load_balancer_type,
+    add_inventory_collection(self.class.load_balancer_type,
                        :load_balancers)
-    add_dto_collection(self.class.load_balancer_pool_type,
+    add_inventory_collection(self.class.load_balancer_pool_type,
                        :load_balancer_pools)
-    add_dto_collection(self.class.load_balancer_pool_member_type,
+    add_inventory_collection(self.class.load_balancer_pool_member_type,
                        :load_balancer_pool_members)
-    add_dto_collection(LoadBalancerPoolMemberPool,
+    add_inventory_collection(LoadBalancerPoolMemberPool,
                        :load_balancer_pool_member_pools,
                        [:load_balancer_pool, :load_balancer_pool_member])
-    add_dto_collection(self.class.load_balancer_listener_type,
+    add_inventory_collection(self.class.load_balancer_listener_type,
                        :load_balancer_listeners)
-    add_dto_collection(LoadBalancerListenerPool,
+    add_inventory_collection(LoadBalancerListenerPool,
                        :load_balancer_listener_pools,
                        [:load_balancer_listener, :load_balancer_pool])
-    add_dto_collection(self.class.load_balancer_health_check_type,
+    add_inventory_collection(self.class.load_balancer_health_check_type,
                        :load_balancer_health_checks)
-    add_dto_collection(LoadBalancerHealthCheckMember,
+    add_inventory_collection(LoadBalancerHealthCheckMember,
                        :load_balancer_health_check_members,
                        [:load_balancer_health_check, :load_balancer_pool_member])
   end
@@ -84,16 +84,16 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerR
 
   def get_cloud_networks
     vpcs = @aws_ec2.client.describe_vpcs[:vpcs]
-    process_dto_collection(vpcs, :cloud_networks) { |vpc| parse_cloud_network(vpc) }
+    process_inventory_collection(vpcs, :cloud_networks) { |vpc| parse_cloud_network(vpc) }
   end
 
   def get_cloud_subnets
     cloud_subnets = @aws_ec2.client.describe_subnets[:subnets]
-    process_dto_collection(cloud_subnets, :cloud_subnets) { |s| parse_cloud_subnet(s) }
+    process_inventory_collection(cloud_subnets, :cloud_subnets) { |s| parse_cloud_subnet(s) }
   end
 
   def get_security_groups
-    process_dto_collection(security_groups, :security_groups) do |sg|
+    process_inventory_collection(security_groups, :security_groups) do |sg|
       get_outbound_firewall_rules(sg)
       get_inbound_firewall_rules(sg)
 
@@ -103,18 +103,18 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerR
 
   def get_inbound_firewall_rules(sg)
     parsed_rules = sg.ip_permissions.collect { |perm| parse_firewall_rule(perm, "inbound", sg) }.flatten
-    process_dto_collection(parsed_rules, :firewall_rules) { |firewall_rule| firewall_rule }
+    process_inventory_collection(parsed_rules, :firewall_rules) { |firewall_rule| firewall_rule }
   end
 
   def get_outbound_firewall_rules(sg)
     parsed_rules = sg.ip_permissions_egress.collect { |perm| parse_firewall_rule(perm, "outbound", sg) }.flatten
-    process_dto_collection(parsed_rules, :firewall_rules) { |firewall_rule| firewall_rule }
+    process_inventory_collection(parsed_rules, :firewall_rules) { |firewall_rule| firewall_rule }
   end
 
   def get_load_balancers
     load_balancers = @aws_elb.client.describe_load_balancers.load_balancer_descriptions
 
-    process_dto_collection(load_balancers, :load_balancers) do |lb|
+    process_inventory_collection(load_balancers, :load_balancers) do |lb|
       get_load_balancer_pools(lb)
       get_load_balancer_pool_members(lb)
       get_load_balancer_listeners(lb)
@@ -125,11 +125,11 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerR
   end
 
   def get_load_balancer_pools(load_balancer)
-    process_dto_collection([load_balancer], :load_balancer_pools) { |lb| parse_load_balancer_pool(lb) }
+    process_inventory_collection([load_balancer], :load_balancer_pools) { |lb| parse_load_balancer_pool(lb) }
   end
 
   def get_load_balancer_pool_members(lb)
-    process_dto_collection(lb.instances, :load_balancer_pool_members) do |member|
+    process_inventory_collection(lb.instances, :load_balancer_pool_members) do |member|
       get_load_balancer_balancer_pool_member_pools(lb, member)
 
       parse_load_balancer_pool_member(member)
@@ -137,7 +137,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerR
   end
 
   def get_load_balancer_balancer_pool_member_pools(lb, member)
-    process_dto_collection([member], :load_balancer_pool_member_pools) do |m|
+    process_inventory_collection([member], :load_balancer_pool_member_pools) do |m|
       parse_load_balancer_pool_member_pools(lb, m)
     end
   end
@@ -148,7 +148,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerR
   end
 
   def get_load_balancer_listeners(lb)
-    process_dto_collection(lb.listener_descriptions, :load_balancer_listeners) do |listener|
+    process_inventory_collection(lb.listener_descriptions, :load_balancer_listeners) do |listener|
       listener = listener.listener
 
       get_load_balancer_listener_pool(listener, lb)
@@ -158,13 +158,13 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerR
   end
 
   def get_load_balancer_listener_pool(listener, lb)
-    process_dto_collection([listener], :load_balancer_listener_pools) do |l|
+    process_inventory_collection([listener], :load_balancer_listener_pools) do |l|
       parse_load_balancer_listener_pool(l, lb)
     end
   end
 
   def get_load_balancer_health_checks(load_balancer)
-    process_dto_collection([load_balancer], :load_balancer_health_checks) do |lb|
+    process_inventory_collection([load_balancer], :load_balancer_health_checks) do |lb|
       get_load_balancer_health_check_members(lb)
 
       parse_load_balancer_health_check(lb)
@@ -173,14 +173,14 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerR
 
   def get_load_balancer_health_check_members(lb)
     health_check_members = @aws_elb.client.describe_instance_health(:load_balancer_name => lb.load_balancer_name)
-    process_dto_collection(health_check_members.instance_states, :load_balancer_health_check_members) do |m|
+    process_inventory_collection(health_check_members.instance_states, :load_balancer_health_check_members) do |m|
       parse_load_balancer_health_check_member(lb, m)
     end
   end
 
   def get_floating_ips
     ips = @aws_ec2.client.describe_addresses.addresses
-    process_dto_collection(ips, :floating_ips) { |ip| parse_floating_ip(ip) }
+    process_inventory_collection(ips, :floating_ips) { |ip| parse_floating_ip(ip) }
   end
 
   def get_public_ips
@@ -198,11 +198,11 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerR
         end
       end
     end
-    process_dto_collection(public_ips, :floating_ips) { |public_ip| parse_public_ip(public_ip) }
+    process_inventory_collection(public_ips, :floating_ips) { |public_ip| parse_public_ip(public_ip) }
   end
 
   def get_network_ports
-    process_dto_collection(network_ports, :network_ports) do |n|
+    process_inventory_collection(network_ports, :network_ports) do |n|
       get_cloud_subnet_network_ports(n)
 
       parse_network_port(n)
@@ -210,24 +210,24 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserDto < ::ManagerR
   end
 
   def get_cloud_subnet_network_ports(network_port)
-    process_dto_collection(network_port.private_ip_addresses, :cloud_subnet_network_ports) do |address|
+    process_inventory_collection(network_port.private_ip_addresses, :cloud_subnet_network_ports) do |address|
       parse_cloud_subnet_network_port(network_port, address)
     end
   end
 
   def get_ec2_floating_ips_and_ports
     instances = @aws_ec2.instances.select { |instance| instance.network_interfaces.blank? }
-    process_dto_collection(instances, :network_ports) do |instance|
+    process_inventory_collection(instances, :network_ports) do |instance|
       get_ec2_cloud_subnet_network_port(instance)
 
       parse_network_port_inferred_from_instance(instance)
     end
-    process_dto_collection(instances, :floating_ips) { |instance| parse_floating_ip_inferred_from_instance(instance) }
+    process_inventory_collection(instances, :floating_ips) { |instance| parse_floating_ip_inferred_from_instance(instance) }
   end
 
   def get_ec2_cloud_subnet_network_port(instance)
     # Create network_port placeholder for old EC2 instances, those do not have interface nor subnet nor VPC
-    process_dto_collection([instance], :cloud_subnet_network_ports) { |i| parse_ec2_cloud_subnet_network_port(i) }
+    process_inventory_collection([instance], :cloud_subnet_network_ports) { |i| parse_ec2_cloud_subnet_network_port(i) }
   end
 
   def parse_cloud_network(vpc)
