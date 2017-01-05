@@ -86,7 +86,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
   def expected_table_counts
     {
       :auth_private_key                  => 0,
-      :ext_management_system             => 3,
+      :ext_management_system             => 4,
       :flavor                            => 0,
       :availability_zone                 => 0,
       :vm_or_template                    => 0,
