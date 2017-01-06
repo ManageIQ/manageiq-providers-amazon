@@ -3,7 +3,6 @@
   :ems_amazon:
     :disabled_regions: []
     # disable regions by their keys found in app/models/manageiq/providers/amazon/regions.rb e.g.
-    # uncomment the following to disable gov-west-1 region
     # - us-gov-west-1
     #
     # add additional regions as found in app/models/manageiq/providers/amazon/regions.rb
