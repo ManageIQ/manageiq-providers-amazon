@@ -33,7 +33,7 @@ module AwsRefresherSpecCommon
       :cloud_subnet                  => 10,
       :custom_attribute              => 0,
       :disk                          => 10,
-      :ext_management_system         => 2,
+      :ext_management_system         => 3,
       :firewall_rule                 => 119,
       :flavor                        => 56,
       :floating_ip                   => 12,

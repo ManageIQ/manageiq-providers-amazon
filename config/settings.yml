@@ -43,3 +43,4 @@
       :ems_refresh_worker:
         :ems_refresh_worker_amazon: {}
         :ems_refresh_worker_amazon_network: {}
+        :ems_refresh_worker_amazon_block_storage: {}
