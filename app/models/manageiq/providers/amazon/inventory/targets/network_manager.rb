@@ -1,27 +1,14 @@
 class ManageIQ::Providers::Amazon::Inventory::Targets::NetworkManager < ManageIQ::Providers::Amazon::Inventory::Targets
   def initialize_inventory_collections
-    add_inventory_collection(cloud_subnet_network_ports_init_data)
-    add_inventory_collection(network_ports_init_data)
-    add_inventory_collection(floating_ips_init_data)
-    add_inventory_collection(cloud_subnets_init_data)
-    add_inventory_collection(cloud_networks_init_data)
-    add_inventory_collection(security_groups_init_data)
-    add_inventory_collection(firewall_rules_init_data)
-    add_inventory_collection(load_balancers_init_data)
-    add_inventory_collection(load_balancer_pools_init_data)
-    add_inventory_collection(load_balancer_pool_members_init_data)
-    add_inventory_collection(load_balancer_pool_member_pools_init_data)
-    add_inventory_collection(load_balancer_listeners_init_data)
-    add_inventory_collection(load_balancer_listener_pools_init_data)
-    add_inventory_collection(load_balancer_health_checks_init_data)
-    add_inventory_collection(load_balancer_health_check_members_init_data)
+    add_inventory_collections(
+      %i(cloud_subnet_network_ports network_ports floating_ips cloud_subnets cloud_networks security_groups
+         firewall_rules load_balancers load_balancer_pools load_balancer_pool_members load_balancer_pool_member_pools
+         load_balancer_listeners load_balancer_listener_pools load_balancer_health_checks
+         load_balancer_health_check_members))
 
-    add_inventory_collection(vms_init_data(:parent   => ems.parent_manager,
-                                           :strategy => :local_db_cache_all))
-    add_inventory_collection(orchestration_stacks_init_data(:parent   => ems.parent_manager,
-                                                            :strategy => :local_db_cache_all))
-    add_inventory_collection(availability_zones_init_data(:parent   => ems.parent_manager,
-                                                          :strategy => :local_db_cache_all))
+    add_inventory_collections(%i(vms orchestration_stack availability_zones),
+                              :parent   => ems.parent_manager,
+                              :strategy => :local_db_cache_all)
   end
 
   def cloud_networks

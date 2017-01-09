@@ -1,18 +1,8 @@
 class ManageIQ::Providers::Amazon::Inventory::Targets::CloudManager < ManageIQ::Providers::Amazon::Inventory::Targets
   def initialize_inventory_collections
-    add_inventory_collection(vms_init_data)
-    add_inventory_collection(miq_templates_init_data)
-    add_inventory_collection(hardwares_init_data)
-    add_inventory_collection(networks_init_data)
-    add_inventory_collection(disks_init_data)
-    add_inventory_collection(availability_zones_init_data)
-    add_inventory_collection(flavors_init_data)
-    add_inventory_collection(key_pairs_init_data)
-    add_inventory_collection(orchestration_stacks_init_data)
-    add_inventory_collection(orchestration_stacks_resources_init_data)
-    add_inventory_collection(orchestration_stacks_outputs_init_data)
-    add_inventory_collection(orchestration_stacks_parameters_init_data)
-    add_inventory_collection(orchestration_templates_init_data)
+    add_inventory_collections(%i(vms miq_templates hardwares networks disks availability_zones availability_zones
+                                 flavors key_pairs orchestration_stacks orchestration_stacks_resources
+                                 orchestration_stacks_outputs orchestration_stacks_parameters orchestration_templates))
   end
 
   def instances

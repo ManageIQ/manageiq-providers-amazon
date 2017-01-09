@@ -7,7 +7,8 @@ class ManageIQ::Providers::Amazon::Inventory::Targets::EventPayloadVm < ManageIQ
         :arel => ems.vms.where(:ems_ref => instance_ems_ref)))
     add_inventory_collection(
       hardwares_init_data(
-        :arel => ems.hardwares.joins(:vm_or_template).where(:vms => {:ems_ref => instance_ems_ref})))
+        :arel     => ems.hardwares.joins(:vm_or_template).where(:vms => {:ems_ref => instance_ems_ref}),
+        :strategy => :find_missing_in_local_db))
     add_inventory_collection(
       disks_init_data(
         :arel => ems.disks.joins(:hardware => :vm_or_template).where(:hardware => {:vms => {:ems_ref => instance_ems_ref}})))
@@ -15,15 +16,7 @@ class ManageIQ::Providers::Amazon::Inventory::Targets::EventPayloadVm < ManageIQ
       networks_init_data(
         :arel => ems.networks.joins(:hardware => :vm_or_template).where(:hardware => {:vms => {:ems_ref => instance_ems_ref}})))
 
-    add_inventory_collection(flavors_init_data(:strategy => :local_db_cache_all))
-    add_inventory_collection(miq_templates_init_data(:strategy => :local_db_cache_all))
-    add_inventory_collection(availability_zones_init_data(:strategy => :local_db_cache_all))
-    add_inventory_collection(key_pairs_init_data(:strategy => :local_db_cache_all))
-    add_inventory_collection(orchestration_stacks_init_data(:strategy => :local_db_cache_all))
-    add_inventory_collection(orchestration_stacks_resources_init_data(:strategy => :local_db_cache_all))
-    add_inventory_collection(orchestration_stacks_outputs_init_data(:strategy => :local_db_cache_all))
-    add_inventory_collection(orchestration_stacks_parameters_init_data(:strategy => :local_db_cache_all))
-    add_inventory_collection(orchestration_templates_init_data(:strategy => :local_db_cache_all))
+    add_remaining_inventory_collections(:strategy => :local_db_find_one)
   end
 
   def instances
