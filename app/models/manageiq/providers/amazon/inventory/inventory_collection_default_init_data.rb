@@ -10,7 +10,13 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
 
   def vms_init_data(extra_attributes = {})
     attributes = {
-      :association => :vms,
+      :association   => :vms,
+      # TODO(lsmola) replace genealogy_parent with db relation and do computing of genealogyparent in a separate queued
+      # job. Then we can check for changed? again, otherwise the after save hood on vmOrTemplate will not fire and
+      # the association to genealogy_parent will not populate, if list of templates changed (like allowing collection
+      # of public images )
+      :check_changed => false
+
     }
 
     init_data(::ManageIQ::Providers::Amazon::CloudManager::Vm, attributes, extra_attributes)
@@ -55,9 +61,15 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
       :association => :hardwares
     }
 
-    if extra_attributes[:strategy] == :local_db_cache_all
+    case extra_attributes[:strategy]
+    when :local_db_cache_all
       attributes[:custom_manager_uuid] = lambda do |hardware|
         [hardware.vm_or_template.ems_ref]
+      end
+    when :find_missing_in_local_db
+      attributes[:custom_db_finder] = lambda do |inventory_collection, hash_uuid_by_ref|
+        inventory_collection.parent.send(inventory_collection.association).references(:vm_or_template).where(
+          :vms => {:ems_ref => hash_uuid_by_ref[:vm_or_template]}).first
       end
     end
 
