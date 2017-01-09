@@ -15,6 +15,25 @@ class ManageIQ::Providers::Amazon::Inventory::Targets < ManageIQ::Providers::Ama
     inventory_collections[key] = ::ManagerRefresh::InventoryCollection.new(model_class, data)
   end
 
+  def add_inventory_collections(inventory_collections, inventory_collections_data = {})
+    inventory_collections.each do |inventory_collection|
+      add_inventory_collection(send("#{inventory_collection}_init_data", inventory_collections_data))
+    end
+  end
+
+  def add_remaining_inventory_collections(inventory_collections_data)
+    # Get names of all inventory collections defined in InventoryCollectionDefaultInitData
+    all_inventory_collections = ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitData.
+      public_instance_methods.grep(/.+_init_data/).map { |x| x.to_s.gsub("_init_data", "") }
+
+    # Get names of all defined inventory_collections
+    defined_inventory_collections = inventory_collections.keys.map(&:to_s)
+
+    # Add all missing inventory_collections with defined init_data
+    add_inventory_collections(all_inventory_collections - defined_inventory_collections,
+                              inventory_collections_data)
+  end
+
   def event_payload(event)
     transform_keys(event[:full_data]["configurationItem"]["configuration"])
   end
