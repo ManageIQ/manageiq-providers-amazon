@@ -88,15 +88,11 @@ class ManageIQ::Providers::Amazon::Inventory
     []
   end
 
-  def health_check_members(load_balancer_name)
+  def health_check_members(_load_balancer_name)
     []
   end
 
   def floating_ips
-    []
-  end
-
-  def instances
     []
   end
 end

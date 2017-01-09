@@ -16,7 +16,6 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
       # the association to genealogy_parent will not populate, if list of templates changed (like allowing collection
       # of public images )
       :check_changed => false
-
     }
 
     init_data(::ManageIQ::Providers::Amazon::CloudManager::Vm, attributes, extra_attributes)
@@ -196,7 +195,7 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
     init_data(ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork, attributes, extra_attributes)
   end
 
-   def security_groups_init_data(extra_attributes = {})
+  def security_groups_init_data(extra_attributes = {})
     attributes = {
       :association => :security_groups,
     }
