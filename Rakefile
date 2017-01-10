@@ -10,8 +10,11 @@ rescue LoadError
 end
 
 namespace :spec do
+  desc "Setup environment for specs"
   task :setup => 'app:test:providers:amazon:setup'
 end
 
+desc "Run all amazon specs"
 task :spec => 'app:test:providers:amazon'
+
 task :default => :spec
