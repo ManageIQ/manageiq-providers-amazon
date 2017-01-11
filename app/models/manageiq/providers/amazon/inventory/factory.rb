@@ -2,7 +2,7 @@ class ManageIQ::Providers::Amazon::Inventory::Factory
   class << self
     def inventory(ems, target)
       if target.kind_of?(EmsEvent)
-        event_target(ems, target)
+        event_target(ems, target) || target(ems, ems)
       else
         target(ems, target)
       end
@@ -14,8 +14,8 @@ class ManageIQ::Providers::Amazon::Inventory::Factory
         ManageIQ::Providers::Amazon::Inventory::Targets::CloudManager.new(ems, target)
       when ManageIQ::Providers::Amazon::NetworkManager
         ManageIQ::Providers::Amazon::Inventory::Targets::NetworkManager.new(ems, target)
-      when Vm
-        ManageIQ::Providers::Amazon::Inventory::Targets::Vm.new(ems, target)
+      else
+        ManageIQ::Providers::Amazon::Inventory::Targets::CloudManager.new(ems, target)
       end
     end
 
