@@ -1,6 +1,6 @@
 class ManageIQ::Providers::Amazon::Inventory::Targets::EventPayloadVm < ManageIQ::Providers::Amazon::Inventory::Targets
   def initialize_inventory_collections
-    instance_ems_ref = event_payload(target)["instance_id"]
+    instance_ems_ref = target[:full_data]["configurationItem"]["resourceId"]
 
     add_inventory_collection(
       vms_init_data(
@@ -20,6 +20,6 @@ class ManageIQ::Providers::Amazon::Inventory::Targets::EventPayloadVm < ManageIQ
   end
 
   def instances
-    [event_payload(target)]
+    [event_payload(target)].compact
   end
 end
