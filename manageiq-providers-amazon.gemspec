@@ -14,4 +14,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config.lib}/**/*"]
 
   s.add_dependency("aws-sdk", ["~>2.2.19"])
+
+  s.add_development_dependency "codeclimate-test-reporter", "~> 1.0.0"
+  s.add_development_dependency "simplecov"
 end
