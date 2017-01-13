@@ -14,6 +14,8 @@ class ManageIQ::Providers::Amazon::Inventory::Factory
         ManageIQ::Providers::Amazon::Inventory::Targets::CloudManager.new(ems, target)
       when ManageIQ::Providers::Amazon::NetworkManager
         ManageIQ::Providers::Amazon::Inventory::Targets::NetworkManager.new(ems, target)
+      when ManageIQ::Providers::Amazon::BlockStorageManager
+        ManageIQ::Providers::Amazon::Inventory::Targets::BlockStorageManager.new(ems, target)
       else
         ManageIQ::Providers::Amazon::Inventory::Targets::CloudManager.new(ems, target)
       end

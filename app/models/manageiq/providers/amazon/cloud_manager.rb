@@ -58,8 +58,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
            :to        => :block_storage_manager,
            :allow_nil => true
 
-  before_create :ensure_managers,
-                :ensure_block_storage_managers
+  before_create :ensure_managers
 
   supports :provisioning
   supports :regions
@@ -70,14 +69,11 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     network_manager.name            = "#{name} Network Manager"
     network_manager.zone_id         = zone_id
     network_manager.provider_region = provider_region
-  end
 
-  def ensure_block_storage_managers
     build_block_storage_manager unless block_storage_manager
     block_storage_manager.name            = "#{name} Block Storage Manager"
     block_storage_manager.zone_id         = zone_id
     block_storage_manager.provider_region = provider_region
-    true
   end
 
   def self.ems_type
