@@ -3,6 +3,10 @@
 class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < ManageIQ::Providers::CloudManager::RefreshParserInventoryObject
   include ManageIQ::Providers::Amazon::RefreshHelperMethods
 
+  def ems
+    inventory.ems
+  end
+
   def populate_inventory_collections
     log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{inventory.ems.name}] id: [#{inventory.ems.id}]"
     $aws_log.info("#{log_header}...")
@@ -143,6 +147,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
 
     {
       :type                     => ManageIQ::Providers::Amazon::CloudManager::Flavor.name,
+      :ext_management_system    => ems,
       :ems_ref                  => uid,
       :name                     => name,
       :description              => flavor[:description],
@@ -165,9 +170,10 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
     name = uid = az['zone_name']
 
     {
-      :type    => ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.name,
-      :ems_ref => uid,
-      :name    => name,
+      :type                  => ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.name,
+      :ext_management_system => ems,
+      :ems_ref               => uid,
+      :name                  => name,
     }
   end
 
@@ -176,6 +182,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
 
     {
       :type        => self.class.key_pair_type,
+      :resource    => ems,
       :name        => name,
       :fingerprint => kp['key_fingerprint']
     }
@@ -207,17 +214,18 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
     name ||= uid
 
     {
-      :type               => ManageIQ::Providers::Amazon::CloudManager::Template.name,
-      :uid_ems            => uid,
-      :ems_ref            => uid,
-      :name               => name,
-      :location           => location,
-      :vendor             => "amazon",
-      :raw_power_state    => "never",
-      :template           => true,
+      :type                  => ManageIQ::Providers::Amazon::CloudManager::Template.name,
+      :ext_management_system => ems,
+      :uid_ems               => uid,
+      :ems_ref               => uid,
+      :name                  => name,
+      :location              => location,
+      :vendor                => "amazon",
+      :raw_power_state       => "never",
+      :template              => true,
       # the is_public flag here avoids having to make an additional API call
       # per image, since we already know whether it's a public image
-      :publicly_available => is_public,
+      :publicly_available    => is_public,
     }
   end
 
@@ -230,19 +238,20 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
     name = name.blank? ? uid : name
 
     {
-      :type                => ManageIQ::Providers::Amazon::CloudManager::Vm.name,
-      :uid_ems             => uid,
-      :ems_ref             => uid,
-      :name                => name,
-      :vendor              => "amazon",
-      :raw_power_state     => status,
-      :boot_time           => instance['launch_time'],
-      :availability_zone   => inventory_collections[:availability_zones].lazy_find(instance.fetch_path('placement', 'availability_zone')),
-      :flavor              => flavor,
-      :genealogy_parent    => inventory_collections[:miq_templates].lazy_find(instance['image_id']),
-      :key_pairs           => [inventory_collections[:key_pairs].lazy_find(instance['key_name'])].compact,
-      :location            => inventory_collections[:networks].lazy_find("#{uid}__public", :key => :hostname, :default => 'unknown'),
-      :orchestration_stack => inventory_collections[:orchestration_stacks].lazy_find(
+      :type                  => ManageIQ::Providers::Amazon::CloudManager::Vm.name,
+      :ext_management_system => ems,
+      :uid_ems               => uid,
+      :ems_ref               => uid,
+      :name                  => name,
+      :vendor                => "amazon",
+      :raw_power_state       => status,
+      :boot_time             => instance['launch_time'],
+      :availability_zone     => inventory_collections[:availability_zones].lazy_find(instance.fetch_path('placement', 'availability_zone')),
+      :flavor                => flavor,
+      :genealogy_parent      => inventory_collections[:miq_templates].lazy_find(instance['image_id']),
+      :key_pairs             => [inventory_collections[:key_pairs].lazy_find(instance['key_name'])].compact,
+      :location              => inventory_collections[:networks].lazy_find("#{uid}__public", :key => :hostname, :default => 'unknown'),
+      :orchestration_stack   => inventory_collections[:orchestration_stacks].lazy_find(
         get_from_tags(instance, "aws:cloudformation:stack-id")),
     }
   end
@@ -292,6 +301,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
     uid = stack['stack_id'].to_s
     {
       :type                   => ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.name,
+      :ext_management_system  => ems,
       :ems_ref                => uid,
       :name                   => stack['stack_name'],
       :description            => stack['description'],
