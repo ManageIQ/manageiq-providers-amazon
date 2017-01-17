@@ -30,6 +30,8 @@ module AwsStubs
       :security_group_count                            => scaling * 20,
       :inbound_firewall_rule_per_security_group_count  => scaling * 5,
       :outbound_firewall_rule_per_security_group_count => scaling * 5,
+      :cloud_volume_count                              => scaling * 5,
+      :cloud_volume_snapshot_count                     => scaling * 5,
     }
   end
 
@@ -355,5 +357,37 @@ module AwsStubs
       mocked_instance_healths << health.to_h
     end
     mocked_instance_healths
+  end
+
+  def mocked_cloud_volumes
+    mocked_cloud_volumes = []
+    test_counts[:cloud_volume_count].times do |i|
+      mocked_cloud_volumes << {
+        :availability_zone => "us-east-1e",
+        :create_time       => Time.now,
+        :size              => i,
+        :state             => "in-use",
+        :volume_id         => "volume_id_#{i}",
+        :volume_type       => "standard"
+      }
+    end
+
+    { :volumes => mocked_cloud_volumes }
+  end
+
+  def mocked_cloud_volume_snapshots
+    mocked_cloud_volume_snapshots = []
+    test_counts[:cloud_volume_snapshot_count].times do |i|
+      mocked_cloud_volume_snapshots << {
+        :snapshot_id => "snapshot_id_#{i}",
+        :description => "snapshot_desc_#{i}",
+        :start_time  => Time.now,
+        :volume_size => i,
+        :state       => "completed",
+        :volume_id   => "volume_id_#{i}",
+      }
+    end
+
+    { :snapshots => mocked_cloud_volume_snapshots }
   end
 end

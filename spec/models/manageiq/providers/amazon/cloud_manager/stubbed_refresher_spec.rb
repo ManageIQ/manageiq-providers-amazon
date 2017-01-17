@@ -132,7 +132,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
 
     {
       :auth_private_key                  => test_counts[:key_pair_count],
-      :ext_management_system             => 2,
+      :ext_management_system             => 3,
       # TODO(lsmola) collect all flavors for original refresh
       :flavor                            => @inventory_object_settings[:inventory_object_refresh] ? 57 : 56,
       :availability_zone                 => 5,
@@ -169,6 +169,8 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :load_balancer_listener_pool       => 0,
       :load_balancer_health_check        => 0,
       :load_balancer_health_check_member => 0,
+      :cloud_volume                      => 0,
+      :cloud_volume_snapshot             => 0,
     }
   end
 
@@ -211,6 +213,8 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :load_balancer_listener_pool       => LoadBalancerListenerPool.count,
       :load_balancer_health_check        => LoadBalancerHealthCheck.count,
       :load_balancer_health_check_member => LoadBalancerHealthCheckMember.count,
+      :cloud_volume                      => CloudVolume.count,
+      :cloud_volume_snapshot             => CloudVolumeSnapshot.count,
     }
 
     expect(actual).to eq expected_table_counts

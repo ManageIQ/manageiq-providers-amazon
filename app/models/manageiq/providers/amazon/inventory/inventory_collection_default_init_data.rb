@@ -278,4 +278,20 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
 
     init_data(::LoadBalancerHealthCheckMember, attributes, extra_attributes)
   end
+
+  def cloud_volumes_init_data(extra_attributes = {})
+    attributes = {
+      :association => :cloud_volumes,
+    }
+
+    init_data(::ManageIQ::Providers::Amazon::BlockStorageManager::CloudVolume, attributes, extra_attributes)
+  end
+
+  def cloud_volume_snapshots_init_data(extra_attributes = {})
+    attributes = {
+      :association => :cloud_volume_snapshots,
+    }
+
+    init_data(::ManageIQ::Providers::Amazon::BlockStorageManager::CloudVolumeSnapshot, attributes, extra_attributes)
+  end
 end

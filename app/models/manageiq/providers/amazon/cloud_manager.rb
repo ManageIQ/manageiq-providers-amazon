@@ -29,6 +29,12 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
           :autosave    => true,
           :dependent   => :destroy
 
+  has_many :storage_managers,
+           :foreign_key => :parent_ems_id,
+           :class_name  => "ManageIQ::Providers::StorageManager",
+           :autosave    => true,
+           :dependent   => :destroy
+
   delegate :floating_ips,
            :security_groups,
            :cloud_networks,
@@ -39,6 +45,17 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
            :private_networks,
            :all_cloud_networks,
            :to        => :network_manager,
+           :allow_nil => true
+
+  has_one :block_storage_manager,
+          :foreign_key => :parent_ems_id,
+          :class_name  => "ManageIQ::Providers::Amazon::BlockStorageManager",
+          :autosave    => true,
+          :dependent   => :destroy
+
+  delegate :cloud_volumes,
+           :cloud_volume_snapshots,
+           :to        => :block_storage_manager,
            :allow_nil => true
 
   before_create :ensure_managers
@@ -52,6 +69,11 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     network_manager.name            = "#{name} Network Manager"
     network_manager.zone_id         = zone_id
     network_manager.provider_region = provider_region
+
+    build_block_storage_manager unless block_storage_manager
+    block_storage_manager.name            = "#{name} Block Storage Manager"
+    block_storage_manager.zone_id         = zone_id
+    block_storage_manager.provider_region = provider_region
   end
 
   def self.ems_type

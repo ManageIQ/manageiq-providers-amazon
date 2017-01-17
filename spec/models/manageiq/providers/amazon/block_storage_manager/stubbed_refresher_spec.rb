@@ -1,7 +1,7 @@
 require_relative '../aws_helper'
 require_relative '../aws_stubs'
 
-describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
+describe ManageIQ::Providers::Amazon::BlockStorageManager::Refresher do
   include AwsStubs
 
   describe "refresh" do
@@ -16,10 +16,10 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     [{:inventory_object_refresh => true},
      {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},
      {:inventory_object_refresh => false}
-    ].each do |settings|
+     ].each do |settings|
       context "with settings #{settings}" do
         before :each do
-          allow(Settings.ems_refresh).to receive(:ec2_network).and_return(settings)
+          allow(Settings.ems_refresh).to receive(:ec2_block_storage).and_return(settings)
         end
 
         it "2 refreshes, first creates all entities, second updates all entitites" do
@@ -65,7 +65,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     @ems.reload
 
     with_aws_stubbed(stub_responses) do
-      EmsRefresh.refresh(@ems.network_manager)
+      EmsRefresh.refresh(@ems.block_storage_manager)
     end
 
     @ems.reload
@@ -76,39 +76,14 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
 
   def stub_responses
     {
-      :elasticloadbalancing => {
-        :describe_load_balancers  => {
-          :load_balancer_descriptions => mocked_load_balancers
-        },
-        :describe_instance_health => {
-          :instance_states => mocked_instance_health
-        }
-      },
-      :ec2                  => {
-        :describe_regions            => {
-          :regions => [
-            {:region_name => 'us-east-1'},
-            {:region_name => 'us-west-1'},
-          ]
-        },
-        :describe_instances          => mocked_instances,
-        :describe_vpcs               => mocked_vpcs,
-        :describe_subnets            => mocked_subnets,
-        :describe_security_groups    => mocked_security_groups,
-        :describe_network_interfaces => mocked_network_ports,
-        :describe_addresses          => mocked_floating_ips
+      :ec2 => {
+        :describe_volumes   => mocked_cloud_volumes,
+        :describe_snapshots => mocked_cloud_volume_snapshots,
       }
     }
   end
 
   def expected_table_counts
-    firewall_rule_count = test_counts[:security_group_count] *
-      (test_counts[:outbound_firewall_rule_per_security_group_count] +
-        test_counts[:outbound_firewall_rule_per_security_group_count])
-
-    floating_ip_count = test_counts[:floating_ip_count] + test_counts[:network_port_count] +
-      test_counts[:instance_ec2_count]
-
     {
       :auth_private_key                  => 0,
       :ext_management_system             => 3,
@@ -131,24 +106,24 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :orchestration_stack_parameter     => 0,
       :orchestration_stack_output        => 0,
       :orchestration_stack_resource      => 0,
-      :security_group                    => test_counts[:security_group_count],
-      :firewall_rule                     => firewall_rule_count,
-      :network_port                      => test_counts[:instance_ec2_count] + test_counts[:network_port_count],
-      :cloud_network                     => test_counts[:vpc_count],
-      :floating_ip                       => floating_ip_count,
+      :security_group                    => 0,
+      :firewall_rule                     => 0,
+      :network_port                      => 0,
+      :cloud_network                     => 0,
+      :floating_ip                       => 0,
       :network_router                    => 0,
-      :cloud_subnet                      => test_counts[:subnet_count],
+      :cloud_subnet                      => 0,
       :custom_attribute                  => 0,
-      :load_balancer                     => test_counts[:load_balancer_count],
-      :load_balancer_pool                => test_counts[:load_balancer_count],
-      :load_balancer_pool_member         => test_counts[:load_balancer_instances_count],
-      :load_balancer_pool_member_pool    => test_counts[:load_balancer_count] * test_counts[:load_balancer_instances_count],
-      :load_balancer_listener            => test_counts[:load_balancer_count],
-      :load_balancer_listener_pool       => test_counts[:load_balancer_count],
-      :load_balancer_health_check        => test_counts[:load_balancer_count],
-      :load_balancer_health_check_member => test_counts[:load_balancer_count] * test_counts[:load_balancer_instances_count],
-      :cloud_volume                      => 0,
-      :cloud_volume_snapshot             => 0,
+      :load_balancer                     => 0,
+      :load_balancer_pool                => 0,
+      :load_balancer_pool_member         => 0,
+      :load_balancer_pool_member_pool    => 0,
+      :load_balancer_listener            => 0,
+      :load_balancer_listener_pool       => 0,
+      :load_balancer_health_check        => 0,
+      :load_balancer_health_check_member => 0,
+      :cloud_volume                      => test_counts[:cloud_volume_count],
+      :cloud_volume_snapshot             => test_counts[:cloud_volume_snapshot_count],
     }
   end
 
@@ -199,26 +174,13 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   end
 
   def assert_ems
-    ems = @ems.network_manager
+    ems = @ems.block_storage_manager
 
-    expect(ems).to have_attributes(
-                     :api_version => nil, # TODO: Should be 3.0
-                     :uid_ems     => nil
-                   )
+    expect(ems).to have_attributes(:api_version => nil, # TODO: Should be 3.0
+                                   :uid_ems     => nil)
 
-    expect(ems.flavors.size).to eql(expected_table_counts[:flavor])
     expect(ems.availability_zones.size).to eql(expected_table_counts[:availability_zone])
-    expect(ems.vms_and_templates.size).to eql(expected_table_counts[:vm_or_template])
-    expect(ems.security_groups.size).to eql(expected_table_counts[:security_group])
-    expect(ems.network_ports.size).to eql(expected_table_counts[:network_port])
-    expect(ems.cloud_networks.size).to eql(expected_table_counts[:cloud_network])
-    expect(ems.floating_ips.size).to eql(expected_table_counts[:floating_ip])
-    expect(ems.network_routers.size).to eql(expected_table_counts[:network_router])
-    expect(ems.cloud_subnets.size).to eql(expected_table_counts[:cloud_subnet])
-    expect(ems.miq_templates.size).to eq(expected_table_counts[:miq_template])
-
-    expect(ems.orchestration_stacks.size).to eql(expected_table_counts[:orchestration_stack])
-
-    expect(ems.load_balancers.size).to eql(expected_table_counts[:load_balancer])
+    expect(ems.cloud_volumes.size).to eql(expected_table_counts[:cloud_volume])
+    expect(ems.cloud_volume_snapshots.size).to eql(expected_table_counts[:cloud_volume_snapshot])
   end
 end
