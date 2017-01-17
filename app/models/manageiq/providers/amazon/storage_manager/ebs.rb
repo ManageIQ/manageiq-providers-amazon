@@ -24,7 +24,7 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::St
            :allow_nil => true
 
   def self.ems_type
-    @ems_type ||= "ec2_block_storage".freeze
+    @ems_type ||= "ec2_ebs_storage".freeze
   end
 
   def self.description
