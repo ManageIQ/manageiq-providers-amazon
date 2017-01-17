@@ -49,7 +49,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
 
   has_one :block_storage_manager,
           :foreign_key => :parent_ems_id,
-          :class_name  => "ManageIQ::Providers::Amazon::BlockStorageManager",
+          :class_name  => "ManageIQ::Providers::Amazon::StorageManager::Ebs",
           :autosave    => true,
           :dependent   => :destroy
 

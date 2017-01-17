@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::BlockStorageManager::RefreshParserInventoryObject < ::ManagerRefresh::RefreshParserInventoryObject
+class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryObject < ::ManagerRefresh::RefreshParserInventoryObject
   include ManageIQ::Providers::Amazon::RefreshHelperMethods
 
   def populate_inventory_collections
@@ -53,11 +53,11 @@ class ManageIQ::Providers::Amazon::BlockStorageManager::RefreshParserInventoryOb
 
   class << self
     def volume_type
-      "ManageIQ::Providers::Amazon::BlockStorageManager::CloudVolume"
+      "ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume"
     end
 
     def volume_snapshot_type
-      "ManageIQ::Providers::Amazon::BlockStorageManager::CloudVolumeSnapshot"
+      "ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot"
     end
   end
 end

@@ -1,7 +1,7 @@
-require_relative '../aws_helper'
-require_relative '../aws_stubs'
+require_relative '../../aws_helper'
+require_relative '../../aws_stubs'
 
-describe ManageIQ::Providers::Amazon::BlockStorageManager::Refresher do
+describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
   include AwsStubs
 
   describe "refresh" do

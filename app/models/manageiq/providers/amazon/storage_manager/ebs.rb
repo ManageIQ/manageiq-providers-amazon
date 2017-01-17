@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::BlockStorageManager < ManageIQ::Providers::StorageManager
+class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::StorageManager
   require_nested :RefreshParser
   require_nested :RefreshWorker
   require_nested :Refresher

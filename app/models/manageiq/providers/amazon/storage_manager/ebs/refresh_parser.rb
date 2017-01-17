@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::BlockStorageManager::RefreshParser
+class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
   include ManageIQ::Providers::Amazon::RefreshHelperMethods
 
   def initialize(ems, options = nil)
@@ -66,11 +66,11 @@ class ManageIQ::Providers::Amazon::BlockStorageManager::RefreshParser
 
   class << self
     def volume_type
-      "ManageIQ::Providers::Amazon::BlockStorageManager::CloudVolume"
+      "ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume"
     end
 
     def volume_snapshot_type
-      "ManageIQ::Providers::Amazon::BlockStorageManager::CloudVolumeSnapshot"
+      "ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot"
     end
   end
 end
