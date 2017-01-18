@@ -294,4 +294,20 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
 
     init_data(::ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot, attributes, extra_attributes)
   end
+
+  def cloud_object_store_containers_init_data(extra_attributes = {})
+    attributes = {
+      :association => :cloud_object_store_containers,
+    }
+
+    init_data(::CloudObjectStoreContainer, attributes, extra_attributes)
+  end
+
+  def cloud_object_store_objects_init_data(extra_attributes = {})
+    attributes = {
+      :association => :cloud_object_store_objects,
+    }
+
+    init_data(::CloudObjectStoreObject, attributes, extra_attributes)
+  end
 end

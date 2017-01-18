@@ -28,6 +28,10 @@ class ManageIQ::Providers::Amazon::Inventory
     @aws_elb ||= ems.connect(:service => :ElasticLoadBalancing)
   end
 
+  def aws_s3
+    @aws_s3 ||= ems.connect(:service => :S3)
+  end
+
   def instances
     []
   end
