@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::BlockStorageManager < ManageIQ::Providers::StorageManager
+class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::StorageManager
   require_nested :RefreshParser
   require_nested :RefreshWorker
   require_nested :Refresher
@@ -24,7 +24,7 @@ class ManageIQ::Providers::Amazon::BlockStorageManager < ManageIQ::Providers::St
            :allow_nil => true
 
   def self.ems_type
-    @ems_type ||= "ec2_block_storage".freeze
+    @ems_type ||= "ec2_ebs_storage".freeze
   end
 
   def self.description

@@ -284,7 +284,7 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
       :association => :cloud_volumes,
     }
 
-    init_data(::ManageIQ::Providers::Amazon::BlockStorageManager::CloudVolume, attributes, extra_attributes)
+    init_data(::ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume, attributes, extra_attributes)
   end
 
   def cloud_volume_snapshots_init_data(extra_attributes = {})
@@ -292,6 +292,6 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
       :association => :cloud_volume_snapshots,
     }
 
-    init_data(::ManageIQ::Providers::Amazon::BlockStorageManager::CloudVolumeSnapshot, attributes, extra_attributes)
+    init_data(::ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot, attributes, extra_attributes)
   end
 end

@@ -1,5 +1,5 @@
 module ManageIQ::Providers
-  class Amazon::BlockStorageManager::Refresher < ManageIQ::Providers::BaseManager::Refresher
+  class Amazon::StorageManager::Ebs::Refresher < ManageIQ::Providers::BaseManager::Refresher
     include ::EmsRefresh::Refreshers::EmsRefresherMixin
 
     def collect_inventory_for_targets(ems, targets)
@@ -26,9 +26,9 @@ module ManageIQ::Providers
       _log.debug "#{log_header} Parsing inventory..."
       hashes, = Benchmark.realtime_block(:parse_inventory) do
         if refresher_options.try(:[], :inventory_object_refresh)
-          ManageIQ::Providers::Amazon::BlockStorageManager::RefreshParserInventoryObject.new(inventory).populate_inventory_collections
+          ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryObject.new(inventory).populate_inventory_collections
         else
-          ManageIQ::Providers::Amazon::BlockStorageManager::RefreshParser.ems_inv_to_hashes(ems, refresher_options)
+          ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser.ems_inv_to_hashes(ems, refresher_options)
         end
       end
       _log.debug "#{log_header} Parsing inventory...Complete"

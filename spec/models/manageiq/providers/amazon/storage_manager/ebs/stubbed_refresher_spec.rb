@@ -1,7 +1,7 @@
-require_relative '../aws_helper'
-require_relative '../aws_stubs'
+require_relative '../../aws_helper'
+require_relative '../../aws_stubs'
 
-describe ManageIQ::Providers::Amazon::BlockStorageManager::Refresher do
+describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
   include AwsStubs
 
   describe "refresh" do
@@ -19,7 +19,7 @@ describe ManageIQ::Providers::Amazon::BlockStorageManager::Refresher do
      ].each do |settings|
       context "with settings #{settings}" do
         before :each do
-          allow(Settings.ems_refresh).to receive(:ec2_block_storage).and_return(settings)
+          allow(Settings.ems_refresh).to receive(:ec2_ebs_storage).and_return(settings)
         end
 
         it "2 refreshes, first creates all entities, second updates all entitites" do
@@ -65,7 +65,7 @@ describe ManageIQ::Providers::Amazon::BlockStorageManager::Refresher do
     @ems.reload
 
     with_aws_stubbed(stub_responses) do
-      EmsRefresh.refresh(@ems.block_storage_manager)
+      EmsRefresh.refresh(@ems.ebs_storage_manager)
     end
 
     @ems.reload
@@ -174,7 +174,7 @@ describe ManageIQ::Providers::Amazon::BlockStorageManager::Refresher do
   end
 
   def assert_ems
-    ems = @ems.block_storage_manager
+    ems = @ems.ebs_storage_manager
 
     expect(ems).to have_attributes(:api_version => nil, # TODO: Should be 3.0
                                    :uid_ems     => nil)
