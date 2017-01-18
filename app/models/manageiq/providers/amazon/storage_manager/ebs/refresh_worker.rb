@@ -6,6 +6,6 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshWorker < ::MiqEms
   end
 
   def self.settings_name
-    :ems_refresh_worker_amazon_block_storage
+    :ems_refresh_worker_amazon_ebs_storage
   end
 end
