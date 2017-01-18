@@ -3,7 +3,7 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParser
 
   def initialize(ems, options = nil)
     @ems        = ems
-    @connection = ems.connect(:service => :S3)
+    @aws_s3     = ems.connect(:service => :S3)
     @data       = {}
     @data_index = {}
     @options    = options || {}
@@ -21,8 +21,7 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParser
   end
 
   def object_store
-    # TODO: change
-    buckets = @connection.client.list_buckets.buckets
+    buckets = @aws_s3.client.list_buckets.buckets
     process_collection(buckets, :cloud_object_store_containers) { |c| parse_container(c) }
   end
 

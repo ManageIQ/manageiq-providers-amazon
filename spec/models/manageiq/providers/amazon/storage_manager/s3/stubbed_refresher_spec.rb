@@ -12,13 +12,13 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
       EvmSpecHelper.local_miq_server(:zone => Zone.seed)
     end
 
-    # Test all kinds of refreshes, DTO refresh, DTO with batch saving and the original refresh
-    [{:dto_refresh => true},
-     {:dto_saving_strategy => :recursive, :dto_refresh => true},
-     {:dto_refresh => false}].each do |settings|
+    # Test all kinds of refreshes
+    [{:inventory_object_refresh => true},
+     {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},
+     {:inventory_object_refresh => false}].each do |settings|
       context "with settings #{settings}" do
         before :each do
-          allow(Settings.ems_refresh).to receive(:s3_bucket).and_return(settings)
+          allow(Settings.ems_refresh).to receive(:s3).and_return(settings)
         end
 
         it "2 refreshes, first creates all entities, second updates all entitites" do
