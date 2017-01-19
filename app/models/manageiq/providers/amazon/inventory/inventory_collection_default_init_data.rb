@@ -10,12 +10,8 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
 
   def vms_init_data(extra_attributes = {})
     attributes = {
-      :association   => :vms,
-      # TODO(lsmola) replace genealogy_parent with db relation and do computing of genealogyparent in a separate queued
-      # job. Then we can check for changed? again, otherwise the after save hood on vmOrTemplate will not fire and
-      # the association to genealogy_parent will not populate, if list of templates changed (like allowing collection
-      # of public images )
-      :check_changed => false
+      :association          => :vms,
+      :attributes_blacklist => [:genealogy_parent]
     }
 
     init_data(::ManageIQ::Providers::Amazon::CloudManager::Vm, attributes, extra_attributes)
@@ -107,7 +103,8 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
 
   def orchestration_stacks_init_data(extra_attributes = {})
     attributes = {
-      :association => :orchestration_stacks,
+      :association          => :orchestration_stacks,
+      :attributes_blacklist => [:parent]
     }
 
     init_data(::ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack, attributes, extra_attributes)
@@ -143,7 +140,9 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
       hashes = inventory_collection.data.map(&:attributes)
 
       templates = ::OrchestrationTemplate.find_or_create_by_contents(hashes)
-      inventory_collection.data.zip(templates).each { |inventory_object, template| inventory_object.object = template }
+      inventory_collection.data.zip(templates).each do |inventory_object, template|
+        inventory_object.id = template.id
+      end
     end
 
     attributes = {
