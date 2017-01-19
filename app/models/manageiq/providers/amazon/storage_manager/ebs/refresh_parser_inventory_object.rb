@@ -1,6 +1,10 @@
 class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryObject < ::ManagerRefresh::RefreshParserInventoryObject
   include ManageIQ::Providers::Amazon::RefreshHelperMethods
 
+  def ems
+    inventory.ems.respond_to?(:ebs_storage_manager) ? inventory.ems.ebs_storage_manager : inventory.ems
+  end
+
   def populate_inventory_collections
     log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{inventory.ems.name}] id: [#{inventory.ems.id}]"
 
@@ -26,13 +30,14 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryOb
     uid = volume['volume_id']
 
     {
-      :type          => self.class.volume_type,
-      :ems_ref       => uid,
-      :name          => uid,
-      :status        => volume['state'],
-      :creation_time => volume['create_time'],
-      :volume_type   => volume['volume_type'],
-      :size          => volume['size'].to_i.gigabytes
+      :type                  => self.class.volume_type,
+      :ext_management_system => ems,
+      :ems_ref               => uid,
+      :name                  => uid,
+      :status                => volume['state'],
+      :creation_time         => volume['create_time'],
+      :volume_type           => volume['volume_type'],
+      :size                  => volume['size'].to_i.gigabytes
     }
   end
 
@@ -40,14 +45,15 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryOb
     uid = snap['snapshot_id']
 
     {
-      :ems_ref       => uid,
-      :type          => self.class.volume_snapshot_type,
-      :name          => snap['snapshot_id'],
-      :status        => snap['state'],
-      :creation_time => snap['start_time'],
-      :description   => snap['description'],
-      :size          => snap['volume_size'],
-      :cloud_volume  => inventory_collections[:cloud_volumes].lazy_find(snap['volume_id'])
+      :type                  => self.class.volume_snapshot_type,
+      :ext_management_system => ems,
+      :ems_ref               => uid,
+      :name                  => snap['snapshot_id'],
+      :status                => snap['state'],
+      :creation_time         => snap['start_time'],
+      :description           => snap['description'],
+      :size                  => snap['volume_size'],
+      :cloud_volume          => inventory_collections[:cloud_volumes].lazy_find(snap['volume_id'])
     }
   end
 
