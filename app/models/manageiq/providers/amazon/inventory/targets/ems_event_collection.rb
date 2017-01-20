@@ -62,7 +62,6 @@ class ManageIQ::Providers::Amazon::Inventory::Targets::EmsEventCollection < Mana
         :strategy => :find_missing_in_local_db))
   end
 
-
   def add_miq_templates_inventory_collections(manager_refs)
     return if manager_refs.blank?
 
@@ -160,6 +159,7 @@ class ManageIQ::Providers::Amazon::Inventory::Targets::EmsEventCollection < Mana
                           :security_groups
                         when "AWS::EC2::Volume"
                           # We don't have any storage manager
+                          nil
                         when "AWS::EC2::NetworkInterface"
                           :network_ports
                         when "AWS::EC2::VPC"
