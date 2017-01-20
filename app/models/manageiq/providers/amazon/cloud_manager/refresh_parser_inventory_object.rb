@@ -46,7 +46,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
   end
 
   def get_public_images
-    get_images(inventory.public_images)
+    get_images(inventory.public_images, true)
   end
 
   def get_images(images, is_public = false)
