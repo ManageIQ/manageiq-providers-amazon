@@ -37,7 +37,8 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryOb
       :status                => volume['state'],
       :creation_time         => volume['create_time'],
       :volume_type           => volume['volume_type'],
-      :size                  => volume['size'].to_i.gigabytes
+      :size                  => volume['size'].to_i.gigabytes,
+      :base_snapshot         => inventory_collections[:cloud_volume_snapshots].lazy_find(volume['snapshot_id'])
     }
   end
 
@@ -52,7 +53,7 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryOb
       :status                => snap['state'],
       :creation_time         => snap['start_time'],
       :description           => snap['description'],
-      :size                  => snap['volume_size'],
+      :size                  => snap['volume_size'].to_i.gigabytes,
       :cloud_volume          => inventory_collections[:cloud_volumes].lazy_find(snap['volume_id'])
     }
   end

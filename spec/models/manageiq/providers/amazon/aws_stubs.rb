@@ -380,7 +380,8 @@ module AwsStubs
         :size              => i,
         :state             => "in-use",
         :volume_id         => "volume_id_#{i}",
-        :volume_type       => "standard"
+        :volume_type       => "standard",
+        :snapshot_id       => "snapshot_id_#{i}"
       }
     end
 
