@@ -27,14 +27,14 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
             # Make sure we don't do any delete&create instead of update
             assert_do_not_delete
 
-            refresh_spec
+            refresh_spec_full
           end
         end
 
         it "2 refreshes, first creates all entities, second updates exiting and deletes missing entitites" do
           @data_scaling = 2
           2.times do
-            refresh_spec
+            refresh_spec_full
             @data_scaling -= 1
           end
         end
@@ -45,7 +45,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
             # Make sure we don't do any delete&create instead of update
             assert_do_not_delete
 
-            refresh_spec
+            refresh_spec_full
             @data_scaling += 1
           end
         end
@@ -53,7 +53,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
         it "2 refreshes, first creates all entities, second deletes all entitites" do
           @data_scaling = 1
           2.times do
-            refresh_spec
+            refresh_spec_counts
             @data_scaling -= 1
           end
         end
@@ -61,7 +61,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
     end
   end
 
-  def refresh_spec
+  def refresh_spec_counts
     @ems.reload
 
     with_aws_stubbed(stub_responses) do
@@ -72,6 +72,13 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
 
     assert_table_counts
     assert_ems
+  end
+
+  def refresh_spec_full
+    refresh_spec_counts
+
+    assert_specific_snapshot
+    assert_specific_volume
   end
 
   def stub_responses
@@ -182,5 +189,36 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
     expect(ems.availability_zones.size).to eql(expected_table_counts[:availability_zone])
     expect(ems.cloud_volumes.size).to eql(expected_table_counts[:cloud_volume])
     expect(ems.cloud_volume_snapshots.size).to eql(expected_table_counts[:cloud_volume_snapshot])
+  end
+
+  def assert_specific_snapshot
+    @snapshot = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.where(:ems_ref => "snapshot_id_1").first
+
+    expect(@snapshot).not_to be_nil
+    expect(@snapshot).to have_attributes(
+      :ems_ref     => "snapshot_id_1",
+      :name        => "snapshot_id_1",
+      :description => "snapshot_desc_1",
+      :status      => "completed",
+      :size        => 1.gigabyte
+    )
+
+    expect(@snapshot.ext_management_system).to eq(@ems.ebs_storage_manager)
+  end
+
+  def assert_specific_volume
+    @volume = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.where(:ems_ref => "volume_id_1").first
+
+    expect(@volume).not_to be_nil
+    expect(@volume).to have_attributes(
+      :ems_ref     => "volume_id_1",
+      :name        => "volume_id_1",
+      :status      => "in-use",
+      :volume_type => "standard",
+      :size        => 1.gigabyte
+    )
+
+    expect(@volume.ext_management_system).to eq(@ems.ebs_storage_manager)
+    expect(@volume.base_snapshot).to eq(@snapshot)
   end
 end
