@@ -1,48 +1,41 @@
 module ManageIQ::Providers::Amazon::CloudManager::EventParser
-  # these have their own EmsEvent classes in automate
-  INSTANCE_EVENTS = %w(
-    AWS_EC2_Instance_CREATE
-    AWS_EC2_Instance_UPDATE
-    AWS_EC2_Instance_DELETE
-    AWS_EC2_Instance_running
-    AWS_EC2_Instance_shutting-down
-    AWS_EC2_Instance_stopped
-  ).to_set.freeze
-
-  def self.map_event_type(aws_event_type)
-    if INSTANCE_EVENTS.include?(aws_event_type)
-      aws_event_type
-    else
-      'ConfigurationItemChangeNotification'
-    end
+  def self.parse_config_event!(event, event_hash)
+    event_hash[:message]                   = event["configurationItemDiff"]
+    event_hash[:timestamp]                 = event["notificationCreationTime"]
+    event_hash[:vm_ems_ref]                = parse_vm_ref(event)
+    event_hash[:availability_zone_ems_ref] = parse_availability_zone_ref(event)
   end
 
-  def self.format_message(event)
-    changed_properties = event.fetch_path("configurationItemDiff", "changedProperties")
-    if changed_properties.present?
-      "#{event['eventType']}: #{changed_properties}"
-    else
-      "#{event['eventType']}"
-    end
+  def self.parse_cloud_watch_api_event!(event, event_hash)
+    event_hash[:message]                   = "request: #{event.fetch_path("detail", "requestParameters")}, "\
+                                             "response: #{event.fetch_path("detail", "responseElements")}"
+    event_hash[:timestamp]                 = event["time"]
+    # TODO(lsmola) so Event can be tied to more Vms, we will need to change the modeling
+    event_hash[:vm_ems_ref]                = event.fetch_path("detail", "responseElements", "instancesSet", "items").
+      try(:first).try(:[], "instanceId")
+    event_hash[:availability_zone_ems_ref] = nil # Can't get it, needs to go through VM
+  end
+
+  def self.parse_cloud_watch_ec2_event!(event, event_hash)
+    event_hash[:message]                   = event["detail"]
+    event_hash[:timestamp]                 = event["time"]
+    event_hash[:vm_ems_ref]                = event.fetch_path("detail", "instance-id")
+    event_hash[:availability_zone_ems_ref] = nil # Can't get it, needs to go through VM
   end
 
   def self.event_to_hash(event, ems_id)
-    log_header = "ems_id: [#{ems_id}] " unless ems_id.nil?
-
-    _log.debug("#{log_header}event: [#{event["configurationItem"]["resourceType"]} - " \
-               "#{event["configurationItem"]["resourceId"]}]")
-
     event_hash = {
-      :event_type => map_event_type(event["eventType"]),
+      :event_type => event["eventType"],
       :source     => "AMAZON",
-      :message    => format_message(event),
-      :timestamp  => event["notificationCreationTime"],
       :full_data  => event,
       :ems_id     => ems_id
     }
 
-    event_hash[:vm_ems_ref]                = parse_vm_ref(event)
-    event_hash[:availability_zone_ems_ref] = parse_availability_zone_ref(event)
+    send("parse_#{event[:event_source]}_event!", event, event_hash)
+
+    log_header = "ems_id: [#{ems_id}] " unless ems_id.nil?
+    _log.debug("#{log_header}event: [#{event[:message]}]")
+
     event_hash
   end
 
