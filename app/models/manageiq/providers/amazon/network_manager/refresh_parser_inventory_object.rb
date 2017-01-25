@@ -24,15 +24,15 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserInventoryObject 
 
   private
   def get_cloud_networks
-    process_inventory_collection(inventory.cloud_networks, :cloud_networks) { |vpc| parse_cloud_network(vpc) }
+    process_inventory_collection(inventory.collector.cloud_networks, :cloud_networks) { |vpc| parse_cloud_network(vpc) }
   end
 
   def get_cloud_subnets
-    process_inventory_collection(inventory.cloud_subnets, :cloud_subnets) { |s| parse_cloud_subnet(s) }
+    process_inventory_collection(inventory.collector.cloud_subnets, :cloud_subnets) { |s| parse_cloud_subnet(s) }
   end
 
   def get_security_groups
-    process_inventory_collection(inventory.security_groups, :security_groups) do |sg|
+    process_inventory_collection(inventory.collector.security_groups, :security_groups) do |sg|
       get_outbound_firewall_rules(sg)
       get_inbound_firewall_rules(sg)
 
@@ -51,7 +51,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserInventoryObject 
   end
 
   def get_load_balancers
-    process_inventory_collection(inventory.load_balancers, :load_balancers) do |lb|
+    process_inventory_collection(inventory.collector.load_balancers, :load_balancers) do |lb|
       get_load_balancer_pools(lb)
       get_load_balancer_pool_members(lb)
       get_load_balancer_listeners(lb)
@@ -109,7 +109,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserInventoryObject 
   end
 
   def get_load_balancer_health_check_members(lb)
-    health_check_members = inventory.health_check_members(lb['load_balancer_name'])
+    health_check_members = inventory.collector.health_check_members(lb['load_balancer_name'])
 
     process_inventory_collection(health_check_members, :load_balancer_health_check_members) do |m|
       parse_load_balancer_health_check_member(lb, m)
@@ -117,11 +117,11 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserInventoryObject 
   end
 
   def get_floating_ips
-    process_inventory_collection(inventory.floating_ips, :floating_ips) { |ip| parse_floating_ip(ip) }
+    process_inventory_collection(inventory.collector.floating_ips, :floating_ips) { |ip| parse_floating_ip(ip) }
   end
 
   def get_network_ports
-    process_inventory_collection(inventory.network_ports, :network_ports) do |n|
+    process_inventory_collection(inventory.collector.network_ports, :network_ports) do |n|
       get_public_ips(n)
       get_cloud_subnet_network_ports(n)
 
@@ -154,7 +154,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParserInventoryObject 
   end
 
   def get_ec2_floating_ips_and_ports
-    process_inventory_collection(inventory.instances, :network_ports) do |instance|
+    process_inventory_collection(inventory.collector.instances, :network_ports) do |instance|
       next unless instance['network_interfaces'].blank?
 
       get_ec2_cloud_subnet_network_port(instance)

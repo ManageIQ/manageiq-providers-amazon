@@ -30,27 +30,27 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
   private
 
   def get_flavors
-    process_inventory_collection(inventory.flavors, :flavors) { |flavor| parse_flavor(flavor) }
+    process_inventory_collection(inventory.collector.flavors, :flavors) { |flavor| parse_flavor(flavor) }
   end
 
   def get_availability_zones
-    process_inventory_collection(inventory.availability_zones, :availability_zones) { |az| parse_availability_zone(az) }
+    process_inventory_collection(inventory.collector.availability_zones, :availability_zones) { |az| parse_availability_zone(az) }
   end
 
   def get_key_pairs
-    process_inventory_collection(inventory.key_pairs, :key_pairs) { |kp| parse_key_pair(kp) }
+    process_inventory_collection(inventory.collector.key_pairs, :key_pairs) { |kp| parse_key_pair(kp) }
   end
 
   def get_private_images
-    get_images(inventory.private_images)
+    get_images(inventory.collector.private_images)
   end
 
   def get_shared_images
-    get_images(inventory.shared_images)
+    get_images(inventory.collector.shared_images)
   end
 
   def get_public_images
-    get_images(inventory.public_images, true)
+    get_images(inventory.collector.public_images, true)
   end
 
   def get_images(images, is_public = false)
@@ -66,7 +66,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
   end
 
   def get_stacks
-    process_inventory_collection(inventory.stacks, :orchestration_stacks) do |stack|
+    process_inventory_collection(inventory.collector.stacks, :orchestration_stacks) do |stack|
       get_stack_resources(stack)
       get_stack_outputs(stack)
       get_stack_parameters(stack)
@@ -89,7 +89,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
   end
 
   def get_stack_resources(stack)
-    resources = inventory.stack_resources(stack['stack_name'])
+    resources = inventory.collector.stack_resources(stack['stack_name'])
 
     process_inventory_collection(resources, :orchestration_stacks_resources) do |resource|
       parse_stack_resource(resource, stack)
@@ -101,7 +101,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
   end
 
   def get_instances
-    process_inventory_collection(inventory.instances, :vms) do |instance|
+    process_inventory_collection(inventory.collector.instances, :vms) do |instance|
       # TODO(lsmola) we have a non lazy dependency, can we remove that?
       flavor = inventory_collections[:flavors].find(instance['instance_type']) || inventory_collections[:flavors].find("unknown")
 
@@ -318,7 +318,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
       :ems_ref     => stack['stack_id'],
       :name        => stack['stack_name'],
       :description => stack['description'],
-      :content     => inventory.stack_template(stack['stack_name']),
+      :content     => inventory.collector.stack_template(stack['stack_name']),
       :orderable   => false
     }
   end

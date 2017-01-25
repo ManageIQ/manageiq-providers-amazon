@@ -1,4 +1,9 @@
 class ManageIQ::Providers::Amazon::Inventory::Targets < ManageIQ::Providers::Amazon::Inventory
+  require_nested :CloudManager
+  require_nested :NetworkManager
+  require_nested :EmsEventCollection
+  require_nested :TargetCollection
+
   include ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitData
 
   protected
@@ -9,9 +14,9 @@ class ManageIQ::Providers::Amazon::Inventory::Targets < ManageIQ::Providers::Ama
 
   def add_inventory_collection(inventory_collection_data, key = nil)
     model_class, data = inventory_collection_data
-    data[:parent] ||= ems
+    data[:parent]     ||= ems
+    key               ||= data[:association]
 
-    key ||= data[:association]
     inventory_collections[key] = ::ManagerRefresh::InventoryCollection.new(model_class, data)
   end
 
@@ -23,9 +28,8 @@ class ManageIQ::Providers::Amazon::Inventory::Targets < ManageIQ::Providers::Ama
 
   def add_remaining_inventory_collections(inventory_collections_data)
     # Get names of all inventory collections defined in InventoryCollectionDefaultInitData
-    all_inventory_collections = ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitData.
-      public_instance_methods.grep(/.+_init_data/).map { |x| x.to_s.gsub("_init_data", "") }
-
+    all_inventory_collections     = ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitData
+      .public_instance_methods.grep(/.+_init_data/).map { |x| x.to_s.gsub("_init_data", "") }
     # Get names of all defined inventory_collections
     defined_inventory_collections = inventory_collections.keys.map(&:to_s)
 
@@ -35,7 +39,12 @@ class ManageIQ::Providers::Amazon::Inventory::Targets < ManageIQ::Providers::Ama
   end
 
   def event_payload(event)
-    transform_keys(event[:full_data]["configurationItem"]["configuration"])
+    transform_keys((event.full_data || []).fetch_path("configurationItem", "configuration"))
+  end
+
+  def event_deleted_payload(event)
+    transform_keys((event.full_data || []).fetch_path("configurationItemDiff", "changedProperties", "Configuration",
+                                                      "previousValue"))
   end
 
   def transform_keys(value)
