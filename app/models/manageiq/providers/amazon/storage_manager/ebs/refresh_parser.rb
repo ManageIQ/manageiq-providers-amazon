@@ -24,16 +24,6 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
 
   private
 
-  def parent_manager_fetch_path(collection, ems_ref)
-    @parent_manager_data ||= {}
-    return @parent_manager_data.fetch_path(collection, ems_ref) if @parent_manager_data.has_key_path?(collection,
-                                                                                                      ems_ref)
-
-    @parent_manager_data.store_path(collection,
-                                    ems_ref,
-                                    @ems.public_send(collection).try(:where, :ems_ref => ems_ref).try(:first))
-  end
-
   def get_volumes
     volumes = @aws_ec2.client.describe_volumes[:volumes]
     process_collection(volumes, :cloud_volumes) { |volume| parse_volume(volume) }
