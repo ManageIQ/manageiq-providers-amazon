@@ -38,7 +38,8 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryOb
       :creation_time         => volume['create_time'],
       :volume_type           => volume['volume_type'],
       :size                  => volume['size'].to_i.gigabytes,
-      :base_snapshot         => inventory_collections[:cloud_volume_snapshots].lazy_find(volume['snapshot_id'])
+      :base_snapshot         => inventory_collections[:cloud_volume_snapshots].lazy_find(volume['snapshot_id']),
+      :availability_zone     => inventory_collections[:availability_zones].lazy_find(volume['availability_zone'])
     }
   end
 
