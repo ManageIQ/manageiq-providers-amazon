@@ -35,16 +35,6 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
 
   private
 
-  def parent_manager_fetch_path(collection, ems_ref)
-    @parent_manager_data ||= {}
-    return @parent_manager_data.fetch_path(collection, ems_ref) if @parent_manager_data.has_key_path?(collection,
-                                                                                                      ems_ref)
-
-    @parent_manager_data.store_path(collection,
-                                    ems_ref,
-                                    @ems.public_send(collection).try(:where, :ems_ref => ems_ref).try(:first))
-  end
-
   def security_groups
     @security_groups ||= @aws_ec2.security_groups
   end

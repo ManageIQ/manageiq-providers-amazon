@@ -46,6 +46,16 @@ module ManageIQ::Providers::Amazon::RefreshHelperMethods
     keys.join('_')
   end
 
+  def parent_manager_fetch_path(collection, ems_ref)
+    @parent_manager_data ||= {}
+    return @parent_manager_data.fetch_path(collection, ems_ref) if @parent_manager_data.has_key_path?(collection,
+                                                                                                      ems_ref)
+
+    @parent_manager_data.store_path(collection,
+                                    ems_ref,
+                                    @ems.public_send(collection).try(:where, :ems_ref => ems_ref).try(:first))
+  end
+
   module ClassMethods
     def ems_inv_to_hashes(ems, options = nil)
       new(ems, options).ems_inv_to_hashes

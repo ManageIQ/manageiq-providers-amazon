@@ -22,6 +22,8 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
     @data
   end
 
+  private
+
   def get_volumes
     volumes = @aws_ec2.client.describe_volumes[:volumes]
     process_collection(volumes, :cloud_volumes) { |volume| parse_volume(volume) }
@@ -36,14 +38,15 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
     uid = volume.volume_id
 
     new_result = {
-      :type          => self.class.volume_type,
-      :ems_ref       => uid,
-      :name          => uid,
-      :status        => volume.state,
-      :creation_time => volume.create_time,
-      :volume_type   => volume.volume_type,
-      :size          => volume.size.to_i.gigabytes,
-      :snapshot_uid  => volume.snapshot_id
+      :type              => self.class.volume_type,
+      :ems_ref           => uid,
+      :name              => uid,
+      :status            => volume.state,
+      :creation_time     => volume.create_time,
+      :volume_type       => volume.volume_type,
+      :size              => volume.size.to_i.gigabytes,
+      :snapshot_uid      => volume.snapshot_id,
+      :availability_zone => parent_manager_fetch_path(:availability_zones, volume.availability_zone),
     }
 
     return uid, new_result
