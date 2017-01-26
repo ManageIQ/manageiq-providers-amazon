@@ -381,7 +381,8 @@ module AwsStubs
         :state             => "in-use",
         :volume_id         => "volume_id_#{i}",
         :volume_type       => "standard",
-        :snapshot_id       => "snapshot_id_#{i}"
+        :snapshot_id       => "snapshot_id_#{i}",
+        :tags              => [{ :key => "name", :value => "volume_#{i}" }]
       }
     end
 
@@ -398,6 +399,7 @@ module AwsStubs
         :volume_size => i,
         :state       => "completed",
         :volume_id   => "volume_id_#{i}",
+        :tags        => [{ :key => "name", :value => "snapshot_#{i}" }]
       }
     end
 

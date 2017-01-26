@@ -40,7 +40,7 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
     new_result = {
       :type              => self.class.volume_type,
       :ems_ref           => uid,
-      :name              => uid,
+      :name              => get_from_tags(volume, :name) || uid,
       :status            => volume.state,
       :creation_time     => volume.create_time,
       :volume_type       => volume.volume_type,
@@ -58,7 +58,7 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
     new_result = {
       :ems_ref       => uid,
       :type          => self.class.volume_snapshot_type,
-      :name          => snap.snapshot_id,
+      :name          => get_from_tags(snap, :name) || uid,
       :status        => snap.state,
       :creation_time => snap.start_time,
       :description   => snap.description,

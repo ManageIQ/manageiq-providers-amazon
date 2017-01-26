@@ -33,7 +33,7 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryOb
       :type                  => self.class.volume_type,
       :ext_management_system => ems,
       :ems_ref               => uid,
-      :name                  => uid,
+      :name                  => get_from_tags(volume, :name) || uid,
       :status                => volume['state'],
       :creation_time         => volume['create_time'],
       :volume_type           => volume['volume_type'],
@@ -50,13 +50,18 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryOb
       :type                  => self.class.volume_snapshot_type,
       :ext_management_system => ems,
       :ems_ref               => uid,
-      :name                  => snap['snapshot_id'],
+      :name                  => get_from_tags(snap, :name) || uid,
       :status                => snap['state'],
       :creation_time         => snap['start_time'],
       :description           => snap['description'],
       :size                  => snap['volume_size'].to_i.gigabytes,
       :cloud_volume          => inventory_collections[:cloud_volumes].lazy_find(snap['volume_id'])
     }
+  end
+
+  # Overridden helper methods, we should put them in helper once we get rid of old refresh
+  def get_from_tags(resource, item)
+    (resource['tags'] || []).detect { |tag, _| tag['key'].downcase == item.to_s.downcase }.try(:[], 'value')
   end
 
   class << self

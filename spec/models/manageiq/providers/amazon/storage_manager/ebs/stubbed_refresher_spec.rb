@@ -197,7 +197,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
     expect(@snapshot).not_to be_nil
     expect(@snapshot).to have_attributes(
       :ems_ref     => "snapshot_id_1",
-      :name        => "snapshot_id_1",
+      :name        => "snapshot_1",
       :description => "snapshot_desc_1",
       :status      => "completed",
       :size        => 1.gigabyte
@@ -212,7 +212,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
     expect(@volume).not_to be_nil
     expect(@volume).to have_attributes(
       :ems_ref     => "volume_id_1",
-      :name        => "volume_id_1",
+      :name        => "volume_1",
       :status      => "in-use",
       :volume_type => "standard",
       :size        => 1.gigabyte
