@@ -55,7 +55,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(SystemService.count).to eq(0)
 
     expect(Relationship.count).to eq(2)
-    expect(MiqQueue.count).to eq(6)
+    expect(MiqQueue.count).to eq(7)
   end
 
   def assert_ems

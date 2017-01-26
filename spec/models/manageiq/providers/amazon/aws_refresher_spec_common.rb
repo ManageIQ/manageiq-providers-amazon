@@ -39,7 +39,7 @@ module AwsRefresherSpecCommon
       :floating_ip                   => 12,
       :guest_device                  => 0,
       :hardware                      => 46,
-      :miq_queue                     => 49,
+      :miq_queue                     => 50,
       :miq_template                  => 20,
       :network                       => 14,
       :network_port                  => 32,

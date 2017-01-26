@@ -40,6 +40,7 @@ class ManageIQ::Providers::Amazon::CloudManager::Refresher < ManageIQ::Providers
   def save_inventory(ems, target, inventory_collections)
     EmsRefresh.save_ems_inventory(ems, inventory_collections)
     EmsRefresh.queue_refresh(ems.network_manager) if target.kind_of?(ManageIQ::Providers::BaseManager)
+    EmsRefresh.queue_refresh(ems.ebs_storage_manager) if target.kind_of?(ManageIQ::Providers::BaseManager)
   end
 
   def post_process_refresh_classes
