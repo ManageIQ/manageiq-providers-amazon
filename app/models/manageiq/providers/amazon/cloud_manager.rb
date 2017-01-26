@@ -23,12 +23,6 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
 
   include ManageIQ::Providers::Amazon::ManagerMixin
 
-  has_many :storage_managers,
-           :foreign_key => :parent_ems_id,
-           :class_name  => "ManageIQ::Providers::StorageManager",
-           :autosave    => true,
-           :dependent   => :destroy
-
   has_one :network_manager,
           :foreign_key => :parent_ems_id,
           :class_name  => "ManageIQ::Providers::Amazon::NetworkManager",
