@@ -14,6 +14,8 @@ class ManageIQ::Providers::Amazon::Inventory::Factory
         ManageIQ::Providers::Amazon::Inventory::Targets::StorageManager::Ebs.new(ems, target)
       when ManageIQ::Providers::Amazon::StorageManager::S3
         ManageIQ::Providers::Amazon::Inventory::Targets::StorageManager::S3.new(ems, target)
+      when ManageIQ::Providers::Amazon::Inventory::TargetCollection
+        ManageIQ::Providers::Amazon::Inventory::Targets::TargetCollection.new(ems, target)
       else
         # Fallback to ems refresh
         ManageIQ::Providers::Amazon::Inventory::Targets::CloudManager.new(ems, ems)
