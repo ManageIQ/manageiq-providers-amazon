@@ -15,6 +15,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors
   attr_reader :network_ports, :network_ports_refs, :network_ports_deleted
   attr_reader :load_balancers, :load_balancers_refs, :load_balancers_deleted
   attr_reader :stacks, :stacks_refs, :stacks_deleted
+  attr_reader :cloud_volumes, :cloud_volumes_refs
+  attr_reader :cloud_volume_snapshots, :cloud_volume_snapshots_refs
+
 
   def initialize(ems, target)
     @ems     = ems
@@ -25,52 +28,57 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors
   end
 
   def initialize_inventory_sources
-    @instances                  = []
-    @instances_refs             = []
-    @instances_deleted          = []
-    @flavors                    = []
-    @flavors_refs               = []
-    @flavors_deleted            = []
-    @availability_zones         = []
-    @availability_zones_refs    = []
-    @availability_zones_deleted = []
-    @key_pairs                  = []
-    @key_pairs_refs             = []
-    @key_pairs_deleted          = []
-    @private_images             = []
-    @private_images_refs        = []
-    @private_images_deleted     = []
-    @shared_images              = []
-    @shared_images_refs         = []
-    @shared_images_deleted      = []
-    @public_images              = []
-    @public_images_refs         = []
-    @public_images_deleted      = []
-    @cloud_networks             = []
-    @cloud_networks_refs        = []
-    @cloud_networks_deleted     = []
-    @cloud_subnets              = []
-    @cloud_subnets_refs         = []
-    @cloud_subnets_deleted      = []
-    @security_groups            = []
-    @security_groups_refs       = []
-    @security_groups_deleted    = []
-    @floating_ips               = []
-    @floating_ips_refs          = []
-    @floating_ips_deleted       = []
-    @network_ports              = []
-    @network_ports_refs         = []
-    @network_ports_deleted      = []
-    @load_balancers             = []
-    @stacks                     = [] # We lack events for stacks
-    @stacks_refs                = [] # We lack events for stacks
+    @instances                   = []
+    @instances_refs              = Set.new
+    @instances_deleted           = []
+    @flavors                     = []
+    @flavors_refs                = Set.new
+    @flavors_deleted             = []
+    @availability_zones          = []
+    @availability_zones_refs     = Set.new
+    @availability_zones_deleted  = []
+    @key_pairs                   = []
+    @key_pairs_refs              = Set.new
+    @key_pairs_deleted           = []
+    @private_images              = []
+    @private_images_refs         = Set.new
+    @private_images_deleted      = []
+    @shared_images               = []
+    @shared_images_refs          = Set.new
+    @shared_images_deleted       = []
+    @public_images               = []
+    @public_images_refs          = Set.new
+    @public_images_deleted       = []
+    @cloud_networks              = []
+    @cloud_networks_refs         = Set.new
+    @cloud_networks_deleted      = []
+    @cloud_subnets               = []
+    @cloud_subnets_refs          = Set.new
+    @cloud_subnets_deleted       = []
+    @security_groups             = []
+    @security_groups_refs        = Set.new
+    @security_groups_deleted     = []
+    @floating_ips                = []
+    @floating_ips_refs           = Set.new
+    @floating_ips_deleted        = []
+    @network_ports               = []
+    @network_ports_refs          = Set.new
+    @network_ports_deleted       = []
+    @load_balancers              = []
+    @load_balancers_refs         = Set.new
+    @stacks                      = []
+    @stacks_refs                 = Set.new
+    @cloud_volumes               = []
+    @cloud_volumes_refs          = Set.new
+    @cloud_volume_snapshots      = []
+    @cloud_volume_snapshots_refs = Set.new
     # Nested resources
-    @stack_resources            = {} # We lack events for stacks
-    @stack_resources_refs       = {} # We lack events for stacks
-    @stack_template             = {} # We lack events for stacks
-    @stack_template_refs        = {} # We lack events for stacks
-    @health_check_members       = {}
-    @health_check_members_refs  = {}
+    @stack_resources             = {}
+    @stack_resources_refs        = {}
+    @stack_template              = {}
+    @stack_template_refs         = {}
+    @health_check_members        = {}
+    @health_check_members_refs   = {}
   end
 
   def hash_collection
