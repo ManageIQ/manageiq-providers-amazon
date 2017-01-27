@@ -57,6 +57,6 @@ class ManageIQ::Providers::Amazon::Inventory::Targets::CloudManager < ManageIQ::
         :custom_save_block     => orchestration_stack_ancestry_save_block,
         :dependency_attributes => {:orchestration_stacks           => [inventory_collections[:orchestration_stacks]],
                                    :orchestration_stacks_resources => [inventory_collections[:orchestration_stacks_resources]]}],
-      :orchestration_stack_ancestry_)
+      :orchestration_stack_ancestry)
   end
 end
