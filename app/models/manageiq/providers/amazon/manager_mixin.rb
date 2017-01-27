@@ -24,8 +24,9 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     password = options[:pass] || authentication_password(options[:auth_type])
     service  = options[:service] || :EC2
     proxy    = options[:proxy_uri] || http_proxy_uri
+    region   = options[:region] || provider_region
 
-    self.class.raw_connect(username, password, service, provider_region, proxy)
+    self.class.raw_connect(username, password, service, region, proxy)
   end
 
   def translate_exception(err)

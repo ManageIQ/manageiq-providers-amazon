@@ -19,6 +19,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManagerRefresh::Invent
   attr_reader :stacks, :stacks_refs, :stacks_deleted
   attr_reader :cloud_volumes, :cloud_volumes_refs
   attr_reader :cloud_volume_snapshots, :cloud_volume_snapshots_refs
+  attr_reader :cloud_objects_store_containers
+  attr_reader :cloud_objects_store_objects
 
   def initialize(_manager, _target)
     super

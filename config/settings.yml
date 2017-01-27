@@ -23,6 +23,8 @@
         :values:
           - machine
     :ignore_terminated_instances: true
+  :s3:
+    :inventory_object_refresh: true
 :http_proxy:
   :ec2:
     :host:

@@ -69,14 +69,23 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
     @ems.reload
 
     assert_table_counts
+    assert_buckets_content
     assert_ems
   end
 
   def stub_responses
     {
       :s3 => {
-        :list_buckets => {
+        :list_buckets        => {
           :buckets => mocked_s3_buckets
+        },
+        :get_bucket_location => {
+          :location_constraint => mocked_regions[:regions][0][:region_name]
+        },
+        :list_objects_v2     => {
+          :contents                => mocked_s3_objects,
+          :next_continuation_token => nil,
+          :is_truncated            => false
         }
       }
     }
@@ -121,7 +130,8 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
       :load_balancer_listener_pool       => 0,
       :load_balancer_health_check        => 0,
       :load_balancer_health_check_member => 0,
-      :cloud_object_store_containers     => test_counts[:s3_buckets_count]
+      :cloud_object_store_containers     => test_counts[:s3_buckets_count],
+      :cloud_object_store_objects        => test_counts[:s3_buckets_count] * test_counts[:s3_objects_per_bucket_count]
     }
   end
 
@@ -164,10 +174,29 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
       :load_balancer_listener_pool       => LoadBalancerListenerPool.count,
       :load_balancer_health_check        => LoadBalancerHealthCheck.count,
       :load_balancer_health_check_member => LoadBalancerHealthCheckMember.count,
-      :cloud_object_store_containers     => CloudObjectStoreContainer.count
+      :cloud_object_store_containers     => CloudObjectStoreContainer.count,
+      :cloud_object_store_objects        => CloudObjectStoreObject.count
     }
 
     expect(actual).to eq expected_table_counts
+  end
+
+  def assert_buckets_content
+    mocked_objects = mocked_s3_objects
+    expected_hash = {
+      :object_count   => mocked_objects.count,
+      :content_length => mocked_objects.map { |object| object[:size] }.sum,
+    }
+    actual = {}
+    expected_content = {}
+    CloudObjectStoreContainer.all.each do |container|
+      expected_content[container.ems_ref] = expected_hash
+      actual[container.ems_ref] = {
+        :object_count   => container.object_count,
+        :content_length => container.bytes
+      }
+    end
+    expect(actual).to eq expected_content
   end
 
   def assert_ems
