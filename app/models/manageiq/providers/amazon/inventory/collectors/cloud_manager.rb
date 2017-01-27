@@ -30,7 +30,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::CloudManager < ManageI
   def public_images
     filters = options.public_images_filters
     hash_collection.new(aws_ec2.client.describe_images(:executable_users => [:all],
-                                                      :filters          => filters)[:images])
+                                                       :filters          => filters)[:images])
   end
 
   def stacks
