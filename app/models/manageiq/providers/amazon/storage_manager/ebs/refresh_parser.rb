@@ -49,6 +49,8 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
       :availability_zone => parent_manager_fetch_path(:availability_zones, volume.availability_zone),
     }
 
+    link_volume_to_disk(new_result, volume.attachments)
+
     return uid, new_result
   end
 
@@ -75,6 +77,57 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
       base_snapshot = @data_index.fetch_path(:cloud_volume_snapshots, base_snapshot_uid)
       cv[:base_snapshot] = base_snapshot unless base_snapshot.nil?
     end if @data[:cloud_volumes]
+  end
+
+  def link_volume_to_disk(volume_hash, attachments)
+    uid = volume_hash[:ems_ref]
+
+    attachments.each do |a|
+      if a['device'].blank?
+        _log.warn "#{log_header}: Volume: #{uid}, is missing a mountpoint, skipping the volume processing"
+        _log.warn "#{log_header}:   EMS: #{@ems.name}, Instance: #{a['instance_id']}"
+        next
+      end
+
+      dev = File.basename(a['device'])
+
+      vm = @ems.parent_manager.vms.find_by(:ems_ref => a['instance_id'])
+      unless vm
+        _log.warn "VM referenced by attachment (#{a['instance_id']} not found."
+        next
+      end
+
+      hardware = vm.hardware
+      disks = hardware.disks
+      unless disks
+        _log.warn "#{log_header}: Volume: #{uid}, attached to instance not visible in the scope of this EMS"
+        _log.warn "#{log_header}:   EMS: #{@ems.name}, Instance: #{a['instance_id']}"
+        next
+      end
+
+      disk_hash = {
+        :size           => volume_hash[:size],
+        :backing_volume => volume_hash
+      }
+
+      if (disk = disks.detect { |d| d.location == dev })
+        # Disk exists: save id.
+        disk_hash[:id] = disk.id
+      else
+        # New disk.
+        disk_hash[:hardware_id]     = hardware.id
+        disk_hash[:device_name]     = dev
+        disk_hash[:device_type]     = "disk"
+        disk_hash[:controller_type] = "EBS Volume"
+        disk_hash[:location]        = dev
+      end
+
+      backing_links << disk_hash
+    end
+  end
+
+  def backing_links
+    @data[:backing_links] ||= []
   end
 
   class << self

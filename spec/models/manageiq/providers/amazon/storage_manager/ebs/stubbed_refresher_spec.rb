@@ -10,6 +10,10 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
       @ems                 = FactoryGirl.create(:ems_amazon, :zone => zone)
       @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
       EvmSpecHelper.local_miq_server(:zone => Zone.seed)
+
+      @disk = FactoryGirl.create(:disk, :controller_type => "amazon", :device_type => "disk", :device_name => "sda1", :location => "sda1")
+      hardware = FactoryGirl.create(:hardware, :disks => [@disk])
+      FactoryGirl.create(:vm_amazon, :ext_management_system => @ems, :ems_ref => "instance_0", :hardware => hardware)
     end
 
     # Test all kinds of refreshes, DTO refresh, DTO with batch saving and the original refresh
@@ -96,12 +100,12 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
       :ext_management_system             => 4,
       :flavor                            => 0,
       :availability_zone                 => 0,
-      :vm_or_template                    => 0,
-      :vm                                => 0,
+      :vm_or_template                    => 1,
+      :vm                                => 1,
       :miq_template                      => 0,
-      :disk                              => 0,
+      :disk                              => 1,
       :guest_device                      => 0,
-      :hardware                          => 0,
+      :hardware                          => 1,
       :network                           => 0,
       :operating_system                  => 0,
       :snapshot                          => 0,
@@ -192,13 +196,13 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
   end
 
   def assert_specific_snapshot
-    @snapshot = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.where(:ems_ref => "snapshot_id_1").first
+    @snapshot = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.where(:ems_ref => "snapshot_id_0").first
 
     expect(@snapshot).not_to be_nil
     expect(@snapshot).to have_attributes(
-      :ems_ref     => "snapshot_id_1",
-      :name        => "snapshot_1",
-      :description => "snapshot_desc_1",
+      :ems_ref     => "snapshot_id_0",
+      :name        => "snapshot_0",
+      :description => "snapshot_desc_0",
       :status      => "completed",
       :size        => 1.gigabyte
     )
@@ -207,12 +211,12 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
   end
 
   def assert_specific_volume
-    @volume = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.where(:ems_ref => "volume_id_1").first
+    @volume = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.where(:ems_ref => "volume_id_0").first
 
     expect(@volume).not_to be_nil
     expect(@volume).to have_attributes(
-      :ems_ref     => "volume_id_1",
-      :name        => "volume_1",
+      :ems_ref     => "volume_id_0",
+      :name        => "volume_0",
       :status      => "in-use",
       :volume_type => "standard",
       :size        => 1.gigabyte
@@ -220,5 +224,11 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
 
     expect(@volume.ext_management_system).to eq(@ems.ebs_storage_manager)
     expect(@volume.base_snapshot).to eq(@snapshot)
+
+    # EBS manager is updating attributes of the pre-existing disk so we need to reload the disk
+    # before checking if the update was successful.
+    @disk.reload
+    expect(@disk.backing).to eq(@volume)
+    expect(@disk.size).to eq(@volume.size)
   end
 end
