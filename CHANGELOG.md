@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased - as of Sprint 53 end 2017-01-30
+
+### Added
+
+- Add ca-central region #[113](https://github.com/ManageIQ/manageiq-providers-amazon/pull/113)
+- Add links between cloud volumes and base snapshots #[112](https://github.com/ManageIQ/manageiq-providers-amazon/pull/112)
+- Introduce Amazon S3 StorageManager ([#106](https://github.com/ManageIQ/manageiq-providers-amazon/pull/106))
+- Introduce Amazon Block Storage  Manager (EBS) ([#101](https://github.com/ManageIQ/manageiq-providers-amazon/pull/101))
+- Parse availability zone of an EBS volume ([#116](https://github.com/ManageIQ/manageiq-providers-amazon/pull/116))
+
+
+### Changed
+- Queue EBS storage refresh after cloud inventory is saved ([#120](https://github.com/ManageIQ/manageiq-providers-amazon/pull/120))
+- Rename Amazon block storage manager ([#107](https://github.com/ManageIQ/manageiq-providers-amazon/pull/107))
+- Changes required after inventory refresh memory optimizations ([#109](https://github.com/ManageIQ/manageiq-providers-amazon/pull/109))
+
+
 ## Unreleased - as of Sprint 52 end 2017-01-14
 
 ### Added
