@@ -31,7 +31,11 @@ module ManageIQ::Providers::Amazon::CloudManager::EventParser
       :ems_id     => ems_id
     }
 
-    send("parse_#{event[:event_source]}_event!", event, event_hash)
+    unless %i(config cloud_watch_api cloud_watch_ec2).include?(event["event_source"])
+      raise "Unsupported event source #{event["event_source"]}"
+    end
+
+    send("parse_#{event["event_source"]}_event!", event, event_hash)
 
     log_header = "ems_id: [#{ems_id}] " unless ems_id.nil?
     _log.debug("#{log_header}event: [#{event[:message]}]")

@@ -163,16 +163,16 @@ class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
     if event["messageType"] == "ConfigurationItemChangeNotification"
       # Aws Config Events
       event["eventType"]   = parse_event_type(event)
-      event[:event_source] = :config
+      event["event_source"] = :config
     elsif event.fetch_path("detail", "eventType") == "AwsApiCall"
       # CloudWatch with CloudTrail for API requests Events
       event["eventType"]   = event.fetch_path("detail", "eventName")
-      event[:event_source] = :cloud_watch_api
+      event["event_source"] = :cloud_watch_api
     elsif event["detail-type"] == "EC2 Instance State-change Notification"
       # CloudWatch EC2 Events
       state                = "_#{event.fetch_path("detail", "state")}" if event.fetch_path("detail", "state")
       event["eventType"]   = "#{event["detail-type"].gsub(" ", "_").gsub("-", "_")}#{state}"
-      event[:event_source] = :cloud_watch_ec2
+      event["event_source"] = :cloud_watch_ec2
     else
       # Not recognized event, ignoring...
       return
