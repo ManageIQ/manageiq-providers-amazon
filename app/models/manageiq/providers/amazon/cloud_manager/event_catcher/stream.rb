@@ -1,10 +1,11 @@
 #
-# Uses the AWS Config service to monitor for events.
+# Uses the AWS Config or CloudWatch service to monitor for events.
 #
-# AWS Config events are collected in an SNS Topic.  Each appliance uses a unique
+# AWS Config or CloudWatch events are collected in an SNS Topic.  Each appliance uses a unique
 # SQS queue subscribed to the AWS Config topic.  If the appliance-specific queue
 # doesn't exist, this event monitor will create the queue and subscribe the
 # queue to the AWS Config topic.
+
 #
 class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
   class ProviderUnreachable < ManageIQ::Providers::BaseManager::EventCatcher::Runner::TemporaryFailure
