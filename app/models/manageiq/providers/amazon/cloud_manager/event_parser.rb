@@ -11,8 +11,8 @@ module ManageIQ::Providers::Amazon::CloudManager::EventParser
                                              "response: #{event.fetch_path("detail", "responseElements")}"
     event_hash[:timestamp]                 = event["time"]
     # TODO(lsmola) so Event can be tied to more Vms, we will need to change the modeling
-    event_hash[:vm_ems_ref]                = event.fetch_path("detail", "responseElements", "instancesSet", "items").
-      try(:first).try(:[], "instanceId")
+    event_hash[:vm_ems_ref]                = event.fetch_path("detail", "responseElements", "instancesSet", "items")
+                                               .try(:first).try(:[], "instanceId")
     event_hash[:availability_zone_ems_ref] = nil # Can't get it, needs to go through VM
   end
 

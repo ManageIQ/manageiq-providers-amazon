@@ -37,7 +37,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventParser do
 
       expect(described_class.event_to_hash(event, nil)).to include(:vm_ems_ref => 'i-0aeefa44d61669849')
     end
-    
+
     it "parses EC2_Instance_State_change_Notification_running event" do
       event = parse_event("cloud_watch/EC2_Instance_State_change_Notification_running.json")
 
