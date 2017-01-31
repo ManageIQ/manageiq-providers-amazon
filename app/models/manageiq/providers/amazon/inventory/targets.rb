@@ -29,7 +29,7 @@ class ManageIQ::Providers::Amazon::Inventory::Targets < ManageIQ::Providers::Ama
   def add_remaining_inventory_collections(inventory_collections_data)
     # Get names of all inventory collections defined in InventoryCollectionDefaultInitData
     all_inventory_collections     = ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitData
-      .public_instance_methods.grep(/.+_init_data/).map { |x| x.to_s.gsub("_init_data", "") }
+                                      .public_instance_methods.grep(/.+_init_data/).map { |x| x.to_s.gsub("_init_data", "") }
     # Get names of all defined inventory_collections
     defined_inventory_collections = inventory_collections.keys.map(&:to_s)
 

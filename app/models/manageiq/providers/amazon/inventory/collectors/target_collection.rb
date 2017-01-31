@@ -12,7 +12,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::TargetCollection < Man
 
   def private_images
     hash_collection.new(
-      aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => private_images_refs.to_a}])[:images])
+      aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => private_images_refs.to_a}]).images)
   end
 
   def stacks
@@ -27,12 +27,12 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::TargetCollection < Man
 
   def cloud_networks
     hash_collection.new(
-      aws_ec2.client.describe_vpcs(:filters => [{:name => 'vpc-id', :values => cloud_networks_refs.to_a}])[:vpcs])
+      aws_ec2.client.describe_vpcs(:filters => [{:name => 'vpc-id', :values => cloud_networks_refs.to_a}]).vpcs)
   end
 
   def cloud_subnets
     hash_collection.new(
-      aws_ec2.client.describe_subnets(:filters => [{:name => 'subnet-id', :values => cloud_subnets_refs.to_a}])[:subnets])
+      aws_ec2.client.describe_subnets(:filters => [{:name => 'subnet-id', :values => cloud_subnets_refs.to_a}]).subnets)
   end
 
   def security_groups
@@ -69,12 +69,13 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::TargetCollection < Man
 
   def cloud_volumes
     hash_collection.new(
-      aws_ec2.client.describe_volumes(:filters => [{:name => 'volume-id', :values => cloud_volumes_refs.to_a}])[:volumes])
+      aws_ec2.client.describe_volumes(:filters => [{:name => 'volume-id', :values => cloud_volumes_refs.to_a}]).volumes)
   end
 
   def cloud_volume_snapshots
     hash_collection.new(
-      aws_ec2.client.describe_snapshots(:filters => [{:name => 'snapshot-id', :values => cloud_volume_snapshots_refs.to_a}])[:snapshots])
+      aws_ec2.client.describe_snapshots(
+        :filters => [{:name => 'snapshot-id', :values => cloud_volume_snapshots_refs.to_a}]).snapshots)
   end
 
   def cloud_object_store_containers

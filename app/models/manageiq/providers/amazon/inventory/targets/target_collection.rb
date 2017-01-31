@@ -14,11 +14,13 @@ class ManageIQ::Providers::Amazon::Inventory::Targets::TargetCollection < Manage
         obj[x.id]           = genealogy_parent_id if genealogy_parent_id
       end
 
-      miq_templates = ManageIQ::Providers::Amazon::CloudManager::Template.select([:id]).
-        where(:id => vms_genealogy_parents.values).find_each.index_by(&:id)
+      miq_templates = ManageIQ::Providers::Amazon::CloudManager::Template
+                        .select([:id])
+                        .where(:id => vms_genealogy_parents.values).find_each.index_by(&:id)
 
-      ManageIQ::Providers::Amazon::CloudManager::Vm.select([:id]).
-        where(:id => vms_genealogy_parents.keys).find_each do |vm|
+      ManageIQ::Providers::Amazon::CloudManager::Vm
+        .select([:id])
+        .where(:id => vms_genealogy_parents.keys).find_each do |vm|
 
         parent = miq_templates[vms_genealogy_parents[vm.id]]
         parent.with_relationship_type('genealogy') { parent.set_child(vm) }
@@ -39,11 +41,13 @@ class ManageIQ::Providers::Amazon::Inventory::Targets::TargetCollection < Manage
         obj[x.id] = parent_id if parent_id
       end
 
-      stacks_parents_indexed = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.select([:id, :ancestry]).
-        where(:id => stacks_parents.values).find_each.index_by(&:id)
+      stacks_parents_indexed = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack
+                                 .select([:id, :ancestry])
+                                 .where(:id => stacks_parents.values).find_each.index_by(&:id)
 
-      ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.select([:id, :ancestry]).
-        where(:id => stacks_parents.keys).find_each do |stack|
+      ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack
+        .select([:id, :ancestry])
+        .where(:id => stacks_parents.keys).find_each do |stack|
 
         parent = stacks_parents_indexed[stacks_parents[stack.id]]
         stack.update_attribute(:parent, parent)

@@ -18,7 +18,6 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors
   attr_reader :cloud_volumes, :cloud_volumes_refs
   attr_reader :cloud_volume_snapshots, :cloud_volume_snapshots_refs
 
-
   def initialize(ems, target)
     @ems     = ems
     @target  = target
