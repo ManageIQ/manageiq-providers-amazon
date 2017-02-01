@@ -1,5 +1,5 @@
-class ManageIQ::Providers::Amazon::Inventory::Collectors
-  attr_reader :ems, :target, :options
+class ManageIQ::Providers::Amazon::Inventory::Collector
+  attr_reader :ems, :options, :target
 
   attr_reader :instances, :instances_refs, :instances_deleted
   attr_reader :flavors, :flavors_refs, :flavors_deleted
@@ -18,10 +18,10 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors
   attr_reader :cloud_volumes, :cloud_volumes_refs
   attr_reader :cloud_volume_snapshots, :cloud_volume_snapshots_refs
 
-  def initialize(ems, target)
+  def initialize(ems, options, target)
     @ems     = ems
+    @options = options
     @target  = target
-    @options = Settings.ems_refresh[ems.class.ems_type]
 
     initialize_inventory_sources
   end

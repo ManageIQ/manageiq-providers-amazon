@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::TargetCollection
+class ManageIQ::Providers::Amazon::TargetCollection
   attr_accessor :targets
 
   def initialize(targets)

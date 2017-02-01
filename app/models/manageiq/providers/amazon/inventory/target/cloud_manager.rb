@@ -1,8 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::Targets::CloudManager < ManageIQ::Providers::Amazon::Inventory::Targets
-  def initialize_collector
-    ManageIQ::Providers::Amazon::Inventory::Collectors::CloudManager.new(ems, target)
-  end
-
+class ManageIQ::Providers::Amazon::Inventory::Target::CloudManager < ManageIQ::Providers::Amazon::Inventory::Target
   def initialize_inventory_collections
     add_inventory_collections(%i(vms miq_templates hardwares networks disks availability_zones availability_zones
                                  flavors key_pairs orchestration_stacks orchestration_stacks_resources

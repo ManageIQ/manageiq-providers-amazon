@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::Collectors::NetworkManager < ManageIQ::Providers::Amazon::Inventory::Collectors
+class ManageIQ::Providers::Amazon::Inventory::Collector::NetworkManager < ManageIQ::Providers::Amazon::Inventory::Collector
   def cloud_networks
     hash_collection.new(aws_ec2.client.describe_vpcs[:vpcs])
   end

@@ -1,8 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::Targets::NetworkManager < ManageIQ::Providers::Amazon::Inventory::Targets
-  def initialize_collector
-    ManageIQ::Providers::Amazon::Inventory::Collectors::NetworkManager.new(ems, target)
-  end
-
+class ManageIQ::Providers::Amazon::Inventory::Target::NetworkManager < ManageIQ::Providers::Amazon::Inventory::Target
   def initialize_inventory_collections
     add_inventory_collections(
       %i(cloud_subnet_network_ports network_ports floating_ips cloud_subnets cloud_networks security_groups

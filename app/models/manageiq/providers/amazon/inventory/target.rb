@@ -1,8 +1,18 @@
-class ManageIQ::Providers::Amazon::Inventory::Targets < ManageIQ::Providers::Amazon::Inventory
+class ManageIQ::Providers::Amazon::Inventory::Target
   require_nested :CloudManager
   require_nested :NetworkManager
-  require_nested :EmsEventCollection
   require_nested :TargetCollection
+
+  attr_reader :collector, :inventory_collections
+
+  delegate :ems, :options, :to => :collector
+
+  def initialize(collector)
+    @collector = collector
+
+    @inventory_collections = {}
+    initialize_inventory_collections
+  end
 
   include ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitData
 

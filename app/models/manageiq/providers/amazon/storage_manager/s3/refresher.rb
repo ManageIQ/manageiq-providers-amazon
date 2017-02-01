@@ -8,7 +8,7 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::Refresher < ManageIQ::Pro
       _log.info "Filtering inventory for #{target.class} [#{target_name}] id: [#{target.id}]..."
 
       if refresher_options.try(:[], :inventory_object_refresh)
-        inventory = ManageIQ::Providers::Amazon::Inventory::Factory.inventory(ems, target)
+        inventory = ManageIQ::Providers::Amazon::Builder.build_inventory(ems, target)
       end
 
       _log.info "Filtering inventory...Complete"
@@ -23,7 +23,7 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::Refresher < ManageIQ::Pro
     _log.debug "#{log_header} Parsing inventory..."
     hashes, = Benchmark.realtime_block(:parse_inventory) do
       if refresher_options.try(:[], :inventory_object_refresh)
-        ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParserInventoryObject.new(inventory).populate_inventory_collections
+        inventory.parse
       else
         ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParser.ems_inv_to_hashes(ems, refresher_options)
       end

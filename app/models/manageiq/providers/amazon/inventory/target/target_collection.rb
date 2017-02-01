@@ -1,8 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::Targets::TargetCollection < ManageIQ::Providers::Amazon::Inventory::Targets
-  def initialize_collector
-    ManageIQ::Providers::Amazon::Inventory::Collectors::TargetCollection.new(ems, target)
-  end
-
+class ManageIQ::Providers::Amazon::Inventory::Target::TargetCollection < ManageIQ::Providers::Amazon::Inventory::Target
   def initialize_inventory_collections
     add_targeted_inventory_collections
     add_remaining_inventory_collections(:strategy => :local_db_find_one)

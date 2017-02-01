@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::Collectors::CloudManager < ManageIQ::Providers::Amazon::Inventory::Collectors
+class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ::Providers::Amazon::Inventory::Collector
   def instances
     hash_collection.new(aws_ec2.instances)
   end

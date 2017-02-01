@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::Collectors::StorageManager::Ebs < ManageIQ::Providers::Amazon::Inventory::Collectors
+class ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::Ebs < ManageIQ::Providers::Amazon::Inventory::Collector
   def cloud_volumes
     hash_collection.new(aws_ec2.client.describe_volumes[:volumes])
   end
