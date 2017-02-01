@@ -165,8 +165,11 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::TargetCollection < Man
     # ems_refs of every related object. Now this is not very nice fro ma design point of view, but we really want
     # to see changes in VM's associated objects, so the VM view is always consistent and have fresh data. The partial
     # reason for this is, that AWS doesn't send all the objects state change,
-    changed_vms = ems.vms.where(:ems_ref => instances_refs.to_a).includes(:key_pairs, :network_ports, :floating_ips)
+    changed_vms = ems.vms.where(:ems_ref => instances_refs.to_a).includes(:key_pairs, :network_ports, :floating_ips,
+                                                                          :orchestration_stack)
     changed_vms.each do |vm|
+      stack = vm.orchestration_stack
+      stacks_refs.merge ([stack] + stack.try(:ancestors)).collect(&:ems_ref).compact
       key_pairs_refs.merge vm.key_pairs.collect(&:name).compact
       network_ports_refs.merge vm.network_ports.collect(&:ems_ref).compact
       floating_ips_refs.merge vm.floating_ips.collect(&:ems_ref).compact
