@@ -46,7 +46,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(MiqTemplate.count).to eq(1)
 
     expect(CustomAttribute.count).to eq(0)
-    expect(Disk.count).to eq(1)
+    expect(Disk.count).to eq(3)
     expect(GuestDevice.count).to eq(0)
     expect(Hardware.count).to eq(3)
     expect(Network.count).to eq(4)
@@ -242,7 +242,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :bitness            => 64
     )
 
-    expect(v.hardware.disks.size).to eq(0) # TODO: Change to a flavor that has disks
+    expect(v.hardware.disks.size).to eq(1) # TODO: Change to a flavor that has disks
     expect(v.hardware.guest_devices.size).to eq(0)
     expect(v.hardware.nics.size).to eq(0)
 

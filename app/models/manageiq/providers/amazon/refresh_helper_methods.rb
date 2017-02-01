@@ -41,6 +41,17 @@ module ManageIQ::Providers::Amazon::RefreshHelperMethods
     super(disks, size, name, location, "amazon")
   end
 
+  def add_block_device_disk(disks, name, location)
+    disk = {
+      :device_name     => name,
+      :device_type     => "disk",
+      :controller_type => "amazon",
+      :location        => location,
+    }
+    disks << disk
+    disk
+  end
+
   # Compose an ems_ref combining some existing keys
   def compose_ems_ref(*keys)
     keys.join('_')

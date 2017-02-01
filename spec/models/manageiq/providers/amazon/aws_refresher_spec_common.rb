@@ -32,7 +32,7 @@ module AwsRefresherSpecCommon
       :cloud_network                 => 5,
       :cloud_subnet                  => 10,
       :custom_attribute              => 0,
-      :disk                          => 10,
+      :disk                          => 44,
       :ext_management_system         => 4,
       :firewall_rule                 => 119,
       :flavor                        => 56,
@@ -373,7 +373,7 @@ module AwsRefresherSpecCommon
       :virtualization_type => "paravirtual"
     )
 
-    expect(v.hardware.disks.size).to eq(0) # TODO: Change to a flavor that has disks
+    expect(v.hardware.disks.size).to eq(1) # TODO: Change to a flavor that has disks
     expect(v.hardware.guest_devices.size).to eq(0)
     expect(v.hardware.nics.size).to eq(0)
 
@@ -477,7 +477,7 @@ module AwsRefresherSpecCommon
       :root_device_type     => "ebs",
     )
 
-    expect(v.hardware.disks.size).to eq(0) # TODO: Change to a flavor that has disks
+    expect(v.hardware.disks.size).to eq(1) # TODO: Change to a flavor that has disks
     expect(v.hardware.guest_devices.size).to eq(0)
     expect(v.hardware.nics.size).to eq(0)
     expect(v.hardware.networks.size).to eq(0)
