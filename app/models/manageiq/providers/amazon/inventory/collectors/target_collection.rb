@@ -19,8 +19,12 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::TargetCollection < Man
     # TODO(lsmola) we can filter only one stack, so that means too many requests, lets try to figure out why
     # CLoudFormations API doesn't support a standard filter
     result = stacks_refs.to_a.map do |stack_ref|
-      aws_cloud_formation.client.describe_stacks(:stack_name => stack_ref)[:stacks]
-    end.flatten
+      begin
+        aws_cloud_formation.client.describe_stacks(:stack_name => stack_ref)[:stacks]
+      rescue Aws::CloudFormation::Errors::ValidationError => _e
+        # A missing stack throws and exception like this, we want to ignore it and just don't list it
+      end
+    end.flatten.compact
 
     hash_collection.new(result)
   end
@@ -90,7 +94,11 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::TargetCollection < Man
 
   # Nested API calls, we want all of them for our filtered list of LBs and Stacks
   def stack_resources(stack_name)
-    stack_resources = aws_cloud_formation.client.list_stack_resources(:stack_name => stack_name).try(:stack_resource_summaries)
+    begin
+      stack_resources = aws_cloud_formation.client.list_stack_resources(:stack_name => stack_name).try(:stack_resource_summaries)
+    rescue Aws::CloudFormation::Errors::ValidationError => _e
+      # When Stack was deleted we want to return empty list of resources
+    end
 
     hash_collection.new(stack_resources || [])
   end
@@ -102,6 +110,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::TargetCollection < Man
 
   def stack_template(stack_name)
     aws_cloud_formation.client.get_template(:stack_name => stack_name).template_body
+  rescue Aws::CloudFormation::Errors::ValidationError => _e
+    # When Stack was deleted we want to return empty string for template
+    ""
   end
 
   private
@@ -129,7 +140,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::TargetCollection < Man
     private_images_refs << hash["imageId"] if hash["imageId"]
     key_pairs_refs << hash["keyName"] if hash["keyName"]
     stacks_refs << hash["stackId"] if hash["stackId"]
-
+    stacks_refs << hash["stackName"] if hash["stackName"]
     cloud_networks_refs << hash["vpcId"] if hash["vpcId"]
     cloud_subnets_refs << hash["subnetId"] if hash["subnetId"]
     network_ports_refs << hash["networkInterfaceId"] if hash["networkInterfaceId"]
@@ -168,8 +179,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::TargetCollection < Man
     changed_vms = ems.vms.where(:ems_ref => instances_refs.to_a).includes(:key_pairs, :network_ports, :floating_ips,
                                                                           :orchestration_stack)
     changed_vms.each do |vm|
-      stack = vm.orchestration_stack
-      stacks_refs.merge ([stack] + stack.try(:ancestors)).collect(&:ems_ref).compact
+      stack      = vm.orchestration_stack
+      all_stacks = ([stack] + (stack.try(:ancestors) || [])).compact
+      stacks_refs.merge all_stacks.collect(&:ems_ref).compact
       key_pairs_refs.merge vm.key_pairs.collect(&:name).compact
       network_ports_refs.merge vm.network_ports.collect(&:ems_ref).compact
       floating_ips_refs.merge vm.floating_ips.collect(&:ems_ref).compact
