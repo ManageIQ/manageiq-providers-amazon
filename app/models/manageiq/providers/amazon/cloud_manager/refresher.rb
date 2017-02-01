@@ -58,7 +58,12 @@ class ManageIQ::Providers::Amazon::CloudManager::Refresher < ManageIQ::Providers
 
       unless sub_ems_targets.blank?
         ems_event_collection = ManageIQ::Providers::Amazon::Inventory::TargetCollection.new(sub_ems_targets)
-        all_targets << ems_event_collection
+        if refresher_options.try(:[], :event_targeted_refresh)
+          # We can disable targeted refresh with a setting, then we will just do full ems refresh on any event
+          all_targets << ems_event_collection
+        else
+          all_targets << @ems_by_ems_id[ems_id]
+        end
       end
 
       @targets_by_ems_id[ems_id] = all_targets
