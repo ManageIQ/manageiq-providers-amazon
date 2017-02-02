@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::Collectors::NetworkManager < ManageIQ::Providers::Amazon::Inventory::Collectors
+class ManageIQ::Providers::Amazon::Inventory::Collector::NetworkManager < ManageIQ::Providers::Amazon::Inventory::Collector
   def cloud_networks
     hash_collection.new(aws_ec2.client.describe_vpcs[:vpcs])
   end
@@ -21,7 +21,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::NetworkManager < Manag
 
   def health_check_members(load_balancer_name)
     hash_collection.new(aws_elb.client.describe_instance_health(
-      :load_balancer_name => load_balancer_name).instance_states)
+      :load_balancer_name => load_balancer_name
+    ).instance_states)
   end
 
   def floating_ips

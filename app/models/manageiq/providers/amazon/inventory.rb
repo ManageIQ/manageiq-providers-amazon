@@ -1,19 +1,21 @@
 class ManageIQ::Providers::Amazon::Inventory
-  require_nested :Factory
-  require_nested :HashCollection
-  require_nested :Collectors
-  require_nested :Targets
-  require_nested :TargetCollection
+  attr_reader :ems, :options, :target, :collector, :parsers_classes
 
-  attr_reader :ems, :target, :collector, :inventory_collections, :options
+  delegate :inventory_collections, :to => :target
 
-  def initialize(ems, target)
-    @ems                   = ems
-    @target                = target
-    @options               = Settings.ems_refresh[ems.class.ems_type]
-    @inventory_collections = {:_inventory_collection => true}
-    @collector             = initialize_collector
+  def initialize(ems, raw_target, target_class: nil, collector_class: nil, parsers_classes: nil)
+    @ems     = ems
+    @options = Settings.ems_refresh[ems.class.ems_type]
 
-    initialize_inventory_collections
+    @collector = collector_class.new(@ems, @options, raw_target)
+    @target    = target_class.new(@collector)
+
+    @parsers_classes = parsers_classes
+  end
+
+  def parse
+    parsers_classes.each { |parser_class| parser_class.new(@target).populate_inventory_collections }
+
+    inventory_collections.values
   end
 end

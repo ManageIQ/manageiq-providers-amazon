@@ -8,11 +8,9 @@ module ManageIQ::Providers
 
         _log.info "Filtering inventory for #{target.class} [#{target_name}] id: [#{target.id}]..."
 
-        inventory = if refresher_options.try(:[], :inventory_object_refresh)
-                      ManageIQ::Providers::Amazon::Inventory::Factory.inventory(ems, target)
-                    else
-                      nil
-                    end
+        if refresher_options.try(:[], :inventory_object_refresh)
+          inventory = ManageIQ::Providers::Amazon::Builder.build_inventory(ems, target)
+        end
 
         _log.info "Filtering inventory...Complete"
         [target, inventory]
@@ -26,7 +24,7 @@ module ManageIQ::Providers
       _log.debug "#{log_header} Parsing inventory..."
       hashes, = Benchmark.realtime_block(:parse_inventory) do
         if refresher_options.try(:[], :inventory_object_refresh)
-          ManageIQ::Providers::Amazon::NetworkManager::RefreshParserInventoryObject.new(inventory).populate_inventory_collections
+          inventory.parse
         else
           ManageIQ::Providers::Amazon::NetworkManager::RefreshParser.ems_inv_to_hashes(ems, refresher_options)
         end

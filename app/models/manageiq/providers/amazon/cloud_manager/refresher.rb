@@ -7,11 +7,9 @@ class ManageIQ::Providers::Amazon::CloudManager::Refresher < ManageIQ::Providers
 
       _log.info "Filtering inventory for #{target.class} [#{target_name}] id: [#{target.id}]..."
 
-      inventory = if refresher_options.try(:[], :inventory_object_refresh)
-                    ManageIQ::Providers::Amazon::Inventory::Factory.inventory(ems, target)
-                  else
-                    nil
-                  end
+      if refresher_options.try(:[], :inventory_object_refresh)
+        inventory = ManageIQ::Providers::Amazon::Builder.build_inventory(ems, target)
+      end
 
       _log.info "Filtering inventory...Complete"
       [target, inventory]
@@ -25,7 +23,7 @@ class ManageIQ::Providers::Amazon::CloudManager::Refresher < ManageIQ::Providers
     _log.debug "#{log_header} Parsing inventory..."
     hashes, = Benchmark.realtime_block(:parse_inventory) do
       if refresher_options.try(:[], :inventory_object_refresh)
-        ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject.new(inventory).populate_inventory_collections
+        inventory.parse
       else
         ManageIQ::Providers::Amazon::CloudManager::RefreshParser.ems_inv_to_hashes(ems, refresher_options)
       end
@@ -33,6 +31,34 @@ class ManageIQ::Providers::Amazon::CloudManager::Refresher < ManageIQ::Providers
     _log.debug "#{log_header} Parsing inventory...Complete"
 
     hashes
+  end
+
+  def preprocess_targets
+    @targets_by_ems_id.each do |ems_id, targets|
+      if targets.any? { |t| t.kind_of?(ExtManagementSystem) }
+        ems             = @ems_by_ems_id[ems_id]
+        targets_for_log = targets.map { |t| "#{t.class} [#{t.name}] id [#{t.id}] " }
+        _log.info "Defaulting to full refresh for EMS: [#{ems.name}], id: [#{ems.id}], from targets: #{targets_for_log}" if targets.length > 1
+      end
+
+      # We want all targets of class EmsEvent to be merged into one target, so they can be refreshed together, otherwise
+      # we could be missing some crosslinks in the refreshed data
+      all_targets, sub_ems_targets = targets.partition { |x| x.kind_of?(ExtManagementSystem) }
+
+      unless sub_ems_targets.blank?
+        ems_event_collection = ManageIQ::Providers::Amazon::Inventory::TargetCollection.new(sub_ems_targets)
+        if refresher_options.try(:[], :event_targeted_refresh)
+          # We can disable targeted refresh with a setting, then we will just do full ems refresh on any event
+          all_targets << ems_event_collection
+        else
+          all_targets << @ems_by_ems_id[ems_id]
+        end
+      end
+
+      @targets_by_ems_id[ems_id] = all_targets
+    end
+
+    super
   end
 
   # TODO(lsmola) NetworkManager, remove this once we have a full representation of the NetworkManager.

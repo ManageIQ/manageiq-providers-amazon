@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::Collectors::CloudManager < ManageIQ::Providers::Amazon::Inventory::Collectors
+class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ::Providers::Amazon::Inventory::Collector
   def instances
     hash_collection.new(aws_ec2.instances)
   end
@@ -17,14 +17,14 @@ class ManageIQ::Providers::Amazon::Inventory::Collectors::CloudManager < ManageI
 
   def private_images
     hash_collection.new(aws_ec2.client.describe_images(:owners  => [:self],
-                                                      :filters => [{:name   => "image-type",
-                                                                    :values => ["machine"]}])[:images])
+                                                       :filters => [{:name   => "image-type",
+                                                                     :values => ["machine"]}])[:images])
   end
 
   def shared_images
     hash_collection.new(aws_ec2.client.describe_images(:executable_users => [:self],
-                                                      :filters          => [{:name   => "image-type",
-                                                                             :values => ["machine"]}])[:images])
+                                                       :filters          => [{:name   => "image-type",
+                                                                              :values => ["machine"]}])[:images])
   end
 
   def public_images

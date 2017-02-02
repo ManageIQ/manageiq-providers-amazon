@@ -1,8 +1,18 @@
-class ManageIQ::Providers::Amazon::Inventory::Targets < ManageIQ::Providers::Amazon::Inventory
+class ManageIQ::Providers::Amazon::Inventory::Target
   require_nested :CloudManager
   require_nested :NetworkManager
-  require_nested :EmsEventCollection
   require_nested :TargetCollection
+
+  attr_reader :collector, :inventory_collections
+
+  delegate :ems, :options, :to => :collector
+
+  def initialize(collector)
+    @collector = collector
+
+    @inventory_collections = {}
+    initialize_inventory_collections
+  end
 
   include ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitData
 
@@ -29,7 +39,7 @@ class ManageIQ::Providers::Amazon::Inventory::Targets < ManageIQ::Providers::Ama
   def add_remaining_inventory_collections(inventory_collections_data)
     # Get names of all inventory collections defined in InventoryCollectionDefaultInitData
     all_inventory_collections     = ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitData
-      .public_instance_methods.grep(/.+_init_data/).map { |x| x.to_s.gsub("_init_data", "") }
+                                    .public_instance_methods.grep(/.+_init_data/).map { |x| x.to_s.gsub("_init_data", "") }
     # Get names of all defined inventory_collections
     defined_inventory_collections = inventory_collections.keys.map(&:to_s)
 
