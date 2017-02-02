@@ -42,6 +42,6 @@ class ManageIQ::Providers::Amazon::Inventory::Targets::NetworkManager < ManageIQ
 
   def instances
     # TODO(lsmola) do the filtering on the API side
-    HashCollection.new(aws_ec2.instances.select { |instance| instance.network_interfaces.blank? })
+    HashCollection.new(aws_ec2.instances)
   end
 end
