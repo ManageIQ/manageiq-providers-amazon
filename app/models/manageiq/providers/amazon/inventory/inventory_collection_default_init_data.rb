@@ -5,7 +5,7 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
     }
 
     init_data.merge!(attributes).merge!(extra_attributes)
-    return init_data
+    init_data
   end
 
   def vms_init_data(extra_attributes = {})
@@ -353,8 +353,8 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
       end
 
       stacks_parents_indexed = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack
-                                 .select([:id, :ancestry])
-                                 .where(:id => stacks_parents.values).find_each.index_by(&:id)
+                               .select([:id, :ancestry])
+                               .where(:id => stacks_parents.values).find_each.index_by(&:id)
 
       ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack
         .select([:id, :ancestry])
@@ -383,8 +383,8 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
       end
 
       miq_templates = ManageIQ::Providers::Amazon::CloudManager::Template
-                        .select([:id])
-                        .where(:id => vms_genealogy_parents.values).find_each.index_by(&:id)
+                      .select([:id])
+                      .where(:id => vms_genealogy_parents.values).find_each.index_by(&:id)
 
       ManageIQ::Providers::Amazon::CloudManager::Vm
         .select([:id])

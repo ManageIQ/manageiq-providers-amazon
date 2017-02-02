@@ -8,12 +8,18 @@ class ManageIQ::Providers::Amazon::Inventory::Target::CloudManager < ManageIQ::P
       vm_and_miq_template_ancestry_init_data(
         :dependency_attributes => {
           :vms           => [inventory_collections[:vms]],
-          :miq_templates => [inventory_collections[:miq_templates]]}))
+          :miq_templates => [inventory_collections[:miq_templates]]
+        }
+      )
+    )
 
     add_inventory_collection(
       orchestration_stack_ancestry_init_data(
         :dependency_attributes => {
           :orchestration_stacks           => [inventory_collections[:orchestration_stacks]],
-          :orchestration_stacks_resources => [inventory_collections[:orchestration_stacks_resources]]}))
+          :orchestration_stacks_resources => [inventory_collections[:orchestration_stacks_resources]]
+        }
+      )
+    )
   end
 end

@@ -23,7 +23,7 @@ class ManageIQ::Providers::Amazon::Inventory::Target
   end
 
   def add_inventory_collection(inventory_collection_data, key = nil)
-    data          = inventory_collection_data
+    data = inventory_collection_data
     data[:parent] ||= ems
     key           ||= data[:association]
 
