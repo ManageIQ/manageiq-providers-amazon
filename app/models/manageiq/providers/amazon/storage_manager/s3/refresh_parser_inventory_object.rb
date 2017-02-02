@@ -19,7 +19,7 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParserInventoryObj
 
   def object_store
     process_inventory_collection(
-      inventory.cloud_object_store_containers,
+      inventory.collector.cloud_object_store_containers,
       :cloud_object_store_containers
     ) { |c| parse_container(c) }
   end

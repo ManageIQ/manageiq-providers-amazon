@@ -19,11 +19,11 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryOb
   private
 
   def get_volumes
-    process_inventory_collection(inventory.cloud_volumes, :cloud_volumes) { |volume| parse_volume(volume) }
+    process_inventory_collection(inventory.collector.cloud_volumes, :cloud_volumes) { |volume| parse_volume(volume) }
   end
 
   def get_snapshots
-    process_inventory_collection(inventory.cloud_volume_snapshots, :cloud_volume_snapshots) { |snap| parse_snapshot(snap) }
+    process_inventory_collection(inventory.collector.cloud_volume_snapshots, :cloud_volume_snapshots) { |snap| parse_snapshot(snap) }
   end
 
   def parse_volume(volume)
