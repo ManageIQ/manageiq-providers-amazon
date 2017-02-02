@@ -7,12 +7,14 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
   def instances
     hash_collection.new(
-      aws_ec2.instances(:filters => [{:name => 'instance-id', :values => instances_refs.to_a}]))
+      aws_ec2.instances(:filters => [{:name => 'instance-id', :values => instances_refs.to_a}])
+    )
   end
 
   def private_images
     hash_collection.new(
-      aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => private_images_refs.to_a}]).images)
+      aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => private_images_refs.to_a}]).images
+    )
   end
 
   def stacks
@@ -31,22 +33,26 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
   def cloud_networks
     hash_collection.new(
-      aws_ec2.client.describe_vpcs(:filters => [{:name => 'vpc-id', :values => cloud_networks_refs.to_a}]).vpcs)
+      aws_ec2.client.describe_vpcs(:filters => [{:name => 'vpc-id', :values => cloud_networks_refs.to_a}]).vpcs
+    )
   end
 
   def cloud_subnets
     hash_collection.new(
-      aws_ec2.client.describe_subnets(:filters => [{:name => 'subnet-id', :values => cloud_subnets_refs.to_a}]).subnets)
+      aws_ec2.client.describe_subnets(:filters => [{:name => 'subnet-id', :values => cloud_subnets_refs.to_a}]).subnets
+    )
   end
 
   def security_groups
     hash_collection.new(
-      aws_ec2.security_groups(:filters => [{:name => 'group-id', :values => security_groups_refs.to_a}]))
+      aws_ec2.security_groups(:filters => [{:name => 'group-id', :values => security_groups_refs.to_a}])
+    )
   end
 
   def network_ports
     hash_collection.new(aws_ec2.client.describe_network_interfaces(
-      :filters => [{:name => 'network-interface-id', :values => network_ports_refs.to_a}]).network_interfaces)
+      :filters => [{:name => 'network-interface-id', :values => network_ports_refs.to_a}]
+    ).network_interfaces)
   end
 
   def load_balancers
@@ -56,7 +62,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     load_balancers_refs.to_a.each do |load_balancers_ref|
       begin
         result += aws_elb.client.describe_load_balancers(
-          :load_balancer_names => [load_balancers_ref]).load_balancer_descriptions
+          :load_balancer_names => [load_balancers_ref]
+        ).load_balancer_descriptions
       rescue ::Aws::ElasticLoadBalancing::Errors::LoadBalancerNotFound => _e
         # TODO(lsmola) maybe it will be faster to fetch all LBs and filter them?
         # Ignore LB that was not found, it will be deleted from our DB
@@ -68,18 +75,22 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
   def floating_ips
     hash_collection.new(
-      aws_ec2.client.describe_addresses(:filters => [{:name => 'allocation-id', :values => floating_ips_refs.to_a}]).addresses)
+      aws_ec2.client.describe_addresses(:filters => [{:name => 'allocation-id', :values => floating_ips_refs.to_a}]).addresses
+    )
   end
 
   def cloud_volumes
     hash_collection.new(
-      aws_ec2.client.describe_volumes(:filters => [{:name => 'volume-id', :values => cloud_volumes_refs.to_a}]).volumes)
+      aws_ec2.client.describe_volumes(:filters => [{:name => 'volume-id', :values => cloud_volumes_refs.to_a}]).volumes
+    )
   end
 
   def cloud_volume_snapshots
     hash_collection.new(
       aws_ec2.client.describe_snapshots(
-        :filters => [{:name => 'snapshot-id', :values => cloud_volume_snapshots_refs.to_a}]).snapshots)
+        :filters => [{:name => 'snapshot-id', :values => cloud_volume_snapshots_refs.to_a}]
+      ).snapshots
+    )
   end
 
   def cloud_object_store_containers
@@ -105,7 +116,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
   def health_check_members(load_balancer_name)
     hash_collection.new(aws_elb.client.describe_instance_health(
-      :load_balancer_name => load_balancer_name).instance_states)
+      :load_balancer_name => load_balancer_name
+    ).instance_states)
   end
 
   def stack_template(stack_name)

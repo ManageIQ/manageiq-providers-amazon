@@ -64,7 +64,8 @@ module ManageIQ::Providers::Amazon::Inventory::InventoryCollectionDefaultInitDat
     when :find_missing_in_local_db
       attributes[:custom_db_finder] = lambda do |inventory_collection, hash_uuid_by_ref|
         inventory_collection.parent.send(inventory_collection.association).references(:vm_or_template).where(
-          :vms => {:ems_ref => hash_uuid_by_ref[:vm_or_template]}).first
+          :vms => {:ems_ref => hash_uuid_by_ref[:vm_or_template]}
+        ).first
       end
     end
 

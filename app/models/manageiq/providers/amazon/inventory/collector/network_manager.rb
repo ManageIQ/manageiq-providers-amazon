@@ -21,7 +21,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::NetworkManager < Manage
 
   def health_check_members(load_balancer_name)
     hash_collection.new(aws_elb.client.describe_instance_health(
-      :load_balancer_name => load_balancer_name).instance_states)
+      :load_balancer_name => load_balancer_name
+    ).instance_states)
   end
 
   def floating_ips
