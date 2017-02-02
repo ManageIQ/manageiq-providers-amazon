@@ -135,6 +135,13 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < 
       end
     end
 
+    if instance.key?("block_device_mappings")
+      instance["block_device_mappings"].each do |blk_map|
+        device = File.basename(blk_map["device_name"])
+        add_block_device_disk(disks, device, device)
+      end
+    end
+
     disks.each do |d|
       d[:hardware] = inventory_collections[:hardwares].lazy_find(instance['instance_id'])
     end

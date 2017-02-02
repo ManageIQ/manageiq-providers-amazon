@@ -271,6 +271,12 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       end
     end
 
+    instance.block_device_mappings.each do |blk_map|
+      disks = new_result[:hardware][:disks]
+      device = File.basename(blk_map.device_name)
+      add_block_device_disk(disks, device, device)
+    end
+
     return uid, new_result
   end
 
