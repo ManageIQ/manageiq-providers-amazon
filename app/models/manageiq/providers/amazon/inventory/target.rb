@@ -23,11 +23,11 @@ class ManageIQ::Providers::Amazon::Inventory::Target
   end
 
   def add_inventory_collection(inventory_collection_data, key = nil)
-    model_class, data = inventory_collection_data
-    data[:parent]     ||= ems
-    key               ||= data[:association]
+    data          = inventory_collection_data
+    data[:parent] ||= ems
+    key           ||= data[:association]
 
-    inventory_collections[key] = ::ManagerRefresh::InventoryCollection.new(model_class, data)
+    inventory_collections[key] = ::ManagerRefresh::InventoryCollection.new(data)
   end
 
   def add_inventory_collections(inventory_collections, inventory_collections_data = {})
