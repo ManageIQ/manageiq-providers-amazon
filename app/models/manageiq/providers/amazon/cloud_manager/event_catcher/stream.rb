@@ -110,17 +110,21 @@ class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
     end
   end
 
-  # @return [Aws::SNS::Topic] the found topic
-  # @raise [ProviderUnreachable] in case the topic is not found
   def sns_topic
     @ems.with_provider_connection(:service => :SNS) do |sns|
-      sns.topics.detect { |t| t.arn.split(/:/)[-1] == @topic_name }
-    end || begin
-      $aws_log.warn("#{log_header} Unable to find the AWS Config Topic '#{@topic_name}'. " \
-      "Cannot collect Amazon events for AWS Access Key ID #{@ems.authentication_userid}")
-      $aws_log.warn("#{log_header} Contact Amazon to create the AWS Config service and topic for Amazon events.")
-      raise ProviderUnreachable, "Unable to find the AWS Config Topic '#{@topic_name}'"
+      get_topic(sns) || create_topic(sns)
     end
+  end
+
+  def get_topic(sns)
+    sns.topics.detect { |t| t.arn.split(/:/)[-1] == @topic_name }
+  end
+
+  def create_topic(sns)
+    sns.create_topic(:name => @topic_name)
+    $aws_log.info("Created SNS topic #{@topic_name}")
+  rescue Aws::SNS::Errors::ServiceError => err
+    $aws_log.error("Cannot create SNS topic #{@topic_name}, #{err.class.name}, Message=#{err.message}")
   end
 
   # @param [Aws::SNS::Topic] topic
