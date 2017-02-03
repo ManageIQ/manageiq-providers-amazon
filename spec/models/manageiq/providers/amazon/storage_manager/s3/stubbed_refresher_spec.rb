@@ -60,6 +60,115 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
     end
   end
 
+  describe "decouple cloud manager from S3 manager" do
+    before do
+      @userid = 'userid_123456'
+      @password = 'pass_654321'
+      @userid2 = "#{@userid}_2"
+      @password2 = "#{@password}_2"
+      @userid3 = "#{@userid}_3"
+      @password3 = "#{@password}_3"
+    end
+
+    it "cloud manager without authentication and then add and update it" do
+      _, _, zone = EvmSpecHelper.create_guid_miq_server_zone
+      @ems = FactoryGirl.create(:ems_amazon, :zone => zone)
+
+      expect(@ems.s3_storage_manager).not_to be_nil
+
+      # create authentication
+      @ems.update_authentication(:default => {:userid => @userid, :password => @password})
+
+      expect(@ems.default_authentication.userid).to eq(@userid)
+      expect(@ems.s3_storage_manager.default_authentication).not_to be_nil
+      expect(@ems.s3_storage_manager.default_authentication.userid).to eq(@userid)
+
+      # update authentication
+      @ems.update_authentication(:default => {:userid => @userid2, :password => @password2})
+
+      expect(@ems.default_authentication.userid).to eq(@userid2)
+      expect(@ems.s3_storage_manager.default_authentication.userid).to eq(@userid2)
+    end
+
+    it "update any cloud manager authentication" do
+      @ems1 = create_cloud_manager_with_auth(@userid, @password, @hostname, "us-west-1")
+      @ems2 = create_cloud_manager_with_auth(@userid, @password, @hostname, "us-west-2")
+
+      # update authentication of the first one
+      @ems1.update_authentication(:default => {:userid => @userid2, :password => @password2})
+
+      expect(@ems1.default_authentication.userid).to eq(@userid2)
+      expect(@ems2.default_authentication.userid).to eq(@userid) # at the moment this one should not be updated
+      expect(@ems1.s3_storage_manager.default_authentication.userid).to eq(@userid2)
+      expect(@ems1.s3_storage_manager.default_authentication.password).to eq(@password2)
+
+      # update authentication of the second one
+      @ems2.update_authentication(:default => {:userid => @userid3, :password => @password3})
+
+      expect(@ems2.default_authentication.userid).to eq(@userid3)
+      expect(@ems2.s3_storage_manager.default_authentication.userid).to eq(@userid3)
+      expect(@ems2.s3_storage_manager.default_authentication.password).to eq(@password3)
+    end
+
+    it "creating cloud provider creates standalone S3 as well" do
+      @ems = create_cloud_manager_with_auth(@userid, @password, @hostname, "us-west-1")
+
+      expect(@ems.s3_storage_manager).not_to be_nil
+      expect(Authentication.count).to eq(2) # cloud manager + S3 manager
+      expect(Endpoint.count).to eq(2)
+
+      expect(@ems.default_authentication.userid).to eq(@ems.s3_storage_manager.default_authentication.userid)
+      expect(@ems.default_authentication.password).to eq(@ems.s3_storage_manager.default_authentication.password)
+      expect(@ems.default_authentication.id).not_to eq(@ems.s3_storage_manager.default_authentication.id)
+
+      expect(@ems.default_endpoint.hostname).to eq(@ems.s3_storage_manager.default_endpoint.hostname)
+      expect(@ems.default_endpoint.id).not_to eq(@ems.s3_storage_manager.default_endpoint.id)
+    end
+
+    it "2 cloud providers, first creates S3, second uses it" do
+      @ems1 = create_cloud_manager_with_auth(@userid, @password, @hostname, "us-west-1")
+
+      expect(ExtManagementSystem.count).to eq 4 # cloud + network + ebs + s3
+      @s3 = @ems1.s3_storage_manager
+
+      @ems2 = create_cloud_manager_with_auth(@userid, @password, @hostname, "us-west-2")
+
+      expect(ExtManagementSystem.count).to eq 7 # 4 + 3
+      expect(@ems2.s3_storage_manager).to eq @s3
+    end
+
+    it "3 cloud providers, but only two share S3 manager" do
+      @ems1 = create_cloud_manager_with_auth(@userid, @password, @hostname, "us-west-1")
+      @ems2 = create_cloud_manager_with_auth(@userid, @password, @hostname, "us-west-2")
+      @ems3 = create_cloud_manager_with_auth("other_" + @userid, @password, @hostname, "us-west-1")
+
+      expect(ExtManagementSystem.count).to eq 11 # 4 + 3 + 4
+      expect(@ems1.s3_storage_manager).to eq @ems2.s3_storage_manager
+      expect(@ems1.s3_storage_manager).not_to eq @ems3.s3_storage_manager
+      expect(@ems2.s3_storage_manager).not_to eq @ems3.s3_storage_manager
+    end
+
+    it "delete S3 manager together with last cloud manager" do
+      @ems1 = create_cloud_manager_with_auth(@userid, @password, @hostname, "us-west-1")
+      @ems2 = create_cloud_manager_with_auth(@userid, @password, @hostname, "us-west-2")
+
+      expect(ManageIQ::Providers::Amazon::StorageManager::S3.count).to eq(1)
+
+      # delete first cloud manager; S3 should remain
+      @ems1.destroy
+      expect(ManageIQ::Providers::Amazon::StorageManager::S3.count).to eq(1)
+
+      @ems2.destroy
+      expect(ManageIQ::Providers::Amazon::StorageManager::S3.count).to eq(0)
+    end
+
+    it "list of cloud manager's storage managers contain S3" do
+      @ems = create_cloud_manager_with_auth(@userid, @password, @hostname, "us-west-1")
+
+      expect(@ems.storage_managers.find { |m| m.type == ManageIQ::Providers::Amazon::StorageManager::S3.name }).to_not be_nil
+    end
+  end
+
   def refresh_spec
     @ems.reload
 
@@ -176,5 +285,21 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
                                    :uid_ems     => nil)
 
     expect(ems.cloud_object_store_containers.size).to eql(expected_table_counts[:cloud_object_store_containers])
+  end
+
+  # cloud manager with its authentication and endpoints defined on create
+  def create_cloud_manager_with_auth(userid, password, hostname, provider_region)
+    _, _, zone = EvmSpecHelper.create_guid_miq_server_zone
+    ems = FactoryGirl.build(:ems_amazon, :zone => zone, :provider_region => provider_region)
+    ems.add_connection_configuration_by_role(
+      :endpoint       => {:role => "default", :hostname => hostname},
+      :authentication => {:userid => userid, :password => password}
+    )
+
+    expect(ems.save).to be_truthy
+    expect(ems.endpoints.count).to eq(1)
+    expect(ems.authentications.count).to eq(1)
+
+    ems
   end
 end
