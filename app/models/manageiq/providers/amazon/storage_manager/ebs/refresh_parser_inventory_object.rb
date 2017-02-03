@@ -29,7 +29,7 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryOb
   def parse_volume(volume)
     uid = volume['volume_id']
 
-    {
+    volume_hash = {
       :type                  => self.class.volume_type,
       :ext_management_system => ems,
       :ems_ref               => uid,
@@ -41,6 +41,10 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryOb
       :base_snapshot         => inventory_collections[:cloud_volume_snapshots].lazy_find(volume['snapshot_id']),
       :availability_zone     => inventory_collections[:availability_zones].lazy_find(volume['availability_zone'])
     }
+
+    link_volume_to_disk(volume_hash, volume['attachments'])
+
+    volume_hash
   end
 
   def parse_snapshot(snap)
@@ -62,6 +66,29 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryOb
   # Overridden helper methods, we should put them in helper once we get rid of old refresh
   def get_from_tags(resource, item)
     (resource['tags'] || []).detect { |tag, _| tag['key'].downcase == item.to_s.downcase }.try(:[], 'value')
+  end
+
+  def link_volume_to_disk(volume_hash, attachments)
+    uid = volume_hash[:ems_ref]
+
+    (attachments || []).each do |a|
+      if a['device'].blank?
+        _log.warn "#{log_header}: Volume: #{uid}, is missing a mountpoint, skipping the volume processing"
+        _log.warn "#{log_header}:   EMS: #{@ems.name}, Instance: #{a['instance_id']}"
+        next
+      end
+
+      dev = File.basename(a['device'])
+
+      disk_hash = {
+        :hardware    => inventory_collections[:hardwares].lazy_find(a["instance_id"]),
+        :device_name => dev,
+        :location    => dev,
+        :size        => volume_hash[:size],
+        :backing     => inventory_collections[:cloud_volumes].lazy_find(uid),
+      }
+      inventory_collections[:disks] << inventory_collections[:disks].new_inventory_object(disk_hash)
+    end
   end
 
   class << self

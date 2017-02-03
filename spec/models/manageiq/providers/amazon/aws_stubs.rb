@@ -377,13 +377,26 @@ module AwsStubs
       mocked_cloud_volumes << {
         :availability_zone => "us-east-1e",
         :create_time       => Time.now,
-        :size              => i,
+        :size              => 1,
         :state             => "in-use",
         :volume_id         => "volume_id_#{i}",
         :volume_type       => "standard",
         :snapshot_id       => "snapshot_id_#{i}",
         :tags              => [{ :key => "name", :value => "volume_#{i}" }]
       }
+    end
+
+    unless mocked_cloud_volumes.blank?
+      # Attach the first cloud volume to a specific instance.
+      volume_with_attachment = mocked_cloud_volumes[0]
+      volume_with_attachment[:attachments] = [{
+        :volume_id             => "volume_id_0",
+        :instance_id           => "instance_0",
+        :device                => "/dev/sda1",
+        :state                 => "attached",
+        :attach_time           => Time.now,
+        :delete_on_termination => true
+      }]
     end
 
     { :volumes => mocked_cloud_volumes }
@@ -396,7 +409,7 @@ module AwsStubs
         :snapshot_id => "snapshot_id_#{i}",
         :description => "snapshot_desc_#{i}",
         :start_time  => Time.now,
-        :volume_size => i,
+        :volume_size => 1,
         :state       => "completed",
         :volume_id   => "volume_id_#{i}",
         :tags        => [{ :key => "name", :value => "snapshot_#{i}" }]
