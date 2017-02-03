@@ -3,9 +3,7 @@
 class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::Providers::CloudManager::RefreshParserInventoryObject
   include ManageIQ::Providers::Amazon::RefreshHelperMethods
 
-  def ems
-    inventory.ems
-  end
+  delegate :ems, :to => :inventory
 
   def populate_inventory_collections
     log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{inventory.ems.name}] id: [#{inventory.ems.id}]"
@@ -196,7 +194,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def parse_image_hardware(image)
-    guest_os = (image['platform'] == "windows") ? "windows" : "linux"
+    guest_os = image['platform'] == "windows" ? "windows" : "linux"
     if guest_os == "linux"
       guest_os = OperatingSystem.normalize_os_name(image['image_location'])
       guest_os = "linux" if guest_os == "unknown"
@@ -259,7 +257,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :key_pairs             => [inventory_collections[:key_pairs].lazy_find(instance['key_name'])].compact,
       :location              => inventory_collections[:networks].lazy_find("#{uid}__public", :key => :hostname, :default => 'unknown'),
       :orchestration_stack   => inventory_collections[:orchestration_stacks].lazy_find(
-        get_from_tags(instance, "aws:cloudformation:stack-id")),
+        get_from_tags(instance, "aws:cloudformation:stack-id")
+      ),
     }
   end
 

@@ -23,6 +23,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
   end
 
   private
+
   def get_cloud_networks
     process_inventory_collection(inventory.collector.cloud_networks, :cloud_networks) { |vpc| parse_cloud_network(vpc) }
   end
@@ -134,8 +135,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
 
     network_port['private_ip_addresses'].each do |private_address|
       if private_address['association'] &&
-        !(public_ip = private_address.fetch_path('association', 'public_ip')).blank? &&
-        private_address.fetch_path('association', 'allocation_id').blank?
+         !(public_ip = private_address.fetch_path('association', 'public_ip')).blank? &&
+         private_address.fetch_path('association', 'allocation_id').blank?
 
         public_ips << {
           :network_port_id    => network_port['network_interface_id'],
@@ -179,7 +180,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
     name = get_from_tags(vpc, 'name')
     name ||= uid
 
-    status = (vpc['state'] == :available) ? "active" : "inactive"
+    status = vpc['state'] == :available ? "active" : "inactive"
 
     {
       :type                  => self.class.cloud_network_type.name,
@@ -190,7 +191,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :status                => status,
       :enabled               => true,
       :orchestration_stack   => inventory_collections[:orchestration_stacks].lazy_find(
-        get_from_tags(vpc, "aws:cloudformation:stack-id")),
+        get_from_tags(vpc, "aws:cloudformation:stack-id")
+      ),
     }
   end
 
@@ -223,7 +225,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :description           => sg['description'].try(:truncate, 255),
       :cloud_network         => inventory_collections[:cloud_networks].lazy_find(sg['vpc_id']),
       :orchestration_stack   => inventory_collections[:orchestration_stacks].lazy_find(
-        get_from_tags(sg, "aws:cloudformation:stack-id")),
+        get_from_tags(sg, "aws:cloudformation:stack-id")
+      ),
     }
   end
 
