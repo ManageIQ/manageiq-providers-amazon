@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParserInventoryObject < ::ManagerRefresh::RefreshParserInventoryObject
+class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3 < ::ManagerRefresh::RefreshParserInventoryObject
   include ManageIQ::Providers::Amazon::RefreshHelperMethods
 
   def ems

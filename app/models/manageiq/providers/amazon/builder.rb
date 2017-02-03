@@ -10,7 +10,7 @@ class ManageIQ::Providers::Amazon::Builder
           target,
           :collector_class => ManageIQ::Providers::Amazon::Inventory::Collector::NetworkManager,
           :target_class    => ManageIQ::Providers::Amazon::Inventory::Target::NetworkManager,
-          :parsers_classes => [ManageIQ::Providers::Amazon::NetworkManager::RefreshParserInventoryObject]
+          :parsers_classes => [ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager]
         )
       when ManageIQ::Providers::Amazon::StorageManager::Ebs
         ManageIQ::Providers::Amazon::Inventory.new(
@@ -18,7 +18,7 @@ class ManageIQ::Providers::Amazon::Builder
           target,
           :collector_class => ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::Ebs,
           :target_class    => ManageIQ::Providers::Amazon::Inventory::Target::StorageManager::Ebs,
-          :parsers_classes => [ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryObject]
+          :parsers_classes => [ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs]
         )
       when ManageIQ::Providers::Amazon::StorageManager::S3
         ManageIQ::Providers::Amazon::Inventory.new(
@@ -26,7 +26,7 @@ class ManageIQ::Providers::Amazon::Builder
           target,
           :collector_class => ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::S3,
           :target_class    => ManageIQ::Providers::Amazon::Inventory::Target::StorageManager::S3,
-          :parsers_classes => [ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParserInventoryObject]
+          :parsers_classes => [ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3]
         )
       when ManageIQ::Providers::Amazon::TargetCollection
         ManageIQ::Providers::Amazon::Inventory.new(
@@ -34,9 +34,9 @@ class ManageIQ::Providers::Amazon::Builder
           target,
           :collector_class => ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection,
           :target_class    => ManageIQ::Providers::Amazon::Inventory::Target::TargetCollection,
-          :parsers_classes => [ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject,
-                               ManageIQ::Providers::Amazon::NetworkManager::RefreshParserInventoryObject,
-                               ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParserInventoryObject]
+          :parsers_classes => [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager,
+                               ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager,
+                               ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs]
         )
       else
         # Fallback to ems refresh
@@ -50,7 +50,7 @@ class ManageIQ::Providers::Amazon::Builder
         target,
         :collector_class => ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager,
         :target_class    => ManageIQ::Providers::Amazon::Inventory::Target::CloudManager,
-        :parsers_classes => [ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject]
+        :parsers_classes => [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager]
       )
     end
   end

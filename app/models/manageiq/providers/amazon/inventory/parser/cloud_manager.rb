@@ -1,6 +1,6 @@
 # TODO: Separate collection from parsing (perhaps collecting in parallel a la RHEVM)
 
-class ManageIQ::Providers::Amazon::CloudManager::RefreshParserInventoryObject < ManageIQ::Providers::CloudManager::RefreshParserInventoryObject
+class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::Providers::CloudManager::RefreshParserInventoryObject
   include ManageIQ::Providers::Amazon::RefreshHelperMethods
 
   def ems
