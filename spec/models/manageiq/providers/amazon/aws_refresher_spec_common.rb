@@ -343,13 +343,13 @@ module AwsRefresherSpecCommon
     expect(v.availability_zone).to eq(@az)
     expect(v.floating_ip).to eq(@ip)
     expect(v.network_ports.first.floating_ips.count).to eq(1)
-    expect(v.network_ports.first.floating_ips).to eq([@ip])
-    expect(v.network_ports.first.floating_ip_addresses).to eq([@ip.address])
-    expect(v.network_ports.first.fixed_ip_addresses).to eq([@ip.fixed_ip_address])
-    expect(v.network_ports.first.ipaddresses).to eq([@ip.fixed_ip_address, @ip.address])
-    expect(v.ipaddresses).to eq([@ip.fixed_ip_address, @ip.address])
+    expect(v.network_ports.first.floating_ips).to match_array([@ip])
+    expect(v.network_ports.first.floating_ip_addresses).to match_array([@ip.address])
+    expect(v.network_ports.first.fixed_ip_addresses).to match_array([@ip.fixed_ip_address])
+    expect(v.network_ports.first.ipaddresses).to match_array([@ip.fixed_ip_address, @ip.address])
+    expect(v.ipaddresses).to match_array([@ip.fixed_ip_address, @ip.address])
     expect(v.flavor).to eq(@flavor)
-    expect(v.key_pairs).to eq([@kp])
+    expect(v.key_pairs).to match_array([@kp])
     expect(v.cloud_network).to     be_nil
     expect(v.cloud_subnet).to      be_nil
     sg_2 = ManageIQ::Providers::Amazon::NetworkManager::SecurityGroup
@@ -438,10 +438,10 @@ module AwsRefresherSpecCommon
     expect(v.availability_zone)
       .to eq(ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.find_by_name("us-east-1e"))
     expect(v.floating_ip).to be_nil
-    expect(v.key_pairs).to eq([@kp])
+    expect(v.key_pairs).to match_array([@kp])
     expect(v.cloud_network).to be_nil
     expect(v.cloud_subnet).to be_nil
-    expect(v.security_groups).to eq([@sg])
+    expect(v.security_groups).to match_array([@sg])
     expect(v.operating_system).to be_nil # TODO: This should probably not be nil
     expect(v.custom_attributes.size).to eq(0)
     expect(v.snapshots.size).to eq(0)
@@ -516,15 +516,15 @@ module AwsRefresherSpecCommon
 
     expect(v.cloud_networks.first).to eq(@cn)
     expect(v.cloud_subnets.first).to eq(@subnet)
-    expect(v.security_groups).to eq([@sg_on_cn])
+    expect(v.security_groups).to match_array([@sg_on_cn])
     expect(v.floating_ip).to eq(@ip1)
-    expect(v.floating_ips).to eq([@ip1])
+    expect(v.floating_ips).to match_array([@ip1])
     expect(v.network_ports.first.floating_ips.count).to eq(1)
-    expect(v.network_ports.first.floating_ips).to eq([@ip1])
-    expect(v.network_ports.first.floating_ip_addresses).to eq([@ip1.address])
-    expect(v.network_ports.first.fixed_ip_addresses).to eq([@ip1.fixed_ip_address, '10.0.0.208'])
-    expect(v.network_ports.first.ipaddresses).to eq([@ip1.fixed_ip_address, '10.0.0.208', @ip1.address])
-    expect(v.ipaddresses).to eq([@ip1.fixed_ip_address, '10.0.0.208', @ip1.address])
+    expect(v.network_ports.first.floating_ips).to match_array([@ip1])
+    expect(v.network_ports.first.floating_ip_addresses).to match_array([@ip1.address])
+    expect(v.network_ports.first.fixed_ip_addresses).to match_array([@ip1.fixed_ip_address, '10.0.0.208'])
+    expect(v.network_ports.first.ipaddresses).to match_array([@ip1.fixed_ip_address, '10.0.0.208', @ip1.address])
+    expect(v.ipaddresses).to match_array([@ip1.fixed_ip_address, '10.0.0.208', @ip1.address])
 
     expect(v.load_balancers.collect(&:name)).to match_array %w(EmSRefreshSpecVPCELB EmSRefreshSpecVPCELB2)
     expect(v.load_balancer_health_checks.collect(&:ems_ref)).to match_array %w(EmSRefreshSpecVPCELB
@@ -572,15 +572,15 @@ module AwsRefresherSpecCommon
 
     expect(v.cloud_networks.first).to eq(@cn)
     expect(v.cloud_subnets.first).to eq(@subnet)
-    expect(v.security_groups).to eq([@sg_on_cn])
+    expect(v.security_groups).to match_array([@sg_on_cn])
     expect(v.floating_ip).to eq(@ip2)
-    expect(v.floating_ips).to eq([@ip2])
+    expect(v.floating_ips).to match_array([@ip2])
     expect(v.network_ports.first.floating_ips.count).to eq(1)
-    expect(v.network_ports.first.floating_ips).to eq([@ip2])
-    expect(v.network_ports.first.floating_ip_addresses).to eq([@ip2.address])
-    expect(v.network_ports.first.fixed_ip_addresses).to eq([@ip2.fixed_ip_address])
-    expect(v.network_ports.first.ipaddresses).to eq([@ip2.fixed_ip_address, @ip2.address])
-    expect(v.ipaddresses).to eq([@ip2.fixed_ip_address, @ip2.address])
+    expect(v.network_ports.first.floating_ips).to match_array([@ip2])
+    expect(v.network_ports.first.floating_ip_addresses).to match_array([@ip2.address])
+    expect(v.network_ports.first.fixed_ip_addresses).to match_array([@ip2.fixed_ip_address])
+    expect(v.network_ports.first.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
+    expect(v.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
   end
 
   def assert_specific_load_balancers
