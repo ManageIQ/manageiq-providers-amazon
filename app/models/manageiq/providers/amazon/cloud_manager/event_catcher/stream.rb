@@ -110,6 +110,8 @@ class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
     end
   end
 
+  # @return [Aws::SNS::Topic] the found topic
+  # @raise [ProviderUnreachable] in case the topic is not found
   def sns_topic
     @ems.with_provider_connection(:service => :SNS) do |sns|
       get_topic(sns) || create_topic(sns)
@@ -124,7 +126,7 @@ class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
     sns.create_topic(:name => @topic_name)
     $aws_log.info("Created SNS topic #{@topic_name}")
   rescue Aws::SNS::Errors::ServiceError => err
-    $aws_log.error("Cannot create SNS topic #{@topic_name}, #{err.class.name}, Message=#{err.message}")
+    raise ProviderUnreachable, "Cannot create SNS topic #{@topic_name}, #{err.class.name}, Message=#{err.message}"
   end
 
   # @param [Aws::SNS::Topic] topic
