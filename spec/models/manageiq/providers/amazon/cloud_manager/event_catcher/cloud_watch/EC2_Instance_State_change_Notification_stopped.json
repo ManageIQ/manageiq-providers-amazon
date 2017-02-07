@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "12e08214-c0ce-53bd-a025-d31e75cc86a6",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"33a2f598-657d-4e11-bd94-c45de5eaa626\",\"detail-type\":\"EC2 Instance State-change Notification\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-01-31T15:52:32Z\",\"region\":\"us-east-1\",\"resources\":[\"arn:aws:ec2:us-east-1:200278856672:instance/i-0aeefa44d61669849\"],\"detail\":{\"instance-id\":\"i-0aeefa44d61669849\",\"state\":\"stopped\"}}",
+  "Timestamp" : "2017-01-31T15:52:34.208Z",
+  "SignatureVersion" : "1",
+  "Signature" : "JmPsgmLwdyZ9RxKX88bZUwk8kTLJTzpR99VNiznHe9QWsxEmnR+vCyo+Mwh02BESpUfZkuqnYbL2jdftqLhZuPL+go/2/u9S7Qo4szXpxOZZilxq/ZjCsWXl8oODGplEGTQiIUjzrHDCnICy5j8koBQFaIwRsCZ5OYd/31pV5YNsEL5j+rHmPS8YHYv2npgoo0ckNsqBuQaUeiFaV0c3GWwMsIy+udR17SPIGaGrWsNA1tnrAnW1vSi9BE4zpjSdza/qAfQW4o6pc+nbeTJNMFpOe4P/0NV4sxED3j3qNveRuzcY73ZSODY5887ZN/Xwr0ErJ2beifKrE0EEB/4m9w==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-b95095beb82e8f6a046b3aafc7f4149a.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:001cf2a7-34a1-4ec0-b52f-e443bc5f52f8"
+}

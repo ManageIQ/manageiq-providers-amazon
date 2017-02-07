@@ -1,10 +1,11 @@
 #
-# Uses the AWS Config service to monitor for events.
+# Uses the AWS Config or CloudWatch service to monitor for events.
 #
-# AWS Config events are collected in an SNS Topic.  Each appliance uses a unique
+# AWS Config or CloudWatch events are collected in an SNS Topic.  Each appliance uses a unique
 # SQS queue subscribed to the AWS Config topic.  If the appliance-specific queue
 # doesn't exist, this event monitor will create the queue and subscribe the
 # queue to the AWS Config topic.
+
 #
 class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
   class ProviderUnreachable < ManageIQ::Providers::BaseManager::EventCatcher::Runner::TemporaryFailure
@@ -159,12 +160,29 @@ class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
   # @param [Aws::SQS::Types::Message] message
   def parse_event(message)
     event = JSON.parse(JSON.parse(message.body)['Message'])
-    $log.info("#{log_header} Found SNS Message with message type #{event["messageType"]}")
-    return unless event["messageType"] == "ConfigurationItemChangeNotification"
+
+    if event["messageType"] == "ConfigurationItemChangeNotification"
+      # Aws Config Events
+      event["eventType"]    = parse_event_type(event)
+      event["event_source"] = :config
+    elsif event.fetch_path("detail", "eventType") == "AwsApiCall"
+      # CloudWatch with CloudTrail for API requests Events
+      event["eventType"]    = event.fetch_path("detail", "eventName")
+      event["event_source"] = :cloud_watch_api
+    elsif event["detail-type"] == "EC2 Instance State-change Notification"
+      # CloudWatch EC2 Events
+      state                 = "_#{event.fetch_path("detail", "state")}" if event.fetch_path("detail", "state")
+      event["eventType"]    = "#{event["detail-type"].tr(" ", "_").tr("-", "_")}#{state}"
+      event["event_source"] = :cloud_watch_ec2
+    else
+      # Not recognized event, ignoring...
+      return
+    end
+
+    $log.info("#{log_header} Found SNS Message with message type #{event["eventType"]} coming from #{event[:event_source]}")
 
     event["messageId"] = message.message_id
-    event["eventType"] = parse_event_type(event)
-    $log.info("#{log_header} Parsed event from SNS Message #{event["eventType"]}")
+    $log.info("#{log_header} Parsed event from SNS Message #{event["eventType"]} coming from #{event[:event_source]}")
     event
   rescue JSON::ParserError => err
     $log.error("#{log_header} JSON::ParserError parsing '#{message.body}' - #{err.message}")
