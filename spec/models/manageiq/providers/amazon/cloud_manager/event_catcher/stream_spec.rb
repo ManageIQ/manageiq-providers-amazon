@@ -6,6 +6,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream do
     described_class.new(ems)
   end
   let(:queue_url) { "https://sqs.eu-central-1.amazonaws.com/995412904407/the_queue_name" }
+  let(:topic_name) { "arn:aws:sns:region:account-id:#{described_class::AWS_CONFIG_TOPIC}" }
+
   let(:get_queue_attributes) do
     Aws::SQS::Client.new(:stub_responses => true).stub_data(:get_queue_attributes, :attributes => {'QueueArn' => 'arn'})
   end
@@ -20,7 +22,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream do
           },
           :sns => {
             :list_topics => {
-              :topics => [{:topic_arn => "arn:aws:sns:region:account-id:#{described_class::AWS_CONFIG_TOPIC}"}]
+              :topics => [{:topic_arn => topic_name}]
             }
           }
         }
@@ -43,7 +45,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream do
             },
             :sns => {
               :list_topics => {
-                :topics => [{:topic_arn => "arn:aws:sns:region:account-id:#{described_class::AWS_CONFIG_TOPIC}"}]
+                :topics => [{:topic_arn => topic_name}]
               }
             }
           }
@@ -55,22 +57,47 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream do
           end
         end
       end
+    end
+  end
 
-      context "and no topic present on aws" do
-        it "raises ProviderUnreachable" do
-          stubbed_responses = {
-            :sqs => {
-              :get_queue_url => 'NonExistentQueue'
-            },
-            :sns => {
-              :list_topics => {
-                :topics => [{:topic_arn => "arn:aws:sns:region:account-id:not-the-right-topic"}]
-              }
+  describe "find or create topic" do
+    before do
+      allow(subject).to receive(:create_topic).and_return(Aws::SNS::Topic.new(:stub_responses => true, :arn => topic_name))
+    end
+
+    context "topic already present on aws" do
+      it "gets it" do
+        stubbed_responses = {
+          :sqs => {
+            :get_queue_url => {:queue_url => queue_url},
+          },
+          :sns => {
+            :list_topics => {
+              :topics => [:topic_arn => topic_name]
             }
           }
-          with_aws_stubbed(stubbed_responses) do
-            expect { subject.send(:find_or_create_queue) }.to raise_exception(described_class::ProviderUnreachable)
-          end
+        }
+        with_aws_stubbed(stubbed_responses) do
+          expect(subject).not_to receive(:create_topic)
+          expect(subject.send(:sns_topic).arn).to eq(topic_name)
+        end
+      end
+    end
+
+    context "no topic present on aws" do
+      it "creates one" do
+        stubbed_responses = {
+          :sqs => {
+            :get_queue_url => {:queue_url => queue_url},
+          },
+          :sns => {
+            :list_topics => {
+              :topics => []
+            }
+          }
+        }
+        with_aws_stubbed(stubbed_responses) do
+          expect(subject.send(:sns_topic).arn).to eq(topic_name)
         end
       end
     end
