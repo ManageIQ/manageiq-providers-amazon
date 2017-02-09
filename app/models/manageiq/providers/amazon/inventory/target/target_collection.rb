@@ -36,7 +36,7 @@ class ManageIQ::Providers::Amazon::Inventory::Target::TargetCollection < ManageI
   def storage
     ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager
   end
-  
+
   def add_targeted_inventory_collections
     images_refs = collector.private_images_refs.to_a + collector.shared_images_refs.to_a + collector.public_images_refs.to_a
 

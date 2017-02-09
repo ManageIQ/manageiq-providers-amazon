@@ -49,7 +49,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
 
     def orchestration_templates(extra_attributes = {})
       attributes = {
-        :model_class       => ::OrchestrationTemplateCfn,
+        :model_class => ::OrchestrationTemplateCfn,
       }
 
       super(attributes.merge!(extra_attributes))
