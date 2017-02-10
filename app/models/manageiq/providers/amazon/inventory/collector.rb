@@ -1,4 +1,8 @@
 class ManageIQ::Providers::Amazon::Inventory::Collector
+  require_nested :CloudManager
+  require_nested :NetworkManager
+  require_nested :TargetCollection
+
   attr_reader :ems, :options, :target
 
   attr_reader :instances, :instances_refs, :instances_deleted

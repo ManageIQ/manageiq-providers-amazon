@@ -1,4 +1,8 @@
 class ManageIQ::Providers::Amazon::Inventory
+  require_nested :Collector
+  require_nested :Parser
+  require_nested :Target
+
   attr_reader :ems, :options, :target, :collector, :parsers_classes
 
   delegate :inventory_collections, :to => :target
