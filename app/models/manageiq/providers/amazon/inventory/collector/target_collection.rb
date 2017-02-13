@@ -1,5 +1,5 @@
 class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < ManageIQ::Providers::Amazon::Inventory::Collector
-  def initialize(_ems, _target)
+  def initialize(_ems, _options, _target)
     super
     parse_targets!
     infer_related_ems_refs!
