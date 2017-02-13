@@ -1,4 +1,6 @@
 class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::StorageManager
+  require_nested :CloudVolume
+  require_nested :CloudVolumeSnapshot
   require_nested :RefreshParser
   require_nested :RefreshWorker
   require_nested :Refresher
