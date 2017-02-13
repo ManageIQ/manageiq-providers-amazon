@@ -1,9 +1,10 @@
 class ManageIQ::Providers::Amazon::Inventory::Target::TargetCollection < ManageIQ::Providers::Amazon::Inventory::Target
   def initialize_inventory_collections
     add_targeted_inventory_collections
+    add_remaining_inventory_collections([cloud, network, storage], :strategy => :local_db_find_one)
 
     add_inventory_collection(
-      vm_and_miq_template_ancestry(
+      cloud.vm_and_miq_template_ancestry(
         :dependency_attributes => {
           :vms           => [inventory_collections[:vms]],
           :miq_templates => [inventory_collections[:miq_templates]]
@@ -12,15 +13,13 @@ class ManageIQ::Providers::Amazon::Inventory::Target::TargetCollection < ManageI
     )
 
     add_inventory_collection(
-      orchestration_stack_ancestry(
+      cloud.orchestration_stack_ancestry(
         :dependency_attributes => {
           :orchestration_stacks           => [inventory_collections[:orchestration_stacks]],
           :orchestration_stacks_resources => [inventory_collections[:orchestration_stacks_resources]]
         }
       )
     )
-
-    add_remaining_inventory_collections(:strategy => :local_db_find_one)
   end
 
   private
@@ -147,7 +146,7 @@ class ManageIQ::Providers::Amazon::Inventory::Target::TargetCollection < ManageI
       )
     )
 
-    add_inventory_collection(orchestration_templates)
+    add_inventory_collection(cloud.orchestration_templates)
   end
 
   def add_cloud_networks_inventory_collections(manager_refs)
