@@ -9,56 +9,8 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     ManageIQ::Providers::Amazon::Regions.find_by_name(provider_region)[:description]
   end
 
-  #
-  # Connections
-  #
-
   def browser_url
     "https://console.aws.amazon.com/ec2/v2/home?region=#{provider_region}"
-  end
-
-  def connect(options = {})
-    raise "no credentials defined" if missing_credentials?(options[:auth_type])
-
-    username = options[:user] || authentication_userid(options[:auth_type])
-    password = options[:pass] || authentication_password(options[:auth_type])
-    service  = options[:service] || :EC2
-    proxy    = options[:proxy_uri] || http_proxy_uri
-
-    self.class.raw_connect(username, password, service, provider_region, proxy)
-  end
-
-  def translate_exception(err)
-    require 'aws-sdk'
-    case err
-    when Aws::EC2::Errors::SignatureDoesNotMatch
-      MiqException::MiqHostError.new "SignatureMismatch - check your AWS Secret Access Key and signing method"
-    when Aws::EC2::Errors::AuthFailure
-      MiqException::MiqHostError.new "Login failed due to a bad username or password."
-    when Aws::Errors::MissingCredentialsError
-      MiqException::MiqHostError.new "Missing credentials"
-    else
-      MiqException::MiqHostError.new "Unexpected response returned from system: #{err.message}"
-    end
-  end
-
-  def verify_credentials(auth_type = nil, options = {})
-    raise MiqException::MiqHostError, "No credentials defined" if missing_credentials?(auth_type)
-
-    begin
-      # EC2 does Lazy Connections, so call a cheap function
-      with_provider_connection(options.merge(:auth_type => auth_type)) do |ec2|
-        ec2.client.describe_regions.regions.map(&:region_name)
-      end
-    rescue => err
-      miq_exception = translate_exception(err)
-      raise unless miq_exception
-
-      _log.error("Error Class=#{err.class.name}, Message=#{err.message}")
-      raise miq_exception
-    end
-
-    true
   end
 
   def validate_timeline
@@ -66,22 +18,21 @@ module ManageIQ::Providers::Amazon::ManagerMixin
      :message   => _("Timeline is not available for %{model}") % {:model => ui_lookup(:model => self.class.to_s)}}
   end
 
-  module ClassMethods
-    #
-    # Connections
-    #
+  # manually add s3 manager to list of storage managers
+  def storage_managers
+    return super << provider.s3_storage_manager if provider.s3_storage_manager
+    super
+  end
 
-    def raw_connect(access_key_id, secret_access_key, service, region, proxy_uri = nil)
-      require 'aws-sdk'
-      Aws.const_get(service)::Resource.new(
-        :access_key_id     => access_key_id,
-        :secret_access_key => secret_access_key,
-        :region            => region,
-        :http_proxy        => proxy_uri,
-        :logger            => $aws_log,
-        :log_level         => :debug,
-        :log_formatter     => Aws::Log::Formatter.new(Aws::Log::Formatter.default.pattern.chomp)
-      )
+  def connect(options = {})
+    options[:provider_region] = provider_region
+    provider.connect(options)
+  end
+
+  module ClassMethods
+
+    def raw_connect(*args, &block)
+      ManageIQ::Providers::Amazon::Provider::raw_connect(*args, &block)
     end
 
     #

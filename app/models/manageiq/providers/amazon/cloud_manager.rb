@@ -33,6 +33,20 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
            :autosave    => true,
            :dependent   => :destroy
 
+  delegate :authentication_check,
+           :authentication_status,
+           :authentications,
+           :authentication_for_summary,
+           :raw_connect,
+           :verify_credentials,
+           :translate_exception,
+           :with_provider_connection,
+           :default_endpoint,
+           :endpoints,
+           :s3_storage_manager,
+           :to        => :provider,
+           :allow_nil => false
+
   delegate :floating_ips,
            :security_groups,
            :cloud_networks,
@@ -56,12 +70,6 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
            :to        => :ebs_storage_manager,
            :allow_nil => true
 
-  has_one :s3_storage_manager,
-          :foreign_key => :parent_ems_id,
-          :class_name  => "ManageIQ::Providers::Amazon::StorageManager::S3",
-          :autosave    => true,
-          :dependent   => :destroy
-
   delegate :cloud_object_store_containers,
            :cloud_object_store_objects,
            :to        => :s3_storage_manager,
@@ -83,11 +91,10 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     ebs_storage_manager.name            = "#{name} EBS Storage Manager"
     ebs_storage_manager.zone_id         = zone_id
     ebs_storage_manager.provider_region = provider_region
+  end
 
-    build_s3_storage_manager unless s3_storage_manager
-    s3_storage_manager.name            = "#{name} S3 Storage Manager"
-    s3_storage_manager.zone_id         = zone_id
-    s3_storage_manager.provider_region = provider_region
+  def provider_class
+    ManageIQ::Providers::Amazon::Provider
   end
 
   def self.ems_type
