@@ -1,29 +1,25 @@
-class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < ::ManagerRefresh::RefreshParserInventoryObject
-  include ManageIQ::Providers::Amazon::RefreshHelperMethods
-
+class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < ManageIQ::Providers::Amazon::Inventory::Parser
   def ems
-    inventory.ems.respond_to?(:ebs_storage_manager) ? inventory.ems.ebs_storage_manager : inventory.ems
+    collector.manager.respond_to?(:ebs_storage_manager) ? collector.manager.ebs_storage_manager : collector.manager
   end
 
-  def populate_inventory_collections
-    log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{inventory.ems.name}] id: [#{inventory.ems.id}]"
+  def parse
+    log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{collector.manager.name}] id: [#{collector.manager.id}]"
 
     $aws_log.info("#{log_header}...}")
     get_volumes
     get_snapshots
     $aws_log.info("#{log_header}...Complete")
-
-    inventory_collections
   end
 
   private
 
   def get_volumes
-    process_inventory_collection(inventory.collector.cloud_volumes, :cloud_volumes) { |volume| parse_volume(volume) }
+    process_inventory_collection(collector.cloud_volumes, :cloud_volumes) { |volume| parse_volume(volume) }
   end
 
   def get_snapshots
-    process_inventory_collection(inventory.collector.cloud_volume_snapshots, :cloud_volume_snapshots) { |snap| parse_snapshot(snap) }
+    process_inventory_collection(collector.cloud_volume_snapshots, :cloud_volume_snapshots) { |snap| parse_snapshot(snap) }
   end
 
   def parse_volume(volume)
@@ -38,8 +34,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < ::Ma
       :creation_time         => volume['create_time'],
       :volume_type           => volume['volume_type'],
       :size                  => volume['size'].to_i.gigabytes,
-      :base_snapshot         => inventory_collections[:cloud_volume_snapshots].lazy_find(volume['snapshot_id']),
-      :availability_zone     => inventory_collections[:availability_zones].lazy_find(volume['availability_zone'])
+      :base_snapshot         => persister.cloud_volume_snapshots.lazy_find(volume['snapshot_id']),
+      :availability_zone     => persister.availability_zones.lazy_find(volume['availability_zone'])
     }
 
     link_volume_to_disk(volume_hash, volume['attachments'])
@@ -59,7 +55,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < ::Ma
       :creation_time         => snap['start_time'],
       :description           => snap['description'],
       :size                  => snap['volume_size'].to_i.gigabytes,
-      :cloud_volume          => inventory_collections[:cloud_volumes].lazy_find(snap['volume_id'])
+      :cloud_volume          => persister.cloud_volumes.lazy_find(snap['volume_id'])
     }
   end
 
@@ -81,13 +77,13 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < ::Ma
       dev = File.basename(a['device'])
 
       disk_hash = {
-        :hardware    => inventory_collections[:hardwares].lazy_find(a["instance_id"]),
+        :hardware    => persister.hardwares.lazy_find(a["instance_id"]),
         :device_name => dev,
         :location    => dev,
         :size        => volume_hash[:size],
-        :backing     => inventory_collections[:cloud_volumes].lazy_find(uid),
+        :backing     => persister.cloud_volumes.lazy_find(uid),
       }
-      inventory_collections[:disks] << inventory_collections[:disks].new_inventory_object(disk_hash)
+      persister.disks << persister.disks.new_inventory_object(disk_hash)
     end
   end
 

@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::Target::NetworkManager < ManageIQ::Providers::Amazon::Inventory::Target
+class ManageIQ::Providers::Amazon::Inventory::Persister::NetworkManager < ManageIQ::Providers::Amazon::Inventory::Persister
   def initialize_inventory_collections
     add_inventory_collections(
       network,
@@ -10,7 +10,7 @@ class ManageIQ::Providers::Amazon::Inventory::Target::NetworkManager < ManageIQ:
 
     add_inventory_collections(cloud,
                               %i(vms orchestration_stacks availability_zones),
-                              :parent   => ems.parent_manager,
+                              :parent   => manager.parent_manager,
                               :strategy => :local_db_cache_all)
   end
 end

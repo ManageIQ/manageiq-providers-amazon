@@ -1,12 +1,10 @@
-class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::ManagerRefresh::RefreshParserInventoryObject
-  include ManageIQ::Providers::Amazon::RefreshHelperMethods
-
+class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ::Providers::Amazon::Inventory::Parser
   def ems
-    inventory.ems.respond_to?(:network_manager) ? inventory.ems.network_manager : inventory.ems
+    collector.manager.respond_to?(:network_manager) ? collector.manager.network_manager : collector.manager
   end
 
-  def populate_inventory_collections
-    log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{inventory.ems.name}] id: [#{inventory.ems.id}]"
+  def parse
+    log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{collector.manager.name}] id: [#{collector.manager.id}]"
 
     $aws_log.info("#{log_header}...")
     # The order of the below methods doesn't matter since they refer to each other using only lazy links
@@ -18,22 +16,20 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
     get_ec2_floating_ips_and_ports
     get_floating_ips
     $aws_log.info("#{log_header}...Complete")
-
-    inventory_collections
   end
 
   private
 
   def get_cloud_networks
-    process_inventory_collection(inventory.collector.cloud_networks, :cloud_networks) { |vpc| parse_cloud_network(vpc) }
+    process_inventory_collection(collector.cloud_networks, :cloud_networks) { |vpc| parse_cloud_network(vpc) }
   end
 
   def get_cloud_subnets
-    process_inventory_collection(inventory.collector.cloud_subnets, :cloud_subnets) { |s| parse_cloud_subnet(s) }
+    process_inventory_collection(collector.cloud_subnets, :cloud_subnets) { |s| parse_cloud_subnet(s) }
   end
 
   def get_security_groups
-    process_inventory_collection(inventory.collector.security_groups, :security_groups) do |sg|
+    process_inventory_collection(collector.security_groups, :security_groups) do |sg|
       get_outbound_firewall_rules(sg)
       get_inbound_firewall_rules(sg)
 
@@ -52,7 +48,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
   end
 
   def get_load_balancers
-    process_inventory_collection(inventory.collector.load_balancers, :load_balancers) do |lb|
+    process_inventory_collection(collector.load_balancers, :load_balancers) do |lb|
       get_load_balancer_pools(lb)
       get_load_balancer_pool_members(lb)
       get_load_balancer_listeners(lb)
@@ -110,7 +106,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
   end
 
   def get_load_balancer_health_check_members(lb)
-    health_check_members = inventory.collector.health_check_members(lb['load_balancer_name'])
+    health_check_members = collector.health_check_members(lb['load_balancer_name'])
 
     process_inventory_collection(health_check_members, :load_balancer_health_check_members) do |m|
       parse_load_balancer_health_check_member(lb, m)
@@ -118,11 +114,11 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
   end
 
   def get_floating_ips
-    process_inventory_collection(inventory.collector.floating_ips, :floating_ips) { |ip| parse_floating_ip(ip) }
+    process_inventory_collection(collector.floating_ips, :floating_ips) { |ip| parse_floating_ip(ip) }
   end
 
   def get_network_ports
-    process_inventory_collection(inventory.collector.network_ports, :network_ports) do |n|
+    process_inventory_collection(collector.network_ports, :network_ports) do |n|
       get_public_ips(n)
       get_cloud_subnet_network_ports(n)
 
@@ -155,7 +151,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
   end
 
   def get_ec2_floating_ips_and_ports
-    process_inventory_collection(inventory.collector.instances, :network_ports) do |instance|
+    process_inventory_collection(collector.instances, :network_ports) do |instance|
       next unless instance['network_interfaces'].blank?
 
       get_ec2_cloud_subnet_network_port(instance)
@@ -190,7 +186,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :cidr                  => vpc['cidr_block'],
       :status                => status,
       :enabled               => true,
-      :orchestration_stack   => inventory_collections[:orchestration_stacks].lazy_find(
+      :orchestration_stack   => persister.orchestration_stacks.lazy_find(
         get_from_tags(vpc, "aws:cloudformation:stack-id")
       ),
     }
@@ -209,8 +205,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :name                  => name,
       :cidr                  => subnet['cidr_block'],
       :status                => subnet['state'].try(:to_s),
-      :availability_zone     => inventory_collections[:availability_zones].lazy_find(subnet['availability_zone']),
-      :cloud_network         => inventory_collections[:cloud_networks].lazy_find(subnet['vpc_id']),
+      :availability_zone     => persister.availability_zones.lazy_find(subnet['availability_zone']),
+      :cloud_network         => persister.cloud_networks.lazy_find(subnet['vpc_id']),
     }
   end
 
@@ -223,8 +219,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :ems_ref               => uid,
       :name                  => sg['group_name'],
       :description           => sg['description'].try(:truncate, 255),
-      :cloud_network         => inventory_collections[:cloud_networks].lazy_find(sg['vpc_id']),
-      :orchestration_stack   => inventory_collections[:orchestration_stacks].lazy_find(
+      :cloud_network         => persister.cloud_networks.lazy_find(sg['vpc_id']),
+      :orchestration_stack   => persister.orchestration_stacks.lazy_find(
         get_from_tags(sg, "aws:cloudformation:stack-id")
       ),
     }
@@ -240,12 +236,12 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :host_protocol => perm['ip_protocol'].to_s.upcase,
       :port          => perm['from_port'],
       :end_port      => perm['to_port'],
-      :resource      => inventory_collections[:security_groups].lazy_find(sg['group_id'])
+      :resource      => persister.security_groups.lazy_find(sg['group_id'])
     }
 
     (perm['user_id_group_pairs'] || []).each do |g|
       new_result                         = common.dup
-      new_result[:source_security_group] = inventory_collections[:security_groups].lazy_find(g['group_id'])
+      new_result[:source_security_group] = persister.security_groups.lazy_find(g['group_id'])
       ret << new_result
     end
 
@@ -282,8 +278,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
 
   def parse_load_balancer_pool_member_pools(lb, member)
     {
-      :load_balancer_pool        => inventory_collections[:load_balancer_pools].lazy_find(lb['load_balancer_name']),
-      :load_balancer_pool_member => inventory_collections[:load_balancer_pool_members].lazy_find(member['instance_id'])
+      :load_balancer_pool        => persister.load_balancer_pools.lazy_find(lb['load_balancer_name']),
+      :load_balancer_pool_member => persister.load_balancer_pool_members.lazy_find(member['instance_id'])
     }
   end
 
@@ -295,14 +291,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :ems_ref               => uid,
       # TODO(lsmola) AWS always associates to eth0 of the instances, we do not collect that info now, we need to do that
       # :network_port => get eth0 network_port
-      :vm                    => inventory_collections[:vms].lazy_find(uid)
+      :vm                    => persister.vms.lazy_find(uid)
     }
   end
 
   def parse_load_balancer_listener_pool(listener, lb)
     {
-      :load_balancer_listener => inventory_collections[:load_balancer_listeners].lazy_find(listener_uid(lb, listener)),
-      :load_balancer_pool     => inventory_collections[:load_balancer_pools].lazy_find(lb['load_balancer_name'])
+      :load_balancer_listener => persister.load_balancer_listeners.lazy_find(listener_uid(lb, listener)),
+      :load_balancer_pool     => persister.load_balancer_pools.lazy_find(lb['load_balancer_name'])
     }
   end
 
@@ -315,7 +311,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :load_balancer_port_range => (listener['load_balancer_port'].to_i..listener['load_balancer_port'].to_i),
       :instance_protocol        => listener['instance_protocol'],
       :instance_port_range      => (listener['instance_port'].to_i..listener['instance_port'].to_i),
-      :load_balancer            => inventory_collections[:load_balancers].lazy_find(lb['load_balancer_name']),
+      :load_balancer            => persister.load_balancers.lazy_find(lb['load_balancer_name']),
     }
   end
 
@@ -338,14 +334,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :timeout               => health_check['timeout'],
       :unhealthy_threshold   => health_check['unhealthy_threshold'],
       :healthy_threshold     => health_check['healthy_threshold'],
-      :load_balancer         => inventory_collections[:load_balancers].lazy_find(lb['load_balancer_name']),
+      :load_balancer         => persister.load_balancers.lazy_find(lb['load_balancer_name']),
     }
   end
 
   def parse_load_balancer_health_check_member(lb, member)
     {
-      :load_balancer_health_check => inventory_collections[:load_balancer_health_checks].lazy_find(lb['load_balancer_name']),
-      :load_balancer_pool_member  => inventory_collections[:load_balancer_pool_members].lazy_find(member['instance_id']),
+      :load_balancer_health_check => persister.load_balancer_health_checks.lazy_find(lb['load_balancer_name']),
+      :load_balancer_pool_member  => persister.load_balancer_pool_members.lazy_find(member['instance_id']),
       :status                     => member['state'],
       :status_reason              => member['description']
     }
@@ -363,8 +359,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :address               => address,
       :fixed_ip_address      => ip['private_ip_address'],
       :cloud_network_only    => cloud_network_only,
-      :network_port          => inventory_collections[:network_ports].lazy_find(ip['network_interface_id']),
-      :vm                    => inventory_collections[:vms].lazy_find(ip['instance_id'])
+      :network_port          => persister.network_ports.lazy_find(ip['network_interface_id']),
+      :vm                    => persister.vms.lazy_find(ip['instance_id'])
     }
   end
 
@@ -379,8 +375,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :address               => address,
       :fixed_ip_address      => instance['private_ip_address'],
       :cloud_network_only    => false,
-      :network_port          => inventory_collections[:network_ports].lazy_find(instance['instance_id']),
-      :vm                    => inventory_collections[:vms].lazy_find(instance['instance_id'])
+      :network_port          => persister.network_ports.lazy_find(instance['instance_id']),
+      :vm                    => persister.vms.lazy_find(instance['instance_id'])
     }
   end
 
@@ -394,16 +390,16 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :address               => address,
       :fixed_ip_address      => public_ip[:private_ip_address],
       :cloud_network_only    => true,
-      :network_port          => inventory_collections[:network_ports].lazy_find(public_ip[:network_port_id]),
-      :vm                    => inventory_collections[:network_ports].lazy_find(public_ip[:network_port_id], :key => :device)
+      :network_port          => persister.network_ports.lazy_find(public_ip[:network_port_id]),
+      :vm                    => persister.network_ports.lazy_find(public_ip[:network_port_id], :key => :device)
     }
   end
 
   def parse_cloud_subnet_network_port(network_port, address)
     {
       :address      => address['private_ip_address'],
-      :cloud_subnet => inventory_collections[:cloud_subnets].lazy_find(network_port['subnet_id']),
-      :network_port => inventory_collections[:network_ports].lazy_find(network_port['network_interface_id'])
+      :cloud_subnet => persister.cloud_subnets.lazy_find(network_port['subnet_id']),
+      :network_port => persister.network_ports.lazy_find(network_port['network_interface_id'])
     }
   end
 
@@ -411,14 +407,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
     {
       :address      => instance['private_ip_address'],
       :cloud_subnet => nil,
-      :network_port => inventory_collections[:network_ports].lazy_find(instance['instance_id'])
+      :network_port => persister.network_ports.lazy_find(instance['instance_id'])
     }
   end
 
   def parse_network_port(network_port)
     uid             = network_port['network_interface_id']
     security_groups = network_port['groups'].blank? ? [] : network_port['groups'].map do |x|
-      inventory_collections[:security_groups].lazy_find(x['group_id'])
+      persister.security_groups.lazy_find(x['group_id'])
     end
 
     {
@@ -430,7 +426,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :mac_address           => network_port['mac_address'],
       :device_owner          => network_port.fetch_path('attachment', 'instance_owner_id'),
       :device_ref            => network_port.fetch_path('attachment', 'instance_id'),
-      :device                => inventory_collections[:vms].lazy_find(network_port.fetch_path('attachment', 'instance_id')),
+      :device                => persister.vms.lazy_find(network_port.fetch_path('attachment', 'instance_id')),
       :security_groups       => security_groups,
     }
   end
@@ -449,9 +445,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ::Manager
       :mac_address           => nil,
       :device_owner          => nil,
       :device_ref            => nil,
-      :device                => inventory_collections[:vms].lazy_find(uid),
+      :device                => persister.vms.lazy_find(uid),
       :security_groups       => instance['security_groups'].to_a.collect do |sg|
-        inventory_collections[:security_groups].lazy_find(sg['group_id'])
+        persister.security_groups.lazy_find(sg['group_id'])
       end.compact,
     }
   end

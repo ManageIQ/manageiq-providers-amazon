@@ -1,12 +1,12 @@
 # TODO: Separate collection from parsing (perhaps collecting in parallel a la RHEVM)
 
-class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::Providers::CloudManager::RefreshParserInventoryObject
-  include ManageIQ::Providers::Amazon::RefreshHelperMethods
+class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::Providers::Amazon::Inventory::Parser
+  def ems
+    collector.manager
+  end
 
-  delegate :ems, :to => :inventory
-
-  def populate_inventory_collections
-    log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{inventory.ems.name}] id: [#{inventory.ems.id}]"
+  def parse
+    log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{collector.manager.name}] id: [#{collector.manager.id}]"
     $aws_log.info("#{log_header}...")
     # The order of the below methods does matter, because they are searched using find instead of lazy_find
     get_flavors
@@ -15,40 +15,38 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     get_availability_zones
     get_key_pairs
     get_stacks
-    get_private_images if inventory.options.get_private_images
-    get_shared_images if inventory.options.get_shared_images
-    get_public_images if inventory.options.get_public_images
+    get_private_images if collector.options.get_private_images
+    get_shared_images if collector.options.get_shared_images
+    get_public_images if collector.options.get_public_images
     get_instances
 
     $aws_log.info("#{log_header}...Complete")
-
-    inventory_collections
   end
 
   private
 
   def get_flavors
-    process_inventory_collection(inventory.collector.flavors, :flavors) { |flavor| parse_flavor(flavor) }
+    process_inventory_collection(collector.flavors, :flavors) { |flavor| parse_flavor(flavor) }
   end
 
   def get_availability_zones
-    process_inventory_collection(inventory.collector.availability_zones, :availability_zones) { |az| parse_availability_zone(az) }
+    process_inventory_collection(collector.availability_zones, :availability_zones) { |az| parse_availability_zone(az) }
   end
 
   def get_key_pairs
-    process_inventory_collection(inventory.collector.key_pairs, :key_pairs) { |kp| parse_key_pair(kp) }
+    process_inventory_collection(collector.key_pairs, :key_pairs) { |kp| parse_key_pair(kp) }
   end
 
   def get_private_images
-    get_images(inventory.collector.private_images)
+    get_images(collector.private_images)
   end
 
   def get_shared_images
-    get_images(inventory.collector.shared_images)
+    get_images(collector.shared_images)
   end
 
   def get_public_images
-    get_images(inventory.collector.public_images, true)
+    get_images(collector.public_images, true)
   end
 
   def get_images(images, is_public = false)
@@ -64,7 +62,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def get_stacks
-    process_inventory_collection(inventory.collector.stacks, :orchestration_stacks) do |stack|
+    process_inventory_collection(collector.stacks, :orchestration_stacks) do |stack|
       get_stack_resources(stack)
       get_stack_outputs(stack)
       get_stack_parameters(stack)
@@ -87,7 +85,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def get_stack_resources(stack)
-    resources = inventory.collector.stack_resources(stack['stack_name'])
+    resources = collector.stack_resources(stack['stack_name'])
 
     process_inventory_collection(resources, :orchestration_stacks_resources) do |resource|
       parse_stack_resource(resource, stack)
@@ -99,9 +97,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def get_instances
-    process_inventory_collection(inventory.collector.instances, :vms) do |instance|
+    process_inventory_collection(collector.instances, :vms) do |instance|
       # TODO(lsmola) we have a non lazy dependency, can we remove that?
-      flavor = inventory_collections[:flavors].find(instance['instance_type']) || inventory_collections[:flavors].find("unknown")
+      flavor = persister.flavors.find(instance['instance_type']) || persister.flavors.find("unknown")
 
       get_instance_hardware(instance, flavor)
 
@@ -141,7 +139,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     end
 
     disks.each do |d|
-      d[:hardware] = inventory_collections[:hardwares].lazy_find(instance['instance_id'])
+      d[:hardware] = persister.hardwares.lazy_find(instance['instance_id'])
     end
 
     process_inventory_collection(disks, :disks) { |x| x }
@@ -205,7 +203,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :bitness             => architecture_to_bitness(image['architecture']),
       :virtualization_type => image['virtualization_type'],
       :root_device_type    => image['root_device_type'],
-      :vm_or_template      => inventory_collections[:miq_templates].lazy_find(image['image_id'])
+      :vm_or_template      => persister.miq_templates.lazy_find(image['image_id'])
     }
   end
 
@@ -236,7 +234,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def parse_instance(instance, flavor)
     status = instance.fetch_path('state', 'name')
-    return if inventory.options.ignore_terminated_instances && status.to_sym == :terminated
+    return if collector.options.ignore_terminated_instances && status.to_sym == :terminated
 
     uid  = instance['instance_id']
     name = get_from_tags(instance, :name)
@@ -251,12 +249,12 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :vendor                => "amazon",
       :raw_power_state       => status,
       :boot_time             => instance['launch_time'],
-      :availability_zone     => inventory_collections[:availability_zones].lazy_find(instance.fetch_path('placement', 'availability_zone')),
+      :availability_zone     => persister.availability_zones.lazy_find(instance.fetch_path('placement', 'availability_zone')),
       :flavor                => flavor,
-      :genealogy_parent      => inventory_collections[:miq_templates].lazy_find(instance['image_id']),
-      :key_pairs             => [inventory_collections[:key_pairs].lazy_find(instance['key_name'])].compact,
-      :location              => inventory_collections[:networks].lazy_find("#{uid}__public", :key => :hostname, :default => 'unknown'),
-      :orchestration_stack   => inventory_collections[:orchestration_stacks].lazy_find(
+      :genealogy_parent      => persister.miq_templates.lazy_find(instance['image_id']),
+      :key_pairs             => [persister.key_pairs.lazy_find(instance['key_name'])].compact,
+      :location              => persister.networks.lazy_find("#{uid}__public", :key => :hostname, :default => 'unknown'),
+      :orchestration_stack   => persister.orchestration_stacks.lazy_find(
         get_from_tags(instance, "aws:cloudformation:stack-id")
       ),
     }
@@ -272,14 +270,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :cpu_total_cores      => flavor[:cpus],
       :memory_mb            => flavor[:memory] / 1.megabyte,
       :disk_capacity        => flavor[:ephemeral_disk_size],
-      :guest_os             => inventory_collections[:hardwares].lazy_find(instance['image_id'], :key => :guest_os),
-      :vm_or_template       => inventory_collections[:vms].lazy_find(instance['instance_id'])
+      :guest_os             => persister.hardwares.lazy_find(instance['image_id'], :key => :guest_os),
+      :vm_or_template       => persister.vms.lazy_find(instance['instance_id'])
     }
   end
 
   def parse_hardware_public_network(instance)
     new_result = {
-      :hardware    => inventory_collections[:hardwares].lazy_find(instance['instance_id']),
+      :hardware    => persister.hardwares.lazy_find(instance['instance_id']),
       :ipaddress   => instance['private_ip_address'].presence,
       :hostname    => instance['private_dns_name'].presence,
       :description => "private"
@@ -292,7 +290,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def parse_hardware_private_network(instance)
     new_result = {
-      :hardware    => inventory_collections[:hardwares].lazy_find(instance['instance_id']),
+      :hardware    => persister.hardwares.lazy_find(instance['instance_id']),
       :ipaddress   => instance['public_ip_address'].presence,
       :hostname    => instance['public_dns_name'].presence,
       :description => "public"
@@ -313,8 +311,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :description            => stack['description'],
       :status                 => stack['stack_status'],
       :status_reason          => stack['stack_status_reason'],
-      :parent                 => inventory_collections[:orchestration_stacks_resources].lazy_find(uid, :key => :stack),
-      :orchestration_template => inventory_collections[:orchestration_templates].lazy_find(uid)
+      :parent                 => persister.orchestration_stacks_resources.lazy_find(uid, :key => :stack),
+      :orchestration_template => persister.orchestration_templates.lazy_find(uid)
     }
   end
 
@@ -324,7 +322,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :ems_ref     => stack['stack_id'],
       :name        => stack['stack_name'],
       :description => stack['description'],
-      :content     => inventory.collector.stack_template(stack['stack_name']),
+      :content     => collector.stack_template(stack['stack_name']),
       :orderable   => false
     }
   end
@@ -334,7 +332,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     param_key = parameter['parameter_key']
     {
       :ems_ref => compose_ems_ref(stack_id, param_key),
-      :stack   => inventory_collections[:orchestration_stacks].lazy_find(stack_id),
+      :stack   => persister.orchestration_stacks.lazy_find(stack_id),
       :name    => param_key,
       :value   => parameter['parameter_value']
     }
@@ -345,7 +343,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     stack_id   = stack['stack_id']
     {
       :ems_ref     => compose_ems_ref(stack_id, output['output_key']),
-      :stack       => inventory_collections[:orchestration_stacks].lazy_find(stack_id),
+      :stack       => persister.orchestration_stacks.lazy_find(stack_id),
       :key         => output_key,
       :value       => output['output_value'],
       :description => output['description']
@@ -359,7 +357,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
     {
       :ems_ref                => uid,
-      :stack                  => inventory_collections[:orchestration_stacks].lazy_find(stack['stack_id']),
+      :stack                  => persister.orchestration_stacks.lazy_find(stack['stack_id']),
       :name                   => resource['logical_resource_id'],
       :logical_resource       => resource['logical_resource_id'],
       :physical_resource      => uid,
