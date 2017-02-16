@@ -1,6 +1,10 @@
 ---
 :ems:
   :ems_amazon:
+    :blacklisted_event_names:
+      - ConfigurationSnapshotDeliveryCompleted
+      - ConfigurationSnapshotDeliveryStarted
+      - ConfigurationSnapshotDeliveryFailed
     :disabled_regions: []
     # disable regions by their keys found in app/models/manageiq/providers/amazon/regions.rb e.g.
     # - us-gov-west-1
