@@ -4,14 +4,18 @@ require_relative '../../aws_stubs'
 describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
   include AwsStubs
 
-  describe "refresh" do
-    before do
-      _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
-      @ems                 = FactoryGirl.create(:ems_amazon, :zone => zone)
-      @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
-      EvmSpecHelper.local_miq_server(:zone => Zone.seed)
-    end
+  before do
+    EvmSpecHelper.local_miq_server(:zone => Zone.seed)
+  end
 
+  let :ems do
+    _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
+    ems = FactoryGirl.create(:ems_amazon, :zone => zone)
+    ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
+    ems
+  end
+
+  describe "refresh" do
     # Test all kinds of refreshes
     [{:inventory_object_refresh => true},
      {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},
@@ -60,13 +64,81 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
     end
   end
 
+  describe "destructive operations (bucket)" do
+    before do
+      ems.cloud_object_store_containers << FactoryGirl.create_list(
+        :aws_bucket_with_objects,
+        5,
+        :ext_management_system => ems.s3_storage_manager
+      )
+    end
+
+    let :bucket do
+      ems.cloud_object_store_containers.first
+    end
+
+    it "connect connects to :S3 service" do
+      conn = ems.s3_storage_manager.connect
+
+      expect(conn).to_not be_nil
+      expect(conn.class).to eq(Aws::S3::Resource)
+    end
+
+    it "bucket's provider_object is of expected type" do
+      provider_obj = bucket.provider_object
+
+      expect(provider_obj).to_not be_nil
+      expect(provider_obj.class).to eq(Aws::S3::Bucket)
+    end
+
+    it "delete_cloud_object_store_container triggers remote action" do
+      expect(bucket).to receive(:with_provider_object)
+
+      bucket.delete_cloud_object_store_container
+    end
+
+    it "remove bucket (trigger)" do
+      options = {:ids => [bucket.id], :task => "delete_cloud_object_store_container", :userid => "admin"}
+
+      expect { CloudObjectStoreContainer.process_tasks(options) }.to change { MiqQueue.count }.by(1)
+    end
+
+    it "remove bucket (process)" do
+      with_aws_stubbed(stub_responses) do
+        # should not remove from MIQ database, we rather rely on refresh
+        expect { bucket.delete_cloud_object_store_container }.to change { ems.cloud_object_store_containers.count }.by(0)
+      end
+    end
+
+    it "bucket type" do
+      expect(bucket.class).to eq(ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer)
+
+      c = CloudObjectStoreContainer.find(bucket.id)
+
+      expect(c.class).to eq(ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer)
+    end
+
+    it "bucket with s3 should support delete" do
+      with_aws_stubbed(stub_responses) do
+        expect(bucket.supports?(:delete)).to be_truthy
+      end
+    end
+
+    it "bucket without s3 should not support delete" do
+      bucket.ext_management_system = nil
+      with_aws_stubbed(stub_responses) do
+        expect(bucket.supports?(:delete)).to be_falsey
+      end
+    end
+  end
+
   def refresh_spec
-    @ems.reload
+    ems.reload
 
     with_aws_stubbed(stub_responses) do
-      EmsRefresh.refresh(@ems.s3_storage_manager)
+      EmsRefresh.refresh(ems.s3_storage_manager)
     end
-    @ems.reload
+    ems.reload
 
     assert_table_counts
     assert_buckets_content
@@ -200,10 +272,10 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
   end
 
   def assert_ems
-    ems = @ems.s3_storage_manager
-    expect(ems).to have_attributes(:api_version => nil,
-                                   :uid_ems     => nil)
+    ems_s3 = ems.s3_storage_manager
+    expect(ems_s3).to have_attributes(:api_version => nil,
+                                      :uid_ems     => nil)
 
-    expect(ems.cloud_object_store_containers.size).to eql(expected_table_counts[:cloud_object_store_containers])
+    expect(ems_s3.cloud_object_store_containers.size).to eql(expected_table_counts[:cloud_object_store_containers])
   end
 end

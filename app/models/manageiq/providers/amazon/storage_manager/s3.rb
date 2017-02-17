@@ -11,9 +11,7 @@ class ManageIQ::Providers::Amazon::StorageManager::S3 < ManageIQ::Providers::Sto
            :authentications,
            :authentication_for_summary,
            :zone,
-           :connect,
            :verify_credentials,
-           :with_provider_connection,
            :address,
            :ip_address,
            :hostname,
@@ -32,5 +30,10 @@ class ManageIQ::Providers::Amazon::StorageManager::S3 < ManageIQ::Providers::Sto
 
   def self.hostname_required?
     false
+  end
+
+  def connect(options = {})
+    options[:service] = :S3
+    parent_manager.connect options
   end
 end
