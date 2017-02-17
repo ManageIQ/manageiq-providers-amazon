@@ -5,38 +5,38 @@ class ManageIQ::Providers::Amazon::Builder
       when ManageIQ::Providers::Amazon::CloudManager
         cloud_manager_inventory(ems, target)
       when ManageIQ::Providers::Amazon::NetworkManager
-        ManageIQ::Providers::Amazon::Inventory.new(
+        inventory(
           ems,
           target,
-          :collector_class => ManageIQ::Providers::Amazon::Inventory::Collector::NetworkManager,
-          :target_class    => ManageIQ::Providers::Amazon::Inventory::Target::NetworkManager,
-          :parsers_classes => [ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager]
+          ManageIQ::Providers::Amazon::Inventory::Collector::NetworkManager,
+          ManageIQ::Providers::Amazon::Inventory::Persister::NetworkManager,
+          [ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager]
         )
       when ManageIQ::Providers::Amazon::StorageManager::Ebs
-        ManageIQ::Providers::Amazon::Inventory.new(
+        inventory(
           ems,
           target,
-          :collector_class => ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::Ebs,
-          :target_class    => ManageIQ::Providers::Amazon::Inventory::Target::StorageManager::Ebs,
-          :parsers_classes => [ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs]
+          ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::Ebs,
+          ManageIQ::Providers::Amazon::Inventory::Persister::StorageManager::Ebs,
+          [ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs]
         )
       when ManageIQ::Providers::Amazon::StorageManager::S3
-        ManageIQ::Providers::Amazon::Inventory.new(
+        inventory(
           ems,
           target,
-          :collector_class => ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::S3,
-          :target_class    => ManageIQ::Providers::Amazon::Inventory::Target::StorageManager::S3,
-          :parsers_classes => [ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3]
+          ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::S3,
+          ManageIQ::Providers::Amazon::Inventory::Persister::StorageManager::S3,
+          [ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3]
         )
       when ManageIQ::Providers::Amazon::TargetCollection
-        ManageIQ::Providers::Amazon::Inventory.new(
+        inventory(
           ems,
           target,
-          :collector_class => ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection,
-          :target_class    => ManageIQ::Providers::Amazon::Inventory::Target::TargetCollection,
-          :parsers_classes => [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager,
-                               ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager,
-                               ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs]
+          ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection,
+          ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection,
+          [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager,
+           ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager,
+           ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs]
         )
       else
         # Fallback to ems refresh
@@ -44,13 +44,26 @@ class ManageIQ::Providers::Amazon::Builder
       end
     end
 
+    private
+
     def cloud_manager_inventory(ems, target)
-      ::ManageIQ::Providers::Amazon::Inventory.new(
+      inventory(
         ems,
         target,
-        :collector_class => ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager,
-        :target_class    => ManageIQ::Providers::Amazon::Inventory::Target::CloudManager,
-        :parsers_classes => [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager]
+        ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager,
+        ManageIQ::Providers::Amazon::Inventory::Persister::CloudManager,
+        [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager]
+      )
+    end
+
+    def inventory(manager, raw_target, collector_class, target_class, parsers_classes)
+      collector = collector_class.new(manager, raw_target)
+      target    = target_class.new(manager, raw_target)
+
+      ::ManageIQ::Providers::Amazon::Inventory.new(
+        target,
+        collector,
+        parsers_classes.map(&:new)
       )
     end
   end

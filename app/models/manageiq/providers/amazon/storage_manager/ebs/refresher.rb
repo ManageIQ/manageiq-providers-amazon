@@ -24,7 +24,7 @@ module ManageIQ::Providers
       _log.debug "#{log_header} Parsing inventory..."
       hashes, = Benchmark.realtime_block(:parse_inventory) do
         if refresher_options.try(:[], :inventory_object_refresh)
-          inventory.parse
+          inventory.inventory_collections
         else
           ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser.ems_inv_to_hashes(ems, refresher_options)
         end

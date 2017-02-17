@@ -1,9 +1,7 @@
-class ManageIQ::Providers::Amazon::Inventory::Collector
+class ManageIQ::Providers::Amazon::Inventory::Collector < ManagerRefresh::Inventory::Collector
   require_nested :CloudManager
   require_nested :NetworkManager
   require_nested :TargetCollection
-
-  attr_reader :ems, :options, :target
 
   attr_reader :instances, :instances_refs, :instances_deleted
   attr_reader :flavors, :flavors_refs, :flavors_deleted
@@ -22,10 +20,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector
   attr_reader :cloud_volumes, :cloud_volumes_refs
   attr_reader :cloud_volume_snapshots, :cloud_volume_snapshots_refs
 
-  def initialize(ems, options, target)
-    @ems     = ems
-    @options = options
-    @target  = target
+  def initialize(_manager, _target)
+    super
 
     initialize_inventory_sources
   end
@@ -89,19 +85,19 @@ class ManageIQ::Providers::Amazon::Inventory::Collector
   end
 
   def aws_ec2
-    @aws_ec2 ||= ems.connect
+    @aws_ec2 ||= manager.connect
   end
 
   def aws_cloud_formation
-    @aws_cloud_formation ||= ems.connect(:service => :CloudFormation)
+    @aws_cloud_formation ||= manager.connect(:service => :CloudFormation)
   end
 
   def aws_elb
-    @aws_elb ||= ems.connect(:service => :ElasticLoadBalancing)
+    @aws_elb ||= manager.connect(:service => :ElasticLoadBalancing)
   end
 
   def aws_s3
-    @aws_s3 ||= ems.connect(:service => :S3)
+    @aws_s3 ||= manager.connect(:service => :S3)
   end
 
   def stack_resources(stack_name)
