@@ -47,11 +47,12 @@ class ManageIQ::Providers::Amazon::Builder
     private
 
     def cloud_manager_inventory(ems, target)
-      inventory(ems,
-                target,
-                ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager,
-                ManageIQ::Providers::Amazon::Inventory::Persister::CloudManager,
-                [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager]
+      inventory(
+        ems,
+        target,
+        ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager,
+        ManageIQ::Providers::Amazon::Inventory::Persister::CloudManager,
+        [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager]
       )
     end
 
