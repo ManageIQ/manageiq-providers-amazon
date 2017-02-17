@@ -14,13 +14,10 @@ class ManageIQ::Providers::Amazon::StorageManager::S3 < ManageIQ::Providers::Sto
            :connect,
            :verify_credentials,
            :with_provider_connection,
-           :address,
-           :ip_address,
-           :hostname,
            :default_endpoint,
            :endpoints,
-           :to        => :parent_manager,
-           :allow_nil => true
+           :to        => :provider,
+           :allow_nil => false
 
   def self.ems_type
     @ems_type ||= "s3".freeze

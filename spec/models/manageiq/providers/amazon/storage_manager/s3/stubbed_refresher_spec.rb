@@ -7,8 +7,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
   describe "refresh" do
     before do
       _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
-      @ems                 = FactoryGirl.create(:ems_amazon, :zone => zone)
-      @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
+      @provider            = FactoryGirl.create(:provider_amazon, :zone => zone, :provider_regions => ['us-west-1'])
       EvmSpecHelper.local_miq_server(:zone => Zone.seed)
     end
 
@@ -61,12 +60,12 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
   end
 
   def refresh_spec
-    @ems.reload
+    @provider.reload
 
     with_aws_stubbed(stub_responses) do
-      EmsRefresh.refresh(@ems.s3_storage_manager)
+      EmsRefresh.refresh(@provider.s3_storage_manager)
     end
-    @ems.reload
+    @provider.reload
 
     assert_table_counts
     assert_ems
@@ -171,7 +170,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
   end
 
   def assert_ems
-    ems = @ems.s3_storage_manager
+    ems = @provider.s3_storage_manager
     expect(ems).to have_attributes(:api_version => nil,
                                    :uid_ems     => nil)
 
