@@ -32,7 +32,8 @@ module AwsStubs
       :outbound_firewall_rule_per_security_group_count => scaling * 5,
       :cloud_volume_count                              => scaling * 5,
       :cloud_volume_snapshot_count                     => scaling * 5,
-      :s3_buckets_count                                => scaling * 5
+      :s3_buckets_count                                => scaling * 5,
+      :s3_objects_per_bucket_count                     => scaling * 5
     }
   end
 
@@ -356,6 +357,19 @@ module AwsStubs
       }
     end
     mocked_s3_buckets
+  end
+
+  def mocked_s3_objects
+    mocked_s3_objects = []
+    test_counts[:s3_objects_per_bucket_count].times do |i|
+      mocked_s3_objects << {
+        :key           => "object_key_#{i}",
+        :etag          => "object_key_#{i}",
+        :size          => 1,
+        :last_modified => Time.now.utc
+      }
+    end
+    mocked_s3_objects
   end
 
   def mocked_instance_health
