@@ -1,7 +1,7 @@
 class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < ManageIQ::Providers::Amazon::Inventory::Persister
   def initialize_inventory_collections
     add_targeted_inventory_collections
-    add_remaining_inventory_collections([cloud, network, storage], :strategy => :local_db_find_one)
+    add_remaining_inventory_collections([cloud, network, storage], :strategy => :local_db_find_references)
 
     add_inventory_collection(
       cloud.vm_and_miq_template_ancestry(
@@ -64,7 +64,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collection(
       cloud.vms(
         :arel     => manager.vms.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
     add_inventory_collection(
@@ -72,7 +72,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
         :arel     => manager.disks.joins(:hardware => :vm_or_template).where(
           :hardware => {'vms' => {:ems_ref => manager_refs}}
         ),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
     add_inventory_collection(
@@ -80,7 +80,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
         :arel     => manager.networks.joins(:hardware => :vm_or_template).where(
           :hardware => {'vms' => {:ems_ref => manager_refs}}
         ),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
   end
@@ -91,7 +91,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collection(
       cloud.miq_templates(
         :arel     => manager.miq_templates.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
   end
@@ -104,7 +104,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
         :arel     => manager.hardwares.joins(:vm_or_template).where(
           'vms' => {:ems_ref => manager_refs}
         ),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
   end
@@ -115,7 +115,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collection(
       cloud.orchestration_stacks(
         :arel     => manager.orchestration_stacks.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
 
@@ -124,7 +124,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
         :arel     => manager.orchestration_stacks_resources.references(:orchestration_stacks).where(
           :orchestration_stacks => {:ems_ref => manager_refs}
         ),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
 
@@ -133,7 +133,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
         :arel     => manager.orchestration_stacks_outputs.references(:orchestration_stacks).where(
           :orchestration_stacks => {:ems_ref => manager_refs}
         ),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
 
@@ -142,7 +142,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
         :arel     => manager.orchestration_stacks_parameters.references(:orchestration_stacks).where(
           :orchestration_stacks => {:ems_ref => manager_refs}
         ),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
 
@@ -155,7 +155,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collection(
       network.cloud_networks(
         :arel     => manager.network_manager.cloud_networks.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
   end
@@ -166,7 +166,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collection(
       network.cloud_subnets(
         :arel     => manager.network_manager.cloud_subnets.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
   end
@@ -177,7 +177,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collection(
       network.security_groups(
         :arel     => manager.network_manager.security_groups.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
     add_inventory_collection(
@@ -185,7 +185,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
         :arel     => manager.network_manager.firewall_rules.references(:security_groups).where(
           :security_groups => {:ems_ref => manager_refs}
         ),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
   end
@@ -196,7 +196,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collection(
       network.network_ports(
         :arel     => manager.network_manager.network_ports.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
     add_inventory_collection(
@@ -204,7 +204,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
         :arel     => manager.network_manager.cloud_subnet_network_ports.references(:network_ports).where(
           :network_ports => {:ems_ref => manager_refs}
         ),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
   end
@@ -215,7 +215,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collection(
       network.floating_ips(
         :arel     => manager.network_manager.floating_ips.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
   end
@@ -226,14 +226,14 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collection(
       network.load_balancers(
         :arel     => manager.network_manager.load_balancers.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
 
     add_inventory_collection(
       network.load_balancer_health_checks(
         :arel     => manager.network_manager.load_balancer_health_checks.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
 
@@ -242,7 +242,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
         :arel     => manager.network_manager.load_balancer_health_check_members.references(:load_balancer_health_checks).where(
           :load_balancer_health_checks => {:ems_ref => manager_refs}
         ),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
 
@@ -251,7 +251,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
         :arel     => manager.network_manager.load_balancer_listeners.joins(:load_balancer).where(
           :load_balancers => {:ems_ref => manager_refs}
         ),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
 
@@ -260,28 +260,28 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
         :arel     => manager.network_manager.load_balancer_listener_pools.joins(:load_balancer_pool).where(
           :load_balancer_pools => {:ems_ref => manager_refs}
         ),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
 
     add_inventory_collection(
       network.load_balancer_pools(
         :arel     => manager.network_manager.load_balancer_pools.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
 
     add_inventory_collection(
       network.load_balancer_pool_member_pools(
         :arel     => manager.network_manager.load_balancer_pool_member_pools.references(:load_balancer_pools).where(:load_balancer_pools => {:ems_ref => manager_refs}),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
 
     add_inventory_collection(
       network.load_balancer_pool_members(
         :arel     => manager.network_manager.load_balancer_pool_members.joins(:load_balancer_pool_member_pools => :load_balancer_pool).where(:load_balancer_pool_member_pools => {'load_balancer_pools' => {:ems_ref => manager_refs}}),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
   end
@@ -292,7 +292,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collection(
       storage.cloud_volumes(
         :arel     => manager.ebs_storage_manager.cloud_volumes.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
   end
@@ -303,7 +303,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collection(
       storage.cloud_volume_snapshots(
         :arel     => manager.ebs_storage_manager.cloud_volume_snapshots.where(:ems_ref => manager_refs),
-        :strategy => :find_missing_in_local_db
+        :strategy => :local_db_find_missing_references
       )
     )
   end
