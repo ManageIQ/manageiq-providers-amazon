@@ -69,9 +69,4 @@ class ManageIQ::Providers::Amazon::CloudManager::Vm < ManageIQ::Providers::Cloud
     # http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_InstanceState.html
     POWER_STATES[raw_power_state.to_s] || "terminated"
   end
-
-  def validate_timeline
-    {:available => false,
-     :message   => _("Timeline is not available for %{model}") % {:model => ui_lookup(:model => self.class.to_s)}}
-  end
 end

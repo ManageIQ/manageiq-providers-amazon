@@ -61,11 +61,6 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     true
   end
 
-  def validate_timeline
-    {:available => false,
-     :message   => _("Timeline is not available for %{model}") % {:model => ui_lookup(:model => self.class.to_s)}}
-  end
-
   module ClassMethods
     #
     # Connections
