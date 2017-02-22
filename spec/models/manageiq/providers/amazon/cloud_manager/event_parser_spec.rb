@@ -51,6 +51,16 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventParser do
     end
   end
 
+  context "AWS CloudWatch Alarm" do
+    it "parses AWS_ALARM_awselb-EmSRefreshSpecVPCELB-Unhealthy-Hosts alarm event" do
+      event = parse_event("cloud_watch/AWS_ALARM_awselb-EmSRefreshSpecVPCELB-Unhealthy-Hosts.json")
+
+      expect(described_class.event_to_hash(event, nil)).to(
+        include(:vm_ems_ref => nil, :message => "awselb-EmSRefreshSpecVPCELB-Unhealthy-Hosts")
+      )
+    end
+  end
+
   def response(path)
     response = double
     allow(response).to receive(:body).and_return(

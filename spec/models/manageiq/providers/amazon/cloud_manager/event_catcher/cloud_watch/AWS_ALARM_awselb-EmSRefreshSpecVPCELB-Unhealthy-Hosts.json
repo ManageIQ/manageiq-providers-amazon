@@ -1,0 +1,12 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "3874b853-67bd-52ef-992e-e9743e1fcbde",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Subject" : "ALARM: \"awselb-EmSRefreshSpecVPCELB-Unhealthy-Hosts\" in US East - N. Virginia",
+  "Message" : "{\"AlarmName\":\"awselb-EmSRefreshSpecVPCELB-Unhealthy-Hosts\",\"AlarmDescription\":\"Created from EC2 Console\",\"AWSAccountId\":\"200278856672\",\"NewStateValue\":\"ALARM\",\"NewStateReason\":\"Threshold Crossed: 1 datapoint (1.0) was greater than or equal to the threshold (1.0).\",\"StateChangeTime\":\"2017-02-22T09:18:26.916+0000\",\"Region\":\"US East - N. Virginia\",\"OldStateValue\":\"INSUFFICIENT_DATA\",\"Trigger\":{\"MetricName\":\"UnHealthyHostCount\",\"Namespace\":\"AWS/ELB\",\"StatisticType\":\"Statistic\",\"Statistic\":\"AVERAGE\",\"Unit\":null,\"Dimensions\":[{\"name\":\"LoadBalancerName\",\"value\":\"EmSRefreshSpecVPCELB\"}],\"Period\":60,\"EvaluationPeriods\":1,\"ComparisonOperator\":\"GreaterThanOrEqualToThreshold\",\"Threshold\":1.0,\"TreatMissingData\":\"\",\"EvaluateLowSampleCountPercentile\":\"\"}}",
+  "Timestamp" : "2017-02-22T09:18:26.949Z",
+  "SignatureVersion" : "1",
+  "Signature" : "bc/L1xnXccww0qeB7WuIQLjF6aiBElzR2+bUngMf5IlkrX8w03HNZbSD4qZs/sSAc2KZAtAjcn7CJLQ0bjRWZ3OZggXC+0+D1IDJ1Vs6tcDD+NAax3hF7nwjhbogN/Qp0LLW26WqXKLxXoTVhuo99C6vIIquertB6nd3aJKegZxn7VdwsamlLa3uPsmcizP7scY8nHHSMoAqDn98OJSJo6kLTQEEWs8iJ+3mBHFKdBVFsCY2aBxVRl/zn9iQVp4blLpv45ekFEtZvk2RLyKIyqcV7L+901xtXpXAzlIXYUmiwCPrD2cqtEZkjKPe8thwsk4aYF7Hkl+nFgMB0XIjzw==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-b95095beb82e8f6a046b3aafc7f4149a.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:9d586985-cd22-4a24-a4ee-3f7b3d503a91"
+}
