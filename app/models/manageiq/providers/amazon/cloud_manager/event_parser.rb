@@ -23,6 +23,13 @@ module ManageIQ::Providers::Amazon::CloudManager::EventParser
     event_hash[:availability_zone_ems_ref] = nil # Can't get it, needs to go through VM
   end
 
+  def self.parse_cloud_watch_alarm_event!(event, event_hash)
+    event_hash[:message]                   = event["AlarmName"]
+    event_hash[:timestamp]                 = event["time"]
+    event_hash[:vm_ems_ref]                = nil # Can't get it
+    event_hash[:availability_zone_ems_ref] = nil # Can't get it
+  end
+
   def self.event_to_hash(event, ems_id)
     event_hash = {
       :event_type => event["eventType"],
@@ -31,7 +38,7 @@ module ManageIQ::Providers::Amazon::CloudManager::EventParser
       :ems_id     => ems_id
     }
 
-    unless %i(config cloud_watch_api cloud_watch_ec2).include?(event["event_source"])
+    unless %i(config cloud_watch_api cloud_watch_ec2 cloud_watch_alarm).include?(event["event_source"])
       raise "Unsupported event source #{event["event_source"]}"
     end
 
