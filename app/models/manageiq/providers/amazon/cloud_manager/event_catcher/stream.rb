@@ -180,8 +180,13 @@ class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
       state                 = "_#{event.fetch_path("detail", "state")}" if event.fetch_path("detail", "state")
       event["eventType"]    = "#{event["detail-type"].tr(" ", "_").tr("-", "_")}#{state}"
       event["event_source"] = :cloud_watch_ec2
+    elsif event["AlarmName"]
+      # CloudWatch Alarm
+      event["eventType"]    = "AWS_ALARM_#{event["AlarmName"]}"
+      event["event_source"] = :cloud_watch_alarm
     else
       # Not recognized event, ignoring...
+      $log.debug("#{log_header} Parsed event from SNS Message not recognized #{event}")
       return
     end
 
