@@ -56,12 +56,13 @@ class ManageIQ::Providers::Amazon::Builder
       )
     end
 
-    def inventory(manager, raw_target, collector_class, target_class, parsers_classes)
+    def inventory(manager, raw_target, collector_class, persister_class, parsers_classes)
       collector = collector_class.new(manager, raw_target)
-      target    = target_class.new(manager, raw_target)
+      # TODO(lsmola) figure out a way to pass collector info, probably via target
+      persister = persister_class.new(manager, raw_target, collector)
 
       ::ManageIQ::Providers::Amazon::Inventory.new(
-        target,
+        persister,
         collector,
         parsers_classes.map(&:new)
       )
