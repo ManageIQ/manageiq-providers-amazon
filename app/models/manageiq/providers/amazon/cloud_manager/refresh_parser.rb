@@ -11,6 +11,9 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     @data_index          = {}
     @known_flavors       = Set.new
     @options             = options
+    @category_name       = "amazon_provider_tags"
+    @category_desc       = "Amazon Provider Tags"
+    @category            = find_or_create_category(@category_name)
   end
 
   def ems_inv_to_hashes
@@ -34,6 +37,65 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
   end
 
   private
+
+  # Define a custom Category (Classification) for tags that are pulled
+  # down from AWS. Those tags will be assigned to this category.
+  #
+  def find_or_create_category(name)
+    tag = Tag.find_or_create_by_classification_name(name)
+
+    Category.find_or_create_by(:description => @category_desc) do |cat|
+      cat.tag          = tag
+      cat.example_text = "Tags for Amazon resources"
+    end
+  end
+
+  # Convert the resource.tags into an array of hashes. In addition, reject
+  # the key of "name" since that is already being used to establish the
+  # resource's name for the UI.
+  #
+  def parse_tags(resource)
+    array = []
+
+    unless resource.tags.blank?
+      resource.tags.each do |struct|
+        array << {struct[:key] => struct[:value]} if struct[:key].to_s.downcase != 'name'
+      end
+    end
+
+    array
+  end
+
+  # Takes an array of resource objects and creates the necessary entries within
+  # the classifications, tags and taggings database. The +type+ should be the
+  # model type, e.g. VmOrTemplate.
+  #
+  # Note that this method should only be called after process_collection in
+  # order to ensure that the resource already exists in the database locally,
+  # otherwise the Tagging cannot be set.
+  #
+  def create_tags_for_resources(resources, type)
+    resources.each do |resource|
+      tags = parse_tags(resource) # Returns an array of key/value pairs
+      tags.each do |hash|
+        hash.each do |key, value|
+          tag = Tag.find_or_create_by(:name => "/managed/#{@category_name}/#{resource.id}/#{key}")
+
+          Category.find_or_create_by(:description => "#{resource.id}:#{key}:#{value}") do |cat|
+            cat.parent = @category
+            cat.tag    = tag
+          end
+
+          object = Object.const_get(type).find_by(:uid_ems => resource.id)
+
+          Tagging.find_or_create_by(:tag_id => tag.id) do |tagging|
+            tagging.taggable_type = type
+            tagging.taggable_id = object.id
+          end
+        end
+      end
+    end
+  end
 
   def get_flavors
     process_collection(ManageIQ::Providers::Amazon::InstanceTypes.all, :flavors) { |flavor| parse_flavor(flavor) }
@@ -103,6 +165,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
   def get_instances
     instances = @aws_ec2.instances
     process_collection(instances, :vms) { |instance| parse_instance(instance) }
+    create_tags_for_resources(instances, 'VmOrTemplate')
   end
 
   def parse_flavor(flavor)
@@ -231,7 +294,6 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       :vendor              => "amazon",
       :raw_power_state     => status,
       :boot_time           => instance.launch_time,
-
       :hardware            => {
         :bitness              => architecture_to_bitness(instance.architecture),
         :virtualization_type  => instance.virtualization_type,
