@@ -44,8 +44,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(VmOrTemplate.count).to eq(3)
     expect(Vm.count).to eq(2)
     expect(MiqTemplate.count).to eq(1)
-
-    expect(CustomAttribute.count).to eq(0)
+    expect(CustomAttribute.count).to eq(1)
     expect(Disk.count).to eq(3)
     expect(GuestDevice.count).to eq(0)
     expect(Hardware.count).to eq(3)
@@ -228,7 +227,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(v.security_groups).to eq([@sg])
     expect(v.key_pairs).to eq([@kp])
     expect(v.operating_system).to       be_nil # TODO: This should probably not be nil
-    expect(v.custom_attributes.size).to eq(0)
+    expect(v.custom_attributes.size).to eq(1)
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to have_attributes(

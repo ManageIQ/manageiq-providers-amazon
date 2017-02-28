@@ -185,6 +185,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       :vendor             => "amazon",
       :raw_power_state    => "never",
       :template           => true,
+      :labels             => parse_labels(image.tags),
       # the is_public flag here avoids having to make an additional API call
       # per image, since we already know whether it's a public image
       :publicly_available => is_public,
@@ -231,7 +232,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       :vendor              => "amazon",
       :raw_power_state     => status,
       :boot_time           => instance.launch_time,
-
+      :labels              => parse_labels(instance.tags),
       :hardware            => {
         :bitness              => architecture_to_bitness(instance.architecture),
         :virtualization_type  => instance.virtualization_type,
@@ -386,5 +387,21 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       :last_updated           => resource.last_updated_timestamp
     }
     return uid, new_result
+  end
+
+  def parse_labels(tags)
+    result = []
+    return result if tags.empty?
+    tags.each do |tag|
+      custom_attr = {
+        :section => 'labels',
+        :name    => tag[:key],
+        :value   => tag[:value],
+        :source  => 'amazon'
+      }
+      result << custom_attr
+    end
+
+    result
   end
 end
