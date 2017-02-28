@@ -11,6 +11,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     @data_index          = {}
     @known_flavors       = Set.new
     @options             = options
+    @label_tag_mapping   = ContainerLabelTagMapping.cache
   end
 
   def ems_inv_to_hashes
@@ -34,6 +35,10 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
   end
 
   private
+
+  def map_labels(model_name, labels)
+    ContainerLabelTagMapping.map_labels(@label_tag_mapping, model_name, labels)
+  end
 
   def get_flavors
     process_collection(ManageIQ::Providers::Amazon::InstanceTypes.all, :flavors) { |flavor| parse_flavor(flavor) }
@@ -223,6 +228,8 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       :hostname  => instance.public_dns_name.presence
     }.delete_nils
 
+    labels = parse_labels(instance)
+
     new_result = {
       :type                => ManageIQ::Providers::Amazon::CloudManager::Vm.name,
       :uid_ems             => uid,
@@ -231,6 +238,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       :vendor              => "amazon",
       :raw_power_state     => status,
       :boot_time           => instance.launch_time,
+      :tags                => map_labels('VmOrTemplate', labels),
 
       :hardware            => {
         :bitness              => architecture_to_bitness(instance.architecture),
@@ -386,5 +394,24 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       :last_updated           => resource.last_updated_timestamp
     }
     return uid, new_result
+  end
+
+  def parse_labels(entity)
+    parse_identifying_attributes(entity.tags, 'labels')
+  end
+
+  def parse_identifying_attributes(attributes, section, source = 'amazon')
+    result = []
+    return result if attributes.blank?
+    attributes.each do |struct|
+      custom_attr = {
+        :section => section,
+        :name    => struct[:key].to_s,
+        :value   => struct[:value],
+        :source  => source
+      }
+      result << custom_attr
+    end
+    result
   end
 end
