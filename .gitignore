@@ -14,3 +14,4 @@
 /config/environments/*.local.yml
 
 /spec/manageiq
+.idea/*
