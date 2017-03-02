@@ -9,6 +9,17 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication, :provider_region => "us-west-1")
   end
 
+  before(:each) do
+    settings                          = OpenStruct.new
+    settings.inventory_object_refresh = false
+    settings.get_private_images       = true
+    settings.get_shared_images        = true
+    settings.get_public_images        = false
+
+    allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
+    allow(Settings.ems_refresh).to receive(:ec2_network).and_return(:inventory_object_refresh => false)
+  end
+
   it "will perform a full refresh on another region" do
     2.times do # Run twice to verify that a second run with existing data does not change anything
       @ems.reload
