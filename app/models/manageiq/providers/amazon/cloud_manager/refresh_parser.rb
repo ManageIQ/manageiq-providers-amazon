@@ -11,8 +11,8 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     @data_index          = {}
     @known_flavors       = Set.new
     @options             = options
-    @category_name       = "amazon_provider_tags"
-    @category_desc       = "Amazon Provider Tags"
+    @category_name       = "amazon"
+    @category_desc       = "Amazon"
     @category            = find_or_create_category(@category_name)
   end
 
@@ -79,9 +79,9 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       tags = parse_tags(resource) # Returns an array of key/value pairs
       tags.each do |hash|
         hash.each do |key, value|
-          tag = Tag.find_or_create_by(:name => "/managed/#{@category_name}/#{resource.id}/#{key}")
+          tag = Tag.find_or_create_by(:name => "/managed/#{@category_name}/#{key.downcase}/#{value.downcase}")
 
-          Category.find_or_create_by(:description => "#{resource.id}:#{key}:#{value}") do |cat|
+          category = Category.find_or_create_by(:description => "#{key.downcase}/#{value.downcase}") do |cat|
             cat.parent = @category
             cat.tag    = tag
           end
