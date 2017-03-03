@@ -79,7 +79,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       tags = parse_tags(resource) # Returns an array of key/value pairs
       tags.each do |hash|
         hash.each do |key, value|
-          name = "/managed/#{@category_name}/#{key.downcase}/#{value.downcase}"
+          name = "/managed/#{@category_name}/#{key.downcase}:#{value.downcase}"
           tag  = Tag.find_or_create_by(:name => name)
 
           category = Category.find_or_create_by(:description => "#{key.downcase}/#{value.downcase}") do |cat|
