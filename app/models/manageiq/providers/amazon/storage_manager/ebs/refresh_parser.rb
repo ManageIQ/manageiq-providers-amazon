@@ -80,12 +80,14 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
   end
 
   def link_volume_to_disk(volume_hash, attachments)
+    log_header = "MIQ(#{self.class.name}.#{__method__})"
+
     uid = volume_hash[:ems_ref]
 
     attachments.each do |a|
       if a['device'].blank?
-        _log.warn "#{log_header}: Volume: #{uid}, is missing a mountpoint, skipping the volume processing"
-        _log.warn "#{log_header}:   EMS: #{@ems.name}, Instance: #{a['instance_id']}"
+        $aws_log.warn "#{log_header}: Volume: #{uid}, is missing a mountpoint, skipping the volume processing"
+        $aws_log.warn "#{log_header}:   EMS: #{@ems.name}, Instance: #{a['instance_id']}"
         next
       end
 
@@ -93,15 +95,15 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
 
       vm = @ems.parent_manager.vms.find_by(:ems_ref => a['instance_id'])
       unless vm
-        _log.warn "VM referenced by attachment (#{a['instance_id']} not found."
+        $aws_log.warn "VM referenced by attachment (#{a['instance_id']} not found."
         next
       end
 
       hardware = vm.hardware
       disks = hardware.disks
       unless disks
-        _log.warn "#{log_header}: Volume: #{uid}, attached to instance not visible in the scope of this EMS"
-        _log.warn "#{log_header}:   EMS: #{@ems.name}, Instance: #{a['instance_id']}"
+        $aws_log.warn "#{log_header}: Volume: #{uid}, attached to instance not visible in the scope of this EMS"
+        $aws_log.warn "#{log_header}:   EMS: #{@ems.name}, Instance: #{a['instance_id']}"
         next
       end
 
