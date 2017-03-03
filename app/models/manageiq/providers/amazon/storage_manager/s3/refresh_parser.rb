@@ -83,6 +83,7 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParser
     uid = bucket.name
 
     new_result = {
+      :type    => self.class.container_type,
       :ems_ref => uid,
       :key     => bucket.name
     }
@@ -101,5 +102,11 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParser
       :cloud_object_store_container_id => @data_index.fetch_path(:cloud_object_store_containers, bucket_id)
     }
     return uid, new_result
+  end
+
+  class << self
+    def container_type
+      ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer.name
+    end
   end
 end
