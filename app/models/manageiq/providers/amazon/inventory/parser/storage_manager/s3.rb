@@ -28,7 +28,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3 < Manag
   def parse_container(bucket)
     uid = bucket['name']
     {
-      :type                  => self.class.container_type,
       :ext_management_system => ems,
       :ems_ref               => uid,
       :key                   => bucket['name']
@@ -65,7 +64,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3 < Manag
   def parse_object(object, bucket)
     uid = object['key']
     {
-      :type                         => self.class.object_type,
       :ext_management_system        => ems,
       :ems_ref                      => "#{bucket.ems_ref}_#{uid}",
       :etag                         => object['etag'],
@@ -74,15 +72,5 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3 < Manag
       :key                          => uid,
       :cloud_object_store_container => bucket
     }
-  end
-
-  class << self
-    def container_type
-      ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer.name
-    end
-
-    def object_type
-      ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject.name
-    end
   end
 end
