@@ -119,7 +119,6 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
   def get_instances
     instances = @aws_ec2.instances
     process_collection(instances, :vms) { |instance| parse_instance(instance) }
-    #create_tags_for_resources(instances, 'VmOrTemplate')
   end
 
   def parse_flavor(flavor)
