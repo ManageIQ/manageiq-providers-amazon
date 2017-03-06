@@ -94,6 +94,7 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParser
     uid = object.key
 
     new_result = {
+      :type                            => self.class.object_type,
       :ems_ref                         => "#{bucket_id}_#{uid}",
       :etag                            => object.etag,
       :last_modified                   => object.last_modified,
@@ -107,6 +108,10 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParser
   class << self
     def container_type
       ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer.name
+    end
+
+    def object_type
+      ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject.name
     end
   end
 end

@@ -132,6 +132,82 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
     end
   end
 
+  describe "destructive operations (objects)" do
+    before do
+      ems.cloud_object_store_containers << FactoryGirl.create_list(
+        :aws_bucket_with_objects,
+        5,
+        :ext_management_system => ems.s3_storage_manager
+      )
+    end
+
+    let :bucket do
+      ems.cloud_object_store_containers.first
+    end
+
+    let :object do
+      bucket.cloud_object_store_objects.first
+    end
+
+    it "objects's provider_object is of expected type" do
+      with_aws_stubbed(stub_responses) do
+        provider_obj = object.provider_object
+
+        expect(provider_obj).to_not be_nil
+        expect(provider_obj.class).to eq(Aws::S3::Object)
+      end
+    end
+
+    it "object delete triggers remote deletion" do
+      expect(object).to receive(:with_provider_object)
+
+      with_aws_stubbed(stub_responses) do
+        object.delete_cloud_object_store_object
+      end
+    end
+
+    it "remove object (trigger)" do
+      options = {:ids => [object.id], :task => "delete_cloud_object_store_object", :userid => "admin"}
+
+      expect { CloudObjectStoreObject.process_tasks(options) }.to change { MiqQueue.count }.by(1)
+    end
+
+    it "remove object (process)" do
+      with_aws_stubbed(stub_responses) do
+        # should not remove from MIQ database, we rather rely on refresh
+        expect { object.delete_cloud_object_store_object }.to change { ems.cloud_object_store_objects.count }.by(0)
+      end
+    end
+
+    it "object type" do
+      expect(object.class).to eq(ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject)
+
+      o = CloudObjectStoreObject.find(object.id)
+
+      expect(o.class).to eq(ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject)
+    end
+
+    it "object with s3 and bucket should support delete" do
+      with_aws_stubbed(stub_responses) do
+        expect(object.supports?(:delete)).to be_truthy
+      end
+    end
+
+    it "object without s3 should not support delete" do
+      object.ext_management_system = nil
+      with_aws_stubbed(stub_responses) do
+        expect(object.supports?(:delete)).to be_falsey
+      end
+    end
+
+    it "object without bucket should not support delete" do
+      object.cloud_object_store_container = nil
+      with_aws_stubbed(stub_responses) do
+        expect(object.supports?(:delete)).to be_falsey
+      end
+    end
+  end
+
   def refresh_spec
     ems.reload
 
