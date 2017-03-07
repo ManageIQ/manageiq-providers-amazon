@@ -35,6 +35,22 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
 
   private
 
+  # Convert the resource.tags into an array of hashes. In addition, reject
+  # the key of "name" since that is already being used to establish the
+  # resource's name for the UI.
+  #
+  def parse_tags(resource)
+    array = []
+
+    unless resource.tags.blank?
+      resource.tags.each do |struct|
+        array << {struct[:key] => struct[:value]}
+      end
+    end
+
+    array
+  end
+
   def get_flavors
     process_collection(ManageIQ::Providers::Amazon::InstanceTypes.all, :flavors) { |flavor| parse_flavor(flavor) }
   end
@@ -231,7 +247,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       :vendor              => "amazon",
       :raw_power_state     => status,
       :boot_time           => instance.launch_time,
-
+      :tags                => parse_tags(instance),
       :hardware            => {
         :bitness              => architecture_to_bitness(instance.architecture),
         :virtualization_type  => instance.virtualization_type,
