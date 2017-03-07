@@ -1,4 +1,6 @@
 class ManageIQ::Providers::Amazon::StorageManager::S3 < ManageIQ::Providers::StorageManager
+  require_nested :CloudObjectStoreContainer
+  require_nested :CloudObjectStoreObject
   require_nested :RefreshParser
   require_nested :RefreshWorker
   require_nested :Refresher
