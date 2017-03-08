@@ -10,6 +10,9 @@
 #     NOTE: We may want to consider using the source data directly, however
 #           there aren't the discontinued types.
 #           https://raw.githubusercontent.com/powdahound/ec2instances.info/master/www/instances.json
+#
+#  see the specs for maintaining this file
+#
 module ManageIQ::Providers::Amazon::InstanceTypes
   # Types that are currently advertised for use
   AVAILABLE_TYPES = {
