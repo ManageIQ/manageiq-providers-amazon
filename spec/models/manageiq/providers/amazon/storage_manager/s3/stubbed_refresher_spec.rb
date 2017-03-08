@@ -130,6 +130,42 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
         expect(bucket.supports?(:delete)).to be_falsey
       end
     end
+
+    it "clear bucket (trigger)" do
+      options = {:ids => [bucket.id], :task => "cloud_object_store_container_clear", :userid => "admin"}
+
+      expect { CloudObjectStoreContainer.process_tasks(options) }.to change { MiqQueue.count }.by(1)
+    end
+
+    it "clear bucket (process)" do
+      with_aws_stubbed(stub_responses) do
+        # should not remove from MIQ database, we rather rely on refresh
+        expect { bucket.raw_cloud_object_store_container_clear }.to change { ems.cloud_object_store_objects.count }.by(0)
+      end
+    end
+
+    it "bucket with s3 should support clear" do
+      with_aws_stubbed(stub_responses) do
+        expect(bucket.supports?(:cloud_object_store_container_clear)).to be_truthy
+      end
+    end
+
+    it "bucket without s3 should not support clear" do
+      bucket.ext_management_system = nil
+      with_aws_stubbed(stub_responses) do
+        expect(bucket.supports?(:cloud_object_store_container_clear)).to be_falsey
+      end
+    end
+
+    it "bucket without objects should not support clear" do
+      bucket.cloud_object_store_objects = []
+
+      expect(bucket.cloud_object_store_objects.count).to eq(0)
+
+      with_aws_stubbed(stub_responses) do
+        expect(bucket.supports?(:cloud_object_store_container_clear)).to be_falsey
+      end
+    end
   end
 
   describe "destructive operations (objects)" do
