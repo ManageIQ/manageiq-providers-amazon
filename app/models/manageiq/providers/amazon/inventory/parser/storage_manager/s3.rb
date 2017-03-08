@@ -37,6 +37,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3 < Manag
   def process_objects(bucket_id, bucket_object)
     # S3 bucket accessible only for API client with same region
     region = collector.aws_s3.client.get_bucket_location(:bucket => bucket_id).location_constraint
+    region = "us-east-1" if region.empty? # SDK returns empty string for default region
     options = { :region => region, :bucket => bucket_id }
 
     # AWS SDK doesn't show information about overall size and object count.
