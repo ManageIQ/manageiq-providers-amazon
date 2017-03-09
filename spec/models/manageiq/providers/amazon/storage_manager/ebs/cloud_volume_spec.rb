@@ -3,7 +3,8 @@ require_relative "../../aws_helper"
 describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
   let(:ems_cloud) { FactoryGirl.create(:ems_amazon_with_authentication) }
   let(:ebs) { FactoryGirl.create(:ems_amazon_ebs, :parent_ems_id => ems_cloud.id) }
-  let(:cloud_volume) { FactoryGirl.create(:cloud_volume_amazon, :ext_management_system => ebs, :ems_ref => "vol_1") }
+  let(:availability_zone) { FactoryGirl.create(:availability_zone_amazon) }
+  let(:cloud_volume) { FactoryGirl.create(:cloud_volume_amazon, :ext_management_system => ebs, :ems_ref => "vol_1", :availability_zone => availability_zone) }
 
   describe "cloud volume operations" do
     context ".raw_create_volume" do
@@ -99,6 +100,18 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
           expect(cloud_volume.detach_volume(instance.ems_ref)).to be_truthy
         end
       end
+    end
+  end
+
+  describe "instance listing for attaching volumes" do
+    let(:first_instance) { FactoryGirl.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_0", :availability_zone => availability_zone) }
+    let(:second_instance) { FactoryGirl.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_1", :availability_zone => availability_zone) }
+    let(:other_availability_zone) { FactoryGirl.create(:availability_zone_amazon) }
+    let(:other_instance) { FactoryGirl.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_2", :availability_zone => other_availability_zone) }
+
+    it "supports attachment to only those instances that are in the same availability zone" do
+      expect(cloud_volume.availability_zone).to eq(availability_zone)
+      expect(cloud_volume.available_vms).to contain_exactly(first_instance, second_instance)
     end
   end
 end

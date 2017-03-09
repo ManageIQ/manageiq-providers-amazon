@@ -1,6 +1,10 @@
 class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVolume
   supports :create
 
+  def available_vms
+    availability_zone.vms
+  end
+
   def self.validate_create_volume(ext_management_system)
     validate_volume(ext_management_system)
   end
