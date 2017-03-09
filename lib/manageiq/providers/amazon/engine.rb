@@ -1,3 +1,5 @@
+require 'rails/all'
+
 module ManageIQ
   module Providers
     module Amazon
