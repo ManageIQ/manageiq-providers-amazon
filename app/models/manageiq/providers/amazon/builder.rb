@@ -28,7 +28,7 @@ class ManageIQ::Providers::Amazon::Builder
           ManageIQ::Providers::Amazon::Inventory::Persister::StorageManager::S3,
           [ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3]
         )
-      when ManageIQ::Providers::Amazon::TargetCollection
+      when ManagerRefresh::TargetCollection
         inventory(
           ems,
           target,
