@@ -35,7 +35,7 @@ module AwsRefresherSpecCommon
       :disk                          => 44,
       :ext_management_system         => 4,
       :firewall_rule                 => 119,
-      :flavor                        => 56,
+      :flavor                        => 76,
       :floating_ip                   => 12,
       :guest_device                  => 0,
       :hardware                      => 46,

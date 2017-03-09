@@ -134,7 +134,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :auth_private_key                  => test_counts[:key_pair_count],
       :ext_management_system             => 4,
       # TODO(lsmola) collect all flavors for original refresh
-      :flavor                            => @inventory_object_settings[:inventory_object_refresh] ? 57 : 56,
+      :flavor                            => @inventory_object_settings[:inventory_object_refresh] ? 78 : 76,
       :availability_zone                 => 5,
       :vm_or_template                    => vm_count_plus_disconnect_inv + image_count_plus_disconnect_inv,
       :vm                                => vm_count_plus_disconnect_inv,
