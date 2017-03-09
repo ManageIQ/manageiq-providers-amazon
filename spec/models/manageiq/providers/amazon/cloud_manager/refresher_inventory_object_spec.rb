@@ -47,7 +47,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
   def expected_table_counts
     super.merge({
-                  :flavor => 57 # DTO collect all flavors, not filtering them by known_flavors
+                  :flavor => 78 # DTO collect all flavors, not filtering them by known_flavors
                 })
   end
 end
