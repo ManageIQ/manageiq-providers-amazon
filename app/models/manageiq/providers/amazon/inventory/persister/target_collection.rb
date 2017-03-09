@@ -24,6 +24,10 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
 
   private
 
+  def references(collection)
+    target.manager_refs_by_association.try(:[], collection).try(:[], :ems_ref).try(:to_a) || []
+  end
+
   def cloud
     ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager
   end
@@ -37,25 +41,23 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
   end
 
   def add_targeted_inventory_collections
-    images_refs = collector.private_images_refs.to_a + collector.shared_images_refs.to_a + collector.public_images_refs.to_a
-
     # Cloud
-    add_vms_inventory_collections(collector.instances_refs.to_a)
-    add_miq_templates_inventory_collections(images_refs)
-    add_hardwares_inventory_collections(collector.instances_refs.to_a + images_refs)
-    add_stacks_inventory_collections(collector.stacks_refs.to_a)
+    add_vms_inventory_collections(references(:vms))
+    add_miq_templates_inventory_collections(references(:miq_templates))
+    add_hardwares_inventory_collections(references(:vms) + references(:miq_templates))
+    add_stacks_inventory_collections(references(:orchestration_stacks))
 
     # Network
-    add_cloud_networks_inventory_collections(collector.cloud_networks_refs.to_a)
-    add_cloud_subnets_inventory_collections(collector.cloud_subnets_refs.to_a)
-    add_network_ports_inventory_collections(collector.instances_refs.to_a + collector.network_ports_refs.to_a)
-    add_security_groups_inventory_collections(collector.security_groups_refs.to_a)
-    add_floating_ips_inventory_collections(collector.floating_ips_refs.to_a)
-    add_load_balancers_collections(collector.load_balancers_refs.to_a)
+    add_cloud_networks_inventory_collections(references(:cloud_networks))
+    add_cloud_subnets_inventory_collections(references(:cloud_subnets))
+    add_network_ports_inventory_collections(references(:vms) + references(:network_ports))
+    add_security_groups_inventory_collections(references(:security_groups))
+    add_floating_ips_inventory_collections(references(:floating_ips))
+    add_load_balancers_collections(references(:load_balancers))
 
     # Storage
-    add_cloud_volumes_collections(collector.cloud_volumes_refs.to_a)
-    add_cloud_volume_snapshots_collections(collector.cloud_volume_snapshots_refs.to_a)
+    add_cloud_volumes_collections(references(:cloud_volumes))
+    add_cloud_volume_snapshots_collections(references(:cloud_volume_snapshots))
   end
 
   def add_vms_inventory_collections(manager_refs)
