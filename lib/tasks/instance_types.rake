@@ -2,12 +2,22 @@ namespace :providers do
   namespace :amazon do
     desc "Create new instance_types.rb"
     task :instance_types => [:environment] do
+      # Instance Types are not provided by the AWS SDK
+      #
       # This task creates a instance_types.rb file in the current directory based upon the current
       # instance_types.rb file and data from
       #  curl https://raw.githubusercontent.com/powdahound/ec2instances.info/master/www/instances.json > lib/tasks/instance_types_data/instances.json
       #  https://aws.amazon.com/ec2/instance-types/#instance-type-matrix > lib/tasks/instance_types_data/instance_types.csv
       #  https://aws.amazon.com/ec2/previous-generation/#Previous_Generation_Instance_Details_and_Pricing_ > lib/tasks/instance_types_data/instance_types_previous.csv
       #     converted to csv via http://www.convertcsv.com/html-table-to-csv.htm
+      #
+      # Other useful resources
+      #   http://aws.amazon.com/ec2/instance-types
+      #   http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/instance-types.html
+      #   http://aws.amazon.com/ec2/previous-generation
+      #   http://www.ec2instances.info/
+      #   http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+      #   http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/c4-instances.html
       require 'csv'
       require 'open-uri'
 

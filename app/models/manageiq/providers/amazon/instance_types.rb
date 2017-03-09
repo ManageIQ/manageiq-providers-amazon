@@ -1,15 +1,7 @@
-# Instance Types for EC2.  These types are not provided by the AWS SDK, and so
-#   are enumerated here manually from the following sources:
+# Instance Types are not provided by the AWS SDK so they are enumerated here manually
 #
-#   http://aws.amazon.com/ec2/instance-types
-#   http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/instance-types.html
-#   http://aws.amazon.com/ec2/previous-generation
-#   http://www.ec2instances.info/
-#   http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
-#   http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/c4-instances.html
-#     NOTE: We may want to consider using the source data directly, however
-#           there aren't the discontinued types.
-#           https://raw.githubusercontent.com/powdahound/ec2instances.info/master/www/instances.json
+# run bin/rails providers:amazon:instance_types to maintain this file
+#
 module ManageIQ::Providers::Amazon::InstanceTypes
   # Types that are currently advertised for use
   AVAILABLE_TYPES = {
