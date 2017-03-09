@@ -6,110 +6,93 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
     @ems_event = ems_event
   end
 
-  # Parses all targets that are present in the EmsEvent given in the initialize
+  # Parses all targets that are present in the EmsEvent given in the initializer
+  #
+  # @return [Array] Array of ManagerRefresh::Target objects
   def parse
     parse_ems_event_targets(ems_event)
   end
 
   private
 
+  # Parses list of ManagerRefresh::Target out of the given EmsEvent
+  #
+  # @param event [EmsEvent] EmsEvent object
+  # @return [Array] Array of ManagerRefresh::Target objects
   def parse_ems_event_targets(event)
-    available_targets = init_available_targets
+    target_collection = ManagerRefresh::TargetCollection.new(:manager => event.ext_management_system, :event => event)
 
     case event.full_data["event_source"]
     when :cloud_watch_api
-      collect_cloudwatch_api_references!(available_targets,
+      collect_cloudwatch_api_references!(target_collection,
                                          event.full_data.fetch_path("detail", "requestParameters") || {})
-      collect_cloudwatch_api_references!(available_targets,
+      collect_cloudwatch_api_references!(target_collection,
                                          event.full_data.fetch_path("detail", "responseElements") || {})
     when :cloud_watch_ec2
-      collect_cloudwatch_ec2_references!(available_targets, event.full_data)
+      collect_cloudwatch_ec2_references!(target_collection, event.full_data)
     when :config
-      collect_config_references!(available_targets, event.full_data)
+      collect_config_references!(target_collection, event.full_data)
     end
 
-    parsed_targets(available_targets)
+    target_collection.targets
   end
 
-  def init_available_targets
-    available_target_classes = [
-      # Cloud
-      Vm,
-      MiqTemplate,
-      ManageIQ::Providers::CloudManager::AuthKeyPair,
-      OrchestrationStack,
-      # Network
-      CloudNetwork,
-      CloudSubnet,
-      NetworkPort,
-      SecurityGroup,
-      FloatingIp,
-      # Block Storage(EBS)
-      CloudVolume,
-      CloudVolumeSnapshot,
-    ]
-
-    available_target_classes.each_with_object({}) do |class_name, obj|
-      obj[class_name.to_s] = {:manager_ref => Set.new}
-    end
+  def parsed_targets(target_collection = {})
+    target_collection.select { |_target_class, references| references[:manager_ref].present? }
   end
 
-  def parsed_targets(available_targets = {})
-    available_targets.select { |_target_class, references| references[:manager_ref].present? }
+  def add_target!(target_collection, association, ref)
+    target_collection.add_target!(:association => association, :manager_ref => {:ems_ref => ref})
   end
 
-  def add_reference!(available_targets, target, ref)
-    available_targets[target.to_s][:manager_ref] << {:ems_ref => ref}
-  end
-
-  def collect_cloudwatch_ec2_references!(available_targets, event_data)
+  def collect_cloudwatch_ec2_references!(target_collection, event_data)
     instance_id = event_data.fetch_path("detail", "instance-id")
-    add_reference!(available_targets, Vm, instance_id) if instance_id
+    add_target!(target_collection, :vms, instance_id) if instance_id
   end
 
-  def collect_config_references!(available_targets, event_data)
+  def collect_config_references!(target_collection, event_data)
     resource_type = event_data.fetch_path("configurationItem", "resourceType")
     resource_id   = event_data.fetch_path("configurationItem", "resourceId")
     target_class  = case resource_type
                     when "AWS::EC2::Instance"
-                      Vm
+                      :vms
                     when "AWS::EC2::SecurityGroup"
-                      SecurityGroup
+                      :security_groups
                     when "AWS::EC2::Volume"
-                      CloudVolume
+                      :cloud_volumes
                     when "AWS::EC2::NetworkInterface"
-                      NetworkPort
+                      :network_ports
                     when "AWS::EC2::VPC"
-                      CloudNetwork
+                      :cloud_networks
                     when "AWS::EC2::Subnet"
-                      CloudSubnet
+                      :cloud_subnets
                     when "AWS::EC2::EIP"
-                      FloatingIp
+                      :floating_ips
                     end
 
-    add_reference!(available_targets, target_class, resource_id) if target_class && resource_id
+    add_target!(target_collection, target_class, resource_id) if target_class && resource_id
   end
 
-  def collect_cloudwatch_api_references!(available_targets, event_data, depth = 0)
+  def collect_cloudwatch_api_references!(target_collection, event_data, depth = 0)
     # Check a reasonable depth, so this can't fail with max stack size
     raise "Depth 20 reached when scanning EmsEvent for Targets" if depth > 20
 
     # Cloud
-    add_reference!(available_targets, Vm, event_data["instanceId"]) if event_data["instanceId"]
-    add_reference!(available_targets, MiqTemplate, event_data["imageId"]) if event_data["imageId"]
-    add_reference!(available_targets, ManageIQ::Providers::CloudManager::AuthKeyPair, event_data["keyName"]) if event_data["keyName"]
-    add_reference!(available_targets, OrchestrationStack, event_data["stackId"]) if event_data["stackId"]
-    add_reference!(available_targets, OrchestrationStack, event_data["stackName"]) if event_data["stackName"]
+    add_target!(target_collection, :vms, event_data["instanceId"]) if event_data["instanceId"]
+    add_target!(target_collection, :miq_templates, event_data["imageId"]) if event_data["imageId"]
+    add_target!(target_collection, :key_pairs, event_data["keyName"]) if event_data["keyName"]
+    add_target!(target_collection, :orchestration_stacks, event_data["stackId"]) if event_data["stackId"]
+    add_target!(target_collection, :orchestration_stacks, event_data["stackName"]) if event_data["stackName"]
     # Network
-    add_reference!(available_targets, CloudNetwork, event_data["vpcId"]) if event_data["vpcId"]
-    add_reference!(available_targets, CloudSubnet, event_data["subnetId"]) if event_data["subnetId"]
-    add_reference!(available_targets, NetworkPort, event_data["networkInterfaceId"]) if event_data["networkInterfaceId"]
-    add_reference!(available_targets, SecurityGroup, event_data["groupId"]) if event_data["groupId"]
-    add_reference!(available_targets, FloatingIp, event_data["allocationId"]) if event_data["allocationId"]
-    add_reference!(available_targets, LoadBalancer, event_data["loadBalancerName"]) if event_data["loadBalancerName"]
+    add_target!(target_collection, :cloud_networks, event_data["vpcId"]) if event_data["vpcId"]
+    add_target!(target_collection, :cloud_subnets, event_data["subnetId"]) if event_data["subnetId"]
+    add_target!(target_collection, :network_ports, event_data["networkInterfaceId"]) if event_data["networkInterfaceId"]
+    add_target!(target_collection, :security_groups, event_data["groupId"]) if event_data["groupId"]
+    add_target!(target_collection, :floating_ips, event_data["allocationId"]) if event_data["allocationId"]
+    add_target!(target_collection, :load_balancers, event_data["loadBalancerName"]) if event_data["loadBalancerName"]
     # Block Storage
-    add_reference!(available_targets, CloudVolume, event_data["volumeId"]) if event_data["volumeId"]
-    add_reference!(available_targets, CloudVolumeSnapshot, event_data["snapshotId"]) if event_data["snapshotId"]
+    add_target!(target_collection, :cloud_volumes, event_data["volumeId"]) if event_data["volumeId"]
+    add_target!(target_collection, :cloud_volume_snapshots, event_data["snapshotId"]) if event_data["snapshotId"]
 
     # TODO(lsmola) how to handle tagging? Tagging affects e.g. a name of any resource, but contains only a generic
     # resourceID
@@ -121,19 +104,19 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
     # mapping and refresh also snapshot?
 
     # Collect nested references
-    collect_cloudwatch_api_references!(available_targets, event_data["networkInterface"], depth + 1) if event_data["networkInterface"]
+    collect_cloudwatch_api_references!(target_collection, event_data["networkInterface"], depth + 1) if event_data["networkInterface"]
 
     (event_data.fetch_path("groupSet", "items") || []).each do |x|
-      collect_cloudwatch_api_references!(available_targets, x, depth + 1)
+      collect_cloudwatch_api_references!(target_collection, x, depth + 1)
     end
     (event_data.fetch_path("instancesSet", "items") || []).each do |x|
-      collect_cloudwatch_api_references!(available_targets, x, depth + 1)
+      collect_cloudwatch_api_references!(target_collection, x, depth + 1)
     end
     (event_data.fetch_path("instances") || []).each do |x|
-      collect_cloudwatch_api_references!(available_targets, x, depth + 1)
+      collect_cloudwatch_api_references!(target_collection, x, depth + 1)
     end
     (event_data.fetch_path("networkInterfaceSet", "items") || []).each do |x|
-      collect_cloudwatch_api_references!(available_targets, x, depth + 1)
+      collect_cloudwatch_api_references!(target_collection, x, depth + 1)
     end
   end
 end
