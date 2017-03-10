@@ -53,6 +53,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     process_inventory_collection(images, :miq_templates) do |image|
       get_image_hardware(image)
 
+      resource = persister.miq_templates.lazy_find(image['image_id'])
+      get_labels(resource, image["tags"])
+
       parse_image(image, is_public)
     end
   end
@@ -102,6 +105,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       flavor = persister.flavors.find(instance['instance_type']) || persister.flavors.find("unknown")
 
       get_instance_hardware(instance, flavor)
+      resource = persister.vms.lazy_find(instance['instance_id'])
+      get_labels(resource, instance["tags"])
 
       parse_instance(instance, flavor)
     end
@@ -113,6 +118,12 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       get_hardware_disks(i, flavor)
 
       parse_instance_hardware(i, flavor)
+    end
+  end
+
+  def get_labels(resource, tags)
+    process_inventory_collection(tags, :vm_and_template_labels) do |tag|
+      parse_label(resource, tag)
     end
   end
 
@@ -365,6 +376,16 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :resource_status        => resource['resource_status'],
       :resource_status_reason => resource['resource_status_reason'],
       :last_updated           => resource['last_updated_timestamp']
+    }
+  end
+
+  def parse_label(resource, tag)
+    {
+      :resource => resource,
+      :section  => 'labels',
+      :name     => tag["key"],
+      :value    => tag["value"],
+      :source   => 'amazon'
     }
   end
 
