@@ -41,13 +41,13 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
     target_collection.select { |_target_class, references| references[:manager_ref].present? }
   end
 
-  def add_target!(target_collection, association, ref)
-    target_collection.add_target!(:association => association, :manager_ref => {:ems_ref => ref})
+  def add_target(target_collection, association, ref)
+    target_collection.add_target(:association => association, :manager_ref => {:ems_ref => ref})
   end
 
   def collect_cloudwatch_ec2_references!(target_collection, event_data)
     instance_id = event_data.fetch_path("detail", "instance-id")
-    add_target!(target_collection, :vms, instance_id) if instance_id
+    add_target(target_collection, :vms, instance_id) if instance_id
   end
 
   def collect_config_references!(target_collection, event_data)
@@ -70,7 +70,7 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
                       :floating_ips
                     end
 
-    add_target!(target_collection, target_class, resource_id) if target_class && resource_id
+    add_target(target_collection, target_class, resource_id) if target_class && resource_id
   end
 
   def collect_cloudwatch_api_references!(target_collection, event_data, depth = 0)
@@ -78,21 +78,21 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
     raise "Depth 20 reached when scanning EmsEvent for Targets" if depth > 20
 
     # Cloud
-    add_target!(target_collection, :vms, event_data["instanceId"]) if event_data["instanceId"]
-    add_target!(target_collection, :miq_templates, event_data["imageId"]) if event_data["imageId"]
-    add_target!(target_collection, :key_pairs, event_data["keyName"]) if event_data["keyName"]
-    add_target!(target_collection, :orchestration_stacks, event_data["stackId"]) if event_data["stackId"]
-    add_target!(target_collection, :orchestration_stacks, event_data["stackName"]) if event_data["stackName"]
+    add_target(target_collection, :vms, event_data["instanceId"]) if event_data["instanceId"]
+    add_target(target_collection, :miq_templates, event_data["imageId"]) if event_data["imageId"]
+    add_target(target_collection, :key_pairs, event_data["keyName"]) if event_data["keyName"]
+    add_target(target_collection, :orchestration_stacks, event_data["stackId"]) if event_data["stackId"]
+    add_target(target_collection, :orchestration_stacks, event_data["stackName"]) if event_data["stackName"]
     # Network
-    add_target!(target_collection, :cloud_networks, event_data["vpcId"]) if event_data["vpcId"]
-    add_target!(target_collection, :cloud_subnets, event_data["subnetId"]) if event_data["subnetId"]
-    add_target!(target_collection, :network_ports, event_data["networkInterfaceId"]) if event_data["networkInterfaceId"]
-    add_target!(target_collection, :security_groups, event_data["groupId"]) if event_data["groupId"]
-    add_target!(target_collection, :floating_ips, event_data["allocationId"]) if event_data["allocationId"]
-    add_target!(target_collection, :load_balancers, event_data["loadBalancerName"]) if event_data["loadBalancerName"]
+    add_target(target_collection, :cloud_networks, event_data["vpcId"]) if event_data["vpcId"]
+    add_target(target_collection, :cloud_subnets, event_data["subnetId"]) if event_data["subnetId"]
+    add_target(target_collection, :network_ports, event_data["networkInterfaceId"]) if event_data["networkInterfaceId"]
+    add_target(target_collection, :security_groups, event_data["groupId"]) if event_data["groupId"]
+    add_target(target_collection, :floating_ips, event_data["allocationId"]) if event_data["allocationId"]
+    add_target(target_collection, :load_balancers, event_data["loadBalancerName"]) if event_data["loadBalancerName"]
     # Block Storage
-    add_target!(target_collection, :cloud_volumes, event_data["volumeId"]) if event_data["volumeId"]
-    add_target!(target_collection, :cloud_volume_snapshots, event_data["snapshotId"]) if event_data["snapshotId"]
+    add_target(target_collection, :cloud_volumes, event_data["volumeId"]) if event_data["volumeId"]
+    add_target(target_collection, :cloud_volume_snapshots, event_data["snapshotId"]) if event_data["snapshotId"]
 
     # TODO(lsmola) how to handle tagging? Tagging affects e.g. a name of any resource, but contains only a generic
     # resourceID

@@ -145,7 +145,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   end
 
   def parse_vm_target!(t)
-    target.add_target!(:association => :vms, :manager_ref => {:ems_ref => t.ems_ref}) if t.ems_ref
+    target.add_target(:association => :vms, :manager_ref => {:ems_ref => t.ems_ref}) if t.ems_ref
   end
 
   def infer_related_ems_refs!
@@ -160,19 +160,19 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       all_stacks = ([stack] + (stack.try(:ancestors) || [])).compact
 
       all_stacks.collect(&:ems_ref).compact.each do |ems_ref|
-        target.add_target!(:association => :orchestration_stacks, :manager_ref => {:ems_ref => ems_ref})
+        target.add_target(:association => :orchestration_stacks, :manager_ref => {:ems_ref => ems_ref})
       end
 
       vm.key_pairs.collect(&:name).compact.each do |ems_ref|
-        target.add_target!(:association => :key_pairs, :manager_ref => {:ems_ref => ems_ref})
+        target.add_target(:association => :key_pairs, :manager_ref => {:ems_ref => ems_ref})
       end
 
       vm.network_ports.collect(&:ems_ref).compact.each do |ems_ref|
-        target.add_target!(:association => :network_ports, :manager_ref => {:ems_ref => ems_ref})
+        target.add_target(:association => :network_ports, :manager_ref => {:ems_ref => ems_ref})
       end
 
       vm.floating_ips.collect(&:ems_ref).compact.each do |ems_ref|
-        target.add_target!(:association => :floating_ips, :manager_ref => {:ems_ref => ems_ref})
+        target.add_target(:association => :floating_ips, :manager_ref => {:ems_ref => ems_ref})
       end
     end
   end
