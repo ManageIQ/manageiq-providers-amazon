@@ -1,5 +1,4 @@
 class ManageIQ::Providers::Amazon::NetworkManager::EventCatcher < ::MiqEventCatcher
-  require_nested :Runner
 
   def self.ems_class
     ManageIQ::Providers::Amazon::NetworkManager
