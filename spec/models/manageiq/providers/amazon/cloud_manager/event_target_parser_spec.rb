@@ -10,11 +10,11 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
   context "AWS Config Event" do
     it "parses vm_ems_ref into event" do
       ems_event = create_ems_event("sqs_message.json")
-      
+
       parsed_targets = described_class.new(ems_event).parse
 
       expect(parsed_targets.size).to eq(1)
-      expect(parsed_targets["Vm"][:manager_ref].to_a).to match_array([{:ems_ref => 'i-06199fba'}])
+      expect(parsed_targets.collect(&:manager_ref).uniq).to match_array([{:ems_ref => 'i-06199fba'}])
     end
   end
 
@@ -23,16 +23,16 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       ems_event = create_ems_event("cloud_watch/StartInstances.json")
       parsed_targets = described_class.new(ems_event).parse
 
-      expect(parsed_targets.size).to eq(1)
-      expect(parsed_targets["Vm"][:manager_ref].to_a).to match_array([{:ems_ref => 'i-0aeefa44d61669849'}])
+      expect(parsed_targets.size).to eq(2)
+      expect(parsed_targets.collect(&:manager_ref).uniq).to match_array([{:ems_ref => 'i-0aeefa44d61669849'}])
     end
 
     it "parses StopInstances" do
       ems_event = create_ems_event("cloud_watch/StopInstances.json")
       parsed_targets = described_class.new(ems_event).parse
 
-      expect(parsed_targets.size).to eq(1)
-      expect(parsed_targets["Vm"][:manager_ref].to_a).to match_array([{:ems_ref => 'i-0aeefa44d61669849'}])
+      expect(parsed_targets.size).to eq(2)
+      expect(parsed_targets.collect(&:manager_ref).uniq).to match_array([{:ems_ref => 'i-0aeefa44d61669849'}])
     end
   end
 
@@ -42,7 +42,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       parsed_targets = described_class.new(ems_event).parse
 
       expect(parsed_targets.size).to eq(1)
-      expect(parsed_targets["Vm"][:manager_ref].to_a).to match_array([{:ems_ref => 'i-0aeefa44d61669849'}])
+      expect(parsed_targets.collect(&:manager_ref).uniq).to match_array([{:ems_ref => 'i-0aeefa44d61669849'}])
     end
 
     it "parses EC2_Instance_State_change_Notification_running event" do
@@ -50,7 +50,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       parsed_targets = described_class.new(ems_event).parse
 
       expect(parsed_targets.size).to eq(1)
-      expect(parsed_targets["Vm"][:manager_ref].to_a).to match_array([{:ems_ref => 'i-0aeefa44d61669849'}])
+      expect(parsed_targets.collect(&:manager_ref).uniq).to match_array([{:ems_ref => 'i-0aeefa44d61669849'}])
     end
 
     it "parses EC2_Instance_State_change_Notification_stopped event" do
@@ -58,7 +58,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       parsed_targets = described_class.new(ems_event).parse
 
       expect(parsed_targets.size).to eq(1)
-      expect(parsed_targets["Vm"][:manager_ref].to_a).to match_array([{:ems_ref => 'i-0aeefa44d61669849'}])
+      expect(parsed_targets.collect(&:manager_ref).uniq).to match_array([{:ems_ref => 'i-0aeefa44d61669849'}])
     end
   end
 
@@ -74,7 +74,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
   def response(path)
     response = double
     allow(response).to receive(:body).and_return(
-      File.read(File.join(File.dirname(__FILE__), "/event_catcher/#{path}")))
+      File.read(File.join(File.dirname(__FILE__), "/event_catcher/#{path}"))
+    )
 
     allow(response).to receive(:message_id).and_return("mocked_message_id")
 
