@@ -76,14 +76,11 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
 
       dev = File.basename(a['device'])
 
-      disk_hash = {
-        :hardware    => persister.hardwares.lazy_find(a["instance_id"]),
-        :device_name => dev,
-        :location    => dev,
-        :size        => volume_hash[:size],
-        :backing     => persister.cloud_volumes.lazy_find(uid),
-      }
-      persister.disks << persister.disks.new_inventory_object(disk_hash)
+      disk = persister.disks.find_or_build_by(:hardware    => persister.hardwares.lazy_find(a["instance_id"]),
+                                              :device_name => dev)
+      disk.location = dev
+      disk.size     = volume_hash[:size]
+      disk.backing  = persister.cloud_volumes.lazy_find(uid)
     end
   end
 
