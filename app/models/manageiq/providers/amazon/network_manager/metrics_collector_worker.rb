@@ -1,5 +1,4 @@
 class ManageIQ::Providers::Amazon::NetworkManager::MetricsCollectorWorker < ::MiqEmsMetricsCollectorWorker
-  require_nested :Runner
 
   self.default_queue_name = "amazon_network"
 
