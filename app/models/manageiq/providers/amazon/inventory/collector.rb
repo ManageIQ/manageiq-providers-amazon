@@ -3,22 +3,22 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManagerRefresh::Invent
   require_nested :NetworkManager
   require_nested :TargetCollection
 
-  attr_reader :instances, :instances_refs, :instances_deleted
-  attr_reader :flavors, :flavors_refs, :flavors_deleted
-  attr_reader :availability_zones, :availability_zones_refs, :availability_zones_deleted
-  attr_reader :key_pairs, :key_pairs_refs, :key_pairs_deleted
-  attr_reader :private_images, :private_images_refs, :private_images_deleted
-  attr_reader :shared_images, :shared_images_refs, :shared_images_deleted
-  attr_reader :public_images, :public_images_refs, :public_images_deleted
-  attr_reader :cloud_networks, :cloud_networks_refs, :cloud_networks_deleted
-  attr_reader :cloud_subnets, :cloud_subnets_refs, :cloud_subnets_deleted
-  attr_reader :security_groups, :security_groups_refs, :security_groups_deleted
-  attr_reader :floating_ips, :floating_ips_refs, :floating_ips_deleted
-  attr_reader :network_ports, :network_ports_refs, :network_ports_deleted
-  attr_reader :load_balancers, :load_balancers_refs, :load_balancers_deleted
-  attr_reader :stacks, :stacks_refs, :stacks_deleted
-  attr_reader :cloud_volumes, :cloud_volumes_refs
-  attr_reader :cloud_volume_snapshots, :cloud_volume_snapshots_refs
+  attr_reader :instances
+  attr_reader :flavors
+  attr_reader :availability_zones
+  attr_reader :key_pairs
+  attr_reader :private_images
+  attr_reader :shared_images
+  attr_reader :public_images
+  attr_reader :cloud_networks
+  attr_reader :cloud_subnets
+  attr_reader :security_groups
+  attr_reader :floating_ips
+  attr_reader :network_ports
+  attr_reader :load_balancers
+  attr_reader :stacks
+  attr_reader :cloud_volumes
+  attr_reader :cloud_volume_snapshots
   attr_reader :cloud_objects_store_containers
   attr_reader :cloud_objects_store_objects
 
@@ -30,49 +30,21 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManagerRefresh::Invent
 
   def initialize_inventory_sources
     @instances                   = []
-    @instances_refs              = Set.new
-    @instances_deleted           = []
     @flavors                     = []
-    @flavors_refs                = Set.new
-    @flavors_deleted             = []
     @availability_zones          = []
-    @availability_zones_refs     = Set.new
-    @availability_zones_deleted  = []
     @key_pairs                   = []
-    @key_pairs_refs              = Set.new
-    @key_pairs_deleted           = []
     @private_images              = []
-    @private_images_refs         = Set.new
-    @private_images_deleted      = []
     @shared_images               = []
-    @shared_images_refs          = Set.new
-    @shared_images_deleted       = []
     @public_images               = []
-    @public_images_refs          = Set.new
-    @public_images_deleted       = []
     @cloud_networks              = []
-    @cloud_networks_refs         = Set.new
-    @cloud_networks_deleted      = []
     @cloud_subnets               = []
-    @cloud_subnets_refs          = Set.new
-    @cloud_subnets_deleted       = []
     @security_groups             = []
-    @security_groups_refs        = Set.new
-    @security_groups_deleted     = []
     @floating_ips                = []
-    @floating_ips_refs           = Set.new
-    @floating_ips_deleted        = []
     @network_ports               = []
-    @network_ports_refs          = Set.new
-    @network_ports_deleted       = []
     @load_balancers              = []
-    @load_balancers_refs         = Set.new
     @stacks                      = []
-    @stacks_refs                 = Set.new
     @cloud_volumes               = []
-    @cloud_volumes_refs          = Set.new
     @cloud_volume_snapshots      = []
-    @cloud_volume_snapshots_refs = Set.new
     # Nested resources
     @stack_resources             = {}
     @stack_resources_refs        = {}
