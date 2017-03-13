@@ -1,4 +1,13 @@
 module AwsRefresherSpecCommon
+  extend ActiveSupport::Concern
+
+  included do
+    # We need a relative path so the specs are executable from the core
+    VCR.configure do |c|
+      c.cassette_library_dir = File.join(File.dirname(__FILE__), "../" * 4 + "vcr_cassettes")
+    end
+  end
+
   def assert_common
     assert_table_counts
     assert_ems
