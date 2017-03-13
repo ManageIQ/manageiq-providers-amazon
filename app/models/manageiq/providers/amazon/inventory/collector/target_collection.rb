@@ -165,7 +165,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
   def infer_related_vm_ems_refs_db!
     changed_vms = manager.vms.where(:ems_ref => references(:vms)).includes(:key_pairs, :network_ports, :floating_ips,
-                                                                        :orchestration_stack, :cloud_subnets)
+                                                                           :orchestration_stack, :cloud_subnets)
     changed_vms.each do |vm|
       stack      = vm.orchestration_stack
       all_stacks = ([stack] + (stack.try(:ancestors) || [])).compact
