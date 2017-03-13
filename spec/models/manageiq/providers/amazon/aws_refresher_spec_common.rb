@@ -31,7 +31,7 @@ module AwsRefresherSpecCommon
       :availability_zone             => 5,
       :cloud_network                 => 5,
       :cloud_subnet                  => 10,
-      :custom_attribute              => 0,
+      :custom_attribute              => 43,
       :disk                          => 44,
       :ext_management_system         => 4,
       :firewall_rule                 => 119,
@@ -336,7 +336,7 @@ module AwsRefresherSpecCommon
       :cpu_reserve_expand    => nil,
       :cpu_limit             => nil,
       :cpu_shares            => nil,
-      :cpu_shares_level      => nil
+      :cpu_shares_level      => nil,
     )
 
     expect(v.ext_management_system).to eq(@ems)
@@ -358,7 +358,7 @@ module AwsRefresherSpecCommon
       .to match_array [sg_2, @sg]
 
     expect(v.operating_system).to       be_nil # TODO: This should probably not be nil
-    expect(v.custom_attributes.size).to eq(0)
+    expect(v.custom_attributes.size).to eq(1)
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to have_attributes(
@@ -403,6 +403,7 @@ module AwsRefresherSpecCommon
     v.with_relationship_type("genealogy") do
       expect(v.parent).to eq(@template)
     end
+    expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-Basic3")
   end
 
   def assert_specific_vm_powered_off
@@ -443,7 +444,7 @@ module AwsRefresherSpecCommon
     expect(v.cloud_subnet).to be_nil
     expect(v.security_groups).to match_array([@sg])
     expect(v.operating_system).to be_nil # TODO: This should probably not be nil
-    expect(v.custom_attributes.size).to eq(0)
+    expect(v.custom_attributes.size).to eq(1)
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to have_attributes(

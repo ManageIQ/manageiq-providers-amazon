@@ -39,6 +39,16 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
       super(attributes.merge!(extra_attributes))
     end
 
+    def vm_and_template_labels(extra_attributes = {})
+      attributes = {
+        :model_class => CustomAttribute,
+        :association => :vm_and_template_labels,
+        :manager_ref => [:resource, :name]
+      }
+
+      attributes.merge!(extra_attributes)
+    end
+
     def orchestration_stacks(extra_attributes = {})
       attributes = {
         :model_class => ::ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
