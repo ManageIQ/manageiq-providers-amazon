@@ -34,4 +34,22 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer
   def raw_cloud_object_store_container_clear
     with_provider_object(&:clear!)
   end
+
+  def self.raw_cloud_object_store_container_create(ext_management_system, options)
+    options.except!(:name) # name is part of general options, but S3 doesn't like it
+    region = options[:create_bucket_configuration][:location_constraint]
+    connection = ext_management_system.connect(:region => region)
+    bucket = connection.create_bucket(options)
+    {
+      :key                   => bucket.name,
+      :ems_ref               => bucket.name,
+      :bytes                 => 0,
+      :object_count          => 0,
+      :provider_region       => region,
+      :ext_management_system => ext_management_system
+    }
+  rescue => e
+    $aws_log.error "raw_cloud_object_store_container_create error, options=[#{options}], error: #{e}"
+    raise MiqException::Error, e.to_s, e.backtrace
+  end
 end
