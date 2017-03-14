@@ -1,0 +1,109 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeRegions&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.6.50 ruby/2.3.1 x86_64-darwin16 resources
+      X-Amz-Date:
+      - 20170313T204134Z
+      X-Amz-Content-Sha256:
+      - 903451d1f3cda66f6ac7101b5810af53eb3ce6b47c5162b0b2238ce9086b6a0d
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=0123456789ABCDEFGHIJ/20170313/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=79469013e645fb455b91bf19e1ef4979f0e02eae37834e4ecbc5a70d9fed346d
+      Content-Length:
+      - '41'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 13 Mar 2017 20:41:38 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeRegionsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>9226d35d-5ebd-452b-b5f8-ef35230831f7</requestId>
+            <regionInfo>
+                <item>
+                    <regionName>ap-south-1</regionName>
+                    <regionEndpoint>ec2.ap-south-1.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>eu-west-2</regionName>
+                    <regionEndpoint>ec2.eu-west-2.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>eu-west-1</regionName>
+                    <regionEndpoint>ec2.eu-west-1.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>ap-northeast-2</regionName>
+                    <regionEndpoint>ec2.ap-northeast-2.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>ap-northeast-1</regionName>
+                    <regionEndpoint>ec2.ap-northeast-1.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>sa-east-1</regionName>
+                    <regionEndpoint>ec2.sa-east-1.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>ca-central-1</regionName>
+                    <regionEndpoint>ec2.ca-central-1.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>ap-southeast-1</regionName>
+                    <regionEndpoint>ec2.ap-southeast-1.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>ap-southeast-2</regionName>
+                    <regionEndpoint>ec2.ap-southeast-2.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>eu-central-1</regionName>
+                    <regionEndpoint>ec2.eu-central-1.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>us-east-1</regionName>
+                    <regionEndpoint>ec2.us-east-1.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>us-east-2</regionName>
+                    <regionEndpoint>ec2.us-east-2.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>us-west-1</regionName>
+                    <regionEndpoint>ec2.us-west-1.amazonaws.com</regionEndpoint>
+                </item>
+                <item>
+                    <regionName>us-west-2</regionName>
+                    <regionEndpoint>ec2.us-west-2.amazonaws.com</regionEndpoint>
+                </item>
+            </regionInfo>
+        </DescribeRegionsResponse>
+    http_version: 
+  recorded_at: Mon, 13 Mar 2017 20:41:39 GMT
+recorded_with: VCR 3.0.3
