@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'bundler/gem_tasks'
+require 'manageiq-providers-amazon'
 
 begin
   require 'rspec/core/rake_task'
@@ -9,6 +10,7 @@ begin
 rescue LoadError
 end
 
+ManageIQ::Providers::Amazon::Engine.load_tasks
 namespace :spec do
   desc "Setup environment for specs"
   task :setup => 'app:test:providers:amazon:setup'
