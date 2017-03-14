@@ -31,10 +31,20 @@ module ManageIQ
           :hostname    => "ec2.eu-west-1.amazonaws.com",
           :description => "EU (Ireland)",
         },
+        "eu-west-2"      => {
+          :name        => "eu-west-2",
+          :hostname    => "ec2.eu-west-2.amazonaws.com",
+          :description => "EU (London)",
+        },
         "eu-central-1"   => {
           :name        => "eu-central-1",
           :hostname    => "ec2.eu-central-1.amazonaws.com",
           :description => "EU (Frankfurt)",
+        },
+        "ap-south-1"     => {
+          :name        => "ap-south-1",
+          :hostname    => "ec2.ap-south-1.amazonaws.com",
+          :description => "Asia Pacific (Mumbai)",
         },
         "ap-southeast-1" => {
           :name        => "ap-southeast-1",

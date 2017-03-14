@@ -1,4 +1,27 @@
 describe ManageIQ::Providers::Amazon::Regions do
+  it "has all the regions" do
+    EvmSpecHelper.create_guid_miq_server_zone
+    ems = FactoryGirl.create(:ems_amazon_with_authentication)
+    ems.update_authentication(:default => {
+                                :userid   => "0123456789ABCDEFGHIJ",
+                                :password => "ABCDEFGHIJKLMNO1234567890abcdefghijklmno"
+                              })
+
+    VCR.use_cassette(described_class.name.underscore) do
+      current_regions = described_class.regions.map do |_name, config|
+        {:region_name => config[:name], :endpoint => config[:hostname]}
+      end
+      current_regions.reject! { |r| r[:region_name] == 'us-gov-west-1' }
+
+      online_regions = ems.connect.client.describe_regions.to_h[:regions]
+
+      # sort for better diff
+      current_regions.sort_by! { |r| r[:region_name] }
+      online_regions.sort_by! { |r| r[:region_name] }
+      expect(online_regions).to eq(current_regions)
+    end
+  end
+
   context "disable regions via Settings" do
     it "contains gov_cloud without it being disabled" do
       allow(Settings.ems.ems_amazon).to receive(:disabled_regions).and_return([])
