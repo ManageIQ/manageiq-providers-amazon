@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 
 
+## Unreleased - as of Sprint 56 end 2017-03-13
+
+### Added
+- Support deletion of CloudObjectStoreContainer [(#144)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/144)
+- Cloud volume operations [(#151)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/151)
+- Support operation `create` for CloudObjectStoreContainer [(#172)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/172)
+- List VMs from the same availability zone as volume [(#164)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/164)
+- AWS SDK call `get_bucket_location` returns empty string [(#168)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/168)
+- Set default Container and Object class when collecting inventory for the 1st time [(#165)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/165)
+- Support deletion of CloudObjectStoreObject [(#152)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/152)
+- Maintain instance types [(#170)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/170)
+- Gather AWS labels and create CustomAttributes [(#162)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/162)
+- Event parser can parse new format of target [(#160)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/160)
+- Add amazon events to settings to display them in timelines [(#163)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/163)
+- Support operation "clear" on CloudObjectStoreContainer [(#153)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/153)
+- Add cloud volume snapshot operations for EBS manager [(#156)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/156)
+- Add eu-west-2 and ap-south-1 regions [(#178)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/178)
+- New instance types [(#171)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/171)
+
+### Changed
+- Filter out events in Settings instead of CloudManager [(#141)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/141)
+- Use base classes for Inventory Collector Persistor and Parser [(#139)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/139)
+- Increase minimum AWS version for modify_volume [(#176)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/176)
+
+### Removed
+- Remove `require_nested :Runner` from NetworkManager::EventCatcher and NetworkManager::MetricsCollectorWorker [(#173)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/173)
+
+### Fixed
+- Suppress warning "toplevel constant referenced" [(#166)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/166)
+- Set power state to shutting_down when rebooting an instance [(#145)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/145)
+- Fix logger in Amazon EBS refresh parser [(#159)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/159)
+
 ## Unreleased - as of Sprint 55 end 2017-02-27
 
 ### Added
