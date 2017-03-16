@@ -49,7 +49,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     {
       :auth_private_key              => 12,
       :ext_management_system         => 2,
-      :flavor                        => 56,
+      :flavor                        => 76,
       :availability_zone             => 5,
       :vm_or_template                => 55,
       :vm                            => 35,
