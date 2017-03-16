@@ -5,4 +5,22 @@ FactoryGirl.define do
           :parent  => :ems_storage do
     provider_region "us-east-1"
   end
+
+  factory :ems_amazon_with_vcr_authentication, :parent => :ems_amazon do
+    zone do
+      _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
+      zone
+    end
+    after(:create) do |ems|
+      client_id  = Rails.application.secrets.amazon.try(:[], 'client_id') || 'AMAZON_CLIENT_ID'
+      client_key = Rails.application.secrets.amazon.try(:[], 'client_secret') || 'AMAZON_CLIENT_SECRET'
+
+      cred = {
+        :userid   => client_id,
+        :password => client_key
+      }
+
+      ems.authentications << FactoryGirl.create(:authentication, cred)
+    end
+  end
 end
