@@ -2,10 +2,15 @@ describe ManageIQ::Providers::Amazon::Regions do
   it "has all the regions" do
     EvmSpecHelper.create_guid_miq_server_zone
     ems = FactoryGirl.create(:ems_amazon_with_authentication)
-    ems.update_authentication(:default => {
-                                :userid   => "0123456789ABCDEFGHIJ",
-                                :password => "ABCDEFGHIJKLMNO1234567890abcdefghijklmno"
-                              })
+    @client_id         = Rails.application.secrets.amazon.try(:[], 'client_id') || 'AMAZON_CLIENT_ID'
+    @client_key        = Rails.application.secrets.amazon.try(:[], 'client_secret') || 'AMAZON_CLIENT_SECRET'
+
+    cred = {
+      :userid   => @client_id,
+      :password => @client_key
+    }
+
+    @ems.authentications << FactoryGirl.create(:authentication, cred)
 
     VCR.use_cassette(described_class.name.underscore) do
       current_regions = described_class.regions.map do |_name, config|
