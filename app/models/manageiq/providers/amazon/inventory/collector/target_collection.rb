@@ -12,11 +12,27 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     target.manager_refs_by_association.try(:[], collection).try(:[], :ems_ref).try(:to_a) || []
   end
 
+  def name_references(collection)
+    target.manager_refs_by_association.try(:[], collection).try(:[], :name).try(:to_a) || []
+  end
+
   def instances
     return @instances unless @instances.blank?
     @instances = hash_collection.new(
       aws_ec2.instances(:filters => [{:name => 'instance-id', :values => references(:vms)}])
     )
+  end
+
+  def availability_zones
+    hash_collection.new(
+      aws_ec2.client.describe_availability_zones(
+        :filters => [{:name => 'zone-name', :values => references(:availability_zones)}]).availability_zones)
+  end
+
+  def key_pairs
+    hash_collection.new(
+      aws_ec2.client.describe_key_pairs(
+        :filters => [{:name => 'key-name', :values => name_references(:key_pairs)}]).key_pairs)
   end
 
   def private_images
@@ -183,8 +199,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     # need to be scanned for all, due to the fake FloatingIps we create.
     instances.each do |vm|
       add_simple_target!(:miq_templates, vm["image_id"])
-      add_simple_target!(:key_pairs, vm["key_name"])
+      add_simple_target!(:availability_zones, vm.fetch_path('placement', 'availability_zone'))
       add_simple_target!(:orchestration_stacks, get_from_tags(vm, "aws:cloudformation:stack-id"))
+      target.add_target(:association => :key_pairs, :manager_ref => {:name => vm["key_name"]})
 
       vm["network_interfaces"].each do |network_interface|
         add_simple_target!(:network_ports, network_interface["network_interface_id"])
