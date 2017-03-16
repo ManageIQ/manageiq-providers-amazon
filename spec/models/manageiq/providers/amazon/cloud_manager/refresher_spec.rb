@@ -4,8 +4,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   include AwsRefresherSpecCommon
 
   before(:each) do
-    _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
-    @ems                 = FactoryGirl.create(:ems_amazon_with_vcr_authentication, :zone => zone)
+    @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication)
   end
 
   it ".ems_type" do

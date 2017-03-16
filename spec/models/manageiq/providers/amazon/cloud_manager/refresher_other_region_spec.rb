@@ -1,7 +1,6 @@
 describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   before(:each) do
-    guid, server, zone = EvmSpecHelper.create_guid_miq_server_zone
-    @ems               = FactoryGirl.create(:ems_amazon_with_vcr_authentication, :zone => zone, :provider_region => "us-west-1")
+    @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication, :provider_region => "us-west-1")
   end
 
   it "will perform a full refresh on another region" do

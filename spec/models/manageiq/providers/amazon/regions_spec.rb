@@ -1,7 +1,6 @@
 describe ManageIQ::Providers::Amazon::Regions do
   it "has all the regions" do
-    _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
-    ems                 = FactoryGirl.create(:ems_amazon_with_vcr_authentication, :zone => zone)
+    ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication)
 
     VCR.use_cassette(described_class.name.underscore) do
       current_regions = described_class.regions.map do |_name, config|
