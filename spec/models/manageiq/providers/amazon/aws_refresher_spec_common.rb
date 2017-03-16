@@ -33,6 +33,7 @@ module AwsRefresherSpecCommon
     assert_specific_orchestration_template
     assert_specific_orchestration_stack
     assert_relationship_tree
+    # assert_specific_tags_on_vm
   end
 
   def assert_specific_flavor
@@ -383,6 +384,7 @@ module AwsRefresherSpecCommon
     expect(v.operating_system).to       be_nil # TODO: This should probably not be nil
     expect(v.custom_attributes.size).to eq(2)
     expect(v.snapshots.size).to eq(0)
+    # expect(v.tags.size).to eq(0)
 
     expect(v.hardware).to have_attributes(
       :guest_os            => "linux",
@@ -1101,4 +1103,10 @@ module AwsRefresherSpecCommon
   def assert_relationship_tree
     expect(@ems.descendants_arranged).to match_relationship_tree({})
   end
+
+  # TODO: Add some real specs here
+  # def assert_specific_tags_on_vm
+  #   vm = ManageIQ::Providers::Amazon::CloudManager::Vm.where(:name => "EmsRefreshSpec-PoweredOn-Basic3").first
+  #   expect(vm.tags).to be_empty
+  # end
 end

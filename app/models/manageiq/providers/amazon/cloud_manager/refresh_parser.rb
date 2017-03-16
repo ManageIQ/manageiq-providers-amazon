@@ -11,6 +11,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     @data_index          = {}
     @known_flavors       = Set.new
     @options             = options
+    @label_tag_mapping   = ContainerLabelTagMapping.cache
   end
 
   def ems_inv_to_hashes
@@ -34,6 +35,10 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
   end
 
   private
+
+  def map_labels(model_name, labels)
+    ContainerLabelTagMapping.map_labels(@label_tag_mapping, model_name, labels)
+  end
 
   def get_flavors
     process_collection(ManageIQ::Providers::Amazon::InstanceTypes.all, :flavors) { |flavor| parse_flavor(flavor) }
@@ -176,6 +181,8 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     name ||= $1 if location =~ /^(.+?)(\.(image|img))?\.manifest\.xml$/
     name ||= uid
 
+    labels = parse_labels(image.tags)
+
     new_result = {
       :type               => ManageIQ::Providers::Amazon::CloudManager::Template.name,
       :uid_ems            => uid,
@@ -185,7 +192,8 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       :vendor             => "amazon",
       :raw_power_state    => "never",
       :template           => true,
-      :labels             => parse_labels(image.tags),
+      :labels             => labels,
+      :tags               => map_labels('Image', labels),
       # the is_public flag here avoids having to make an additional API call
       # per image, since we already know whether it's a public image
       :publicly_available => is_public,
@@ -224,6 +232,8 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       :hostname  => instance.public_dns_name.presence
     }.delete_nils
 
+    labels = parse_labels(instance.tags)
+
     new_result = {
       :type                => ManageIQ::Providers::Amazon::CloudManager::Vm.name,
       :uid_ems             => uid,
@@ -232,7 +242,8 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       :vendor              => "amazon",
       :raw_power_state     => status,
       :boot_time           => instance.launch_time,
-      :labels              => parse_labels(instance.tags),
+      :labels              => labels,
+      :tags                => map_labels('Vm', labels),
       :hardware            => {
         :bitness              => architecture_to_bitness(instance.architecture),
         :virtualization_type  => instance.virtualization_type,
