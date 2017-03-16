@@ -22,7 +22,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
     @instances_hashes = hash_collection.new(
       aws_ec2.instances(:filters => [{:name => 'instance-id', :values => references(:vms)}])
-    )
+    ).all
   end
 
   def availability_zones
@@ -95,7 +95,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
     @network_ports_hashes = hash_collection.new(aws_ec2.client.describe_network_interfaces(
       :filters => [{:name => 'network-interface-id', :values => references(:network_ports)}]
-    ).network_interfaces)
+    ).network_interfaces).all
   end
 
   def load_balancers
