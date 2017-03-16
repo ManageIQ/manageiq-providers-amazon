@@ -1,4 +1,4 @@
-require_relative "../aws_refresher_spec_common"
+require_relative "../../aws_refresher_spec_common"
 
 describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   include AwsRefresherSpecCommon

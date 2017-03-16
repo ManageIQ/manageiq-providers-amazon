@@ -11,6 +11,7 @@ module AwsRefresherSpecCommon
   def assert_common
     assert_table_counts
     assert_ems
+    expect(@ems.direct_orchestration_stacks.size).to eql(3)
     assert_specific_flavor
     assert_specific_az
     assert_specific_key_pair
@@ -34,22 +35,22 @@ module AwsRefresherSpecCommon
 
   def expected_table_counts
     {
-      :auth_private_key              => 12,
+      :auth_private_key              => 17,
       :availability_zone             => 5,
       :cloud_network                 => 5,
       :cloud_subnet                  => 10,
-      :custom_attribute              => 43,
-      :disk                          => 44,
+      :custom_attribute              => 52,
+      :disk                          => 32,
       :ext_management_system         => 4,
-      :firewall_rule                 => 119,
+      :firewall_rule                 => 155,
       :flavor                        => 76,
-      :floating_ip                   => 12,
+      :floating_ip                   => 15,
       :guest_device                  => 0,
-      :hardware                      => 46,
-      :miq_queue                     => 48,
-      :miq_template                  => 20,
-      :network                       => 14,
-      :network_port                  => 32,
+      :hardware                      => 44,
+      :miq_queue                     => 46,
+      :miq_template                  => 24,
+      :network                       => 21,
+      :network_port                  => 30,
       :network_router                => 0,
       :operating_system              => 0,
       :orchestration_stack           => 5,
@@ -57,12 +58,12 @@ module AwsRefresherSpecCommon
       :orchestration_stack_parameter => 13,
       :orchestration_stack_resource  => 46,
       :orchestration_template        => 5,
-      :relationship                  => 25,
-      :security_group                => 49,
+      :relationship                  => 21,
+      :security_group                => 74,
       :snapshot                      => 0,
       :system_service                => 0,
-      :vm                            => 26,
-      :vm_or_template                => 46
+      :vm                            => 20,
+      :vm_or_template                => 44
     }
   end
 
@@ -120,7 +121,6 @@ module AwsRefresherSpecCommon
     expect(@ems.miq_templates.size).to eq(expected_table_counts[:miq_template])
 
     expect(@ems.orchestration_stacks.size).to eql(expected_table_counts[:orchestration_stack])
-    expect(@ems.direct_orchestration_stacks.size).to eql(3)
   end
 
   def assert_specific_flavor
@@ -459,7 +459,9 @@ module AwsRefresherSpecCommon
     expect(v.cloud_subnet).to be_nil
     expect(v.security_groups).to match_array([@sg])
     expect(v.operating_system).to be_nil # TODO: This should probably not be nil
-    expect(v.custom_attributes.size).to eq(1)
+    expect(v.custom_attributes.size).to eq(2)
+    expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOff")
+    expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to have_attributes(
