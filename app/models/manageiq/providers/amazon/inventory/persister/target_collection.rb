@@ -47,10 +47,10 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
   def add_targeted_inventory_collections
     # Cloud
     add_vms_inventory_collections(references(:vms))
+    add_miq_templates_inventory_collections(references(:miq_templates))
+    add_vms_and_miq_templates_inventory_collections(references(:vms) + references(:miq_templates))
     add_key_pairs_inventory_collections(name_references(:key_pairs))
     add_availability_zones_inventory_collections(references(:availability_zones))
-    add_miq_templates_inventory_collections(references(:miq_templates))
-    add_hardwares_inventory_collections(references(:vms) + references(:miq_templates))
     add_stacks_inventory_collections(references(:orchestration_stacks))
 
     # Network
@@ -126,12 +126,20 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     )
   end
 
-  def add_hardwares_inventory_collections(manager_refs)
+  def add_vms_and_miq_templates_inventory_collections(manager_refs)
     return if manager_refs.blank?
 
     add_inventory_collection(
       cloud.hardwares(
         :arel     => manager.hardwares.joins(:vm_or_template).where(
+          'vms' => {:ems_ref => manager_refs}
+        ),
+        :strategy => :local_db_find_missing_references
+      )
+    )
+    add_inventory_collection(
+      cloud.vm_and_template_labels(
+        :arel     => manager.vm_and_template_labels.where(
           'vms' => {:ems_ref => manager_refs}
         ),
         :strategy => :local_db_find_missing_references
