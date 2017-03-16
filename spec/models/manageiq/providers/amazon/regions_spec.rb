@@ -10,7 +10,7 @@ describe ManageIQ::Providers::Amazon::Regions do
       :password => @client_key
     }
 
-    @ems.authentications << FactoryGirl.create(:authentication, cred)
+    ems.authentications << FactoryGirl.create(:authentication, cred)
 
     VCR.use_cassette(described_class.name.underscore) do
       current_regions = described_class.regions.map do |_name, config|
