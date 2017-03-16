@@ -210,9 +210,12 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       all_stacks = ([stack] + (stack.try(:ancestors) || [])).compact
 
       all_stacks.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:orchestration_stacks, ems_ref) }
-      vm.network_ports.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:network_ports, ems_ref) }
       vm.cloud_subnets.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:cloud_subnets, ems_ref) }
       vm.floating_ips.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:floating_ips, ems_ref) }
+      vm.network_ports.collect(&:ems_ref).compact.each do |ems_ref|
+        # Add only real network ports, starting with "eni-"
+        add_simple_target!(:network_ports, ems_ref) if ems_ref.start_with?("eni-")
+      end
       vm.key_pairs.collect(&:name).compact.each do |name|
         target.add_target(:association => :key_pairs, :manager_ref => {:name => name})
       end
