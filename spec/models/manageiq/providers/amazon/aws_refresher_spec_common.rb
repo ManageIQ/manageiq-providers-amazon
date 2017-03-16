@@ -13,8 +13,6 @@ module AwsRefresherSpecCommon
     assert_ems
     assert_specific_flavor
     assert_specific_az
-    assert_specific_floating_ip
-    assert_specific_floating_ip_for_cloud_network
     assert_specific_key_pair
     assert_specific_cloud_network
     assert_specific_security_group
@@ -127,20 +125,23 @@ module AwsRefresherSpecCommon
 
   def assert_specific_flavor
     @flavor = ManageIQ::Providers::Amazon::CloudManager::Flavor.where(:name => "t1.micro").first
-    expect(@flavor).to have_attributes(
-      :name                     => "t1.micro",
-      :description              => "T1 Micro",
-      :enabled                  => true,
-      :cpus                     => 1,
-      :cpu_cores                => 1,
-      :memory                   => 0.613.gigabytes.to_i,
-      :supports_32_bit          => true,
-      :supports_64_bit          => true,
-      :supports_hvm             => false,
-      :supports_paravirtual     => true,
-      :block_storage_based_only => true,
-      :ephemeral_disk_size      => 0,
-      :ephemeral_disk_count     => 0
+    expect(@flavor).to(
+      have_attributes(
+        :name                     => "t1.micro",
+        :ems_ref                  => "t1.micro",
+        :description              => "T1 Micro",
+        :enabled                  => true,
+        :cpus                     => 1,
+        :cpu_cores                => 1,
+        :memory                   => 0.613.gigabytes.to_i,
+        :supports_32_bit          => true,
+        :supports_64_bit          => true,
+        :supports_hvm             => false,
+        :supports_paravirtual     => true,
+        :block_storage_based_only => true,
+        :ephemeral_disk_size      => 0,
+        :ephemeral_disk_count     => 0
+      )
     )
 
     expect(@flavor.ext_management_system).to eq(@ems)
@@ -171,7 +172,9 @@ module AwsRefresherSpecCommon
       :ems_ref            => "eipalloc-ce53d7a0",
       :cloud_network_only => true
     )
+  end
 
+  def assert_specific_public_ip_for_cloud_network
     @ip2 = ManageIQ::Providers::Amazon::NetworkManager::FloatingIp.where(:address => "52.207.210.230").first
     expect(@ip2).to have_attributes(
       :address            => "52.207.210.230",
@@ -320,6 +323,8 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_vm_powered_on
+    assert_specific_floating_ip
+
     v = ManageIQ::Providers::Amazon::CloudManager::Vm.where(
       :name            => "EmsRefreshSpec-PoweredOn-Basic3",
       :raw_power_state => "running").first
@@ -367,7 +372,7 @@ module AwsRefresherSpecCommon
       .to match_array [sg_2, @sg]
 
     expect(v.operating_system).to       be_nil # TODO: This should probably not be nil
-    expect(v.custom_attributes.size).to eq(1)
+    expect(v.custom_attributes.size).to eq(2)
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to have_attributes(
@@ -413,6 +418,7 @@ module AwsRefresherSpecCommon
       expect(v.parent).to eq(@template)
     end
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-Basic3")
+    expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
   end
 
   def assert_specific_vm_powered_off
@@ -498,6 +504,8 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_vm_on_cloud_network
+    assert_specific_floating_ip_for_cloud_network
+
     v = ManageIQ::Providers::Amazon::CloudManager::Vm.where(:name => "EmsRefreshSpec-PoweredOn-VPC").first
     expect(v).to have_attributes(
       :template              => false,
@@ -554,6 +562,8 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_vm_on_cloud_network_public_ip
+    assert_specific_public_ip_for_cloud_network
+
     v = ManageIQ::Providers::Amazon::CloudManager::Vm.where(:name => "EmsRefreshSpec-PoweredOn-VPC1").first
     expect(v).to have_attributes(
       :template              => false,
@@ -593,7 +603,7 @@ module AwsRefresherSpecCommon
     expect(v.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
   end
 
-  def assert_specific_load_balancers
+  def assert_specific_load_balancer_non_vpc
     @elb_non_vpc = ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer.where(
       :name => "EmsRefreshSpec-LoadBalancer").first
     expect(@elb_non_vpc).to have_attributes(
@@ -605,6 +615,16 @@ module AwsRefresherSpecCommon
     )
 
     expect(@elb_non_vpc.ext_management_system).to eq(@ems.network_manager)
+    expect(@elb_non_vpc.load_balancer_pool_members.count).to eq 1
+  end
+
+  def assert_specific_load_balancer_non_vpc_vms
+    expect(@elb_non_vpc.vms.first.name).to eq "EmsRefreshSpec-PoweredOn-Basic3"
+  end
+
+  def assert_specific_load_balancers
+    assert_specific_load_balancer_non_vpc
+    assert_specific_load_balancer_non_vpc_vms
 
     @elb = ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer.where(
       :name => "EmSRefreshSpecVPCELB").first
@@ -642,9 +662,6 @@ module AwsRefresherSpecCommon
 
     expect(@elb.vms).to match_array @elb2.vms
     expect(@elb.load_balancer_pool_members).to match_array @elb2.load_balancer_pool_members
-
-    expect(@elb_non_vpc.load_balancer_pool_members.count).to eq 1
-    expect(@elb_non_vpc.vms.first.name).to eq "EmsRefreshSpec-PoweredOn-Basic3"
   end
 
   def assert_specific_load_balancer_listeners
