@@ -4,6 +4,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     parse_targets!
     infer_related_ems_refs!
 
+    # Reset the target cache, so we can access new targets inside
     target.manager_refs_by_association_reset
   end
 
@@ -12,7 +13,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   end
 
   def instances
-    hash_collection.new(
+    return @instances unless @instances.blank?
+    @instances = hash_collection.new(
       aws_ec2.instances(:filters => [{:name => 'instance-id', :values => references(:vms)}])
     )
   end
@@ -56,7 +58,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   end
 
   def network_ports
-    hash_collection.new(aws_ec2.client.describe_network_interfaces(
+    return @network_ports unless @network_ports.blank?
+
+    @network_ports = hash_collection.new(aws_ec2.client.describe_network_interfaces(
       :filters => [{:name => 'network-interface-id', :values => references(:network_ports).to_a}]
     ).network_interfaces)
   end
@@ -145,7 +149,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   end
 
   def parse_vm_target!(t)
-    target.add_target(:association => :vms, :manager_ref => {:ems_ref => t.ems_ref}) if t.ems_ref
+    add_simple_target!(:vms, t.ems_ref)
   end
 
   def infer_related_ems_refs!
@@ -153,27 +157,78 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     # ems_refs of every related object. Now this is not very nice fro ma design point of view, but we really want
     # to see changes in VM's associated objects, so the VM view is always consistent and have fresh data. The partial
     # reason for this is, that AWS doesn't send all the objects state change,
+    unless references(:vms).blank?
+      infer_related_vm_ems_refs_db!
+      infer_related_vm_ems_refs_api!
+    end
+  end
+
+  def infer_related_vm_ems_refs_db!
     changed_vms = manager.vms.where(:ems_ref => references(:vms)).includes(:key_pairs, :network_ports, :floating_ips,
-                                                                           :orchestration_stack)
+                                                                           :orchestration_stack, :cloud_subnets)
     changed_vms.each do |vm|
       stack      = vm.orchestration_stack
       all_stacks = ([stack] + (stack.try(:ancestors) || [])).compact
 
-      all_stacks.collect(&:ems_ref).compact.each do |ems_ref|
-        target.add_target(:association => :orchestration_stacks, :manager_ref => {:ems_ref => ems_ref})
+      all_stacks.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:orchestration_stacks, ems_ref) }
+      vm.key_pairs.collect(&:name).compact.each { |ems_ref| add_simple_target!(:key_pairs, ems_ref) }
+      vm.network_ports.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:network_ports, ems_ref) }
+      vm.cloud_subnets.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:cloud_subnets, ems_ref) }
+      vm.floating_ips.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:floating_ips, ems_ref) }
+    end
+  end
+
+  def infer_related_vm_ems_refs_api!
+    # TODO(lsmola) should we filter the VMs by only VMs we want to do full refresh for? Some of them, like FloatingIps
+    # need to be scanned for all, due to the fake FloatingIps we create.
+    instances.each do |vm|
+      add_simple_target!(:miq_templates, vm["image_id"])
+      add_simple_target!(:key_pairs, vm["key_name"])
+      add_simple_target!(:orchestration_stacks, get_from_tags(vm, "aws:cloudformation:stack-id"))
+
+      vm["network_interfaces"].each do |network_interface|
+        add_simple_target!(:network_ports, network_interface["network_interface_id"])
+        add_simple_target!(:cloud_subnet, network_interface["subnet_id"])
+        add_simple_target!(:cloud_network, network_interface["vpc_id"])
       end
 
-      vm.key_pairs.collect(&:name).compact.each do |ems_ref|
-        target.add_target(:association => :key_pairs, :manager_ref => {:ems_ref => ems_ref})
+      vm["security_groups"].each do |security_group|
+        add_simple_target!(:security_groups, security_group["group_id"])
       end
 
-      vm.network_ports.collect(&:ems_ref).compact.each do |ems_ref|
-        target.add_target(:association => :network_ports, :manager_ref => {:ems_ref => ems_ref})
+      vm["block_device_mappings"].each do |cloud_volume|
+        add_simple_target!(:cloud_volumes, cloud_volume.fetch_path("ebs", "volume_id"))
       end
 
-      vm.floating_ips.collect(&:ems_ref).compact.each do |ems_ref|
-        target.add_target(:association => :floating_ips, :manager_ref => {:ems_ref => ems_ref})
+      # EC2 classic floating ips
+      if vm["network_interfaces"].blank? && vm['public_ip_address'].present?
+        add_simple_target!(:floating_ips, vm['public_ip_address'])
       end
     end
+
+    # TODO(lsmola) I don't like this anymore, the TargetCollection should just build structure with unique targets
+    # inside. The we don't need to do this cache invalidate, since add_target would be modifying it directly.
+    # Reset target cache, so we can get a fresh list of network_ports ids
+    target.manager_refs_by_association_reset
+
+    # We need to go through all network ports, to get a correct list of the floating IPs, for some reason, the list
+    # under a vm is missing allocation_ids.
+    network_ports.each do |network_port|
+      network_port['private_ip_addresses'].each do |private_ip_address|
+        floating_ip_id = (private_ip_address.fetch_path("association", "allocation_id") ||
+          private_ip_address.fetch_path("association", "public_ip"))
+        add_simple_target!(:floating_ips, floating_ip_id)
+      end
+    end
+  end
+
+  def add_simple_target!(association, ems_ref)
+    return if ems_ref.blank?
+
+    target.add_target(:association => association, :manager_ref => {:ems_ref => ems_ref})
+  end
+
+  def get_from_tags(resource, item)
+    (resource['tags'] || []).detect { |tag, _| tag['key'].downcase == item.to_s.downcase }.try(:[], 'value')
   end
 end

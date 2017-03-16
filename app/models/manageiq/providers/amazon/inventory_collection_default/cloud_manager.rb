@@ -64,5 +64,13 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
 
       super(attributes.merge!(extra_attributes))
     end
+
+    def disks(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => %i(hardware device_name location size backing),
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
   end
 end
