@@ -1,4 +1,8 @@
+require_relative "../aws_refresher_spec_common"
+
 describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
+  include AwsRefresherSpecCommon
+
   before(:each) do
     @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication, :provider_region => "us-west-1")
   end
