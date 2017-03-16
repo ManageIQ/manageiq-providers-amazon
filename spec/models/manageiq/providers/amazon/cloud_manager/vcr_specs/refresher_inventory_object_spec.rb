@@ -13,8 +13,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
   # Test all kinds of DTO refreshes, DTO refresh, DTO with recursive saving strategy
   [{:inventory_object_refresh => true},
-   {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},
-  ].each do |inventory_object_settings|
+   {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},].each do |inventory_object_settings|
     context "with settings #{inventory_object_settings}" do
       before(:each) do
         settings                                  = OpenStruct.new
@@ -44,8 +43,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   end
 
   def expected_table_counts
-    super.merge({
-                  :flavor => 78 # DTO collect all flavors, not filtering them by known_flavors
-                })
+    super.merge(
+      :flavor => 78 # DTO collect all flavors, not filtering them by known_flavors
+    )
   end
 end

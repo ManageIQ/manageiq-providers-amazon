@@ -30,7 +30,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
     hash_collection.new(
       aws_ec2.client.describe_availability_zones(
-        :filters => [{:name => 'zone-name', :values => references(:availability_zones)}]).availability_zones)
+        :filters => [{:name => 'zone-name', :values => references(:availability_zones)}]
+      ).availability_zones
+    )
   end
 
   def key_pairs
@@ -38,7 +40,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
     hash_collection.new(
       aws_ec2.client.describe_key_pairs(
-        :filters => [{:name => 'key-name', :values => name_references(:key_pairs)}]).key_pairs)
+        :filters => [{:name => 'key-name', :values => name_references(:key_pairs)}]
+      ).key_pairs
+    )
   end
 
   def private_images

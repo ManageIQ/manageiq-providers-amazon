@@ -9,8 +9,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
   # Test all kinds of graph refreshes, graph refresh, graph with recursive saving strategy
   [{:inventory_object_refresh => true},
-   {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},
-  ].each do |inventory_object_settings|
+   {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},].each do |inventory_object_settings|
     context "with settings #{inventory_object_settings}" do
       before(:each) do
         settings                                  = OpenStruct.new
@@ -73,7 +72,6 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
                        :supports_paravirtual     => true,
                        :block_storage_based_only => true,
                        :ephemeral_disk_size      => 0,
-                       :ephemeral_disk_count     => 0
-    )
+                       :ephemeral_disk_count     => 0)
   end
 end

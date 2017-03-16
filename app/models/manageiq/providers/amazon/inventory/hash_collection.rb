@@ -10,7 +10,7 @@ class ManageIQ::Providers::Amazon::Inventory::HashCollection
   end
 
   def all
-    collection.each_with_object([]) {|item, obj| obj << transform(item) }
+    collection.each_with_object([]) { |item, obj| obj << transform(item) }
   end
 
   private

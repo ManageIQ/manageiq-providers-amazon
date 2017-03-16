@@ -8,7 +8,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   end
 
   it "will perform a full refresh on another region" do
-    2.times do  # Run twice to verify that a second run with existing data does not change anything
+    2.times do # Run twice to verify that a second run with existing data does not change anything
       @ems.reload
 
       VCR.use_cassette("#{described_class.name.underscore}_other_region") do
