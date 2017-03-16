@@ -1,16 +1,7 @@
 describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   before(:each) do
     guid, server, zone = EvmSpecHelper.create_guid_miq_server_zone
-    @ems               = FactoryGirl.create(:ems_amazon, :provider_region => "us-west-1", :zone => zone)
-    @client_id         = Rails.application.secrets.amazon.try(:[], 'client_id') || 'AMAZON_CLIENT_ID'
-    @client_key        = Rails.application.secrets.amazon.try(:[], 'client_secret') || 'AMAZON_CLIENT_SECRET'
-
-    cred = {
-      :userid   => @client_id,
-      :password => @client_key
-    }
-
-    @ems.authentications << FactoryGirl.create(:authentication, cred)
+    @ems               = FactoryGirl.create(:ems_amazon_with_vcr_authentication, :zone => zone, :provider_region => "us-west-1")
   end
 
   it "will perform a full refresh on another region" do
