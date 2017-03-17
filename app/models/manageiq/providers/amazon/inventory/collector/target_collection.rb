@@ -12,20 +12,50 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     target.manager_refs_by_association.try(:[], collection).try(:[], :ems_ref).try(:to_a) || []
   end
 
+  def name_references(collection)
+    target.manager_refs_by_association.try(:[], collection).try(:[], :name).try(:to_a) || []
+  end
+
   def instances
-    return @instances unless @instances.blank?
-    @instances = hash_collection.new(
+    return [] if references(:vms).blank?
+    return @instances_hashes if @instances_hashes
+
+    @instances_hashes = hash_collection.new(
       aws_ec2.instances(:filters => [{:name => 'instance-id', :values => references(:vms)}])
+    ).all
+  end
+
+  def availability_zones
+    return [] if references(:availability_zones).blank?
+
+    hash_collection.new(
+      aws_ec2.client.describe_availability_zones(
+        :filters => [{:name => 'zone-name', :values => references(:availability_zones)}]
+      ).availability_zones
+    )
+  end
+
+  def key_pairs
+    return [] if name_references(:key_pairs).blank?
+
+    hash_collection.new(
+      aws_ec2.client.describe_key_pairs(
+        :filters => [{:name => 'key-name', :values => name_references(:key_pairs)}]
+      ).key_pairs
     )
   end
 
   def private_images
+    return [] if references(:miq_templates).blank?
+
     hash_collection.new(
       aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => references(:miq_templates)}]).images
     )
   end
 
   def stacks
+    return [] if references(:orchestrations_stacks).blank?
+
     # TODO(lsmola) we can filter only one stack, so that means too many requests, lets try to figure out why
     # CLoudFormations API doesn't support a standard filter
     result = references(:orchestrations_stacks).map do |stack_ref|
@@ -40,29 +70,36 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   end
 
   def cloud_networks
+    return [] if references(:cloud_networks).blank?
+
     hash_collection.new(
       aws_ec2.client.describe_vpcs(:filters => [{:name => 'vpc-id', :values => references(:cloud_networks)}]).vpcs
     )
   end
 
   def cloud_subnets
+    return [] if references(:cloud_subnets).blank?
+
     hash_collection.new(
       aws_ec2.client.describe_subnets(:filters => [{:name => 'subnet-id', :values => references(:cloud_subnets)}]).subnets
     )
   end
 
   def security_groups
+    return [] if references(:security_groups).blank?
+
     hash_collection.new(
-      aws_ec2.security_groups(:filters => [{:name => 'group-id', :values => references(:security_groups).to_a}])
+      aws_ec2.security_groups(:filters => [{:name => 'group-id', :values => references(:security_groups)}])
     )
   end
 
   def network_ports
-    return @network_ports unless @network_ports.blank?
+    return [] if references(:network_ports).blank?
+    return @network_ports_hashes if @network_ports_hashes
 
-    @network_ports = hash_collection.new(aws_ec2.client.describe_network_interfaces(
-      :filters => [{:name => 'network-interface-id', :values => references(:network_ports).to_a}]
-    ).network_interfaces)
+    @network_ports_hashes = hash_collection.new(aws_ec2.client.describe_network_interfaces(
+      :filters => [{:name => 'network-interface-id', :values => references(:network_ports)}]
+    ).network_interfaces).all
   end
 
   def load_balancers
@@ -84,18 +121,24 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   end
 
   def floating_ips
+    return [] if references(:floating_ips).blank?
+
     hash_collection.new(
       aws_ec2.client.describe_addresses(:filters => [{:name => 'allocation-id', :values => references(:floating_ips)}]).addresses
     )
   end
 
   def cloud_volumes
+    return [] if references(:cloud_volumes).blank?
+
     hash_collection.new(
       aws_ec2.client.describe_volumes(:filters => [{:name => 'volume-id', :values => references(:cloud_volumes)}]).volumes
     )
   end
 
   def cloud_volume_snapshots
+    return [] if references(:cloud_volumes_snapshots).blank?
+
     hash_collection.new(
       aws_ec2.client.describe_snapshots(
         :filters => [{:name => 'snapshot-id', :values => references(:cloud_volumes_snapshots)}]
@@ -171,10 +214,15 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       all_stacks = ([stack] + (stack.try(:ancestors) || [])).compact
 
       all_stacks.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:orchestration_stacks, ems_ref) }
-      vm.key_pairs.collect(&:name).compact.each { |ems_ref| add_simple_target!(:key_pairs, ems_ref) }
-      vm.network_ports.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:network_ports, ems_ref) }
       vm.cloud_subnets.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:cloud_subnets, ems_ref) }
       vm.floating_ips.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:floating_ips, ems_ref) }
+      vm.network_ports.collect(&:ems_ref).compact.each do |ems_ref|
+        # Add only real network ports, starting with "eni-"
+        add_simple_target!(:network_ports, ems_ref) if ems_ref.start_with?("eni-")
+      end
+      vm.key_pairs.collect(&:name).compact.each do |name|
+        target.add_target(:association => :key_pairs, :manager_ref => {:name => name})
+      end
     end
   end
 
@@ -183,8 +231,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     # need to be scanned for all, due to the fake FloatingIps we create.
     instances.each do |vm|
       add_simple_target!(:miq_templates, vm["image_id"])
-      add_simple_target!(:key_pairs, vm["key_name"])
+      add_simple_target!(:availability_zones, vm.fetch_path('placement', 'availability_zone'))
       add_simple_target!(:orchestration_stacks, get_from_tags(vm, "aws:cloudformation:stack-id"))
+      target.add_target(:association => :key_pairs, :manager_ref => {:name => vm["key_name"]})
 
       vm["network_interfaces"].each do |network_interface|
         add_simple_target!(:network_ports, network_interface["network_interface_id"])

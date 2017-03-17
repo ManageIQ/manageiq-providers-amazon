@@ -6,10 +6,17 @@ class ManageIQ::Providers::Amazon::Inventory::HashCollection
   end
 
   def each
-    collection.each do |item|
-      item_data = item.respond_to?(:to_hash) ? item.to_hash : item.data.to_hash
-      yield(transform_keys(item_data))
-    end
+    collection.each { |item| yield(transform(item)) }
+  end
+
+  def all
+    collection.each_with_object([]) { |item, obj| obj << transform(item) }
+  end
+
+  private
+
+  def transform(item)
+    transform_keys(item.respond_to?(:to_hash) ? item.to_hash : item.data.to_hash)
   end
 
   def transform_keys(value)

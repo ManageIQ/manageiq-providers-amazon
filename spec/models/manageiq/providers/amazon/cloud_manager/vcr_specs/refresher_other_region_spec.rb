@@ -1,10 +1,14 @@
+require_relative "../../aws_refresher_spec_common"
+
 describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
+  include AwsRefresherSpecCommon
+
   before(:each) do
     @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication, :provider_region => "us-west-1")
   end
 
   it "will perform a full refresh on another region" do
-    2.times do  # Run twice to verify that a second run with existing data does not change anything
+    2.times do # Run twice to verify that a second run with existing data does not change anything
       @ems.reload
 
       VCR.use_cassette("#{described_class.name.underscore}_other_region") do
@@ -28,44 +32,38 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     end
   end
 
-  def assert_table_counts
-    expect(ExtManagementSystem.count).to eq(4)
-    expect(Flavor.count).to eq(76)
-    expect(AvailabilityZone.count).to eq(3)
-    expect(FloatingIp.count).to eq(3)
-    expect(AuthPrivateKey.count).to eq(2)
-    expect(SecurityGroup.count).to eq(2)
-    expect(FirewallRule.count).to eq(4)
-    expect(VmOrTemplate.count).to eq(3)
-    expect(Vm.count).to eq(2)
-    expect(MiqTemplate.count).to eq(1)
-    expect(CustomAttribute.count).to eq(1)
-    expect(Disk.count).to eq(3)
-    expect(GuestDevice.count).to eq(0)
-    expect(Hardware.count).to eq(3)
-    expect(Network.count).to eq(4)
-    expect(OperatingSystem.count).to eq(0) # TODO: Should this be 15 (set on all vms)?
-    expect(Snapshot.count).to eq(0)
-    expect(SystemService.count).to eq(0)
-
-    expect(Relationship.count).to eq(2)
-    expect(MiqQueue.count).to eq(5)
-  end
-
-  def assert_ems
-    expect(@ems).to have_attributes(
-      :api_version => nil, # TODO: Should be 3.0
-      :uid_ems     => nil
-    )
-
-    expect(@ems.flavors.size).to eq(76)
-    expect(@ems.availability_zones.size).to eq(3)
-    expect(@ems.floating_ips.size).to eq(3)
-    expect(@ems.key_pairs.size).to eq(2)
-    expect(@ems.security_groups.size).to eq(2)
-    expect(@ems.vms_and_templates.size).to eq(3)
-    expect(@ems.vms.size).to eq(2)
-    expect(@ems.miq_templates.size).to eq(1)
+  def expected_table_counts
+    {
+      :auth_private_key              => 3,
+      :availability_zone             => 3,
+      :cloud_network                 => 1,
+      :cloud_subnet                  => 2,
+      :custom_attribute              => 5,
+      :disk                          => 4,
+      :ext_management_system         => 4,
+      :firewall_rule                 => 8,
+      :flavor                        => 76,
+      :floating_ip                   => 4,
+      :guest_device                  => 0,
+      :hardware                      => 4,
+      :miq_queue                     => 6,
+      :miq_template                  => 1,
+      :network                       => 6,
+      :network_port                  => 3,
+      :network_router                => 0,
+      :operating_system              => 0,
+      :orchestration_stack           => 0,
+      :orchestration_stack_output    => 0,
+      :orchestration_stack_parameter => 0,
+      :orchestration_stack_resource  => 0,
+      :orchestration_template        => 0,
+      :relationship                  => 2,
+      :security_group                => 4,
+      :snapshot                      => 0,
+      :system_service                => 0,
+      :vm                            => 3,
+      :vm_or_template                => 4
+    }
   end
 
   def assert_specific_flavor
