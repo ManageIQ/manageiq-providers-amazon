@@ -20,6 +20,10 @@ module AwsRefresherSpecCommon
     assert_specific_security_group_on_cloud_network
     assert_specific_template
     assert_specific_shared_template
+    assert_specific_cloud_volume_vm_on_cloud_network
+    assert_specific_cloud_volume_vm_on_cloud_network_public_ip
+    assert_specific_cloud_volume_snapshot
+    assert_specific_cloud_volume_snapshot_encrypted
     assert_specific_vm_powered_on
     assert_specific_vm_powered_off
     assert_specific_vm_on_cloud_network
@@ -326,6 +330,103 @@ module AwsRefresherSpecCommon
     expect(t).not_to be_nil
   end
 
+  def assert_specific_cloud_volume_vm_on_cloud_network
+    @cloud_volume_vpc = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.find_by(
+      :name => "EmsRefreshSpecForVpcVm")
+
+    expect(@cloud_volume_vpc).to(
+      have_attributes(
+        "type"                  => "ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume",
+        "ems_ref"               => "vol-0e4c86c12b28cead8",
+        "size"                  => 1073741824,
+        "ext_management_system" => @ems.ebs_storage_manager,
+        "availability_zone"     => @az,
+        "name"                  => "EmsRefreshSpecForVpcVm",
+        "status"                => "in-use",
+        "description"           => nil,
+        "volume_type"           => "gp2",
+        "bootable"              => nil,
+        "cloud_tenant_id"       => nil
+      )
+    )
+  end
+
+  def assert_specific_cloud_volume_vm_on_cloud_network_public_ip
+    @cloud_volume_vpc1 = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.find_by(
+      :name => "EmsRefreshSpecForVpc1")
+
+    expect(@cloud_volume_vpc1).to(
+      have_attributes(
+        "type"                     => "ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume",
+        "ems_ref"                  => "vol-0acad09812d803c09",
+        "size"                     => 1073741824,
+        "ext_management_system"    => @ems.ebs_storage_manager,
+        "availability_zone"        => @az,
+        "cloud_volume_snapshot_id" => nil,
+        "name"                     => "EmsRefreshSpecForVpc1",
+        "status"                   => "in-use",
+        "description"              => nil,
+        "volume_type"              => "gp2",
+        "bootable"                 => nil,
+        "cloud_tenant_id"          => nil
+      )
+    )
+  end
+
+  def assert_specific_cloud_volume_snapshot
+    based_volume = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.find_by(
+      :name => "EmsRefreshSpecForVpcVm")
+
+    base_volume = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.find_by(
+      :name => "EmsRefreshSpecForSnapshot")
+
+    @cloud_volume_snapshot = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.find_by(
+      :name => "EmsRefreshSpecSnapshot")
+
+    expect(@cloud_volume_snapshot).to(
+      have_attributes(
+        "type"                  => "ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot",
+        "ems_ref"               => "snap-055095f47fab5e749",
+        "ext_management_system" => @ems.ebs_storage_manager,
+        "cloud_volume"          => base_volume,
+        "name"                  => "EmsRefreshSpecSnapshot",
+        "description"           => "EmsRefreshSpecSnapshotDesc",
+        "status"                => "completed",
+        "size"                  => 1073741824,
+        "cloud_tenant_id"       => nil
+      )
+    )
+
+    expect(@cloud_volume_snapshot.based_volumes).to match_array([based_volume])
+    expect(based_volume.base_snapshot).to eq(@cloud_volume_snapshot)
+    expect(base_volume.cloud_volume_snapshots).to match_array([@cloud_volume_snapshot])
+  end
+
+  def assert_specific_cloud_volume_snapshot_encrypted
+    base_volume = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.find_by(
+      :name => "EmsRefreshSpecForVpc1")
+
+
+    @cloud_volume_snapshot_encrypted = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.find_by(
+      :name => "EmsRefreshSpecSnapshotOfVpc1")
+
+    expect(@cloud_volume_snapshot_encrypted).to(
+      have_attributes(
+        "type"                  => "ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot",
+        "ems_ref"               => "snap-0c78ca2afaa671102",
+        "ext_management_system" => @ems.ebs_storage_manager,
+        "cloud_volume"          => base_volume,
+        "name"                  => "EmsRefreshSpecSnapshotOfVpc1",
+        "description"           => "EmsRefreshSpecSnapshotOfVpc1Desc",
+        "status"                => "completed",
+        "size"                  => 1073741824,
+        "cloud_tenant_id"       => nil
+      )
+    )
+
+    expect(base_volume.cloud_volume_snapshots).to match_array([@cloud_volume_snapshot_encrypted])
+  end
+
   def assert_specific_vm_powered_on
     assert_specific_floating_ip
 
@@ -501,6 +602,7 @@ module AwsRefresherSpecCommon
     )
 
     expect(v.hardware.disks.size).to eq(1) # TODO: Change to a flavor that has disks
+    expect(v.cloud_volumes.pluck(:name, :volume_type)).to match_array([["vol-1aa43ec6", "standard"]])
     expect(v.hardware.guest_devices.size).to eq(0)
     expect(v.hardware.nics.size).to eq(0)
     expect(v.hardware.networks.size).to eq(0)
@@ -514,29 +616,31 @@ module AwsRefresherSpecCommon
     assert_specific_floating_ip_for_cloud_network
 
     v = ManageIQ::Providers::Amazon::CloudManager::Vm.where(:name => "EmsRefreshSpec-PoweredOn-VPC").first
-    expect(v).to have_attributes(
-      :template              => false,
-      :ems_ref               => "i-8b5739f2",
-      :ems_ref_obj           => nil,
-      :uid_ems               => "i-8b5739f2",
-      :vendor                => "amazon",
-      :power_state           => "on",
-      :location              => "unknown",
-      :tools_status          => nil,
-      :boot_time             => "2016-08-30 07:14:39.000000000 +0000",
-      :standby_action        => nil,
-      :connection_state      => nil,
-      :cpu_affinity          => nil,
-      :memory_reserve        => nil,
-      :memory_reserve_expand => nil,
-      :memory_limit          => nil,
-      :memory_shares         => nil,
-      :memory_shares_level   => nil,
-      :cpu_reserve           => nil,
-      :cpu_reserve_expand    => nil,
-      :cpu_limit             => nil,
-      :cpu_shares            => nil,
-      :cpu_shares_level      => nil
+    expect(v).to(
+      have_attributes(
+        :template              => false,
+        :ems_ref               => "i-8b5739f2",
+        :ems_ref_obj           => nil,
+        :uid_ems               => "i-8b5739f2",
+        :vendor                => "amazon",
+        :power_state           => "on",
+        :location              => "unknown",
+        :tools_status          => nil,
+        :boot_time             => "2016-08-30 07:14:39.000000000 +0000",
+        :standby_action        => nil,
+        :connection_state      => nil,
+        :cpu_affinity          => nil,
+        :memory_reserve        => nil,
+        :memory_reserve_expand => nil,
+        :memory_limit          => nil,
+        :memory_shares         => nil,
+        :memory_shares_level   => nil,
+        :cpu_reserve           => nil,
+        :cpu_reserve_expand    => nil,
+        :cpu_limit             => nil,
+        :cpu_shares            => nil,
+        :cpu_shares_level      => nil
+      )
     )
 
     expect(v.cloud_networks.first).to eq(@cn)
@@ -566,35 +670,136 @@ module AwsRefresherSpecCommon
       "Status: OutOfService, Status Reason: Instance has failed at least the UnhealthyThreshold number of health checks consecutively."
     ]
     expect(v.load_balancer_health_check_states_with_reason).to match_array healt_check_states_with_reason
+
+    expect(v.operating_system).to be_nil # TODO: This should probably not be nil
+    expect(v.custom_attributes.size).to eq(2)
+    expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-VPC")
+    expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
+    expect(v.snapshots.size).to eq(0)
+
+    expect(v.hardware).to(
+      have_attributes(
+        :config_version       => nil,
+        :virtual_hw_version   => nil,
+        :guest_os             => "linux",
+        :cpu_sockets          => 1,
+        :bios                 => nil,
+        :bios_location        => nil,
+        :time_sync            => nil,
+        :annotation           => nil,
+        :memory_mb            => 627,
+        :host_id              => nil,
+        :cpu_speed            => nil,
+        :cpu_type             => nil,
+        :size_on_disk         => nil,
+        :manufacturer         => "",
+        :model                => "",
+        :number_of_nics       => nil,
+        :cpu_usage            => nil,
+        :memory_usage         => nil,
+        :cpu_cores_per_socket => 1,
+        :cpu_total_cores      => 1,
+        :vmotion_enabled      => nil,
+        :disk_free_space      => nil,
+        :disk_capacity        => 0,
+        :guest_os_full_name   => nil,
+        :memory_console       => nil,
+        :bitness              => 64,
+        :virtualization_type  => "paravirtual",
+        :root_device_type     => "ebs",
+      )
+    )
+
+    expect(v.hardware.disks.size).to eq(2) # TODO: Change to a flavor that has disks
+
+    expect(v.hardware.disks.detect { |x| x.device_name == "sda1" }).to(
+      have_attributes(
+        :device_name        => "sda1",
+        :device_type        => "disk",
+        :location           => "sda1",
+        :filename           => nil,
+        :hardware           => v.hardware,
+        :mode               => nil,
+        :controller_type    => "amazon",
+        :size               => 7516192768,
+        :free_space         => nil,
+        :size_on_disk       => nil,
+        :present            => true,
+        :start_connected    => true,
+        :auto_detect        => nil,
+        :disk_type          => nil,
+        :storage_id         => nil,
+        :backing_type       => "CloudVolume",
+        :storage_profile_id => nil,
+        :bootable           => nil,
+      )
+    )
+
+    expect(v.hardware.disks.detect { |x| x.device_name == "sdf" }).to(
+      have_attributes(
+        :device_name        => "sdf",
+        :device_type        => "disk",
+        :location           => "sdf",
+        :filename           => nil,
+        :hardware           => v.hardware,
+        :mode               => nil,
+        :controller_type    => "amazon",
+        :size               => 1073741824,
+        :free_space         => nil,
+        :size_on_disk       => nil,
+        :present            => true,
+        :start_connected    => true,
+        :auto_detect        => nil,
+        :disk_type          => nil,
+        :storage_id         => nil,
+        :backing            => @cloud_volume_vpc,
+        :backing_type       => "CloudVolume",
+        :storage_profile_id => nil,
+        :bootable           => nil,
+      )
+    )
+
+    expect(v.hardware.disks.size).to eq(2) # TODO: Change to a flavor that has disks
+    expect(v.cloud_volumes.pluck(:name, :volume_type)).to(
+      match_array([["EmsRefreshSpec-PoweredOn-VPC-root", "standard"], ["EmsRefreshSpecForVpcVm", "gp2"]]))
+    expect(v.hardware.guest_devices.size).to eq(0)
+    expect(v.hardware.nics.size).to eq(0)
+    expect(v.hardware.networks.size).to eq(2)
+
+    v.with_relationship_type("genealogy") do
+      expect(v.parent).to eq(@template)
+    end
   end
 
   def assert_specific_vm_on_cloud_network_public_ip
     assert_specific_public_ip_for_cloud_network
 
     v = ManageIQ::Providers::Amazon::CloudManager::Vm.where(:name => "EmsRefreshSpec-PoweredOn-VPC1").first
-    expect(v).to have_attributes(
-      :template              => false,
-      :ems_ref               => "i-c72af2f6",
-      :ems_ref_obj           => nil,
-      :uid_ems               => "i-c72af2f6",
-      :vendor                => "amazon",
-      :power_state           => "on",
-      :location              => "unknown",
-      :tools_status          => nil,
-      :boot_time             => "2016-08-30 07:17:58.000000000 +0000",
-      :standby_action        => nil,
-      :connection_state      => nil,
-      :cpu_affinity          => nil,
-      :memory_reserve        => nil,
-      :memory_reserve_expand => nil,
-      :memory_limit          => nil,
-      :memory_shares         => nil,
-      :memory_shares_level   => nil,
-      :cpu_reserve           => nil,
-      :cpu_reserve_expand    => nil,
-      :cpu_limit             => nil,
-      :cpu_shares            => nil,
-      :cpu_shares_level      => nil
+    expect(v).to(
+      have_attributes(
+        :template              => false,
+        :ems_ref               => "i-c72af2f6",
+        :ems_ref_obj           => nil,
+        :uid_ems               => "i-c72af2f6",
+        :vendor                => "amazon",
+        :power_state           => "on",
+        :location              => "unknown",
+        :tools_status          => nil,
+        :boot_time             => "2016-08-30 07:17:58.000000000 +0000",
+        :standby_action        => nil,
+        :connection_state      => nil,
+        :cpu_affinity          => nil,
+        :memory_reserve        => nil,
+        :memory_reserve_expand => nil,
+        :memory_limit          => nil,
+        :memory_shares         => nil,
+        :memory_shares_level   => nil,
+        :cpu_reserve           => nil,
+        :cpu_reserve_expand    => nil,
+        :cpu_limit             => nil,
+        :cpu_shares            => nil,
+        :cpu_shares_level      => nil
+      )
     )
 
     expect(v.cloud_networks.first).to eq(@cn)
@@ -608,6 +813,104 @@ module AwsRefresherSpecCommon
     expect(v.network_ports.first.fixed_ip_addresses).to match_array([@ip2.fixed_ip_address])
     expect(v.network_ports.first.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
     expect(v.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
+
+    expect(v.operating_system).to be_nil # TODO: This should probably not be nil
+    expect(v.custom_attributes.size).to eq(2)
+    expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-VPC1")
+    expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
+    expect(v.snapshots.size).to eq(0)
+
+    expect(v.hardware).to(
+      have_attributes(
+        :config_version       => nil,
+        :virtual_hw_version   => nil,
+        :guest_os             => nil,
+        :cpu_sockets          => 1,
+        :bios                 => nil,
+        :bios_location        => nil,
+        :time_sync            => nil,
+        :annotation           => nil,
+        :memory_mb            => 1024,
+        :host_id              => nil,
+        :cpu_speed            => nil,
+        :cpu_type             => nil,
+        :size_on_disk         => nil,
+        :manufacturer         => "",
+        :model                => "",
+        :number_of_nics       => nil,
+        :cpu_usage            => nil,
+        :memory_usage         => nil,
+        :cpu_cores_per_socket => 1,
+        :cpu_total_cores      => 1,
+        :vmotion_enabled      => nil,
+        :disk_free_space      => nil,
+        :disk_capacity        => 0,
+        :guest_os_full_name   => nil,
+        :memory_console       => nil,
+        :bitness              => 64,
+        :virtualization_type  => "hvm",
+        :root_device_type     => "ebs",
+      )
+    )
+
+    expect(v.hardware.disks.size).to eq(2) # TODO: Change to a flavor that has disks
+
+    expect(v.hardware.disks.detect { |x| x.device_name == "sda1" }).to(
+      have_attributes(
+        :device_name        => "sda1",
+        :device_type        => "disk",
+        :location           => "sda1",
+        :filename           => nil,
+        :hardware           => v.hardware,
+        :mode               => nil,
+        :controller_type    => "amazon",
+        :size               => 10737418240,
+        :free_space         => nil,
+        :size_on_disk       => nil,
+        :present            => true,
+        :start_connected    => true,
+        :auto_detect        => nil,
+        :disk_type          => nil,
+        :storage_id         => nil,
+        :backing_type       => "CloudVolume",
+        :storage_profile_id => nil,
+        :bootable           => nil,
+      )
+    )
+
+    expect(v.hardware.disks.detect { |x| x.device_name == "sdf" }).to(
+      have_attributes(
+        :device_name        => "sdf",
+        :device_type        => "disk",
+        :location           => "sdf",
+        :filename           => nil,
+        :hardware           => v.hardware,
+        :mode               => nil,
+        :controller_type    => "amazon",
+        :size               => 1073741824,
+        :free_space         => nil,
+        :size_on_disk       => nil,
+        :present            => true,
+        :start_connected    => true,
+        :auto_detect        => nil,
+        :disk_type          => nil,
+        :storage_id         => nil,
+        :backing            => @cloud_volume_vpc1,
+        :backing_type       => "CloudVolume",
+        :storage_profile_id => nil,
+        :bootable           => nil,
+      )
+    )
+
+    expect(v.cloud_volumes.pluck(:name, :volume_type)).to(
+      match_array([["EmsRefreshSpec-PoweredOn-VPC1-root", "gp2"], ["EmsRefreshSpecForVpc1", "gp2"]]))
+    expect(v.hardware.guest_devices.size).to eq(0)
+    expect(v.hardware.nics.size).to eq(0)
+    expect(v.hardware.networks.size).to eq(2)
+
+    v.with_relationship_type("genealogy") do
+      expect(v.parent).to eq(nil)
+    end
   end
 
   def assert_specific_load_balancer_non_vpc
