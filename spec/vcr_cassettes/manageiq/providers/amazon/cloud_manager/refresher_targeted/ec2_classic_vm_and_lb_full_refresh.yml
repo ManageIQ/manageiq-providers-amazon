@@ -14,12 +14,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170316T143443Z
+      - 20170317T090611Z
       X-Amz-Content-Sha256:
       - 15060d4cadc5ceda7ce099049c06aa362d9fe6caa77a51c60d2b050b77aef8eb
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170316/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=71b60503f3a7a713fc882cba8a92b942b27c6a7b3cbd3bc2febf04d034103ebf
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=4e66a4c18609ffaca746d529b7ddcf123deb50900ab65543756f05ad0cf63cae
       Content-Length:
       - '97'
       Accept:
@@ -36,7 +36,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Thu, 16 Mar 2017 14:34:40 GMT
+      - Fri, 17 Mar 2017 09:06:09 GMT
       Server:
       - AmazonEC2
     body:
@@ -44,7 +44,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>18982d53-1aea-4051-b0b9-920086932bc9</requestId>
+            <requestId>fab88e51-04e6-40c3-98cc-12d5f5d5aacc</requestId>
             <reservationSet>
                 <item>
                     <reservationId>r-18ca6cb0</reservationId>
@@ -131,7 +131,7 @@ http_interactions:
             </reservationSet>
         </DescribeInstancesResponse>
     http_version: 
-  recorded_at: Thu, 16 Mar 2017 14:34:44 GMT
+  recorded_at: Fri, 17 Mar 2017 09:06:12 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -146,12 +146,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170316T143444Z
+      - 20170317T090612Z
       X-Amz-Content-Sha256:
       - 3687d6dd1f231b3240bd52e8c7cf959c498b8b7312ba6b8a4e9c1e83e973d0b5
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170316/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=e6dc5a22deba4201ef724eb2363cd7375df76e171dc6b242ad096255bf518c26
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=10d8cea7a700ba2d252c00cc1f3f101601e5afa62d1e2a9cbeb46fe9ffe8366f
       Content-Length:
       - '103'
       Accept:
@@ -168,7 +168,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Thu, 16 Mar 2017 14:34:42 GMT
+      - Fri, 17 Mar 2017 09:06:09 GMT
       Server:
       - AmazonEC2
     body:
@@ -176,7 +176,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeAvailabilityZonesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>9916ae63-0221-4d18-97d1-669c0951655d</requestId>
+            <requestId>3244360b-b8d0-43d5-93dd-2779290a53b0</requestId>
             <availabilityZoneInfo>
                 <item>
                     <zoneName>us-east-1e</zoneName>
@@ -187,7 +187,7 @@ http_interactions:
             </availabilityZoneInfo>
         </DescribeAvailabilityZonesResponse>
     http_version: 
-  recorded_at: Thu, 16 Mar 2017 14:34:45 GMT
+  recorded_at: Fri, 17 Mar 2017 09:06:13 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -202,12 +202,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170316T143445Z
+      - 20170317T090613Z
       X-Amz-Content-Sha256:
       - 8b897801bc6737ad27423b50d05f4c5a3cb37aff5adc92042c314bf391679416
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170316/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=4f045e801f1de4df843e3ddfaa1189a7793cb8afca3084cf358ae7328adbf37e
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=87b39faabc1a5edfef2a5a708309e46ccebcaf4e8004eaf6717d0f6728935c8e
       Content-Length:
       - '105'
       Accept:
@@ -224,7 +224,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Thu, 16 Mar 2017 14:34:42 GMT
+      - Fri, 17 Mar 2017 09:06:11 GMT
       Server:
       - AmazonEC2
     body:
@@ -232,7 +232,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeKeyPairsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>31956aba-3b9c-4b23-a25f-eeab5866c786</requestId>
+            <requestId>cb007c1d-91f1-4ecf-8037-c4f54bb266e1</requestId>
             <keySet>
                 <item>
                     <keyName>EmsRefreshSpec-KeyPair</keyName>
@@ -241,7 +241,7 @@ http_interactions:
             </keySet>
         </DescribeKeyPairsResponse>
     http_version: 
-  recorded_at: Thu, 16 Mar 2017 14:34:45 GMT
+  recorded_at: Fri, 17 Mar 2017 09:06:14 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -256,12 +256,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170316T143445Z
+      - 20170317T090614Z
       X-Amz-Content-Sha256:
       - 59ebf96e9619012c1913bd7ad295db16925f7ce6f757deea0097185f78822898
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170316/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=bafab06c0cc90d1ec05440b4600c4884c7b7aa2fa17c04a4fa645ac8169919c8
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=0c5ad2291e76cb07cdcda355aa41c3a6e21bf2b42fc97123d817f5f1138d7ce4
       Content-Length:
       - '93'
       Accept:
@@ -278,7 +278,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Thu, 16 Mar 2017 14:34:43 GMT
+      - Fri, 17 Mar 2017 09:06:11 GMT
       Server:
       - AmazonEC2
     body:
@@ -286,7 +286,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>32e18e0a-6d07-4f49-8f0d-c19117d66380</requestId>
+            <requestId>a3cab38b-a4f8-4878-a95b-cd9fe45c06bf</requestId>
             <imagesSet>
                 <item>
                     <imageId>ami-5769193e</imageId>
@@ -320,7 +320,7 @@ http_interactions:
             </imagesSet>
         </DescribeImagesResponse>
     http_version: 
-  recorded_at: Thu, 16 Mar 2017 14:34:46 GMT
+  recorded_at: Fri, 17 Mar 2017 09:06:15 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -335,12 +335,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170316T143446Z
+      - 20170317T090615Z
       X-Amz-Content-Sha256:
       - 9bfbe564c1df25a8fe1db93d7b6cbaf7ee80f2d833bb57f3f02fb39c9e917788
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170316/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=520225ffeb30a09913613d3b403b2a1d27ff69e1a5d2ddbecf0630a4679625e2
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=fe891fa807aff1183c19c5dffa2cde2f5c90393499daedf68daddd5ee0695d21
       Content-Length:
       - '129'
       Accept:
@@ -357,7 +357,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Thu, 16 Mar 2017 14:34:43 GMT
+      - Fri, 17 Mar 2017 09:06:13 GMT
       Server:
       - AmazonEC2
     body:
@@ -365,7 +365,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeSecurityGroupsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>844fbde2-6f52-446a-ac36-aae279e4d20d</requestId>
+            <requestId>180369b7-2aa8-467a-80e4-3ff71f2a2d5e</requestId>
             <securityGroupInfo>
                 <item>
                     <ownerId>200278856672</ownerId>
@@ -537,7 +537,7 @@ http_interactions:
             </securityGroupInfo>
         </DescribeSecurityGroupsResponse>
     http_version: 
-  recorded_at: Thu, 16 Mar 2017 14:34:47 GMT
+  recorded_at: Fri, 17 Mar 2017 09:06:16 GMT
 - request:
     method: post
     uri: https://elasticloadbalancing.us-east-1.amazonaws.com/
@@ -552,12 +552,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170316T143447Z
+      - 20170317T090616Z
       X-Amz-Content-Sha256:
       - eccb5bf67bfa5fee8ecc6861893290305425c597e770f0b64647437903c0124e
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170316/us-east-1/elasticloadbalancing/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=0200f20ce778574ee5b971c7ef93587d1bae53e9b7138df86ddf5ebbb986c42c
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-east-1/elasticloadbalancing/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=8ff62da366e35431df79a1a1baec0ab43cc8b3bb1e4a278248ba411b25ea97f1
       Content-Length:
       - '102'
       Accept:
@@ -568,7 +568,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - b3393c7d-0a55-11e7-8128-3d1b4f6a0d74
+      - f8d5f6b8-0af0-11e7-87d7-1f43bf74cafc
       Content-Type:
       - text/xml
       Content-Length:
@@ -576,7 +576,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Thu, 16 Mar 2017 14:34:44 GMT
+      - Fri, 17 Mar 2017 09:06:13 GMT
     body:
       encoding: UTF-8
       string: |
@@ -633,11 +633,11 @@ http_interactions:
             </LoadBalancerDescriptions>
           </DescribeLoadBalancersResult>
           <ResponseMetadata>
-            <RequestId>b3393c7d-0a55-11e7-8128-3d1b4f6a0d74</RequestId>
+            <RequestId>f8d5f6b8-0af0-11e7-87d7-1f43bf74cafc</RequestId>
           </ResponseMetadata>
         </DescribeLoadBalancersResponse>
     http_version: 
-  recorded_at: Thu, 16 Mar 2017 14:34:48 GMT
+  recorded_at: Fri, 17 Mar 2017 09:06:17 GMT
 - request:
     method: post
     uri: https://elasticloadbalancing.us-east-1.amazonaws.com/
@@ -652,12 +652,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170316T143448Z
+      - 20170317T090617Z
       X-Amz-Content-Sha256:
       - 3af90022526a6f5460a9813c88cc0b96b9ad472999bfeedaccd286147e93047b
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170316/us-east-1/elasticloadbalancing/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=dff7a6bf7897802145078f3c82aec2575b0f39a414a5880a9def7d593aeaa733
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-east-1/elasticloadbalancing/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=e79ecd3ca2f1ff6cb2f3ad7aa6599284acbabb0444c32a88b60368f65c36b46d
       Content-Length:
       - '93'
       Accept:
@@ -668,13 +668,13 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - b39195df-0a55-11e7-bfef-b106d4365ac4
+      - f9570dde-0af0-11e7-a85d-b1fbc0f6aa59
       Content-Type:
       - text/xml
       Content-Length:
       - '629'
       Date:
-      - Thu, 16 Mar 2017 14:34:45 GMT
+      - Fri, 17 Mar 2017 09:06:14 GMT
     body:
       encoding: UTF-8
       string: |
@@ -690,11 +690,11 @@ http_interactions:
             </InstanceStates>
           </DescribeInstanceHealthResult>
           <ResponseMetadata>
-            <RequestId>b39195df-0a55-11e7-bfef-b106d4365ac4</RequestId>
+            <RequestId>f9570dde-0af0-11e7-a85d-b1fbc0f6aa59</RequestId>
           </ResponseMetadata>
         </DescribeInstanceHealthResponse>
     http_version: 
-  recorded_at: Thu, 16 Mar 2017 14:34:48 GMT
+  recorded_at: Fri, 17 Mar 2017 09:06:17 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -709,12 +709,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170316T143448Z
+      - 20170317T090617Z
       X-Amz-Content-Sha256:
       - 2c78f1ad1dfa1273041e2e2ca1ebe682d22be25a3e4ca677f9efe3364177dd87
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170316/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=fc9f022ce05534a213d25c471c5451816df306e209d9bc23d988eb61b300d870
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=73e0c792ddb9c54cefd2aff4816e1cacdcd2731203f7759b53e54e26a32943ad
       Content-Length:
       - '102'
       Accept:
@@ -731,7 +731,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Thu, 16 Mar 2017 14:34:45 GMT
+      - Fri, 17 Mar 2017 09:06:16 GMT
       Server:
       - AmazonEC2
     body:
@@ -739,11 +739,11 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeAddressesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>584a182c-343b-457b-9b76-57636fb745b9</requestId>
+            <requestId>dc638315-b74a-44d0-9375-57429f52fbc3</requestId>
             <addressesSet/>
         </DescribeAddressesResponse>
     http_version: 
-  recorded_at: Thu, 16 Mar 2017 14:34:49 GMT
+  recorded_at: Fri, 17 Mar 2017 09:06:19 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -758,12 +758,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170316T143449Z
+      - 20170317T090619Z
       X-Amz-Content-Sha256:
       - 9eb53c8dc817d7d2387b68b959e1dcbcb088b2eca78249418f904ba14c592c42
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170316/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=5722e6795fe93d513713663d3e31cfb64bfc7c8eadcea08f0c516be715d5873e
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=75faecae5bc37afc3b4ab336f64260fac522188d0ca6b4f037be97bdbff73c8d
       Content-Length:
       - '95'
       Accept:
@@ -780,7 +780,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Thu, 16 Mar 2017 14:34:47 GMT
+      - Fri, 17 Mar 2017 09:06:17 GMT
       Server:
       - AmazonEC2
     body:
@@ -788,7 +788,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeVolumesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>983dc9ec-2868-4914-8d54-c2d0f07975e6</requestId>
+            <requestId>a0c122aa-9d4f-4a16-8a8e-e698428c1b9a</requestId>
             <volumeSet>
                 <item>
                     <volumeId>vol-b6fa656a</volumeId>
@@ -807,11 +807,17 @@ http_interactions:
                             <deleteOnTermination>true</deleteOnTermination>
                         </item>
                     </attachmentSet>
+                    <tagSet>
+                        <item>
+                            <key>Name</key>
+                            <value>EmsRefreshSpec-PoweredOn-Basic3-root</value>
+                        </item>
+                    </tagSet>
                     <volumeType>standard</volumeType>
                     <encrypted>false</encrypted>
                 </item>
             </volumeSet>
         </DescribeVolumesResponse>
     http_version: 
-  recorded_at: Thu, 16 Mar 2017 14:34:50 GMT
+  recorded_at: Fri, 17 Mar 2017 09:06:20 GMT
 recorded_with: VCR 3.0.3
