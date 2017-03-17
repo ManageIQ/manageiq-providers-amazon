@@ -101,6 +101,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def get_instances
     process_inventory_collection(collector.instances, :vms) do |instance|
+      status = instance.fetch_path('state', 'name')
+      return if collector.options.ignore_terminated_instances && status.to_sym == :terminated
+
       # TODO(lsmola) we have a non lazy dependency, can we remove that?
       flavor = persister.flavors.find(instance['instance_type']) || persister.flavors.find("unknown")
 
@@ -245,7 +248,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def parse_instance(instance, flavor)
     status = instance.fetch_path('state', 'name')
-    return if collector.options.ignore_terminated_instances && status.to_sym == :terminated
 
     uid  = instance['instance_id']
     name = get_from_tags(instance, :name)
