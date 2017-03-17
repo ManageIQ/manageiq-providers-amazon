@@ -14,6 +14,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       VCR.use_cassette("#{described_class.name.underscore}_other_region") do
         EmsRefresh.refresh(@ems)
         EmsRefresh.refresh(@ems.network_manager)
+        EmsRefresh.refresh(@ems.ebs_storage_manager)
       end
       @ems.reload
 
@@ -38,6 +39,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :availability_zone             => 3,
       :cloud_network                 => 1,
       :cloud_subnet                  => 2,
+      :cloud_volume                  => 3,
+      :cloud_volume_snapshot         => 1,
       :custom_attribute              => 5,
       :disk                          => 4,
       :ext_management_system         => 4,
