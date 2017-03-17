@@ -22,6 +22,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
         settings.get_private_images               = true
         settings.get_shared_images                = true
         settings.get_public_images                = false
+        settings.ignore_terminated_instances      = true
 
         allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
         allow(Settings.ems_refresh).to receive(:ec2_network).and_return(inventory_object_settings)
