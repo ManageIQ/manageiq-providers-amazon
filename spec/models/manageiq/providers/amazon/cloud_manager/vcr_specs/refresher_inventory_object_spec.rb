@@ -34,6 +34,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           VCR.use_cassette(described_class.name.underscore + '_inventory_object') do
             EmsRefresh.refresh(@ems)
             EmsRefresh.refresh(@ems.network_manager)
+            EmsRefresh.refresh(@ems.ebs_storage_manager)
           end
           @ems.reload
 

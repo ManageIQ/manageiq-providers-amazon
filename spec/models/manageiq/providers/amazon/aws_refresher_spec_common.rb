@@ -39,8 +39,10 @@ module AwsRefresherSpecCommon
       :availability_zone             => 5,
       :cloud_network                 => 5,
       :cloud_subnet                  => 10,
-      :custom_attribute              => 52,
-      :disk                          => 32,
+      :cloud_volume                  => 45,
+      :cloud_volume_snapshot         => 21,
+      :custom_attribute              => 50,
+      :disk                          => 34,
       :ext_management_system         => 4,
       :firewall_rule                 => 155,
       :flavor                        => 76,
@@ -70,6 +72,8 @@ module AwsRefresherSpecCommon
   def assert_table_counts
     actual = {
       :auth_private_key              => AuthPrivateKey.count,
+      :cloud_volume                  => CloudVolume.count,
+      :cloud_volume_snapshot         => CloudVolumeSnapshot.count,
       :ext_management_system         => ExtManagementSystem.count,
       :flavor                        => Flavor.count,
       :availability_zone             => AvailabilityZone.count,
@@ -388,6 +392,7 @@ module AwsRefresherSpecCommon
     )
 
     expect(v.hardware.disks.size).to eq(1) # TODO: Change to a flavor that has disks
+    expect(v.cloud_volumes.pluck(:name, :volume_type)).to match_array([["EmsRefreshSpec-PoweredOn-Basic3-root", "standard"]])
     expect(v.hardware.guest_devices.size).to eq(0)
     expect(v.hardware.nics.size).to eq(0)
 
