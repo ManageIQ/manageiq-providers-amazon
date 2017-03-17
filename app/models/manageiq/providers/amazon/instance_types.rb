@@ -1,6 +1,6 @@
 # Instance Types are not provided by the AWS SDK so they are enumerated here manually
 #
-# run bin/rails providers:amazon:instance_types to maintain this file
+# run bin/rails instance_types to maintain this file
 #
 module ManageIQ::Providers::Amazon::InstanceTypes
   # Types that are currently advertised for use

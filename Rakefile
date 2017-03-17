@@ -10,7 +10,8 @@ begin
 rescue LoadError
 end
 
-ManageIQ::Providers::Amazon::Engine.load_tasks
+FileList['lib/tasks_private/**/*.rake'].each { |r| load r }
+
 namespace :spec do
   desc "Setup environment for specs"
   task :setup => 'app:test:providers:amazon:setup'
