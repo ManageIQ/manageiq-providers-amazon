@@ -43,7 +43,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           end
           @ems.reload
 
-          expected_counts ={
+          expected_counts = {
             :auth_private_key              => 1,
             :availability_zone             => 1,
             :cloud_network                 => 0,
