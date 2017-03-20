@@ -33,7 +33,8 @@ module AwsStubs
       :cloud_volume_count                              => scaling * 5,
       :cloud_volume_snapshot_count                     => scaling * 5,
       :s3_buckets_count                                => scaling * 5,
-      :s3_objects_per_bucket_count                     => scaling * 5
+      :s3_objects_per_bucket_count                     => scaling * 5,
+      :custom_attribute_count                          => scaling * 20,
     }
   end
 
@@ -153,7 +154,12 @@ module AwsStubs
           {
             :network_interface_id => "interface_#{i}"
           }
-        ]
+        ],
+        :tags               => [{
+          :key   => "tag_name_#{i}",
+          :value => "tag_value_#{i}",
+        }],
+
       }
     end
 
