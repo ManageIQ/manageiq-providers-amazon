@@ -14,12 +14,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090500Z
+      - 20170317T164831Z
       X-Amz-Content-Sha256:
       - 2bd59c58bf8c2bcc1c39ea3a5a38bb7cd5a643758cbd1b78a746d3a3aa5c1580
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=da4d90966031bd1bf128a903c6d7d4e92b3fed13f74ae03c1a2b29626ced7576
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b8ee55b963612a44f7de0652533d3797db548be40740e6bce109b8308061f993
       Content-Length:
       - '51'
       Accept:
@@ -36,7 +36,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:04:59 GMT
+      - Fri, 17 Mar 2017 16:48:28 GMT
       Server:
       - AmazonEC2
     body:
@@ -44,7 +44,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeAvailabilityZonesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>1f1ead6c-7561-4aef-a8f1-65055cbaa0ae</requestId>
+            <requestId>34bba74a-2e0d-4294-aa46-d0e4b6a83fb8</requestId>
             <availabilityZoneInfo>
                 <item>
                     <zoneName>us-west-1a</zoneName>
@@ -67,7 +67,7 @@ http_interactions:
             </availabilityZoneInfo>
         </DescribeAvailabilityZonesResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:02 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:32 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -82,12 +82,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090502Z
+      - 20170317T164832Z
       X-Amz-Content-Sha256:
       - e7326d4766918579e6d040a9c8d2243cefc0ab1aaa37cd7a9dab76d8c3538b59
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=40ae159ca8ed3d5b559b8913d0d9cfb91ae48b2625b732d1feefde9fd7da9e30
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=5f47d9643107599759c6ff4be9d5a72c1bdfbe6529befa6eca7505507b38fcef
       Content-Length:
       - '42'
       Accept:
@@ -104,7 +104,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:00 GMT
+      - Fri, 17 Mar 2017 16:48:30 GMT
       Server:
       - AmazonEC2
     body:
@@ -112,7 +112,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeKeyPairsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>2efae65e-493b-45ef-81a4-be15c33fe5f0</requestId>
+            <requestId>80a4d919-d662-4e52-85f7-328fb1dbd5bb</requestId>
             <keySet>
                 <item>
                     <keyName>bronagh-west1</keyName>
@@ -129,7 +129,7 @@ http_interactions:
             </keySet>
         </DescribeKeyPairsResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:03 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:33 GMT
 - request:
     method: post
     uri: https://cloudformation.us-west-1.amazonaws.com/
@@ -144,12 +144,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090503Z
+      - 20170317T164833Z
       X-Amz-Content-Sha256:
       - 1c0d327d16f37b15838ca07a3964664f2dcff8d7051d9f1d87552e7df79be01f
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=63fa3971279816eacad816dd347359052529e9f8e9331ca997e93f07579aff50
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=d43a2ce8ba79b913dbd5319e4be910f49798641f21e30dda49a8310df28f674d
       Content-Length:
       - '40'
       Accept:
@@ -160,13 +160,13 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - ce21cdf2-0af0-11e7-8e47-4b3d1d04ca91
+      - 8dcb400f-0b31-11e7-ba88-d196f9dbfa62
       Content-Type:
       - text/xml
       Content-Length:
       - '283'
       Date:
-      - Fri, 17 Mar 2017 09:05:02 GMT
+      - Fri, 17 Mar 2017 16:48:31 GMT
     body:
       encoding: UTF-8
       string: |
@@ -175,11 +175,11 @@ http_interactions:
             <Stacks/>
           </DescribeStacksResult>
           <ResponseMetadata>
-            <RequestId>ce21cdf2-0af0-11e7-8e47-4b3d1d04ca91</RequestId>
+            <RequestId>8dcb400f-0b31-11e7-ba88-d196f9dbfa62</RequestId>
           </ResponseMetadata>
         </DescribeStacksResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:05 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:34 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -194,12 +194,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090505Z
+      - 20170317T164834Z
       X-Amz-Content-Sha256:
       - 353f42a6b4f35502116ce0f2e997ba13b57b156b7a2d476afc85d222902f4415
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1198a531ccc535b8e66c3953ce895b0e01fa0be93b9847d1f9847e2260601327
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=4fa1e3f7fdc7209221467bc84029329315f3c5edf0979272cf3fa6a8fd341282
       Content-Length:
       - '103'
       Accept:
@@ -216,7 +216,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:03 GMT
+      - Fri, 17 Mar 2017 16:48:32 GMT
       Server:
       - AmazonEC2
     body:
@@ -224,7 +224,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>c858505e-718d-41b2-be93-e7316d377bea</requestId>
+            <requestId>17d88a2f-9d1f-4cee-aa0f-4c173a899417</requestId>
             <imagesSet>
                 <item>
                     <imageId>ami-183e175d</imageId>
@@ -258,7 +258,7 @@ http_interactions:
             </imagesSet>
         </DescribeImagesResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:07 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:35 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -273,12 +273,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090507Z
+      - 20170317T164835Z
       X-Amz-Content-Sha256:
       - 13559d63912d4017a9523f9e8bda64c2a6870c83adb807d3bccff29a4065cdfc
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=c326a1bdb65822a5ce9506084b63b5269f3a4addc08fdf731ee3ceb04f452505
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=cd7ebe04f896c77d5c4e96a94ebcdbbd1609af1a5e3eb59fa6c02b2fbc29d817
       Content-Length:
       - '110'
       Accept:
@@ -295,7 +295,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:05 GMT
+      - Fri, 17 Mar 2017 16:48:33 GMT
       Server:
       - AmazonEC2
     body:
@@ -303,11 +303,11 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>9883de5b-8288-4868-8217-d43f1c2a50cf</requestId>
+            <requestId>0c63d36e-11e1-435f-ad9b-47cb43cf1944</requestId>
             <imagesSet/>
         </DescribeImagesResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:08 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:36 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -322,12 +322,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090508Z
+      - 20170317T164836Z
       X-Amz-Content-Sha256:
       - 6171eb09865e32b0602af0f7957e26573a51f53caaedff02ff88883cb0275885
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=467c7e96b9ab0aee0bc46ad0317932382c16448bc1aadb709b290c64fcd676f4
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b3ec33cabfa996ba6b526ce2726c3451faa68f5c15cd6a8794f92184370668dc
       Content-Length:
       - '43'
       Accept:
@@ -344,7 +344,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:07 GMT
+      - Fri, 17 Mar 2017 16:48:35 GMT
       Server:
       - AmazonEC2
     body:
@@ -352,7 +352,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>dcb77d61-080f-41f4-9b4d-17f117f1e967</requestId>
+            <requestId>68cb2f87-9492-4db4-9292-d0af29207ec6</requestId>
             <reservationSet>
                 <item>
                     <reservationId>r-18afd25e</reservationId>
@@ -623,7 +623,7 @@ http_interactions:
             </reservationSet>
         </DescribeInstancesResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:10 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:38 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -638,12 +638,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090510Z
+      - 20170317T164838Z
       X-Amz-Content-Sha256:
       - d821ac2c2958664a08eb0f0b183ebf80201e8a50da5d9e98eca9bc36ef648656
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=77df83594b6676d101f9cc4a7684808618d859529060de8aaa4e87136bb21dab
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=01f7390373df43f003b25f102f9c3d78a04b1b836d865b281393cbd4219c386d
       Content-Length:
       - '38'
       Accept:
@@ -660,7 +660,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:08 GMT
+      - Fri, 17 Mar 2017 16:48:36 GMT
       Server:
       - AmazonEC2
     body:
@@ -668,7 +668,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeVpcsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>d268c793-114e-44b5-ac5b-2bcf5962b4a2</requestId>
+            <requestId>1a985af2-844b-4ac3-b816-eb600fbd8949</requestId>
             <vpcSet>
                 <item>
                     <vpcId>vpc-8a5a91ee</vpcId>
@@ -681,7 +681,7 @@ http_interactions:
             </vpcSet>
         </DescribeVpcsResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:11 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:39 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -696,12 +696,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090511Z
+      - 20170317T164839Z
       X-Amz-Content-Sha256:
       - 4458b81adb7ad686766b11e1bb41ad4b186e7cfb44c26a0b7ade703866d0fca0
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=f4bef3fd955ba828ac8075e99e05dbff23bfd3a2abde32edeca8e3d33e1f444d
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1aa35f54082b49d8f5ece16afbf4d2394c2d3dedfe44bfd4f6ff7bcdef5434e7
       Content-Length:
       - '41'
       Accept:
@@ -718,7 +718,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:09 GMT
+      - Fri, 17 Mar 2017 16:48:38 GMT
       Server:
       - AmazonEC2
     body:
@@ -726,7 +726,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeSubnetsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>d197a04b-bd06-48f6-bc6b-1a66570cebb7</requestId>
+            <requestId>8e6b9809-9a47-45db-b7ba-60c173f7905f</requestId>
             <subnetSet>
                 <item>
                     <subnetId>subnet-ea63c9b2</subnetId>
@@ -755,7 +755,7 @@ http_interactions:
             </subnetSet>
         </DescribeSubnetsResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:12 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:40 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -770,12 +770,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090512Z
+      - 20170317T164840Z
       X-Amz-Content-Sha256:
       - 398587829763af2624ad0faa257a51949217b85bb2957c3948946c38ab0fddac
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=0bc1bc707af436b49abef808c0b2b2b5ff505e0444be13f9076ef943cc97ed20
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=7a7b60553b96880970aac93150c8cbefc0aa31c2432756e9c5d2b5a000945293
       Content-Length:
       - '48'
       Accept:
@@ -792,7 +792,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:09 GMT
+      - Fri, 17 Mar 2017 16:48:38 GMT
       Server:
       - AmazonEC2
     body:
@@ -800,7 +800,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeSecurityGroupsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>a4a81082-801d-41a4-89a6-63c1c2764501</requestId>
+            <requestId>1fc18dae-2b38-4730-aace-0d513cb14d81</requestId>
             <securityGroupInfo>
                 <item>
                     <ownerId>200278856672</ownerId>
@@ -950,7 +950,7 @@ http_interactions:
             </securityGroupInfo>
         </DescribeSecurityGroupsResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:13 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:42 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -965,12 +965,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090513Z
+      - 20170317T164842Z
       X-Amz-Content-Sha256:
       - 398587829763af2624ad0faa257a51949217b85bb2957c3948946c38ab0fddac
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=5fc9e67413a5b90820cba73614493b608c951dec1a857067e5da3b46761257bd
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=a212dca0f52ff268f4af4abdc81726b4994c6a4eaf20979c7396216e046c5449
       Content-Length:
       - '48'
       Accept:
@@ -987,7 +987,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:11 GMT
+      - Fri, 17 Mar 2017 16:48:39 GMT
       Server:
       - AmazonEC2
     body:
@@ -995,7 +995,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeSecurityGroupsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>a71ac5a8-7424-41b0-bb80-2d2cf786f70c</requestId>
+            <requestId>d9e7c3f8-f347-4c9c-9288-3511fa66c55f</requestId>
             <securityGroupInfo>
                 <item>
                     <ownerId>200278856672</ownerId>
@@ -1145,7 +1145,7 @@ http_interactions:
             </securityGroupInfo>
         </DescribeSecurityGroupsResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:14 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:43 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -1160,12 +1160,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090514Z
+      - 20170317T164843Z
       X-Amz-Content-Sha256:
       - 19ba5dc918b1e927d0c1a179e1bed2a393fa8987b6fbc66e756823d414115566
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=e490465eac0f5e54e53a49d890f4574458e92260f33ad36acf320bb21e8b9c44
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=382970e53e84f2f369d8f2b240a1a36f1aef6aaef4fcd241c3e56b4f1eeee4a1
       Content-Length:
       - '51'
       Accept:
@@ -1182,7 +1182,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:12 GMT
+      - Fri, 17 Mar 2017 16:48:41 GMT
       Server:
       - AmazonEC2
     body:
@@ -1190,7 +1190,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeNetworkInterfacesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>ad47244e-eebd-4544-b24f-7c4a8f43d3be</requestId>
+            <requestId>49993a7f-7431-4558-8b3c-404e3012fcf3</requestId>
             <networkInterfaceSet>
                 <item>
                     <networkInterfaceId>eni-ca94d9e0</networkInterfaceId>
@@ -1241,7 +1241,7 @@ http_interactions:
             </networkInterfaceSet>
         </DescribeNetworkInterfacesResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:15 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:44 GMT
 - request:
     method: post
     uri: https://elasticloadbalancing.us-west-1.amazonaws.com/
@@ -1256,12 +1256,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090515Z
+      - 20170317T164844Z
       X-Amz-Content-Sha256:
       - 236069f72bf74f0c7ddff0a34b0defa8a21d1d6a897e588764e1b2ff6319f94a
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/elasticloadbalancing/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=2a2e165f8d72bc44fde7cc927a97298038391dc1c57bff455e5a0885ae1d587d
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=dea0aebcd8067c26852e4a83dd48a9fc1e3298832c19d261047f398d59249303
       Content-Length:
       - '47'
       Accept:
@@ -1272,13 +1272,13 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - d5450abc-0af0-11e7-9b6b-c75de9c40da5
+      - 94580940-0b31-11e7-91d6-335fb98b5e99
       Content-Type:
       - text/xml
       Content-Length:
       - '335'
       Date:
-      - Fri, 17 Mar 2017 09:05:13 GMT
+      - Fri, 17 Mar 2017 16:48:42 GMT
     body:
       encoding: UTF-8
       string: |
@@ -1287,11 +1287,11 @@ http_interactions:
             <LoadBalancerDescriptions/>
           </DescribeLoadBalancersResult>
           <ResponseMetadata>
-            <RequestId>d5450abc-0af0-11e7-9b6b-c75de9c40da5</RequestId>
+            <RequestId>94580940-0b31-11e7-91d6-335fb98b5e99</RequestId>
           </ResponseMetadata>
         </DescribeLoadBalancersResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:17 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:45 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -1306,12 +1306,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090517Z
+      - 20170317T164845Z
       X-Amz-Content-Sha256:
       - 6171eb09865e32b0602af0f7957e26573a51f53caaedff02ff88883cb0275885
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=79856b999a40ba8d040aa2388a34ea4ec5c2ae5b9222c8b1adfb8709574f0927
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=e5a06ac65ef18d181381d6cf3e07f5d82ab46e971138da064ed0655c83ee2567
       Content-Length:
       - '43'
       Accept:
@@ -1328,7 +1328,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:15 GMT
+      - Fri, 17 Mar 2017 16:48:44 GMT
       Server:
       - AmazonEC2
     body:
@@ -1336,7 +1336,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>1b3619d4-73f4-4f40-b3fb-2484db621148</requestId>
+            <requestId>fdd0314e-a013-46ba-bca9-801a1692155f</requestId>
             <reservationSet>
                 <item>
                     <reservationId>r-18afd25e</reservationId>
@@ -1607,7 +1607,7 @@ http_interactions:
             </reservationSet>
         </DescribeInstancesResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:19 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:47 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -1622,12 +1622,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090519Z
+      - 20170317T164847Z
       X-Amz-Content-Sha256:
       - 64c2b3b3e9d5b907d967a34cae3881d465039ab97edd1648478bb0195096a489
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=884ed644bbdd25594ab3b122cce25541af8427f6870257891de206f9ff45efdf
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=949bf9128586de6b11ab6fbee5454a7547ef199cba51e82bdc783786bbbf2180
       Content-Length:
       - '43'
       Accept:
@@ -1644,7 +1644,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:16 GMT
+      - Fri, 17 Mar 2017 16:48:45 GMT
       Server:
       - AmazonEC2
     body:
@@ -1652,7 +1652,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeAddressesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>06b5f04b-3b5b-4dd0-8c75-fcab1f876829</requestId>
+            <requestId>861165c1-e8b1-4f68-b996-dd812053d39b</requestId>
             <addressesSet>
                 <item>
                     <publicIp>54.215.0.230</publicIp>
@@ -1662,7 +1662,7 @@ http_interactions:
             </addressesSet>
         </DescribeAddressesResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:20 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:48 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -1677,12 +1677,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090520Z
+      - 20170317T164848Z
       X-Amz-Content-Sha256:
       - 925be3c8fc6870a890a6670574a88c988b51f13d9ea74f458ce9b6972534f164
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ccfb06dc50fe6397ac72cccd92a52f5e1c2b39e28b7ced990f18837a35660daf
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=32b7a525e9469dadf7772f968d148362e83cf5f86d334aa9efebf436caf6879b
       Content-Length:
       - '41'
       Accept:
@@ -1699,7 +1699,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:18 GMT
+      - Fri, 17 Mar 2017 16:48:46 GMT
       Server:
       - AmazonEC2
     body:
@@ -1707,7 +1707,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeVolumesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>4e0351c5-a072-4549-90f8-4ca9b1779b3b</requestId>
+            <requestId>d19229c2-e5ee-4948-bf1b-34e595d512e4</requestId>
             <volumeSet>
                 <item>
                     <volumeId>vol-e2d90ab6</volumeId>
@@ -1773,7 +1773,7 @@ http_interactions:
             </volumeSet>
         </DescribeVolumesResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:21 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:50 GMT
 - request:
     method: post
     uri: https://ec2.us-west-1.amazonaws.com/
@@ -1788,12 +1788,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170317T090521Z
+      - 20170317T164850Z
       X-Amz-Content-Sha256:
       - 198438dba11e3ce3807802118c2500dc7ec3fcda2f43c86e579dfb6049e0f159
       Authorization:
       - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=026cd5be75d3e5e5eca0828f222da0078799055e114c9b512b8c6982a36dc3c6
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=36494944a6e1e2c31f21ef5cbda577421321b53f2e2e7245e0e97a6af77c543e
       Content-Length:
       - '56'
       Accept:
@@ -1810,7 +1810,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Fri, 17 Mar 2017 09:05:20 GMT
+      - Fri, 17 Mar 2017 16:48:47 GMT
       Server:
       - AmazonEC2
     body:
@@ -1818,7 +1818,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeSnapshotsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>b5a905c6-3d7a-4ebd-9bed-bcb26de4ecbe</requestId>
+            <requestId>29b0f617-52d8-480a-a456-a31cf82e79ff</requestId>
             <snapshotSet>
                 <item>
                     <snapshotId>snap-02ef440a</snapshotId>
@@ -1834,5 +1834,1329 @@ http_interactions:
             </snapshotSet>
         </DescribeSnapshotsResponse>
     http_version: 
-  recorded_at: Fri, 17 Mar 2017 09:05:23 GMT
+  recorded_at: Fri, 17 Mar 2017 16:48:51 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeInstances&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164851Z
+      X-Amz-Content-Sha256:
+      - 6171eb09865e32b0602af0f7957e26573a51f53caaedff02ff88883cb0275885
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=832ad8d5d48dcbc03b236fc0c1363f315c1b25ada23a0ac31a2904510fb56bf5
+      Content-Length:
+      - '43'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:48:48 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>3f570249-5683-4a32-a6b2-898ed8da635a</requestId>
+            <reservationSet>
+                <item>
+                    <reservationId>r-18afd25e</reservationId>
+                    <ownerId>200278856672</ownerId>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-e94055ac</groupId>
+                            <groupName>default</groupName>
+                        </item>
+                    </groupSet>
+                    <instancesSet>
+                        <item>
+                            <instanceId>i-fdd815a4</instanceId>
+                            <imageId>ami-3bc9997e</imageId>
+                            <instanceState>
+                                <code>272</code>
+                                <name>running</name>
+                            </instanceState>
+                            <privateDnsName>ip-10-160-177-126.us-west-1.compute.internal</privateDnsName>
+                            <dnsName>ec2-184-169-243-31.us-west-1.compute.amazonaws.com</dnsName>
+                            <reason/>
+                            <amiLaunchIndex>0</amiLaunchIndex>
+                            <productCodes/>
+                            <instanceType>m1.small</instanceType>
+                            <launchTime>2012-10-01T18:11:04.000Z</launchTime>
+                            <placement>
+                                <availabilityZone>us-west-1a</availabilityZone>
+                                <groupName/>
+                                <tenancy>default</tenancy>
+                            </placement>
+                            <kernelId>aki-99a0f1dc</kernelId>
+                            <monitoring>
+                                <state>disabled</state>
+                            </monitoring>
+                            <privateIpAddress>10.160.177.126</privateIpAddress>
+                            <ipAddress>184.169.243.31</ipAddress>
+                            <groupSet>
+                                <item>
+                                    <groupId>sg-e94055ac</groupId>
+                                    <groupName>default</groupName>
+                                </item>
+                            </groupSet>
+                            <stateReason>
+                                <code>Client.UserInitiatedShutdown</code>
+                                <message>Client.UserInitiatedShutdown: User initiated shutdown</message>
+                            </stateReason>
+                            <architecture>i386</architecture>
+                            <rootDeviceType>ebs</rootDeviceType>
+                            <rootDeviceName>/dev/sda1</rootDeviceName>
+                            <blockDeviceMapping>
+                                <item>
+                                    <deviceName>/dev/sda1</deviceName>
+                                    <ebs>
+                                        <volumeId>vol-93f7b6bd</volumeId>
+                                        <status>attached</status>
+                                        <attachTime>2012-10-01T18:11:08.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </ebs>
+                                </item>
+                            </blockDeviceMapping>
+                            <virtualizationType>paravirtual</virtualizationType>
+                            <clientToken>5bfd4308-0bf3-11e2-96b9-a4b197fffe9a</clientToken>
+                            <hypervisor>xen</hypervisor>
+                            <networkInterfaceSet/>
+                            <ebsOptimized>false</ebsOptimized>
+                        </item>
+                    </instancesSet>
+                </item>
+                <item>
+                    <reservationId>r-9fde5ac4</reservationId>
+                    <ownerId>200278856672</ownerId>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-2b87746f</groupId>
+                            <groupName>EmsRefreshSpec-SecurityGroup-OtherRegion</groupName>
+                        </item>
+                    </groupSet>
+                    <instancesSet>
+                        <item>
+                            <instanceId>i-dc1ee486</instanceId>
+                            <imageId>ami-183e175d</imageId>
+                            <instanceState>
+                                <code>16</code>
+                                <name>running</name>
+                            </instanceState>
+                            <privateDnsName>ip-10-191-129-95.us-west-1.compute.internal</privateDnsName>
+                            <dnsName>ec2-204-236-137-154.us-west-1.compute.amazonaws.com</dnsName>
+                            <reason>Server.InternalError</reason>
+                            <keyName>EmsRefreshSpec-KeyPair-OtherRegion</keyName>
+                            <amiLaunchIndex>0</amiLaunchIndex>
+                            <productCodes/>
+                            <instanceType>t1.micro</instanceType>
+                            <launchTime>2013-08-31T00:12:43.000Z</launchTime>
+                            <placement>
+                                <availabilityZone>us-west-1a</availabilityZone>
+                                <groupName/>
+                                <tenancy>default</tenancy>
+                            </placement>
+                            <kernelId>aki-36b79b73</kernelId>
+                            <monitoring>
+                                <state>disabled</state>
+                            </monitoring>
+                            <privateIpAddress>10.191.129.95</privateIpAddress>
+                            <ipAddress>204.236.137.154</ipAddress>
+                            <groupSet>
+                                <item>
+                                    <groupId>sg-2b87746f</groupId>
+                                    <groupName>EmsRefreshSpec-SecurityGroup-OtherRegion</groupName>
+                                </item>
+                            </groupSet>
+                            <stateReason>
+                                <code>Client.UserInitiatedShutdown</code>
+                                <message>Client.UserInitiatedShutdown: User initiated shutdown</message>
+                            </stateReason>
+                            <architecture>x86_64</architecture>
+                            <rootDeviceType>ebs</rootDeviceType>
+                            <rootDeviceName>/dev/sda1</rootDeviceName>
+                            <blockDeviceMapping>
+                                <item>
+                                    <deviceName>/dev/sda1</deviceName>
+                                    <ebs>
+                                        <volumeId>vol-e2d90ab6</volumeId>
+                                        <status>attached</status>
+                                        <attachTime>2013-08-31T00:12:46.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </ebs>
+                                </item>
+                            </blockDeviceMapping>
+                            <virtualizationType>paravirtual</virtualizationType>
+                            <clientToken>TYBNt1377907963036</clientToken>
+                            <tagSet>
+                                <item>
+                                    <key>Name</key>
+                                    <value>EmsRefreshSpec-PoweredOn-OtherRegion</value>
+                                </item>
+                            </tagSet>
+                            <hypervisor>xen</hypervisor>
+                            <networkInterfaceSet/>
+                            <ebsOptimized>false</ebsOptimized>
+                        </item>
+                    </instancesSet>
+                </item>
+                <item>
+                    <reservationId>r-05c2745096d06e08a</reservationId>
+                    <ownerId>200278856672</ownerId>
+                    <groupSet/>
+                    <instancesSet>
+                        <item>
+                            <instanceId>i-0536cdd458e6648a1</instanceId>
+                            <imageId>ami-2cade64c</imageId>
+                            <instanceState>
+                                <code>16</code>
+                                <name>running</name>
+                            </instanceState>
+                            <privateDnsName>ip-172-30-2-38.us-west-1.compute.internal</privateDnsName>
+                            <dnsName/>
+                            <reason/>
+                            <keyName>bronagh-west1</keyName>
+                            <amiLaunchIndex>0</amiLaunchIndex>
+                            <productCodes/>
+                            <instanceType>t2.micro</instanceType>
+                            <launchTime>2017-02-10T18:28:52.000Z</launchTime>
+                            <placement>
+                                <availabilityZone>us-west-1a</availabilityZone>
+                                <groupName/>
+                                <tenancy>default</tenancy>
+                            </placement>
+                            <monitoring>
+                                <state>enabled</state>
+                            </monitoring>
+                            <subnetId>subnet-57167333</subnetId>
+                            <vpcId>vpc-8a5a91ee</vpcId>
+                            <privateIpAddress>172.30.2.38</privateIpAddress>
+                            <ipAddress>54.215.233.17</ipAddress>
+                            <sourceDestCheck>true</sourceDestCheck>
+                            <groupSet>
+                                <item>
+                                    <groupId>sg-84be0fe3</groupId>
+                                    <groupName>launch-wizard-1</groupName>
+                                </item>
+                            </groupSet>
+                            <stateReason>
+                                <code/>
+                                <message/>
+                            </stateReason>
+                            <architecture>x86_64</architecture>
+                            <rootDeviceType>ebs</rootDeviceType>
+                            <rootDeviceName>/dev/sda1</rootDeviceName>
+                            <blockDeviceMapping>
+                                <item>
+                                    <deviceName>/dev/sda1</deviceName>
+                                    <ebs>
+                                        <volumeId>vol-09b39716a001ccde5</volumeId>
+                                        <status>attached</status>
+                                        <attachTime>2017-02-09T18:05:42.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </ebs>
+                                </item>
+                            </blockDeviceMapping>
+                            <virtualizationType>hvm</virtualizationType>
+                            <clientToken>VvBGm1486663541158</clientToken>
+                            <tagSet>
+                                <item>
+                                    <key>anotheradmintag</key>
+                                    <value>visible</value>
+                                </item>
+                                <item>
+                                    <key>Name</key>
+                                    <value>Bronagh-west1-california</value>
+                                </item>
+                                <item>
+                                    <key>Owner</key>
+                                    <value>Bronagh Sorota</value>
+                                </item>
+                                <item>
+                                    <key>Admintag</key>
+                                    <value>test</value>
+                                </item>
+                            </tagSet>
+                            <hypervisor>xen</hypervisor>
+                            <networkInterfaceSet>
+                                <item>
+                                    <networkInterfaceId>eni-ca94d9e0</networkInterfaceId>
+                                    <subnetId>subnet-57167333</subnetId>
+                                    <vpcId>vpc-8a5a91ee</vpcId>
+                                    <description>Primary network interface</description>
+                                    <ownerId>200278856672</ownerId>
+                                    <status>in-use</status>
+                                    <macAddress>02:ae:92:86:f5:e2</macAddress>
+                                    <privateIpAddress>172.30.2.38</privateIpAddress>
+                                    <sourceDestCheck>true</sourceDestCheck>
+                                    <groupSet>
+                                        <item>
+                                            <groupId>sg-84be0fe3</groupId>
+                                            <groupName>launch-wizard-1</groupName>
+                                        </item>
+                                    </groupSet>
+                                    <attachment>
+                                        <attachmentId>eni-attach-f192739f</attachmentId>
+                                        <deviceIndex>0</deviceIndex>
+                                        <status>attached</status>
+                                        <attachTime>2017-02-09T18:05:41.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </attachment>
+                                    <association>
+                                        <publicIp>54.215.233.17</publicIp>
+                                        <publicDnsName/>
+                                        <ipOwnerId>amazon</ipOwnerId>
+                                    </association>
+                                    <privateIpAddressesSet>
+                                        <item>
+                                            <privateIpAddress>172.30.2.38</privateIpAddress>
+                                            <primary>true</primary>
+                                            <association>
+                                            <publicIp>54.215.233.17</publicIp>
+                                            <publicDnsName/>
+                                            <ipOwnerId>amazon</ipOwnerId>
+                                            </association>
+                                        </item>
+                                    </privateIpAddressesSet>
+                                    <ipv6AddressesSet/>
+                                </item>
+                            </networkInterfaceSet>
+                            <ebsOptimized>false</ebsOptimized>
+                        </item>
+                    </instancesSet>
+                </item>
+            </reservationSet>
+        </DescribeInstancesResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:48:52 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeImages&Filter.1.Name=image-type&Filter.1.Value.1=machine&Owner.1=self&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164852Z
+      X-Amz-Content-Sha256:
+      - 353f42a6b4f35502116ce0f2e997ba13b57b156b7a2d476afc85d222902f4415
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=58673ddc0caec6068d6aff9aa041c2ac7a097ea4cd566cd4db58fa895da35c3f
+      Content-Length:
+      - '103'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:48:50 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>c9f8a8b5-240e-48e5-98d5-5add5583bfc9</requestId>
+            <imagesSet>
+                <item>
+                    <imageId>ami-183e175d</imageId>
+                    <imageLocation>200278856672/EmsRefreshSpec-Image-OtherRegion</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>200278856672</imageOwnerId>
+                    <creationDate>2013-06-22T02:28:05.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <kernelId>aki-36b79b73</kernelId>
+                    <name>EmsRefreshSpec-Image-OtherRegion</name>
+                    <description>EmsRefreshSpec-Image-OtherRegion</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-02ef440a</snapshotId>
+                                <volumeSize>7</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>standard</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                </item>
+            </imagesSet>
+        </DescribeImagesResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:48:54 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeImages&ExecutableBy.1=self&Filter.1.Name=image-type&Filter.1.Value.1=machine&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164854Z
+      X-Amz-Content-Sha256:
+      - 13559d63912d4017a9523f9e8bda64c2a6870c83adb807d3bccff29a4065cdfc
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=08e9b52fa061dbbbb550c4b3daf5b576ef426b37b77bb3b5e3185e0a68250692
+      Content-Length:
+      - '110'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:48:51 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>f0b99bcf-7bf0-4801-88d1-001e6faec007</requestId>
+            <imagesSet/>
+        </DescribeImagesResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:48:55 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeSecurityGroups&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164855Z
+      X-Amz-Content-Sha256:
+      - 398587829763af2624ad0faa257a51949217b85bb2957c3948946c38ab0fddac
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=5dc8eed07d2d9f7fb61a8f3f9098c86868ac0fc08bf2c07ffd0624eba5958178
+      Content-Length:
+      - '48'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:48:52 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeSecurityGroupsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>32a15568-7d7e-4c99-b8b9-fdfff9603ef1</requestId>
+            <securityGroupInfo>
+                <item>
+                    <ownerId>200278856672</ownerId>
+                    <groupId>sg-e94055ac</groupId>
+                    <groupName>default</groupName>
+                    <groupDescription>default group</groupDescription>
+                    <ipPermissions>
+                        <item>
+                            <ipProtocol>tcp</ipProtocol>
+                            <fromPort>0</fromPort>
+                            <toPort>65535</toPort>
+                            <groups>
+                                <item>
+                                    <userId>200278856672</userId>
+                                    <groupId>sg-e94055ac</groupId>
+                                    <groupName>default</groupName>
+                                </item>
+                            </groups>
+                            <ipRanges/>
+                            <ipv6Ranges/>
+                            <prefixListIds/>
+                        </item>
+                        <item>
+                            <ipProtocol>udp</ipProtocol>
+                            <fromPort>0</fromPort>
+                            <toPort>65535</toPort>
+                            <groups>
+                                <item>
+                                    <userId>200278856672</userId>
+                                    <groupId>sg-e94055ac</groupId>
+                                    <groupName>default</groupName>
+                                </item>
+                            </groups>
+                            <ipRanges/>
+                            <ipv6Ranges/>
+                            <prefixListIds/>
+                        </item>
+                        <item>
+                            <ipProtocol>icmp</ipProtocol>
+                            <fromPort>-1</fromPort>
+                            <toPort>-1</toPort>
+                            <groups>
+                                <item>
+                                    <userId>200278856672</userId>
+                                    <groupId>sg-e94055ac</groupId>
+                                    <groupName>default</groupName>
+                                </item>
+                            </groups>
+                            <ipRanges/>
+                            <ipv6Ranges/>
+                            <prefixListIds/>
+                        </item>
+                    </ipPermissions>
+                    <ipPermissionsEgress/>
+                </item>
+                <item>
+                    <ownerId>200278856672</ownerId>
+                    <groupId>sg-2b87746f</groupId>
+                    <groupName>EmsRefreshSpec-SecurityGroup-OtherRegion</groupName>
+                    <groupDescription>EmsRefreshSpec-SecurityGroup-OtherRegion</groupDescription>
+                    <ipPermissions>
+                        <item>
+                            <ipProtocol>tcp</ipProtocol>
+                            <fromPort>0</fromPort>
+                            <toPort>65535</toPort>
+                            <groups/>
+                            <ipRanges>
+                                <item>
+                                    <cidrIp>0.0.0.0/0</cidrIp>
+                                </item>
+                            </ipRanges>
+                            <ipv6Ranges/>
+                            <prefixListIds/>
+                        </item>
+                    </ipPermissions>
+                    <ipPermissionsEgress/>
+                </item>
+                <item>
+                    <ownerId>200278856672</ownerId>
+                    <groupId>sg-c2be0fa5</groupId>
+                    <groupName>default</groupName>
+                    <groupDescription>default VPC security group</groupDescription>
+                    <vpcId>vpc-8a5a91ee</vpcId>
+                    <ipPermissions>
+                        <item>
+                            <ipProtocol>-1</ipProtocol>
+                            <groups>
+                                <item>
+                                    <userId>200278856672</userId>
+                                    <groupId>sg-c2be0fa5</groupId>
+                                </item>
+                            </groups>
+                            <ipRanges/>
+                            <ipv6Ranges/>
+                            <prefixListIds/>
+                        </item>
+                    </ipPermissions>
+                    <ipPermissionsEgress>
+                        <item>
+                            <ipProtocol>-1</ipProtocol>
+                            <groups/>
+                            <ipRanges>
+                                <item>
+                                    <cidrIp>0.0.0.0/0</cidrIp>
+                                </item>
+                            </ipRanges>
+                            <ipv6Ranges/>
+                            <prefixListIds/>
+                        </item>
+                    </ipPermissionsEgress>
+                </item>
+                <item>
+                    <ownerId>200278856672</ownerId>
+                    <groupId>sg-84be0fe3</groupId>
+                    <groupName>launch-wizard-1</groupName>
+                    <groupDescription>launch-wizard-1 created 2017-02-09T13:04:54.419-05:00</groupDescription>
+                    <vpcId>vpc-8a5a91ee</vpcId>
+                    <ipPermissions>
+                        <item>
+                            <ipProtocol>tcp</ipProtocol>
+                            <fromPort>22</fromPort>
+                            <toPort>22</toPort>
+                            <groups/>
+                            <ipRanges>
+                                <item>
+                                    <cidrIp>0.0.0.0/0</cidrIp>
+                                </item>
+                            </ipRanges>
+                            <ipv6Ranges/>
+                            <prefixListIds/>
+                        </item>
+                    </ipPermissions>
+                    <ipPermissionsEgress>
+                        <item>
+                            <ipProtocol>-1</ipProtocol>
+                            <groups/>
+                            <ipRanges>
+                                <item>
+                                    <cidrIp>0.0.0.0/0</cidrIp>
+                                </item>
+                            </ipRanges>
+                            <ipv6Ranges/>
+                            <prefixListIds/>
+                        </item>
+                    </ipPermissionsEgress>
+                </item>
+            </securityGroupInfo>
+        </DescribeSecurityGroupsResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:48:55 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeNetworkInterfaces&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164855Z
+      X-Amz-Content-Sha256:
+      - 19ba5dc918b1e927d0c1a179e1bed2a393fa8987b6fbc66e756823d414115566
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=3cfcfa30fee5a5341f0398f5257f439ae42f97de59fbd745f7c5f0a187df0413
+      Content-Length:
+      - '51'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:48:53 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeNetworkInterfacesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>ab4168b9-c72a-496f-aa83-3aa01bf6ca20</requestId>
+            <networkInterfaceSet>
+                <item>
+                    <networkInterfaceId>eni-ca94d9e0</networkInterfaceId>
+                    <subnetId>subnet-57167333</subnetId>
+                    <vpcId>vpc-8a5a91ee</vpcId>
+                    <availabilityZone>us-west-1a</availabilityZone>
+                    <description>Primary network interface</description>
+                    <ownerId>200278856672</ownerId>
+                    <requesterManaged>false</requesterManaged>
+                    <status>in-use</status>
+                    <macAddress>02:ae:92:86:f5:e2</macAddress>
+                    <privateIpAddress>172.30.2.38</privateIpAddress>
+                    <sourceDestCheck>true</sourceDestCheck>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-84be0fe3</groupId>
+                            <groupName>launch-wizard-1</groupName>
+                        </item>
+                    </groupSet>
+                    <attachment>
+                        <attachmentId>eni-attach-f192739f</attachmentId>
+                        <instanceId>i-0536cdd458e6648a1</instanceId>
+                        <instanceOwnerId>200278856672</instanceOwnerId>
+                        <deviceIndex>0</deviceIndex>
+                        <status>attached</status>
+                        <attachTime>2017-02-09T18:05:41.000Z</attachTime>
+                        <deleteOnTermination>true</deleteOnTermination>
+                    </attachment>
+                    <association>
+                        <publicIp>54.215.233.17</publicIp>
+                        <publicDnsName/>
+                        <ipOwnerId>amazon</ipOwnerId>
+                    </association>
+                    <tagSet/>
+                    <privateIpAddressesSet>
+                        <item>
+                            <privateIpAddress>172.30.2.38</privateIpAddress>
+                            <primary>true</primary>
+                            <association>
+                                <publicIp>54.215.233.17</publicIp>
+                                <publicDnsName/>
+                                <ipOwnerId>amazon</ipOwnerId>
+                            </association>
+                        </item>
+                    </privateIpAddressesSet>
+                    <ipv6AddressesSet/>
+                </item>
+            </networkInterfaceSet>
+        </DescribeNetworkInterfacesResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:48:57 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeAddresses&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164857Z
+      X-Amz-Content-Sha256:
+      - 64c2b3b3e9d5b907d967a34cae3881d465039ab97edd1648478bb0195096a489
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=8f79d11fd5146b6c688ecb0dafd113cbb4d8513312f1f00b42cc0bb24c1281a3
+      Content-Length:
+      - '43'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:48:55 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeAddressesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>29bfef28-2461-49f1-a06c-665900031bac</requestId>
+            <addressesSet>
+                <item>
+                    <publicIp>54.215.0.230</publicIp>
+                    <domain>standard</domain>
+                    <instanceId/>
+                </item>
+            </addressesSet>
+        </DescribeAddressesResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:48:58 GMT
+- request:
+    method: post
+    uri: https://cloudformation.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeStacks&Version=2010-05-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164858Z
+      X-Amz-Content-Sha256:
+      - 1c0d327d16f37b15838ca07a3964664f2dcff8d7051d9f1d87552e7df79be01f
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=c2054d21bea88ee19f30d2f5863901c028d8a34db347c22b9381d996181693a1
+      Content-Length:
+      - '40'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 9c66914a-0b31-11e7-89e0-ab963e756651
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '283'
+      Date:
+      - Fri, 17 Mar 2017 16:48:56 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <DescribeStacksResponse xmlns="http://cloudformation.amazonaws.com/doc/2010-05-15/">
+          <DescribeStacksResult>
+            <Stacks/>
+          </DescribeStacksResult>
+          <ResponseMetadata>
+            <RequestId>9c66914a-0b31-11e7-89e0-ab963e756651</RequestId>
+          </ResponseMetadata>
+        </DescribeStacksResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:48:59 GMT
+- request:
+    method: post
+    uri: https://cloudformation.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeStacks&Version=2010-05-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164859Z
+      X-Amz-Content-Sha256:
+      - 1c0d327d16f37b15838ca07a3964664f2dcff8d7051d9f1d87552e7df79be01f
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=d19e7f465745b5b1f2ec950bfced55f6f71e17b684b4ebb022d574258df4d0fa
+      Content-Length:
+      - '40'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 9d00fcfa-0b31-11e7-b2a3-19b135eae4a2
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '283'
+      Date:
+      - Fri, 17 Mar 2017 16:48:57 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <DescribeStacksResponse xmlns="http://cloudformation.amazonaws.com/doc/2010-05-15/">
+          <DescribeStacksResult>
+            <Stacks/>
+          </DescribeStacksResult>
+          <ResponseMetadata>
+            <RequestId>9d00fcfa-0b31-11e7-b2a3-19b135eae4a2</RequestId>
+          </ResponseMetadata>
+        </DescribeStacksResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:49:00 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeKeyPairs&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164900Z
+      X-Amz-Content-Sha256:
+      - e7326d4766918579e6d040a9c8d2243cefc0ab1aaa37cd7a9dab76d8c3538b59
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=9afb02d6bd3fbe3f1edad50b0a62fc5a1fef6da34fd64eb2849904a4d3db952b
+      Content-Length:
+      - '42'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:48:58 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeKeyPairsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>f2006d54-8096-43d9-8022-1adedfeded9f</requestId>
+            <keySet>
+                <item>
+                    <keyName>bronagh-west1</keyName>
+                    <keyFingerprint>29:a0:34:e9:01:b1:28:d0:01:ae:e0:73:ca:dd:ea:2f:14:c4:e1:d6</keyFingerprint>
+                </item>
+                <item>
+                    <keyName>EmsRefreshSpec-KeyPair-OtherRegion</keyName>
+                    <keyFingerprint>fc:53:30:aa:d2:23:c7:8d:e2:e8:05:95:a0:d2:90:fb:15:30:a2:51</keyFingerprint>
+                </item>
+                <item>
+                    <keyName>jf-west-1</keyName>
+                    <keyFingerprint>5f:a8:de:1b:56:ba:3c:12:78:13:79:d6:d0:1d:b9:12:7d:b9:6d:91</keyFingerprint>
+                </item>
+            </keySet>
+        </DescribeKeyPairsResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:49:02 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeAvailabilityZones&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164902Z
+      X-Amz-Content-Sha256:
+      - 2bd59c58bf8c2bcc1c39ea3a5a38bb7cd5a643758cbd1b78a746d3a3aa5c1580
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ded550f5f1a234c91576a40fab380faaa5d7bec21c5cf026c8c9fb5418fc981b
+      Content-Length:
+      - '51'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:48:59 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeAvailabilityZonesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>68bb55e3-0c5a-4445-893b-7f9a5e063c0a</requestId>
+            <availabilityZoneInfo>
+                <item>
+                    <zoneName>us-west-1a</zoneName>
+                    <zoneState>available</zoneState>
+                    <regionName>us-west-1</regionName>
+                    <messageSet/>
+                </item>
+                <item>
+                    <zoneName>us-west-1b</zoneName>
+                    <zoneState>available</zoneState>
+                    <regionName>us-west-1</regionName>
+                    <messageSet/>
+                </item>
+                <item>
+                    <zoneName>us-west-1c</zoneName>
+                    <zoneState>available</zoneState>
+                    <regionName>us-west-1</regionName>
+                    <messageSet/>
+                </item>
+            </availabilityZoneInfo>
+        </DescribeAvailabilityZonesResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:49:02 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeVpcs&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164902Z
+      X-Amz-Content-Sha256:
+      - d821ac2c2958664a08eb0f0b183ebf80201e8a50da5d9e98eca9bc36ef648656
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=a7921bf3e9b3d520c653d8987d5385e93b6629dc0027ce508729d96154f215d7
+      Content-Length:
+      - '38'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:49:00 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeVpcsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>5cddae91-aa85-412d-8479-f223c5b54385</requestId>
+            <vpcSet>
+                <item>
+                    <vpcId>vpc-8a5a91ee</vpcId>
+                    <state>available</state>
+                    <cidrBlock>172.30.0.0/16</cidrBlock>
+                    <dhcpOptionsId>dopt-d0617fb5</dhcpOptionsId>
+                    <instanceTenancy>default</instanceTenancy>
+                    <isDefault>false</isDefault>
+                </item>
+            </vpcSet>
+        </DescribeVpcsResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:49:03 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeSubnets&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164903Z
+      X-Amz-Content-Sha256:
+      - 4458b81adb7ad686766b11e1bb41ad4b186e7cfb44c26a0b7ade703866d0fca0
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=39fb31c8ee64873f51fb9ab4cb6a00c5e638b8d0c22b6849a86e03336f41eae5
+      Content-Length:
+      - '41'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:49:01 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeSubnetsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>dbe7dd7a-04e0-42a0-a057-84175a9f3bd5</requestId>
+            <subnetSet>
+                <item>
+                    <subnetId>subnet-ea63c9b2</subnetId>
+                    <state>available</state>
+                    <vpcId>vpc-8a5a91ee</vpcId>
+                    <cidrBlock>172.30.0.0/24</cidrBlock>
+                    <ipv6CidrBlockAssociationSet/>
+                    <availableIpAddressCount>251</availableIpAddressCount>
+                    <availabilityZone>us-west-1c</availabilityZone>
+                    <defaultForAz>false</defaultForAz>
+                    <mapPublicIpOnLaunch>true</mapPublicIpOnLaunch>
+                    <assignIpv6AddressOnCreation>false</assignIpv6AddressOnCreation>
+                </item>
+                <item>
+                    <subnetId>subnet-57167333</subnetId>
+                    <state>available</state>
+                    <vpcId>vpc-8a5a91ee</vpcId>
+                    <cidrBlock>172.30.2.0/24</cidrBlock>
+                    <ipv6CidrBlockAssociationSet/>
+                    <availableIpAddressCount>250</availableIpAddressCount>
+                    <availabilityZone>us-west-1a</availabilityZone>
+                    <defaultForAz>false</defaultForAz>
+                    <mapPublicIpOnLaunch>true</mapPublicIpOnLaunch>
+                    <assignIpv6AddressOnCreation>false</assignIpv6AddressOnCreation>
+                </item>
+            </subnetSet>
+        </DescribeSubnetsResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:49:04 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeVolumes&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164904Z
+      X-Amz-Content-Sha256:
+      - 925be3c8fc6870a890a6670574a88c988b51f13d9ea74f458ce9b6972534f164
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=af7d34340eed9c5474c7da0dd56726e3e132a280c3b5ebcfaa9264c196db0e22
+      Content-Length:
+      - '41'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:49:01 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeVolumesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>b8d2994a-466a-430c-8569-2389b8f63731</requestId>
+            <volumeSet>
+                <item>
+                    <volumeId>vol-e2d90ab6</volumeId>
+                    <size>7</size>
+                    <snapshotId>snap-02ef440a</snapshotId>
+                    <availabilityZone>us-west-1a</availabilityZone>
+                    <status>in-use</status>
+                    <createTime>2013-08-31T00:12:46.000Z</createTime>
+                    <attachmentSet>
+                        <item>
+                            <volumeId>vol-e2d90ab6</volumeId>
+                            <instanceId>i-dc1ee486</instanceId>
+                            <device>/dev/sda1</device>
+                            <status>attached</status>
+                            <attachTime>2013-08-31T00:12:46.000Z</attachTime>
+                            <deleteOnTermination>true</deleteOnTermination>
+                        </item>
+                    </attachmentSet>
+                    <volumeType>standard</volumeType>
+                    <encrypted>false</encrypted>
+                </item>
+                <item>
+                    <volumeId>vol-93f7b6bd</volumeId>
+                    <size>8</size>
+                    <snapshotId>snap-eb65da81</snapshotId>
+                    <availabilityZone>us-west-1a</availabilityZone>
+                    <status>in-use</status>
+                    <createTime>2012-10-01T18:11:07.000Z</createTime>
+                    <attachmentSet>
+                        <item>
+                            <volumeId>vol-93f7b6bd</volumeId>
+                            <instanceId>i-fdd815a4</instanceId>
+                            <device>/dev/sda1</device>
+                            <status>attached</status>
+                            <attachTime>2012-10-01T18:11:08.000Z</attachTime>
+                            <deleteOnTermination>true</deleteOnTermination>
+                        </item>
+                    </attachmentSet>
+                    <volumeType>standard</volumeType>
+                    <encrypted>false</encrypted>
+                </item>
+                <item>
+                    <volumeId>vol-09b39716a001ccde5</volumeId>
+                    <size>10</size>
+                    <snapshotId>snap-b90c983a</snapshotId>
+                    <availabilityZone>us-west-1a</availabilityZone>
+                    <status>in-use</status>
+                    <createTime>2017-02-09T18:05:42.548Z</createTime>
+                    <attachmentSet>
+                        <item>
+                            <volumeId>vol-09b39716a001ccde5</volumeId>
+                            <instanceId>i-0536cdd458e6648a1</instanceId>
+                            <device>/dev/sda1</device>
+                            <status>attached</status>
+                            <attachTime>2017-02-09T18:05:42.000Z</attachTime>
+                            <deleteOnTermination>true</deleteOnTermination>
+                        </item>
+                    </attachmentSet>
+                    <volumeType>gp2</volumeType>
+                    <iops>100</iops>
+                    <encrypted>false</encrypted>
+                </item>
+            </volumeSet>
+        </DescribeVolumesResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:49:05 GMT
+- request:
+    method: post
+    uri: https://ec2.us-west-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeSnapshots&Owner.1=self&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170317T164905Z
+      X-Amz-Content-Sha256:
+      - 198438dba11e3ce3807802118c2500dc7ec3fcda2f43c86e579dfb6049e0f159
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170317/us-west-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=19a0013f73ab670368900e70c24f0327589377a6f29b9672910625bd3a4075c5
+      Content-Length:
+      - '56'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 17 Mar 2017 16:49:03 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeSnapshotsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>79fe0399-f200-477c-88c3-2006ad33954e</requestId>
+            <snapshotSet>
+                <item>
+                    <snapshotId>snap-02ef440a</snapshotId>
+                    <volumeId>vol-18b7d138</volumeId>
+                    <status>completed</status>
+                    <startTime>2013-06-22T02:28:30.000Z</startTime>
+                    <progress>100%</progress>
+                    <ownerId>200278856672</ownerId>
+                    <volumeSize>7</volumeSize>
+                    <description>Created by CreateImage(i-d133c68a) for ami-183e175d from vol-18b7d138</description>
+                    <encrypted>false</encrypted>
+                </item>
+            </snapshotSet>
+        </DescribeSnapshotsResponse>
+    http_version: 
+  recorded_at: Fri, 17 Mar 2017 16:49:07 GMT
 recorded_with: VCR 3.0.3
