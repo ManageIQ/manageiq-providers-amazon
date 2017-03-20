@@ -71,5 +71,31 @@ module ManageIQ::Providers::Amazon::RefreshHelperMethods
     def ems_inv_to_hashes(ems, options = nil)
       new(ems, options).ems_inv_to_hashes
     end
+
+    def queue_save_new_labels(resource_id, resource_type, labels, ems)
+      MiqQueue.put(
+        :queue_name  => MiqEmsRefreshWorker.queue_name_for_ems(ems),
+        :class_name  => 'ManageIQ::Providers::Amazon::CloudManager::RefreshParser',
+        :method_name => 'save_new_label_inventory',
+        :role        => "ems_inventory",
+        :zone        => ems.my_zone,
+        :args        => [resource_id, resource_type, labels],
+      )
+    end
+
+    def save_new_label_inventory(resource_id, resource_type, labels)
+      resource = resource_type.constantize.find_by(:id => resource_id)
+      return if resource.nil?
+
+      resource_labels = []
+      labels.each do |l|
+        $aws_log.info("L #{l.inspect}")
+        l[:section] = 'labels'
+        l[:source]  = 'amazon'
+        resource_labels << l
+      end
+
+      EmsRefresh.save_labels_inventory(resource, resource_labels )
+    end
   end
 end
