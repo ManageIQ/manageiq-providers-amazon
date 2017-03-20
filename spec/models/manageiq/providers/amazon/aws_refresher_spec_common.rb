@@ -836,12 +836,9 @@ module AwsRefresherSpecCommon
     expect(@elb_non_vpc.vms.first.name).to eq "EmsRefreshSpec-PoweredOn-Basic3"
   end
 
-  def assert_specific_load_balancers
-    assert_specific_load_balancer_non_vpc
-    assert_specific_load_balancer_non_vpc_vms
-
+  def assert_specific_load_balancer_vpc
     @elb = ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer.where(
-      :name => "EmSRefreshSpecVPCELB").first
+    :name => "EmSRefreshSpecVPCELB").first
     expect(@elb).to have_attributes(
       "ems_ref"         => "EmSRefreshSpecVPCELB",
       "name"            => "EmSRefreshSpecVPCELB",
@@ -855,7 +852,22 @@ module AwsRefresherSpecCommon
     # expect(@elb.availability_zones).to eq(@az)
     # expect(@elb.cloud_subnets).to eq(..)
     # expect(@elb.network_ports).to eq(..)
+  end
 
+  def assert_specific_load_balancer_vpc_relations
+    expect(@elb.vms.count).to eq 2
+    expect(@elb.load_balancer_pool_members.count).to eq 2
+    expect(@elb.load_balancer_pool_members.first.ext_management_system).to eq @ems.network_manager
+    expect(@elb.vms.first.ext_management_system).to eq @ems
+    expect(@elb.vms.collect(&:name)).to match_array ["EmsRefreshSpec-PoweredOn-VPC", "VMstate-8"]
+  end
+
+  def assert_specific_load_balancer_vpc_and_vpc2_relations
+    expect(@elb.vms).to match_array @elb2.vms
+    expect(@elb.load_balancer_pool_members).to match_array @elb2.load_balancer_pool_members
+  end
+
+  def assert_specific_load_balancer_vpc2
     @elb2 = ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer.where(
       :name => "EmSRefreshSpecVPCELB2").first
     expect(@elb2).to have_attributes(
@@ -867,139 +879,154 @@ module AwsRefresherSpecCommon
     )
 
     expect(@elb2.ext_management_system).to eq(@ems.network_manager)
-
-    expect(@elb.vms.count).to eq 2
-    expect(@elb.load_balancer_pool_members.count).to eq 2
-    expect(@elb.load_balancer_pool_members.first.ext_management_system).to eq @ems.network_manager
-    expect(@elb.vms.first.ext_management_system).to eq @ems
-    expect(@elb.vms.collect(&:name)).to match_array ["EmsRefreshSpec-PoweredOn-VPC", "VMstate-8"]
-
-    expect(@elb.vms).to match_array @elb2.vms
-    expect(@elb.load_balancer_pool_members).to match_array @elb2.load_balancer_pool_members
   end
 
-  def assert_specific_load_balancer_listeners
+  def assert_specific_load_balancers
+    assert_specific_load_balancer_non_vpc
+    assert_specific_load_balancer_non_vpc_vms
+    assert_specific_load_balancer_vpc
+    assert_specific_load_balancer_vpc_relations
+    assert_specific_load_balancer_vpc2
+    assert_specific_load_balancer_vpc_and_vpc2_relations
+  end
+
+  def assert_specific_load_balancer_listeners_non_vpc
     expect(@elb_non_vpc.load_balancer_listeners.count).to eq 1
+
+    @listener_non_vpc = @elb_non_vpc.load_balancer_listeners
+                          .where(:ems_ref => "EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__").first
+    expect(@listener_non_vpc).to have_attributes(
+                                   "ems_ref"                  => "EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__",
+                                   "name"                     => nil,
+                                   "description"              => nil,
+                                   "load_balancer_protocol"   => "HTTP",
+                                   "load_balancer_port_range" => 80...81,
+                                   "instance_protocol"        => "HTTP",
+                                   "instance_port_range"      => 80...81,
+                                   "cloud_tenant_id"          => nil,
+                                   "type"                     => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
+                                 )
+    expect(@listener_non_vpc.ext_management_system).to eq(@ems.network_manager)
+  end
+
+  def assert_specific_load_balancer_listeners_vpc_and_vpc_2
     expect(@elb.load_balancer_listeners.count).to eq 2
     expect(@elb2.load_balancer_listeners.count).to eq 1
 
-    @listener_non_vpc = @elb_non_vpc.load_balancer_listeners
-                                    .where(:ems_ref => "EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__").first
-    expect(@listener_non_vpc).to have_attributes(
-      "ems_ref"                  => "EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__",
-      "name"                     => nil,
-      "description"              => nil,
-      "load_balancer_protocol"   => "HTTP",
-      "load_balancer_port_range" => 80...81,
-      "instance_protocol"        => "HTTP",
-      "instance_port_range"      => 80...81,
-      "cloud_tenant_id"          => nil,
-      "type"                     => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
-    )
-    expect(@listener_non_vpc.ext_management_system).to eq(@ems.network_manager)
-
     listener_1 = @elb.load_balancer_listeners
-                     .where(:ems_ref => "EmSRefreshSpecVPCELB__TCP__22__TCP__22__").first
+                   .where(:ems_ref => "EmSRefreshSpecVPCELB__TCP__22__TCP__22__").first
     expect(listener_1).to have_attributes(
-      "ems_ref"                  => "EmSRefreshSpecVPCELB__TCP__22__TCP__22__",
-      "name"                     => nil,
-      "description"              => nil,
-      "load_balancer_protocol"   => "TCP",
-      "load_balancer_port_range" => 22...23,
-      "instance_protocol"        => "TCP",
-      "instance_port_range"      => 22...23,
-      "cloud_tenant_id"          => nil,
-      "type"                     => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
-    )
+                            "ems_ref"                  => "EmSRefreshSpecVPCELB__TCP__22__TCP__22__",
+                            "name"                     => nil,
+                            "description"              => nil,
+                            "load_balancer_protocol"   => "TCP",
+                            "load_balancer_port_range" => 22...23,
+                            "instance_protocol"        => "TCP",
+                            "instance_port_range"      => 22...23,
+                            "cloud_tenant_id"          => nil,
+                            "type"                     => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
+                          )
     expect(listener_1.ext_management_system).to eq(@ems.network_manager)
 
     @listener_2 = @elb.load_balancer_listeners
-                      .where(:ems_ref => "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__").first
+                    .where(:ems_ref => "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__").first
     expect(@listener_2).to have_attributes(
-      "ems_ref"                  => "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__",
-      "name"                     => nil,
-      "description"              => nil,
-      "load_balancer_protocol"   => "HTTP",
-      "load_balancer_port_range" => 80...81,
-      "instance_protocol"        => "HTTP",
-      "instance_port_range"      => 80...81,
-      "cloud_tenant_id"          => nil,
-      "type"                     => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
-    )
+                             "ems_ref"                  => "EmSRefreshSpecVPCELB__HTTP__80__HTTP__80__",
+                             "name"                     => nil,
+                             "description"              => nil,
+                             "load_balancer_protocol"   => "HTTP",
+                             "load_balancer_port_range" => 80...81,
+                             "instance_protocol"        => "HTTP",
+                             "instance_port_range"      => 80...81,
+                             "cloud_tenant_id"          => nil,
+                             "type"                     => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
+                           )
     expect(@listener_2.ext_management_system).to eq(@ems.network_manager)
 
     @listener_3 = @elb2.load_balancer_listeners.first
     expect(@listener_3).to have_attributes(
-      "ems_ref"                  => "EmSRefreshSpecVPCELB2__TCP__2222__TCP__22__",
-      "name"                     => nil,
-      "description"              => nil,
-      "load_balancer_protocol"   => "TCP",
-      "load_balancer_port_range" => 2222...2223,
-      "instance_protocol"        => "TCP",
-      "instance_port_range"      => 22...23,
-      "cloud_tenant_id"          => nil,
-      "type"                     => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
-    )
+                             "ems_ref"                  => "EmSRefreshSpecVPCELB2__TCP__2222__TCP__22__",
+                             "name"                     => nil,
+                             "description"              => nil,
+                             "load_balancer_protocol"   => "TCP",
+                             "load_balancer_port_range" => 2222...2223,
+                             "instance_protocol"        => "TCP",
+                             "instance_port_range"      => 22...23,
+                             "cloud_tenant_id"          => nil,
+                             "type"                     => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
+                           )
     expect(@listener_3.ext_management_system).to eq(@ems.network_manager)
   end
 
-  def assert_specific_load_balancer_health_checks
+  def assert_specific_load_balancer_listeners
+    assert_specific_load_balancer_listeners_non_vpc
+    assert_specific_load_balancer_listeners_vpc_and_vpc_2
+  end
+
+  def assert_specific_load_balancer_health_checks_non_vpc
     expect(@elb_non_vpc.load_balancer_health_checks.count).to eq 1
 
     health_check_non_vpc = @elb_non_vpc.load_balancer_health_checks.first
     expect(health_check_non_vpc).to have_attributes(
-      "ems_ref"             => "EmsRefreshSpec-LoadBalancer",
-      "name"                => nil,
-      "protocol"            => "TCP",
-      "port"                => 22,
-      "url_path"            => "",
-      "interval"            => 30,
-      "timeout"             => 5,
-      "healthy_threshold"   => 10,
-      "unhealthy_threshold" => 2,
-      "cloud_tenant_id"     => nil,
-      "type"                => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck"
-    )
+                                      "ems_ref"             => "EmsRefreshSpec-LoadBalancer",
+                                      "name"                => nil,
+                                      "protocol"            => "TCP",
+                                      "port"                => 22,
+                                      "url_path"            => "",
+                                      "interval"            => 30,
+                                      "timeout"             => 5,
+                                      "healthy_threshold"   => 10,
+                                      "unhealthy_threshold" => 2,
+                                      "cloud_tenant_id"     => nil,
+                                      "type"                => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck"
+                                    )
 
     expect(health_check_non_vpc.load_balancer_listener).to eq nil
+  end
 
+  def assert_specific_load_balancer_health_checks_vpc_and_vpc_2
     expect(@elb.load_balancer_health_checks.count).to eq 1
 
     health_check_1 = @elb.load_balancer_health_checks.first
     expect(health_check_1).to have_attributes(
-      "ems_ref"             => "EmSRefreshSpecVPCELB",
-      "name"                => nil,
-      "protocol"            => "HTTP",
-      "port"                => 80,
-      "url_path"            => "index.html",
-      "interval"            => 30,
-      "timeout"             => 5,
-      "healthy_threshold"   => 10,
-      "unhealthy_threshold" => 2,
-      "cloud_tenant_id"     => nil,
-      "type"                => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck"
-    )
+                                "ems_ref"             => "EmSRefreshSpecVPCELB",
+                                "name"                => nil,
+                                "protocol"            => "HTTP",
+                                "port"                => 80,
+                                "url_path"            => "index.html",
+                                "interval"            => 30,
+                                "timeout"             => 5,
+                                "healthy_threshold"   => 10,
+                                "unhealthy_threshold" => 2,
+                                "cloud_tenant_id"     => nil,
+                                "type"                => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck"
+                              )
 
     expect(@elb2.load_balancer_health_checks.count).to eq 1
 
     health_check_2 = @elb2.load_balancer_health_checks.first
     expect(health_check_2).to have_attributes(
-      "ems_ref"             => "EmSRefreshSpecVPCELB2",
-      "name"                => nil,
-      "protocol"            => "TCP",
-      "port"                => 22,
-      "url_path"            => "",
-      "interval"            => 30,
-      "timeout"             => 5,
-      "healthy_threshold"   => 10,
-      "unhealthy_threshold" => 2,
-      "cloud_tenant_id"     => nil,
-      "type"                => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck"
-    )
+                                "ems_ref"             => "EmSRefreshSpecVPCELB2",
+                                "name"                => nil,
+                                "protocol"            => "TCP",
+                                "port"                => 22,
+                                "url_path"            => "",
+                                "interval"            => 30,
+                                "timeout"             => 5,
+                                "healthy_threshold"   => 10,
+                                "unhealthy_threshold" => 2,
+                                "cloud_tenant_id"     => nil,
+                                "type"                => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck"
+                              )
 
     expect(health_check_1.load_balancer_pool_members.count).to eq 2
     expect(health_check_1.load_balancer_pool_members).to match_array health_check_2.load_balancer_pool_members
     expect(health_check_1.vms).to match_array health_check_2.vms
+  end
+
+  def assert_specific_load_balancer_health_checks
+    assert_specific_load_balancer_health_checks_non_vpc
+    assert_specific_load_balancer_health_checks_vpc_and_vpc_2
   end
 
   def assert_specific_orchestration_template
