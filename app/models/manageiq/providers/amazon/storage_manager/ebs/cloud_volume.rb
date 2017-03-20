@@ -33,11 +33,13 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
   end
 
   def raw_update_volume(options)
-    # Only name update is currently supported
-    if options.key?(:name)
-      with_provider_object do |volume|
-        volume.create_tags(:tags => [{:key => "Name", :value => options[:name]}])
-      end
+    with_provider_object do |volume|
+      # Update the name in case it was provided in the options.
+      volume.create_tags(:tags => [{:key => "Name", :value => options[:name]}]) if options.key?(:name)
+
+      # Mofiy volume configuration based on the given options.
+      modify_opts = modify_volume_options(options)
+      volume.client.modify_volume(modify_opts.merge(:volume_id => ems_ref)) unless modify_opts.empty?
     end
   rescue => e
     _log.error "volume=[#{name}], error: #{e}"
@@ -91,5 +93,18 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
   def provider_object(connection = nil)
     connection ||= ext_management_system.connect
     connection.volume(ems_ref)
+  end
+
+  private
+
+  def modify_volume_options(options = {})
+    modify_opts = {}
+    if volume_type != 'standard'
+      modify_opts[:volume_type] = options[:volume_type] if options[:volume_type] && options[:volume_type] != 'standard'
+      modify_opts[:size]        = Integer(options[:size]) if options[:size] && Integer(options[:size]).gigabytes != size
+      modify_opts[:iops]        = options[:iops] if (options[:volume_type] == "io1" || volume_type == 'io1') && options[:iops]
+    end
+
+    modify_opts
   end
 end
