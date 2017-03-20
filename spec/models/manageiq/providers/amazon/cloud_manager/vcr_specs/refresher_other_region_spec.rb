@@ -1,7 +1,9 @@
 require_relative "../../aws_refresher_spec_common"
+require_relative "../../aws_refresher_spec_counts"
 
 describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   include AwsRefresherSpecCommon
+  include AwsRefresherSpecCounts
 
   before(:each) do
     @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication, :provider_region => "us-west-1")
@@ -15,11 +17,11 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
         EmsRefresh.refresh(@ems)
         EmsRefresh.refresh(@ems.network_manager)
         EmsRefresh.refresh(@ems.ebs_storage_manager)
-      end
-      @ems.reload
 
-      assert_table_counts
-      assert_ems
+        @ems.reload
+        assert_counts(table_counts_from_api)
+      end
+
       assert_specific_flavor
       assert_specific_az
       assert_specific_floating_ip
@@ -31,42 +33,6 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       assert_relationship_tree
       assert_subnet_required
     end
-  end
-
-  def expected_table_counts
-    {
-      :auth_private_key              => 3,
-      :availability_zone             => 3,
-      :cloud_network                 => 1,
-      :cloud_subnet                  => 2,
-      :cloud_volume                  => 3,
-      :cloud_volume_snapshot         => 1,
-      :custom_attribute              => 5,
-      :disk                          => 4,
-      :ext_management_system         => 4,
-      :firewall_rule                 => 8,
-      :flavor                        => 76,
-      :floating_ip                   => 4,
-      :guest_device                  => 0,
-      :hardware                      => 4,
-      :miq_queue                     => 6,
-      :miq_template                  => 1,
-      :network                       => 6,
-      :network_port                  => 3,
-      :network_router                => 0,
-      :operating_system              => 0,
-      :orchestration_stack           => 0,
-      :orchestration_stack_output    => 0,
-      :orchestration_stack_parameter => 0,
-      :orchestration_stack_resource  => 0,
-      :orchestration_template        => 0,
-      :relationship                  => 2,
-      :security_group                => 4,
-      :snapshot                      => 0,
-      :system_service                => 0,
-      :vm                            => 3,
-      :vm_or_template                => 4
-    }
   end
 
   def assert_specific_flavor
