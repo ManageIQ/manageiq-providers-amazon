@@ -1,7 +1,9 @@
 require_relative "../../aws_refresher_spec_common"
+require_relative "../../aws_refresher_spec_counts"
 
 describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   include AwsRefresherSpecCommon
+  include AwsRefresherSpecCounts
 
   before(:each) do
     @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication)
@@ -49,10 +51,13 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :cloud_network                 => 0,
             :cloud_subnet                  => 0,
             :cloud_volume                  => 1,
+            :cloud_volume_backup           => 0,
             :cloud_volume_snapshot         => 0,
             :custom_attribute              => 2,
             :disk                          => 1,
+            :ext_management_system         => 4,
             :firewall_rule                 => 13,
+            :flavor                        => 1,
             :floating_ip                   => 1,
             :guest_device                  => 0,
             :hardware                      => 2,
@@ -66,14 +71,14 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :orchestration_stack_parameter => 0,
             :orchestration_stack_resource  => 0,
             :orchestration_template        => 0,
-            :relationship                  => 2,
             :security_group                => 2,
             :snapshot                      => 0,
+            :system_service                => 0,
             :vm                            => 1,
             :vm_or_template                => 2
           }
 
-          assert_targeted_table_counts(expected_counts)
+          assert_counts(expected_counts)
 
           assert_specific_flavor
           assert_specific_key_pair
@@ -105,39 +110,5 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
                        :block_storage_based_only => true,
                        :ephemeral_disk_size      => 0,
                        :ephemeral_disk_count     => 0)
-  end
-
-  def assert_targeted_table_counts(expected_table_counts)
-    actual = {
-      :auth_private_key              => AuthPrivateKey.count,
-      :availability_zone             => AvailabilityZone.count,
-      :cloud_subnet                  => CloudSubnet.count,
-      :cloud_network                 => CloudNetwork.count,
-      :cloud_volume                  => CloudVolume.count,
-      :cloud_volume_snapshot         => CloudVolumeSnapshot.count,
-      :custom_attribute              => CustomAttribute.count,
-      :vm_or_template                => VmOrTemplate.count,
-      :vm                            => Vm.count,
-      :miq_template                  => MiqTemplate.count,
-      :disk                          => Disk.count,
-      :guest_device                  => GuestDevice.count,
-      :hardware                      => Hardware.count,
-      :network                       => Network.count,
-      :operating_system              => OperatingSystem.count,
-      :snapshot                      => Snapshot.count,
-      :relationship                  => Relationship.count,
-      :orchestration_template        => OrchestrationTemplate.count,
-      :orchestration_stack           => OrchestrationStack.count,
-      :orchestration_stack_parameter => OrchestrationStackParameter.count,
-      :orchestration_stack_output    => OrchestrationStackOutput.count,
-      :orchestration_stack_resource  => OrchestrationStackResource.count,
-      :security_group                => SecurityGroup.count,
-      :firewall_rule                 => FirewallRule.count,
-      :network_port                  => NetworkPort.count,
-      :floating_ip                   => FloatingIp.count,
-      :network_router                => NetworkRouter.count,
-    }
-
-    expect(actual).to eq expected_table_counts
   end
 end

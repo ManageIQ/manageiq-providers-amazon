@@ -1,7 +1,9 @@
 require_relative "../../aws_refresher_spec_common"
+require_relative "../../aws_refresher_spec_counts"
 
 describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   include AwsRefresherSpecCommon
+  include AwsRefresherSpecCounts
 
   before(:each) do
     @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication)
@@ -35,8 +37,10 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             EmsRefresh.refresh(@ems)
             EmsRefresh.refresh(@ems.network_manager)
             EmsRefresh.refresh(@ems.ebs_storage_manager)
+
+            @ems.reload
+            assert_counts(table_counts_from_api)
           end
-          @ems.reload
 
           assert_common
         end
@@ -44,9 +48,9 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     end
   end
 
-  def expected_table_counts
-    super.merge(
-      :flavor => 78 # DTO collect all flavors, not filtering them by known_flavors
-    )
+  def table_counts_from_api
+    counts = super
+    counts[:flavor] = counts[:flavor] + 2 # Graph refresh collect all flavors, not filtering them by known_flavors
+    counts
   end
 end
