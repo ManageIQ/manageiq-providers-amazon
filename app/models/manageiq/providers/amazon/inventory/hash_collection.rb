@@ -13,8 +13,10 @@ class ManageIQ::Providers::Amazon::Inventory::HashCollection
     collection.each_with_object([]) { |item, obj| obj << transform(item) }
   end
 
-  private
+  delegate :count, to: :all
+  alias size count
 
+  private
   def transform(item)
     transform_keys(item.respond_to?(:to_hash) ? item.to_hash : item.data.to_hash)
   end
