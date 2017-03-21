@@ -23,16 +23,16 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
       }
       with_aws_stubbed(stubbed_responses) do
         expect(vm.perf_collect_metrics('realtime')).to eq([
-          {"amazon-perf-vm" => described_class::VIM_STYLE_COUNTERS},
-          {"amazon-perf-vm" => {}}
-        ])
+                                                            {"amazon-perf-vm" => described_class::VIM_STYLE_COUNTERS},
+                                                            {"amazon-perf-vm" => {}}
+                                                          ])
       end
     end
 
     it "handles when metrics are collected for only one counter" do
       stubbed_responses = {
         :cloudwatch => {
-          :list_metrics => {
+          :list_metrics          => {
             :metrics => [
               :metric_name => "NetworkIn",
               :namespace   => "Namespace"
@@ -48,9 +48,9 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
       }
       with_aws_stubbed(stubbed_responses) do
         expect(vm.perf_collect_metrics('realtime')).to eq([
-          {"amazon-perf-vm" => described_class::VIM_STYLE_COUNTERS},
-          {"amazon-perf-vm" => {}}
-        ])
+                                                            {"amazon-perf-vm" => described_class::VIM_STYLE_COUNTERS},
+                                                            {"amazon-perf-vm" => {}}
+                                                          ])
       end
     end
   end

@@ -87,7 +87,10 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationServiceOptionCo
   context 'tags option' do
     let(:options) { {'dialog_stack_tags' => "tag_key1 => tag_val1 \ntag_key2=>tag_val2\n\n"} }
 
-    it { expect(subject.stack_create_options[:tags]).to eq(
-      [{:key => 'tag_key1', :value => 'tag_val1'}, {:key => 'tag_key2', :value => 'tag_val2'}]) }
+    it do
+      expect(subject.stack_create_options[:tags]).to eq(
+        [{:key => 'tag_key1', :value => 'tag_val1'}, {:key => 'tag_key2', :value => 'tag_val2'}]
+      )
+    end
   end
 end

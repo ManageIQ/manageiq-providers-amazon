@@ -15,8 +15,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     # Test all kinds of refreshes, DTO refresh, DTO with batch saving and the original refresh
     [{:inventory_object_refresh => true},
      {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},
-     {:inventory_object_refresh => false}
-    ].each do |inventory_object_settings|
+     {:inventory_object_refresh => false}].each do |inventory_object_settings|
       context "with settings #{inventory_object_settings}" do
         before :each do
           settings                                  = OpenStruct.new
@@ -46,7 +45,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
           2.times do
             refresh_spec
             @data_scaling         -= 1
-            @disconnect_inv_count +=1
+            @disconnect_inv_count += 1
           end
         end
 
@@ -120,7 +119,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   end
 
   def expected_table_counts(disconnect = nil)
-    disconnect                      ||= disconnect_inv_factor
+    disconnect ||= disconnect_inv_factor
     vm_count                        = test_counts[:instance_vpc_count] + test_counts[:instance_vpc_count]
     image_count                     = test_counts[:image_count]
 
@@ -224,9 +223,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     ems = @ems
 
     expect(ems).to have_attributes(
-                     :api_version => nil, # TODO: Should be 3.0
-                     :uid_ems     => nil
-                   )
+      :api_version => nil, # TODO: Should be 3.0
+      :uid_ems     => nil
+    )
     # The disconnected entities should not be associated to ems, so we get counts as expected_table_counts(0)
     expect(ems.flavors.size).to eql(expected_table_counts[:flavor])
     expect(ems.availability_zones.size).to eql(expected_table_counts[:availability_zone])

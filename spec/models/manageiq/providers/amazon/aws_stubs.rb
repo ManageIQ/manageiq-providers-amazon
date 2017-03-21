@@ -40,16 +40,20 @@ module AwsStubs
   def assert_do_not_delete
     allow_any_instance_of(ApplicationRecord).to(
       receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
-                                 " causing create&delete instead of update"))
+                                 " causing create&delete instead of update")
+    )
     allow_any_instance_of(ActiveRecord::Associations::CollectionProxy).to(
       receive(:delete).and_raise("Not allowed delete operation detected. The probable cause is a wrong manager_ref"\
-                                 " causing create&delete instead of update"))
+                                 " causing create&delete instead of update")
+    )
     allow_any_instance_of(ApplicationRecord).to(
       receive(:disconnect_inv).and_raise("Not allowed delete operation detected. The probable cause is a wrong"\
-                                         " manager_ref causing create&disconnect_inv instead of update"))
+                                         " manager_ref causing create&disconnect_inv instead of update")
+    )
     allow_any_instance_of(ActiveRecord::Associations::CollectionProxy).to(
       receive(:disconnect_inv).and_raise("Not allowed delete operation detected. The probable cause is a wrong"\
-                                         "manager_ref causing create&disconnect_inv instead of update"))
+                                         "manager_ref causing create&disconnect_inv instead of update")
+    )
   end
 
   def mocked_floating_ips
@@ -83,7 +87,8 @@ module AwsStubs
             }
           }, {
             :private_ip_address => "11.#{(i / 255) == 0 ? 0 : i % (i / 255)}.#{i / 255}.#{i % 255}",
-          }]
+          }
+        ]
       }
     end
 
@@ -103,7 +108,8 @@ module AwsStubs
           :user_id_group_pairs => [
             {
               :vpc_id => "vpc_#{i}"
-            }]
+            }
+          ]
         }
       end
 
@@ -116,7 +122,8 @@ module AwsStubs
           :ip_ranges   => [
             {
               :cidr_ip => "0.0.0.0/0"
-            }]
+            }
+          ]
         }
       end
 
@@ -145,7 +152,8 @@ module AwsStubs
         :network_interfaces => [
           {
             :network_interface_id => "interface_#{i}"
-          }]
+          }
+        ]
       }
     end
 
@@ -268,7 +276,8 @@ module AwsStubs
       {:zone_name => "us-east-1b", :region_name => "us-east-1", :state => "available"},
       {:zone_name => "us-east-1c", :region_name => "us-east-1", :state => "available"},
       {:zone_name => "us-east-1d", :region_name => "us-east-1", :state => "available"},
-      {:zone_name => "us-east-1e", :region_name => "us-east-1", :state => "available"}]}
+      {:zone_name => "us-east-1e", :region_name => "us-east-1", :state => "available"}
+    ]}
   end
 
   def mocked_vpcs
