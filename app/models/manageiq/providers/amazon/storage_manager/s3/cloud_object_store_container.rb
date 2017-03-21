@@ -45,7 +45,6 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer
       :ems_ref               => bucket.name,
       :bytes                 => 0,
       :object_count          => 0,
-      :provider_region       => region,
       :ext_management_system => ext_management_system
     }
   rescue => e
