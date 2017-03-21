@@ -311,14 +311,20 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
 
     add_inventory_collection(
       network.load_balancer_pool_member_pools(
-        :arel     => manager.network_manager.load_balancer_pool_member_pools.references(:load_balancer_pools).where(:load_balancer_pools => {:ems_ref => manager_refs}),
+        :arel     => manager.network_manager.load_balancer_pool_member_pools
+                       .references(:load_balancer_pools)
+                       .where(:load_balancer_pools => {:ems_ref => manager_refs})
+                       .distinct,
         :strategy => :local_db_find_missing_references
       )
     )
 
     add_inventory_collection(
       network.load_balancer_pool_members(
-        :arel     => manager.network_manager.load_balancer_pool_members.joins(:load_balancer_pool_member_pools => :load_balancer_pool).where(:load_balancer_pool_member_pools => {'load_balancer_pools' => {:ems_ref => manager_refs}}),
+        :arel     => manager.network_manager.load_balancer_pool_members
+                       .joins(:load_balancer_pool_member_pools => :load_balancer_pool)
+                       .where(:load_balancer_pool_member_pools => {'load_balancer_pools' => {:ems_ref => manager_refs}})
+                       .distinct,
         :strategy => :local_db_find_missing_references
       )
     )
