@@ -14,8 +14,7 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject < 
   end
 
   def provider_object(connection = nil)
-    connection ||= ext_management_system.connect
-    connection.bucket(cloud_object_store_container.ems_ref).object(key)
+    cloud_object_store_container.provider_object(connection).object(key)
   end
 
   def raw_delete

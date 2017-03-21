@@ -23,8 +23,14 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer
   end
 
   def provider_object(connection = nil)
+    connect(connection).bucket(ems_ref)
+  end
+
+  def connect(connection = nil)
     connection ||= ext_management_system.connect
-    connection.bucket(ems_ref)
+    region = connection.client.get_bucket_location(:bucket => ems_ref).location_constraint
+    region = "us-east-1" if region.empty? # SDK returns empty string for default region
+    ext_management_system.connect(:region => region)
   end
 
   def raw_delete

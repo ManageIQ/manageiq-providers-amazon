@@ -85,10 +85,12 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
     end
 
     it "bucket's provider_object is of expected type" do
-      provider_obj = bucket.provider_object
+      with_aws_stubbed(stub_responses) do
+        provider_obj = bucket.provider_object
 
-      expect(provider_obj).to_not be_nil
-      expect(provider_obj.class).to eq(Aws::S3::Bucket)
+        expect(provider_obj).to_not be_nil
+        expect(provider_obj.class).to eq(Aws::S3::Bucket)
+      end
     end
 
     it "delete_cloud_object_store_container triggers remote action" do
