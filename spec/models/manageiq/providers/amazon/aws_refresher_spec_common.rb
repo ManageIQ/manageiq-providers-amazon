@@ -162,7 +162,7 @@ module AwsRefresherSpecCommon
        .order(:host_protocol, :direction, :port, :end_port, :source_ip_range, :source_security_group_id)
        .zip(expected_firewall_rules)
        .each do |actual, expected|
-       expect(actual).to have_attributes(expected)
+      expect(actual).to have_attributes(expected)
     end
   end
 
@@ -236,7 +236,8 @@ module AwsRefresherSpecCommon
 
   def assert_specific_cloud_volume_vm_on_cloud_network
     @cloud_volume_vpc = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.find_by(
-      :name => "EmsRefreshSpecForVpcVm")
+      :name => "EmsRefreshSpecForVpcVm"
+    )
 
     expect(@cloud_volume_vpc).to(
       have_attributes(
@@ -257,7 +258,8 @@ module AwsRefresherSpecCommon
 
   def assert_specific_cloud_volume_vm_on_cloud_network_public_ip
     @cloud_volume_vpc1 = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.find_by(
-      :name => "EmsRefreshSpecForVpc1")
+      :name => "EmsRefreshSpecForVpc1"
+    )
 
     expect(@cloud_volume_vpc1).to(
       have_attributes(
@@ -279,13 +281,16 @@ module AwsRefresherSpecCommon
 
   def assert_specific_cloud_volume_snapshot
     based_volume = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.find_by(
-      :name => "EmsRefreshSpecForVpcVm")
+      :name => "EmsRefreshSpecForVpcVm"
+    )
 
     base_volume = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.find_by(
-      :name => "EmsRefreshSpecForSnapshot")
+      :name => "EmsRefreshSpecForSnapshot"
+    )
 
     @cloud_volume_snapshot = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.find_by(
-      :name => "EmsRefreshSpecSnapshot")
+      :name => "EmsRefreshSpecSnapshot"
+    )
 
     expect(@cloud_volume_snapshot).to(
       have_attributes(
@@ -308,11 +313,12 @@ module AwsRefresherSpecCommon
 
   def assert_specific_cloud_volume_snapshot_encrypted
     base_volume = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.find_by(
-      :name => "EmsRefreshSpecForVpc1")
-
+      :name => "EmsRefreshSpecForVpc1"
+    )
 
     @cloud_volume_snapshot_encrypted = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.find_by(
-      :name => "EmsRefreshSpecSnapshotOfVpc1")
+      :name => "EmsRefreshSpecSnapshotOfVpc1"
+    )
 
     expect(@cloud_volume_snapshot_encrypted).to(
       have_attributes(
@@ -336,7 +342,8 @@ module AwsRefresherSpecCommon
 
     v = ManageIQ::Providers::Amazon::CloudManager::Vm.where(
       :name            => "EmsRefreshSpec-PoweredOn-Basic3",
-      :raw_power_state => "running").first
+      :raw_power_state => "running"
+    ).first
     expect(v).to have_attributes(
       :template              => false,
       :ems_ref               => "i-680071e9",
@@ -434,7 +441,8 @@ module AwsRefresherSpecCommon
   def assert_specific_vm_powered_off
     v = ManageIQ::Providers::Amazon::CloudManager::Vm.where(
       :name            => "EmsRefreshSpec-PoweredOff",
-      :raw_power_state => "stopped").first
+      :raw_power_state => "stopped"
+    ).first
     expect(v).to have_attributes(
       :template              => false,
       :ems_ref               => "i-6eeb97ef",
@@ -462,7 +470,7 @@ module AwsRefresherSpecCommon
 
     expect(v.ext_management_system).to eq(@ems)
     expect(v.availability_zone)
-      .to eq(ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.find_by_name("us-east-1e"))
+      .to eq(ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.find_by(:name => "us-east-1e"))
     expect(v.floating_ip).to be_nil
     expect(v.key_pairs).to match_array([@kp])
     expect(v.cloud_network).to be_nil
@@ -665,7 +673,8 @@ module AwsRefresherSpecCommon
 
     expect(v.hardware.disks.size).to eq(2) # TODO: Change to a flavor that has disks
     expect(v.cloud_volumes.pluck(:name, :volume_type)).to(
-      match_array([["EmsRefreshSpec-PoweredOn-VPC-root", "standard"], ["EmsRefreshSpecForVpcVm", "gp2"]]))
+      match_array([["EmsRefreshSpec-PoweredOn-VPC-root", "standard"], ["EmsRefreshSpecForVpcVm", "gp2"]])
+    )
     expect(v.hardware.guest_devices.size).to eq(0)
     expect(v.hardware.nics.size).to eq(0)
     expect(v.hardware.networks.size).to eq(2)
@@ -807,7 +816,8 @@ module AwsRefresherSpecCommon
     )
 
     expect(v.cloud_volumes.pluck(:name, :volume_type)).to(
-      match_array([["EmsRefreshSpec-PoweredOn-VPC1-root", "gp2"], ["EmsRefreshSpecForVpc1", "gp2"]]))
+      match_array([["EmsRefreshSpec-PoweredOn-VPC1-root", "gp2"], ["EmsRefreshSpecForVpc1", "gp2"]])
+    )
     expect(v.hardware.guest_devices.size).to eq(0)
     expect(v.hardware.nics.size).to eq(0)
     expect(v.hardware.networks.size).to eq(2)
@@ -819,7 +829,8 @@ module AwsRefresherSpecCommon
 
   def assert_specific_load_balancer_non_vpc
     @elb_non_vpc = ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer.where(
-      :name => "EmsRefreshSpec-LoadBalancer").first
+      :name => "EmsRefreshSpec-LoadBalancer"
+    ).first
     expect(@elb_non_vpc).to have_attributes(
       "ems_ref"         => "EmsRefreshSpec-LoadBalancer",
       "name"            => "EmsRefreshSpec-LoadBalancer",
@@ -836,12 +847,10 @@ module AwsRefresherSpecCommon
     expect(@elb_non_vpc.vms.first.name).to eq "EmsRefreshSpec-PoweredOn-Basic3"
   end
 
-  def assert_specific_load_balancers
-    assert_specific_load_balancer_non_vpc
-    assert_specific_load_balancer_non_vpc_vms
-
+  def assert_specific_load_balancer_vpc
     @elb = ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer.where(
-      :name => "EmSRefreshSpecVPCELB").first
+      :name => "EmSRefreshSpecVPCELB"
+    ).first
     expect(@elb).to have_attributes(
       "ems_ref"         => "EmSRefreshSpecVPCELB",
       "name"            => "EmSRefreshSpecVPCELB",
@@ -855,9 +864,25 @@ module AwsRefresherSpecCommon
     # expect(@elb.availability_zones).to eq(@az)
     # expect(@elb.cloud_subnets).to eq(..)
     # expect(@elb.network_ports).to eq(..)
+  end
 
+  def assert_specific_load_balancer_vpc_relations
+    expect(@elb.vms.count).to eq 2
+    expect(@elb.load_balancer_pool_members.count).to eq 2
+    expect(@elb.load_balancer_pool_members.first.ext_management_system).to eq @ems.network_manager
+    expect(@elb.vms.first.ext_management_system).to eq @ems
+    expect(@elb.vms.collect(&:name)).to match_array ["EmsRefreshSpec-PoweredOn-VPC", "VMstate-8"]
+  end
+
+  def assert_specific_load_balancer_vpc_and_vpc2_relations
+    expect(@elb.vms).to match_array @elb2.vms
+    expect(@elb.load_balancer_pool_members).to match_array @elb2.load_balancer_pool_members
+  end
+
+  def assert_specific_load_balancer_vpc2
     @elb2 = ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer.where(
-      :name => "EmSRefreshSpecVPCELB2").first
+      :name => "EmSRefreshSpecVPCELB2"
+    ).first
     expect(@elb2).to have_attributes(
       "ems_ref"         => "EmSRefreshSpecVPCELB2",
       "name"            => "EmSRefreshSpecVPCELB2",
@@ -867,21 +892,19 @@ module AwsRefresherSpecCommon
     )
 
     expect(@elb2.ext_management_system).to eq(@ems.network_manager)
-
-    expect(@elb.vms.count).to eq 2
-    expect(@elb.load_balancer_pool_members.count).to eq 2
-    expect(@elb.load_balancer_pool_members.first.ext_management_system).to eq @ems.network_manager
-    expect(@elb.vms.first.ext_management_system).to eq @ems
-    expect(@elb.vms.collect(&:name)).to match_array ["EmsRefreshSpec-PoweredOn-VPC", "VMstate-8"]
-
-    expect(@elb.vms).to match_array @elb2.vms
-    expect(@elb.load_balancer_pool_members).to match_array @elb2.load_balancer_pool_members
   end
 
-  def assert_specific_load_balancer_listeners
+  def assert_specific_load_balancers
+    assert_specific_load_balancer_non_vpc
+    assert_specific_load_balancer_non_vpc_vms
+    assert_specific_load_balancer_vpc
+    assert_specific_load_balancer_vpc_relations
+    assert_specific_load_balancer_vpc2
+    assert_specific_load_balancer_vpc_and_vpc2_relations
+  end
+
+  def assert_specific_load_balancer_listeners_non_vpc
     expect(@elb_non_vpc.load_balancer_listeners.count).to eq 1
-    expect(@elb.load_balancer_listeners.count).to eq 2
-    expect(@elb2.load_balancer_listeners.count).to eq 1
 
     @listener_non_vpc = @elb_non_vpc.load_balancer_listeners
                                     .where(:ems_ref => "EmsRefreshSpec-LoadBalancer__HTTP__80__HTTP__80__").first
@@ -897,6 +920,11 @@ module AwsRefresherSpecCommon
       "type"                     => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
     )
     expect(@listener_non_vpc.ext_management_system).to eq(@ems.network_manager)
+  end
+
+  def assert_specific_load_balancer_listeners_vpc_and_vpc_2
+    expect(@elb.load_balancer_listeners.count).to eq 2
+    expect(@elb2.load_balancer_listeners.count).to eq 1
 
     listener_1 = @elb.load_balancer_listeners
                      .where(:ems_ref => "EmSRefreshSpecVPCELB__TCP__22__TCP__22__").first
@@ -943,7 +971,12 @@ module AwsRefresherSpecCommon
     expect(@listener_3.ext_management_system).to eq(@ems.network_manager)
   end
 
-  def assert_specific_load_balancer_health_checks
+  def assert_specific_load_balancer_listeners
+    assert_specific_load_balancer_listeners_non_vpc
+    assert_specific_load_balancer_listeners_vpc_and_vpc_2
+  end
+
+  def assert_specific_load_balancer_health_checks_non_vpc
     expect(@elb_non_vpc.load_balancer_health_checks.count).to eq 1
 
     health_check_non_vpc = @elb_non_vpc.load_balancer_health_checks.first
@@ -962,7 +995,9 @@ module AwsRefresherSpecCommon
     )
 
     expect(health_check_non_vpc.load_balancer_listener).to eq nil
+  end
 
+  def assert_specific_load_balancer_health_checks_vpc_and_vpc_2
     expect(@elb.load_balancer_health_checks.count).to eq 1
 
     health_check_1 = @elb.load_balancer_health_checks.first
@@ -1002,6 +1037,11 @@ module AwsRefresherSpecCommon
     expect(health_check_1.vms).to match_array health_check_2.vms
   end
 
+  def assert_specific_load_balancer_health_checks
+    assert_specific_load_balancer_health_checks_non_vpc
+    assert_specific_load_balancer_health_checks_vpc_and_vpc_2
+  end
+
   def assert_specific_orchestration_template
     @orch_template = OrchestrationTemplateCfn.where(:md5 => "1c67b49b780587c4e2756ba029a8844b").first
     expect(@orch_template.description).to start_with("AWS CloudFormation Sample Template WordPress_Simple:")
@@ -1011,14 +1051,16 @@ module AwsRefresherSpecCommon
 
   def assert_specific_orchestration_stack
     stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.where(
-      :name => "EmsRefreshSpecStack").first
+      :name => "EmsRefreshSpecStack"
+    ).first
     expect(stack.status_reason)
       .to eq("The following resource(s) failed to create: [OutBoundHTTPNetworkAclEntry, IPAddress, Route, "\
              "InboundSSHNetworkAclEntry, WebServerWaitCondition, InboundResponsePortsNetworkAclEntry, "\
              "OutBoundHTTPSNetworkAclEntry, InboundHTTPNetworkAclEntry]. ")
 
     @orch_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.where(
-      :name => "EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W").first
+      :name => "EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W"
+    ).first
     expect(@orch_stack).to have_attributes(
       :status  => "CREATE_COMPLETE",
       :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W/72cb3f90-5fb9-11e6-ab2c-50d501eed2b3",
@@ -1085,7 +1127,8 @@ module AwsRefresherSpecCommon
 
     # orchestration stack can have security groups
     sg = SecurityGroup.where(
-      :name => "EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W-WebServerSecurityGroup-K60KWXZHGJDE").first
+      :name => "EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W-WebServerSecurityGroup-K60KWXZHGJDE"
+    ).first
     expect(sg.orchestration_stack).to eq(@orch_stack)
 
     # orchestration stack can have cloud networks

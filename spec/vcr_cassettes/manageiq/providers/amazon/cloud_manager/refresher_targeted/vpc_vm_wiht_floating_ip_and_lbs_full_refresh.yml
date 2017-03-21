@@ -1,0 +1,1093 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeInstances&Filter.1.Name=instance-id&Filter.1.Value.1=i-8b5739f2&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102912Z
+      X-Amz-Content-Sha256:
+      - e2d9b669aae6b51a63d67b20b361e9a0781d8847cf0d067825b00eba56c38a11
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=6299453381d8375dd8db52d73597001eaca528c85c78843debbdb1b793da7d77
+      Content-Length:
+      - '97'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 20 Mar 2017 10:29:12 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>660a286d-f949-4d76-a438-1d434d883d33</requestId>
+            <reservationSet>
+                <item>
+                    <reservationId>r-1842f370</reservationId>
+                    <ownerId>200278856672</ownerId>
+                    <groupSet/>
+                    <instancesSet>
+                        <item>
+                            <instanceId>i-8b5739f2</instanceId>
+                            <imageId>ami-5769193e</imageId>
+                            <instanceState>
+                                <code>16</code>
+                                <name>running</name>
+                            </instanceState>
+                            <privateDnsName>ip-10-0-0-254.ec2.internal</privateDnsName>
+                            <dnsName/>
+                            <reason>Server.InternalError</reason>
+                            <keyName>EmsRefreshSpec-KeyPair</keyName>
+                            <amiLaunchIndex>0</amiLaunchIndex>
+                            <productCodes/>
+                            <instanceType>t1.micro</instanceType>
+                            <launchTime>2016-08-30T07:14:39.000Z</launchTime>
+                            <placement>
+                                <availabilityZone>us-east-1e</availabilityZone>
+                                <groupName/>
+                                <tenancy>default</tenancy>
+                            </placement>
+                            <kernelId>aki-1eceaf77</kernelId>
+                            <monitoring>
+                                <state>disabled</state>
+                            </monitoring>
+                            <subnetId>subnet-f849ff96</subnetId>
+                            <vpcId>vpc-ff49ff91</vpcId>
+                            <privateIpAddress>10.0.0.254</privateIpAddress>
+                            <ipAddress>54.208.119.197</ipAddress>
+                            <sourceDestCheck>true</sourceDestCheck>
+                            <groupSet>
+                                <item>
+                                    <groupId>sg-80f755ef</groupId>
+                                    <groupName>EmsRefreshSpec-SecurityGroup-VPC</groupName>
+                                </item>
+                            </groupSet>
+                            <stateReason>
+                                <code>Client.UserInitiatedShutdown</code>
+                                <message>Client.UserInitiatedShutdown: User initiated shutdown</message>
+                            </stateReason>
+                            <architecture>x86_64</architecture>
+                            <rootDeviceType>ebs</rootDeviceType>
+                            <rootDeviceName>/dev/sda1</rootDeviceName>
+                            <blockDeviceMapping>
+                                <item>
+                                    <deviceName>/dev/sda1</deviceName>
+                                    <ebs>
+                                        <volumeId>vol-67606d2d</volumeId>
+                                        <status>attached</status>
+                                        <attachTime>2013-09-23T20:11:57.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </ebs>
+                                </item>
+                                <item>
+                                    <deviceName>/dev/sdf</deviceName>
+                                    <ebs>
+                                        <volumeId>vol-0e4c86c12b28cead8</volumeId>
+                                        <status>attached</status>
+                                        <attachTime>2017-03-17T07:22:23.000Z</attachTime>
+                                        <deleteOnTermination>false</deleteOnTermination>
+                                    </ebs>
+                                </item>
+                            </blockDeviceMapping>
+                            <virtualizationType>paravirtual</virtualizationType>
+                            <clientToken>aPCzL1379967112359</clientToken>
+                            <tagSet>
+                                <item>
+                                    <key>Name</key>
+                                    <value>EmsRefreshSpec-PoweredOn-VPC</value>
+                                </item>
+                                <item>
+                                    <key>owner</key>
+                                    <value>UNKNOWN</value>
+                                </item>
+                            </tagSet>
+                            <hypervisor>xen</hypervisor>
+                            <networkInterfaceSet>
+                                <item>
+                                    <networkInterfaceId>eni-ad25f7cc</networkInterfaceId>
+                                    <subnetId>subnet-f849ff96</subnetId>
+                                    <vpcId>vpc-ff49ff91</vpcId>
+                                    <description>Primary network interface</description>
+                                    <ownerId>200278856672</ownerId>
+                                    <status>in-use</status>
+                                    <macAddress>22:d8:dc:13:0c:ca</macAddress>
+                                    <privateIpAddress>10.0.0.254</privateIpAddress>
+                                    <sourceDestCheck>true</sourceDestCheck>
+                                    <groupSet>
+                                        <item>
+                                            <groupId>sg-80f755ef</groupId>
+                                            <groupName>EmsRefreshSpec-SecurityGroup-VPC</groupName>
+                                        </item>
+                                    </groupSet>
+                                    <attachment>
+                                        <attachmentId>eni-attach-05fac66f</attachmentId>
+                                        <deviceIndex>0</deviceIndex>
+                                        <status>attached</status>
+                                        <attachTime>2013-09-23T20:11:52.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </attachment>
+                                    <association>
+                                        <publicIp>54.208.119.197</publicIp>
+                                        <publicDnsName/>
+                                        <ipOwnerId>200278856672</ipOwnerId>
+                                    </association>
+                                    <privateIpAddressesSet>
+                                        <item>
+                                            <privateIpAddress>10.0.0.254</privateIpAddress>
+                                            <primary>true</primary>
+                                            <association>
+                                            <publicIp>54.208.119.197</publicIp>
+                                            <publicDnsName/>
+                                            <ipOwnerId>200278856672</ipOwnerId>
+                                            </association>
+                                        </item>
+                                        <item>
+                                            <privateIpAddress>10.0.0.208</privateIpAddress>
+                                            <privateDnsName/>
+                                            <primary>false</primary>
+                                        </item>
+                                    </privateIpAddressesSet>
+                                    <ipv6AddressesSet/>
+                                </item>
+                            </networkInterfaceSet>
+                            <ebsOptimized>false</ebsOptimized>
+                        </item>
+                    </instancesSet>
+                </item>
+            </reservationSet>
+        </DescribeInstancesResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:13 GMT
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeNetworkInterfaces&Filter.1.Name=network-interface-id&Filter.1.Value.1=eni-ad25f7cc&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102913Z
+      X-Amz-Content-Sha256:
+      - 05fbd66d553750cf914304302a483c6ecc8fc8ce4b32360b7c6b78c3c0dd257b
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=0f4dde07fe717022df8524333dfbaf424c065dc2e936de0b095d484cf2f873db
+      Content-Length:
+      - '116'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 20 Mar 2017 10:29:13 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeNetworkInterfacesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>a2116970-f212-4fcd-9490-ccf4306c8f9c</requestId>
+            <networkInterfaceSet>
+                <item>
+                    <networkInterfaceId>eni-ad25f7cc</networkInterfaceId>
+                    <subnetId>subnet-f849ff96</subnetId>
+                    <vpcId>vpc-ff49ff91</vpcId>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <description>Primary network interface</description>
+                    <ownerId>200278856672</ownerId>
+                    <requesterManaged>false</requesterManaged>
+                    <status>in-use</status>
+                    <macAddress>22:d8:dc:13:0c:ca</macAddress>
+                    <privateIpAddress>10.0.0.254</privateIpAddress>
+                    <sourceDestCheck>true</sourceDestCheck>
+                    <groupSet>
+                        <item>
+                            <groupId>sg-80f755ef</groupId>
+                            <groupName>EmsRefreshSpec-SecurityGroup-VPC</groupName>
+                        </item>
+                    </groupSet>
+                    <attachment>
+                        <attachmentId>eni-attach-05fac66f</attachmentId>
+                        <instanceId>i-8b5739f2</instanceId>
+                        <instanceOwnerId>200278856672</instanceOwnerId>
+                        <deviceIndex>0</deviceIndex>
+                        <status>attached</status>
+                        <attachTime>2013-09-23T20:11:52.000Z</attachTime>
+                        <deleteOnTermination>true</deleteOnTermination>
+                    </attachment>
+                    <association>
+                        <publicIp>54.208.119.197</publicIp>
+                        <publicDnsName/>
+                        <ipOwnerId>200278856672</ipOwnerId>
+                        <allocationId>eipalloc-ce53d7a0</allocationId>
+                        <associationId>eipassoc-cc6e58f1</associationId>
+                    </association>
+                    <tagSet/>
+                    <privateIpAddressesSet>
+                        <item>
+                            <privateIpAddress>10.0.0.254</privateIpAddress>
+                            <primary>true</primary>
+                            <association>
+                                <publicIp>54.208.119.197</publicIp>
+                                <publicDnsName/>
+                                <ipOwnerId>200278856672</ipOwnerId>
+                                <allocationId>eipalloc-ce53d7a0</allocationId>
+                                <associationId>eipassoc-cc6e58f1</associationId>
+                            </association>
+                        </item>
+                        <item>
+                            <privateIpAddress>10.0.0.208</privateIpAddress>
+                            <privateDnsName/>
+                            <primary>false</primary>
+                        </item>
+                    </privateIpAddressesSet>
+                    <ipv6AddressesSet/>
+                </item>
+            </networkInterfaceSet>
+        </DescribeNetworkInterfacesResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:14 GMT
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeAvailabilityZones&Filter.1.Name=zone-name&Filter.1.Value.1=us-east-1e&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102914Z
+      X-Amz-Content-Sha256:
+      - 3687d6dd1f231b3240bd52e8c7cf959c498b8b7312ba6b8a4e9c1e83e973d0b5
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=bc2319339119959f33271716f2071e9da77b0c85e007a8347c1a29311812db0d
+      Content-Length:
+      - '103'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 20 Mar 2017 10:29:13 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeAvailabilityZonesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>b2a5cb17-7248-48b0-a1a8-586243a1215c</requestId>
+            <availabilityZoneInfo>
+                <item>
+                    <zoneName>us-east-1e</zoneName>
+                    <zoneState>available</zoneState>
+                    <regionName>us-east-1</regionName>
+                    <messageSet/>
+                </item>
+            </availabilityZoneInfo>
+        </DescribeAvailabilityZonesResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:15 GMT
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeKeyPairs&Filter.1.Name=key-name&Filter.1.Value.1=EmsRefreshSpec-KeyPair&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102915Z
+      X-Amz-Content-Sha256:
+      - 8b897801bc6737ad27423b50d05f4c5a3cb37aff5adc92042c314bf391679416
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=e1c7f634924837161c38195e1199edfb79d8d0e3e80590b7731551db4465ce30
+      Content-Length:
+      - '105'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 20 Mar 2017 10:29:13 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeKeyPairsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>64477208-8308-41f9-bb87-0f7c45ac64e2</requestId>
+            <keySet>
+                <item>
+                    <keyName>EmsRefreshSpec-KeyPair</keyName>
+                    <keyFingerprint>49:9f:3f:a4:26:48:39:94:26:06:dd:25:73:e5:da:9b:4b:1b:6c:93</keyFingerprint>
+                </item>
+            </keySet>
+        </DescribeKeyPairsResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:15 GMT
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeImages&Filter.1.Name=image-id&Filter.1.Value.1=ami-5769193e&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102915Z
+      X-Amz-Content-Sha256:
+      - 59ebf96e9619012c1913bd7ad295db16925f7ce6f757deea0097185f78822898
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=476f19470b7b76a79a3808edcc74d33a7320a18b33d5a1f92e6e46ec36417bf5
+      Content-Length:
+      - '93'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 20 Mar 2017 10:29:15 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>8468a39a-fa57-40b4-b148-e8e6a4f2ec14</requestId>
+            <imagesSet>
+                <item>
+                    <imageId>ami-5769193e</imageId>
+                    <imageLocation>200278856672/EmsRefreshSpec-Image</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>200278856672</imageOwnerId>
+                    <creationDate>2013-06-22T02:28:44.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <kernelId>aki-1eceaf77</kernelId>
+                    <name>EmsRefreshSpec-Image</name>
+                    <description>EmsRefreshSpec-Image</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-5f38cd0e</snapshotId>
+                                <volumeSize>7</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>standard</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                </item>
+            </imagesSet>
+        </DescribeImagesResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:16 GMT
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeSecurityGroups&Filter.1.Name=group-id&Filter.1.Value.1=sg-80f755ef&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102916Z
+      X-Amz-Content-Sha256:
+      - 0556b7007cebc8027a9ce2b5915968f2b1c7c6ffe1a378f347ce5af51819c62b
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=9c85ee5b135785c0900a9dccf2f3f0986297c3b91e84ed1211c7cb287f841b28
+      Content-Length:
+      - '100'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 20 Mar 2017 10:29:15 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeSecurityGroupsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>05dbc9bd-4bbb-4b7b-979e-a08d57c6fc38</requestId>
+            <securityGroupInfo>
+                <item>
+                    <ownerId>200278856672</ownerId>
+                    <groupId>sg-80f755ef</groupId>
+                    <groupName>EmsRefreshSpec-SecurityGroup-VPC</groupName>
+                    <groupDescription>EmsRefreshSpec-SecurityGroup-VPC</groupDescription>
+                    <vpcId>vpc-ff49ff91</vpcId>
+                    <ipPermissions>
+                        <item>
+                            <ipProtocol>tcp</ipProtocol>
+                            <fromPort>22</fromPort>
+                            <toPort>22</toPort>
+                            <groups/>
+                            <ipRanges>
+                                <item>
+                                    <cidrIp>0.0.0.0/0</cidrIp>
+                                </item>
+                            </ipRanges>
+                            <ipv6Ranges/>
+                            <prefixListIds/>
+                        </item>
+                        <item>
+                            <ipProtocol>icmp</ipProtocol>
+                            <fromPort>-1</fromPort>
+                            <toPort>-1</toPort>
+                            <groups/>
+                            <ipRanges>
+                                <item>
+                                    <cidrIp>0.0.0.0/0</cidrIp>
+                                </item>
+                            </ipRanges>
+                            <ipv6Ranges/>
+                            <prefixListIds/>
+                        </item>
+                    </ipPermissions>
+                    <ipPermissionsEgress>
+                        <item>
+                            <ipProtocol>-1</ipProtocol>
+                            <groups/>
+                            <ipRanges>
+                                <item>
+                                    <cidrIp>0.0.0.0/0</cidrIp>
+                                </item>
+                            </ipRanges>
+                            <ipv6Ranges/>
+                            <prefixListIds/>
+                        </item>
+                    </ipPermissionsEgress>
+                </item>
+            </securityGroupInfo>
+        </DescribeSecurityGroupsResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:17 GMT
+- request:
+    method: post
+    uri: https://elasticloadbalancing.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeLoadBalancers&LoadBalancerNames.member.1=EmSRefreshSpecVPCELB&Version=2012-06-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102917Z
+      X-Amz-Content-Sha256:
+      - 82480686120cee6598fb446a90f52388d87e930c9f7c5c1a597f4854ca394d9e
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/elasticloadbalancing/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=a813bb115af17a9a4ac693a0b039af26c32f1c58349f97d2e363582d59bbae8e
+      Content-Length:
+      - '95'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 11c9f318-0d58-11e7-94cf-1333b1f1869c
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '2740'
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 20 Mar 2017 10:29:16 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <DescribeLoadBalancersResponse xmlns="http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/">
+          <DescribeLoadBalancersResult>
+            <LoadBalancerDescriptions>
+              <member>
+                <VPCId>vpc-ff49ff91</VPCId>
+                <CanonicalHostedZoneNameID>Z35SXDOTRQ7X7K</CanonicalHostedZoneNameID>
+                <Scheme>internet-facing</Scheme>
+                <Instances>
+                  <member>
+                    <InstanceId>i-8b5739f2</InstanceId>
+                  </member>
+                  <member>
+                    <InstanceId>i-fb694e66</InstanceId>
+                  </member>
+                </Instances>
+                <Policies>
+                  <AppCookieStickinessPolicies/>
+                  <LBCookieStickinessPolicies/>
+                  <OtherPolicies/>
+                </Policies>
+                <AvailabilityZones>
+                  <member>us-east-1d</member>
+                  <member>us-east-1e</member>
+                </AvailabilityZones>
+                <DNSName>EmSRefreshSpecVPCELB-546141344.us-east-1.elb.amazonaws.com</DNSName>
+                <BackendServerDescriptions/>
+                <SourceSecurityGroup>
+                  <OwnerAlias>200278856672</OwnerAlias>
+                  <GroupName>EmsRefreshSpec-SecurityGroup-VPC</GroupName>
+                </SourceSecurityGroup>
+                <LoadBalancerName>EmSRefreshSpecVPCELB</LoadBalancerName>
+                <ListenerDescriptions>
+                  <member>
+                    <Listener>
+                      <InstancePort>80</InstancePort>
+                      <InstanceProtocol>HTTP</InstanceProtocol>
+                      <Protocol>HTTP</Protocol>
+                      <LoadBalancerPort>80</LoadBalancerPort>
+                    </Listener>
+                    <PolicyNames/>
+                  </member>
+                  <member>
+                    <Listener>
+                      <InstancePort>22</InstancePort>
+                      <InstanceProtocol>TCP</InstanceProtocol>
+                      <Protocol>TCP</Protocol>
+                      <LoadBalancerPort>22</LoadBalancerPort>
+                    </Listener>
+                    <PolicyNames/>
+                  </member>
+                </ListenerDescriptions>
+                <HealthCheck>
+                  <UnhealthyThreshold>2</UnhealthyThreshold>
+                  <Interval>30</Interval>
+                  <HealthyThreshold>10</HealthyThreshold>
+                  <Timeout>5</Timeout>
+                  <Target>HTTP:80/index.html</Target>
+                </HealthCheck>
+                <CreatedTime>2016-08-09T08:16:14.340Z</CreatedTime>
+                <Subnets>
+                  <member>subnet-16c70477</member>
+                  <member>subnet-f849ff96</member>
+                </Subnets>
+                <SecurityGroups>
+                  <member>sg-80f755ef</member>
+                </SecurityGroups>
+                <CanonicalHostedZoneName>EmSRefreshSpecVPCELB-546141344.us-east-1.elb.amazonaws.com</CanonicalHostedZoneName>
+              </member>
+            </LoadBalancerDescriptions>
+          </DescribeLoadBalancersResult>
+          <ResponseMetadata>
+            <RequestId>11c9f318-0d58-11e7-94cf-1333b1f1869c</RequestId>
+          </ResponseMetadata>
+        </DescribeLoadBalancersResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:17 GMT
+- request:
+    method: post
+    uri: https://elasticloadbalancing.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeLoadBalancers&LoadBalancerNames.member.1=EmSRefreshSpecVPCELB2&Version=2012-06-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102917Z
+      X-Amz-Content-Sha256:
+      - bc9f1ae08133e40a9bd638f1287b9ebcec1bbba671f92b326ab237b0f11f1b19
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/elasticloadbalancing/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=0c94e4c831371dba868df997bec2316e9f49d8243020b38ef6ec319c1d50d302
+      Content-Length:
+      - '96'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 1215531a-0d58-11e7-9afa-b5745e44b59c
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '2408'
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 20 Mar 2017 10:29:16 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <DescribeLoadBalancersResponse xmlns="http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/">
+          <DescribeLoadBalancersResult>
+            <LoadBalancerDescriptions>
+              <member>
+                <VPCId>vpc-ff49ff91</VPCId>
+                <CanonicalHostedZoneNameID>Z35SXDOTRQ7X7K</CanonicalHostedZoneNameID>
+                <Scheme>internet-facing</Scheme>
+                <Instances>
+                  <member>
+                    <InstanceId>i-fb694e66</InstanceId>
+                  </member>
+                  <member>
+                    <InstanceId>i-8b5739f2</InstanceId>
+                  </member>
+                </Instances>
+                <Policies>
+                  <AppCookieStickinessPolicies/>
+                  <LBCookieStickinessPolicies/>
+                  <OtherPolicies/>
+                </Policies>
+                <AvailabilityZones>
+                  <member>us-east-1d</member>
+                  <member>us-east-1e</member>
+                </AvailabilityZones>
+                <DNSName>EmSRefreshSpecVPCELB2-1206960929.us-east-1.elb.amazonaws.com</DNSName>
+                <BackendServerDescriptions/>
+                <SourceSecurityGroup>
+                  <OwnerAlias>200278856672</OwnerAlias>
+                  <GroupName>quick-create-1</GroupName>
+                </SourceSecurityGroup>
+                <LoadBalancerName>EmSRefreshSpecVPCELB2</LoadBalancerName>
+                <ListenerDescriptions>
+                  <member>
+                    <Listener>
+                      <InstancePort>22</InstancePort>
+                      <InstanceProtocol>TCP</InstanceProtocol>
+                      <Protocol>TCP</Protocol>
+                      <LoadBalancerPort>2222</LoadBalancerPort>
+                    </Listener>
+                    <PolicyNames/>
+                  </member>
+                </ListenerDescriptions>
+                <HealthCheck>
+                  <UnhealthyThreshold>2</UnhealthyThreshold>
+                  <Interval>30</Interval>
+                  <HealthyThreshold>10</HealthyThreshold>
+                  <Timeout>5</Timeout>
+                  <Target>TCP:22</Target>
+                </HealthCheck>
+                <CreatedTime>2016-08-10T14:17:09.810Z</CreatedTime>
+                <Subnets>
+                  <member>subnet-16c70477</member>
+                  <member>subnet-f849ff96</member>
+                </Subnets>
+                <SecurityGroups>
+                  <member>sg-0d2cd677</member>
+                </SecurityGroups>
+                <CanonicalHostedZoneName>EmSRefreshSpecVPCELB2-1206960929.us-east-1.elb.amazonaws.com</CanonicalHostedZoneName>
+              </member>
+            </LoadBalancerDescriptions>
+          </DescribeLoadBalancersResult>
+          <ResponseMetadata>
+            <RequestId>1215531a-0d58-11e7-9afa-b5745e44b59c</RequestId>
+          </ResponseMetadata>
+        </DescribeLoadBalancersResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:18 GMT
+- request:
+    method: post
+    uri: https://elasticloadbalancing.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeInstanceHealth&LoadBalancerName=EmSRefreshSpecVPCELB&Version=2012-06-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102918Z
+      X-Amz-Content-Sha256:
+      - e3ca7eaa1d39176b50c00e34e89f3aaf68b84ce556b8e5b1d9242affcccfd5d4
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/elasticloadbalancing/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=8bf5a6d14e29c127f9613f281f9686f3ef23e1d7928d33224368557922e43c6a
+      Content-Length:
+      - '86'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 1263251c-0d58-11e7-9c64-5daabdad818e
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '847'
+      Date:
+      - Mon, 20 Mar 2017 10:29:16 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <DescribeInstanceHealthResponse xmlns="http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/">
+          <DescribeInstanceHealthResult>
+            <InstanceStates>
+              <member>
+                <Description>Instance has failed at least the UnhealthyThreshold number of health checks consecutively.</Description>
+                <InstanceId>i-8b5739f2</InstanceId>
+                <ReasonCode>Instance</ReasonCode>
+                <State>OutOfService</State>
+              </member>
+              <member>
+                <Description>Instance is in stopped state.</Description>
+                <InstanceId>i-fb694e66</InstanceId>
+                <ReasonCode>Instance</ReasonCode>
+                <State>OutOfService</State>
+              </member>
+            </InstanceStates>
+          </DescribeInstanceHealthResult>
+          <ResponseMetadata>
+            <RequestId>1263251c-0d58-11e7-9c64-5daabdad818e</RequestId>
+          </ResponseMetadata>
+        </DescribeInstanceHealthResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:18 GMT
+- request:
+    method: post
+    uri: https://elasticloadbalancing.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeInstanceHealth&LoadBalancerName=EmSRefreshSpecVPCELB2&Version=2012-06-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102918Z
+      X-Amz-Content-Sha256:
+      - 906dd8e8fc282f77d697b9b88544cfc4963e06d223e5d72254f984144f015d1f
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/elasticloadbalancing/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=dee98db3d27d032832938b6fe2bdb6aab053392f36bb07556df00b2f55abaca8
+      Content-Length:
+      - '87'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 12b4795e-0d58-11e7-af65-5b4024912a6b
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '847'
+      Date:
+      - Mon, 20 Mar 2017 10:29:17 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <DescribeInstanceHealthResponse xmlns="http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/">
+          <DescribeInstanceHealthResult>
+            <InstanceStates>
+              <member>
+                <Description>Instance is in stopped state.</Description>
+                <InstanceId>i-fb694e66</InstanceId>
+                <ReasonCode>Instance</ReasonCode>
+                <State>OutOfService</State>
+              </member>
+              <member>
+                <Description>Instance has failed at least the UnhealthyThreshold number of health checks consecutively.</Description>
+                <InstanceId>i-8b5739f2</InstanceId>
+                <ReasonCode>Instance</ReasonCode>
+                <State>OutOfService</State>
+              </member>
+            </InstanceStates>
+          </DescribeInstanceHealthResult>
+          <ResponseMetadata>
+            <RequestId>12b4795e-0d58-11e7-af65-5b4024912a6b</RequestId>
+          </ResponseMetadata>
+        </DescribeInstanceHealthResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:19 GMT
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeAddresses&Filter.1.Name=allocation-id&Filter.1.Value.1=eipalloc-ce53d7a0&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102919Z
+      X-Amz-Content-Sha256:
+      - 797240de400141eaa48134a4a0ed7234fe1a1d39db5e13945c4e0e0f4973642a
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=12adf19d439e69bd29e614ea0414e170a675de5f616ce03a7c44a32ccac95f94
+      Content-Length:
+      - '106'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 20 Mar 2017 10:29:18 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeAddressesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>cd71715e-d50e-4fe0-bd06-bb457fd2aa2b</requestId>
+            <addressesSet>
+                <item>
+                    <publicIp>54.208.119.197</publicIp>
+                    <allocationId>eipalloc-ce53d7a0</allocationId>
+                    <domain>vpc</domain>
+                    <instanceId>i-8b5739f2</instanceId>
+                    <associationId>eipassoc-cc6e58f1</associationId>
+                    <networkInterfaceId>eni-ad25f7cc</networkInterfaceId>
+                    <networkInterfaceOwnerId>200278856672</networkInterfaceOwnerId>
+                    <privateIpAddress>10.0.0.254</privateIpAddress>
+                </item>
+            </addressesSet>
+        </DescribeAddressesResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:20 GMT
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeVolumes&Filter.1.Name=volume-id&Filter.1.Value.1=vol-67606d2d&Filter.1.Value.2=vol-0e4c86c12b28cead8&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.7 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170320T102920Z
+      X-Amz-Content-Sha256:
+      - 8d9086926a91406caa02f92d002a2afe08a08a46fcc1b894e9c137a0dda0547d
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170320/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1ffbf158c2a58bb8e02a30d06dba145c9e77a4aaa7495f6dc5b775726e5af2ae
+      Content-Length:
+      - '134'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 20 Mar 2017 10:29:19 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeVolumesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>57411ee3-d840-4744-960c-21c45c59e16a</requestId>
+            <volumeSet>
+                <item>
+                    <volumeId>vol-67606d2d</volumeId>
+                    <size>7</size>
+                    <snapshotId>snap-5f38cd0e</snapshotId>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <status>in-use</status>
+                    <createTime>2013-09-23T20:11:57.000Z</createTime>
+                    <attachmentSet>
+                        <item>
+                            <volumeId>vol-67606d2d</volumeId>
+                            <instanceId>i-8b5739f2</instanceId>
+                            <device>/dev/sda1</device>
+                            <status>attached</status>
+                            <attachTime>2013-09-23T20:11:57.000Z</attachTime>
+                            <deleteOnTermination>true</deleteOnTermination>
+                        </item>
+                    </attachmentSet>
+                    <tagSet>
+                        <item>
+                            <key>Name</key>
+                            <value>EmsRefreshSpec-PoweredOn-VPC-root</value>
+                        </item>
+                    </tagSet>
+                    <volumeType>standard</volumeType>
+                    <encrypted>false</encrypted>
+                </item>
+                <item>
+                    <volumeId>vol-0e4c86c12b28cead8</volumeId>
+                    <size>1</size>
+                    <snapshotId>snap-055095f47fab5e749</snapshotId>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <status>in-use</status>
+                    <createTime>2017-03-17T07:21:35.798Z</createTime>
+                    <attachmentSet>
+                        <item>
+                            <volumeId>vol-0e4c86c12b28cead8</volumeId>
+                            <instanceId>i-8b5739f2</instanceId>
+                            <device>/dev/sdf</device>
+                            <status>attached</status>
+                            <attachTime>2017-03-17T07:22:23.000Z</attachTime>
+                            <deleteOnTermination>false</deleteOnTermination>
+                        </item>
+                    </attachmentSet>
+                    <tagSet>
+                        <item>
+                            <key>Name</key>
+                            <value>EmsRefreshSpecForVpcVm</value>
+                        </item>
+                    </tagSet>
+                    <volumeType>gp2</volumeType>
+                    <iops>100</iops>
+                    <encrypted>false</encrypted>
+                </item>
+            </volumeSet>
+        </DescribeVolumesResponse>
+    http_version: 
+  recorded_at: Mon, 20 Mar 2017 10:29:21 GMT
+recorded_with: VCR 3.0.3

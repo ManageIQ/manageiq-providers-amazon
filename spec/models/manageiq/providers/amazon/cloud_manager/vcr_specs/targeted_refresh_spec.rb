@@ -45,6 +45,15 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           end
           @ems.reload
 
+          assert_specific_flavor
+          assert_specific_key_pair
+          assert_specific_az
+          assert_specific_security_group
+          assert_specific_template
+          assert_specific_load_balancer_non_vpc
+          assert_specific_load_balancer_non_vpc_vms
+          assert_specific_vm_powered_on
+
           expected_counts = {
             :auth_private_key              => 1,
             :availability_zone             => 1,
@@ -79,15 +88,73 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           }
 
           assert_counts(expected_counts)
+        end
+      end
+
+      it "will perform an VPC VM with floating IP and connected LBs" do
+        vm_target   = ManagerRefresh::Target.new(:manager_id  => @ems.id,
+                                                 :association => :vms,
+                                                 :manager_ref => {:ems_ref => "i-8b5739f2"})
+        lb_target_1 = ManagerRefresh::Target.new(:manager_id  => @ems.id,
+                                                 :association => :load_balancers,
+                                                 :manager_ref => {:ems_ref => "EmSRefreshSpecVPCELB"})
+        lb_target_2 = ManagerRefresh::Target.new(:manager_id  => @ems.id,
+                                                 :association => :load_balancers,
+                                                 :manager_ref => {:ems_ref => "EmSRefreshSpecVPCELB2"})
+
+        2.times do # Run twice to verify that a second run with existing data does not change anything
+          @ems.reload
+
+          VCR.use_cassette(described_class.name.underscore + "_targeted/vpc_vm_wiht_floating_ip_and_lbs_full_refresh") do
+            EmsRefresh.refresh([vm_target, lb_target_1, lb_target_2])
+          end
+          @ems.reload
 
           assert_specific_flavor
           assert_specific_key_pair
           assert_specific_az
-          assert_specific_security_group
+          assert_specific_security_group_on_cloud_network
           assert_specific_template
-          assert_specific_load_balancer_non_vpc
-          assert_specific_load_balancer_non_vpc_vms
-          assert_specific_vm_powered_on
+          assert_specific_load_balancer_vpc
+          assert_specific_load_balancer_vpc2
+          assert_specific_load_balancer_listeners_vpc_and_vpc_2
+          assert_specific_cloud_volume_vm_on_cloud_network
+          assert_specific_vm_on_cloud_network
+
+          expected_counts = {
+            :auth_private_key              => 1,
+            :availability_zone             => 1,
+            :cloud_network                 => 0,
+            :cloud_subnet                  => 0,
+            :cloud_volume                  => 2,
+            :cloud_volume_backup           => 0,
+            :cloud_volume_snapshot         => 0,
+            :custom_attribute              => 2,
+            :disk                          => 2,
+            :ext_management_system         => 4,
+            :firewall_rule                 => 3,
+            :flavor                        => 1,
+            :floating_ip                   => 1,
+            :guest_device                  => 0,
+            :hardware                      => 2,
+            :miq_template                  => 1,
+            :network                       => 2,
+            :network_port                  => 1,
+            :network_router                => 0,
+            :operating_system              => 0,
+            :orchestration_stack           => 0,
+            :orchestration_stack_output    => 0,
+            :orchestration_stack_parameter => 0,
+            :orchestration_stack_resource  => 0,
+            :orchestration_template        => 0,
+            :security_group                => 1,
+            :snapshot                      => 0,
+            :system_service                => 0,
+            :vm                            => 1,
+            :vm_or_template                => 2
+          }
+
+          assert_counts(expected_counts)
         end
       end
     end
