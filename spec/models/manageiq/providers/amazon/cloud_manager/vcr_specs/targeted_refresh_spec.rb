@@ -159,9 +159,9 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       end
 
       it "will refresh a VPC VM with public IP" do
-        vm_target   = ManagerRefresh::Target.new(:manager_id  => @ems.id,
-                                                 :association => :vms,
-                                                 :manager_ref => {:ems_ref => "i-c72af2f6"})
+        vm_target = ManagerRefresh::Target.new(:manager_id  => @ems.id,
+                                               :association => :vms,
+                                               :manager_ref => {:ems_ref => "i-c72af2f6"})
 
         2.times do # Run twice to verify that a second run with existing data does not change anything
           @ems.reload

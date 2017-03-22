@@ -230,7 +230,8 @@ module AwsRefresherSpecCommon
 
   def assert_specific_template_2
     @template2 = ManageIQ::Providers::Amazon::CloudManager::Template.where(
-      :name => "RHEL-7.2_HVM_GA-20151112-x86_64-1-Hourly2-GP2").first
+      :name => "RHEL-7.2_HVM_GA-20151112-x86_64-1-Hourly2-GP2"
+    ).first
     expect(@template2).to(
       have_attributes(
         :template              => true,
