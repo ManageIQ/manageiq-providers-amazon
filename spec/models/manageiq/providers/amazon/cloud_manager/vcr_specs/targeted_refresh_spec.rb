@@ -66,7 +66,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :disk                          => 1,
             :ext_management_system         => 4,
             :firewall_rule                 => 13,
-            :flavor                        => 1,
+            :flavor                        => 2,
             :floating_ip                   => 1,
             :guest_device                  => 0,
             :hardware                      => 2,
@@ -133,7 +133,65 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :disk                          => 2,
             :ext_management_system         => 4,
             :firewall_rule                 => 3,
-            :flavor                        => 1,
+            :flavor                        => 2,
+            :floating_ip                   => 1,
+            :guest_device                  => 0,
+            :hardware                      => 2,
+            :miq_template                  => 1,
+            :network                       => 2,
+            :network_port                  => 1,
+            :network_router                => 0,
+            :operating_system              => 0,
+            :orchestration_stack           => 0,
+            :orchestration_stack_output    => 0,
+            :orchestration_stack_parameter => 0,
+            :orchestration_stack_resource  => 0,
+            :orchestration_template        => 0,
+            :security_group                => 1,
+            :snapshot                      => 0,
+            :system_service                => 0,
+            :vm                            => 1,
+            :vm_or_template                => 2
+          }
+
+          assert_counts(expected_counts)
+        end
+      end
+
+      it "will refresh a VPC VM with public IP" do
+        vm_target   = ManagerRefresh::Target.new(:manager_id  => @ems.id,
+                                                 :association => :vms,
+                                                 :manager_ref => {:ems_ref => "i-c72af2f6"})
+
+        2.times do # Run twice to verify that a second run with existing data does not change anything
+          @ems.reload
+
+          VCR.use_cassette(described_class.name.underscore + "_targeted/vpc_vm_with_public_ip_and_template") do
+            EmsRefresh.refresh([vm_target])
+          end
+          @ems.reload
+
+          assert_specific_flavor
+          assert_specific_key_pair
+          assert_specific_az
+          assert_specific_security_group_on_cloud_network
+          assert_specific_template_2
+          assert_specific_cloud_volume_vm_on_cloud_network_public_ip
+          assert_specific_vm_on_cloud_network_public_ip(:guest_os => "linux_redhat", :template => @template2)
+
+          expected_counts = {
+            :auth_private_key              => 1,
+            :availability_zone             => 1,
+            :cloud_network                 => 0,
+            :cloud_subnet                  => 0,
+            :cloud_volume                  => 2,
+            :cloud_volume_backup           => 0,
+            :cloud_volume_snapshot         => 0,
+            :custom_attribute              => 2,
+            :disk                          => 2,
+            :ext_management_system         => 4,
+            :firewall_rule                 => 3,
+            :flavor                        => 2,
             :floating_ip                   => 1,
             :guest_device                  => 0,
             :hardware                      => 2,
@@ -170,6 +228,23 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
                        :cpus                     => 1,
                        :cpu_cores                => 1,
                        :memory                   => 0.613.gigabytes.to_i,
+                       :supports_32_bit          => true,
+                       :supports_64_bit          => true,
+                       :supports_hvm             => false,
+                       :supports_paravirtual     => true,
+                       :block_storage_based_only => true,
+                       :ephemeral_disk_size      => 0,
+                       :ephemeral_disk_count     => 0)
+
+    FactoryGirl.create(:flavor_amazon,
+                       :ext_management_system    => @ems,
+                       :name                     => "t2.micro",
+                       :ems_ref                  => "t2.micro",
+                       :description              => "T2 Micro",
+                       :enabled                  => true,
+                       :cpus                     => 1,
+                       :cpu_cores                => 1,
+                       :memory                   => 1.0.gigabytes.to_i,
                        :supports_32_bit          => true,
                        :supports_64_bit          => true,
                        :supports_hvm             => false,
