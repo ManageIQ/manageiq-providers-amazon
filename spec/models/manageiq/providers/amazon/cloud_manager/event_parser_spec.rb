@@ -64,7 +64,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventParser do
   def response(path)
     response = double
     allow(response).to receive(:body).and_return(
-      File.read(File.join(File.dirname(__FILE__), "/event_catcher/#{path}")))
+      File.read(File.join(File.dirname(__FILE__), "/event_catcher/#{path}"))
+    )
 
     allow(response).to receive(:message_id).and_return("mocked_message_id")
 

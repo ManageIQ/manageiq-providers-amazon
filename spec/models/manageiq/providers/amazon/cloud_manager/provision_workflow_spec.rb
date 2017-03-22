@@ -395,7 +395,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
       stub_get_next_vm_name
 
       # the dialogs populate this
-      values.merge!(:src_vm_id => template.id, :vm_tags => [])
+      values[:src_vm_id] = template.id
+      values[:vm_tags] = []
 
       request = workflow.make_request(nil, values)
 

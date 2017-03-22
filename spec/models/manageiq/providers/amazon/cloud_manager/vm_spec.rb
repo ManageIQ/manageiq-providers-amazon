@@ -54,7 +54,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Vm do
       stubbed_responses = {
         :ec2 => {
           :describe_instances =>
-            { :reservations => [{instances: [:instance_id => vm.ems_ref]}] }
+                                 { :reservations => [{:instances => [:instance_id => vm.ems_ref]}] }
         }
       }
       with_aws_stubbed(stubbed_responses) do

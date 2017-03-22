@@ -223,8 +223,7 @@ module AwsRefresherSpecCounts
     stacks.each do |stack|
       resources << hash_collection.new(aws_cloud_formation.client.list_stack_resources(
         :stack_name => stack["stack_name"]
-).try(:stack_resource_summaries)
-                                      ).all.select { |res| res['physical_resource_id'] }
+      ).try(:stack_resource_summaries)).all.select { |res| res['physical_resource_id'] }
     end
     resources.flatten.compact
   end

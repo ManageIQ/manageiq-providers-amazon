@@ -15,8 +15,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     # Test all kinds of refreshes, DTO refresh, DTO with batch saving and the original refresh
     [{:inventory_object_refresh => true},
      {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},
-     {:inventory_object_refresh => false}
-    ].each do |settings|
+     {:inventory_object_refresh => false}].each do |settings|
       context "with settings #{settings}" do
         before :each do
           allow(Settings.ems_refresh).to receive(:ec2_network).and_return(settings)
@@ -103,11 +102,11 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
 
   def expected_table_counts
     firewall_rule_count = test_counts[:security_group_count] *
-      (test_counts[:outbound_firewall_rule_per_security_group_count] +
-        test_counts[:outbound_firewall_rule_per_security_group_count])
+                          (test_counts[:outbound_firewall_rule_per_security_group_count] +
+                            test_counts[:outbound_firewall_rule_per_security_group_count])
 
     floating_ip_count = test_counts[:floating_ip_count] + test_counts[:network_port_count] +
-      test_counts[:instance_ec2_count]
+                        test_counts[:instance_ec2_count]
 
     {
       :auth_private_key                  => 0,
@@ -202,9 +201,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     ems = @ems.network_manager
 
     expect(ems).to have_attributes(
-                     :api_version => nil, # TODO: Should be 3.0
-                     :uid_ems     => nil
-                   )
+      :api_version => nil, # TODO: Should be 3.0
+      :uid_ems     => nil
+    )
 
     expect(ems.flavors.size).to eql(expected_table_counts[:flavor])
     expect(ems.availability_zones.size).to eql(expected_table_counts[:availability_zone])
