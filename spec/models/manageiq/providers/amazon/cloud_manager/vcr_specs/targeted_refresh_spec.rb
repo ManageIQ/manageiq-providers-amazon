@@ -29,7 +29,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
         create_flavors
       end
 
-      it "will perform an EC2 classic VM powered on and LB full targeted refresh" do
+      it "will refresh an EC2 classic VM powered on and LB full targeted refresh" do
         vm_target = ManagerRefresh::Target.new(:manager     => @ems,
                                                :association => :vms,
                                                :manager_ref => {:ems_ref => "i-680071e9"})
@@ -91,7 +91,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
         end
       end
 
-      it "will perform an VPC VM with floating IP and connected LBs" do
+      it "will refresh a VPC VM with floating IP and connected LBs" do
         vm_target   = ManagerRefresh::Target.new(:manager_id  => @ems.id,
                                                  :association => :vms,
                                                  :manager_ref => {:ems_ref => "i-8b5739f2"})
@@ -105,7 +105,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
         2.times do # Run twice to verify that a second run with existing data does not change anything
           @ems.reload
 
-          VCR.use_cassette(described_class.name.underscore + "_targeted/vpc_vm_wiht_floating_ip_and_lbs_full_refresh") do
+          VCR.use_cassette(described_class.name.underscore + "_targeted/vpc_vm_with_floating_ip_and_lbs_full_refresh") do
             EmsRefresh.refresh([vm_target, lb_target_1, lb_target_2])
           end
           @ems.reload
