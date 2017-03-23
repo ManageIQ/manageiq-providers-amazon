@@ -1,5 +1,6 @@
 class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVolume
   supports :create
+  supports :snapshot_create
 
   def available_vms
     availability_zone.vms
