@@ -18,6 +18,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     get_private_images if collector.options.get_private_images
     get_shared_images if collector.options.get_shared_images
     get_public_images if collector.options.get_public_images
+    get_referenced_images
     get_instances
 
     $aws_log.info("#{log_header}...Complete")
@@ -47,6 +48,10 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def get_public_images
     get_images(collector.public_images, true)
+  end
+
+  def get_referenced_images
+    get_images(collector.referenced_images)
   end
 
   def get_images(images, is_public = false)
