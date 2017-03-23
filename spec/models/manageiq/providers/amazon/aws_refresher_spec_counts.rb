@@ -7,8 +7,10 @@ module AwsRefresherSpecCounts
   end
 
   def table_counts_from_api
-    instance_hashes            = instances.all.select { |x| x["state"]["name"] != "terminated" }
-    image_hashes               = private_images.all + shared_images.all
+    instance_hashes            = instances.select { |x| x["state"]["name"] != "terminated" }
+    image_hashes               = private_images + shared_images + public_images
+    # Only new refresh can collect a referenced images
+    image_hashes               += referenced_images(instance_hashes, image_hashes) if options.inventory_object_refresh
     instances_count            = instance_hashes.size
     images_count               = image_hashes.size
     instances_and_images_count = instances_count + images_count
@@ -68,6 +70,7 @@ module AwsRefresherSpecCounts
     orchestration_stack_parameters_count = orchestration_stack_hashes.map { |x| x["parameters"] }.flatten.compact.size
     orchestration_stack_outputs_count    = orchestration_stack_hashes.map { |x| x["outputs"] }.flatten.compact.size
     orchestration_stack_resources_count  = stacks_resources.size
+
 
     {
       :auth_private_key              => key_pairs.size,
@@ -181,13 +184,17 @@ module AwsRefresherSpecCounts
     @aws_s3 ||= manager.connect(:service => :S3)
   end
 
+  def options
+    @options ||= Settings.ems_refresh[manager.class.ems_type]
+  end
+
   def hash_collection
     ::ManageIQ::Providers::Amazon::Inventory::HashCollection
   end
 
   # helpers for getting records fro mthe API
   def instances
-    hash_collection.new(aws_ec2.instances)
+    hash_collection.new(aws_ec2.instances).all
   end
 
   def flavors
@@ -203,15 +210,37 @@ module AwsRefresherSpecCounts
   end
 
   def private_images
-    hash_collection.new(aws_ec2.client.describe_images(:owners  => [:self],
-                                                       :filters => [{:name   => "image-type",
-                                                                     :values => ["machine"]}])[:images])
+    return [] unless options.get_private_images
+
+    hash_collection.new(
+      aws_ec2.client.describe_images(:owners  => [:self],
+                                     :filters => [{:name   => "image-type",
+                                                   :values => ["machine"]}]).images).all
   end
 
   def shared_images
-    hash_collection.new(aws_ec2.client.describe_images(:executable_users => [:self],
-                                                       :filters          => [{:name   => "image-type",
-                                                                              :values => ["machine"]}])[:images])
+    return [] unless options.get_shared_images
+
+    hash_collection.new(
+      aws_ec2.client.describe_images(:executable_users => [:self],
+                                     :filters          => [{:name   => "image-type",
+                                                            :values => ["machine"]}]).images).all
+  end
+
+  def public_images
+    return [] unless options.get_public_images
+
+    hash_collection.new(
+      aws_ec2.client.describe_images(:executable_users => [:all],
+                                     :filters          => options.public_images_filters).images).all
+  end
+
+  def referenced_images(instance_hashes, image_hashes)
+    refs = extra_image_references(instance_hashes, image_hashes)
+
+    hash_collection.new(
+      aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => refs}]).images
+    ).all
   end
 
   def stacks
@@ -268,5 +297,19 @@ module AwsRefresherSpecCounts
 
   def cloud_volume_snapshots
     hash_collection.new(aws_ec2.client.describe_snapshots(:owner_ids => [:self])[:snapshots])
+  end
+
+  private
+
+  def extra_image_references(instance_hashes, image_hashes)
+    # The references to images that are not collected by private_images, shared_images or public_images but that are
+    # referenced by instances. Which can be caused e.g. by using a public_image while not collecting it under
+    # public_images
+
+    db_image_refs        = Set.new(manager.miq_templates.pluck(:ems_ref))
+    instances_image_refs = Set.new(instance_hashes.map { |x| x["image_id"] })
+    api_images_refs      = Set.new(image_hashes.map { |x| x["image_id"] })
+
+    ((db_image_refs + instances_image_refs) - api_images_refs).to_a.sort
   end
 end
