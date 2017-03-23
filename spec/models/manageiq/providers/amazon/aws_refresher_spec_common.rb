@@ -228,6 +228,63 @@ module AwsRefresherSpecCommon
     expect(@template.hardware.networks.size).to eq(0)
   end
 
+  def assert_specific_template_2
+    @template2 = ManageIQ::Providers::Amazon::CloudManager::Template.where(
+      :name => "RHEL-7.2_HVM_GA-20151112-x86_64-1-Hourly2-GP2"
+    ).first
+    expect(@template2).to(
+      have_attributes(
+        :template              => true,
+        :ems_ref               => "ami-2051294a",
+        :ems_ref_obj           => nil,
+        :uid_ems               => "ami-2051294a",
+        :vendor                => "amazon",
+        :power_state           => "never",
+        :location              => "309956199498/RHEL-7.2_HVM_GA-20151112-x86_64-1-Hourly2-GP2",
+        :tools_status          => nil,
+        :boot_time             => nil,
+        :standby_action        => nil,
+        :connection_state      => nil,
+        :cpu_affinity          => nil,
+        :memory_reserve        => nil,
+        :memory_reserve_expand => nil,
+        :memory_limit          => nil,
+        :memory_shares         => nil,
+        :memory_shares_level   => nil,
+        :cpu_reserve           => nil,
+        :cpu_reserve_expand    => nil,
+        :cpu_limit             => nil,
+        :cpu_shares            => nil,
+        :cpu_shares_level      => nil
+      )
+    )
+
+    expect(@template2.ext_management_system).to eq(@ems)
+    expect(@template2.operating_system).to       be_nil # TODO: This should probably not be nil
+    expect(@template2.custom_attributes.size).to eq(0)
+    expect(@template2.snapshots.size).to eq(0)
+
+    expect(@template2.hardware).to(
+      have_attributes(
+        :guest_os            => "linux_redhat",
+        :guest_os_full_name  => nil,
+        :bios                => nil,
+        :annotation          => nil,
+        :cpu_sockets         => 1,
+        :memory_mb           => nil,
+        :disk_capacity       => nil,
+        :bitness             => 64,
+        :virtualization_type => "hvm",
+        :root_device_type    => "ebs"
+      )
+    )
+
+    expect(@template2.hardware.disks.size).to eq(0)
+    expect(@template2.hardware.guest_devices.size).to eq(0)
+    expect(@template2.hardware.nics.size).to eq(0)
+    expect(@template2.hardware.networks.size).to eq(0)
+  end
+
   def assert_specific_shared_template
     # TODO: Share an EmsRefreshSpec specific template
     t = ManageIQ::Providers::Amazon::CloudManager::Template.where(:ems_ref => "ami-5769193e").first
@@ -684,7 +741,10 @@ module AwsRefresherSpecCommon
     end
   end
 
-  def assert_specific_vm_on_cloud_network_public_ip
+  def assert_specific_vm_on_cloud_network_public_ip(template_info = {})
+    # TODO(lsmola) template_info is here because full refresh might not catch a public template, while fill targeted
+    # refresh will always get it. So we need to narrow down the full refresh, so it fetches also referenced templates.
+
     assert_specific_public_ip_for_cloud_network
 
     v = ManageIQ::Providers::Amazon::CloudManager::Vm.where(:name => "EmsRefreshSpec-PoweredOn-VPC1").first
@@ -737,7 +797,7 @@ module AwsRefresherSpecCommon
       have_attributes(
         :config_version       => nil,
         :virtual_hw_version   => nil,
-        :guest_os             => nil,
+        :guest_os             => template_info[:guest_os],
         :cpu_sockets          => 1,
         :bios                 => nil,
         :bios_location        => nil,
@@ -823,7 +883,7 @@ module AwsRefresherSpecCommon
     expect(v.hardware.networks.size).to eq(2)
 
     v.with_relationship_type("genealogy") do
-      expect(v.parent).to eq(nil)
+      expect(v.parent).to eq(template_info[:template])
     end
   end
 
