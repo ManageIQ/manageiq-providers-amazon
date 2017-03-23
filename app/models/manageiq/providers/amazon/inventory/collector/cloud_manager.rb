@@ -21,7 +21,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
     @private_images_hashes ||= hash_collection.new(
       aws_ec2.client.describe_images(:owners  => [:self],
                                      :filters => [{:name   => "image-type",
-                                                   :values => ["machine"]}]).images).all
+                                                   :values => ["machine"]}]).images
+    ).all
   end
 
   def shared_images
@@ -30,7 +31,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
     @shared_images_hashes ||= hash_collection.new(
       aws_ec2.client.describe_images(:executable_users => [:self],
                                      :filters          => [{:name   => "image-type",
-                                                            :values => ["machine"]}]).images).all
+                                                            :values => ["machine"]}]).images
+    ).all
   end
 
   def public_images
@@ -38,7 +40,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
 
     @public_images_hashes ||= hash_collection.new(
       aws_ec2.client.describe_images(:executable_users => [:all],
-                                     :filters          => options.public_images_filters).images).all
+                                     :filters          => options.public_images_filters).images
+    ).all
   end
 
   def referenced_images

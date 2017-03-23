@@ -10,7 +10,7 @@ module AwsRefresherSpecCounts
     instance_hashes            = instances.select { |x| x["state"]["name"] != "terminated" }
     image_hashes               = private_images + shared_images + public_images
     # Only new refresh can collect a referenced images
-    image_hashes               += referenced_images(instance_hashes, image_hashes) if options.inventory_object_refresh
+    image_hashes += referenced_images(instance_hashes, image_hashes) if options.inventory_object_refresh
     instances_count            = instance_hashes.size
     images_count               = image_hashes.size
     instances_and_images_count = instances_count + images_count
@@ -70,7 +70,6 @@ module AwsRefresherSpecCounts
     orchestration_stack_parameters_count = orchestration_stack_hashes.map { |x| x["parameters"] }.flatten.compact.size
     orchestration_stack_outputs_count    = orchestration_stack_hashes.map { |x| x["outputs"] }.flatten.compact.size
     orchestration_stack_resources_count  = stacks_resources.size
-
 
     {
       :auth_private_key              => key_pairs.size,
@@ -215,7 +214,8 @@ module AwsRefresherSpecCounts
     hash_collection.new(
       aws_ec2.client.describe_images(:owners  => [:self],
                                      :filters => [{:name   => "image-type",
-                                                   :values => ["machine"]}]).images).all
+                                                   :values => ["machine"]}]).images
+    ).all
   end
 
   def shared_images
@@ -224,7 +224,8 @@ module AwsRefresherSpecCounts
     hash_collection.new(
       aws_ec2.client.describe_images(:executable_users => [:self],
                                      :filters          => [{:name   => "image-type",
-                                                            :values => ["machine"]}]).images).all
+                                                            :values => ["machine"]}]).images
+    ).all
   end
 
   def public_images
@@ -232,7 +233,8 @@ module AwsRefresherSpecCounts
 
     hash_collection.new(
       aws_ec2.client.describe_images(:executable_users => [:all],
-                                     :filters          => options.public_images_filters).images).all
+                                     :filters          => options.public_images_filters).images
+    ).all
   end
 
   def referenced_images(instance_hashes, image_hashes)
