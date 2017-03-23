@@ -17,6 +17,7 @@ module AwsRefresherSpecCommon
     assert_specific_security_group
     assert_specific_security_group_on_cloud_network
     assert_specific_template
+    assert_specific_template_2
     assert_specific_shared_template
     assert_specific_cloud_volume_vm_on_cloud_network
     assert_specific_cloud_volume_vm_on_cloud_network_public_ip
@@ -232,6 +233,13 @@ module AwsRefresherSpecCommon
     @template2 = ManageIQ::Providers::Amazon::CloudManager::Template.where(
       :name => "RHEL-7.2_HVM_GA-20151112-x86_64-1-Hourly2-GP2"
     ).first
+
+    # Only graph refresh is able to collect this public template
+    unless options.inventory_object_refresh
+      expect(@template2).to be_nil
+      return
+    end
+
     expect(@template2).to(
       have_attributes(
         :template              => true,
@@ -741,10 +749,7 @@ module AwsRefresherSpecCommon
     end
   end
 
-  def assert_specific_vm_on_cloud_network_public_ip(template_info = {})
-    # TODO(lsmola) template_info is here because full refresh might not catch a public template, while fill targeted
-    # refresh will always get it. So we need to narrow down the full refresh, so it fetches also referenced templates.
-
+  def assert_specific_vm_on_cloud_network_public_ip
     assert_specific_public_ip_for_cloud_network
 
     v = ManageIQ::Providers::Amazon::CloudManager::Vm.where(:name => "EmsRefreshSpec-PoweredOn-VPC1").first
@@ -797,7 +802,7 @@ module AwsRefresherSpecCommon
       have_attributes(
         :config_version       => nil,
         :virtual_hw_version   => nil,
-        :guest_os             => template_info[:guest_os],
+        :guest_os             => @template2.try(:hardware).try(:guest_os),
         :cpu_sockets          => 1,
         :bios                 => nil,
         :bios_location        => nil,
@@ -883,7 +888,7 @@ module AwsRefresherSpecCommon
     expect(v.hardware.networks.size).to eq(2)
 
     v.with_relationship_type("genealogy") do
-      expect(v.parent).to eq(template_info[:template])
+      expect(v.parent).to eq(@template2)
     end
   end
 
