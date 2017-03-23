@@ -12,7 +12,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
   end
 
   def key_pairs
-    hash_collection.new(aws_ec2.client.describe_key_pairs[:key_pairs]).all
+    hash_collection.new(aws_ec2.client.describe_key_pairs[:key_pairs])
   end
 
   def private_images
