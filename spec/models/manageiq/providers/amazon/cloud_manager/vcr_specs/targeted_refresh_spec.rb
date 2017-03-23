@@ -177,7 +177,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           assert_specific_security_group_on_cloud_network
           assert_specific_template_2
           assert_specific_cloud_volume_vm_on_cloud_network_public_ip
-          assert_specific_vm_on_cloud_network_public_ip(:guest_os => "linux_redhat", :template => @template2)
+          assert_specific_vm_on_cloud_network_public_ip
 
           expected_counts = {
             :auth_private_key              => 1,
