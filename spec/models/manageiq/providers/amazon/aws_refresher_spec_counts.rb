@@ -301,8 +301,6 @@ module AwsRefresherSpecCounts
     hash_collection.new(aws_ec2.client.describe_snapshots(:owner_ids => [:self])[:snapshots])
   end
 
-  private
-
   def extra_image_references(instance_hashes, image_hashes)
     # The references to images that are not collected by private_images, shared_images or public_images but that are
     # referenced by instances. Which can be caused e.g. by using a public_image while not collecting it under
