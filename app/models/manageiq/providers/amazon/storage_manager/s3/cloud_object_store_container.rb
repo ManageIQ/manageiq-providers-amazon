@@ -42,7 +42,9 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer
   end
 
   def self.raw_cloud_object_store_container_create(ext_management_system, options)
-    options.except!(:name) # name is part of general options, but S3 doesn't like it
+    # frontend stores name as :name, but amazon expects it as :bucket
+    options[:bucket] = options.delete(:name) unless options[:name].nil?
+
     region = options[:create_bucket_configuration][:location_constraint]
     connection = ext_management_system.connect(:region => region)
     bucket = connection.create_bucket(options)
