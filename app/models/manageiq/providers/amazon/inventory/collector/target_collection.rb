@@ -45,7 +45,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     )
   end
 
-  def private_images
+  def referenced_images
     return [] if references(:miq_templates).blank?
 
     hash_collection.new(
