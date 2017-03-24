@@ -47,21 +47,21 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def get_public_images
-    get_images(collector.public_images, true)
+    get_images(collector.public_images)
   end
 
   def get_referenced_images
     get_images(collector.referenced_images)
   end
 
-  def get_images(images, is_public = false)
+  def get_images(images)
     process_inventory_collection(images, :miq_templates) do |image|
       get_image_hardware(image)
 
       resource = persister.miq_templates.lazy_find(image['image_id'])
       get_labels(resource, image["tags"])
 
-      parse_image(image, is_public)
+      parse_image(image)
     end
   end
 
@@ -226,7 +226,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     }
   end
 
-  def parse_image(image, is_public)
+  def parse_image(image)
     uid      = image['image_id']
     location = image['image_location']
 
@@ -247,7 +247,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :template              => true,
       # the is_public flag here avoids having to make an additional API call
       # per image, since we already know whether it's a public image
-      :publicly_available    => is_public,
+      :publicly_available    => image['public'],
     }
   end
 
