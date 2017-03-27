@@ -4,6 +4,14 @@ module Authenticator
       'Amazon IAM'
     end
 
+    def self.validate_config(config)
+      %i(amazon_key amazon_secret).map do |key|
+        if config[key].blank?
+          [key, "#{key} can't be blank"]
+        end
+      end.compact
+    end
+
     def self.validate_connection(config)
       errors = {}
 
@@ -32,7 +40,7 @@ module Authenticator
           if iam_user?(iam)
             # FIXME: this is probably the wrong error category to raise
             raise MiqException::MiqHostError, _("Access key %{number} belongs to IAM user, not to the AWS account holder.") %
-              {:number => config[:amazon_key]}
+                                              {:number => config[:amazon_key]}
           end
           iam
         end
@@ -86,7 +94,7 @@ module Authenticator
         end
       end
       raise MiqException::MiqHostError, _("Access key %{number} does not match an IAM user for aws account holder.") %
-        {:number => access_key_id}
+                                        {:number => access_key_id}
     end
 
     def iam_user?(iam)
