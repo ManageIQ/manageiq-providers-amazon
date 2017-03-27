@@ -17,7 +17,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
         settings                                  = OpenStruct.new
         settings.inventory_object_saving_strategy = inventory_object_settings[:inventory_object_saving_strategy]
         settings.inventory_object_refresh         = inventory_object_settings[:inventory_object_refresh]
-        settings.event_targeted_refresh           = true
+        settings.allow_targeted_refresh           = true
         settings.get_private_images               = true
         settings.get_shared_images                = true
         settings.get_public_images                = false
