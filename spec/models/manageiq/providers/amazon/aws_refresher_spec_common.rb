@@ -1112,29 +1112,39 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_orchestration_template
-    @orch_template = OrchestrationTemplateCfn.where(:md5 => "1c67b49b780587c4e2756ba029a8844b").first
-    expect(@orch_template.description).to start_with("AWS CloudFormation Sample Template WordPress_Simple:")
+    @orch_template = OrchestrationTemplateCfn.where(:md5 => "d986d851f5413fddcf1366914fbb2d28").first
+    expect(@orch_template.description).to start_with("AWS CloudFormation Sample Template VPC_Single_Instance_In_Subnet")
     expect(@orch_template.content).to start_with("{\n  \"AWSTemplateFormatVersion\" : \"2010-09-09\",")
     expect(@orch_template).to have_attributes(:draft => false, :orderable => false)
   end
 
   def assert_specific_orchestration_stack
-    stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.where(
-      :name => "EmsRefreshSpecStack"
-    ).first
-    expect(stack.status_reason)
-      .to eq("The following resource(s) failed to create: [OutBoundHTTPNetworkAclEntry, IPAddress, Route, "\
-             "InboundSSHNetworkAclEntry, WebServerWaitCondition, InboundResponsePortsNetworkAclEntry, "\
-             "OutBoundHTTPSNetworkAclEntry, InboundHTTPNetworkAclEntry]. ")
+    @parent_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.find_by(
+      :name => "EmsRefreshSpecStack")
 
-    @orch_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.where(
-      :name => "EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W"
-    ).first
-    expect(@orch_stack).to have_attributes(
-      :status  => "CREATE_COMPLETE",
-      :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W/72cb3f90-5fb9-11e6-ab2c-50d501eed2b3",
+    expect(@parent_stack).to(
+      have_attributes(
+        :status_reason => nil,
+        :status        => "CREATE_COMPLETE",
+        :ems_ref       => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack/"\
+                          "07fba5b0-13aa-11e7-847a-500c28604cae",
+      )
     )
-    expect(@orch_stack.description).to start_with("AWS CloudFormation Sample Template WordPress_Simple:")
+
+    @orch_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.find_by(
+      :name => "EmsRefreshSpecStack-WebServerInstance-1PAB3IELQ8EYT"
+    )
+    expect(@orch_stack).to(
+      have_attributes(
+        :status_reason => nil,
+        :status        => "CREATE_COMPLETE",
+        :ems_ref       => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance"\
+                          "-1PAB3IELQ8EYT/28cef7b0-13aa-11e7-8260-503aca4a58d1",
+      )
+    )
+
+    expect(@orch_stack.description).to start_with("AWS CloudFormation Sample Template VPC_Single_Instance_In_Subnet")
+    expect(@parent_stack.description).to start_with("AWS CloudFormation Sample Template vpc_single_instance_in_subnet")
 
     assert_specific_orchestration_stack_parameters
     assert_specific_orchestration_stack_resources
@@ -1144,12 +1154,20 @@ module AwsRefresherSpecCommon
 
   def assert_specific_orchestration_stack_parameters
     parameters = @orch_stack.parameters.order("ems_ref")
-    expect(parameters.size).to eq(2)
+    expect(parameters.size).to eq(6)
 
     # assert one of the parameter models
-    expect(parameters[1]).to have_attributes(
-      :name  => "InstanceType",
-      :value => "t1.micro"
+    expect(parameters.map { |x| x.attributes.select { |k, _v| %w(name value).include?(k) } }).to(
+      match_array(
+        [
+          {"name" => "DBRootPassword", "value" => "****"},
+          {"name" => "InstanceSecurityGroupID", "value" => "sg-a5109cda"},
+          {"name" => "InstanceType", "value" => "t2.nano"},
+          {"name" => "KeyName", "value" => "EmsRefreshSpec-KeyPair"},
+          {"name" => "SSHLocation", "value" => "0.0.0.0/0"},
+          {"name" => "SubnetID", "value" => "subnet-fc014299"}
+        ]
+      )
     )
   end
 
@@ -1158,27 +1176,55 @@ module AwsRefresherSpecCommon
     expect(resources.size).to eq(2)
 
     # assert one of the resource models
-    expect(resources[1]).to have_attributes(
-      :name                   => "WebServer",
-      :logical_resource       => "WebServer",
-      :physical_resource      => "i-d7754a49",
-      :resource_category      => "AWS::EC2::Instance",
-      :resource_status        => "CREATE_COMPLETE",
-      :resource_status_reason => nil,
+    fields_to_compare = %w(name logical_resource physical_resource resource_category resource_status resource_status_reason)
+    expect(resources.map { |x| x.attributes.select { |k, _v| fields_to_compare.include?(k) } }).to(
+      match_array(
+        [
+          {
+            "name"                   => "IPAddress",
+            "logical_resource"       => "IPAddress",
+            "physical_resource"      => "34.206.127.107",
+            "resource_category"      => "AWS::EC2::EIP",
+            "resource_status"        => "CREATE_COMPLETE",
+            "resource_status_reason" => nil
+          }, {
+            "name"                   => "WebServerInstance",
+            "logical_resource"       => "WebServerInstance",
+            "physical_resource"      => "i-015e4579bfa4fcc84",
+            "resource_category"      => "AWS::EC2::Instance",
+            "resource_status"        => "CREATE_COMPLETE",
+            "resource_status_reason" => nil
+          }
+        ]
+      )
     )
   end
 
   def assert_specific_orchestration_stack_outputs
     outputs = @orch_stack.outputs
     expect(outputs.size).to eq(1)
-    expect(outputs[0]).to have_attributes(
-      :key         => "WebsiteURL",
-      :value       => "http://ec2-23-23-39-34.compute-1.amazonaws.com/wordpress",
-      :description => "WordPress Website"
+    expect(outputs.map { |x| x.attributes.select { |k, _v| %w(key value description).include?(k) } }).to(
+      match_array(
+        [
+          {"key"         => "URL",
+           "value"       => "http://34.206.127.107",
+           "description" => "Newly created application URL"}
+        ]
+      )
     )
   end
 
   def assert_specific_orchestration_stack_associations
+    @orch_stack_vm = Vm.where(:name => "i-015e4579bfa4fcc84").first
+    @orch_stack_floating_ip = @orch_stack_vm.floating_ips.first
+    @parent_stack_sg = @orch_stack_vm.security_groups.first
+    @parent_stack_vpc = @orch_stack_vm.cloud_networks.first
+    @orch_stack_floating_ip = @orch_stack_vm.cloud_networks.first
+
+    expect(@parent_stack_sg).not_to be_nil
+    expect(@parent_stack_vpc).not_to be_nil
+    expect(@orch_stack_floating_ip).not_to be_nil
+
     # orchestration stack belongs to a provider
     expect(@orch_stack.ext_management_system).to eq(@ems)
 
@@ -1186,23 +1232,22 @@ module AwsRefresherSpecCommon
     expect(@orch_stack.orchestration_template).to eq(@orch_template)
 
     # orchestration stack can be nested
-    parent_stack = OrchestrationStack.where(:name => "EmsRefreshSpecStack").first
-    expect(@orch_stack.parent).to eq(parent_stack)
+    expect(@orch_stack.parent).to eq(@parent_stack)
+    expect(@parent_stack.children).to match_array([@orch_stack])
 
     # orchestration stack can have vms
-    # vm = Vm.where(:name => "i-d7754a49").first
-    # TODO(lsmola) deployment of the VCR nested Orchestration Stack is broken, I need to fix the templates
-    # expect(vm.orchestration_stack).to eq(@orch_stack)
+    expect(@orch_stack_vm.orchestration_stack).to eq(@orch_stack)
+    expect(@orch_stack.vms).to match_array([@orch_stack_vm])
+
+    # Check parent stack relations
+    # orchestration stack can have vms
+    expect(@parent_stack.vms).to match_array([@orch_stack_vm])
 
     # orchestration stack can have security groups
-    sg = SecurityGroup.where(
-      :name => "EmsRefreshSpecStack-WebServerInstance-110TKGO3S0A6W-WebServerSecurityGroup-K60KWXZHGJDE"
-    ).first
-    expect(sg.orchestration_stack).to eq(@orch_stack)
+    expect(@parent_stack_sg.orchestration_stack).to eq(@parent_stack)
 
     # orchestration stack can have cloud networks
-    vpc = CloudNetwork.where(:name => "vpc-08d9b36f").first
-    expect(vpc.orchestration_stack).to eq(parent_stack)
+    expect(@parent_stack_vpc.orchestration_stack).to eq(@parent_stack)
   end
 
   def assert_specific_vm_in_other_region
