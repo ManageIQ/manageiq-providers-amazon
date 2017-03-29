@@ -7,7 +7,8 @@ module AwsRefresherSpecCounts
   end
 
   def table_counts_from_api
-    instance_hashes            = instances.select { |x| x["state"]["name"] != "terminated" }
+    all_instance_hashes        = instances
+    instance_hashes            = all_instance_hashes.select { |x| x["state"]["name"] != "terminated" }
     image_hashes               = private_images + shared_images + public_images
     # Only new refresh can collect a referenced images
     image_hashes += referenced_images(instance_hashes, image_hashes) if options.inventory_object_refresh
@@ -40,7 +41,9 @@ module AwsRefresherSpecCounts
       )
     end.flatten.size
 
-    ec2_classic_instance_hashes = instance_hashes.select { |x| x['network_interfaces'].blank? }
+    # TODO(lsmola) we don't filter out terminated instances for getting network_ports from EC2 classic instances, fix it
+    # then we can use instance_hashes instead of all_instance_hashes here.
+    ec2_classic_instance_hashes = all_instance_hashes.select { |x| x['network_interfaces'].blank? }
     network_port_hashes         = network_ports.all
     # Network ports count consists of VPC ENIs + ec2_classic_instances
     network_ports_count         = network_port_hashes.size + ec2_classic_instance_hashes.size
