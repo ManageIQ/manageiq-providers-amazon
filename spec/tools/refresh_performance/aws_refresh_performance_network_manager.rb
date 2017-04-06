@@ -22,7 +22,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     end
 
     before(:all) do
-      output = ["Name", "Object Count", "Scaling", "Collect", "Parse Legacy", "Parse Targetted", "Saving", "Total"]
+      output = ["Name", "Object Count", "Scaling", "Collect", "Parse", "Parse Targetted", "Saving", "Total"]
 
       open(Rails.root.join('log', 'benchmark_results.csv'), 'a') do |f|
         f.puts output.join(",")
@@ -121,7 +121,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
 
     # Get also a chart displayable format
     matched = detected.match(/:collect_inventory_for_targets=>([\d\.e-]+).*?
-                              :parse_legacy_inventory=>([\d\.e-]+).*?
+                              :parse_inventory=>([\d\.e-]+).*?
                               :parse_targeted_inventory=>([\d\.e-]+).*?
                               :save_inventory=>([\d\.e-]+).*?
                               :ems_refresh=>([\d\.e-]+).*?/x)
@@ -172,7 +172,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
 
     {
       :auth_private_key                  => 0,
-      :ext_management_system             => 2,
+      :ext_management_system             => 4,
       :flavor                            => 0,
       :availability_zone                 => 0,
       :vm_or_template                    => 0,
