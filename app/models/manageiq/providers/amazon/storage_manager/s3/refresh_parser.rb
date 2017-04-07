@@ -51,10 +51,16 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParser
       token = nil
       proceed = true
       while proceed
-        response = api_client.list_objects_v2(
-          :bucket             => bucket_id,
-          :continuation_token => token
-        )
+        begin
+          response = api_client.list_objects_v2(
+            :bucket             => bucket_id,
+            :continuation_token => token
+          )
+        rescue => e
+          _log.warn("Unable to collect S3 objects in a bucket #{bucket_id}, Message: #{e.message}")
+          _log.warn(e.backtrace.join("\n"))
+          break
+        end
         process_collection(response.contents, :cloud_object_store_objects) do |o|
           uid, new_result = parse_object(o, bucket_id)
           bytes += new_result[:content_length]
