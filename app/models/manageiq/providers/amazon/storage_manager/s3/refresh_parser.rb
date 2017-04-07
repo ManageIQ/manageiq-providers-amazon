@@ -57,7 +57,8 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParser
             :continuation_token => token
           )
         rescue => e
-          $aws_log.warn("Unable to collect S3 objects in a bucket #{bucket_id}, Message: #{e.message}")
+          log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{@ems.name}] id: [#{@ems.id}]"
+          $aws_log.warn("#{log_header}: Unable to collect S3 objects in a bucket #{bucket_id}, Message: #{e.message}")
           $aws_log.warn(e.backtrace.join("\n"))
           break
         end
