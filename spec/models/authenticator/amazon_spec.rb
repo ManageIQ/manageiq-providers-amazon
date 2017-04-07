@@ -442,4 +442,19 @@ describe Authenticator::Amazon do
       end
     end
   end
+
+  context '.validate_config' do
+    cases = [
+        { :amazon_key => "foo", :amazon_secret => "bar"}, true,
+        { :amazon_key => "foo", :amazon_secret => nil},   false,
+        { :amazon_key => "", :amazon_secret => "bar"},    false,
+        { },                                              false,
+    ]
+
+    cases.each_slice(2) do |c, expected|
+      it c do
+        expect(described_class.validate_config(c).empty?).to eq(expected)
+      end
+    end
+  end
 end
