@@ -57,8 +57,8 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::RefreshParser
             :continuation_token => token
           )
         rescue => e
-          _log.warn("Unable to collect S3 objects in a bucket #{bucket_id}, Message: #{e.message}")
-          _log.warn(e.backtrace.join("\n"))
+          $aws_log.warn("Unable to collect S3 objects in a bucket #{bucket_id}, Message: #{e.message}")
+          $aws_log.warn(e.backtrace.join("\n"))
           break
         end
         process_collection(response.contents, :cloud_object_store_objects) do |o|
