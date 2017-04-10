@@ -26,6 +26,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
     end
   end
 
+
   def snapshots
     collector.cloud_volume_snapshots.each do |snap|
       persister.cloud_volume_snapshots.find_or_build(snap['snapshot_id']).assign_attributes(

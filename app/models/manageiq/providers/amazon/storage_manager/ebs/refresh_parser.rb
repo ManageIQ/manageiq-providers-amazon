@@ -47,6 +47,8 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
       :size              => volume.size.to_i.gigabytes,
       :snapshot_uid      => volume.snapshot_id,
       :availability_zone => parent_manager_fetch_path(:availability_zones, volume.availability_zone),
+      :encrypted         => volume.encrypted,
+      :iops              => volume.iops
     }
 
     link_volume_to_disk(new_result, volume.attachments)

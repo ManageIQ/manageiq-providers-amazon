@@ -445,7 +445,9 @@ module AwsStubs
         :volume_id         => "volume_id_#{i}",
         :volume_type       => "standard",
         :snapshot_id       => "snapshot_id_#{i}",
-        :tags              => [{ :key => "name", :value => "volume_#{i}" }]
+        :tags              => [{ :key => "name", :value => "volume_#{i}" }],
+        :iops              => (i == 0 ? 100 : nil),
+        :encrypted         => (i == 0 ? true : false),
       }
     end
 

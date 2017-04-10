@@ -82,6 +82,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
 
     assert_specific_snapshot
     assert_specific_volume
+    assert_unencrypted_volume
   end
 
   def stub_responses
@@ -218,7 +219,9 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
       :name        => "volume_0",
       :status      => "in-use",
       :volume_type => "standard",
-      :size        => 1.gigabyte
+      :size        => 1.gigabyte,
+      :encrypted   => true,
+      :iops        => 100
     )
 
     expect(@volume.ext_management_system).to eq(@ems.ebs_storage_manager)
@@ -229,5 +232,20 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
     @disk.reload
     expect(@disk.backing).to eq(@volume)
     expect(@disk.size).to eq(@volume.size)
+  end
+
+  def assert_unencrypted_volume
+    @volume = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.where(:ems_ref => "volume_id_1").first
+
+    expect(@volume).not_to be_nil
+    expect(@volume).to have_attributes(
+      :ems_ref     => "volume_id_1",
+      :name        => "volume_1",
+      :status      => "in-use",
+      :volume_type => "standard",
+      :size        => 1.gigabyte,
+      :encrypted   => false,
+      :iops        => nil
+    )
   end
 end
