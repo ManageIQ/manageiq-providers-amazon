@@ -69,8 +69,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
 
     (attachments || []).each do |a|
       if a['device'].blank?
-        _log.warn "#{log_header}: Volume: #{uid}, is missing a mountpoint, skipping the volume processing"
-        _log.warn "#{log_header}:   EMS: #{@ems.name}, Instance: #{a['instance_id']}"
+        log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{ems.name}] id: [#{ems.id}]"
+        $aws_log.warn "#{log_header}: Volume: #{uid}, is missing a mountpoint, skipping the volume processing"
+        $aws_log.warn "#{log_header}: EMS: #{ems.name}, Instance: #{a['instance_id']}"
         next
       end
 
