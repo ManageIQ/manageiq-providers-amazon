@@ -68,6 +68,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
            :allow_nil => true
 
   before_create :ensure_managers
+  before_update :ensure_managers_zone_and_provider_region
 
   supports :provisioning
   supports :regions
@@ -75,19 +76,32 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
 
   def ensure_managers
     build_network_manager unless network_manager
-    network_manager.name            = "#{name} Network Manager"
-    network_manager.zone_id         = zone_id
-    network_manager.provider_region = provider_region
+    network_manager.name = "#{name} Network Manager"
 
     build_ebs_storage_manager unless ebs_storage_manager
-    ebs_storage_manager.name            = "#{name} EBS Storage Manager"
-    ebs_storage_manager.zone_id         = zone_id
-    ebs_storage_manager.provider_region = provider_region
+    ebs_storage_manager.name = "#{name} EBS Storage Manager"
 
     build_s3_storage_manager unless s3_storage_manager
-    s3_storage_manager.name            = "#{name} S3 Storage Manager"
-    s3_storage_manager.zone_id         = zone_id
-    s3_storage_manager.provider_region = provider_region
+    s3_storage_manager.name = "#{name} S3 Storage Manager"
+
+    ensure_managers_zone_and_provider_region
+  end
+
+  def ensure_managers_zone_and_provider_region
+    if network_manager
+      network_manager.zone_id         = zone_id
+      network_manager.provider_region = provider_region
+    end
+
+    if ebs_storage_manager
+      ebs_storage_manager.zone_id         = zone_id
+      ebs_storage_manager.provider_region = provider_region
+    end
+
+    if s3_storage_manager
+      s3_storage_manager.zone_id         = zone_id
+      s3_storage_manager.provider_region = provider_region
+    end
   end
 
   def self.ems_type
