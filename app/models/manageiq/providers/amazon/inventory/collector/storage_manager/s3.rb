@@ -16,8 +16,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::S3 <
     token = response.next_continuation_token if response.is_truncated
     return hash_collection.new(response.contents), token
   rescue => e
-    _log.warn("Unable to collect S3 objects in a bucket #{options[:bucket]}, Message: #{e.message}")
-    _log.warn(e.backtrace.join("\n"))
+    log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{manager.name}] id: [#{manager.id}]"
+    $aws_log.warn("#{log_header}: Unable to collect S3 objects in a bucket #{options[:bucket]}, Message: #{e.message}")
+    $aws_log.warn(e.backtrace.join("\n"))
     return [], nil
   end
 
