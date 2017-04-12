@@ -457,4 +457,25 @@ describe Authenticator::Amazon do
       end
     end
   end
+
+  context 'Settings' do
+    it 'stores passwords encrypted' do
+      password  = "pa$$word"
+      encrypted = MiqPassword.encrypt(password)
+      miq_server = FactoryGirl.create(:miq_server)
+
+      Vmdb::Settings.save!(miq_server,
+                           :authentication => {
+                               :mode          => "amazon",
+                               :amazon_key    => "key",
+                               :amazon_secret => password
+                           }
+      )
+
+      miq_server.reload
+
+      change = miq_server.settings_changes.find_by(:key => "/authentication/amazon_secret")
+      expect(change.value).to eq encrypted
+    end
+  end
 end
