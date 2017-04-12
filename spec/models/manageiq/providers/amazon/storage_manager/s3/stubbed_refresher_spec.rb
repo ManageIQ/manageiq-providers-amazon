@@ -60,6 +60,17 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
             @data_scaling -= 1
           end
         end
+
+        it "handles gracefully errors in bucket's object listing" do
+          ems.reload
+
+          with_aws_stubbed(stub_object_listing_exception) do
+            EmsRefresh.refresh(ems.s3_storage_manager)
+          end
+          ems.reload
+
+          expect(CloudObjectStoreObject.count).to eq 0
+        end
       end
     end
   end
@@ -273,6 +284,20 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
           :next_continuation_token => nil,
           :is_truncated            => false
         }
+      }
+    }
+  end
+
+  def stub_object_listing_exception
+    {
+      :s3 => {
+        :list_buckets        => {
+          :buckets => mocked_s3_buckets
+        },
+        :get_bucket_location => {
+          :location_constraint => mocked_regions[:regions][0][:region_name]
+        },
+        :list_objects_v2     => Timeout::Error
       }
     }
   end
