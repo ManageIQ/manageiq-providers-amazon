@@ -42,6 +42,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
            :allow_nil => true
 
   before_create :ensure_managers
+  before_update :ensure_managers_zone_and_provider_region
 
   supports :provisioning
   supports :regions
@@ -49,9 +50,16 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
 
   def ensure_managers
     build_network_manager unless network_manager
-    network_manager.name            = "#{name} Network Manager"
-    network_manager.zone_id         = zone_id
-    network_manager.provider_region = provider_region
+    network_manager.name = "#{name} Network Manager"
+
+    ensure_managers_zone_and_provider_region
+  end
+
+  def ensure_managers_zone_and_provider_region
+    if network_manager
+      network_manager.zone_id         = zone_id
+      network_manager.provider_region = provider_region
+    end
   end
 
   def self.ems_type
