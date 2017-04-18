@@ -1119,6 +1119,15 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_orchestration_stack
+    assert_specific_parent_orchestration_stack_data
+    assert_specific_orchestration_stack_data
+    assert_specific_orchestration_stack_parameters
+    assert_specific_orchestration_stack_resources
+    assert_specific_orchestration_stack_outputs
+    assert_specific_orchestration_stack_associations
+  end
+
+  def assert_specific_parent_orchestration_stack_data
     @parent_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.find_by(
       :name => "EmsRefreshSpecStack")
 
@@ -1131,6 +1140,10 @@ module AwsRefresherSpecCommon
       )
     )
 
+    expect(@parent_stack.description).to start_with("AWS CloudFormation Sample Template vpc_single_instance_in_subnet")
+  end
+
+  def assert_specific_orchestration_stack_data
     @orch_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.find_by(
       :name => "EmsRefreshSpecStack-WebServerInstance-1PAB3IELQ8EYT"
     )
@@ -1144,12 +1157,6 @@ module AwsRefresherSpecCommon
     )
 
     expect(@orch_stack.description).to start_with("AWS CloudFormation Sample Template VPC_Single_Instance_In_Subnet")
-    expect(@parent_stack.description).to start_with("AWS CloudFormation Sample Template vpc_single_instance_in_subnet")
-
-    assert_specific_orchestration_stack_parameters
-    assert_specific_orchestration_stack_resources
-    assert_specific_orchestration_stack_outputs
-    assert_specific_orchestration_stack_associations
   end
 
   def assert_specific_orchestration_stack_parameters
