@@ -237,8 +237,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
       vm["network_interfaces"].each do |network_interface|
         add_simple_target!(:network_ports, network_interface["network_interface_id"])
-        add_simple_target!(:cloud_subnet, network_interface["subnet_id"])
-        add_simple_target!(:cloud_network, network_interface["vpc_id"])
+        add_simple_target!(:cloud_subnets, network_interface["subnet_id"])
+        add_simple_target!(:cloud_networks, network_interface["vpc_id"])
       end
 
       vm["security_groups"].each do |security_group|
