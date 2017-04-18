@@ -106,34 +106,50 @@ module AwsRefresherSpecCommon
     )
   end
 
-  def assert_specific_cloud_network
+  def assert_vpc
     @cn = CloudNetwork.where(:name => "EmsRefreshSpec-VPC").first
-    expect(@cn).to have_attributes(
-      :name    => "EmsRefreshSpec-VPC",
-      :ems_ref => "vpc-ff49ff91",
-      :cidr    => "10.0.0.0/16",
-      :status  => "inactive",
-      :enabled => true
+    expect(@cn).to(
+      have_attributes(
+        :name    => "EmsRefreshSpec-VPC",
+        :ems_ref => "vpc-ff49ff91",
+        :cidr    => "10.0.0.0/16",
+        :status  => "inactive",
+        :enabled => true
+      )
     )
+  end
 
-    expect(@cn.cloud_subnets.size).to eq(2)
+  def assert_vpc_subnet_1
     @subnet = @cn.cloud_subnets.where(:name => "EmsRefreshSpec-Subnet1").first
-    expect(@subnet).to have_attributes(
-      :name    => "EmsRefreshSpec-Subnet1",
-      :ems_ref => "subnet-f849ff96",
-      :cidr    => "10.0.0.0/24"
+    expect(@subnet).to(
+      have_attributes(
+        :name    => "EmsRefreshSpec-Subnet1",
+        :ems_ref => "subnet-f849ff96",
+        :cidr    => "10.0.0.0/24"
+      )
     )
     expect(@subnet.availability_zone)
       .to eq(ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.where(:name => "us-east-1e").first)
+  end
 
+  def assert_vpc_subnet_2
     subnet2 = @cn.cloud_subnets.where(:name => "EmsRefreshSpec-Subnet2").first
-    expect(subnet2).to have_attributes(
-      :name    => "EmsRefreshSpec-Subnet2",
-      :ems_ref => "subnet-16c70477",
-      :cidr    => "10.0.1.0/24"
+    expect(subnet2).to(
+      have_attributes(
+        :name    => "EmsRefreshSpec-Subnet2",
+        :ems_ref => "subnet-16c70477",
+        :cidr    => "10.0.1.0/24"
+      )
     )
     expect(subnet2.availability_zone)
       .to eq(ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.where(:name => "us-east-1d").first)
+  end
+
+  def assert_specific_cloud_network
+    assert_vpc
+    expect(@cn.cloud_subnets.size).to eq(2)
+    assert_vpc_subnet_1
+    assert_vpc_subnet_2
   end
 
   def assert_specific_security_group

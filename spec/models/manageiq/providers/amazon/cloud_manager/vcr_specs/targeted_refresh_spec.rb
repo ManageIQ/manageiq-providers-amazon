@@ -66,7 +66,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :disk                          => 1,
             :ext_management_system         => 4,
             :firewall_rule                 => 13,
-            :flavor                        => 2,
+            :flavor                        => 3,
             :floating_ip                   => 1,
             :guest_device                  => 0,
             :hardware                      => 2,
@@ -110,6 +110,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           end
           @ems.reload
 
+          assert_vpc
+          assert_vpc_subnet_1
           assert_specific_flavor
           assert_specific_key_pair
           assert_specific_az
@@ -124,8 +126,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           expected_counts = {
             :auth_private_key              => 1,
             :availability_zone             => 1,
-            :cloud_network                 => 0,
-            :cloud_subnet                  => 0,
+            :cloud_network                 => 1,
+            :cloud_subnet                  => 1,
             :cloud_volume                  => 2,
             :cloud_volume_backup           => 0,
             :cloud_volume_snapshot         => 0,
@@ -133,7 +135,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :disk                          => 2,
             :ext_management_system         => 4,
             :firewall_rule                 => 3,
-            :flavor                        => 2,
+            :flavor                        => 3,
             :floating_ip                   => 1,
             :guest_device                  => 0,
             :hardware                      => 2,
@@ -171,6 +173,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           end
           @ems.reload
 
+          assert_vpc
+          assert_vpc_subnet_1
           assert_specific_flavor
           assert_specific_key_pair
           assert_specific_az
@@ -182,8 +186,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           expected_counts = {
             :auth_private_key              => 1,
             :availability_zone             => 1,
-            :cloud_network                 => 0,
-            :cloud_subnet                  => 0,
+            :cloud_network                 => 1,
+            :cloud_subnet                  => 1,
             :cloud_volume                  => 2,
             :cloud_volume_backup           => 0,
             :cloud_volume_snapshot         => 0,
@@ -191,7 +195,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :disk                          => 2,
             :ext_management_system         => 4,
             :firewall_rule                 => 3,
-            :flavor                        => 2,
+            :flavor                        => 3,
             :floating_ip                   => 1,
             :guest_device                  => 0,
             :hardware                      => 2,
@@ -258,7 +262,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :disk                          => 0,
             :ext_management_system         => 4,
             :firewall_rule                 => 0,
-            :flavor                        => 2,
+            :flavor                        => 3,
             :floating_ip                   => 0,
             :guest_device                  => 0,
             :hardware                      => 0,
@@ -339,7 +343,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :disk                          => 0,
             :ext_management_system         => 4,
             :firewall_rule                 => 0,
-            :flavor                        => 2,
+            :flavor                        => 3,
             :floating_ip                   => 0,
             :guest_device                  => 0,
             :hardware                      => 0,
@@ -358,6 +362,79 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :system_service                => 0,
             :vm                            => 0,
             :vm_or_template                => 0
+          }
+
+          assert_counts(expected_counts)
+        end
+      end
+
+      it "will refresh a nested orchestration stacks with Vm" do
+        vm_target = ManagerRefresh::Target.new(
+          :manager_id  => @ems.id,
+          :association => :vms,
+          :manager_ref => {:ems_ref => "i-015e4579bfa4fcc84"}
+        )
+
+        orchestration_stack_target = ManagerRefresh::Target.new(
+          :manager_id  => @ems.id,
+          :association => :orchestration_stacks,
+          :manager_ref => {
+            :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack/"\
+                        "07fba5b0-13aa-11e7-847a-500c28604cae"
+          }
+        )
+
+        orchestration_stack_target_nested = ManagerRefresh::Target.new(
+          :manager_id  => @ems.id,
+          :association => :orchestration_stacks,
+          :manager_ref => {
+            :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance"\
+                        "-1PAB3IELQ8EYT/28cef7b0-13aa-11e7-8260-503aca4a58d1"
+          }
+        )
+
+        2.times do # Run twice to verify that a second run with existing data does not change anything
+          @ems.reload
+
+          VCR.use_cassette(described_class.name.underscore + "_targeted/orchestration_stacks_nested_with_vm") do
+            EmsRefresh.refresh([vm_target, orchestration_stack_target, orchestration_stack_target_nested])
+          end
+          @ems.reload
+
+          assert_specific_orchestration_template
+          assert_specific_orchestration_stack
+
+          expected_counts = {
+            :auth_private_key              => 1,
+            :availability_zone             => 1,
+            :cloud_network                 => 1,
+            :cloud_subnet                  => 1,
+            :cloud_volume                  => 1,
+            :cloud_volume_backup           => 0,
+            :cloud_volume_snapshot         => 0,
+            :custom_attribute              => 4,
+            :disk                          => 1,
+            :ext_management_system         => 4,
+            :firewall_rule                 => 3,
+            :flavor                        => 3,
+            :floating_ip                   => 1,
+            :guest_device                  => 0,
+            :hardware                      => 2,
+            :miq_template                  => 1,
+            :network                       => 2,
+            :network_port                  => 1,
+            :network_router                => 0,
+            :operating_system              => 0,
+            :orchestration_stack           => 2,
+            :orchestration_stack_output    => 2,
+            :orchestration_stack_parameter => 10,
+            :orchestration_stack_resource  => 19,
+            :orchestration_template        => 2,
+            :security_group                => 1,
+            :snapshot                      => 0,
+            :system_service                => 0,
+            :vm                            => 1,
+            :vm_or_template                => 2
           }
 
           assert_counts(expected_counts)
@@ -393,6 +470,23 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
                        :cpus                     => 1,
                        :cpu_cores                => 1,
                        :memory                   => 1.0.gigabytes.to_i,
+                       :supports_32_bit          => true,
+                       :supports_64_bit          => true,
+                       :supports_hvm             => false,
+                       :supports_paravirtual     => true,
+                       :block_storage_based_only => true,
+                       :ephemeral_disk_size      => 0,
+                       :ephemeral_disk_count     => 0)
+
+    FactoryGirl.create(:flavor_amazon,
+                       :ext_management_system    => @ems,
+                       :name                     => "t2.nano",
+                       :ems_ref                  => "t2.nano",
+                       :description              => "T2 Nano",
+                       :enabled                  => true,
+                       :cpus                     => 1,
+                       :cpu_cores                => 1,
+                       :memory                   => 0.5.gigabytes,
                        :supports_32_bit          => true,
                        :supports_64_bit          => true,
                        :supports_hvm             => false,
