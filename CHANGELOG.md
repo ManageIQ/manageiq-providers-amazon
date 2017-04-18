@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 
 
+## Unreleased - as of Sprint 58 end 2017-04-10
+
+### Fixed
+- Gracefully ignore and log errors when listing s3 objects [(#207)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/207)
+- Return instead of next is causing unwanted break of Vm parsing [(#202)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/202)
+
+## Unreleased - as of Sprint 57 end 2017-03-27
+
+### Added
+- Remap `:name` parameter into `:bucket` parameter when creating new bucket [(#198)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/198)
+- Use public flag we get from data rather than sending it explicitly [(#197)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/197)
+- Add tags for VMs and Images [(#183)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/183)
+- Add options for graph refresh [(#158)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/158)
+- Adjust attribute set of newly created bucket [(#192)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/192)
+- Add eu-west-2 and ap-south-1 regions [(#178)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/178)
+- Enable dynamic cloud volume modifications [(#177)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/177)
+- Increase minimum AWS version for modify_volume [(#176)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/176)
+- Do vm targeted full refresh by default [(#174)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/174)
+- New instance types [(#171)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/171)
+- Maintain instance types [(#170)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/170)
+
+### Fixed
+- Add support snapshot_create to EBS cloud volume [(#196)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/196)
+- Filter terminated instance properly [(#184)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/184)
+
 ## Unreleased - as of Sprint 56 end 2017-03-13
 
 ### Added
