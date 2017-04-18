@@ -158,7 +158,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     )
 
     add_inventory_collection(
-      cloud.orchestration_stacks(
+      cloud.orchestration_stacks_resources(
         :arel     => manager.orchestration_stacks_resources.references(:orchestration_stacks).where(
           :orchestration_stacks => {:ems_ref => manager_refs}
         ),
