@@ -2,9 +2,11 @@ require_relative '../../aws_helper'
 require_relative '../../aws_stubs'
 
 describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
+
   include AwsStubs
 
   before do
+    skip("AWS S3 is disabled") unless ::Settings.prototype.amazon.s3
     EvmSpecHelper.local_miq_server(:zone => Zone.seed)
   end
 
@@ -305,7 +307,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
   def expected_table_counts
     {
       :auth_private_key                  => 0,
-      :ext_management_system             => 4,
+      :ext_management_system             => expected_ext_management_systems_count,
       :flavor                            => 0,
       :availability_zone                 => 0,
       :vm_or_template                    => 0,
