@@ -1,0 +1,480 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://cloudformation.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeStacks&StackName=arn%3Aaws%3Acloudformation%3Aus-east-1%3A200278856672%3Astack%2FEmsRefreshSpecStack-WebServerInstance-1PAB3IELQ8EYT%2F28cef7b0-13aa-11e7-8260-503aca4a58d1&Version=2010-05-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170418T082221Z
+      X-Amz-Content-Sha256:
+      - 9ff597a58e43478edc9a515b9a129640eadea988b0102cae804f6ac7e59a2262
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170418/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=f8dd699197a6d4a40cadb62bacbc417cd1008ce3f87a20ee34e1ce146cbde7ab
+      Content-Length:
+      - '205'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 210f0adc-2410-11e7-8536-2f082b92a693
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '2340'
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Tue, 18 Apr 2017 08:22:14 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <DescribeStacksResponse xmlns="http://cloudformation.amazonaws.com/doc/2010-05-15/">
+          <DescribeStacksResult>
+            <Stacks>
+              <member>
+                <Outputs>
+                  <member>
+                    <Description>Newly created application URL</Description>
+                    <OutputKey>URL</OutputKey>
+                    <OutputValue>http://34.206.127.107</OutputValue>
+                  </member>
+                </Outputs>
+                <CreationTime>2017-03-28T11:32:01.151Z</CreationTime>
+                <NotificationARNs/>
+                <StackId>arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance-1PAB3IELQ8EYT/28cef7b0-13aa-11e7-8260-503aca4a58d1</StackId>
+                <StackName>EmsRefreshSpecStack-WebServerInstance-1PAB3IELQ8EYT</StackName>
+                <Description>AWS CloudFormation Sample Template VPC_Single_Instance_In_Subnet: Sample template showing how to create a VPC and add an EC2 instance with an Elastic IP address and a security group. **WARNING** This template creates an Amazon EC2 instance. You will be billed for the AWS resources used if you create a stack from this template.</Description>
+                <StackStatus>CREATE_COMPLETE</StackStatus>
+                <DisableRollback>true</DisableRollback>
+                <Tags/>
+                <Parameters>
+                  <member>
+                    <ParameterKey>KeyName</ParameterKey>
+                    <ParameterValue>EmsRefreshSpec-KeyPair</ParameterValue>
+                  </member>
+                  <member>
+                    <ParameterKey>SSHLocation</ParameterKey>
+                    <ParameterValue>0.0.0.0/0</ParameterValue>
+                  </member>
+                  <member>
+                    <ParameterKey>InstanceSecurityGroupID</ParameterKey>
+                    <ParameterValue>sg-a5109cda</ParameterValue>
+                  </member>
+                  <member>
+                    <ParameterKey>DBRootPassword</ParameterKey>
+                    <ParameterValue>****</ParameterValue>
+                  </member>
+                  <member>
+                    <ParameterKey>SubnetID</ParameterKey>
+                    <ParameterValue>subnet-fc014299</ParameterValue>
+                  </member>
+                  <member>
+                    <ParameterKey>InstanceType</ParameterKey>
+                    <ParameterValue>t2.nano</ParameterValue>
+                  </member>
+                </Parameters>
+              </member>
+            </Stacks>
+          </DescribeStacksResult>
+          <ResponseMetadata>
+            <RequestId>210f0adc-2410-11e7-8536-2f082b92a693</RequestId>
+          </ResponseMetadata>
+        </DescribeStacksResponse>
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 08:22:22 GMT
+- request:
+    method: post
+    uri: https://cloudformation.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=ListStackResources&StackName=EmsRefreshSpecStack-WebServerInstance-1PAB3IELQ8EYT&Version=2010-05-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170418T082222Z
+      X-Amz-Content-Sha256:
+      - b08571f930d1018c0dece1477c75f323ed1c55b532e02a6ac107e4786b151021
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170418/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=8e53200cc7173ca86a9e1c9a13c314547fd006109a69fc18fbddbc6885cc310d
+      Content-Length:
+      - '106'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 21806aa3-2410-11e7-b21f-3b6e9adc8921
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '1038'
+      Date:
+      - Tue, 18 Apr 2017 08:22:15 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <ListStackResourcesResponse xmlns="http://cloudformation.amazonaws.com/doc/2010-05-15/">
+          <ListStackResourcesResult>
+            <StackResourceSummaries>
+              <member>
+                <LastUpdatedTimestamp>2017-03-28T11:34:19.414Z</LastUpdatedTimestamp>
+                <PhysicalResourceId>34.206.127.107</PhysicalResourceId>
+                <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <LogicalResourceId>IPAddress</LogicalResourceId>
+                <ResourceType>AWS::EC2::EIP</ResourceType>
+              </member>
+              <member>
+                <LastUpdatedTimestamp>2017-03-28T11:33:40.838Z</LastUpdatedTimestamp>
+                <PhysicalResourceId>i-015e4579bfa4fcc84</PhysicalResourceId>
+                <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <LogicalResourceId>WebServerInstance</LogicalResourceId>
+                <ResourceType>AWS::EC2::Instance</ResourceType>
+              </member>
+            </StackResourceSummaries>
+          </ListStackResourcesResult>
+          <ResponseMetadata>
+            <RequestId>21806aa3-2410-11e7-b21f-3b6e9adc8921</RequestId>
+          </ResponseMetadata>
+        </ListStackResourcesResponse>
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 08:22:23 GMT
+- request:
+    method: post
+    uri: https://cloudformation.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=GetTemplate&StackName=EmsRefreshSpecStack-WebServerInstance-1PAB3IELQ8EYT&Version=2010-05-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170418T082223Z
+      X-Amz-Content-Sha256:
+      - 2f4b252fd9424087d9c2a33c5a7d744e17b92f3c0d5f86c143a7d057945c1c20
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170418/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=aa9814de6de3a039d7a9c6d3b9b2342c5c6bcccb1ce75823eb31a39c17165775
+      Content-Length:
+      - '99'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 21faca3b-2410-11e7-a6a4-e7d7f64d6d4f
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '23157'
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Tue, 18 Apr 2017 08:22:16 GMT
+    body:
+      encoding: UTF-8
+      string: "<GetTemplateResponse xmlns=\"http://cloudformation.amazonaws.com/doc/2010-05-15/\">\n
+        \ <GetTemplateResult>\n    <TemplateBody>{\n  &quot;AWSTemplateFormatVersion&quot;
+        : &quot;2010-09-09&quot;,\n\n  &quot;Description&quot; : &quot;AWS CloudFormation
+        Sample Template VPC_Single_Instance_In_Subnet: Sample template showing how
+        to create a VPC and add an EC2 instance with an Elastic IP address and a security
+        group. **WARNING** This template creates an Amazon EC2 instance. You will
+        be billed for the AWS resources used if you create a stack from this template.&quot;,\n\n
+        \ &quot;Parameters&quot; : {\n\n    &quot;InstanceType&quot; : {\n      &quot;Description&quot;
+        : &quot;WebServer EC2 instance type&quot;,\n      &quot;Type&quot; : &quot;String&quot;,\n
+        \     &quot;Default&quot; : &quot;t2.small&quot;,\n      &quot;AllowedValues&quot;
+        : [ &quot;t1.micro&quot;, &quot;t2.nano&quot;, &quot;t2.micro&quot;, &quot;t2.small&quot;,
+        &quot;t2.medium&quot;, &quot;t2.large&quot;, &quot;m1.small&quot;, &quot;m1.medium&quot;,
+        &quot;m1.large&quot;, &quot;m1.xlarge&quot;, &quot;m2.xlarge&quot;, &quot;m2.2xlarge&quot;,
+        &quot;m2.4xlarge&quot;, &quot;m3.medium&quot;, &quot;m3.large&quot;, &quot;m3.xlarge&quot;,
+        &quot;m3.2xlarge&quot;, &quot;m4.large&quot;, &quot;m4.xlarge&quot;, &quot;m4.2xlarge&quot;,
+        &quot;m4.4xlarge&quot;, &quot;m4.10xlarge&quot;, &quot;c1.medium&quot;, &quot;c1.xlarge&quot;,
+        &quot;c3.large&quot;, &quot;c3.xlarge&quot;, &quot;c3.2xlarge&quot;, &quot;c3.4xlarge&quot;,
+        &quot;c3.8xlarge&quot;, &quot;c4.large&quot;, &quot;c4.xlarge&quot;, &quot;c4.2xlarge&quot;,
+        &quot;c4.4xlarge&quot;, &quot;c4.8xlarge&quot;, &quot;g2.2xlarge&quot;, &quot;g2.8xlarge&quot;,
+        &quot;r3.large&quot;, &quot;r3.xlarge&quot;, &quot;r3.2xlarge&quot;, &quot;r3.4xlarge&quot;,
+        &quot;r3.8xlarge&quot;, &quot;i2.xlarge&quot;, &quot;i2.2xlarge&quot;, &quot;i2.4xlarge&quot;,
+        &quot;i2.8xlarge&quot;, &quot;d2.xlarge&quot;, &quot;d2.2xlarge&quot;, &quot;d2.4xlarge&quot;,
+        &quot;d2.8xlarge&quot;, &quot;hi1.4xlarge&quot;, &quot;hs1.8xlarge&quot;,
+        &quot;cr1.8xlarge&quot;, &quot;cc2.8xlarge&quot;, &quot;cg1.4xlarge&quot;]\n,\n
+        \     &quot;ConstraintDescription&quot; : &quot;must be a valid EC2 instance
+        type.&quot;\n    },\n\n    &quot;KeyName&quot;: {\n      &quot;Description&quot;
+        : &quot;Name of an existing EC2 KeyPair to enable SSH access to the instance&quot;,\n
+        \     &quot;Type&quot;: &quot;AWS::EC2::KeyPair::KeyName&quot;,\n      &quot;ConstraintDescription&quot;
+        : &quot;must be the name of an existing EC2 KeyPair.&quot;\n    },\n\n    &quot;DBRootPassword&quot;:
+        {\n      &quot;Description&quot;: &quot;Db password&quot;,\n      &quot;Type&quot;:
+        &quot;String&quot;,\n      &quot;NoEcho&quot;: &quot;true&quot;, \n      &quot;Default&quot;:
+        &quot;adminadmin&quot;\n    },\t\n    \n    &quot;SSHLocation&quot; : {\n
+        \     &quot;Description&quot; : &quot; The IP address range that can be used
+        to SSH to the EC2 instances&quot;,\n      &quot;Type&quot;: &quot;String&quot;,\n
+        \     &quot;MinLength&quot;: &quot;9&quot;,\n      &quot;MaxLength&quot;:
+        &quot;18&quot;,\n      &quot;Default&quot;: &quot;0.0.0.0/0&quot;,\n      &quot;AllowedPattern&quot;:
+        &quot;(\\\\d{1,3})\\\\.(\\\\d{1,3})\\\\.(\\\\d{1,3})\\\\.(\\\\d{1,3})/(\\\\d{1,2})&quot;,\n
+        \     &quot;ConstraintDescription&quot;: &quot;must be a valid IP CIDR range
+        of the form x.x.x.x/x.&quot;\n    },\n\n    &quot;InstanceSecurityGroupID&quot;:
+        {\n      &quot;Description&quot;: &quot;Security Group ID&quot;,\n      &quot;Type&quot;:
+        &quot;AWS::EC2::SecurityGroup::Id&quot;,\n      &quot;ConstraintDescription&quot;:
+        &quot;must be the id of an existing VPC SecurityGroup.&quot;\n    },\n    \n
+        \   &quot;SubnetID&quot;: {\n      &quot;Description&quot;: &quot;Subnet ID&quot;,\n
+        \     &quot;Type&quot;: &quot;AWS::EC2::Subnet::Id&quot;,\n      &quot;ConstraintDescription&quot;:
+        &quot;must be the id of an existing VPC Subnet.&quot;\n    }\n  },\n\n  &quot;Mappings&quot;
+        : {\n    &quot;Region2Examples&quot; : {\n      &quot;us-east-1&quot;      :
+        { &quot;Examples&quot; : &quot;https://s3.amazonaws.com/cloudformation-examples-us-east-1&quot;
+        },\n      &quot;us-west-2&quot;      : { &quot;Examples&quot; : &quot;https://s3-us-west-2.amazonaws.com/cloudformation-examples-us-west-2&quot;
+        },\n      &quot;us-west-1&quot;      : { &quot;Examples&quot; : &quot;https://s3-us-west-1.amazonaws.com/cloudformation-examples-us-west-1&quot;
+        },\n      &quot;eu-west-1&quot;      : { &quot;Examples&quot; : &quot;https://s3-eu-west-1.amazonaws.com/cloudformation-examples-eu-west-1&quot;
+        },\n      &quot;eu-west-2&quot;      : { &quot;Examples&quot; : &quot;https://s3-eu-west-2.amazonaws.com/cloudformation-examples-eu-west-2&quot;
+        },\n      &quot;eu-central-1&quot;   : { &quot;Examples&quot; : &quot;https://s3-eu-central-1.amazonaws.com/cloudformation-examples-eu-central-1&quot;
+        },\n      &quot;ap-southeast-1&quot; : { &quot;Examples&quot; : &quot;https://s3-ap-southeast-1.amazonaws.com/cloudformation-examples-ap-southeast-1&quot;
+        },\n      &quot;ap-northeast-1&quot; : { &quot;Examples&quot; : &quot;https://s3-ap-northeast-1.amazonaws.com/cloudformation-examples-ap-northeast-1&quot;
+        },\n      &quot;ap-northeast-2&quot; : { &quot;Examples&quot; : &quot;https://s3-ap-northeast-2.amazonaws.com/cloudformation-examples-ap-northeast-2&quot;
+        },\n      &quot;ap-southeast-2&quot; : { &quot;Examples&quot; : &quot;https://s3-ap-southeast-2.amazonaws.com/cloudformation-examples-ap-southeast-2&quot;
+        },\n      &quot;ap-south-1&quot;     : { &quot;Examples&quot; : &quot;https://s3-ap-south-1.amazonaws.com/cloudformation-examples-ap-south-1&quot;
+        },\n      &quot;us-east-2&quot;      : { &quot;Examples&quot; : &quot;https://s3-us-east-2.amazonaws.com/cloudformation-examples-us-east-2&quot;
+        },\n      &quot;ca-central-1&quot;   : { &quot;Examples&quot; : &quot;https://s3-ca-central-1.amazonaws.com/cloudformation-examples-ca-central-1&quot;
+        },\n      &quot;sa-east-1&quot;      : { &quot;Examples&quot; : &quot;https://s3-sa-east-1.amazonaws.com/cloudformation-examples-sa-east-1&quot;
+        },\n      &quot;cn-north-1&quot;     : { &quot;Examples&quot; : &quot;https://s3.cn-north-1.amazonaws.com.cn/cloudformation-examples-cn-north-1&quot;
+        }\n    }\n,\n    &quot;AWSInstanceType2Arch&quot; : {\n      &quot;t1.micro&quot;
+        \   : { &quot;Arch&quot; : &quot;PV64&quot;   },\n      &quot;t2.nano&quot;
+        \    : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;t2.micro&quot;
+        \   : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;t2.small&quot;
+        \   : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;t2.medium&quot;
+        \  : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;t2.large&quot;
+        \   : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;m1.small&quot;
+        \   : { &quot;Arch&quot; : &quot;PV64&quot;   },\n      &quot;m1.medium&quot;
+        \  : { &quot;Arch&quot; : &quot;PV64&quot;   },\n      &quot;m1.large&quot;
+        \   : { &quot;Arch&quot; : &quot;PV64&quot;   },\n      &quot;m1.xlarge&quot;
+        \  : { &quot;Arch&quot; : &quot;PV64&quot;   },\n      &quot;m2.xlarge&quot;
+        \  : { &quot;Arch&quot; : &quot;PV64&quot;   },\n      &quot;m2.2xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;PV64&quot;   },\n      &quot;m2.4xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;PV64&quot;   },\n      &quot;m3.medium&quot;
+        \  : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;m3.large&quot;
+        \   : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;m3.xlarge&quot;
+        \  : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;m3.2xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;m4.large&quot;
+        \   : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;m4.xlarge&quot;
+        \  : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;m4.2xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;m4.4xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;m4.10xlarge&quot;
+        : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;c1.medium&quot;
+        \  : { &quot;Arch&quot; : &quot;PV64&quot;   },\n      &quot;c1.xlarge&quot;
+        \  : { &quot;Arch&quot; : &quot;PV64&quot;   },\n      &quot;c3.large&quot;
+        \   : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;c3.xlarge&quot;
+        \  : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;c3.2xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;c3.4xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;c3.8xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;c4.large&quot;
+        \   : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;c4.xlarge&quot;
+        \  : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;c4.2xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;c4.4xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;c4.8xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;g2.2xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVMG2&quot;  },\n      &quot;g2.8xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVMG2&quot;  },\n      &quot;r3.large&quot;
+        \   : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;r3.xlarge&quot;
+        \  : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;r3.2xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;r3.4xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;r3.8xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;i2.xlarge&quot;
+        \  : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;i2.2xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;i2.4xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;i2.8xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;d2.xlarge&quot;
+        \  : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;d2.2xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;d2.4xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;d2.8xlarge&quot;
+        \ : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;hi1.4xlarge&quot;
+        : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;hs1.8xlarge&quot;
+        : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;cr1.8xlarge&quot;
+        : { &quot;Arch&quot; : &quot;HVM64&quot;  },\n      &quot;cc2.8xlarge&quot;
+        : { &quot;Arch&quot; : &quot;HVM64&quot;  }\n    },\n\n    &quot;AWSInstanceType2NATArch&quot;
+        : {\n      &quot;t1.micro&quot;    : { &quot;Arch&quot; : &quot;NATPV64&quot;
+        \  },\n      &quot;t2.nano&quot;     : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;t2.micro&quot;    : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;t2.small&quot;    : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;t2.medium&quot;   : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;t2.large&quot;    : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;m1.small&quot;    : { &quot;Arch&quot; : &quot;NATPV64&quot;
+        \  },\n      &quot;m1.medium&quot;   : { &quot;Arch&quot; : &quot;NATPV64&quot;
+        \  },\n      &quot;m1.large&quot;    : { &quot;Arch&quot; : &quot;NATPV64&quot;
+        \  },\n      &quot;m1.xlarge&quot;   : { &quot;Arch&quot; : &quot;NATPV64&quot;
+        \  },\n      &quot;m2.xlarge&quot;   : { &quot;Arch&quot; : &quot;NATPV64&quot;
+        \  },\n      &quot;m2.2xlarge&quot;  : { &quot;Arch&quot; : &quot;NATPV64&quot;
+        \  },\n      &quot;m2.4xlarge&quot;  : { &quot;Arch&quot; : &quot;NATPV64&quot;
+        \  },\n      &quot;m3.medium&quot;   : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;m3.large&quot;    : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;m3.xlarge&quot;   : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;m3.2xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;m4.large&quot;    : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;m4.xlarge&quot;   : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;m4.2xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;m4.4xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;m4.10xlarge&quot; : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;c1.medium&quot;   : { &quot;Arch&quot; : &quot;NATPV64&quot;
+        \  },\n      &quot;c1.xlarge&quot;   : { &quot;Arch&quot; : &quot;NATPV64&quot;
+        \  },\n      &quot;c3.large&quot;    : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;c3.xlarge&quot;   : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;c3.2xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;c3.4xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;c3.8xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;c4.large&quot;    : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;c4.xlarge&quot;   : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;c4.2xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;c4.4xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;c4.8xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;g2.2xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVMG2&quot;
+        \ },\n      &quot;g2.8xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVMG2&quot;
+        \ },\n      &quot;r3.large&quot;    : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;r3.xlarge&quot;   : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;r3.2xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;r3.4xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;r3.8xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;i2.xlarge&quot;   : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;i2.2xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;i2.4xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;i2.8xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;d2.xlarge&quot;   : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;d2.2xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;d2.4xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;d2.8xlarge&quot;  : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;hi1.4xlarge&quot; : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;hs1.8xlarge&quot; : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;cr1.8xlarge&quot; : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ },\n      &quot;cc2.8xlarge&quot; : { &quot;Arch&quot; : &quot;NATHVM64&quot;
+        \ }\n    }\n,\n    &quot;AWSRegionArch2AMI&quot; : {\n      &quot;us-east-1&quot;
+        \       : {&quot;PV64&quot; : &quot;ami-2a69aa47&quot;, &quot;HVM64&quot;
+        : &quot;ami-6869aa05&quot;, &quot;HVMG2&quot; : &quot;ami-bb18efad&quot;},\n
+        \     &quot;us-west-2&quot;        : {&quot;PV64&quot; : &quot;ami-7f77b31f&quot;,
+        &quot;HVM64&quot; : &quot;ami-7172b611&quot;, &quot;HVMG2&quot; : &quot;ami-31912f51&quot;},\n
+        \     &quot;us-west-1&quot;        : {&quot;PV64&quot; : &quot;ami-a2490dc2&quot;,
+        &quot;HVM64&quot; : &quot;ami-31490d51&quot;, &quot;HVMG2&quot; : &quot;ami-0a9dcf6a&quot;},\n
+        \     &quot;eu-west-1&quot;        : {&quot;PV64&quot; : &quot;ami-4cdd453f&quot;,
+        &quot;HVM64&quot; : &quot;ami-f9dd458a&quot;, &quot;HVMG2&quot; : &quot;ami-873e61e1&quot;},\n
+        \     &quot;eu-west-2&quot;        : {&quot;PV64&quot; : &quot;NOT_SUPPORTED&quot;,
+        &quot;HVM64&quot; : &quot;ami-886369ec&quot;, &quot;HVMG2&quot; : &quot;NOT_SUPPORTED&quot;},\n
+        \     &quot;eu-central-1&quot;     : {&quot;PV64&quot; : &quot;ami-6527cf0a&quot;,
+        &quot;HVM64&quot; : &quot;ami-ea26ce85&quot;, &quot;HVMG2&quot; : &quot;ami-a16ba4ce&quot;},\n
+        \     &quot;ap-northeast-1&quot;   : {&quot;PV64&quot; : &quot;ami-3e42b65f&quot;,
+        &quot;HVM64&quot; : &quot;ami-374db956&quot;, &quot;HVMG2&quot; : &quot;ami-6b443f0c&quot;},\n
+        \     &quot;ap-northeast-2&quot;   : {&quot;PV64&quot; : &quot;NOT_SUPPORTED&quot;,
+        &quot;HVM64&quot; : &quot;ami-2b408b45&quot;, &quot;HVMG2&quot; : &quot;NOT_SUPPORTED&quot;},\n
+        \     &quot;ap-southeast-1&quot;   : {&quot;PV64&quot; : &quot;ami-df9e4cbc&quot;,
+        &quot;HVM64&quot; : &quot;ami-a59b49c6&quot;, &quot;HVMG2&quot; : &quot;ami-1c0ba17f&quot;},\n
+        \     &quot;ap-southeast-2&quot;   : {&quot;PV64&quot; : &quot;ami-63351d00&quot;,
+        &quot;HVM64&quot; : &quot;ami-dc361ebf&quot;, &quot;HVMG2&quot; : &quot;ami-bf0d0adc&quot;},\n
+        \     &quot;ap-south-1&quot;       : {&quot;PV64&quot; : &quot;NOT_SUPPORTED&quot;,
+        &quot;HVM64&quot; : &quot;ami-ffbdd790&quot;, &quot;HVMG2&quot; : &quot;ami-6135440e&quot;},\n
+        \     &quot;us-east-2&quot;        : {&quot;PV64&quot; : &quot;NOT_SUPPORTED&quot;,
+        &quot;HVM64&quot; : &quot;ami-f6035893&quot;, &quot;HVMG2&quot; : &quot;NOT_SUPPORTED&quot;},\n
+        \     &quot;ca-central-1&quot;     : {&quot;PV64&quot; : &quot;NOT_SUPPORTED&quot;,
+        &quot;HVM64&quot; : &quot;ami-730ebd17&quot;, &quot;HVMG2&quot; : &quot;NOT_SUPPORTED&quot;},\n
+        \     &quot;sa-east-1&quot;        : {&quot;PV64&quot; : &quot;ami-1ad34676&quot;,
+        &quot;HVM64&quot; : &quot;ami-6dd04501&quot;, &quot;HVMG2&quot; : &quot;NOT_SUPPORTED&quot;},\n
+        \     &quot;cn-north-1&quot;       : {&quot;PV64&quot; : &quot;ami-77559f1a&quot;,
+        &quot;HVM64&quot; : &quot;ami-8e6aa0e3&quot;, &quot;HVMG2&quot; : &quot;NOT_SUPPORTED&quot;}\n
+        \   }\n\n  },\n\n  &quot;Resources&quot; : {\n    &quot;IPAddress&quot; :
+        {\n      &quot;Type&quot; : &quot;AWS::EC2::EIP&quot;,\n      &quot;Properties&quot;
+        : {\n        &quot;Domain&quot; : &quot;vpc&quot;,\n        &quot;InstanceId&quot;
+        : { &quot;Ref&quot; : &quot;WebServerInstance&quot; }\n      }\n    },\n\n
+        \   &quot;WebServerInstance&quot; : {\n      &quot;Type&quot; : &quot;AWS::EC2::Instance&quot;,\n
+        \     &quot;Metadata&quot; : {\n        &quot;Comment&quot; : &quot;Install
+        a simple application&quot;,\n        &quot;AWS::CloudFormation::Init&quot;
+        : {\n          &quot;config&quot; : {\n            &quot;packages&quot; :
+        {\n              &quot;yum&quot; : {\n                &quot;httpd&quot;             :
+        []\n              }\n            },\n\n            &quot;files&quot; : {\n
+        \             &quot;/var/www/html/index.html&quot; : {\n                &quot;content&quot;
+        : { &quot;Fn::Join&quot; : [&quot;\\n&quot;, [\n                  &quot;&lt;img
+        src=\\&quot;&quot;, {&quot;Fn::FindInMap&quot; : [&quot;Region2Examples&quot;,
+        {&quot;Ref&quot; : &quot;AWS::Region&quot;}, &quot;Examples&quot;]}, &quot;/cloudformation_graphic.png\\&quot;
+        alt=\\&quot;AWS CloudFormation Logo\\&quot;/&gt;&quot;,\n                  &quot;&lt;h1&gt;Congratulations,
+        you have successfully launched the AWS CloudFormation sample.&lt;/h1&gt;&quot;\n
+        \               ]]},\n                &quot;mode&quot;    : &quot;000644&quot;,\n
+        \               &quot;owner&quot;   : &quot;root&quot;,\n                &quot;group&quot;
+        \  : &quot;root&quot;\n              },\n\n              &quot;/etc/cfn/cfn-hup.conf&quot;
+        : {\n                &quot;content&quot; : { &quot;Fn::Join&quot; : [&quot;&quot;,
+        [\n                  &quot;[main]\\n&quot;,\n                  &quot;stack=&quot;,
+        { &quot;Ref&quot; : &quot;AWS::StackId&quot; }, &quot;\\n&quot;,\n                  &quot;region=&quot;,
+        { &quot;Ref&quot; : &quot;AWS::Region&quot; }, &quot;\\n&quot;\n                ]]},\n
+        \               &quot;mode&quot;    : &quot;000400&quot;,\n                &quot;owner&quot;
+        \  : &quot;root&quot;,\n                &quot;group&quot;   : &quot;root&quot;\n
+        \             },\n\n              &quot;/etc/cfn/hooks.d/cfn-auto-reloader.conf&quot;
+        : {\n                &quot;content&quot;: { &quot;Fn::Join&quot; : [&quot;&quot;,
+        [\n                  &quot;[cfn-auto-reloader-hook]\\n&quot;,\n                  &quot;triggers=post.update\\n&quot;,\n
+        \                 &quot;path=Resources.WebServerInstance.Metadata.AWS::CloudFormation::Init\\n&quot;,\n
+        \                 &quot;action=/opt/aws/bin/cfn-init -v &quot;,\n                  &quot;
+        \        --stack &quot;, { &quot;Ref&quot; : &quot;AWS::StackName&quot; },\n
+        \                 &quot;         --resource WebServerInstance &quot;,\n                  &quot;
+        \        --region &quot;, { &quot;Ref&quot; : &quot;AWS::Region&quot; }, &quot;\\n&quot;,\n
+        \                 &quot;runas=root\\n&quot;\n                ]]}\n              }\n
+        \           },\n\n            &quot;services&quot; : {\n              &quot;sysvinit&quot;
+        : {\n                &quot;httpd&quot;    : { &quot;enabled&quot; : &quot;true&quot;,
+        &quot;ensureRunning&quot; : &quot;true&quot; },\n                &quot;cfn-hup&quot;
+        : { &quot;enabled&quot; : &quot;true&quot;, &quot;ensureRunning&quot; : &quot;true&quot;,
+        \n                              &quot;files&quot; : [&quot;/etc/cfn/cfn-hup.conf&quot;,
+        &quot;/etc/cfn/hooks.d/cfn-auto-reloader.conf&quot;]}\n              }\n            }\n
+        \         }\n        }\n      },\n      &quot;Properties&quot; : {\n        &quot;ImageId&quot;
+        : { &quot;Fn::FindInMap&quot; : [ &quot;AWSRegionArch2AMI&quot;, { &quot;Ref&quot;
+        : &quot;AWS::Region&quot; },\n                          { &quot;Fn::FindInMap&quot;
+        : [ &quot;AWSInstanceType2Arch&quot;, { &quot;Ref&quot; : &quot;InstanceType&quot;
+        }, &quot;Arch&quot; ] } ] },\n        &quot;InstanceType&quot; : { &quot;Ref&quot;
+        : &quot;InstanceType&quot; },\n        &quot;KeyName&quot; : { &quot;Ref&quot;
+        : &quot;KeyName&quot; },\n        &quot;Tags&quot; : [ {&quot;Key&quot; :
+        &quot;Application&quot;, &quot;Value&quot; : { &quot;Ref&quot; : &quot;AWS::StackId&quot;}
+        } ],\n        &quot;NetworkInterfaces&quot; : [{\n          &quot;GroupSet&quot;
+        \                : [{ &quot;Ref&quot; : &quot;InstanceSecurityGroupID&quot;
+        }],\n          &quot;AssociatePublicIpAddress&quot; : &quot;true&quot;,\n
+        \         &quot;DeviceIndex&quot;              : &quot;0&quot;,\n          &quot;DeleteOnTermination&quot;
+        \     : &quot;true&quot;,\n          &quot;SubnetId&quot;                 :
+        { &quot;Ref&quot; : &quot;SubnetID&quot; }\n        }],\n        &quot;UserData&quot;
+        \      : { &quot;Fn::Base64&quot; : { &quot;Fn::Join&quot; : [&quot;&quot;,
+        [\n             &quot;#!/bin/bash -xe\\n&quot;,\n             &quot;yum update
+        -y aws-cfn-bootstrap\\n&quot;,\n\n             &quot;/opt/aws/bin/cfn-init
+        -v &quot;,\n             &quot;         --stack &quot;, { &quot;Ref&quot;
+        : &quot;AWS::StackName&quot; },\n             &quot;         --resource WebServerInstance
+        &quot;,\n             &quot;         --region &quot;, { &quot;Ref&quot; :
+        &quot;AWS::Region&quot; }, &quot;\\n&quot;,\n\n             &quot;/opt/aws/bin/cfn-signal
+        -e $? &quot;,\n             &quot;         --stack &quot;, { &quot;Ref&quot;
+        : &quot;AWS::StackName&quot; },\n             &quot;         --resource WebServerInstance
+        &quot;,\n             &quot;         --region &quot;, { &quot;Ref&quot; :
+        &quot;AWS::Region&quot; }, &quot;\\n&quot;\n        ]]}}\n      },\n      &quot;CreationPolicy&quot;
+        : {\n        &quot;ResourceSignal&quot; : {\n          &quot;Timeout&quot;
+        : &quot;PT15M&quot;\n        }\n      }\n    }\n  },\n\n  &quot;Outputs&quot;
+        : {\n    &quot;URL&quot; : {\n      &quot;Value&quot; : { &quot;Fn::Join&quot;
+        : [ &quot;&quot;, [&quot;http://&quot;, { &quot;Fn::GetAtt&quot; : [&quot;WebServerInstance&quot;,
+        &quot;PublicIp&quot;] }]]},\n      &quot;Description&quot; : &quot;Newly created
+        application URL&quot;\n    }\n  }\n}\n\n</TemplateBody>\n    <StagesAvailable>\n
+        \     <member>Original</member>\n      <member>Processed</member>\n    </StagesAvailable>\n
+        \ </GetTemplateResult>\n  <ResponseMetadata>\n    <RequestId>21faca3b-2410-11e7-a6a4-e7d7f64d6d4f</RequestId>\n
+        \ </ResponseMetadata>\n</GetTemplateResponse>\n"
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 08:22:24 GMT
+recorded_with: VCR 3.0.3
