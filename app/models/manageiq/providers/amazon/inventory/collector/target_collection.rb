@@ -54,11 +54,11 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   end
 
   def stacks
-    return [] if references(:orchestrations_stacks).blank?
+    return [] if references(:orchestration_stacks).blank?
 
     # TODO(lsmola) we can filter only one stack, so that means too many requests, lets try to figure out why
     # CLoudFormations API doesn't support a standard filter
-    result = references(:orchestrations_stacks).map do |stack_ref|
+    result = references(:orchestration_stacks).map do |stack_ref|
       begin
         aws_cloud_formation.client.describe_stacks(:stack_name => stack_ref)[:stacks]
       rescue Aws::CloudFormation::Errors::ValidationError => _e
@@ -237,8 +237,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
       vm["network_interfaces"].each do |network_interface|
         add_simple_target!(:network_ports, network_interface["network_interface_id"])
-        add_simple_target!(:cloud_subnet, network_interface["subnet_id"])
-        add_simple_target!(:cloud_network, network_interface["vpc_id"])
+        add_simple_target!(:cloud_subnets, network_interface["subnet_id"])
+        add_simple_target!(:cloud_networks, network_interface["vpc_id"])
       end
 
       vm["security_groups"].each do |security_group|
