@@ -14,7 +14,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     # The order of the below methods doesn't matter since they refer to each other using only lazy links
     availability_zones
     key_pairs
-    get_stacks
+    stacks
     private_images if collector.options.get_private_images
     shared_images if collector.options.get_shared_images
     public_images if collector.options.get_public_images
@@ -100,39 +100,94 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     end
   end
 
-  def get_stacks
-    process_inventory_collection(collector.stacks, :orchestration_stacks) do |stack|
-      get_stack_resources(stack)
-      get_stack_outputs(stack)
-      get_stack_parameters(stack)
-      get_stack_template(stack)
+  def stacks
+    collector.stacks.each do |stack|
+      uid = stack['stack_id'].to_s
 
-      parse_stack(stack)
+      persister_orchestration_stack = persister.orchestration_stacks.find_or_build(uid)
+      persister_orchestration_stack.assign_attributes(
+        :type                   => ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.name,
+        :ext_management_system  => ems,
+        :ems_ref                => uid,
+        :name                   => stack['stack_name'],
+        :description            => stack['description'],
+        :status                 => stack['stack_status'],
+        :status_reason          => stack['stack_status_reason'],
+        :parent                 => persister.orchestration_stacks_resources.lazy_find(uid, :key => :stack),
+        :orchestration_template => stack_template(stack)
+      )
+
+      stack_resources(persister_orchestration_stack, stack)
+      stack_outputs(persister_orchestration_stack, stack)
+      stack_parameters(persister_orchestration_stack, stack)
     end
   end
 
-  def get_stack_parameters(stack)
-    process_inventory_collection(stack['parameters'], :orchestration_stacks_parameters) do |parameter|
-      parse_stack_parameter(parameter, stack)
+  def stack_resources(persister_orchestration_stack, stack)
+    collector.stack_resources(stack['stack_name']).each do |resource|
+      uid = resource['physical_resource_id']
+      # physical_resource_id can be empty if the resource was not successfully created; ignore such
+      return nil if uid.nil?
+
+      persister_orchestration_stacks_resources = persister.orchestration_stacks_resources.find_or_build(uid)
+      persister_orchestration_stacks_resources.assign_attributes(
+        :ems_ref                => uid,
+        :stack                  => persister_orchestration_stack,
+        :name                   => resource['logical_resource_id'],
+        :logical_resource       => resource['logical_resource_id'],
+        :physical_resource      => uid,
+        :resource_category      => resource['resource_type'],
+        :resource_status        => resource['resource_status'],
+        :resource_status_reason => resource['resource_status_reason'],
+        :last_updated           => resource['last_updated_timestamp']
+      )
     end
   end
 
-  def get_stack_outputs(stack)
-    process_inventory_collection(stack['outputs'], :orchestration_stacks_outputs) do |output|
-      parse_stack_output(output, stack)
+  def stack_outputs(persister_orchestration_stack, stack)
+    stack['outputs'].each do |output|
+      output_key = output['output_key']
+      uid        = compose_ems_ref(stack['stack_id'].to_s, output['output_key'])
+
+      persister_orchestration_stacks_outputs = persister.orchestration_stacks_outputs.find_or_build(uid)
+      persister_orchestration_stacks_outputs.assign_attributes(
+        :ems_ref     => uid,
+        :stack       => persister_orchestration_stack,
+        :key         => output_key,
+        :value       => output['output_value'],
+        :description => output['description']
+      )
     end
   end
 
-  def get_stack_resources(stack)
-    resources = collector.stack_resources(stack['stack_name'])
+  def stack_parameters(persister_orchestration_stack, stack)
+    stack['parameters'].each do |parameter|
+      param_key = parameter['parameter_key']
+      uid       = compose_ems_ref(stack['stack_id'].to_s, param_key)
 
-    process_inventory_collection(resources, :orchestration_stacks_resources) do |resource|
-      parse_stack_resource(resource, stack)
+      persister_orchestration_stacks_parameters = persister.orchestration_stacks_parameters.find_or_build(uid)
+      persister_orchestration_stacks_parameters.assign_attributes(
+        :ems_ref => uid,
+        :stack   => persister_orchestration_stack,
+        :name    => param_key,
+        :value   => parameter['parameter_value']
+      )
     end
   end
 
-  def get_stack_template(stack)
-    process_inventory_collection([stack], :orchestration_templates) { |the_stack| parse_stack_template(the_stack) }
+  def stack_template(stack)
+    uid = stack['stack_id']
+
+    persister_orchestration_template = persister.orchestration_templates.find_or_build(uid)
+    persister_orchestration_template.assign_attributes(
+      :type        => "OrchestrationTemplateCfn",
+      :ems_ref     => uid,
+      :name        => stack['stack_name'],
+      :description => stack['description'],
+      :content     => collector.stack_template(stack['stack_name']),
+      :orderable   => false
+    )
+    persister_orchestration_template
   end
 
   def get_instances
@@ -312,74 +367,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
     new_result
   end
-
-  def parse_stack(stack)
-    uid = stack['stack_id'].to_s
-    {
-      :type                   => ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.name,
-      :ext_management_system  => ems,
-      :ems_ref                => uid,
-      :name                   => stack['stack_name'],
-      :description            => stack['description'],
-      :status                 => stack['stack_status'],
-      :status_reason          => stack['stack_status_reason'],
-      :parent                 => persister.orchestration_stacks_resources.lazy_find(uid, :key => :stack),
-      :orchestration_template => persister.orchestration_templates.lazy_find(uid)
-    }
-  end
-
-  def parse_stack_template(stack)
-    {
-      :type        => "OrchestrationTemplateCfn",
-      :ems_ref     => stack['stack_id'],
-      :name        => stack['stack_name'],
-      :description => stack['description'],
-      :content     => collector.stack_template(stack['stack_name']),
-      :orderable   => false
-    }
-  end
-
-  def parse_stack_parameter(parameter, stack)
-    stack_id  = stack['stack_id']
-    param_key = parameter['parameter_key']
-    {
-      :ems_ref => compose_ems_ref(stack_id, param_key),
-      :stack   => persister.orchestration_stacks.lazy_find(stack_id),
-      :name    => param_key,
-      :value   => parameter['parameter_value']
-    }
-  end
-
-  def parse_stack_output(output, stack)
-    output_key = output['output_key']
-    stack_id   = stack['stack_id']
-    {
-      :ems_ref     => compose_ems_ref(stack_id, output['output_key']),
-      :stack       => persister.orchestration_stacks.lazy_find(stack_id),
-      :key         => output_key,
-      :value       => output['output_value'],
-      :description => output['description']
-    }
-  end
-
-  def parse_stack_resource(resource, stack)
-    uid = resource['physical_resource_id']
-    # physical_resource_id can be empty if the resource was not successfully created; ignore such
-    return nil if uid.nil?
-
-    {
-      :ems_ref                => uid,
-      :stack                  => persister.orchestration_stacks.lazy_find(stack['stack_id']),
-      :name                   => resource['logical_resource_id'],
-      :logical_resource       => resource['logical_resource_id'],
-      :physical_resource      => uid,
-      :resource_category      => resource['resource_type'],
-      :resource_status        => resource['resource_status'],
-      :resource_status_reason => resource['resource_status_reason'],
-      :last_updated           => resource['last_updated_timestamp']
-    }
-  end
-
 
   # Overridden helper methods, we should put them in helper once we get rid of old refresh
   def get_from_tags(resource, item)
