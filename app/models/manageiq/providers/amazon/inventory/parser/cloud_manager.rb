@@ -15,10 +15,10 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     availability_zones
     key_pairs
     get_stacks
-    get_private_images if collector.options.get_private_images
-    get_shared_images if collector.options.get_shared_images
-    get_public_images if collector.options.get_public_images
-    get_referenced_images
+    private_images if collector.options.get_private_images
+    shared_images if collector.options.get_shared_images
+    public_images if collector.options.get_public_images
+    referenced_images
     get_instances
 
     $aws_log.info("#{log_header}...Complete")
@@ -26,35 +26,78 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   private
 
-  def get_private_images
-    get_images(collector.private_images)
+  def private_images
+    images(collector.private_images)
   end
 
-  def get_shared_images
-    get_images(collector.shared_images)
+  def shared_images
+    images(collector.shared_images)
   end
 
-  def get_public_images
-    get_images(collector.public_images)
+  def public_images
+    images(collector.public_images)
   end
 
-  def get_referenced_images
-    get_images(collector.referenced_images)
+  def referenced_images
+    images(collector.referenced_images)
   end
 
-  def get_images(images)
-    process_inventory_collection(images, :miq_templates) do |image|
-      get_image_hardware(image)
+  def images(images)
+    images.each do |image|
+      uid      = image['image_id']
+      location = image['image_location']
+      name     = get_from_tags(image, :name)
+      name     ||= image['name']
+      name     ||= $1 if location =~ /^(.+?)(\.(image|img))?\.manifest\.xml$/
+      name     ||= uid
 
-      resource = persister.miq_templates.lazy_find(image['image_id'])
-      get_labels(resource, image["tags"])
+      persister_image = persister.miq_templates.find_or_build(uid)
+      persister_image.assign_attributes(
+        :type                  => ManageIQ::Providers::Amazon::CloudManager::Template.name,
+        :ext_management_system => ems,
+        :uid_ems               => uid,
+        :ems_ref               => uid,
+        :name                  => name,
+        :location              => location,
+        :vendor                => "amazon",
+        :raw_power_state       => "never",
+        :template              => true,
+        :publicly_available    => image['public'],
+      )
 
-      parse_image(image)
+      image_hardware(persister_image, image)
+      vm_and_template_labels(persister_image, image["tags"] || [])
     end
   end
 
-  def get_image_hardware(image)
-    process_inventory_collection([image], :hardwares) { |img| parse_image_hardware(img) }
+  def image_hardware(persister_image, image)
+    guest_os = image['platform'] == "windows" ? "windows" : "linux"
+    if guest_os == "linux"
+      guest_os = OperatingSystem.normalize_os_name(image['image_location'])
+      guest_os = "linux" if guest_os == "unknown"
+    end
+
+    persister_hardware = persister.hardwares.find_or_build(persister_image)
+    persister_hardware.assign_attributes(
+      :guest_os            => guest_os,
+      :bitness             => architecture_to_bitness(image['architecture']),
+      :virtualization_type => image['virtualization_type'],
+      :root_device_type    => image['root_device_type'],
+      :vm_or_template      => persister_image
+    )
+  end
+
+  def vm_and_template_labels(resource, tags)
+    tags.each do |tag|
+      persister_label = persister.vm_and_template_labels.find_or_build_by(:resource => resource, :name => tag["key"])
+      persister_label.assign_attributes(
+        :resource => resource,
+        :section  => 'labels',
+        :name     => tag["key"],
+        :value    => tag["value"],
+        :source   => 'amazon'
+      )
+    end
   end
 
   def get_stacks
@@ -102,7 +145,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
       get_instance_hardware(instance, flavor)
       resource = persister.vms.lazy_find(instance['instance_id'])
-      get_labels(resource, instance["tags"])
+      vm_and_template_labels(resource, instance["tags"] || [])
 
       parse_instance(instance, flavor)
     end
@@ -114,12 +157,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       get_hardware_disks(i, flavor)
 
       parse_instance_hardware(i, flavor)
-    end
-  end
-
-  def get_labels(resource, tags)
-    process_inventory_collection(tags, :vm_and_template_labels) do |tag|
-      parse_label(resource, tag)
     end
   end
 
@@ -154,7 +191,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def flavors
     collector.flavors.each do |flavor|
-      name = uid = flavor[:name]
+      name             = uid = flavor[:name]
       persister_flavor = persister.flavors.find_or_build(uid)
 
       persister_flavor.assign_attributes(
@@ -181,7 +218,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def availability_zones
     collector.availability_zones.each do |az|
-      name = uid = az['zone_name']
+      name                        = uid = az['zone_name']
       persister_availability_zone = persister.availability_zones.find_or_build(uid)
 
       persister_availability_zone.assign_attributes(
@@ -207,46 +244,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     end
   end
 
-  def parse_image_hardware(image)
-    guest_os = image['platform'] == "windows" ? "windows" : "linux"
-    if guest_os == "linux"
-      guest_os = OperatingSystem.normalize_os_name(image['image_location'])
-      guest_os = "linux" if guest_os == "unknown"
-    end
-
-    {
-      :guest_os            => guest_os,
-      :bitness             => architecture_to_bitness(image['architecture']),
-      :virtualization_type => image['virtualization_type'],
-      :root_device_type    => image['root_device_type'],
-      :vm_or_template      => persister.miq_templates.lazy_find(image['image_id'])
-    }
-  end
-
-  def parse_image(image)
-    uid      = image['image_id']
-    location = image['image_location']
-
-    name = get_from_tags(image, :name)
-    name ||= image['name']
-    name ||= $1 if location =~ /^(.+?)(\.(image|img))?\.manifest\.xml$/
-    name ||= uid
-
-    {
-      :type                  => ManageIQ::Providers::Amazon::CloudManager::Template.name,
-      :ext_management_system => ems,
-      :uid_ems               => uid,
-      :ems_ref               => uid,
-      :name                  => name,
-      :location              => location,
-      :vendor                => "amazon",
-      :raw_power_state       => "never",
-      :template              => true,
-      # the is_public flag here avoids having to make an additional API call
-      # per image, since we already know whether it's a public image
-      :publicly_available    => image['public'],
-    }
-  end
 
   def parse_instance(instance, flavor)
     status = instance.fetch_path('state', 'name')
@@ -383,15 +380,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     }
   end
 
-  def parse_label(resource, tag)
-    {
-      :resource => resource,
-      :section  => 'labels',
-      :name     => tag["key"],
-      :value    => tag["value"],
-      :source   => 'amazon'
-    }
-  end
 
   # Overridden helper methods, we should put them in helper once we get rid of old refresh
   def get_from_tags(resource, item)
