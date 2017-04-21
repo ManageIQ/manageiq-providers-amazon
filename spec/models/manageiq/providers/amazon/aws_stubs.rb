@@ -149,6 +149,18 @@ module AwsStubs
         :state              => {:name => 'running'},
         :architecture       => 'x86_64',
         :placement          => {:availability_zone => "us-east-1e"},
+        :tags               => [
+          {
+            :key   => "tag_01_for_instance_#{i % 1000}",
+            :value => "tag_01_value_for_instance_#{i % 1000}"
+          }, {
+            :key   => "tag_02_for_instance_#{i % 1000}",
+            :value => "tag_02_value_for_instance_#{i % 1000}"
+          }, {
+            :key   => "tag_03_for_instance_#{i % 1000}",
+            :value => "tag_03_value_for_instance_#{i % 1000}"
+          }
+        ],
         :network_interfaces => [
           {
             :network_interface_id => "interface_#{i}"
@@ -167,6 +179,18 @@ module AwsStubs
         :state              => {:name => 'running'},
         :architecture       => 'x86_64',
         :placement          => {:availability_zone => "us-east-1e"},
+        :tags               => [
+          {
+            :key   => "tag_01_for_instance_#{i % 1000}",
+            :value => "tag_01_value_for_instance_#{i % 1000}"
+          }, {
+            :key   => "tag_02_for_instance_#{i % 1000}",
+            :value => "tag_02_value_for_instance_#{i % 1000}"
+          }, {
+            :key   => "tag_03_for_instance_#{i % 1000}",
+            :value => "tag_03_value_for_instance_#{i % 1000}"
+          }
+        ]
       }
     end
 
@@ -182,7 +206,19 @@ module AwsStubs
         :kernel_id      => "aki_#{i}",
         :ramdisk_id     => "ari_#{i}",
         :architecture   => 'x86_64',
-        :state          => "available"
+        :state          => "available",
+        :tags           => [
+          {
+            :key   => "tag_01_for_image_#{i % 1000}",
+            :value => "tag_01_value_for_image_#{i % 1000}"
+          }, {
+            :key   => "tag_02_for_image_#{i % 1000}",
+            :value => "tag_02_value_for_image_#{i % 1000}"
+          }, {
+            :key   => "tag_03_for_image_#{i % 1000}",
+            :value => "tag_03_value_for_image_#{i % 1000}"
+          }
+        ],
       }
     end
 

@@ -119,14 +119,20 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   end
 
   def expected_table_counts(disconnect = nil)
-    disconnect ||= disconnect_inv_factor
-    vm_count                        = test_counts[:instance_vpc_count] + test_counts[:instance_vpc_count]
-    image_count                     = test_counts[:image_count]
+    disconnect  ||= disconnect_inv_factor
+    vm_count    = test_counts[:instance_vpc_count] + test_counts[:instance_ec2_count]
+    image_count = test_counts[:image_count]
+
+    # We have 3 custom_attributes per each vm + custom attributes of disconnected vm
+    custom_attribute_count = (test_counts[:instance_vpc_count] * 3 + test_counts[:instance_ec2_count] * 3 +
+      test_counts[:image_count] * 3)
+    custom_attribute_count += disconnect * (test_counts(1)[:instance_vpc_count] * 3 +
+      test_counts(1)[:instance_ec2_count] * 3 + test_counts(1)[:image_count] * 3)
 
     # Disconnect_inv count, when these objects are not found in the API, they are not deleted in DB, but just marked
     # as disconnected
     vm_count_plus_disconnect_inv    = vm_count + disconnect * (test_counts(1)[:instance_vpc_count] +
-      test_counts(1)[:instance_vpc_count])
+      test_counts(1)[:instance_ec2_count])
     image_count_plus_disconnect_inv = image_count + disconnect * test_counts(1)[:image_count]
 
     {
@@ -159,7 +165,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :floating_ip                       => 0,
       :network_router                    => 0,
       :cloud_subnet                      => 0,
-      :custom_attribute                  => 0,
+      :custom_attribute                  => custom_attribute_count,
       :load_balancer                     => 0,
       :load_balancer_pool                => 0,
       :load_balancer_pool_member         => 0,
