@@ -9,11 +9,11 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{collector.manager.name}] id: [#{collector.manager.id}]"
     $aws_log.info("#{log_header}...")
     # The order of the below methods does matter, because they are searched using find instead of lazy_find
-    get_flavors
+    flavors
 
     # The order of the below methods doesn't matter since they refer to each other using only lazy links
-    get_availability_zones
-    get_key_pairs
+    availability_zones
+    key_pairs
     get_stacks
     get_private_images if collector.options.get_private_images
     get_shared_images if collector.options.get_shared_images
@@ -25,18 +25,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   private
-
-  def get_flavors
-    process_inventory_collection(collector.flavors, :flavors) { |flavor| parse_flavor(flavor) }
-  end
-
-  def get_availability_zones
-    process_inventory_collection(collector.availability_zones, :availability_zones) { |az| parse_availability_zone(az) }
-  end
-
-  def get_key_pairs
-    process_inventory_collection(collector.key_pairs, :key_pairs) { |kp| parse_key_pair(kp) }
-  end
 
   def get_private_images
     get_images(collector.private_images)
@@ -164,50 +152,59 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     process_inventory_collection(disks, :disks) { |x| x }
   end
 
-  def parse_flavor(flavor)
-    name = uid = flavor[:name]
+  def flavors
+    collector.flavors.each do |flavor|
+      name = uid = flavor[:name]
+      persister_flavor = persister.flavors.find_or_build(uid)
 
-    {
-      :type                     => ManageIQ::Providers::Amazon::CloudManager::Flavor.name,
-      :ext_management_system    => ems,
-      :ems_ref                  => uid,
-      :name                     => name,
-      :description              => flavor[:description],
-      :enabled                  => !flavor[:disabled],
-      :cpus                     => flavor[:vcpu],
-      :cpu_cores                => 1,
-      :memory                   => flavor[:memory],
-      :supports_32_bit          => flavor[:architecture].include?(:i386),
-      :supports_64_bit          => flavor[:architecture].include?(:x86_64),
-      :supports_hvm             => flavor[:virtualization_type].include?(:hvm),
-      :supports_paravirtual     => flavor[:virtualization_type].include?(:paravirtual),
-      :block_storage_based_only => flavor[:ebs_only],
-      :cloud_subnet_required    => flavor[:vpc_only],
-      :ephemeral_disk_size      => flavor[:instance_store_size],
-      :ephemeral_disk_count     => flavor[:instance_store_volumes]
-    }
+      persister_flavor.assign_attributes(
+        :type                     => ManageIQ::Providers::Amazon::CloudManager::Flavor.name,
+        :ext_management_system    => ems,
+        :ems_ref                  => uid,
+        :name                     => name,
+        :description              => flavor[:description],
+        :enabled                  => !flavor[:disabled],
+        :cpus                     => flavor[:vcpu],
+        :cpu_cores                => 1,
+        :memory                   => flavor[:memory],
+        :supports_32_bit          => flavor[:architecture].include?(:i386),
+        :supports_64_bit          => flavor[:architecture].include?(:x86_64),
+        :supports_hvm             => flavor[:virtualization_type].include?(:hvm),
+        :supports_paravirtual     => flavor[:virtualization_type].include?(:paravirtual),
+        :block_storage_based_only => flavor[:ebs_only],
+        :cloud_subnet_required    => flavor[:vpc_only],
+        :ephemeral_disk_size      => flavor[:instance_store_size],
+        :ephemeral_disk_count     => flavor[:instance_store_volumes]
+      )
+    end
   end
 
-  def parse_availability_zone(az)
-    name = uid = az['zone_name']
+  def availability_zones
+    collector.availability_zones.each do |az|
+      name = uid = az['zone_name']
+      persister_availability_zone = persister.availability_zones.find_or_build(uid)
 
-    {
-      :type                  => ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.name,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      :name                  => name,
-    }
+      persister_availability_zone.assign_attributes(
+        :type                  => ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.name,
+        :ext_management_system => ems,
+        :ems_ref               => uid,
+        :name                  => name,
+      )
+    end
   end
 
-  def parse_key_pair(kp)
-    name = kp['key_name']
+  def key_pairs
+    collector.key_pairs.each do |kp|
+      name = kp['key_name']
 
-    {
-      :type        => self.class.key_pair_type,
-      :resource    => ems,
-      :name        => name,
-      :fingerprint => kp['key_fingerprint']
-    }
+      persister_key_pair = persister.key_pairs.find_or_build(name)
+      persister_key_pair.assign_attributes(
+        :type        => self.class.key_pair_type,
+        :resource    => ems,
+        :name        => name,
+        :fingerprint => kp['key_fingerprint']
+      )
+    end
   end
 
   def parse_image_hardware(image)

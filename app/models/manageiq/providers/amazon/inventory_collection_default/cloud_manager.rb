@@ -17,7 +17,13 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
 
     def availability_zones(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone,
+        :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :name,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
@@ -25,7 +31,26 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
 
     def flavors(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::CloudManager::Flavor,
+        :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::Flavor,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :name,
+          :description,
+          :enabled,
+          :cpus,
+          :cpu_cores,
+          :memory,
+          :supports_32_bit,
+          :supports_64_bit,
+          :supports_hvm,
+          :supports_paravirtual,
+          :block_storage_based_only,
+          :cloud_subnet_required,
+          :ephemeral_disk_size,
+          :ephemeral_disk_count,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
@@ -33,7 +58,13 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
 
     def key_pairs(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair,
+        :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair,
+        :inventory_object_attributes => [
+          :type,
+          :resource,
+          :name,
+          :fingerprint,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
