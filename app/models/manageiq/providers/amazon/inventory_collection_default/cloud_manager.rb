@@ -115,7 +115,63 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
 
     def orchestration_stacks(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
+        :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :name,
+          :description,
+          :status,
+          :status_reason,
+          :parent,
+          :orchestration_template,
+        ]
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
+
+    def orchestration_stacks_resources(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => [
+          :ems_ref,
+          :stack,
+          :name,
+          :logical_resource,
+          :physical_resource,
+          :resource_category,
+          :resource_status,
+          :resource_status_reason,
+          :last_updated,
+        ]
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
+
+    def orchestration_stacks_outputs(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => [
+          :ems_ref,
+          :stack,
+          :key,
+          :value,
+          :description,
+        ]
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
+
+    def orchestration_stacks_parameters(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => [
+          :ems_ref,
+          :stack,
+          :name,
+          :value,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
@@ -123,7 +179,15 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
 
     def orchestration_templates(extra_attributes = {})
       attributes = {
-        :model_class => ::OrchestrationTemplateCfn,
+        :model_class                 => ::OrchestrationTemplateCfn,
+        :inventory_object_attributes => [
+          :type,
+          :ems_ref,
+          :name,
+          :description,
+          :content,
+          :orderable,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
