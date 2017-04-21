@@ -14,12 +14,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170418T082221Z
+      - 20170421T135909Z
       X-Amz-Content-Sha256:
       - 9ff597a58e43478edc9a515b9a129640eadea988b0102cae804f6ac7e59a2262
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170418/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=f8dd699197a6d4a40cadb62bacbc417cd1008ce3f87a20ee34e1ce146cbde7ab
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170421/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=a7483a85b278046d96f3caea662dd39b08de630d4136a8f674f1eb6b6d5c7a2e
       Content-Length:
       - '205'
       Accept:
@@ -30,7 +30,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 210f0adc-2410-11e7-8536-2f082b92a693
+      - b12b1898-269a-11e7-ae25-99226f19792d
       Content-Type:
       - text/xml
       Content-Length:
@@ -38,7 +38,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Tue, 18 Apr 2017 08:22:14 GMT
+      - Fri, 21 Apr 2017 13:59:09 GMT
     body:
       encoding: UTF-8
       string: |
@@ -91,76 +91,11 @@ http_interactions:
             </Stacks>
           </DescribeStacksResult>
           <ResponseMetadata>
-            <RequestId>210f0adc-2410-11e7-8536-2f082b92a693</RequestId>
+            <RequestId>b12b1898-269a-11e7-ae25-99226f19792d</RequestId>
           </ResponseMetadata>
         </DescribeStacksResponse>
     http_version: 
-  recorded_at: Tue, 18 Apr 2017 08:22:22 GMT
-- request:
-    method: post
-    uri: https://cloudformation.us-east-1.amazonaws.com/
-    body:
-      encoding: UTF-8
-      string: Action=ListStackResources&StackName=EmsRefreshSpecStack-WebServerInstance-1PAB3IELQ8EYT&Version=2010-05-15
-    headers:
-      Content-Type:
-      - application/x-www-form-urlencoded; charset=utf-8
-      Accept-Encoding:
-      - ''
-      User-Agent:
-      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
-      X-Amz-Date:
-      - 20170418T082222Z
-      X-Amz-Content-Sha256:
-      - b08571f930d1018c0dece1477c75f323ed1c55b532e02a6ac107e4786b151021
-      Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170418/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=8e53200cc7173ca86a9e1c9a13c314547fd006109a69fc18fbddbc6885cc310d
-      Content-Length:
-      - '106'
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amzn-Requestid:
-      - 21806aa3-2410-11e7-b21f-3b6e9adc8921
-      Content-Type:
-      - text/xml
-      Content-Length:
-      - '1038'
-      Date:
-      - Tue, 18 Apr 2017 08:22:15 GMT
-    body:
-      encoding: UTF-8
-      string: |
-        <ListStackResourcesResponse xmlns="http://cloudformation.amazonaws.com/doc/2010-05-15/">
-          <ListStackResourcesResult>
-            <StackResourceSummaries>
-              <member>
-                <LastUpdatedTimestamp>2017-03-28T11:34:19.414Z</LastUpdatedTimestamp>
-                <PhysicalResourceId>34.206.127.107</PhysicalResourceId>
-                <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
-                <LogicalResourceId>IPAddress</LogicalResourceId>
-                <ResourceType>AWS::EC2::EIP</ResourceType>
-              </member>
-              <member>
-                <LastUpdatedTimestamp>2017-03-28T11:33:40.838Z</LastUpdatedTimestamp>
-                <PhysicalResourceId>i-015e4579bfa4fcc84</PhysicalResourceId>
-                <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
-                <LogicalResourceId>WebServerInstance</LogicalResourceId>
-                <ResourceType>AWS::EC2::Instance</ResourceType>
-              </member>
-            </StackResourceSummaries>
-          </ListStackResourcesResult>
-          <ResponseMetadata>
-            <RequestId>21806aa3-2410-11e7-b21f-3b6e9adc8921</RequestId>
-          </ResponseMetadata>
-        </ListStackResourcesResponse>
-    http_version: 
-  recorded_at: Tue, 18 Apr 2017 08:22:23 GMT
+  recorded_at: Fri, 21 Apr 2017 13:59:09 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -175,12 +110,12 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
       X-Amz-Date:
-      - 20170418T082223Z
+      - 20170421T135909Z
       X-Amz-Content-Sha256:
       - 2f4b252fd9424087d9c2a33c5a7d744e17b92f3c0d5f86c143a7d057945c1c20
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170418/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=aa9814de6de3a039d7a9c6d3b9b2342c5c6bcccb1ce75823eb31a39c17165775
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170421/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=6d4b64b0feaa5e0ced1ebc9c7fe78a324c8007c41c0ded9091e030f64abb5d5c
       Content-Length:
       - '99'
       Accept:
@@ -191,7 +126,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 21faca3b-2410-11e7-a6a4-e7d7f64d6d4f
+      - b1776374-269a-11e7-8d98-33c9632f229d
       Content-Type:
       - text/xml
       Content-Length:
@@ -199,7 +134,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Tue, 18 Apr 2017 08:22:16 GMT
+      - Fri, 21 Apr 2017 13:59:09 GMT
     body:
       encoding: UTF-8
       string: "<GetTemplateResponse xmlns=\"http://cloudformation.amazonaws.com/doc/2010-05-15/\">\n
@@ -473,8 +408,73 @@ http_interactions:
         &quot;PublicIp&quot;] }]]},\n      &quot;Description&quot; : &quot;Newly created
         application URL&quot;\n    }\n  }\n}\n\n</TemplateBody>\n    <StagesAvailable>\n
         \     <member>Original</member>\n      <member>Processed</member>\n    </StagesAvailable>\n
-        \ </GetTemplateResult>\n  <ResponseMetadata>\n    <RequestId>21faca3b-2410-11e7-a6a4-e7d7f64d6d4f</RequestId>\n
+        \ </GetTemplateResult>\n  <ResponseMetadata>\n    <RequestId>b1776374-269a-11e7-8d98-33c9632f229d</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
     http_version: 
-  recorded_at: Tue, 18 Apr 2017 08:22:24 GMT
+  recorded_at: Fri, 21 Apr 2017 13:59:10 GMT
+- request:
+    method: post
+    uri: https://cloudformation.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=ListStackResources&StackName=EmsRefreshSpecStack-WebServerInstance-1PAB3IELQ8EYT&Version=2010-05-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170421T135910Z
+      X-Amz-Content-Sha256:
+      - b08571f930d1018c0dece1477c75f323ed1c55b532e02a6ac107e4786b151021
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170421/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=e8b0a90a4ded9a1fc2e183b5e4b2e6357cee56499cd11e0aeb0f667522decaca
+      Content-Length:
+      - '106'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - b1ea984d-269a-11e7-8255-6b14fc98b857
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '1038'
+      Date:
+      - Fri, 21 Apr 2017 13:59:10 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <ListStackResourcesResponse xmlns="http://cloudformation.amazonaws.com/doc/2010-05-15/">
+          <ListStackResourcesResult>
+            <StackResourceSummaries>
+              <member>
+                <LastUpdatedTimestamp>2017-03-28T11:34:19.414Z</LastUpdatedTimestamp>
+                <PhysicalResourceId>34.206.127.107</PhysicalResourceId>
+                <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <LogicalResourceId>IPAddress</LogicalResourceId>
+                <ResourceType>AWS::EC2::EIP</ResourceType>
+              </member>
+              <member>
+                <LastUpdatedTimestamp>2017-03-28T11:33:40.838Z</LastUpdatedTimestamp>
+                <PhysicalResourceId>i-015e4579bfa4fcc84</PhysicalResourceId>
+                <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <LogicalResourceId>WebServerInstance</LogicalResourceId>
+                <ResourceType>AWS::EC2::Instance</ResourceType>
+              </member>
+            </StackResourceSummaries>
+          </ListStackResourcesResult>
+          <ResponseMetadata>
+            <RequestId>b1ea984d-269a-11e7-8255-6b14fc98b857</RequestId>
+          </ResponseMetadata>
+        </ListStackResourcesResponse>
+    http_version: 
+  recorded_at: Fri, 21 Apr 2017 13:59:11 GMT
 recorded_with: VCR 3.0.3
