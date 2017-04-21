@@ -83,6 +83,18 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
             @data_scaling -= 1
           end
         end
+
+        it "2 refreshes, first creates all entities, second deletes an association" do
+          # This spec verifies that a deleted association is cleaned up
+          @delete_associations = nil
+
+          2.times do
+            refresh_spec
+            @delete_associations = [
+              [:instance, :tags]
+            ]
+          end
+        end
       end
     end
   end
@@ -103,7 +115,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   end
 
   def stub_responses
-    {
+    stubbed_response = {
       :ec2            => {
         :describe_regions            => mocked_regions,
         :describe_availability_zones => mocked_availability_zones,
@@ -116,6 +128,22 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
         :list_stack_resources => mocked_stack_resources
       }
     }
+    delete_associations(stubbed_response)
+    stubbed_response
+  end
+
+  def delete_associations(stubbed_response)
+    return if @delete_associations.nil?
+
+    @delete_associations.each do |association|
+      type        = association[0]
+      association = association[1]
+
+      case type
+      when :instance
+        stubbed_response[:ec2][:describe_instances][:reservations].first[:instances].first[association.to_sym].pop
+      end
+    end
   end
 
   def expected_table_counts(disconnect = nil)
@@ -159,7 +187,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :floating_ip                       => 0,
       :network_router                    => 0,
       :cloud_subnet                      => 0,
-      :custom_attribute                  => 0,
+      :custom_attribute                  => custom_attributes_count(disconnect),
       :load_balancer                     => 0,
       :load_balancer_pool                => 0,
       :load_balancer_pool_member         => 0,
@@ -239,5 +267,11 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     expect(ems.miq_templates.size).to eq(expected_table_counts(0)[:miq_template])
 
     expect(ems.orchestration_stacks.size).to eql(expected_table_counts[:orchestration_stack])
+  end
+
+  def custom_attributes_count(disconnect)
+    custom_attribute_count = test_counts[:custom_attribute_count] + disconnect * test_counts(1)[:custom_attribute_count]
+    custom_attribute_count -= 1 if @delete_associations
+    custom_attribute_count
   end
 end
