@@ -9,7 +9,33 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
 
     def miq_templates(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::CloudManager::Template,
+        :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::Template,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :uid_ems,
+          :ems_ref,
+          :name,
+          :location,
+          :vendor,
+          :raw_power_state,
+          :template,
+          :publicly_available,
+        ]
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
+
+    def hardwares(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => [
+          :guest_os,
+          :bitness,
+          :virtualization_type,
+          :root_device_type,
+          :vm_or_template,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
@@ -72,9 +98,16 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
 
     def vm_and_template_labels(extra_attributes = {})
       attributes = {
-        :model_class => CustomAttribute,
-        :association => :vm_and_template_labels,
-        :manager_ref => [:resource, :name]
+        :model_class                 => CustomAttribute,
+        :association                 => :vm_and_template_labels,
+        :manager_ref                 => [:resource, :name],
+        :inventory_object_attributes => [
+          :resource,
+          :section,
+          :name,
+          :value,
+          :source,
+        ]
       }
 
       attributes.merge!(extra_attributes)
