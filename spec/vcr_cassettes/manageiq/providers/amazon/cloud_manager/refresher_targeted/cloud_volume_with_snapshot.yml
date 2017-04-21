@@ -1,0 +1,165 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeVolumes&Filter.1.Name=volume-id&Filter.1.Value.1=vol-0e1613cacf4688009&Filter.1.Value.2=vol-0e4c86c12b28cead8&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170418T151703Z
+      X-Amz-Content-Sha256:
+      - 83ed44add3dbe9789f8662e978435f2f205e57cab9f4bf411a870e76ddf99642
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170418/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=6290ba9490308cabd7344416667106b85ca97d5d9a8c284174ba3066e0912ba8
+      Content-Length:
+      - '143'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Tue, 18 Apr 2017 15:17:04 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeVolumesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>399d6636-739a-4892-afbc-18a61d8db46c</requestId>
+            <volumeSet>
+                <item>
+                    <volumeId>vol-0e1613cacf4688009</volumeId>
+                    <size>1</size>
+                    <snapshotId/>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <status>available</status>
+                    <createTime>2017-03-17T07:20:08.273Z</createTime>
+                    <attachmentSet/>
+                    <tagSet>
+                        <item>
+                            <key>Name</key>
+                            <value>EmsRefreshSpecForSnapshot</value>
+                        </item>
+                    </tagSet>
+                    <volumeType>gp2</volumeType>
+                    <iops>100</iops>
+                    <encrypted>false</encrypted>
+                </item>
+                <item>
+                    <volumeId>vol-0e4c86c12b28cead8</volumeId>
+                    <size>1</size>
+                    <snapshotId>snap-055095f47fab5e749</snapshotId>
+                    <availabilityZone>us-east-1e</availabilityZone>
+                    <status>in-use</status>
+                    <createTime>2017-03-17T07:21:35.798Z</createTime>
+                    <attachmentSet>
+                        <item>
+                            <volumeId>vol-0e4c86c12b28cead8</volumeId>
+                            <instanceId>i-8b5739f2</instanceId>
+                            <device>/dev/sdf</device>
+                            <status>attached</status>
+                            <attachTime>2017-03-17T07:22:23.000Z</attachTime>
+                            <deleteOnTermination>false</deleteOnTermination>
+                        </item>
+                    </attachmentSet>
+                    <tagSet>
+                        <item>
+                            <key>Name</key>
+                            <value>EmsRefreshSpecForVpcVm</value>
+                        </item>
+                    </tagSet>
+                    <volumeType>gp2</volumeType>
+                    <iops>100</iops>
+                    <encrypted>false</encrypted>
+                </item>
+            </volumeSet>
+        </DescribeVolumesResponse>
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 15:17:04 GMT
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeSnapshots&Filter.1.Name=snapshot-id&Filter.1.Value.1=snap-055095f47fab5e749&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170418T151704Z
+      X-Amz-Content-Sha256:
+      - 5066378d60fa497314e563b9c0938f56256710d6ed743fe3149766566f3d3daf
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170418/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=a1b287b2dd9fee72f6ff920a9ad4e26b4c2ac0dd3db5df28cfe80476c72ee275
+      Content-Length:
+      - '109'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Tue, 18 Apr 2017 15:17:04 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeSnapshotsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>09709241-83bf-45a7-96fb-7b02ffcd4a38</requestId>
+            <snapshotSet>
+                <item>
+                    <snapshotId>snap-055095f47fab5e749</snapshotId>
+                    <volumeId>vol-0e1613cacf4688009</volumeId>
+                    <status>completed</status>
+                    <startTime>2017-03-17T07:21:12.000Z</startTime>
+                    <progress>100%</progress>
+                    <ownerId>200278856672</ownerId>
+                    <volumeSize>1</volumeSize>
+                    <description>EmsRefreshSpecSnapshotDesc</description>
+                    <encrypted>false</encrypted>
+                    <tagSet>
+                        <item>
+                            <key>Name</key>
+                            <value>EmsRefreshSpecSnapshot</value>
+                        </item>
+                    </tagSet>
+                </item>
+            </snapshotSet>
+        </DescribeSnapshotsResponse>
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 15:17:04 GMT
+recorded_with: VCR 3.0.3

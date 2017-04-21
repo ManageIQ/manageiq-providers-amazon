@@ -137,11 +137,11 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   end
 
   def cloud_volume_snapshots
-    return [] if references(:cloud_volumes_snapshots).blank?
+    return [] if references(:cloud_volume_snapshots).blank?
 
     hash_collection.new(
       aws_ec2.client.describe_snapshots(
-        :filters => [{:name => 'snapshot-id', :values => references(:cloud_volumes_snapshots)}]
+        :filters => [{:name => 'snapshot-id', :values => references(:cloud_volume_snapshots)}]
       ).snapshots
     )
   end
