@@ -2,7 +2,6 @@ require_relative '../../aws_helper'
 require_relative '../../aws_stubs'
 
 describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
-
   include AwsStubs
 
   before do
