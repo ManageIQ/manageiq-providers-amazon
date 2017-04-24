@@ -114,7 +114,7 @@ module AwsRefresherSpecCounts
     orchestration_stack_outputs_count    = orchestration_stack_hashes.map { |x| x["outputs"] }.flatten.compact.size
     orchestration_stack_resources_count  = stacks_resources.size
 
-    base_inventory_counts.merge({
+    base_inventory_counts.merge(
       :auth_private_key              => key_pairs.size,
       :availability_zone             => availability_zones.size,
       :cloud_network                 => cloud_networks.size,
@@ -138,7 +138,7 @@ module AwsRefresherSpecCounts
       :security_group                => security_groups_count,
       :vm                            => instances_count,
       :vm_or_template                => instances_and_images_count
-    })
+    )
   end
 
   def assert_table_counts(expected_table_counts)
