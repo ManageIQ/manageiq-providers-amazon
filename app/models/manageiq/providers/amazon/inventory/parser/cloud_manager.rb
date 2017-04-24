@@ -19,7 +19,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     shared_images if collector.options.get_shared_images
     public_images if collector.options.get_public_images
     referenced_images
-    get_instances
+    instances
 
     $aws_log.info("#{log_header}...Complete")
   end
@@ -190,37 +190,88 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     persister_orchestration_template
   end
 
-  def get_instances
-    process_inventory_collection(collector.instances, :vms) do |instance|
+  def instances
+    collector.instances.each do |instance|
       status = instance.fetch_path('state', 'name')
       next if collector.options.ignore_terminated_instances && status.to_sym == :terminated
 
       # TODO(lsmola) we have a non lazy dependency, can we remove that?
       flavor = persister.flavors.find(instance['instance_type']) || persister.flavors.find("unknown")
 
-      get_instance_hardware(instance, flavor)
-      resource = persister.vms.lazy_find(instance['instance_id'])
-      vm_and_template_labels(resource, instance["tags"] || [])
+      uid  = instance['instance_id']
+      name = get_from_tags(instance, :name)
+      name = name.blank? ? uid : name
 
-      parse_instance(instance, flavor)
+      persister_instance = persister.vms.find_or_build(uid)
+      persister_instance.assign_attributes(
+        :type                  => ManageIQ::Providers::Amazon::CloudManager::Vm.name,
+        :ext_management_system => ems,
+        :uid_ems               => uid,
+        :ems_ref               => uid,
+        :name                  => name,
+        :vendor                => "amazon",
+        :raw_power_state       => status,
+        :boot_time             => instance['launch_time'],
+        :availability_zone     => persister.availability_zones.lazy_find(instance.fetch_path('placement', 'availability_zone')),
+        :flavor                => flavor,
+        :genealogy_parent      => persister.miq_templates.lazy_find(instance['image_id']),
+        :key_pairs             => [persister.key_pairs.lazy_find(instance['key_name'])].compact,
+        :location              => persister.networks.lazy_find("#{uid}__public", :key => :hostname, :default => 'unknown'),
+        :orchestration_stack   => persister.orchestration_stacks.lazy_find(
+          get_from_tags(instance, "aws:cloudformation:stack-id")
+        ),
+      )
+
+      instance_hardware(persister_instance, instance, flavor)
+      vm_and_template_labels(persister_instance, instance["tags"] || [])
     end
   end
 
-  def get_instance_hardware(instance, flavor)
-    process_inventory_collection([instance], :hardwares) do |i|
-      get_hardware_networks(i)
-      get_hardware_disks(i, flavor)
+  def instance_hardware(persister_instance, instance, flavor)
+    persister_hardware = persister.hardwares.find_or_build(persister_instance)
+    persister_hardware.assign_attributes(
+      :bitness              => architecture_to_bitness(instance['architecture']),
+      :virtualization_type  => instance['virtualization_type'],
+      :root_device_type     => instance['root_device_type'],
+      :cpu_sockets          => flavor[:cpus],
+      :cpu_cores_per_socket => 1,
+      :cpu_total_cores      => flavor[:cpus],
+      :memory_mb            => flavor[:memory] / 1.megabyte,
+      :disk_capacity        => flavor[:ephemeral_disk_size],
+      :guest_os             => persister.hardwares.lazy_find(instance['image_id'], :key => :guest_os),
+      :vm_or_template       => persister_instance,
+    )
 
-      parse_instance_hardware(i, flavor)
+    hardware_networks(persister_hardware, instance)
+    hardware_disks(persister_hardware, instance, flavor)
+  end
+
+  def hardware_networks(persister_hardware, instance)
+    hardware_network(persister_hardware,
+                     instance['private_ip_address'].presence,
+                     instance['private_dns_name'].presence,
+                     "private")
+
+    hardware_network(persister_hardware,
+                     instance['public_ip_address'].presence,
+                     instance['public_dns_name'].presence,
+                     "public")
+  end
+
+  def hardware_network(persister_hardware, ip_address, hostname, description)
+    unless ip_address.blank?
+      persister_private_network = persister.networks.find_or_build_by(:hardware    => persister_hardware,
+                                                                      :description => description)
+      persister_private_network.assign_attributes(
+        :hardware    => persister_hardware,
+        :ipaddress   => ip_address,
+        :hostname    => hostname,
+        :description => description
+      )
     end
   end
 
-  def get_hardware_networks(instance)
-    process_inventory_collection([instance], :networks) { |i| parse_hardware_private_network(i) }
-    process_inventory_collection([instance], :networks) { |i| parse_hardware_public_network(i) }
-  end
-
-  def get_hardware_disks(instance, flavor)
+  def hardware_disks(persister_hardware, instance, flavor)
     disks = []
 
     if flavor[:ephemeral_disk_count] > 0
@@ -237,11 +288,13 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       end
     end
 
-    disks.each do |d|
-      d[:hardware] = persister.hardwares.lazy_find(instance['instance_id'])
-    end
+    disks.each do |disk|
+      disk[:hardware] = persister_hardware
 
-    process_inventory_collection(disks, :disks) { |x| x }
+      persister_disk = persister.disks.find_or_build_by(:hardware    => persister_hardware,
+                                                        :device_name => disk[:device_name])
+      persister_disk.assign_attributes(disk)
+    end
   end
 
   def flavors
@@ -297,75 +350,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :fingerprint => kp['key_fingerprint']
       )
     end
-  end
-
-
-  def parse_instance(instance, flavor)
-    status = instance.fetch_path('state', 'name')
-
-    uid  = instance['instance_id']
-    name = get_from_tags(instance, :name)
-    name = name.blank? ? uid : name
-
-    {
-      :type                  => ManageIQ::Providers::Amazon::CloudManager::Vm.name,
-      :ext_management_system => ems,
-      :uid_ems               => uid,
-      :ems_ref               => uid,
-      :name                  => name,
-      :vendor                => "amazon",
-      :raw_power_state       => status,
-      :boot_time             => instance['launch_time'],
-      :availability_zone     => persister.availability_zones.lazy_find(instance.fetch_path('placement', 'availability_zone')),
-      :flavor                => flavor,
-      :genealogy_parent      => persister.miq_templates.lazy_find(instance['image_id']),
-      :key_pairs             => [persister.key_pairs.lazy_find(instance['key_name'])].compact,
-      :location              => persister.networks.lazy_find("#{uid}__public", :key => :hostname, :default => 'unknown'),
-      :orchestration_stack   => persister.orchestration_stacks.lazy_find(
-        get_from_tags(instance, "aws:cloudformation:stack-id")
-      ),
-    }
-  end
-
-  def parse_instance_hardware(instance, flavor)
-    {
-      :bitness              => architecture_to_bitness(instance['architecture']),
-      :virtualization_type  => instance['virtualization_type'],
-      :root_device_type     => instance['root_device_type'],
-      :cpu_sockets          => flavor[:cpus],
-      :cpu_cores_per_socket => 1,
-      :cpu_total_cores      => flavor[:cpus],
-      :memory_mb            => flavor[:memory] / 1.megabyte,
-      :disk_capacity        => flavor[:ephemeral_disk_size],
-      :guest_os             => persister.hardwares.lazy_find(instance['image_id'], :key => :guest_os),
-      :vm_or_template       => persister.vms.lazy_find(instance['instance_id'])
-    }
-  end
-
-  def parse_hardware_public_network(instance)
-    new_result = {
-      :hardware    => persister.hardwares.lazy_find(instance['instance_id']),
-      :ipaddress   => instance['private_ip_address'].presence,
-      :hostname    => instance['private_dns_name'].presence,
-      :description => "private"
-    }
-
-    new_result = nil if new_result[:ipaddress].blank?
-
-    new_result
-  end
-
-  def parse_hardware_private_network(instance)
-    new_result = {
-      :hardware    => persister.hardwares.lazy_find(instance['instance_id']),
-      :ipaddress   => instance['public_ip_address'].presence,
-      :hostname    => instance['public_dns_name'].presence,
-      :description => "public"
-    }
-
-    new_result = nil if new_result[:ipaddress].blank?
-
-    new_result
   end
 
   # Overridden helper methods, we should put them in helper once we get rid of old refresh

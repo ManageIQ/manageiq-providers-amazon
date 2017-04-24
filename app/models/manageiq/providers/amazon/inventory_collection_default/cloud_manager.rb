@@ -2,7 +2,23 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
   class << self
     def vms(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::CloudManager::Vm,
+        :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::Vm,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :uid_ems,
+          :ems_ref,
+          :name,
+          :vendor,
+          :raw_power_state,
+          :boot_time,
+          :availability_zone,
+          :flavor,
+          :genealogy_parent,
+          :key_pairs,
+          :location,
+          :orchestration_stack,
+        ]
       }
       super(attributes.merge!(extra_attributes))
     end
@@ -35,6 +51,25 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
           :virtualization_type,
           :root_device_type,
           :vm_or_template,
+          :root_device_type,
+          :cpu_sockets,
+          :cpu_cores_per_socket,
+          :cpu_total_cores,
+          :memory_mb,
+          :disk_capacity,
+        ]
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
+
+    def networks(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => [
+          :hardware,
+          :ipaddress,
+          :hostname,
+          :description,
         ]
       }
 
@@ -195,7 +230,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
 
     def disks(extra_attributes = {})
       attributes = {
-        :inventory_object_attributes => %i(hardware device_name location size backing),
+        :inventory_object_attributes => %i(hardware device_name device_type controller_type location size backing),
       }
 
       super(attributes.merge!(extra_attributes))
