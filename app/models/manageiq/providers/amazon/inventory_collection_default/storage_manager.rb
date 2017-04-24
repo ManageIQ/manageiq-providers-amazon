@@ -18,7 +18,14 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager < 
 
     def cloud_object_store_containers(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer,
+        :model_class                 => ::ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer,
+        :inventory_object_attributes => [
+          :ext_management_system,
+          :ems_ref,
+          :key,
+          :bytes,
+          :object_count,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
@@ -26,7 +33,16 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager < 
 
     def cloud_object_store_objects(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject,
+        :model_class                 => ::ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject,
+        :inventory_object_attributes => [
+          :ext_management_system,
+          :ems_ref,
+          :etag,
+          :last_modified,
+          :content_length,
+          :key,
+          :cloud_object_store_container,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
