@@ -10,7 +10,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     # The order of the below methods doesn't matter since they refer to each other using only lazy links
     cloud_networks
     cloud_subnets
-    get_security_groups
+    security_groups
     get_network_ports
     get_load_balancers
     get_ec2_floating_ips_and_ports
@@ -63,23 +63,50 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     end
   end
 
-  def get_security_groups
-    process_inventory_collection(collector.security_groups, :security_groups) do |sg|
-      get_outbound_firewall_rules(sg)
-      get_inbound_firewall_rules(sg)
+  def security_groups
+    collector.security_groups.each do |sg|
+      uid = sg['group_id']
 
-      parse_security_group(sg)
+      persister_security_group = persister.security_groups.find_or_build(uid)
+      persister_security_group.assign_attributes(
+        :type                  => self.class.security_group_type.name,
+        :ext_management_system => ems,
+        :ems_ref               => uid,
+        :name                  => sg['group_name'],
+        :description           => sg['description'].try(:truncate, 255),
+        :cloud_network         => persister.cloud_networks.lazy_find(sg['vpc_id']),
+        :orchestration_stack   => persister.orchestration_stacks.lazy_find(
+          get_from_tags(sg, "aws:cloudformation:stack-id")
+        ),
+      )
+
+      sg['ip_permissions'].each { |perm| firewall_rule(persister_security_group, perm, "inbound") }
+      sg['ip_permissions_egress'].each { |perm| firewall_rule(persister_security_group,perm, "outbound") }
     end
   end
 
-  def get_inbound_firewall_rules(sg)
-    parsed_rules = sg['ip_permissions'].collect { |perm| parse_firewall_rule(perm, "inbound", sg) }.flatten
-    process_inventory_collection(parsed_rules, :firewall_rules) { |firewall_rule| firewall_rule }
-  end
+  # TODO: Should ICMP protocol values have their own 2 columns, or
+  #   should they override port and end_port like the Amazon API.
+  def firewall_rule(persister_security_group, perm, direction)
+    common = {
+      :direction     => direction,
+      :host_protocol => perm['ip_protocol'].to_s.upcase,
+      :port          => perm['from_port'],
+      :end_port      => perm['to_port'],
+      :resource      => persister_security_group
+    }
 
-  def get_outbound_firewall_rules(sg)
-    parsed_rules = sg['ip_permissions_egress'].collect { |perm| parse_firewall_rule(perm, "outbound", sg) }.flatten
-    process_inventory_collection(parsed_rules, :firewall_rules) { |firewall_rule| firewall_rule }
+    (perm['user_id_group_pairs'] || []).each do |g|
+      firewall_rule                   = common.dup
+      firewall_rule[:source_security_group] = persister.security_groups.lazy_find(g['group_id'])
+      persister.firewall_rules.build(firewall_rule)
+    end
+
+    (perm['ip_ranges'] || []).each do |r|
+      firewall_rule                   = common.dup
+      firewall_rule[:source_ip_range] = r['cidr_ip']
+      persister.firewall_rules.build(firewall_rule)
+    end
   end
 
   def get_load_balancers
@@ -203,50 +230,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
   def get_ec2_cloud_subnet_network_port(instance)
     # Create network_port placeholder for old EC2 instances, those do not have interface nor subnet nor VPC
     process_inventory_collection([instance], :cloud_subnet_network_ports) { |i| parse_ec2_cloud_subnet_network_port(i) }
-  end
-
-  def parse_security_group(sg)
-    uid = sg['group_id']
-
-    {
-      :type                  => self.class.security_group_type.name,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      :name                  => sg['group_name'],
-      :description           => sg['description'].try(:truncate, 255),
-      :cloud_network         => persister.cloud_networks.lazy_find(sg['vpc_id']),
-      :orchestration_stack   => persister.orchestration_stacks.lazy_find(
-        get_from_tags(sg, "aws:cloudformation:stack-id")
-      ),
-    }
-  end
-
-  # TODO: Should ICMP protocol values have their own 2 columns, or
-  #   should they override port and end_port like the Amazon API.
-  def parse_firewall_rule(perm, direction, sg)
-    ret = []
-
-    common = {
-      :direction     => direction,
-      :host_protocol => perm['ip_protocol'].to_s.upcase,
-      :port          => perm['from_port'],
-      :end_port      => perm['to_port'],
-      :resource      => persister.security_groups.lazy_find(sg['group_id'])
-    }
-
-    (perm['user_id_group_pairs'] || []).each do |g|
-      new_result                         = common.dup
-      new_result[:source_security_group] = persister.security_groups.lazy_find(g['group_id'])
-      ret << new_result
-    end
-
-    (perm['ip_ranges'] || []).each do |r|
-      new_result                   = common.dup
-      new_result[:source_ip_range] = r['cidr_ip']
-      ret << new_result
-    end
-
-    ret
   end
 
   def parse_load_balancer(lb)
