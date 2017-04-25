@@ -7,56 +7,52 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
     log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{collector.manager.name}] id: [#{collector.manager.id}]"
 
     $aws_log.info("#{log_header}...}")
-    get_volumes
-    get_snapshots
+    volumes
+    snapshots
     $aws_log.info("#{log_header}...Complete")
   end
 
   private
 
-  def get_volumes
-    process_inventory_collection(collector.cloud_volumes, :cloud_volumes) { |volume| parse_volume(volume) }
+  def volumes
+    collector.cloud_volumes.each do |volume|
+      uid = volume['volume_id']
+
+      persister_volume = persister.cloud_volumes.find_or_build(uid)
+      persister_volume.assign_attributes(
+        :type                  => self.class.volume_type,
+        :ext_management_system => ems,
+        :ems_ref               => uid,
+        :name                  => get_from_tags(volume, :name) || uid,
+        :status                => volume['state'],
+        :creation_time         => volume['create_time'],
+        :volume_type           => volume['volume_type'],
+        :size                  => volume['size'].to_i.gigabytes,
+        :base_snapshot         => persister.cloud_volume_snapshots.lazy_find(volume['snapshot_id']),
+        :availability_zone     => persister.availability_zones.lazy_find(volume['availability_zone'])
+      )
+
+      link_volume_to_disk(persister_volume, volume['attachments'])
+    end
   end
 
-  def get_snapshots
-    process_inventory_collection(collector.cloud_volume_snapshots, :cloud_volume_snapshots) { |snap| parse_snapshot(snap) }
-  end
+  def snapshots
+    collector.cloud_volume_snapshots.each do |snap|
+      uid = snap['snapshot_id']
 
-  def parse_volume(volume)
-    uid = volume['volume_id']
-
-    volume_hash = {
-      :type                  => self.class.volume_type,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      :name                  => get_from_tags(volume, :name) || uid,
-      :status                => volume['state'],
-      :creation_time         => volume['create_time'],
-      :volume_type           => volume['volume_type'],
-      :size                  => volume['size'].to_i.gigabytes,
-      :base_snapshot         => persister.cloud_volume_snapshots.lazy_find(volume['snapshot_id']),
-      :availability_zone     => persister.availability_zones.lazy_find(volume['availability_zone'])
-    }
-
-    link_volume_to_disk(volume_hash, volume['attachments'])
-
-    volume_hash
-  end
-
-  def parse_snapshot(snap)
-    uid = snap['snapshot_id']
-
-    {
-      :type                  => self.class.volume_snapshot_type,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      :name                  => get_from_tags(snap, :name) || uid,
-      :status                => snap['state'],
-      :creation_time         => snap['start_time'],
-      :description           => snap['description'],
-      :size                  => snap['volume_size'].to_i.gigabytes,
-      :cloud_volume          => persister.cloud_volumes.lazy_find(snap['volume_id'])
-    }
+      persister_snapshot = persister.cloud_volume_snapshots.find_or_build(uid)
+      persister_snapshot.assign_attributes(
+        :type                  => self.class.volume_snapshot_type,
+        :ext_management_system => ems,
+        :ems_ref               => uid,
+        :name                  => get_from_tags(snap, :name) || uid,
+        :status                => snap['state'],
+        :creation_time         => snap['start_time'],
+        :description           => snap['description'],
+        :size                  => snap['volume_size'].to_i.gigabytes,
+        :cloud_volume          => persister.cloud_volumes.lazy_find(snap['volume_id'])
+      )
+    end
   end
 
   # Overridden helper methods, we should put them in helper once we get rid of old refresh
@@ -64,13 +60,11 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
     (resource['tags'] || []).detect { |tag, _| tag['key'].downcase == item.to_s.downcase }.try(:[], 'value')
   end
 
-  def link_volume_to_disk(volume_hash, attachments)
-    uid = volume_hash[:ems_ref]
-
+  def link_volume_to_disk(persister_volume, attachments)
     (attachments || []).each do |a|
       if a['device'].blank?
         log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{ems.name}] id: [#{ems.id}]"
-        $aws_log.warn "#{log_header}: Volume: #{uid}, is missing a mountpoint, skipping the volume processing"
+        $aws_log.warn "#{log_header}: Volume: #{persister_volume.ems_ref}, is missing a mountpoint, skipping the volume processing"
         $aws_log.warn "#{log_header}: EMS: #{ems.name}, Instance: #{a['instance_id']}"
         next
       end
@@ -80,8 +74,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
       disk = persister.disks.find_or_build_by(:hardware    => persister.hardwares.lazy_find(a["instance_id"]),
                                               :device_name => dev)
       disk.location = dev
-      disk.size     = volume_hash[:size]
-      disk.backing  = persister.cloud_volumes.lazy_find(uid)
+      disk.size     = persister_volume.size
+      disk.backing  = persister_volume
     end
   end
 
