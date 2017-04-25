@@ -54,7 +54,32 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def security_groups(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::NetworkManager::SecurityGroup,
+        :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::SecurityGroup,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :name,
+          :description,
+          :cloud_network,
+          :orchestration_stack,
+        ]
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
+
+    def firewall_rules(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => [
+          :direction,
+          :host_protocol,
+          :port,
+          :end_port,
+          :resource,
+          :source_security_group,
+          :source_ip_range,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
