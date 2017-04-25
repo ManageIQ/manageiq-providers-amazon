@@ -87,7 +87,13 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def load_balancers(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer,
+        :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :name,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
@@ -95,7 +101,13 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def load_balancer_pools(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPool,
+        :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPool,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :name,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
@@ -103,7 +115,24 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def load_balancer_pool_members(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPoolMember,
+        :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPoolMember,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :vm,
+        ]
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
+
+    def load_balancer_pool_member_pools(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => [
+          :load_balancer_pool,
+          :load_balancer_pool_member,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
@@ -111,7 +140,28 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def load_balancer_listeners(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener,
+        :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :load_balancer_protocol,
+          :load_balancer_port_range,
+          :instance_protocol,
+          :instance_port_range,
+          :load_balancer,
+        ]
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
+
+    def load_balancer_listener_pools(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => [
+          :load_balancer_listener,
+          :load_balancer_pool,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
@@ -119,7 +169,33 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def load_balancer_health_checks(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck,
+        :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :protocol,
+          :port,
+          :url_path,
+          :interval,
+          :timeout,
+          :unhealthy_threshold,
+          :healthy_threshold,
+          :load_balancer,
+        ]
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
+
+    def load_balancer_health_check_members(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => [
+          :load_balancer_health_check,
+          :load_balancer_pool_member,
+          :status,
+          :status_reason,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
