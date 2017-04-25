@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 - Rewrite EBS parser to a new format [(#228)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/228)
 - Rewrite S3 parser to a new format [(#227)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/227)
 
-## Fine RC-1
+## Fine Beta-2
 
 ### Added
 - Rewrite the instance parser to the new syntax [(#225)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/225)
