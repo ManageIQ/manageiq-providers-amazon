@@ -18,7 +18,17 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def cloud_subnets(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::NetworkManager::CloudSubnet,
+        :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::CloudSubnet,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :name,
+          :cidr,
+          :status,
+          :availability_zone,
+          :cloud_network,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
@@ -26,7 +36,17 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def cloud_networks(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork,
+        :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :name,
+          :cidr,
+          :status,
+          :enabled,
+          :orchestration_stack,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
