@@ -54,40 +54,23 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           assert_specific_load_balancer_non_vpc_vms
           assert_specific_vm_powered_on
 
-          expected_counts = {
+          assert_counts(
             :auth_private_key              => 1,
             :availability_zone             => 1,
-            :cloud_network                 => 0,
-            :cloud_subnet                  => 0,
             :cloud_volume                  => 1,
-            :cloud_volume_backup           => 0,
-            :cloud_volume_snapshot         => 0,
             :custom_attribute              => 2,
             :disk                          => 1,
-            :ext_management_system         => 4,
             :firewall_rule                 => 13,
             :flavor                        => 3,
             :floating_ip                   => 1,
-            :guest_device                  => 0,
             :hardware                      => 2,
             :miq_template                  => 1,
             :network                       => 2,
             :network_port                  => 1,
-            :network_router                => 0,
-            :operating_system              => 0,
-            :orchestration_stack           => 0,
-            :orchestration_stack_output    => 0,
-            :orchestration_stack_parameter => 0,
-            :orchestration_stack_resource  => 0,
-            :orchestration_template        => 0,
             :security_group                => 2,
-            :snapshot                      => 0,
-            :system_service                => 0,
             :vm                            => 1,
             :vm_or_template                => 2
-          }
-
-          assert_counts(expected_counts)
+          )
         end
       end
 
@@ -123,40 +106,25 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           assert_specific_cloud_volume_vm_on_cloud_network
           assert_specific_vm_on_cloud_network
 
-          expected_counts = {
+          assert_counts(
             :auth_private_key              => 1,
             :availability_zone             => 1,
             :cloud_network                 => 1,
             :cloud_subnet                  => 1,
             :cloud_volume                  => 2,
-            :cloud_volume_backup           => 0,
-            :cloud_volume_snapshot         => 0,
             :custom_attribute              => 2,
             :disk                          => 2,
-            :ext_management_system         => 4,
             :firewall_rule                 => 3,
             :flavor                        => 3,
             :floating_ip                   => 1,
-            :guest_device                  => 0,
             :hardware                      => 2,
             :miq_template                  => 1,
             :network                       => 2,
             :network_port                  => 1,
-            :network_router                => 0,
-            :operating_system              => 0,
-            :orchestration_stack           => 0,
-            :orchestration_stack_output    => 0,
-            :orchestration_stack_parameter => 0,
-            :orchestration_stack_resource  => 0,
-            :orchestration_template        => 0,
             :security_group                => 1,
-            :snapshot                      => 0,
-            :system_service                => 0,
             :vm                            => 1,
             :vm_or_template                => 2
-          }
-
-          assert_counts(expected_counts)
+          )
         end
       end
 
@@ -183,40 +151,25 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           assert_specific_cloud_volume_vm_on_cloud_network_public_ip
           assert_specific_vm_on_cloud_network_public_ip
 
-          expected_counts = {
+          assert_counts(
             :auth_private_key              => 1,
             :availability_zone             => 1,
             :cloud_network                 => 1,
             :cloud_subnet                  => 1,
             :cloud_volume                  => 2,
-            :cloud_volume_backup           => 0,
-            :cloud_volume_snapshot         => 0,
             :custom_attribute              => 2,
             :disk                          => 2,
-            :ext_management_system         => 4,
             :firewall_rule                 => 3,
             :flavor                        => 3,
             :floating_ip                   => 1,
-            :guest_device                  => 0,
             :hardware                      => 2,
             :miq_template                  => 1,
             :network                       => 2,
             :network_port                  => 1,
-            :network_router                => 0,
-            :operating_system              => 0,
-            :orchestration_stack           => 0,
-            :orchestration_stack_output    => 0,
-            :orchestration_stack_parameter => 0,
-            :orchestration_stack_resource  => 0,
-            :orchestration_template        => 0,
             :security_group                => 1,
-            :snapshot                      => 0,
-            :system_service                => 0,
             :vm                            => 1,
             :vm_or_template                => 2
-          }
-
-          assert_counts(expected_counts)
+          )
         end
       end
 
@@ -250,40 +203,14 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           # orchestration stack belongs to an orchestration template
           expect(@orch_stack.orchestration_template).to eq(@orch_template)
 
-          expected_counts = {
-            :auth_private_key              => 0,
-            :availability_zone             => 0,
-            :cloud_network                 => 0,
-            :cloud_subnet                  => 0,
-            :cloud_volume                  => 0,
-            :cloud_volume_backup           => 0,
-            :cloud_volume_snapshot         => 0,
-            :custom_attribute              => 0,
-            :disk                          => 0,
-            :ext_management_system         => 4,
-            :firewall_rule                 => 0,
+          assert_counts(
             :flavor                        => 3,
-            :floating_ip                   => 0,
-            :guest_device                  => 0,
-            :hardware                      => 0,
-            :miq_template                  => 0,
-            :network                       => 0,
-            :network_port                  => 0,
-            :network_router                => 0,
-            :operating_system              => 0,
             :orchestration_stack           => 1,
             :orchestration_stack_output    => 1,
             :orchestration_stack_parameter => 6,
             :orchestration_stack_resource  => 2,
-            :orchestration_template        => 1,
-            :security_group                => 0,
-            :snapshot                      => 0,
-            :system_service                => 0,
-            :vm                            => 0,
-            :vm_or_template                => 0
-          }
-
-          assert_counts(expected_counts)
+            :orchestration_template        => 1
+          )
         end
       end
 
@@ -331,40 +258,14 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           expect(@orch_stack.parent).to eq(@parent_stack)
           expect(@parent_stack.children).to match_array([@orch_stack])
 
-          expected_counts = {
-            :auth_private_key              => 0,
-            :availability_zone             => 0,
-            :cloud_network                 => 0,
-            :cloud_subnet                  => 0,
-            :cloud_volume                  => 0,
-            :cloud_volume_backup           => 0,
-            :cloud_volume_snapshot         => 0,
-            :custom_attribute              => 0,
-            :disk                          => 0,
-            :ext_management_system         => 4,
-            :firewall_rule                 => 0,
+          assert_counts(
             :flavor                        => 3,
-            :floating_ip                   => 0,
-            :guest_device                  => 0,
-            :hardware                      => 0,
-            :miq_template                  => 0,
-            :network                       => 0,
-            :network_port                  => 0,
-            :network_router                => 0,
-            :operating_system              => 0,
             :orchestration_stack           => 2,
             :orchestration_stack_output    => 2,
             :orchestration_stack_parameter => 10,
             :orchestration_stack_resource  => 19,
-            :orchestration_template        => 2,
-            :security_group                => 0,
-            :snapshot                      => 0,
-            :system_service                => 0,
-            :vm                            => 0,
-            :vm_or_template                => 0
-          }
-
-          assert_counts(expected_counts)
+            :orchestration_template        => 2
+          )
         end
       end
 
@@ -404,40 +305,30 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           assert_specific_orchestration_template
           assert_specific_orchestration_stack
 
-          expected_counts = {
+          assert_counts(
             :auth_private_key              => 1,
             :availability_zone             => 1,
             :cloud_network                 => 1,
             :cloud_subnet                  => 1,
             :cloud_volume                  => 1,
-            :cloud_volume_backup           => 0,
-            :cloud_volume_snapshot         => 0,
             :custom_attribute              => 4,
             :disk                          => 1,
-            :ext_management_system         => 4,
             :firewall_rule                 => 3,
             :flavor                        => 3,
             :floating_ip                   => 1,
-            :guest_device                  => 0,
             :hardware                      => 2,
             :miq_template                  => 1,
             :network                       => 2,
             :network_port                  => 1,
-            :network_router                => 0,
-            :operating_system              => 0,
             :orchestration_stack           => 2,
             :orchestration_stack_output    => 2,
             :orchestration_stack_parameter => 10,
             :orchestration_stack_resource  => 19,
             :orchestration_template        => 2,
             :security_group                => 1,
-            :snapshot                      => 0,
-            :system_service                => 0,
             :vm                            => 1,
             :vm_or_template                => 2
-          }
-
-          assert_counts(expected_counts)
+          )
         end
       end
 
@@ -477,40 +368,11 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           assert_specific_cloud_volume_vm_on_cloud_network
           assert_specific_cloud_volume_snapshot
 
-          expected_counts = {
-            :auth_private_key              => 0,
-            :availability_zone             => 0,
-            :cloud_network                 => 0,
-            :cloud_subnet                  => 0,
+          assert_counts(
             :cloud_volume                  => 2,
-            :cloud_volume_backup           => 0,
             :cloud_volume_snapshot         => 1,
-            :custom_attribute              => 0,
-            :disk                          => 0,
-            :ext_management_system         => 4,
-            :firewall_rule                 => 0,
             :flavor                        => 3,
-            :floating_ip                   => 0,
-            :guest_device                  => 0,
-            :hardware                      => 0,
-            :miq_template                  => 0,
-            :network                       => 0,
-            :network_port                  => 0,
-            :network_router                => 0,
-            :operating_system              => 0,
-            :orchestration_stack           => 0,
-            :orchestration_stack_output    => 0,
-            :orchestration_stack_parameter => 0,
-            :orchestration_stack_resource  => 0,
-            :orchestration_template        => 0,
-            :security_group                => 0,
-            :snapshot                      => 0,
-            :system_service                => 0,
-            :vm                            => 0,
-            :vm_or_template                => 0
-          }
-
-          assert_counts(expected_counts)
+          )
         end
       end
     end

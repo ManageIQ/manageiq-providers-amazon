@@ -81,8 +81,10 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     build_ebs_storage_manager unless ebs_storage_manager
     ebs_storage_manager.name = "#{name} EBS Storage Manager"
 
-    build_s3_storage_manager unless s3_storage_manager
-    s3_storage_manager.name = "#{name} S3 Storage Manager"
+    if ::Settings.prototype.amazon.s3
+      build_s3_storage_manager unless s3_storage_manager
+      s3_storage_manager.name = "#{name} S3 Storage Manager"
+    end
 
     ensure_managers_zone_and_provider_region
   end

@@ -3,6 +3,10 @@ module AwsStubs
     @data_scaling || try(:data_scaling) || 1
   end
 
+  def expected_ext_management_systems_count
+    ::Settings.prototype.amazon.s3 ? 4 : 3
+  end
+
   def disconnect_inv_factor
     # The entities like VM are disconnected instead of deleted, for comparing, we set how many was disconnected and
     # we add them to the total count

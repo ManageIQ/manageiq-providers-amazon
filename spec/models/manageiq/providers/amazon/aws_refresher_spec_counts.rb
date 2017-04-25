@@ -1,9 +1,49 @@
 module AwsRefresherSpecCounts
   extend ActiveSupport::Concern
 
+  def expected_ext_management_systems_count
+    ::Settings.prototype.amazon.s3 ? 4 : 3
+  end
+
+  def base_inventory_counts
+    {
+      :auth_private_key              => 0,
+      :availability_zone             => 0,
+      :cloud_network                 => 0,
+      :cloud_subnet                  => 0,
+      :cloud_volume                  => 0,
+      :cloud_volume_backup           => 0,
+      :cloud_volume_snapshot         => 0,
+      :custom_attribute              => 0,
+      :disk                          => 0,
+      :ext_management_system         => expected_ext_management_systems_count,
+      :firewall_rule                 => 0,
+      :flavor                        => 0,
+      :floating_ip                   => 0,
+      :guest_device                  => 0,
+      :hardware                      => 0,
+      :miq_template                  => 0,
+      :network                       => 0,
+      :network_port                  => 0,
+      :network_router                => 0,
+      :operating_system              => 0,
+      :orchestration_stack           => 0,
+      :orchestration_stack_output    => 0,
+      :orchestration_stack_parameter => 0,
+      :orchestration_stack_resource  => 0,
+      :orchestration_template        => 0,
+      :security_group                => 0,
+      :snapshot                      => 0,
+      :system_service                => 0,
+      :vm                            => 0,
+      :vm_or_template                => 0
+    }
+  end
+
   def assert_counts(expected_table_counts)
-    assert_table_counts(expected_table_counts)
-    assert_ems(expected_table_counts)
+    expected_counts = base_inventory_counts.merge(expected_table_counts)
+    assert_table_counts(expected_counts)
+    assert_ems(expected_counts)
   end
 
   def table_counts_from_api
@@ -74,38 +114,31 @@ module AwsRefresherSpecCounts
     orchestration_stack_outputs_count    = orchestration_stack_hashes.map { |x| x["outputs"] }.flatten.compact.size
     orchestration_stack_resources_count  = stacks_resources.size
 
-    {
+    base_inventory_counts.merge(
       :auth_private_key              => key_pairs.size,
       :availability_zone             => availability_zones.size,
       :cloud_network                 => cloud_networks.size,
       :cloud_subnet                  => cloud_subnets.size,
       :cloud_volume                  => cloud_volumes.size,
-      :cloud_volume_backup           => 0,
       :cloud_volume_snapshot         => cloud_volume_snapshots.size,
       :custom_attribute              => custom_attributes_count,
       :disk                          => disks_count,
-      :ext_management_system         => 4,
       :firewall_rule                 => firewall_rules_count,
       :flavor                        => 76,
       :floating_ip                   => floating_ips_refs.size,
-      :guest_device                  => 0,
       :hardware                      => instances_and_images_count,
       :miq_template                  => images_count,
       :network                       => networks_count,
       :network_port                  => network_ports_count,
-      :network_router                => 0,
-      :operating_system              => 0,
       :orchestration_stack           => orchestration_stacks_count,
       :orchestration_stack_output    => orchestration_stack_outputs_count,
       :orchestration_stack_parameter => orchestration_stack_parameters_count,
       :orchestration_stack_resource  => orchestration_stack_resources_count,
       :orchestration_template        => orchestration_stacks_count,
       :security_group                => security_groups_count,
-      :snapshot                      => 0,
-      :system_service                => 0,
       :vm                            => instances_count,
       :vm_or_template                => instances_and_images_count
-    }
+    )
   end
 
   def assert_table_counts(expected_table_counts)

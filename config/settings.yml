@@ -69,3 +69,6 @@
         :ems_refresh_worker_amazon_network: {}
         :ems_refresh_worker_amazon_ebs_storage: {}
         :ems_refresh_worker_amazon_s3: {}
+:prototype:
+  :amazon:
+    :s3: false

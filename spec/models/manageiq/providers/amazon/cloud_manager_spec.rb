@@ -33,9 +33,11 @@ describe ManageIQ::Providers::Amazon::CloudManager do
     expect(ems.ebs_storage_manager.zone_id).to eq zone1.id
     expect(ems.ebs_storage_manager.provider_region).to eq "us-east-1"
 
-    expect(ems.s3_storage_manager.zone).to eq zone1
-    expect(ems.s3_storage_manager.zone_id).to eq zone1.id
-    expect(ems.s3_storage_manager.provider_region).to eq "us-east-1"
+    if ::Settings.prototype.amazon.s3
+      expect(ems.s3_storage_manager.zone).to eq zone1
+      expect(ems.s3_storage_manager.zone_id).to eq zone1.id
+      expect(ems.s3_storage_manager.provider_region).to eq "us-east-1"
+    end
 
     ems.zone = zone2
     ems.provider_region = "us-west-1"
@@ -50,9 +52,11 @@ describe ManageIQ::Providers::Amazon::CloudManager do
     expect(ems.ebs_storage_manager.zone_id).to eq zone2.id
     expect(ems.ebs_storage_manager.provider_region).to eq "us-west-1"
 
-    expect(ems.s3_storage_manager.zone).to eq zone2
-    expect(ems.s3_storage_manager.zone_id).to eq zone2.id
-    expect(ems.s3_storage_manager.provider_region).to eq "us-west-1"
+    if ::Settings.prototype.amazon.s3
+      expect(ems.s3_storage_manager.zone).to eq zone2
+      expect(ems.s3_storage_manager.zone_id).to eq zone2.id
+      expect(ems.s3_storage_manager.provider_region).to eq "us-west-1"
+    end
   end
 
   describe ".metrics_collector_queue_name" do

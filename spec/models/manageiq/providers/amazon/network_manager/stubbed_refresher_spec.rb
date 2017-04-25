@@ -110,7 +110,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
 
     {
       :auth_private_key                  => 0,
-      :ext_management_system             => 4,
+      :ext_management_system             => expected_ext_management_systems_count,
       :flavor                            => 0,
       :availability_zone                 => 0,
       :vm_or_template                    => 0,
