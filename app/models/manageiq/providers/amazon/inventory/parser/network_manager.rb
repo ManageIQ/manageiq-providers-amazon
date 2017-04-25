@@ -8,8 +8,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
     $aws_log.info("#{log_header}...")
     # The order of the below methods doesn't matter since they refer to each other using only lazy links
-    get_cloud_networks
-    get_cloud_subnets
+    cloud_networks
+    cloud_subnets
     get_security_groups
     get_network_ports
     get_load_balancers
@@ -20,12 +20,47 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
   private
 
-  def get_cloud_networks
-    process_inventory_collection(collector.cloud_networks, :cloud_networks) { |vpc| parse_cloud_network(vpc) }
+  def cloud_networks
+    collector.cloud_networks.each do |vpc|
+      uid    = vpc['vpc_id']
+      name   = get_from_tags(vpc, 'name')
+      name   ||= uid
+      status = vpc['state'] == :available ? "active" : "inactive"
+
+      persister_network = persister.cloud_networks.find_or_build(uid)
+      persister_network.assign_attributes(
+        :type                  => self.class.cloud_network_type.name,
+        :ext_management_system => ems,
+        :ems_ref               => uid,
+        :name                  => name,
+        :cidr                  => vpc['cidr_block'],
+        :status                => status,
+        :enabled               => true,
+        :orchestration_stack   => persister.orchestration_stacks.lazy_find(
+          get_from_tags(vpc, "aws:cloudformation:stack-id")
+        ),
+      )
+    end
   end
 
-  def get_cloud_subnets
-    process_inventory_collection(collector.cloud_subnets, :cloud_subnets) { |s| parse_cloud_subnet(s) }
+  def cloud_subnets
+    collector.cloud_subnets.each do |subnet|
+      uid  = subnet['subnet_id']
+      name = get_from_tags(subnet, 'name')
+      name ||= uid
+
+      persister_subnet = persister.cloud_subnets.find_or_build(uid)
+      persister_subnet.assign_attributes(
+        :type                  => self.class.cloud_subnet_type.name,
+        :ext_management_system => ems,
+        :ems_ref               => uid,
+        :name                  => name,
+        :cidr                  => subnet['cidr_block'],
+        :status                => subnet['state'].try(:to_s),
+        :availability_zone     => persister.availability_zones.lazy_find(subnet['availability_zone']),
+        :cloud_network         => persister.cloud_networks.lazy_find(subnet['vpc_id']),
+      )
+    end
   end
 
   def get_security_groups
@@ -168,46 +203,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
   def get_ec2_cloud_subnet_network_port(instance)
     # Create network_port placeholder for old EC2 instances, those do not have interface nor subnet nor VPC
     process_inventory_collection([instance], :cloud_subnet_network_ports) { |i| parse_ec2_cloud_subnet_network_port(i) }
-  end
-
-  def parse_cloud_network(vpc)
-    uid = vpc['vpc_id']
-
-    name = get_from_tags(vpc, 'name')
-    name ||= uid
-
-    status = vpc['state'] == :available ? "active" : "inactive"
-
-    {
-      :type                  => self.class.cloud_network_type.name,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      :name                  => name,
-      :cidr                  => vpc['cidr_block'],
-      :status                => status,
-      :enabled               => true,
-      :orchestration_stack   => persister.orchestration_stacks.lazy_find(
-        get_from_tags(vpc, "aws:cloudformation:stack-id")
-      ),
-    }
-  end
-
-  def parse_cloud_subnet(subnet)
-    uid = subnet['subnet_id']
-
-    name = get_from_tags(subnet, 'name')
-    name ||= uid
-
-    {
-      :type                  => self.class.cloud_subnet_type.name,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      :name                  => name,
-      :cidr                  => subnet['cidr_block'],
-      :status                => subnet['state'].try(:to_s),
-      :availability_zone     => persister.availability_zones.lazy_find(subnet['availability_zone']),
-      :cloud_network         => persister.cloud_networks.lazy_find(subnet['vpc_id']),
-    }
   end
 
   def parse_security_group(sg)
