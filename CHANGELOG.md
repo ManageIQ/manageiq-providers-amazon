@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Fine RC-1
+## Fine Beta-2
 
 ### Added
 - Rewrite stacks parser to the new syntax [(#223)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/223)
