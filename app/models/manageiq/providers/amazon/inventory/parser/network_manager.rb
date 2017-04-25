@@ -12,7 +12,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     cloud_subnets
     security_groups
     get_network_ports
-    get_load_balancers
+    load_balancers
     get_ec2_floating_ips_and_ports
     get_floating_ips
     $aws_log.info("#{log_header}...Complete")
@@ -109,69 +109,112 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     end
   end
 
-  def get_load_balancers
-    process_inventory_collection(collector.load_balancers, :load_balancers) do |lb|
-      get_load_balancer_pools(lb)
-      get_load_balancer_pool_members(lb)
-      get_load_balancer_listeners(lb)
-      get_load_balancer_health_checks(lb)
+  def load_balancers
+    collector.load_balancers.each do |lb|
+      uid = lb['load_balancer_name']
 
-      parse_load_balancer(lb)
+      persister_load_balancer = persister.load_balancers.find_or_build(uid)
+      persister_load_balancer.assign_attributes(
+        :type                  => self.class.load_balancer_type.name,
+        :ext_management_system => ems,
+        :ems_ref               => uid,
+        :name                  => uid,
+      )
+
+      persister_load_balancer_pool = persister.load_balancer_pools.find_or_build(uid)
+      persister_load_balancer_pool.assign_attributes(
+        :type                  => self.class.load_balancer_pool_type.name,
+        :ext_management_system => ems,
+        :ems_ref               => uid,
+        :name                  => uid,
+      )
+
+      load_balancer_pool_members(persister_load_balancer_pool, lb['instances'])
+      load_balancer_listeners(persister_load_balancer, persister_load_balancer_pool, lb)
+      load_balancer_health_checks(persister_load_balancer, uid, lb['health_check'])
     end
   end
 
-  def get_load_balancer_pools(load_balancer)
-    process_inventory_collection([load_balancer], :load_balancer_pools) { |lb| parse_load_balancer_pool(lb) }
-  end
+  def load_balancer_pool_members(persister_load_balancer_pool, members)
+    members.each do |member|
+      uid = member['instance_id']
 
-  def get_load_balancer_pool_members(lb)
-    process_inventory_collection(lb['instances'], :load_balancer_pool_members) do |member|
-      get_load_balancer_balancer_pool_member_pools(lb, member)
+      persister_load_balancer_pool_member = persister.load_balancer_pool_members.find_or_build(uid)
+      persister_load_balancer_pool_member.assign_attributes(
+        :type                  => self.class.load_balancer_pool_member_type.name,
+        :ext_management_system => ems,
+        :ems_ref               => uid,
+        # TODO(lsmola) AWS always associates to eth0 of the instances, we do not collect that info now, we need to do that
+        # :network_port => get eth0 network_port
+        :vm                    => persister.vms.lazy_find(uid)
+      )
 
-      parse_load_balancer_pool_member(member)
+      persister.load_balancer_pool_member_pools.find_or_build_by(
+        :load_balancer_pool        => persister_load_balancer_pool,
+        :load_balancer_pool_member => persister_load_balancer_pool_member
+      )
     end
   end
 
-  def get_load_balancer_balancer_pool_member_pools(lb, member)
-    process_inventory_collection([member], :load_balancer_pool_member_pools) do |m|
-      parse_load_balancer_pool_member_pools(lb, m)
-    end
-  end
-
-  def listener_uid(lb, listener)
-    "#{lb['load_balancer_name']}__#{listener['protocol']}__#{listener['load_balancer_port']}__"\
-    "#{listener['instance_protocol']}__#{listener['instance_port']}__#{listener['ssl_certificate_id']}"
-  end
-
-  def get_load_balancer_listeners(lb)
-    process_inventory_collection(lb['listener_descriptions'], :load_balancer_listeners) do |listener|
+  def load_balancer_listeners(persister_load_balancer, persister_load_balancer_pool, lb)
+    lb['listener_descriptions'].each do |listener|
       listener = listener['listener']
+      uid      = "#{lb['load_balancer_name']}__#{listener['protocol']}__#{listener['load_balancer_port']}__"\
+                 "#{listener['instance_protocol']}__#{listener['instance_port']}__#{listener['ssl_certificate_id']}"
 
-      get_load_balancer_listener_pool(listener, lb)
+      persister_load_balancer_listener = persister.load_balancer_listeners.find_or_build(uid)
+      persister_load_balancer_listener.assign_attributes(
+        :type                     => self.class.load_balancer_listener_type.name,
+        :ext_management_system    => ems,
+        :ems_ref                  => uid,
+        :load_balancer_protocol   => listener['protocol'],
+        :load_balancer_port_range => (listener['load_balancer_port'].to_i..listener['load_balancer_port'].to_i),
+        :instance_protocol        => listener['instance_protocol'],
+        :instance_port_range      => (listener['instance_port'].to_i..listener['instance_port'].to_i),
+        :load_balancer            => persister_load_balancer,
+      )
 
-      parse_load_balancer_listener(lb, listener)
+      persister.load_balancer_listener_pools.find_or_build_by(
+        :load_balancer_listener => persister_load_balancer_listener,
+        :load_balancer_pool     => persister_load_balancer_pool
+      )
     end
   end
 
-  def get_load_balancer_listener_pool(listener, lb)
-    process_inventory_collection([listener], :load_balancer_listener_pools) do |l|
-      parse_load_balancer_listener_pool(l, lb)
-    end
+  def load_balancer_health_checks(persister_load_balancer, uid, health_check)
+    target_match = health_check['target'].match(/^(\w+)\:(\d+)\/?(.*?)$/)
+    protocol     = target_match[1]
+    port         = target_match[2].to_i
+    url_path     = target_match[3]
+
+    persister_load_balancer_health_check = persister.load_balancer_health_checks.find_or_build(uid)
+    persister_load_balancer_health_check.assign_attributes(
+      :type                  => self.class.load_balancer_health_check_type.name,
+      :ext_management_system => ems,
+      :ems_ref               => uid,
+      :protocol              => protocol,
+      :port                  => port,
+      :url_path              => url_path,
+      :interval              => health_check['interval'],
+      :timeout               => health_check['timeout'],
+      :unhealthy_threshold   => health_check['unhealthy_threshold'],
+      :healthy_threshold     => health_check['healthy_threshold'],
+      :load_balancer         => persister_load_balancer,
+    )
+
+    load_balancer_health_checks_members(persister_load_balancer_health_check, uid)
   end
 
-  def get_load_balancer_health_checks(load_balancer)
-    process_inventory_collection([load_balancer], :load_balancer_health_checks) do |lb|
-      get_load_balancer_health_check_members(lb)
-
-      parse_load_balancer_health_check(lb)
-    end
-  end
-
-  def get_load_balancer_health_check_members(lb)
-    health_check_members = collector.health_check_members(lb['load_balancer_name'])
-
-    process_inventory_collection(health_check_members, :load_balancer_health_check_members) do |m|
-      parse_load_balancer_health_check_member(lb, m)
+  def load_balancer_health_checks_members(persister_load_balancer_health_check, uid)
+    collector.health_check_members(uid).each do |member|
+      persister_health_check_member = persister.load_balancer_health_check_members.find_or_build_by(
+        :load_balancer_health_check => persister_load_balancer_health_check,
+        :load_balancer_pool_member  => persister.load_balancer_pool_members.lazy_find(member['instance_id']),
+      )
+      persister_health_check_member.assign_attributes(
+        :status        => member['state'],
+        :status_reason => member['description']
+      )
     end
   end
 
@@ -230,99 +273,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
   def get_ec2_cloud_subnet_network_port(instance)
     # Create network_port placeholder for old EC2 instances, those do not have interface nor subnet nor VPC
     process_inventory_collection([instance], :cloud_subnet_network_ports) { |i| parse_ec2_cloud_subnet_network_port(i) }
-  end
-
-  def parse_load_balancer(lb)
-    uid = lb['load_balancer_name']
-
-    {
-      :type                  => self.class.load_balancer_type.name,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      :name                  => uid,
-    }
-  end
-
-  def parse_load_balancer_pool(lb)
-    uid = lb['load_balancer_name']
-
-    {
-      :type                  => self.class.load_balancer_pool_type.name,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      :name                  => uid,
-    }
-  end
-
-  def parse_load_balancer_pool_member_pools(lb, member)
-    {
-      :load_balancer_pool        => persister.load_balancer_pools.lazy_find(lb['load_balancer_name']),
-      :load_balancer_pool_member => persister.load_balancer_pool_members.lazy_find(member['instance_id'])
-    }
-  end
-
-  def parse_load_balancer_pool_member(member)
-    uid = member['instance_id']
-    {
-      :type                  => self.class.load_balancer_pool_member_type.name,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      # TODO(lsmola) AWS always associates to eth0 of the instances, we do not collect that info now, we need to do that
-      # :network_port => get eth0 network_port
-      :vm                    => persister.vms.lazy_find(uid)
-    }
-  end
-
-  def parse_load_balancer_listener_pool(listener, lb)
-    {
-      :load_balancer_listener => persister.load_balancer_listeners.lazy_find(listener_uid(lb, listener)),
-      :load_balancer_pool     => persister.load_balancer_pools.lazy_find(lb['load_balancer_name'])
-    }
-  end
-
-  def parse_load_balancer_listener(lb, listener)
-    {
-      :type                     => self.class.load_balancer_listener_type.name,
-      :ext_management_system    => ems,
-      :ems_ref                  => listener_uid(lb, listener),
-      :load_balancer_protocol   => listener['protocol'],
-      :load_balancer_port_range => (listener['load_balancer_port'].to_i..listener['load_balancer_port'].to_i),
-      :instance_protocol        => listener['instance_protocol'],
-      :instance_port_range      => (listener['instance_port'].to_i..listener['instance_port'].to_i),
-      :load_balancer            => persister.load_balancers.lazy_find(lb['load_balancer_name']),
-    }
-  end
-
-  def parse_load_balancer_health_check(lb)
-    uid          = lb['load_balancer_name']
-    health_check = lb['health_check']
-    target_match = health_check['target'].match(/^(\w+)\:(\d+)\/?(.*?)$/)
-    protocol     = target_match[1]
-    port         = target_match[2].to_i
-    url_path     = target_match[3]
-
-    {
-      :type                  => self.class.load_balancer_health_check_type.name,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      :protocol              => protocol,
-      :port                  => port,
-      :url_path              => url_path,
-      :interval              => health_check['interval'],
-      :timeout               => health_check['timeout'],
-      :unhealthy_threshold   => health_check['unhealthy_threshold'],
-      :healthy_threshold     => health_check['healthy_threshold'],
-      :load_balancer         => persister.load_balancers.lazy_find(lb['load_balancer_name']),
-    }
-  end
-
-  def parse_load_balancer_health_check_member(lb, member)
-    {
-      :load_balancer_health_check => persister.load_balancer_health_checks.lazy_find(lb['load_balancer_name']),
-      :load_balancer_pool_member  => persister.load_balancer_pool_members.lazy_find(member['instance_id']),
-      :status                     => member['state'],
-      :status_reason              => member['description']
-    }
   end
 
   def parse_floating_ip(ip)
