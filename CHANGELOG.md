@@ -2,9 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## Fine Beta
+## Fine RC-1
 
 ### Added
+- Rewrite stacks parser to the new syntax [(#223)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/223)
+- Rewrite images parser to the new syntax [(#221)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/221)
+- Rewrite parsing of flavors keypairs and azs to the new syntax [(#220)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/220)
 - Remap `:name` parameter into `:bucket` parameter when creating new bucket [(#198)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/198)
 - Use public flag we get from data rather than sending it explicitly [(#197)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/197)
 - Add tags for VMs and Images [(#183)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/183)
@@ -58,6 +61,8 @@ All notable changes to this project will be documented in this file.
 - Rename 'DTO' to 'Inventory' in refresh ([#95](https://github.com/ManageIQ/manageiq-providers-amazon/pull/95))
 
 ### Fixed
+- Ensure managers change zone and provider region with cloud manager [(#212)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/212)
+- Rename $aws_log to \_log since \_log is not available [(#210)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/210)
 - Gracefully ignore and log errors when listing s3 objects [(#207)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/207)
 - Return instead of next is causing unwanted break of Vm parsing [(#202)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/202)
 - Add support snapshot_create to EBS cloud volume [(#196)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/196)
