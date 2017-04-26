@@ -51,11 +51,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       name     ||= $1 if location =~ /^(.+?)(\.(image|img))?\.manifest\.xml$/
       name     ||= uid
 
-      persister_image = persister.miq_templates.find_or_build(uid)
-      persister_image.assign_attributes(
+      persister_image = persister.miq_templates.find_or_build(uid).assign_attributes(
         :ext_management_system => ems,
         :uid_ems               => uid,
-        :ems_ref               => uid,
         :name                  => name,
         :location              => location,
         :vendor                => "amazon",
@@ -76,23 +74,18 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       guest_os = "linux" if guest_os == "unknown"
     end
 
-    persister_hardware = persister.hardwares.find_or_build(persister_image)
-    persister_hardware.assign_attributes(
+    persister.hardwares.find_or_build(persister_image).assign_attributes(
       :guest_os            => guest_os,
       :bitness             => architecture_to_bitness(image['architecture']),
       :virtualization_type => image['virtualization_type'],
       :root_device_type    => image['root_device_type'],
-      :vm_or_template      => persister_image
     )
   end
 
   def vm_and_template_labels(resource, tags)
     tags.each do |tag|
-      persister_label = persister.vm_and_template_labels.find_or_build_by(:resource => resource, :name => tag["key"])
-      persister_label.assign_attributes(
-        :resource => resource,
+      persister.vm_and_template_labels.find_or_build_by(:resource => resource, :name => tag["key"]).assign_attributes(
         :section  => 'labels',
-        :name     => tag["key"],
         :value    => tag["value"],
         :source   => 'amazon'
       )
@@ -103,10 +96,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     collector.stacks.each do |stack|
       uid = stack['stack_id'].to_s
 
-      persister_orchestration_stack = persister.orchestration_stacks.find_or_build(uid)
-      persister_orchestration_stack.assign_attributes(
+      persister_orchestration_stack = persister.orchestration_stacks.find_or_build(uid).assign_attributes(
         :ext_management_system  => ems,
-        :ems_ref                => uid,
         :name                   => stack['stack_name'],
         :description            => stack['description'],
         :status                 => stack['stack_status'],
@@ -127,9 +118,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       # physical_resource_id can be empty if the resource was not successfully created; ignore such
       return nil if uid.nil?
 
-      persister_orchestration_stacks_resources = persister.orchestration_stacks_resources.find_or_build(uid)
-      persister_orchestration_stacks_resources.assign_attributes(
-        :ems_ref                => uid,
+      persister.orchestration_stacks_resources.find_or_build(uid).assign_attributes(
         :stack                  => persister_orchestration_stack,
         :name                   => resource['logical_resource_id'],
         :logical_resource       => resource['logical_resource_id'],
@@ -144,14 +133,11 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def stack_outputs(persister_orchestration_stack, stack)
     stack['outputs'].each do |output|
-      output_key = output['output_key']
-      uid        = compose_ems_ref(stack['stack_id'].to_s, output['output_key'])
+      uid = compose_ems_ref(stack['stack_id'].to_s, output['output_key'])
 
-      persister_orchestration_stacks_outputs = persister.orchestration_stacks_outputs.find_or_build(uid)
-      persister_orchestration_stacks_outputs.assign_attributes(
-        :ems_ref     => uid,
+      persister.orchestration_stacks_outputs.find_or_build(uid).assign_attributes(
         :stack       => persister_orchestration_stack,
-        :key         => output_key,
+        :key         => output['output_key'],
         :value       => output['output_value'],
         :description => output['description']
       )
@@ -160,32 +146,24 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def stack_parameters(persister_orchestration_stack, stack)
     stack['parameters'].each do |parameter|
-      param_key = parameter['parameter_key']
-      uid       = compose_ems_ref(stack['stack_id'].to_s, param_key)
+      uid = compose_ems_ref(stack['stack_id'].to_s, parameter['parameter_key'])
 
-      persister_orchestration_stacks_parameters = persister.orchestration_stacks_parameters.find_or_build(uid)
-      persister_orchestration_stacks_parameters.assign_attributes(
-        :ems_ref => uid,
-        :stack   => persister_orchestration_stack,
-        :name    => param_key,
-        :value   => parameter['parameter_value']
+      persister.orchestration_stacks_parameters.find_or_build(uid).assign_attributes(
+        :stack => persister_orchestration_stack,
+        :name  => parameter['parameter_key'],
+        :value => parameter['parameter_value']
       )
     end
   end
 
   def stack_template(stack)
-    uid = stack['stack_id']
-
-    persister_orchestration_template = persister.orchestration_templates.find_or_build(uid)
-    persister_orchestration_template.assign_attributes(
+    persister.orchestration_templates.find_or_build(stack['stack_id']).assign_attributes(
       :type        => "OrchestrationTemplateCfn",
-      :ems_ref     => uid,
       :name        => stack['stack_name'],
       :description => stack['description'],
       :content     => collector.stack_template(stack['stack_name']),
       :orderable   => false
     )
-    persister_orchestration_template
   end
 
   def instances
@@ -200,11 +178,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       name = get_from_tags(instance, :name)
       name = name.blank? ? uid : name
 
-      persister_instance = persister.vms.find_or_build(uid)
-      persister_instance.assign_attributes(
+      persister_instance = persister.vms.find_or_build(uid).assign_attributes(
         :ext_management_system => ems,
         :uid_ems               => uid,
-        :ems_ref               => uid,
         :name                  => name,
         :vendor                => "amazon",
         :raw_power_state       => status,
@@ -225,8 +201,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def instance_hardware(persister_instance, instance, flavor)
-    persister_hardware = persister.hardwares.find_or_build(persister_instance)
-    persister_hardware.assign_attributes(
+    persister_hardware = persister.hardwares.find_or_build(persister_instance).assign_attributes(
       :bitness              => architecture_to_bitness(instance['architecture']),
       :virtualization_type  => instance['virtualization_type'],
       :root_device_type     => instance['root_device_type'],
@@ -236,7 +211,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :memory_mb            => flavor[:memory] / 1.megabyte,
       :disk_capacity        => flavor[:ephemeral_disk_size],
       :guest_os             => persister.hardwares.lazy_find(instance['image_id'], :key => :guest_os),
-      :vm_or_template       => persister_instance,
     )
 
     hardware_networks(persister_hardware, instance)
@@ -257,13 +231,12 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def hardware_network(persister_hardware, ip_address, hostname, description)
     unless ip_address.blank?
-      persister_private_network = persister.networks.find_or_build_by(:hardware    => persister_hardware,
-                                                                      :description => description)
-      persister_private_network.assign_attributes(
+      persister.networks.find_or_build_by(
         :hardware    => persister_hardware,
+        :description => description
+      ).assign_attributes(
         :ipaddress   => ip_address,
         :hostname    => hostname,
-        :description => description
       )
     end
   end
@@ -288,21 +261,18 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     disks.each do |disk|
       disk[:hardware] = persister_hardware
 
-      persister_disk = persister.disks.find_or_build_by(:hardware    => persister_hardware,
-                                                        :device_name => disk[:device_name])
-      persister_disk.assign_attributes(disk)
+      persister.disks.find_or_build_by(
+        :hardware    => persister_hardware,
+        :device_name => disk[:device_name]
+      ).assign_attributes(disk)
     end
   end
 
   def flavors
     collector.flavors.each do |flavor|
-      name             = uid = flavor[:name]
-      persister_flavor = persister.flavors.find_or_build(uid)
-
-      persister_flavor.assign_attributes(
+      persister.flavors.find_or_build(flavor[:name]).assign_attributes(
         :ext_management_system    => ems,
-        :ems_ref                  => uid,
-        :name                     => name,
+        :name                     => flavor[:name],
         :description              => flavor[:description],
         :enabled                  => !flavor[:disabled],
         :cpus                     => flavor[:vcpu],
@@ -322,25 +292,17 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def availability_zones
     collector.availability_zones.each do |az|
-      name                        = uid = az['zone_name']
-      persister_availability_zone = persister.availability_zones.find_or_build(uid)
-
-      persister_availability_zone.assign_attributes(
+      persister.availability_zones.find_or_build(az['zone_name']).assign_attributes(
         :ext_management_system => ems,
-        :ems_ref               => uid,
-        :name                  => name,
+        :name                  => az['zone_name'],
       )
     end
   end
 
   def key_pairs
     collector.key_pairs.each do |kp|
-      name = kp['key_name']
-
-      persister_key_pair = persister.key_pairs.find_or_build(name)
-      persister_key_pair.assign_attributes(
+      persister.key_pairs.find_or_build(kp['key_name']).assign_attributes(
         :resource    => ems,
-        :name        => name,
         :fingerprint => kp['key_fingerprint']
       )
     end
