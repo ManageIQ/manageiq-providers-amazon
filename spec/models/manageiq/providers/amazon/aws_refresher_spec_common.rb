@@ -107,7 +107,7 @@ module AwsRefresherSpecCommon
   end
 
   def assert_vpc
-    @cn = CloudNetwork.where(:name => "EmsRefreshSpec-VPC").first
+    @cn = ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork.where(:name => "EmsRefreshSpec-VPC").first
     expect(@cn).to(
       have_attributes(
         :name    => "EmsRefreshSpec-VPC",
@@ -123,6 +123,7 @@ module AwsRefresherSpecCommon
     @subnet = @cn.cloud_subnets.where(:name => "EmsRefreshSpec-Subnet1").first
     expect(@subnet).to(
       have_attributes(
+        :type    => "ManageIQ::Providers::Amazon::NetworkManager::CloudSubnet",
         :name    => "EmsRefreshSpec-Subnet1",
         :ems_ref => "subnet-f849ff96",
         :cidr    => "10.0.0.0/24"
@@ -136,6 +137,7 @@ module AwsRefresherSpecCommon
     subnet2 = @cn.cloud_subnets.where(:name => "EmsRefreshSpec-Subnet2").first
     expect(subnet2).to(
       have_attributes(
+        :type    => "ManageIQ::Providers::Amazon::NetworkManager::CloudSubnet",
         :name    => "EmsRefreshSpec-Subnet2",
         :ems_ref => "subnet-16c70477",
         :cidr    => "10.0.1.0/24"
@@ -1040,6 +1042,10 @@ module AwsRefresherSpecCommon
       "type"                     => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
     )
     expect(@listener_2.ext_management_system).to eq(@ems.network_manager)
+    expect(@listener_2.load_balancer_pools.count).to eq 1
+    expect(@listener_2.load_balancer_pools.first.type).to(
+      eq("ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPool")
+    )
 
     @listener_3 = @elb2.load_balancer_listeners.first
     expect(@listener_3).to have_attributes(
@@ -1119,6 +1125,12 @@ module AwsRefresherSpecCommon
 
     expect(health_check_1.load_balancer_pool_members.count).to eq 2
     expect(health_check_1.load_balancer_pool_members).to match_array health_check_2.load_balancer_pool_members
+
+    expect(health_check_1.load_balancer_pool_members.collect(&:type)).to(
+      match_array(
+        ["ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPoolMember"] * 2
+      )
+    )
     expect(health_check_1.vms).to match_array health_check_2.vms
   end
 
