@@ -22,18 +22,11 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
   def cloud_networks
     collector.cloud_networks.each do |vpc|
-      uid    = vpc['vpc_id']
-      name   = get_from_tags(vpc, 'name')
-      name   ||= uid
-      status = vpc['state'] == :available ? "active" : "inactive"
-
-      persister_network = persister.cloud_networks.find_or_build(uid)
-      persister_network.assign_attributes(
+      persister.cloud_networks.find_or_build(vpc['vpc_id']).assign_attributes(
         :ext_management_system => ems,
-        :ems_ref               => uid,
-        :name                  => name,
+        :name                  => get_from_tags(vpc, 'name') || vpc['vpc_id'],
         :cidr                  => vpc['cidr_block'],
-        :status                => status,
+        :status                => vpc['state'] == :available ? "active" : "inactive",
         :enabled               => true,
         :orchestration_stack   => persister.orchestration_stacks.lazy_find(
           get_from_tags(vpc, "aws:cloudformation:stack-id")
@@ -44,15 +37,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
   def cloud_subnets
     collector.cloud_subnets.each do |subnet|
-      uid  = subnet['subnet_id']
-      name = get_from_tags(subnet, 'name')
-      name ||= uid
-
-      persister_subnet = persister.cloud_subnets.find_or_build(uid)
-      persister_subnet.assign_attributes(
+      persister.cloud_subnets.find_or_build(subnet['subnet_id']).assign_attributes(
         :ext_management_system => ems,
-        :ems_ref               => uid,
-        :name                  => name,
+        :name                  => get_from_tags(subnet, 'name') || subnet['subnet_id'],
         :cidr                  => subnet['cidr_block'],
         :status                => subnet['state'].try(:to_s),
         :availability_zone     => persister.availability_zones.lazy_find(subnet['availability_zone']),
@@ -63,13 +50,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
   def security_groups
     collector.security_groups.each do |sg|
-      uid = sg['group_id']
-
-      persister_security_group = persister.security_groups.find_or_build(uid)
-      persister_security_group.assign_attributes(
+      persister_security_group = persister.security_groups.find_or_build(sg['group_id']).assign_attributes(
         :ext_management_system => ems,
-        :ems_ref               => uid,
-        :name                  => sg['group_name'],
+        :name                  => sg['group_name'] || sg['group_id'],
         :description           => sg['description'].try(:truncate, 255),
         :cloud_network         => persister.cloud_networks.lazy_find(sg['vpc_id']),
         :orchestration_stack   => persister.orchestration_stacks.lazy_find(
@@ -110,17 +93,13 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     collector.load_balancers.each do |lb|
       uid = lb['load_balancer_name']
 
-      persister_load_balancer = persister.load_balancers.find_or_build(uid)
-      persister_load_balancer.assign_attributes(
+      persister_load_balancer = persister.load_balancers.find_or_build(uid).assign_attributes(
         :ext_management_system => ems,
-        :ems_ref               => uid,
         :name                  => uid,
       )
 
-      persister_load_balancer_pool = persister.load_balancer_pools.find_or_build(uid)
-      persister_load_balancer_pool.assign_attributes(
+      persister_load_balancer_pool = persister.load_balancer_pools.find_or_build(uid).assign_attributes(
         :ext_management_system => ems,
-        :ems_ref               => uid,
         :name                  => uid,
       )
 
@@ -134,10 +113,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     members.each do |member|
       uid = member['instance_id']
 
-      persister_load_balancer_pool_member = persister.load_balancer_pool_members.find_or_build(uid)
-      persister_load_balancer_pool_member.assign_attributes(
+      persister_load_balancer_pool_member = persister.load_balancer_pool_members.find_or_build(uid).assign_attributes(
         :ext_management_system => ems,
-        :ems_ref               => uid,
         # TODO(lsmola) AWS always associates to eth0 of the instances, we do not collect that info now, we need to do that
         # :network_port => get eth0 network_port
         :vm                    => persister.vms.lazy_find(uid)
@@ -156,10 +133,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
       uid      = "#{lb['load_balancer_name']}__#{listener['protocol']}__#{listener['load_balancer_port']}__"\
                  "#{listener['instance_protocol']}__#{listener['instance_port']}__#{listener['ssl_certificate_id']}"
 
-      persister_load_balancer_listener = persister.load_balancer_listeners.find_or_build(uid)
-      persister_load_balancer_listener.assign_attributes(
+      persister_load_balancer_listener = persister.load_balancer_listeners.find_or_build(uid).assign_attributes(
         :ext_management_system    => ems,
-        :ems_ref                  => uid,
         :load_balancer_protocol   => listener['protocol'],
         :load_balancer_port_range => (listener['load_balancer_port'].to_i..listener['load_balancer_port'].to_i),
         :instance_protocol        => listener['instance_protocol'],
@@ -180,10 +155,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     port         = target_match[2].to_i
     url_path     = target_match[3]
 
-    persister_load_balancer_health_check = persister.load_balancer_health_checks.find_or_build(uid)
-    persister_load_balancer_health_check.assign_attributes(
+    persister_load_balancer_health_check = persister.load_balancer_health_checks.find_or_build(uid).assign_attributes(
       :ext_management_system => ems,
-      :ems_ref               => uid,
       :protocol              => protocol,
       :port                  => port,
       :url_path              => url_path,
@@ -199,11 +172,10 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
   def load_balancer_health_checks_members(persister_load_balancer_health_check, uid)
     collector.health_check_members(uid).each do |member|
-      persister_health_check_member = persister.load_balancer_health_check_members.find_or_build_by(
+      persister.load_balancer_health_check_members.find_or_build_by(
         :load_balancer_health_check => persister_load_balancer_health_check,
         :load_balancer_pool_member  => persister.load_balancer_pool_members.lazy_find(member['instance_id']),
-      )
-      persister_health_check_member.assign_attributes(
+      ).assign_attributes(
         :status        => member['state'],
         :status_reason => member['description']
       )
@@ -224,10 +196,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
       # of the data.
       next if !cloud_network_only && ip['instance_id'] && persister.floating_ips.data_index[uid]
 
-      persister_floating_ip = persister.floating_ips.find_or_build(uid)
-      persister_floating_ip.assign_attributes(
+      persister.floating_ips.find_or_build(uid).assign_attributes(
         :ext_management_system => ems,
-        :ems_ref               => uid,
         :address               => address,
         :fixed_ip_address      => ip['private_ip_address'],
         :cloud_network_only    => cloud_network_only,
@@ -244,11 +214,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
         persister.security_groups.lazy_find(x['group_id'])
       end
 
-      persister_network_port = persister.network_ports.find_or_build(uid)
-      persister_network_port.assign_attributes(
+      persister_network_port = persister.network_ports.find_or_build(uid).assign_attributes(
         :ext_management_system => ems,
         :name                  => uid,
-        :ems_ref               => uid,
         :status                => network_port['status'],
         :mac_address           => network_port['mac_address'],
         :device_owner          => network_port.fetch_path('attachment', 'instance_owner_id'),
@@ -275,10 +243,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
         !(public_ip = private_address.fetch_path('association', 'public_ip')).blank? &&
         private_address.fetch_path('association', 'allocation_id').blank?
 
-        persister_floating_ip = persister.floating_ips.find_or_build(public_ip)
-        persister_floating_ip.assign_attributes(
+        persister.floating_ips.find_or_build(public_ip).assign_attributes(
           :ext_management_system => ems,
-          :ems_ref               => public_ip,
           :address               => public_ip,
           :fixed_ip_address      => private_address['private_ip_address'],
           :cloud_network_only    => true,
@@ -294,20 +260,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     collector.instances.each do |instance|
       next unless instance['network_interfaces'].blank?
 
-      uid  = instance['instance_id']
-      name = get_from_tags(instance, 'name')
-      name ||= uid
-
-      persister_network_port = persister.network_ports.find_or_build(uid)
-      persister_network_port.assign_attributes(
+      persister_network_port = persister.network_ports.find_or_build(instance['instance_id']).assign_attributes(
         :ext_management_system => ems,
-        :name                  => name,
-        :ems_ref               => uid,
+        :name                  => get_from_tags(instance, 'name') || instance['instance_id'],
         :status                => nil,
         :mac_address           => nil,
         :device_owner          => nil,
         :device_ref            => nil,
-        :device                => persister.vms.lazy_find(uid),
+        :device                => persister.vms.lazy_find(instance['instance_id']),
         :security_groups       => instance['security_groups'].to_a.collect do |sg|
           persister.security_groups.lazy_find(sg['group_id'])
         end.compact,
@@ -327,10 +287,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     uid = instance['public_ip_address']
     return nil if uid.blank?
 
-    persister_floating_ip = persister.floating_ips.find_or_build(uid)
-    persister_floating_ip.assign_attributes(
+    persister.floating_ips.find_or_build(uid).assign_attributes(
       :ext_management_system => ems,
-      :ems_ref               => uid,
       :address               => uid,
       :fixed_ip_address      => instance['private_ip_address'],
       :cloud_network_only    => false,
