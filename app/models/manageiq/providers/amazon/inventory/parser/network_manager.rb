@@ -29,7 +29,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
       persister_network = persister.cloud_networks.find_or_build(uid)
       persister_network.assign_attributes(
-        :type                  => self.class.cloud_network_type.name,
         :ext_management_system => ems,
         :ems_ref               => uid,
         :name                  => name,
@@ -51,7 +50,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
       persister_subnet = persister.cloud_subnets.find_or_build(uid)
       persister_subnet.assign_attributes(
-        :type                  => self.class.cloud_subnet_type.name,
         :ext_management_system => ems,
         :ems_ref               => uid,
         :name                  => name,
@@ -69,7 +67,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
       persister_security_group = persister.security_groups.find_or_build(uid)
       persister_security_group.assign_attributes(
-        :type                  => self.class.security_group_type.name,
         :ext_management_system => ems,
         :ems_ref               => uid,
         :name                  => sg['group_name'],
@@ -115,7 +112,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
       persister_load_balancer = persister.load_balancers.find_or_build(uid)
       persister_load_balancer.assign_attributes(
-        :type                  => self.class.load_balancer_type.name,
         :ext_management_system => ems,
         :ems_ref               => uid,
         :name                  => uid,
@@ -123,7 +119,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
       persister_load_balancer_pool = persister.load_balancer_pools.find_or_build(uid)
       persister_load_balancer_pool.assign_attributes(
-        :type                  => self.class.load_balancer_pool_type.name,
         :ext_management_system => ems,
         :ems_ref               => uid,
         :name                  => uid,
@@ -141,7 +136,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
       persister_load_balancer_pool_member = persister.load_balancer_pool_members.find_or_build(uid)
       persister_load_balancer_pool_member.assign_attributes(
-        :type                  => self.class.load_balancer_pool_member_type.name,
         :ext_management_system => ems,
         :ems_ref               => uid,
         # TODO(lsmola) AWS always associates to eth0 of the instances, we do not collect that info now, we need to do that
@@ -164,7 +158,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
       persister_load_balancer_listener = persister.load_balancer_listeners.find_or_build(uid)
       persister_load_balancer_listener.assign_attributes(
-        :type                     => self.class.load_balancer_listener_type.name,
         :ext_management_system    => ems,
         :ems_ref                  => uid,
         :load_balancer_protocol   => listener['protocol'],
@@ -189,7 +182,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
     persister_load_balancer_health_check = persister.load_balancer_health_checks.find_or_build(uid)
     persister_load_balancer_health_check.assign_attributes(
-      :type                  => self.class.load_balancer_health_check_type.name,
       :ext_management_system => ems,
       :ems_ref               => uid,
       :protocol              => protocol,
@@ -234,7 +226,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
       persister_floating_ip = persister.floating_ips.find_or_build(uid)
       persister_floating_ip.assign_attributes(
-        :type                  => self.class.floating_ip_type.name,
         :ext_management_system => ems,
         :ems_ref               => uid,
         :address               => address,
@@ -255,7 +246,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
       persister_network_port = persister.network_ports.find_or_build(uid)
       persister_network_port.assign_attributes(
-        :type                  => self.class.network_port_type.name,
         :ext_management_system => ems,
         :name                  => uid,
         :ems_ref               => uid,
@@ -287,7 +277,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
         persister_floating_ip = persister.floating_ips.find_or_build(public_ip)
         persister_floating_ip.assign_attributes(
-          :type                  => self.class.floating_ip_type.name,
           :ext_management_system => ems,
           :ems_ref               => public_ip,
           :address               => public_ip,
@@ -311,7 +300,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
       persister_network_port = persister.network_ports.find_or_build(uid)
       persister_network_port.assign_attributes(
-        :type                  => self.class.network_port_type.name,
         :ext_management_system => ems,
         :name                  => name,
         :ems_ref               => uid,
@@ -341,7 +329,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
     persister_floating_ip = persister.floating_ips.find_or_build(uid)
     persister_floating_ip.assign_attributes(
-      :type                  => self.class.floating_ip_type.name,
       :ext_management_system => ems,
       :ems_ref               => uid,
       :address               => uid,
@@ -355,51 +342,5 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
   # Overridden helper methods, we should put them in helper once we get rid of old refresh
   def get_from_tags(resource, item)
     (resource['tags'] || []).detect { |tag, _| tag['key'].downcase == item.to_s.downcase }.try(:[], 'value')
-  end
-
-  class << self
-    def load_balancer_type
-      ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer
-    end
-
-    def load_balancer_listener_type
-      ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener
-    end
-
-    def load_balancer_health_check_type
-      ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck
-    end
-
-    def load_balancer_pool_type
-      ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPool
-    end
-
-    def load_balancer_pool_member_type
-      ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPoolMember
-    end
-
-    def security_group_type
-      ManageIQ::Providers::Amazon::NetworkManager::SecurityGroup
-    end
-
-    def network_router_type
-      ManageIQ::Providers::Amazon::NetworkManager::NetworkRouter
-    end
-
-    def cloud_network_type
-      ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork
-    end
-
-    def cloud_subnet_type
-      ManageIQ::Providers::Amazon::NetworkManager::CloudSubnet
-    end
-
-    def floating_ip_type
-      ManageIQ::Providers::Amazon::NetworkManager::FloatingIp
-    end
-
-    def network_port_type
-      ManageIQ::Providers::Amazon::NetworkManager::NetworkPort
-    end
   end
 end

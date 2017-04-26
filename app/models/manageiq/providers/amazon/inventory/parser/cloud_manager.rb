@@ -53,7 +53,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
       persister_image = persister.miq_templates.find_or_build(uid)
       persister_image.assign_attributes(
-        :type                  => ManageIQ::Providers::Amazon::CloudManager::Template.name,
         :ext_management_system => ems,
         :uid_ems               => uid,
         :ems_ref               => uid,
@@ -106,7 +105,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
       persister_orchestration_stack = persister.orchestration_stacks.find_or_build(uid)
       persister_orchestration_stack.assign_attributes(
-        :type                   => ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.name,
         :ext_management_system  => ems,
         :ems_ref                => uid,
         :name                   => stack['stack_name'],
@@ -204,7 +202,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
       persister_instance = persister.vms.find_or_build(uid)
       persister_instance.assign_attributes(
-        :type                  => ManageIQ::Providers::Amazon::CloudManager::Vm.name,
         :ext_management_system => ems,
         :uid_ems               => uid,
         :ems_ref               => uid,
@@ -303,7 +300,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       persister_flavor = persister.flavors.find_or_build(uid)
 
       persister_flavor.assign_attributes(
-        :type                     => ManageIQ::Providers::Amazon::CloudManager::Flavor.name,
         :ext_management_system    => ems,
         :ems_ref                  => uid,
         :name                     => name,
@@ -330,7 +326,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       persister_availability_zone = persister.availability_zones.find_or_build(uid)
 
       persister_availability_zone.assign_attributes(
-        :type                  => ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone.name,
         :ext_management_system => ems,
         :ems_ref               => uid,
         :name                  => name,
@@ -344,7 +339,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
       persister_key_pair = persister.key_pairs.find_or_build(name)
       persister_key_pair.assign_attributes(
-        :type        => self.class.key_pair_type,
         :resource    => ems,
         :name        => name,
         :fingerprint => kp['key_fingerprint']
@@ -355,11 +349,5 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   # Overridden helper methods, we should put them in helper once we get rid of old refresh
   def get_from_tags(resource, item)
     (resource['tags'] || []).detect { |tag, _| tag['key'].downcase == item.to_s.downcase }.try(:[], 'value')
-  end
-
-  class << self
-    def key_pair_type
-      ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair.name
-    end
   end
 end
