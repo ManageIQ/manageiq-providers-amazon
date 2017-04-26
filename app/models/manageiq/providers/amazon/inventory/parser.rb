@@ -4,14 +4,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser < ManagerRefresh::Inventory
 
   include ManageIQ::Providers::Amazon::ParserHelperMethods
 
-  def process_inventory_collection(collection, key)
-    (collection || []).each do |item|
-      new_result = yield(item)
-      next if new_result.blank?
-
-      raise "InventoryCollection #{key} must be defined" unless persister.collections[key]
-
-      persister.collections[key] << persister.collections[key].new_inventory_object(new_result)
-    end
+  # Overridden helper methods, we should put them in helper once we get rid of old refresh
+  def get_from_tags(resource, item)
+    (resource['tags'] || []).detect { |tag, _| tag['key'].downcase == item.to_s.downcase }.try(:[], 'value')
   end
 end
