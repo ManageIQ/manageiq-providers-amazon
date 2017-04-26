@@ -11,10 +11,10 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     cloud_networks
     cloud_subnets
     security_groups
-    get_network_ports
+    network_ports
     load_balancers
-    get_ec2_floating_ips_and_ports
-    get_floating_ips
+    ec2_floating_ips_and_ports
+    floating_ips
     $aws_log.info("#{log_header}...Complete")
   end
 
@@ -218,166 +218,138 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     end
   end
 
-  def get_floating_ips
-    process_inventory_collection(collector.floating_ips, :floating_ips) { |ip| parse_floating_ip(ip) }
-  end
+  def floating_ips
+    collector.floating_ips.each do |ip|
+      cloud_network_only = ip['domain']['vpc'] ? true : false
+      address            = ip['public_ip']
+      uid                = cloud_network_only ? ip['allocation_id'] : ip['public_ip']
 
-  def get_network_ports
-    process_inventory_collection(collector.network_ports, :network_ports) do |n|
-      get_public_ips(n)
-      get_cloud_subnet_network_ports(n)
+      # These are solved by the ec2_floating_ips_and_ports and they need to be solved there. Seems like there is a bug
+      # that the private ip is not present in this list, but it's under ec2_floating_ips_and_ports ips, but only for
+      # the non VPC instances.
+      # TODO(lsmola) find a nicer way to do the find only in the data_index. The find method can go into the DB with
+      # some strategies, which is not wanted here. We need to separate find used for crosslinks and find used for saving
+      # of the data.
+      next if !cloud_network_only && ip['instance_id'] && persister.floating_ips.data_index[uid]
 
-      parse_network_port(n)
+      persister_floating_ip = persister.floating_ips.find_or_build(uid)
+      persister_floating_ip.assign_attributes(
+        :type                  => self.class.floating_ip_type.name,
+        :ext_management_system => ems,
+        :ems_ref               => uid,
+        :address               => address,
+        :fixed_ip_address      => ip['private_ip_address'],
+        :cloud_network_only    => cloud_network_only,
+        :network_port          => persister.network_ports.lazy_find(ip['network_interface_id']),
+        :vm                    => persister.vms.lazy_find(ip['instance_id'])
+      )
     end
   end
 
-  def get_public_ips(network_port)
-    public_ips = []
+  def network_ports
+    collector.network_ports.each do |network_port|
+      uid             = network_port['network_interface_id']
+      security_groups = network_port['groups'].blank? ? [] : network_port['groups'].map do |x|
+        persister.security_groups.lazy_find(x['group_id'])
+      end
 
+      persister_network_port = persister.network_ports.find_or_build(uid)
+      persister_network_port.assign_attributes(
+        :type                  => self.class.network_port_type.name,
+        :ext_management_system => ems,
+        :name                  => uid,
+        :ems_ref               => uid,
+        :status                => network_port['status'],
+        :mac_address           => network_port['mac_address'],
+        :device_owner          => network_port.fetch_path('attachment', 'instance_owner_id'),
+        :device_ref            => network_port.fetch_path('attachment', 'instance_id'),
+        :device                => persister.vms.lazy_find(network_port.fetch_path('attachment', 'instance_id')),
+        :security_groups       => security_groups,
+      )
+
+      network_port['private_ip_addresses'].each do |address|
+        persister.cloud_subnet_network_ports.find_or_build_by(
+          :address      => address['private_ip_address'],
+          :cloud_subnet => persister.cloud_subnets.lazy_find(network_port['subnet_id']),
+          :network_port => persister_network_port
+        )
+      end
+
+      public_ips(network_port)
+    end
+  end
+
+  def public_ips(network_port)
     network_port['private_ip_addresses'].each do |private_address|
       if private_address['association'] &&
-         !(public_ip = private_address.fetch_path('association', 'public_ip')).blank? &&
-         private_address.fetch_path('association', 'allocation_id').blank?
+        !(public_ip = private_address.fetch_path('association', 'public_ip')).blank? &&
+        private_address.fetch_path('association', 'allocation_id').blank?
 
-        public_ips << {
-          :network_port_id    => network_port['network_interface_id'],
-          :private_ip_address => private_address['private_ip_address'],
-          :public_ip_address  => public_ip
-        }
+        persister_floating_ip = persister.floating_ips.find_or_build(public_ip)
+        persister_floating_ip.assign_attributes(
+          :type                  => self.class.floating_ip_type.name,
+          :ext_management_system => ems,
+          :ems_ref               => public_ip,
+          :address               => public_ip,
+          :fixed_ip_address      => private_address['private_ip_address'],
+          :cloud_network_only    => true,
+          :network_port          => persister.network_ports.lazy_find(network_port['network_interface_id']),
+          :vm                    => persister.network_ports.lazy_find(network_port['network_interface_id'],
+                                                                      :key => :device)
+        )
       end
     end
-    process_inventory_collection(public_ips, :floating_ips) { |public_ip| parse_public_ip(public_ip) }
   end
 
-  def get_cloud_subnet_network_ports(network_port)
-    process_inventory_collection(network_port['private_ip_addresses'], :cloud_subnet_network_ports) do |address|
-      parse_cloud_subnet_network_port(network_port, address)
-    end
-  end
-
-  def get_ec2_floating_ips_and_ports
-    process_inventory_collection(collector.instances, :network_ports) do |instance|
+  def ec2_floating_ips_and_ports
+    collector.instances.each do |instance|
       next unless instance['network_interfaces'].blank?
 
-      get_ec2_cloud_subnet_network_port(instance)
-      get_floating_ip_inferred_from_instance(instance)
+      uid  = instance['instance_id']
+      name = get_from_tags(instance, 'name')
+      name ||= uid
 
-      parse_network_port_inferred_from_instance(instance)
+      persister_network_port = persister.network_ports.find_or_build(uid)
+      persister_network_port.assign_attributes(
+        :type                  => self.class.network_port_type.name,
+        :ext_management_system => ems,
+        :name                  => name,
+        :ems_ref               => uid,
+        :status                => nil,
+        :mac_address           => nil,
+        :device_owner          => nil,
+        :device_ref            => nil,
+        :device                => persister.vms.lazy_find(uid),
+        :security_groups       => instance['security_groups'].to_a.collect do |sg|
+          persister.security_groups.lazy_find(sg['group_id'])
+        end.compact,
+      )
+
+      persister.cloud_subnet_network_ports.find_or_build_by(
+        :address      => instance['private_ip_address'],
+        :cloud_subnet => nil,
+        :network_port => persister_network_port
+      )
+
+      floating_ip_inferred_from_instance(persister_network_port, instance)
     end
   end
 
-  def get_floating_ip_inferred_from_instance(instance)
-    process_inventory_collection([instance], :floating_ips) { |i| parse_floating_ip_inferred_from_instance(i) }
-  end
-
-  def get_ec2_cloud_subnet_network_port(instance)
-    # Create network_port placeholder for old EC2 instances, those do not have interface nor subnet nor VPC
-    process_inventory_collection([instance], :cloud_subnet_network_ports) { |i| parse_ec2_cloud_subnet_network_port(i) }
-  end
-
-  def parse_floating_ip(ip)
-    cloud_network_only = ip['domain']['vpc'] ? true : false
-    address            = ip['public_ip']
-    uid                = cloud_network_only ? ip['allocation_id'] : ip['public_ip']
-
-    {
-      :type                  => self.class.floating_ip_type.name,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      :address               => address,
-      :fixed_ip_address      => ip['private_ip_address'],
-      :cloud_network_only    => cloud_network_only,
-      :network_port          => persister.network_ports.lazy_find(ip['network_interface_id']),
-      :vm                    => persister.vms.lazy_find(ip['instance_id'])
-    }
-  end
-
-  def parse_floating_ip_inferred_from_instance(instance)
-    address = uid = instance['public_ip_address']
+  def floating_ip_inferred_from_instance(persister_network_port, instance)
+    uid = instance['public_ip_address']
     return nil if uid.blank?
 
-    {
+    persister_floating_ip = persister.floating_ips.find_or_build(uid)
+    persister_floating_ip.assign_attributes(
       :type                  => self.class.floating_ip_type.name,
       :ext_management_system => ems,
       :ems_ref               => uid,
-      :address               => address,
+      :address               => uid,
       :fixed_ip_address      => instance['private_ip_address'],
       :cloud_network_only    => false,
-      :network_port          => persister.network_ports.lazy_find(instance['instance_id']),
-      :vm                    => persister.vms.lazy_find(instance['instance_id'])
-    }
-  end
-
-  def parse_public_ip(public_ip)
-    address = uid = public_ip[:public_ip_address]
-
-    {
-      :type                  => self.class.floating_ip_type.name,
-      :ext_management_system => ems,
-      :ems_ref               => uid,
-      :address               => address,
-      :fixed_ip_address      => public_ip[:private_ip_address],
-      :cloud_network_only    => true,
-      :network_port          => persister.network_ports.lazy_find(public_ip[:network_port_id]),
-      :vm                    => persister.network_ports.lazy_find(public_ip[:network_port_id], :key => :device)
-    }
-  end
-
-  def parse_cloud_subnet_network_port(network_port, address)
-    {
-      :address      => address['private_ip_address'],
-      :cloud_subnet => persister.cloud_subnets.lazy_find(network_port['subnet_id']),
-      :network_port => persister.network_ports.lazy_find(network_port['network_interface_id'])
-    }
-  end
-
-  def parse_ec2_cloud_subnet_network_port(instance)
-    {
-      :address      => instance['private_ip_address'],
-      :cloud_subnet => nil,
-      :network_port => persister.network_ports.lazy_find(instance['instance_id'])
-    }
-  end
-
-  def parse_network_port(network_port)
-    uid             = network_port['network_interface_id']
-    security_groups = network_port['groups'].blank? ? [] : network_port['groups'].map do |x|
-      persister.security_groups.lazy_find(x['group_id'])
-    end
-
-    {
-      :type                  => self.class.network_port_type.name,
-      :ext_management_system => ems,
-      :name                  => uid,
-      :ems_ref               => uid,
-      :status                => network_port['status'],
-      :mac_address           => network_port['mac_address'],
-      :device_owner          => network_port.fetch_path('attachment', 'instance_owner_id'),
-      :device_ref            => network_port.fetch_path('attachment', 'instance_id'),
-      :device                => persister.vms.lazy_find(network_port.fetch_path('attachment', 'instance_id')),
-      :security_groups       => security_groups,
-    }
-  end
-
-  def parse_network_port_inferred_from_instance(instance)
-    uid  = instance['instance_id']
-    name = get_from_tags(instance, 'name')
-    name ||= uid
-
-    {
-      :type                  => self.class.network_port_type.name,
-      :ext_management_system => ems,
-      :name                  => name,
-      :ems_ref               => uid,
-      :status                => nil,
-      :mac_address           => nil,
-      :device_owner          => nil,
-      :device_ref            => nil,
-      :device                => persister.vms.lazy_find(uid),
-      :security_groups       => instance['security_groups'].to_a.collect do |sg|
-        persister.security_groups.lazy_find(sg['group_id'])
-      end.compact,
-    }
+      :network_port          => persister_network_port,
+      :vm                    => persister_network_port.device
+    )
   end
 
   # Overridden helper methods, we should put them in helper once we get rid of old refresh

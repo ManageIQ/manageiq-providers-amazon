@@ -2,7 +2,31 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
   class << self
     def network_ports(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::NetworkManager::NetworkPort,
+        :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::NetworkPort,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :name,
+          :ems_ref,
+          :status,
+          :mac_address,
+          :device_owner,
+          :device_ref,
+          :device,
+          :security_groups,
+        ]
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
+
+    def cloud_subnet_network_ports(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => [
+          :address,
+          :cloud_subnet,
+          :network_port,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
@@ -10,7 +34,17 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def floating_ips(extra_attributes = {})
       attributes = {
-        :model_class => ::ManageIQ::Providers::Amazon::NetworkManager::FloatingIp,
+        :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::FloatingIp,
+        :inventory_object_attributes => [
+          :type,
+          :ext_management_system,
+          :ems_ref,
+          :address,
+          :fixed_ip_address,
+          :cloud_network_only,
+          :network_port,
+          :vm,
+        ]
       }
 
       super(attributes.merge!(extra_attributes))
