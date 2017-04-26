@@ -158,7 +158,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def stack_template(stack)
     persister.orchestration_templates.find_or_build(stack['stack_id']).assign_attributes(
-      :type        => "OrchestrationTemplateCfn",
       :name        => stack['stack_name'],
       :description => stack['description'],
       :content     => collector.stack_template(stack['stack_name']),
