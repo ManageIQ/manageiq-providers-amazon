@@ -20,7 +20,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
 
       persister_volume = persister.cloud_volumes.find_or_build(uid)
       persister_volume.assign_attributes(
-        :type                  => self.class.volume_type,
         :ext_management_system => ems,
         :ems_ref               => uid,
         :name                  => get_from_tags(volume, :name) || uid,
@@ -42,7 +41,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
 
       persister_snapshot = persister.cloud_volume_snapshots.find_or_build(uid)
       persister_snapshot.assign_attributes(
-        :type                  => self.class.volume_snapshot_type,
         :ext_management_system => ems,
         :ems_ref               => uid,
         :name                  => get_from_tags(snap, :name) || uid,
@@ -76,16 +74,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
       disk.location = dev
       disk.size     = persister_volume.size
       disk.backing  = persister_volume
-    end
-  end
-
-  class << self
-    def volume_type
-      "ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume"
-    end
-
-    def volume_snapshot_type
-      "ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot"
     end
   end
 end
