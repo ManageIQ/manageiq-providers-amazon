@@ -17,8 +17,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3 < Manag
     collector.cloud_object_store_containers.each do |container|
       container_id = container['name']
 
-      persister_container = persister.cloud_object_store_containers.find_or_build(container_id)
-      persister_container.assign_attributes(
+      persister_container = persister.cloud_object_store_containers.find_or_build(container_id).assign_attributes(
         :ext_management_system => ems,
         :ems_ref               => container_id,
         :key                   => container['name']
@@ -59,16 +58,13 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3 < Manag
     uid     = container_object['key']
     ems_ref = "#{container_id}_#{uid}"
 
-    persister_container_object = persister.cloud_object_store_objects.find_or_build(ems_ref)
-    persister_container_object.assign_attributes(
+    persister.cloud_object_store_objects.find_or_build(ems_ref).assign_attributes(
       :ext_management_system        => ems,
-      :ems_ref                      => ems_ref,
       :etag                         => container_object['etag'],
       :last_modified                => container_object['last_modified'],
       :content_length               => container_object['size'],
       :key                          => uid,
       :cloud_object_store_container => persister_container
     )
-    persister_container_object
   end
 end
