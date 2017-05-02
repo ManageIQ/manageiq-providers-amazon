@@ -256,6 +256,62 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
         expect(object.supports?(:delete)).to be_falsey
       end
     end
+
+    describe "delete folder" do
+      before do
+        allow(object.cloud_object_store_container).to receive(:provider_object)
+          .and_return(provider_object_for_container)
+      end
+
+      let :provider_object_for_container do
+        container = double("provider_object_for_container")
+        allow(container).to receive(:objects).and_return(objects_batch)
+        allow(container).to receive(:object).and_return(single_object)
+        container
+      end
+
+      let :objects_batch do
+        objects_batch = double("objects_batch")
+        allow(objects_batch).to receive(:batch_delete!)
+        objects_batch
+      end
+
+      let :single_object do
+        single_object = double("single_object")
+        allow(single_object).to receive(:delete)
+        single_object
+      end
+
+      it "delete folder #1" do
+        object.key = "myfolder/"
+        expect(objects_batch).to receive(:batch_delete!)
+        expect(single_object).not_to receive(:delete)
+
+        with_aws_stubbed(stub_responses) do
+          object.delete_cloud_object_store_object
+        end
+      end
+
+      it "delete folder #2" do
+        object.key = "myfolder/subfolder/"
+        expect(objects_batch).to receive(:batch_delete!)
+        expect(single_object).not_to receive(:delete)
+
+        with_aws_stubbed(stub_responses) do
+          object.delete_cloud_object_store_object
+        end
+      end
+
+      it "delete regular object" do
+        object.key = "file.txt"
+        expect(objects_batch).not_to receive(:batch_delete!)
+        expect(single_object).to receive(:delete)
+
+        with_aws_stubbed(stub_responses) do
+          object.delete_cloud_object_store_object
+        end
+      end
+    end
   end
 
   def refresh_spec

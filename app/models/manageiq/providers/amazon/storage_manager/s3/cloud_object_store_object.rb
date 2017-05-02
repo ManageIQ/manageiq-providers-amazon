@@ -18,6 +18,10 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject < 
   end
 
   def raw_delete
-    with_provider_object(&:delete)
+    if key.end_with? "/" # delete object with subobjects (aka. folder)
+      cloud_object_store_container.provider_object.objects(:prefix => key).batch_delete!
+    else # delete single object
+      with_provider_object(&:delete)
+    end
   end
 end
