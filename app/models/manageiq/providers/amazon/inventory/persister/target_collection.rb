@@ -56,9 +56,10 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     # Network
     add_cloud_networks_inventory_collections(references(:cloud_networks))
     add_cloud_subnets_inventory_collections(references(:cloud_subnets))
-    add_network_ports_inventory_collections(references(:vms) + references(:network_ports))
+    add_network_ports_inventory_collections(
+      references(:vms) + references(:network_ports) + references(:load_balancers))
     add_security_groups_inventory_collections(references(:security_groups))
-    add_floating_ips_inventory_collections(references(:floating_ips))
+    add_floating_ips_inventory_collections(references(:floating_ips) + references(:load_balancers))
     add_load_balancers_collections(references(:load_balancers))
 
     # Storage
