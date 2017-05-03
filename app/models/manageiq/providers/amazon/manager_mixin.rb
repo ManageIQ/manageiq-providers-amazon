@@ -2,7 +2,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
   extend ActiveSupport::Concern
 
   included do
-    validates :provider_region, :inclusion => {:in => ManageIQ::Providers::Amazon::Regions.names}
+    validates :provider_region, :inclusion => {:in => ->(_region) { ManageIQ::Providers::Amazon::Regions.names }}
   end
 
   def description
