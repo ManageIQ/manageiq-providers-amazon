@@ -947,10 +947,12 @@ module AwsRefresherSpecCommon
     )
 
     expect(@elb.ext_management_system).to eq(@ems.network_manager)
-    # TODO(lsmola)
-    # expect(@elb.availability_zones).to eq(@az)
-    # expect(@elb.cloud_subnets).to eq(..)
-    # expect(@elb.network_ports).to eq(..)
+    expect(@elb.network_ports.map(&:name)).to(match_array("EmSRefreshSpecVPCELB"))
+    expect(@elb.floating_ips.map(&:address)).to(
+      match_array(
+        ["EmSRefreshSpecVPCELB-546141344.us-east-1.elb.amazonaws.com"]
+      )
+    )
   end
 
   def assert_specific_load_balancer_vpc_relations
@@ -959,6 +961,7 @@ module AwsRefresherSpecCommon
     expect(@elb.load_balancer_pool_members.first.ext_management_system).to eq @ems.network_manager
     expect(@elb.vms.first.ext_management_system).to eq @ems
     expect(@elb.vms.collect(&:name)).to match_array ["EmsRefreshSpec-PoweredOn-VPC", "VMstate-8"]
+    expect(@elb.cloud_subnets.map(&:name)).to(match_array(["EmsRefreshSpec-Subnet1", "EmsRefreshSpec-Subnet2"]))
   end
 
   def assert_specific_load_balancer_vpc_and_vpc2_relations
