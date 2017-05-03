@@ -1164,7 +1164,7 @@ module AwsRefresherSpecCommon
         :status_reason => nil,
         :status        => "CREATE_COMPLETE",
         :ems_ref       => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack/"\
-                          "07fba5b0-13aa-11e7-847a-500c28604cae",
+                          "b4e06950-2fed-11e7-bd93-500c286374d1",
       )
     )
 
@@ -1173,14 +1173,14 @@ module AwsRefresherSpecCommon
 
   def assert_specific_orchestration_stack_data
     @orch_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.find_by(
-      :name => "EmsRefreshSpecStack-WebServerInstance-1PAB3IELQ8EYT"
+      :name => "EmsRefreshSpecStack-WebServerInstance-1CTHQS2P5WJ7S"
     )
     expect(@orch_stack).to(
       have_attributes(
         :status_reason => nil,
         :status        => "CREATE_COMPLETE",
-        :ems_ref       => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance"\
-                          "-1PAB3IELQ8EYT/28cef7b0-13aa-11e7-8260-503aca4a58d1",
+        :ems_ref       => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-"\
+                          "WebServerInstance-1CTHQS2P5WJ7S/d3bb46b0-2fed-11e7-a3d9-503f23fb55fe",
       )
     )
 
@@ -1196,11 +1196,11 @@ module AwsRefresherSpecCommon
       match_array(
         [
           {"name" => "DBRootPassword", "value" => "****"},
-          {"name" => "InstanceSecurityGroupID", "value" => "sg-a5109cda"},
+          {"name" => "InstanceSecurityGroupID", "value" => "sg-76c10f08"},
           {"name" => "InstanceType", "value" => "t2.nano"},
           {"name" => "KeyName", "value" => "EmsRefreshSpec-KeyPair"},
           {"name" => "SSHLocation", "value" => "0.0.0.0/0"},
-          {"name" => "SubnetID", "value" => "subnet-fc014299"}
+          {"name" => "SubnetID", "value" => "subnet-2190b144"}
         ]
       )
     )
@@ -1218,14 +1218,14 @@ module AwsRefresherSpecCommon
           {
             "name"                   => "IPAddress",
             "logical_resource"       => "IPAddress",
-            "physical_resource"      => "34.206.127.107",
+            "physical_resource"      => "34.202.178.10",
             "resource_category"      => "AWS::EC2::EIP",
             "resource_status"        => "CREATE_COMPLETE",
             "resource_status_reason" => nil
           }, {
             "name"                   => "WebServerInstance",
             "logical_resource"       => "WebServerInstance",
-            "physical_resource"      => "i-015e4579bfa4fcc84",
+            "physical_resource"      => "i-0bca58e6e540ddc39",
             "resource_category"      => "AWS::EC2::Instance",
             "resource_status"        => "CREATE_COMPLETE",
             "resource_status_reason" => nil
@@ -1242,7 +1242,7 @@ module AwsRefresherSpecCommon
       match_array(
         [
           {"key"         => "URL",
-           "value"       => "http://34.206.127.107",
+           "value"       => "http://34.202.178.10",
            "description" => "Newly created application URL"}
         ]
       )
@@ -1250,7 +1250,7 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_orchestration_stack_associations
-    @orch_stack_vm = Vm.where(:name => "i-015e4579bfa4fcc84").first
+    @orch_stack_vm = Vm.where(:name => "i-0bca58e6e540ddc39").first
     @orch_stack_floating_ip = @orch_stack_vm.floating_ips.first
     @parent_stack_sg = @orch_stack_vm.security_groups.first
     @parent_stack_vpc = @orch_stack_vm.cloud_networks.first
