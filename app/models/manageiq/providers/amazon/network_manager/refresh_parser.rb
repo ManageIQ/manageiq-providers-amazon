@@ -28,6 +28,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     get_ec2_floating_ips_and_ports
     get_floating_ips
     get_public_ips
+    get_load_balancers_ports_and_floating_ips
     $aws_log.info("#{log_header}...Complete")
 
     @data
@@ -77,8 +78,51 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     sg.ip_permissions_egress.collect { |perm| parse_firewall_rule(perm, "outbound") }.flatten
   end
 
+  def lb_cloud_subnets(subnet_id)
+    {
+      :address      => nil,
+      :cloud_subnet => @data_index[:cloud_subnets][subnet_id]
+    }
+  end
+
   def get_load_balancers
     process_collection(load_balancers, :load_balancers) { |lb| parse_load_balancer(lb) }
+  end
+
+  def get_load_balancers_ports_and_floating_ips
+    load_balancers.each do |lb|
+      uid          = lb.load_balancer_name
+      network_port = {
+        :ems_ref                    => uid,
+        :name                       => uid,
+        :status                     => nil,
+        :mac_address                => nil,
+        :device_owner               => uid,
+        :device_ref                 => uid,
+        :device                     => @data_index[:load_balancers][uid],
+        :cloud_subnet_network_ports => lb.subnets.to_a.map {|subnet_id| lb_cloud_subnets(subnet_id)},
+        :security_groups            => lb.security_groups.to_a.collect do |security_group_id|
+          @data_index[:security_groups][security_group_id]
+        end.compact
+      }
+
+      @data[:network_ports] << network_port
+      @data_index.store_path(:network_ports, uid, network_port)
+
+      floating_ip = {
+        :ems_ref            => uid,
+        :address            => lb.dns_name,
+        :fixed_ip_address   => nil,
+        :cloud_network_only => lb.vpc_id.present?,
+        :network_port       => network_port,
+        :cloud_network      => lb.vpc_id.present? ? @data_index[:cloud_networks][lb.vpc_id] : nil,
+        :status             => nil,
+        :vm                 => nil
+      }
+
+      @data[:floating_ips] << floating_ip
+      @data_index.store_path(:floating_ips, uid, floating_ip)
+    end
   end
 
   def get_load_balancer_pools
