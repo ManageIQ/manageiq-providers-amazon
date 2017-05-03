@@ -42,7 +42,9 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
           :address,
           :fixed_ip_address,
           :cloud_network_only,
+          :cloud_network,
           :network_port,
+          :status,
           :vm,
         ]
       }

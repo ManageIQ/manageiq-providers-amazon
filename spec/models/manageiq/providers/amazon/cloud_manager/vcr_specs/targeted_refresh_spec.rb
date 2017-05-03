@@ -62,11 +62,11 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :disk                          => 1,
             :firewall_rule                 => 13,
             :flavor                        => 3,
-            :floating_ip                   => 1,
+            :floating_ip                   => 2,
             :hardware                      => 2,
             :miq_template                  => 1,
             :network                       => 2,
-            :network_port                  => 1,
+            :network_port                  => 2,
             :security_group                => 2,
             :vm                            => 1,
             :vm_or_template                => 2
@@ -116,11 +116,11 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :disk                          => 2,
             :firewall_rule                 => 3,
             :flavor                        => 3,
-            :floating_ip                   => 1,
+            :floating_ip                   => 3,
             :hardware                      => 2,
             :miq_template                  => 1,
             :network                       => 2,
-            :network_port                  => 1,
+            :network_port                  => 3,
             :security_group                => 1,
             :vm                            => 1,
             :vm_or_template                => 2
@@ -178,8 +178,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           :manager_id  => @ems.id,
           :association => :orchestration_stacks,
           :manager_ref => {
-            :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance"\
-                        "-1PAB3IELQ8EYT/28cef7b0-13aa-11e7-8260-503aca4a58d1"
+            :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-"\
+                        "WebServerInstance-1CTHQS2P5WJ7S/d3bb46b0-2fed-11e7-a3d9-503f23fb55fe"
           }
         )
 
@@ -220,7 +220,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           :association => :orchestration_stacks,
           :manager_ref => {
             :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack/"\
-                        "07fba5b0-13aa-11e7-847a-500c28604cae"
+                        "b4e06950-2fed-11e7-bd93-500c286374d1"
           }
         )
 
@@ -228,8 +228,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           :manager_id  => @ems.id,
           :association => :orchestration_stacks,
           :manager_ref => {
-            :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance"\
-                        "-1PAB3IELQ8EYT/28cef7b0-13aa-11e7-8260-503aca4a58d1"
+            :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-"\
+                        "WebServerInstance-1CTHQS2P5WJ7S/d3bb46b0-2fed-11e7-a3d9-503f23fb55fe"
           }
         )
 
@@ -273,7 +273,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
         vm_target = ManagerRefresh::Target.new(
           :manager_id  => @ems.id,
           :association => :vms,
-          :manager_ref => {:ems_ref => "i-015e4579bfa4fcc84"}
+          :manager_ref => {:ems_ref => "i-0bca58e6e540ddc39"}
         )
 
         orchestration_stack_target = ManagerRefresh::Target.new(
@@ -281,7 +281,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           :association => :orchestration_stacks,
           :manager_ref => {
             :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack/"\
-                        "07fba5b0-13aa-11e7-847a-500c28604cae"
+                        "b4e06950-2fed-11e7-bd93-500c286374d1"
           }
         )
 
@@ -289,8 +289,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           :manager_id  => @ems.id,
           :association => :orchestration_stacks,
           :manager_ref => {
-            :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance"\
-                        "-1PAB3IELQ8EYT/28cef7b0-13aa-11e7-8260-503aca4a58d1"
+            :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-"\
+                        "WebServerInstance-1CTHQS2P5WJ7S/d3bb46b0-2fed-11e7-a3d9-503f23fb55fe"
           }
         )
 
@@ -311,7 +311,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :cloud_network                 => 1,
             :cloud_subnet                  => 1,
             :cloud_volume                  => 1,
-            :custom_attribute              => 4,
+            :custom_attribute              => 6,
             :disk                          => 1,
             :firewall_rule                 => 3,
             :flavor                        => 3,

@@ -71,6 +71,8 @@ module AwsRefresherSpecCounts
     security_group_hashes = security_groups.all
     security_groups_count = security_group_hashes.count
 
+    load_balancers_size = load_balancers.size
+
     # Total number of firewall rules is inferred from security groups
     firewall_rules_count  = security_group_hashes.map do |rule|
       (
@@ -86,7 +88,7 @@ module AwsRefresherSpecCounts
     ec2_classic_instance_hashes = all_instance_hashes.select { |x| x['network_interfaces'].blank? }
     network_port_hashes         = network_ports.all
     # Network ports count consists of VPC ENIs + ec2_classic_instances
-    network_ports_count         = network_port_hashes.size + ec2_classic_instance_hashes.size
+    network_ports_count         = network_port_hashes.size + ec2_classic_instance_hashes.size + load_balancers_size
 
     floating_ip_hashes = floating_ips.all
     # VPC floating IPs are taken from floating_ips and network_ports + EC2 classic floating ips are taken from
@@ -107,6 +109,8 @@ module AwsRefresherSpecCounts
       ec2_classic_instance_hashes.map { |instance| instance['public_ip_address'] }.compact
     )
 
+    floating_ips_count = floating_ips_refs.size + load_balancers_size
+
     orchestration_stack_hashes = stacks.all
     orchestration_stacks_count = orchestration_stack_hashes.size
 
@@ -125,7 +129,7 @@ module AwsRefresherSpecCounts
       :disk                          => disks_count,
       :firewall_rule                 => firewall_rules_count,
       :flavor                        => 76,
-      :floating_ip                   => floating_ips_refs.size,
+      :floating_ip                   => floating_ips_count,
       :hardware                      => instances_and_images_count,
       :miq_template                  => images_count,
       :network                       => networks_count,

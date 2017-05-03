@@ -106,6 +106,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
       load_balancer_pool_members(persister_load_balancer_pool, lb['instances'])
       load_balancer_listeners(persister_load_balancer, persister_load_balancer_pool, lb)
       load_balancer_health_checks(persister_load_balancer, uid, lb['health_check'])
+      load_balancer_floating_ip_and_port(persister_load_balancer, uid, lb)
     end
   end
 
@@ -168,6 +169,40 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     )
 
     load_balancer_health_checks_members(persister_load_balancer_health_check, uid)
+  end
+
+  def load_balancer_floating_ip_and_port(persister_load_balancer, uid, lb)
+    persister_network_port = persister.network_ports.find_or_build(uid).assign_attributes(
+      :ext_management_system => ems,
+      :name                  => uid,
+      :status                => nil,
+      :mac_address           => nil,
+      :device_owner          => uid,
+      :device_ref            => uid,
+      :device                => persister_load_balancer,
+      :security_groups       => lb['security_groups'].to_a.collect do |security_group_id|
+        persister.security_groups.lazy_find(security_group_id)
+      end.compact,
+    )
+
+    lb['subnets'].each do |subnet_id|
+      persister.cloud_subnet_network_ports.find_or_build_by(
+        :address      => nil,
+        :cloud_subnet => persister.cloud_subnets.lazy_find(subnet_id),
+        :network_port => persister_network_port
+      )
+    end
+
+    persister.floating_ips.find_or_build(uid).assign_attributes(
+      :ext_management_system => ems,
+      :address               => lb['dns_name'],
+      :fixed_ip_address      => nil,
+      :cloud_network_only    => lb['vpc_id'].present?,
+      :network_port          => persister_network_port,
+      :cloud_network         => lb['vpc_id'].present? ? persister.cloud_networks.lazy_find(lb['vpc_id']) : nil,
+      :status                => nil,
+      :vm                    => nil
+    )
   end
 
   def load_balancer_health_checks_members(persister_load_balancer_health_check, uid)

@@ -106,7 +106,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
                             test_counts[:outbound_firewall_rule_per_security_group_count])
 
     floating_ip_count = test_counts[:floating_ip_count] + test_counts[:network_port_count] +
-                        test_counts[:instance_ec2_count]
+                        test_counts[:instance_ec2_count] + test_counts[:load_balancer_count]
+    network_port_count = test_counts[:instance_ec2_count] + test_counts[:network_port_count] +
+                         test_counts[:load_balancer_count]
 
     {
       :auth_private_key                  => 0,
@@ -132,7 +134,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :orchestration_stack_resource      => 0,
       :security_group                    => test_counts[:security_group_count],
       :firewall_rule                     => firewall_rule_count,
-      :network_port                      => test_counts[:instance_ec2_count] + test_counts[:network_port_count],
+      :network_port                      => network_port_count,
       :cloud_network                     => test_counts[:vpc_count],
       :floating_ip                       => floating_ip_count,
       :network_router                    => 0,
