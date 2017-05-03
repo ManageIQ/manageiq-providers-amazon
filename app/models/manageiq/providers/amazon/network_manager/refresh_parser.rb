@@ -100,7 +100,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
         :device_owner               => uid,
         :device_ref                 => uid,
         :device                     => @data_index[:load_balancers][uid],
-        :cloud_subnet_network_ports => lb.subnets.to_a.map {|subnet_id| lb_cloud_subnets(subnet_id)},
+        :cloud_subnet_network_ports => lb.subnets.to_a.map { |subnet_id| lb_cloud_subnets(subnet_id) },
         :security_groups            => lb.security_groups.to_a.collect do |security_group_id|
           @data_index[:security_groups][security_group_id]
         end.compact
