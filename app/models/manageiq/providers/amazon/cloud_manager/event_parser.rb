@@ -25,7 +25,7 @@ module ManageIQ::Providers::Amazon::CloudManager::EventParser
 
   def self.parse_cloud_watch_alarm_event!(event, event_hash)
     event_hash[:message]                   = event["AlarmName"]
-    event_hash[:timestamp]                 = event["time"]
+    event_hash[:timestamp]                 = event["StateChangeTime"]
     event_hash[:vm_ems_ref]                = nil # Can't get it
     event_hash[:availability_zone_ems_ref] = nil # Can't get it
   end
