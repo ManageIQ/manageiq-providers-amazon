@@ -8,11 +8,21 @@
           - AWS_EC2_Instance_CREATE
           - AWS_EC2_Instance_UPDATE
           - AWS_EC2_Instance_DELETE
+          - TerminateInstances
+          - RunInstances
         :power:
           :critical:
           - AWS_EC2_Instance_running
           - AWS_EC2_Instance_shutting-down
           - AWS_EC2_Instance_stopped
+          - EC2_Instance_State_change_Notification_running
+          - EC2_Instance_State_change_Notification_shutting_down
+          - EC2_Instance_State_change_Notification_stopped
+          - EC2_Instance_State_change_Notification_stopping
+          - EC2_Instance_State_change_Notification_terminated
+          - EC2_Instance_State_change_Notification_pending
+          - StopInstances
+          - StartInstances
     :blacklisted_event_names:
       - ConfigurationSnapshotDeliveryCompleted
       - ConfigurationSnapshotDeliveryStarted
