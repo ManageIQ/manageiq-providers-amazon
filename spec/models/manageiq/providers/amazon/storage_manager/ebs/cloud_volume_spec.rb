@@ -75,7 +75,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
 
         with_aws_stubbed(stubbed_responses) do
           expect do
-            cloud_volume.update_volume(:volume_type => 'gp2')
+            cloud_volume.update_volume(:volume_type => 'gp2', :size => 4)
           end.to raise_error(MiqException::MiqVolumeUpdateError)
         end
       end
@@ -117,10 +117,16 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
           include_examples "#modify_volume is not allowed"
         end
 
+        context "volume configuration does not change" do
+          let(:options) { { :volume_type => "gp2", :size => 1 } }
+
+          include_examples "#modify_volume is not allowed"
+        end
+
         context "volume type to gp2" do
           let(:options) { { :volume_type => "gp2", :iops => 200, :size => 4 } }
           # It must ignore IOPS param.
-          let(:modify_volume_options) { { :volume_id => "vol_1", :volume_type => "gp2", :size => 4 } }
+          let(:modify_volume_options) { { :volume_id => "vol_1", :size => 4 } }
 
           include_examples "#modify_volume is allowed"
         end
