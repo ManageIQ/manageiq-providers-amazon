@@ -100,8 +100,9 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
 
   def modify_volume_options(options = {})
     modify_opts = {}
+
     if volume_type != 'standard'
-      modify_opts[:volume_type] = options[:volume_type] if options[:volume_type] && options[:volume_type] != 'standard'
+      modify_opts[:volume_type] = options[:volume_type] if options[:volume_type] && options[:volume_type] != volume_type
       modify_opts[:size]        = Integer(options[:size]) if options[:size] && Integer(options[:size]).gigabytes != size
       modify_opts[:iops]        = options[:iops] if (options[:volume_type] == "io1" || volume_type == 'io1') && options[:iops]
     end
