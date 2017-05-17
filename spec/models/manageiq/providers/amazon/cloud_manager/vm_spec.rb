@@ -33,7 +33,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Vm do
       allow(MiqServer).to receive(:my_server).and_return("default")
       @proxies = vm.proxies4job
     end
-    
+
     it "has the correct message" do
       expect(@proxies[:message]).to eq('Perform SmartState Analysis on this Instance')
     end
