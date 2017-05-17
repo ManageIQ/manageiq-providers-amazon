@@ -42,7 +42,7 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
     sync_stashed_metadata(ost)
   end
 
-  def proxies4job(_job)
+  def proxies4job(_job = nil)
     {
       :proxies => [MiqServer.my_server],
       :message => 'Perform SmartState Analysis on this Instance'
