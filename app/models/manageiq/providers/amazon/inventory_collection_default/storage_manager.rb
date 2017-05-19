@@ -5,7 +5,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :name,
           :status,
@@ -14,7 +14,10 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager < 
           :size,
           :base_snapshot,
           :availability_zone,
-        ]
+        ],
+        :builder_params              => {
+          :ems_id => ->(persister) { persister.manager.try(:ebs_storage_manager).try(:id) || persister.manager.id },
+        }
       }
 
       super(attributes.merge!(extra_attributes))
@@ -25,7 +28,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :name,
           :status,
@@ -33,7 +36,10 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager < 
           :description,
           :size,
           :cloud_volume,
-        ]
+        ],
+        :builder_params              => {
+          :ems_id => ->(persister) { persister.manager.try(:ebs_storage_manager).try(:id) || persister.manager.id },
+        }
       }
 
       super(attributes.merge!(extra_attributes))
@@ -43,12 +49,15 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager < 
       attributes = {
         :model_class                 => ::ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer,
         :inventory_object_attributes => [
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :key,
           :bytes,
           :object_count,
-        ]
+        ],
+        :builder_params              => {
+          :ems_id => ->(persister) { persister.manager.try(:s3_storage_manager).try(:id) || persister.manager.id },
+        }
       }
 
       super(attributes.merge!(extra_attributes))
@@ -58,14 +67,17 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager < 
       attributes = {
         :model_class                 => ::ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject,
         :inventory_object_attributes => [
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :etag,
           :last_modified,
           :content_length,
           :key,
           :cloud_object_store_container,
-        ]
+        ],
+        :builder_params              => {
+          :ems_id => ->(persister) { persister.manager.try(:s3_storage_manager).try(:id) || persister.manager.id },
+        }
       }
 
       super(attributes.merge!(extra_attributes))
