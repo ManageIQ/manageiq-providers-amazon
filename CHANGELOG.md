@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased Sprint 60
+
+### Added
+- Bump ruby to 2.3.3 and add 2.4.1 [(#245)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/245)
+- Refresh port and floating ip for a lb [(#244)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/244)
+- Rewrite network ports and floating ips parser to a new format [(#233)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/233)
+- Rewrite load balancers parser to a new format [(#231)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/231)
+
+### Fixed
+- Support deletion of S3 folders [(#226)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/226)
+
 ## Unreleased Sprint 59
 
 ### Added
@@ -9,7 +20,7 @@ All notable changes to this project will be documented in this file.
 - Rewrite EBS parser to a new format [(#228)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/228)
 - Rewrite S3 parser to a new format [(#227)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/227)
 
-## Fine Beta-2
+## Fine Release Candidate
 
 ### Added
 - Rewrite the instance parser to the new syntax [(#225)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/225)
