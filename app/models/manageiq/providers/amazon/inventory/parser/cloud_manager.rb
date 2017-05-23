@@ -1,10 +1,6 @@
 # TODO: Separate collection from parsing (perhaps collecting in parallel a la RHEVM)
 
 class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::Providers::Amazon::Inventory::Parser
-  def ems
-    collector.manager
-  end
-
   def parse
     log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{collector.manager.name}] id: [#{collector.manager.id}]"
     $aws_log.info("#{log_header}...")
@@ -52,14 +48,13 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       name     ||= uid
 
       persister_image = persister.miq_templates.find_or_build(uid).assign_attributes(
-        :ext_management_system => ems,
-        :uid_ems               => uid,
-        :name                  => name,
-        :location              => location,
-        :vendor                => "amazon",
-        :raw_power_state       => "never",
-        :template              => true,
-        :publicly_available    => image['public'],
+        :uid_ems            => uid,
+        :name               => name,
+        :location           => location,
+        :vendor             => "amazon",
+        :raw_power_state    => "never",
+        :template           => true,
+        :publicly_available => image['public'],
       )
 
       image_hardware(persister_image, image)
@@ -85,9 +80,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def vm_and_template_labels(resource, tags)
     tags.each do |tag|
       persister.vm_and_template_labels.find_or_build_by(:resource => resource, :name => tag["key"]).assign_attributes(
-        :section  => 'labels',
-        :value    => tag["value"],
-        :source   => 'amazon'
+        :section => 'labels',
+        :value   => tag["value"],
+        :source  => 'amazon'
       )
     end
   end
@@ -97,7 +92,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       uid = stack['stack_id'].to_s
 
       persister_orchestration_stack = persister.orchestration_stacks.find_or_build(uid).assign_attributes(
-        :ext_management_system  => ems,
         :name                   => stack['stack_name'],
         :description            => stack['description'],
         :status                 => stack['stack_status'],
@@ -178,18 +172,17 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       name = name.blank? ? uid : name
 
       persister_instance = persister.vms.find_or_build(uid).assign_attributes(
-        :ext_management_system => ems,
-        :uid_ems               => uid,
-        :name                  => name,
-        :vendor                => "amazon",
-        :raw_power_state       => status,
-        :boot_time             => instance['launch_time'],
-        :availability_zone     => persister.availability_zones.lazy_find(instance.fetch_path('placement', 'availability_zone')),
-        :flavor                => flavor,
-        :genealogy_parent      => persister.miq_templates.lazy_find(instance['image_id']),
-        :key_pairs             => [persister.key_pairs.lazy_find(instance['key_name'])].compact,
-        :location              => persister.networks.lazy_find("#{uid}__public", :key => :hostname, :default => 'unknown'),
-        :orchestration_stack   => persister.orchestration_stacks.lazy_find(
+        :uid_ems             => uid,
+        :name                => name,
+        :vendor              => "amazon",
+        :raw_power_state     => status,
+        :boot_time           => instance['launch_time'],
+        :availability_zone   => persister.availability_zones.lazy_find(instance.fetch_path('placement', 'availability_zone')),
+        :flavor              => flavor,
+        :genealogy_parent    => persister.miq_templates.lazy_find(instance['image_id']),
+        :key_pairs           => [persister.key_pairs.lazy_find(instance['key_name'])].compact,
+        :location            => persister.networks.lazy_find("#{uid}__public", :key => :hostname, :default => 'unknown'),
+        :orchestration_stack => persister.orchestration_stacks.lazy_find(
           get_from_tags(instance, "aws:cloudformation:stack-id")
         ),
       )
@@ -234,8 +227,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :hardware    => persister_hardware,
         :description => description
       ).assign_attributes(
-        :ipaddress   => ip_address,
-        :hostname    => hostname,
+        :ipaddress => ip_address,
+        :hostname  => hostname,
       )
     end
   end
@@ -270,7 +263,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def flavors
     collector.flavors.each do |flavor|
       persister.flavors.find_or_build(flavor[:name]).assign_attributes(
-        :ext_management_system    => ems,
         :name                     => flavor[:name],
         :description              => flavor[:description],
         :enabled                  => !flavor[:disabled],
@@ -292,8 +284,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def availability_zones
     collector.availability_zones.each do |az|
       persister.availability_zones.find_or_build(az['zone_name']).assign_attributes(
-        :ext_management_system => ems,
-        :name                  => az['zone_name'],
+        :name => az['zone_name'],
       )
     end
   end
@@ -301,7 +292,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def key_pairs
     collector.key_pairs.each do |kp|
       persister.key_pairs.find_or_build(kp['key_name']).assign_attributes(
-        :resource    => ems,
         :fingerprint => kp['key_fingerprint']
       )
     end

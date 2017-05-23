@@ -5,7 +5,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::NetworkPort,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :name,
           :ems_ref,
           :status,
@@ -37,7 +37,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::FloatingIp,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :address,
           :fixed_ip_address,
@@ -57,7 +57,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::CloudSubnet,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :name,
           :cidr,
@@ -75,7 +75,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :name,
           :cidr,
@@ -93,7 +93,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::SecurityGroup,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :name,
           :description,
@@ -126,7 +126,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancer,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :name,
         ]
@@ -140,7 +140,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPool,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :name,
         ]
@@ -154,7 +154,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPoolMember,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :vm,
         ]
@@ -179,7 +179,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :load_balancer_protocol,
           :load_balancer_port_range,
@@ -208,7 +208,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
         :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerHealthCheck,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :protocol,
           :port,

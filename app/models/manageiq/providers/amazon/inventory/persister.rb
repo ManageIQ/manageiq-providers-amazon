@@ -8,7 +8,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister < ManagerRefresh::Invent
   # @param manager [ManageIQ::Providers::BaseManager] A manager object
   # @param target [Object] A refresh Target object
   # @param target [ManagerRefresh::Inventory::Collector] A Collector object
-  def initialize(manager, target, collector)
+  def initialize(manager, target = nil, collector = nil)
     @manager   = manager
     @target    = target
     @collector = collector

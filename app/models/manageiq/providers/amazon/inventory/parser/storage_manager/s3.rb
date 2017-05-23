@@ -1,8 +1,4 @@
 class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3 < ManageIQ::Providers::Amazon::Inventory::Parser
-  def ems
-    collector.manager.respond_to?(:s3_storage_manager) ? collector.manager.s3_storage_manager : collector.manager
-  end
-
   def parse
     log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{collector.manager.name}] id: [#{collector.manager.id}]"
 
@@ -18,9 +14,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3 < Manag
       container_id = container['name']
 
       persister_container = persister.cloud_object_store_containers.find_or_build(container_id).assign_attributes(
-        :ext_management_system => ems,
-        :ems_ref               => container_id,
-        :key                   => container['name']
+        :ems_ref => container_id,
+        :key     => container['name']
       )
 
       # Assign number of objects and size in KB of the all container objects
@@ -30,9 +25,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3 < Manag
 
   def container_objects(container_id, persister_container)
     # S3 bucket accessible only for API client with same region
-    region  = collector.aws_s3.client.get_bucket_location(:bucket => container_id).location_constraint
-    region  = "us-east-1" if region.empty? # SDK returns empty string for default region
-    options = {:region => region, :bucket => container_id}
+    region       = collector.aws_s3.client.get_bucket_location(:bucket => container_id).location_constraint
+    region       = "us-east-1" if region.empty? # SDK returns empty string for default region
+    options      = {:region => region, :bucket => container_id}
 
     # AWS SDK doesn't show information about overall size and object count.
     # We need to collect it manually.
@@ -59,7 +54,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3 < Manag
     ems_ref = "#{container_id}_#{uid}"
 
     persister.cloud_object_store_objects.find_or_build(ems_ref).assign_attributes(
-      :ext_management_system        => ems,
       :etag                         => container_object['etag'],
       :last_modified                => container_object['last_modified'],
       :content_length               => container_object['size'],

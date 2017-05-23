@@ -5,7 +5,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
         :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::Vm,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :uid_ems,
           :ems_ref,
           :name,
@@ -18,7 +18,11 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
           :key_pairs,
           :location,
           :orchestration_stack,
-        ]
+        ],
+        :builder_params              => {
+          :ems_id => ->(persister) { persister.manager.id },
+          :vendor => "amazon",
+        }
       }
       super(attributes.merge!(extra_attributes))
     end
@@ -28,7 +32,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
         :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::Template,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :uid_ems,
           :ems_ref,
           :name,
@@ -37,7 +41,12 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
           :raw_power_state,
           :template,
           :publicly_available,
-        ]
+        ],
+        :builder_params              => {
+          :ems_id   => ->(persister) { persister.manager.id },
+          :vendor   => "amazon",
+          :template => true
+        }
       }
 
       super(attributes.merge!(extra_attributes))
@@ -81,7 +90,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
         :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::AvailabilityZone,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :name,
         ]
@@ -95,7 +104,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
         :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::Flavor,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :name,
           :description,
@@ -153,7 +162,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
         :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
         :inventory_object_attributes => [
           :type,
-          :ext_management_system,
+          :ems_id,
           :ems_ref,
           :name,
           :description,
