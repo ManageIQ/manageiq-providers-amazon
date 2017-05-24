@@ -3,7 +3,6 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
     def network_ports(extra_attributes = {})
       attributes = {
         :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::NetworkPort,
-        :manager_ref_allowed_nil     => [:cloud_subnet],
         :inventory_object_attributes => [
           :type,
           :ems_id,
@@ -23,6 +22,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def cloud_subnet_network_ports(extra_attributes = {})
       attributes = {
+        :manager_ref_allowed_nil     => [:cloud_subnet],
         :inventory_object_attributes => [
           :address,
           :cloud_subnet,
