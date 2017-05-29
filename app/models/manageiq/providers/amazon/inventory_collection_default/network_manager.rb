@@ -22,6 +22,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def cloud_subnet_network_ports(extra_attributes = {})
       attributes = {
+        :manager_ref_allowed_nil     => [:cloud_subnet],
         :inventory_object_attributes => [
           :address,
           :cloud_subnet,
@@ -107,6 +108,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
 
     def firewall_rules(extra_attributes = {})
       attributes = {
+        :manager_ref_allowed_nil     => [:source_security_group],
         :inventory_object_attributes => [
           :direction,
           :host_protocol,
