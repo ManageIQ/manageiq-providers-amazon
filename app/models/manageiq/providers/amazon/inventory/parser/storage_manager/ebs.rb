@@ -19,13 +19,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
         :volume_type       => volume['volume_type'],
         :size              => volume['size'].to_i.gigabytes,
         :base_snapshot     => persister.cloud_volume_snapshots.lazy_find(volume['snapshot_id']),
-        :availability_zone => persister.availability_zones.lazy_find(volume['availability_zone'])
+        :availability_zone => persister.availability_zones.lazy_find(volume['availability_zone']),
+        :iops              => volume['iops'],
+        :encrypted         => volume['encrypted'],
       )
 
       volume_attachments(persister_volume, volume['attachments'])
     end
   end
-
 
   def snapshots
     collector.cloud_volume_snapshots.each do |snap|
