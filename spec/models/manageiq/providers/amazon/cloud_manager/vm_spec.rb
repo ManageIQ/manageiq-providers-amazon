@@ -4,6 +4,45 @@ describe ManageIQ::Providers::Amazon::CloudManager::Vm do
   let(:ems) { FactoryGirl.create(:ems_amazon_with_authentication) }
   let(:vm)  { FactoryGirl.create(:vm_amazon, :ems_ref => "amazon-perf-vm", :ext_management_system => ems) }
 
+  context "#active_proxy?" do
+    it "returns true" do
+      expect(vm.has_active_proxy?).to eq(true)
+    end
+  end
+
+  context "#has_proxy?" do
+    it "returns true" do
+      expect(vm.has_proxy?).to eq(true)
+    end
+  end
+
+  context "#scan_via_ems?" do
+    it "returns true" do
+      expect(vm.scan_via_ems?).to eq(true)
+    end
+  end
+
+  context "#requires_storage_for_scan??" do
+    it "returns false" do
+      expect(vm.requires_storage_for_scan?).to eq(false)
+    end
+  end
+
+  context "#proxies4job" do
+    before do
+      allow(MiqServer).to receive(:my_server).and_return("default")
+      @proxies = vm.proxies4job
+    end
+
+    it "has the correct message" do
+      expect(@proxies[:message]).to eq('Perform SmartState Analysis on this Instance')
+    end
+
+    it "returns the default proxy" do
+      expect(@proxies[:proxies].first).to eq('default')
+    end
+  end
+
   context "#is_available?" do
     let(:power_state_on)        { "running" }
     let(:power_state_suspended) { "pending" }

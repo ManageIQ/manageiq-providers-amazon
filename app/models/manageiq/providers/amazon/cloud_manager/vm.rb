@@ -1,5 +1,6 @@
 class ManageIQ::Providers::Amazon::CloudManager::Vm < ManageIQ::Providers::CloudManager::Vm
   include_concern 'Operations'
+  include_concern 'ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared'
 
   POWER_STATES = {
     "running"       => "on",
@@ -30,13 +31,6 @@ class ManageIQ::Providers::Amazon::CloudManager::Vm < ManageIQ::Providers::Cloud
     # Mark all instances no longer found as unknown
     self.raw_power_state = "unknown"
     save
-  end
-
-  def proxies4job(_job = nil)
-    {
-      :proxies => [MiqServer.my_server],
-      :message => 'Perform SmartState Analysis on this VM'
-    }
   end
 
   def disconnected
