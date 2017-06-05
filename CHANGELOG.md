@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased Sprint 61
+
+### Fixed
+- Prevent volume update with no modifications [(#249)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/249)
+- Parse timestamp for aws alarm events [(#246)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/246)
+
 ## Unreleased Sprint 60
 
 ### Added
@@ -20,7 +26,7 @@ All notable changes to this project will be documented in this file.
 - Rewrite EBS parser to a new format [(#228)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/228)
 - Rewrite S3 parser to a new format [(#227)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/227)
 
-## Fine Release Candidate
+## Fine-1
 
 ### Added
 - Rewrite the instance parser to the new syntax [(#225)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/225)
