@@ -14,6 +14,8 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager < 
           :size,
           :base_snapshot,
           :availability_zone,
+          :iops,
+          :encrypted,
         ],
         :builder_params              => {
           :ems_id => ->(persister) { persister.manager.try(:ebs_storage_manager).try(:id) || persister.manager.id },
