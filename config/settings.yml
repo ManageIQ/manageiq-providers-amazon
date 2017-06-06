@@ -1,4 +1,17 @@
 ---
+:amazon:
+  :event_handling:
+    :event_groups:
+      :addition:
+        :critical:
+        - AWS_EC2_Instance_CREATE
+        - AWS_EC2_Instance_UPDATE
+        - AWS_EC2_Instance_DELETE
+      :power:
+        :critical:
+        - AWS_EC2_Instance_running
+        - AWS_EC2_Instance_shutting-down
+        - AWS_EC2_Instance_stopped
 :ems:
   :ems_amazon:
     :event_handling:
