@@ -9,4 +9,9 @@ unless gem_root.join("spec/manageiq").exist?
 end
 
 require gem_root.join("spec/manageiq/lib/manageiq/environment").to_s
+system "pwd"
+system "ls -l"
 ManageIQ::Environment.manageiq_plugin_setup
+system "pwd"
+system "ls -l"
+exit
