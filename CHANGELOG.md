@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased Sprint 62
+
+### Added
+- Simplify TargetCollection Persistor by using IC configurations [(#255)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/255)
+- Leverage builder params to provide ems id and defaults [(#253)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/253)
+- Upgrade aws-sdk to 2.9.7 [(#252)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/252)
+- Initial Changes to Amazon Provider for SSA Support [(#251)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/251)
+- Collect IOPS and encryption status of cloud volume [(#211)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/211)
+
 ## Unreleased Sprint 61
 
 ### Fixed
