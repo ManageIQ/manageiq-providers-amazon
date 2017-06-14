@@ -477,7 +477,8 @@ module AwsStubs
         :volume_size => 1,
         :state       => "completed",
         :volume_id   => "volume_id_#{i}",
-        :tags        => [{ :key => "name", :value => "snapshot_#{i}" }]
+        :tags        => [{ :key => "name", :value => "snapshot_#{i}" }],
+        :encrypted   => (i == 0 ? true : false),
       }
     end
 

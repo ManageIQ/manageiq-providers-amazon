@@ -38,6 +38,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager < 
           :description,
           :size,
           :cloud_volume,
+          :encrypted,
         ],
         :builder_params              => {
           :ems_id => ->(persister) { persister.manager.try(:ebs_storage_manager).try(:id) || persister.manager.id },

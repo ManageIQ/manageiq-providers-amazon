@@ -36,7 +36,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
         :creation_time => snap['start_time'],
         :description   => snap['description'],
         :size          => snap['volume_size'].to_i.gigabytes,
-        :cloud_volume  => persister.cloud_volumes.lazy_find(snap['volume_id'])
+        :cloud_volume  => persister.cloud_volumes.lazy_find(snap['volume_id']),
+        :encrypted     => snap['encrypted'],
       )
     end
   end

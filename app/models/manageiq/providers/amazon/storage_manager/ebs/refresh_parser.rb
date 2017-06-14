@@ -67,7 +67,8 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser
       :creation_time => snap.start_time,
       :description   => snap.description,
       :size          => snap.volume_size.to_i.gigabytes,
-      :volume        => @data_index.fetch_path(:cloud_volumes, snap.volume_id)
+      :volume        => @data_index.fetch_path(:cloud_volumes, snap.volume_id),
+      :encrypted     => snap.encrypted,
     }
 
     return uid, new_result

@@ -81,6 +81,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
     refresh_spec_counts
 
     assert_specific_snapshot
+    assert_unencrypted_snapshot
     assert_specific_volume
     assert_unencrypted_volume
   end
@@ -196,22 +197,38 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
   end
 
   def assert_specific_snapshot
-    @snapshot = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.where(:ems_ref => "snapshot_id_0").first
+    snapshot = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.where(:ems_ref => "snapshot_id_0").first
 
-    expect(@snapshot).not_to be_nil
-    expect(@snapshot).to have_attributes(
+    expect(snapshot).not_to be_nil
+    expect(snapshot).to have_attributes(
       :ems_ref     => "snapshot_id_0",
       :name        => "snapshot_0",
       :description => "snapshot_desc_0",
       :status      => "completed",
-      :size        => 1.gigabyte
+      :size        => 1.gigabyte,
+      :encrypted   => true,
     )
 
-    expect(@snapshot.ext_management_system).to eq(@ems.ebs_storage_manager)
+    expect(snapshot.ext_management_system).to eq(@ems.ebs_storage_manager)
+  end
+
+  def assert_unencrypted_snapshot
+    snapshot = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.where(:ems_ref => "snapshot_id_1").first
+
+    expect(snapshot).not_to be_nil
+    expect(snapshot).to have_attributes(
+      :ems_ref     => "snapshot_id_1",
+      :name        => "snapshot_1",
+      :description => "snapshot_desc_1",
+      :status      => "completed",
+      :size        => 1.gigabyte,
+      :encrypted   => false,
+    )
   end
 
   def assert_specific_volume
     @volume = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume.where(:ems_ref => "volume_id_0").first
+    snapshot = ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.where(:ems_ref => "snapshot_id_0").first
 
     expect(@volume).not_to be_nil
     expect(@volume).to have_attributes(
@@ -225,7 +242,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
     )
 
     expect(@volume.ext_management_system).to eq(@ems.ebs_storage_manager)
-    expect(@volume.base_snapshot).to eq(@snapshot)
+    expect(@volume.base_snapshot).to eq(snapshot)
 
     # EBS manager is updating attributes of the pre-existing disk so we need to reload the disk
     # before checking if the update was successful.
