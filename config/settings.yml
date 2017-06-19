@@ -65,7 +65,6 @@
     :user:
 :log:
   :level_aws: info
-  :level_aws_in_evm: error
 :workers:
   :worker_base:
     :event_catcher:
