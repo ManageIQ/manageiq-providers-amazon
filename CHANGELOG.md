@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased Sprint 63
+
+### Added
+- Collect encryption status of cloud volume snapshot [(#259)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/259)
+
 ## Unreleased Sprint 62
 
 ### Added
