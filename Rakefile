@@ -1,6 +1,5 @@
 require 'bundler/setup'
 require 'bundler/gem_tasks'
-require 'manageiq-providers-amazon'
 
 begin
   require 'rspec/core/rake_task'
