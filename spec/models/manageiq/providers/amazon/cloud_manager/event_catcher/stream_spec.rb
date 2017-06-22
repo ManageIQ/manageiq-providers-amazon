@@ -114,6 +114,19 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream do
                                                              "messageType" => "ConfigurationItemChangeNotification",
                                                              "eventType"   => "AWS_EC2_Instance_UPDATE")
     end
+
+    it "parses an SNS message for EBS notifications" do
+      body = File.read(File.join(File.dirname(__FILE__), "ebs_message.json"))
+      msg = Aws::SQS::Types::Message.new(:body => body, :message_id => 2)
+
+      expected_keys = {
+        'messageId'    => 2,
+        'eventType'    => 'modifyVolume',
+        'event_source' => :cloud_watch_ec2
+      }
+
+      expect(subject.send(:parse_event, msg)).to include(expected_keys)
+    end
   end
 
   context "#poll" do
