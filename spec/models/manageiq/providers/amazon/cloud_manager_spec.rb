@@ -1,6 +1,24 @@
 require_relative 'aws_helper'
 
 describe ManageIQ::Providers::Amazon::CloudManager do
+  context ".raw_connect" do
+    it "decrypts the secret access key" do
+      expect(MiqPassword).to receive(:try_decrypt).with('secret_access_key')
+
+      described_class.raw_connect('access_key', 'secret_access_key', :EC2, 'region')
+    end
+
+    it "validates credentials if specified" do
+      expect(described_class).to receive(:validate_connection)
+
+      described_class.raw_connect('access_key', 'secret_access_key', :EC2, 'region', 'uri', true)
+    end
+
+    it "returns the connection if not specified" do
+      expect(described_class.raw_connect('access_key', 'secret_access_key', :EC2, 'region', 'uri')).to be_a_kind_of(Aws::EC2::Resource)
+    end
+  end
+
   it ".ems_type" do
     expect(described_class.ems_type).to eq('ec2')
   end
