@@ -91,9 +91,7 @@ module ManageIQ
       end
 
       def self.regions_by_hostname
-        regions.values.each_with_object({}) do |v, h|
-          h[v[:hostname]] = v
-        end
+        regions.values.index_by { |v| v[:hostname] }
       end
 
       def self.all
