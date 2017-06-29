@@ -42,7 +42,7 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
       #
       # TODO:  This request should be handed off to a worker responsible FOR watching for job completion
       # In addition the instance manager should get kicked in the shin so it can determine if there
-      # are instances available to handle this request and act accordingly if not. 
+      # are instances available to handle this request and act accordingly if not.
       # For now, we will simply call perform_instance_wait, which will wait for the *NEXT* job
       # to be completed and handle it as if it is the one we care about (a possibly faulty assumption)
       #
@@ -75,23 +75,22 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
   def perform_metadata_sync(ost)
     _log.debug("Syncing Metadata for #{ems_ref}")
     update_job_message(ost, "Synchronization in progress")
-    status        = scan_message         = "OK"
-    status_code   = categories_processed = 0
-    ost.xml_class = XmlHash::Document
-
-    bb, last_err  = nil
-
+    status, scan_message              = "OK"
+    status_code, categories_processed = 0
+    ost.xml_class                     = XmlHash::Document
+    bb, last_err                      = nil
 
     xml_summary = ost.xml_class.createDoc(:summary)
     xml_node = xml_node_scan = xml_summary.root.add_element("scanmetadata")
     xml_summary.root.add_attributes("taskid" => ost.taskid)
 
-    data_dir = File.join(File.expand_path(Rails.root), "data/metadata")
+    data_dir = File.expand_path(Rails.root.join("data/metadata"))
     _log.debug "creating #{data_dir}"
     begin
       Dir.mkdir(data_dir)
     rescue Errno::EEXIST
       # Ignore if the directory was created by another thread
+      _log.debug "No need to create directory #{data_dir} since it exists."
     end unless File.exist?(data_dir)
     ost.skipConfig = true
     ost.config     = OpenStruct.new(
@@ -114,23 +113,22 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
 
       categories.each do |c|
         update_job_message(ost, "Syncing #{c}")
-        st = Time.now
+        st = Time.current
         xml = MIQRexml.load(ost.reply[:categories][c.to_sym])
-        if xml
-          _log.debug "Writing scanned data to XML for [#{c}] to blackbox."
-          bb.saveXmlData(xml, c)
-          _log.debug "Writing XML complete."
+        next unless xml
+        _log.debug "Writing scanned data to XML for [#{c}] to blackbox."
+        bb.saveXmlData(xml, c)
+        _log.debug "Writing XML complete."
 
-          category_node = xml_summary.class.load(xml.root.shallow_copy.to_xml.to_s).root
-          category_node.add_attributes("start_time" => st.utc.iso8601, "end_time" => Time.now.utc.iso8601)
-          xml_node << category_node
-          categories_processed += 1
-        end
+        category_node = xml_summary.class.load(xml.root.shallow_copy.to_xml.to_s).root
+        category_node.add_attributes("start_time" => st.utc.iso8601, "end_time" => Time.now.utc.iso8601)
+        xml_node << category_node
+        categories_processed += 1
       end
-    rescue NoMethodError => scanErr
-      last_err = scanErr
-      _log.error "perform_metadata_sync Error - [#{scanErr}]"
-      _log.error "perform_metadata_sync Error - [#{scanErr.backtrace.join("\n")}]"
+    rescue NoMethodError => scan_err
+      last_err = scan_err
+      _log.error "perform_metadata_sync Error - [#{scan_err}]"
+      _log.error "perform_metadata_sync Error - [#{scan_err.backtrace.join("\n")}]"
     ensure
       bb.close if bb
       update_job_message(ost, "Scanning completed.")
