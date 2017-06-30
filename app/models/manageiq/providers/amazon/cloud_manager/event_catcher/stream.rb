@@ -180,6 +180,10 @@ class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
       state                 = "_#{event.fetch_path("detail", "state")}" if event.fetch_path("detail", "state")
       event["eventType"]    = "#{event["detail-type"].tr(" ", "_").tr("-", "_")}#{state}"
       event["event_source"] = :cloud_watch_ec2
+    elsif ["EBS Volume Notification", "EBS Snapshot Notification"].include?(event["detail-type"])
+      # CloudWatch EC2 EBS Events
+      event["eventType"] = event.fetch_path("detail", "event")
+      event["event_source"] = :cloud_watch_ec2
     elsif event["AlarmName"]
       # CloudWatch Alarm
       event["eventType"]    = "AWS_ALARM_#{event["AlarmName"]}"
