@@ -175,21 +175,14 @@ class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
       # CloudWatch with CloudTrail for API requests Events
       event["eventType"]    = event.fetch_path("detail", "eventName")
       event["event_source"] = :cloud_watch_api
-    elsif event["detail-type"]
+    elsif event["detail-type"] == "EC2 Instance State-change Notification"
       # CloudWatch EC2 Events
-      detail_type = event["detail-type"]
-
-      if detail_type == "EC2 Instance State-change Notification"
-        state              = "_#{event.fetch_path("detail", "state")}" if event.fetch_path("detail", "state")
-        event["eventType"] = "#{detail_type.tr(" ", "_").tr("-", "_")}#{state}"
-      elsif ["EBS Volume Notification", "EBS Snapshot Notification"].include?(detail_type)
-        event["eventType"] = event.fetch_path("detail", "event")
-      else
-        # Not recognized event, ignoring...
-        $log.debug("#{log_header} Parsed event from SNS Message not recognized #{event}")
-        return
-      end
-
+      state                 = "_#{event.fetch_path("detail", "state")}" if event.fetch_path("detail", "state")
+      event["eventType"]    = "#{event["detail-type"].tr(" ", "_").tr("-", "_")}#{state}"
+      event["event_source"] = :cloud_watch_ec2
+    elsif ["EBS Volume Notification", "EBS Snapshot Notification"].include?(event["detail-type"])
+      # CloudWatch EC2 EBS Events
+      event["eventType"] = event.fetch_path("detail", "event")
       event["event_source"] = :cloud_watch_ec2
     elsif event["AlarmName"]
       # CloudWatch Alarm
