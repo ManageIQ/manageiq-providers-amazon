@@ -97,7 +97,7 @@ describe "Provision Requests API" do
         )
       )
 
-      task_id = response.parsed_body["results"].first["id"]
+      task_id = ApplicationRecord.uncompress_id(response.parsed_body["results"].first["id"])
       expect(MiqProvisionRequest.exists?(task_id)).to be_truthy
     end
 
@@ -125,7 +125,7 @@ describe "Provision Requests API" do
         )
       )
 
-      task_id = response.parsed_body["results"].first["id"]
+      task_id = ApplicationRecord.uncompress_id(response.parsed_body["results"].first["id"])
       expect(MiqProvisionRequest.exists?(task_id)).to be_truthy
     end
 
@@ -154,7 +154,7 @@ describe "Provision Requests API" do
         )
       )
 
-      task_id = response.parsed_body["results"].first["id"]
+      task_id = ApplicationRecord.uncompress_id(response.parsed_body["results"].first["id"])
       expect(MiqProvisionRequest.exists?(task_id)).to be_truthy
     end
   end
