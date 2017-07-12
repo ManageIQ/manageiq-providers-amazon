@@ -1,8 +1,9 @@
 class ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair < ManageIQ::Providers::CloudManager::AuthKeyPair
+  AwsKeyPair = Struct.new(:name, :key_name, :fingerprint, :private_key)
+
   def self.raw_create_key_pair(ext_management_system, create_options)
     ec2 = ext_management_system.connect
     kp = ec2.create_key_pair(create_options)
-    AwsKeyPair = Struct.new(:name, :key_name, :fingerprint, :private_key)
     AwsKeyPair.new(kp.name, kp.name, kp.key_fingerprint, kp.key_material)
   rescue => err
     _log.error "keypair=[#{name}], error: #{err}"
