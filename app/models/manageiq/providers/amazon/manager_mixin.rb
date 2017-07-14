@@ -29,34 +29,14 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     self.class.raw_connect(username, password, service, region, proxy)
   end
 
-  def translate_exception(err)
-    require 'aws-sdk'
-    case err
-    when Aws::EC2::Errors::SignatureDoesNotMatch
-      MiqException::MiqHostError.new "SignatureMismatch - check your AWS Secret Access Key and signing method"
-    when Aws::EC2::Errors::AuthFailure
-      MiqException::MiqHostError.new "Login failed due to a bad username or password."
-    when Aws::Errors::MissingCredentialsError
-      MiqException::MiqHostError.new "Missing credentials"
-    else
-      MiqException::MiqHostError.new "Unexpected response returned from system: #{err.message}"
-    end
-  end
-
   def verify_credentials(auth_type = nil, options = {})
     raise MiqException::MiqHostError, "No credentials defined" if missing_credentials?(auth_type)
 
-    begin
+    self.class.connection_rescue_block do
       # EC2 does Lazy Connections, so call a cheap function
       with_provider_connection(options.merge(:auth_type => auth_type)) do |ec2|
-        ec2.client.describe_regions.regions.map(&:region_name)
+        self.class.validate_connection(ec2)
       end
-    rescue => err
-      miq_exception = translate_exception(err)
-      raise unless miq_exception
-
-      _log.error("Error Class=#{err.class.name}, Message=#{err.message}")
-      raise miq_exception
     end
 
     true
@@ -67,17 +47,52 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     # Connections
     #
 
-    def raw_connect(access_key_id, secret_access_key, service, region, proxy_uri = nil)
+    def raw_connect(access_key_id, secret_access_key, service, region, proxy_uri = nil, validate = false)
       require 'aws-sdk'
-      Aws.const_get(service)::Resource.new(
+
+      connection = Aws.const_get(service)::Resource.new(
         :access_key_id     => access_key_id,
-        :secret_access_key => secret_access_key,
+        :secret_access_key => MiqPassword.try_decrypt(secret_access_key),
         :region            => region,
         :http_proxy        => proxy_uri,
         :logger            => $aws_log,
         :log_level         => :debug,
         :log_formatter     => Aws::Log::Formatter.new(Aws::Log::Formatter.default.pattern.chomp)
       )
+
+      validate_connection(connection) if validate
+
+      connection
+    end
+
+    def validate_connection(connection)
+      connection_rescue_block do
+        connection.client.describe_regions.regions.map(&:region_name)
+      end
+    end
+
+    def connection_rescue_block
+      yield
+    rescue => err
+      miq_exception = translate_exception(err)
+      raise unless miq_exception
+
+      _log.error("Error Class=#{err.class.name}, Message=#{err.message}")
+      raise miq_exception
+    end
+
+    def translate_exception(err)
+      require 'aws-sdk'
+      case err
+      when Aws::EC2::Errors::SignatureDoesNotMatch
+        MiqException::MiqHostError.new "SignatureMismatch - check your AWS Secret Access Key and signing method"
+      when Aws::EC2::Errors::AuthFailure
+        MiqException::MiqHostError.new "Login failed due to a bad username or password."
+      when Aws::Errors::MissingCredentialsError
+        MiqException::MiqHostError.new "Missing credentials"
+      else
+        MiqException::MiqHostError.new "Unexpected response returned from system: #{err.message}"
+      end
     end
 
     #
