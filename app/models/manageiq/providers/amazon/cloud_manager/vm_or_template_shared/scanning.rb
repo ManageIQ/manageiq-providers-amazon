@@ -26,7 +26,7 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
     @s3                    = ext_management_system.connect(connect_args)
     raise "Unable to obtain a new S3 resource" unless @s3
     ssaq_args              = {}
-    ssaq_args[:ssa_bucket] = "evm-prototype"
+    ssaq_args[:ssa_bucket] = ext_management_system.guid
     ssaq_args[:region]     = ext_management_system.provider_region
     ssaq_args[:sqs]        = @sqs
     ssaq_args[:s3]         = @s3
