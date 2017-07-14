@@ -25,11 +25,11 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
     connect_args[:service] = :S3
     @s3                    = ext_management_system.connect(connect_args)
     raise "Unable to obtain a new S3 resource" unless @s3
-    ssaq_args                 = {}
-    ssaq_args[:ssa_bucket]    = "evm-prototype"
-    ssaq_args[:region]        = ext_management_system.provider_region
-    ssaq_args[:sqs]           = @sqs
-    ssaq_args[:s3]            = @s3
+    ssaq_args              = {}
+    ssaq_args[:ssa_bucket] = "evm-prototype"
+    ssaq_args[:region]     = ext_management_system.provider_region
+    ssaq_args[:sqs]        = @sqs
+    ssaq_args[:s3]         = @s3
 
     begin
       ssaq = AmazonSsaSupport::SsaQueue.new(ssaq_args)
@@ -75,13 +75,13 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
   def perform_metadata_sync(ost)
     _log.debug("Syncing Metadata for #{ems_ref}")
     update_job_message(ost, "Synchronization in progress")
-    status, scan_message              = "OK"
-    status_code, categories_processed = 0
-    ost.xml_class                     = XmlHash::Document
-    bb, last_err                      = nil
+    status        = scan_message         = "OK"
+    status_code   = categories_processed = 0
+    ost.xml_class = XmlHash::Document
+    bb            = last_err             = nil
 
     xml_summary = ost.xml_class.createDoc(:summary)
-    xml_node = xml_node_scan = xml_summary.root.add_element("scanmetadata")
+    xml_node    = xml_node_scan = xml_summary.root.add_element("scanmetadata")
     xml_summary.root.add_attributes("taskid" => ost.taskid)
 
     data_dir = File.expand_path(Rails.root.join("data/metadata"))
@@ -135,7 +135,7 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
       if last_err
         status = "Error"
         status_code = 8
-        status_code = 16 if categories_processed.zero?
+	status_code = 16 if categories_processed.zero?
         scan_message = last_err.to_s
         _log.error "ScanMetadata error status:[#{status_code}]:  message:[#{last_err}]"
         _log.debug { last_err.backtrace.join("\n") }
