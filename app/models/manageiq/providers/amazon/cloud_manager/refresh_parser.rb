@@ -177,9 +177,9 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     end
 
     name = get_from_tags(image, :name)
-    name ||= image.name
-    name ||= $1 if location =~ /^(.+?)(\.(image|img))?\.manifest\.xml$/
-    name ||= uid
+    name = image.name if name.blank?
+    name = $1         if name.blank? && location =~ /^(.+?)(\.(image|img))?\.manifest\.xml$/
+    name = uid        if name.blank?
 
     labels = parse_labels(image.tags)
 
