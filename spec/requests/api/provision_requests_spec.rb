@@ -92,7 +92,7 @@ describe "Provision Requests API" do
           "placement_availability_zone" => [az.id, az.name],
           "cloud_network"               => [cloud_network1.id, cloud_network1.name],
           "cloud_subnet"                => [cloud_subnet1.id, anything],
-          "security_groups"             => [security_group1.id, security_group1.name],
+          "security_groups"             => [security_group1.id],
           "floating_ip_address"         => [floating_ip1.id, floating_ip1.name]
         )
       )
