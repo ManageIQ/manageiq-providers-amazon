@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased Sprint 65
+
+### Added
+- Enable SSA for AWS Images [(#266)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/266)
+- Allow raw_connect to validate the connection and decrypt the password [(#264)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/264)
+- Handle SSA Response from AWS Scanning Instance [(#267)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/267)
+
+### Fixed
+- Adjust test result to match new data_type [(#272)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/272)
+- Handle empty string in image name tags [(#273)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/273)
+
 ## Unreleased Sprint 63
 
 ### Added
