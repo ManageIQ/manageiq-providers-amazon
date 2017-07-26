@@ -219,7 +219,7 @@ module ManageIQ::Providers::Amazon::CloudManager::SsaAgentManager
     end
   end
 
-  def sg_authorize_ingress(sg, protocal, from_port, to_port)
+  def sg_authorize_ingress(sg, protocol, from_port, to_port)
       sg.authorize_ingress({
         ip_permissions: [{
           ip_protocol: protocol,
