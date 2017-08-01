@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Fine-3
+
+### Fixed
+- Support deletion of S3 folders [(#226)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/226)
+- Prevent volume update with no modifications [(#249)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/249)
+
 ## Fine-1
 
 ### Added
