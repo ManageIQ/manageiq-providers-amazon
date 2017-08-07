@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased Sprint 66
+
+### Added
+- Enable to save key_pair in Authentication [(#268)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/268)
+
 ## Unreleased Sprint 65
 
 ### Added
