@@ -249,7 +249,7 @@ module ManageIQ::Providers::Amazon::CloudManager::SsaAgentManager
   end
 
   def setup_ruby(log = '/var/log/miq_ssa_deploy.log')
-    <<~HEREDOC
+    <<~SETUP
       yum -y update > #{log} 2>&1
       yum -y install git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel postgresql-devel >> #{log} 2>&1
       git clone https://github.com/rbenv/rbenv.git ~/.rbenv >> #{log} 2>&1
@@ -269,11 +269,11 @@ module ManageIQ::Providers::Amazon::CloudManager::SsaAgentManager
       gem install aws-sdk >> #{log} 2>&1
       rbenv rehash >> #{log} 2>&1
       ruby -v >> #{log} 2>&1
-    HEREDOC
+    SETUP
   end
 
   def default_settings
-    <<~HEREDOC
+    <<~SETTINGS
       echo "---" > default_ssa_config.yml
       echo ":log_level: #{log_level}" >> default_ssa_config.yml
       echo ":region: #{region}" >> default_ssa_config.yml
@@ -284,11 +284,11 @@ module ManageIQ::Providers::Amazon::CloudManager::SsaAgentManager
       echo ":log_prefix: #{log_prefix}" >> default_ssa_config.yml
       echo ":heartbeat_prefix: #{heartbeat_prefix}" >> default_ssa_config.yml
       echo ":heartbeat_interval: #{heartbeat_interval}" >> default_ssa_config.yml
-    HEREDOC
+    SETTINGS
   end
 
   def github_gem_file
-    <<~HEREDOC
+    <<~GEMFILE
       echo 'source "https://rubygems.org"' > Gemfile
       echo 'gem "manageiq-gems-pending", ">0", :require => "manageiq-gems-pending", :git => "https://github.com/ManageIQ/manageiq-gems-pending.git", :branch => "master"' >> Gemfile
       echo 'gem "manageiq-smartstate", ">0", :require => "manageiq-smartstate", :git => "https://github.com/ManageIQ/manageiq-smartstate.git", :branch => "master"' >> Gemfile
@@ -296,11 +296,11 @@ module ManageIQ::Providers::Amazon::CloudManager::SsaAgentManager
       # Modified gems for gems-pending.  Setting sources here since they are git references
       echo 'gem "handsoap", "~>0.2.5", :require => false, :git => "https://github.com/ManageIQ/handsoap.git", :tag => "v0.2.5-5"' >> Gemfile
       echo 'gem "aws-sdk"' >> Gemfile
-    HEREDOC
+    GEMFILE
   end
 
   def agent_startup_script(log = '/var/log/miq_ssa_deploy.log')
-    <<~HEREDOC
+    <<~STARTUP
       echo "#!/bin/sh" > start_agent.sh
       echo "ssa_root=`bundle show amazon_ssa_support`" >> start_agent.sh
       echo 'ssa_script="$ssa_root/tools/amazon_ssa_extract.rb"' >> start_agent.sh
@@ -308,11 +308,11 @@ module ManageIQ::Providers::Amazon::CloudManager::SsaAgentManager
       chmod 755 start_agent.sh
       echo "Agent starts ..." >> #{log} 2>&1
       ./start_agent.sh
-    HEREDOC
+    STARTUP
   end
 
   def create_user_data(log = '/var/log/miq_ssa_deploy.log')
-    userdata = <<~HEREDOC
+    userdata = <<~DATA
       #!/bin/bash
       #{setup_ruby}
       mkdir -p /opt/miq/log
@@ -321,7 +321,7 @@ module ManageIQ::Providers::Amazon::CloudManager::SsaAgentManager
       bundle install >> #{log} 2>&1
       #{default_settings} 
       #{agent_startup_script}
-    HEREDOC
+    DATA
     Base64.encode64(userdata)
   end
 
