@@ -6,8 +6,11 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshWorker < ManageIQ::Provi
   # This way, the refresher for Amazon's CloudManager will refresh *all*
   # of the Amazon inventory across all managers.
   def self.queue_name_for_ems(ems)
-    return ems unless ems.kind_of?(ExtManagementSystem)
-    ["ems_#{ems.id}"] + ems.child_managers.collect { |manager| "ems_#{manager.id}" }
+    if ems.kind_of?(ExtManagementSystem)
+      ["ems_#{ems.id}"] + ems.child_managers.collect { |manager| "ems_#{manager.id}" }
+    else
+      super
+    end
   end
 
   # MiQ complains if this isn't defined
