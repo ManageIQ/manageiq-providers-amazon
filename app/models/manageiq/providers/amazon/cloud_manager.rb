@@ -73,13 +73,10 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   supports :regions
   supports :discovery
 
-  # overriding queue_name so PerEmsWorkerMixin picks up *all* of the
-  # Amazon-manager types from here.
-  # This way, the refresher for Amazon's CloudManager will refresh *all*
-  # of the Amazon inventory across all managers.
-  def queue_name
-    ["ems_#{id}"] + child_managers.collect { |manager| "ems_#{manager.id}" }
-  end
+
+  # def queue_name
+  #   ["ems_#{id}"] + child_managers.collect { |manager| "ems_#{manager.id}" }
+  # end
 
   def ensure_managers
     build_network_manager unless network_manager
