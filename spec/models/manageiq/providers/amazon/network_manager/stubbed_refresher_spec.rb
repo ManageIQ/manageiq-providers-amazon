@@ -1,7 +1,9 @@
 require_relative '../aws_helper'
 require_relative '../aws_stubs'
+require_relative '../aws_refresher_spec_common'
 
 describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
+  include AwsRefresherSpecCommon
   include AwsStubs
 
   describe "refresh" do
@@ -13,12 +15,11 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     end
 
     # Test all kinds of refreshes, DTO refresh, DTO with batch saving and the original refresh
-    [{:inventory_object_refresh => true},
-     {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},
-     {:inventory_object_refresh => false}].each do |settings|
+    (AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS + AwsRefresherSpecCommon::ALL_OLD_REFRESH_SETTINGS
+    ).each do |settings|
       context "with settings #{settings}" do
         before :each do
-          allow(Settings.ems_refresh).to receive(:ec2_network).and_return(settings)
+          stub_refresh_settings(settings)
         end
 
         it "2 refreshes, first creates all entities, second updates all entitites" do
