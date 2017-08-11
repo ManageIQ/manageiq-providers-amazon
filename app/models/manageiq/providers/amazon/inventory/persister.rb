@@ -40,17 +40,12 @@ class ManageIQ::Providers::Amazon::Inventory::Persister < ManagerRefresh::Invent
     nil
   end
 
-  def check_changed
-    true
-  end
-
   def shared_options
     settings_options = options[:inventory_collections].try(:to_hash) || {}
 
     settings_options.merge(
-      :strategy      => strategy,
-      :targeted      => targeted,
-      :check_changed => check_changed
+      :strategy => strategy,
+      :targeted => targeted,
     )
   end
 end
