@@ -17,9 +17,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     add_inventory_collections(
       cloud,
       %i(hardwares networks disks vm_and_template_labels orchestration_stacks_resources orchestration_stacks_outputs
-         orchestration_stacks_parameters),
-      :strategy => strategy,
-      :targeted => true
+         orchestration_stacks_parameters)
     )
 
     add_inventory_collection(cloud.orchestration_templates)
@@ -52,8 +50,6 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
       %i(firewall_rules cloud_subnet_network_ports load_balancer_pools load_balancer_pool_members
          load_balancer_pool_member_pools load_balancer_listeners load_balancer_listener_pools
          load_balancer_health_checks load_balancer_health_check_members),
-      :strategy => strategy,
-      :targeted => true,
       :parent   => manager.network_manager
     )
 
@@ -109,14 +105,16 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
   end
 
   def add_inventory_collection_with_references(inventory_collections_data, name, manager_refs, options = {})
-    options = inventory_collections_data.send(
+    options = shared_options.merge(inventory_collections_data.send(
       name,
       :manager_uuids => manager_refs,
-      :strategy      => strategy,
-      :targeted      => true
-    ).merge(options)
+    ).merge(options))
 
     add_inventory_collection(options)
+  end
+
+  def targeted
+    true
   end
 
   def strategy
