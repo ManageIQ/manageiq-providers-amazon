@@ -13,21 +13,10 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(described_class.ems_type).to eq(:ec2)
   end
 
-  # Test all kinds of DTO refreshes, DTO refresh, DTO with recursive saving strategy
-  [{:inventory_object_refresh => true},
-   {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},].each do |inventory_object_settings|
-    context "with settings #{inventory_object_settings}" do
+  AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS.each do |settings|
+    context "with settings #{settings}" do
       before(:each) do
-        settings                                  = OpenStruct.new
-        settings.inventory_object_saving_strategy = inventory_object_settings[:inventory_object_saving_strategy]
-        settings.inventory_object_refresh         = inventory_object_settings[:inventory_object_refresh]
-        settings.get_private_images               = true
-        settings.get_shared_images                = true
-        settings.get_public_images                = false
-        settings.ignore_terminated_instances      = true
-
-        allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
-        allow(Settings.ems_refresh).to receive(:ec2_network).and_return(inventory_object_settings)
+        stub_refresh_settings(settings)
       end
 
       it "will perform a full refresh" do

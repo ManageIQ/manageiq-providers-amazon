@@ -9,40 +9,37 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication, :provider_region => "us-west-1")
   end
 
-  before(:each) do
-    settings                          = OpenStruct.new
-    settings.inventory_object_refresh = false
-    settings.get_private_images       = true
-    settings.get_shared_images        = true
-    settings.get_public_images        = false
-
-    allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
-    allow(Settings.ems_refresh).to receive(:ec2_network).and_return(:inventory_object_refresh => false)
-  end
-
-  it "will perform a full refresh on another region" do
-    2.times do # Run twice to verify that a second run with existing data does not change anything
-      @ems.reload
-
-      VCR.use_cassette("#{described_class.name.underscore}_other_region") do
-        EmsRefresh.refresh(@ems)
-        EmsRefresh.refresh(@ems.network_manager)
-        EmsRefresh.refresh(@ems.ebs_storage_manager)
-
-        @ems.reload
-        assert_counts(table_counts_from_api)
+  AwsRefresherSpecCommon::ALL_OLD_REFRESH_SETTINGS.each do |settings|
+    context "with settings #{settings}" do
+      before(:each) do
+        stub_refresh_settings(settings)
       end
 
-      assert_specific_flavor
-      assert_specific_az
-      assert_specific_floating_ip
-      assert_specific_key_pair
-      assert_specific_security_group
-      assert_specific_template
-      assert_specific_vm_powered_on
-      assert_specific_vm_in_other_region
-      assert_relationship_tree
-      assert_subnet_required
+      it "will perform a full refresh on another region" do
+        2.times do # Run twice to verify that a second run with existing data does not change anything
+          @ems.reload
+
+          VCR.use_cassette("#{described_class.name.underscore}_other_region") do
+            EmsRefresh.refresh(@ems)
+            EmsRefresh.refresh(@ems.network_manager)
+            EmsRefresh.refresh(@ems.ebs_storage_manager)
+
+            @ems.reload
+            assert_counts(table_counts_from_api)
+          end
+
+          assert_specific_flavor
+          assert_specific_az
+          assert_specific_floating_ip
+          assert_specific_key_pair
+          assert_specific_security_group
+          assert_specific_template
+          assert_specific_vm_powered_on
+          assert_specific_vm_in_other_region
+          assert_relationship_tree
+          assert_subnet_required
+        end
+      end
     end
   end
 
