@@ -8,6 +8,47 @@ module AwsRefresherSpecCommon
     end
   end
 
+  ALL_GRAPH_REFRESH_SETTINGS = [
+    {
+      :inventory_object_refresh => true,
+      :inventory_collections    => {
+        :saver_strategy => :default,
+      },
+    }, {
+      :inventory_object_refresh => true,
+      :inventory_collections    => {
+        :saver_strategy => :batch,
+        :use_ar_object  => true,
+      },
+    }, {
+      :inventory_object_refresh => true,
+      :inventory_collections    => {
+        :saver_strategy => :batch,
+        :use_ar_object  => false,
+      },
+    }, {
+      :inventory_object_saving_strategy => :recursive,
+      :inventory_object_refresh         => true
+    }
+  ].freeze
+
+  ALL_OLD_REFRESH_SETTINGS = [
+    {
+      :inventory_object_refresh => false
+    }
+  ].freeze
+
+  def stub_refresh_settings(settings)
+    stub_settings_merge(
+      :ems_refresh => {
+        :ec2             => settings,
+        :ec2_network     => settings,
+        :ec2_ebs_storage => settings,
+        :s3              => settings
+      }
+    )
+  end
+
   def assert_common
     expect(@ems.direct_orchestration_stacks.size).to eql(3)
     assert_specific_flavor

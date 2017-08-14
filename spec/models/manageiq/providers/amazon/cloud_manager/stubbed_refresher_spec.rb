@@ -1,7 +1,9 @@
 require_relative '../aws_helper'
 require_relative '../aws_stubs'
+require_relative '../aws_refresher_spec_common'
 
 describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
+  include AwsRefresherSpecCommon
   include AwsStubs
 
   describe "refresh" do
@@ -12,21 +14,18 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       EvmSpecHelper.local_miq_server(:zone => Zone.seed)
     end
 
-    # Test all kinds of refreshes, DTO refresh, DTO with batch saving and the original refresh
-    [{:inventory_object_refresh => true},
-     {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},
-     {:inventory_object_refresh => false}].each do |inventory_object_settings|
-      context "with settings #{inventory_object_settings}" do
+    (AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS + AwsRefresherSpecCommon::ALL_OLD_REFRESH_SETTINGS
+    ).each do |settings|
+      context "with settings #{settings}" do
         before :each do
-          settings                                  = OpenStruct.new
-          settings.inventory_object_refresh         = inventory_object_settings[:inventory_object_refresh]
-          settings.inventory_object_saving_strategy = inventory_object_settings[:inventory_object_saving_strategy]
-          settings.get_private_images               = true
-          settings.get_shared_images                = false
-          settings.get_public_images                = false
-
-          allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
-          @inventory_object_settings = inventory_object_settings
+          stub_refresh_settings(
+            settings.merge(
+              :get_private_images => true,
+              :get_shared_images  => false,
+              :get_public_images  => false
+            )
+          )
+          @inventory_object_settings = settings
         end
 
         it "2 refreshes, first creates all entities, second updates all entitites" do

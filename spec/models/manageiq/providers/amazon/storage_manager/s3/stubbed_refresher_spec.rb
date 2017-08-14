@@ -1,10 +1,14 @@
 require_relative '../../aws_helper'
 require_relative '../../aws_stubs'
+require_relative '../../aws_refresher_spec_common'
 
 describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
+  include AwsRefresherSpecCommon
   include AwsStubs
 
   before do
+    stub_settings_merge(:prototype => {:amazon => {:s3 => true }})
+
     skip("AWS S3 is disabled") unless ::Settings.prototype.amazon.s3
     EvmSpecHelper.local_miq_server(:zone => Zone.seed)
   end
@@ -17,13 +21,11 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
   end
 
   describe "refresh" do
-    # Test all kinds of refreshes
-    [{:inventory_object_refresh => true},
-     {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},
-     {:inventory_object_refresh => false}].each do |settings|
+    (AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS + AwsRefresherSpecCommon::ALL_OLD_REFRESH_SETTINGS
+    ).each do |settings|
       context "with settings #{settings}" do
         before :each do
-          allow(Settings.ems_refresh).to receive(:s3).and_return(settings)
+          stub_refresh_settings(settings)
         end
 
         it "2 refreshes, first creates all entities, second updates all entitites" do

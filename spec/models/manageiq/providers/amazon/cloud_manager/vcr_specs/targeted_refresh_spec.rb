@@ -9,21 +9,10 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication)
   end
 
-  # Test all kinds of graph refreshes, graph refresh, graph with recursive saving strategy
-  [{:inventory_object_refresh => true},
-   {:inventory_object_saving_strategy => :recursive, :inventory_object_refresh => true},].each do |inventory_object_settings|
-    context "with settings #{inventory_object_settings}" do
+  AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS.each do |settings|
+    context "with settings #{settings}" do
       before(:each) do
-        settings                                  = OpenStruct.new
-        settings.inventory_object_saving_strategy = inventory_object_settings[:inventory_object_saving_strategy]
-        settings.inventory_object_refresh         = inventory_object_settings[:inventory_object_refresh]
-        settings.allow_targeted_refresh           = true
-        settings.get_private_images               = true
-        settings.get_shared_images                = true
-        settings.get_public_images                = false
-
-        allow(Settings.ems_refresh).to receive(:ec2).and_return(settings)
-
+        stub_refresh_settings(settings.merge(:allow_targeted_refresh => true))
         # The flavors are not fetched from the API, they can go in only by appliance update, so must be in place after
         # the full refresh, lets pre-create them in the DB.
         create_flavors
