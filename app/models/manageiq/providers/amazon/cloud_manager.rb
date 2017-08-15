@@ -8,6 +8,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   require_nested :MetricsCollectorWorker
   require_nested :OrchestrationServiceOptionConverter
   require_nested :OrchestrationStack
+  require_nested :OrchestrationTemplate
   require_nested :Provision
   require_nested :ProvisionWorkflow
   require_nested :RefreshParser
@@ -16,7 +17,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   require_nested :Template
   require_nested :Vm
 
-  OrchestrationTemplateCfn.register_eligible_manager(self)
+  OrchestrationTemplate.register_eligible_manager(self)
 
   include ManageIQ::Providers::Amazon::ManagerMixin
 
