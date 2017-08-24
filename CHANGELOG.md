@@ -35,7 +35,6 @@ All notable changes to this project will be documented in this file.
 ## Unreleased Sprint 61
 
 ### Fixed
-- Prevent volume update with no modifications [(#249)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/249)
 - Parse timestamp for aws alarm events [(#246)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/246)
 
 ## Unreleased Sprint 60
@@ -46,15 +45,18 @@ All notable changes to this project will be documented in this file.
 - Rewrite network ports and floating ips parser to a new format [(#233)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/233)
 - Rewrite load balancers parser to a new format [(#231)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/231)
 
-### Fixed
-- Support deletion of S3 folders [(#226)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/226)
-
 ## Unreleased Sprint 59
 
 ### Added
 - Rewrite network and subnet parser to a new format [(#229)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/229)
 - Rewrite EBS parser to a new format [(#228)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/228)
 - Rewrite S3 parser to a new format [(#227)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/227)
+
+## Fine-3
+
+### Fixed
+- Support deletion of S3 folders [(#226)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/226)
+- Prevent volume update with no modifications [(#249)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/249)
 
 ## Fine-1
 
