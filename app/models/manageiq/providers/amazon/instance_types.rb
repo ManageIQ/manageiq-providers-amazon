@@ -14,7 +14,7 @@ module ManageIQ::Providers::Amazon::InstanceTypes
       :ebs_only                => true,
       :instance_store_size     => 0,
       :instance_store_volumes  => 0,
-      :architecture            => [:x86_64],
+      :architecture            => [:i386, :x86_64],
       :virtualization_type     => [:hvm],
       :network_performance     => :low,
       :physical_processor      => "Intel Xeon family",
@@ -87,7 +87,7 @@ module ManageIQ::Providers::Amazon::InstanceTypes
       :ebs_only                => true,
       :instance_store_size     => 0,
       :instance_store_volumes  => 0,
-      :architecture            => [:x86_64],
+      :architecture            => [:i386, :x86_64],
       :virtualization_type     => [:hvm],
       :network_performance     => :low_to_moderate,
       :physical_processor      => "Intel Xeon family",
@@ -351,7 +351,7 @@ module ManageIQ::Providers::Amazon::InstanceTypes
       :ebs_only                => false,
       :instance_store_size     => 32.0.gigabytes,
       :instance_store_volumes  => 2, # SSD
-      :architecture            => [:x86_64],
+      :architecture            => [:i386, :x86_64],
       :virtualization_type     => [:hvm, :paravirtual],
       :network_performance     => :moderate,
       :physical_processor      => "Intel Xeon E5-2680 v2",
@@ -580,54 +580,6 @@ module ManageIQ::Providers::Amazon::InstanceTypes
       :enhanced_networking     => true,
       :cluster_networking      => true,
       :vpc_only                => true,
-    },
-
-    "g2.2xlarge"  => {
-      :name                    => "g2.2xlarge",
-      :family                  => "Accelerated computing",
-      :description             => "G2 Double Extra Large",
-      :memory                  => 15.0.gigabytes,
-      :vcpu                    => 8,
-      :ebs_only                => false,
-      :instance_store_size     => 60.0.gigabytes,
-      :instance_store_volumes  => 1, # SSD
-      :architecture            => [:x86_64],
-      :virtualization_type     => [:hvm],
-      :network_performance     => :high,
-      :physical_processor      => "Intel Xeon E5-2670",
-      :processor_clock_speed   => 2.6,
-      :intel_aes_ni            => true,
-      :intel_avx               => true,
-      :intel_avx2              => nil,
-      :intel_turbo             => true,
-      :ebs_optimized_available => true,
-      :enhanced_networking     => nil,
-      :cluster_networking      => true,
-      :vpc_only                => false,
-    },
-
-    "g2.8xlarge"  => {
-      :name                    => "g2.8xlarge",
-      :family                  => "Accelerated computing",
-      :description             => "G2 Eight Extra Large",
-      :memory                  => 60.0.gigabytes,
-      :vcpu                    => 32,
-      :ebs_only                => false,
-      :instance_store_size     => 240.0.gigabytes,
-      :instance_store_volumes  => 2, # SSD
-      :architecture            => [:x86_64],
-      :virtualization_type     => [:hvm],
-      :network_performance     => :very_high,
-      :physical_processor      => "Intel Xeon E5-2670",
-      :processor_clock_speed   => 2.6,
-      :intel_aes_ni            => true,
-      :intel_avx               => true,
-      :intel_avx2              => nil,
-      :intel_turbo             => true,
-      :ebs_optimized_available => nil,
-      :enhanced_networking     => nil,
-      :cluster_networking      => true,
-      :vpc_only                => false,
     },
 
     "r3.large"    => {
@@ -1328,16 +1280,16 @@ module ManageIQ::Providers::Amazon::InstanceTypes
 
     "f1.2xlarge"  => {
       :name                    => "f1.2xlarge",
-      :family                  => "Unknown",
+      :family                  => "Accelerated computing",
       :description             => "F1 Double Extra Large",
       :memory                  => 122.0.gigabytes,
       :vcpu                    => 8,
       :ebs_only                => false,
-      :instance_store_size     => 480.0.gigabytes,
+      :instance_store_size     => 470.0.gigabytes,
       :instance_store_volumes  => 1, # SSD
       :architecture            => [:x86_64],
-      :virtualization_type     => [],
-      :network_performance     => :high,
+      :virtualization_type     => [:hvm],
+      :network_performance     => :up_to_10_gigabit,
       :physical_processor      => "Intel Xeon E5-2686 v4",
       :processor_clock_speed   => 2.3,
       :intel_aes_ni            => true,
@@ -1352,16 +1304,16 @@ module ManageIQ::Providers::Amazon::InstanceTypes
 
     "f1.16xlarge" => {
       :name                    => "f1.16xlarge",
-      :family                  => "Unknown",
+      :family                  => "Accelerated computing",
       :description             => "F1 16xlarge",
       :memory                  => 976.0.gigabytes,
       :vcpu                    => 64,
       :ebs_only                => false,
-      :instance_store_size     => 3840.0.gigabytes,
-      :instance_store_volumes  => 4,
+      :instance_store_size     => 3760.0.gigabytes,
+      :instance_store_volumes  => 4, # SSD
       :architecture            => [:x86_64],
-      :virtualization_type     => [],
-      :network_performance     => :high,
+      :virtualization_type     => [:hvm],
+      :network_performance     => :very_high,
       :physical_processor      => "Intel Xeon E5-2686 v4",
       :processor_clock_speed   => 2.3,
       :intel_aes_ni            => true,
@@ -1373,7 +1325,79 @@ module ManageIQ::Providers::Amazon::InstanceTypes
       :cluster_networking      => nil,
       :vpc_only                => false,
     },
-  }
+
+    "g3.4xlarge"  => {
+      :name                    => "g3.4xlarge",
+      :family                  => "Accelerated computing",
+      :description             => "G3 Quadruple Extra Large",
+      :memory                  => 122.0.gigabytes,
+      :vcpu                    => 16,
+      :ebs_only                => true,
+      :instance_store_size     => 0,
+      :instance_store_volumes  => 0,
+      :architecture            => [:x86_64],
+      :virtualization_type     => [:hvm],
+      :network_performance     => :up_to_10_gigabit,
+      :physical_processor      => "Intel Xeon E5-2686 v4",
+      :processor_clock_speed   => 2.3,
+      :intel_aes_ni            => true,
+      :intel_avx               => true,
+      :intel_avx2              => true,
+      :intel_turbo             => true,
+      :ebs_optimized_available => true,
+      :enhanced_networking     => true,
+      :cluster_networking      => nil,
+      :vpc_only                => false,
+    },
+
+    "g3.8xlarge"  => {
+      :name                    => "g3.8xlarge",
+      :family                  => "Accelerated computing",
+      :description             => "G3 Eight Extra Large",
+      :memory                  => 244.0.gigabytes,
+      :vcpu                    => 32,
+      :ebs_only                => true,
+      :instance_store_size     => 0,
+      :instance_store_volumes  => 0,
+      :architecture            => [:x86_64],
+      :virtualization_type     => [:hvm],
+      :network_performance     => :very_high,
+      :physical_processor      => "Intel Xeon E5-2686 v4",
+      :processor_clock_speed   => 2.3,
+      :intel_aes_ni            => true,
+      :intel_avx               => true,
+      :intel_avx2              => true,
+      :intel_turbo             => true,
+      :ebs_optimized_available => true,
+      :enhanced_networking     => true,
+      :cluster_networking      => nil,
+      :vpc_only                => false,
+    },
+
+    "g3.16xlarge" => {
+      :name                    => "g3.16xlarge",
+      :family                  => "Accelerated computing",
+      :description             => "G3 16xlarge",
+      :memory                  => 488.0.gigabytes,
+      :vcpu                    => 64,
+      :ebs_only                => true,
+      :instance_store_size     => 0,
+      :instance_store_volumes  => 0,
+      :architecture            => [:x86_64],
+      :virtualization_type     => [:hvm],
+      :network_performance     => :very_high,
+      :physical_processor      => "Intel Xeon E5-2686 v4",
+      :processor_clock_speed   => 2.3,
+      :intel_aes_ni            => true,
+      :intel_avx               => true,
+      :intel_avx2              => true,
+      :intel_turbo             => true,
+      :ebs_optimized_available => true,
+      :enhanced_networking     => true,
+      :cluster_networking      => nil,
+      :vpc_only                => false,
+    },
+  }.freeze
 
   # Types that are still advertised, but not recommended for new instances.
   DEPRECATED_TYPES = {
@@ -1832,7 +1856,55 @@ module ManageIQ::Providers::Amazon::InstanceTypes
       :cluster_networking      => true,
       :vpc_only                => false,
     },
-  }
+
+    "g2.2xlarge"  => {
+      :name                    => "g2.2xlarge",
+      :family                  => "Accelerated computing",
+      :description             => "G2 Double Extra Large",
+      :memory                  => 15.0.gigabytes,
+      :vcpu                    => 8,
+      :ebs_only                => false,
+      :instance_store_size     => 60.0.gigabytes,
+      :instance_store_volumes  => 1,
+      :architecture            => [:x86_64],
+      :virtualization_type     => [:hvm],
+      :network_performance     => :high,
+      :physical_processor      => "Intel Xeon E5-2670",
+      :processor_clock_speed   => 2.6,
+      :intel_aes_ni            => true,
+      :intel_avx               => true,
+      :intel_avx2              => nil,
+      :intel_turbo             => true,
+      :ebs_optimized_available => true,
+      :enhanced_networking     => nil,
+      :cluster_networking      => true,
+      :vpc_only                => false,
+    },
+
+    "g2.8xlarge"  => {
+      :name                    => "g2.8xlarge",
+      :family                  => "Accelerated computing",
+      :description             => "G2 Eight Extra Large",
+      :memory                  => 60.0.gigabytes,
+      :vcpu                    => 32,
+      :ebs_only                => false,
+      :instance_store_size     => 240.0.gigabytes,
+      :instance_store_volumes  => 2,
+      :architecture            => [:x86_64],
+      :virtualization_type     => [:hvm],
+      :network_performance     => :very_high,
+      :physical_processor      => "Intel Xeon E5-2670",
+      :processor_clock_speed   => 2.6,
+      :intel_aes_ni            => true,
+      :intel_avx               => true,
+      :intel_avx2              => nil,
+      :intel_turbo             => true,
+      :ebs_optimized_available => nil,
+      :enhanced_networking     => nil,
+      :cluster_networking      => true,
+      :vpc_only                => false,
+    },
+  }.freeze
 
   # Types that are no longer advertised
   DISCONTINUED_TYPES = {
@@ -1885,13 +1957,19 @@ module ManageIQ::Providers::Amazon::InstanceTypes
       :cluster_networking      => nil,
       :vpc_only                => false,
     },
-  }
+  }.freeze
+
+  def self.instance_types
+    additional = Hash(Settings.ems.ems_amazon.try!(:additional_instance_types)).stringify_keys
+    disabled = Array(Settings.ems.ems_amazon.try!(:disabled_instance_types))
+    AVAILABLE_TYPES.merge(DEPRECATED_TYPES).merge(DISCONTINUED_TYPES).merge(additional).except(*disabled)
+  end
 
   def self.all
-    AVAILABLE_TYPES.values + DEPRECATED_TYPES.values + DISCONTINUED_TYPES.values
+    instance_types.values
   end
 
   def self.names
-    AVAILABLE_TYPES.keys + DEPRECATED_TYPES.keys + DISCONTINUED_TYPES.keys
+    instance_types.keys
   end
 end

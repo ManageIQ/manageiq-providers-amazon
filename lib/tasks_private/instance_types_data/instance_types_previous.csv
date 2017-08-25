@@ -6,6 +6,8 @@ General purpose,m1.xlarge,64-bit,4,15,4 x 420,Yes,High
 Compute optimized,c1.medium,32-bit or 64-bit,2,1.7,1 x 350,-,Moderate
 Compute optimized,c1.xlarge,64-bit,8,7,4 x 420,Yes,High
 Compute optimized,cc2.8xlarge,64-bit,32,60.5,4 x 840,-,10 Gigabit
+GPU Optimized,g2.2xlarge,64-bit,8,15,1 x 60,,
+GPU Optimized,g2.8xlarge,64-bit,32,60,2 x 120,,
 GPU instances,cg1.4xlarge,64-bit,16,22.5,2 x 840,-,10 Gigabit
 Memory optimized,m2.xlarge,64-bit,2,17.1,1 x 420,-,Moderate
 Memory optimized,m2.2xlarge,64-bit,4,34.2,1 x 850,Yes,Moderate
