@@ -126,6 +126,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def stack_outputs(persister_orchestration_stack, stack)
+    return unless stack['outputs']
+
     stack['outputs'].each do |output|
       uid = compose_ems_ref(stack['stack_id'].to_s, output['output_key'])
 
@@ -139,6 +141,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def stack_parameters(persister_orchestration_stack, stack)
+    return unless stack['outputs']
+
     stack['parameters'].each do |parameter|
       uid = compose_ems_ref(stack['stack_id'].to_s, parameter['parameter_key'])
 
