@@ -49,14 +49,14 @@
         :values:
           - machine
     :ignore_terminated_instances: true
-    :inventory_object_refresh: false
-    :allow_targeted_refresh: false
+    :inventory_object_refresh: true
+    :allow_targeted_refresh: true
   :ec2_network:
-    :inventory_object_refresh: false
+    :inventory_object_refresh: true
   :s3:
     :inventory_object_refresh: true
   :ec2_ebs_storage:
-    :inventory_object_refresh: false
+    :inventory_object_refresh: true
 :http_proxy:
   :ec2:
     :host:
