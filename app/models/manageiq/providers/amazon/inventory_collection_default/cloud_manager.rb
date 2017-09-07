@@ -232,7 +232,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
 
     def orchestration_templates(extra_attributes = {})
       attributes = {
-        :model_class                 => ::OrchestrationTemplateCfn,
+        :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate,
         :inventory_object_attributes => [
           :type,
           :ems_ref,

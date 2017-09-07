@@ -150,7 +150,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     _log.error "vm=[#{vm.name}], error: #{err}"
   end
 
-  # @param [OrchestrationTemplateCfn] template
+  # @param [ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate] template
   # @return [nil] if the template is valid
   # @return [String] if the template is invalid this is the error message
   def orchestration_template_validate(template)
