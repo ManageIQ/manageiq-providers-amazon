@@ -1,4 +1,6 @@
 describe ManageIQ::Providers::Amazon::CloudManager::EventParser do
+  include EventsCommon
+
   context ".event_to_hash" do
     it "parses vm_ems_ref into event" do
       message               = JSON.parse(File.read(File.join(File.dirname(__FILE__), "/event_catcher/sqs_message.json")))
@@ -79,34 +81,5 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventParser do
         )
       )
     end
-  end
-
-  context "AWS CloudWatch Alarm" do
-    it "parses AWS_ALARM_awselb-EmSRefreshSpecVPCELB-Unhealthy-Hosts alarm event" do
-      event = parse_event("cloud_watch/AWS_ALARM_awselb-EmSRefreshSpecVPCELB-Unhealthy-Hosts.json")
-
-      expect(described_class.event_to_hash(event, nil)).to(
-        include(
-          :vm_ems_ref => nil,
-          :message    => "awselb-EmSRefreshSpecVPCELB-Unhealthy-Hosts",
-          :timestamp  => "2017-02-22T09:18:26.916+0000"
-        )
-      )
-    end
-  end
-
-  def response(path)
-    response = double
-    allow(response).to receive(:body).and_return(
-      File.read(File.join(File.dirname(__FILE__), "/event_catcher/#{path}"))
-    )
-
-    allow(response).to receive(:message_id).and_return("mocked_message_id")
-
-    response
-  end
-
-  def parse_event(path)
-    ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream.new(double).send(:parse_event, response(path))
   end
 end
