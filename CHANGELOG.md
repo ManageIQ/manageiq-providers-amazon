@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased as of Sprint 68 ending 2017-09-04
+
+### Added
+- Overriding queue name to generate an array of queue names [(#280)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/280)
+
+### Fixed
+- Add nil checks for stack [(#291)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/291)
+
 ## Unreleased Sprint 66
 
 ### Added
