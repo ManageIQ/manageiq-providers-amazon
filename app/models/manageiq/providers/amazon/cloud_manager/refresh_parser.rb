@@ -355,7 +355,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     # Only need a temporary unique identifier for the template. Using the stack id is the cheapest way.
     uid = stack.stack_id
     new_result = {
-      :type        => "OrchestrationTemplateCfn",
+      :type        => "ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate",
       :name        => stack.name,
       :description => stack.description,
       :content     => stack.client.get_template(:stack_name => stack.name).template_body,

@@ -1189,7 +1189,7 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_orchestration_template
-    @orch_template = OrchestrationTemplateCfn.where(:md5 => "d986d851f5413fddcf1366914fbb2d28").first
+    @orch_template = ::ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate.where(:md5 => "d986d851f5413fddcf1366914fbb2d28").first
     expect(@orch_template.description).to start_with("AWS CloudFormation Sample Template VPC_Single_Instance_In_Subnet")
     expect(@orch_template.content).to start_with("{\n  \"AWSTemplateFormatVersion\" : \"2010-09-09\",")
     expect(@orch_template).to have_attributes(:draft => false, :orderable => false)
