@@ -9,8 +9,7 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate < Orchest
   end
 
   def parameters
-    raw_parameters = JSON.parse(content)["Parameters"]
-    (raw_parameters || {}).collect do |key, val|
+    (parse["Parameters"] || {}).collect do |key, val|
       OrchestrationTemplate::OrchestrationParameter.new(
         :name          => key,
         :label         => key.titleize,
@@ -29,12 +28,12 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate < Orchest
     end
   end
 
-  def deployment_options(manager_class = nil)
+  def deployment_options(_manager_class = nil)
     super + aws_deployment_options
   end
 
   def resources
-    @resources ||= (JSON.parse(content)["Resources"] || {}).collect do |key, val|
+    @resources ||= (parse["Resources"] || {}).collect do |key, val|
       OrchestrationTemplate::OrchestrationResource.new(
         :name => key,
         :type => val['Type']
@@ -50,17 +49,40 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate < Orchest
     @eligible_manager_types ||= []
   end
 
-  # return the parsing error message if not valid JSON; otherwise nil
+  # return the parsing error message if not valid JSON or YAML; otherwise nil
   def validate_format
+    return unless content
+    return validate_format_json if format == :json
+    validate_format_yaml
+  end
+
+  # quickly guess the format without full validation
+  # returns either :json or :yaml
+  def format
+    content.strip.start_with?('{') ? :json : :yaml
+  end
+
+  private
+
+  def parse
+    return JSON.parse(content) if format == :json
+    YAML.safe_load(content, [Date])
+  end
+
+  def validate_format_yaml
+    YAML.parse(content) && nil if content
+  rescue Psych::SyntaxError => err
+    err.message
+  end
+
+  def validate_format_json
     JSON.parse(content) && nil if content
   rescue JSON::ParserError => err
     err.message
   end
 
-  private
-
   def aws_deployment_options
-    [onfailure_opt(true),
+    [onfailure_opt,
      timeout_opt,
      notifications_opt,
      capabilities_opt,
@@ -70,16 +92,17 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate < Orchest
      policy_opt]
   end
 
-  def onfailure_opt(can_delete)
-    choices = {'ROLLBACK' => 'Rollback', 'DO_NOTHING' => 'Do nothing'}
-    choices['DELETE'] = 'Delete stack' if can_delete
+  def onfailure_opt
+    choices = {'ROLLBACK' => 'Rollback', 'DO_NOTHING' => 'Do nothing', 'DELETE' => 'Delete stack'}
 
     OrchestrationTemplate::OrchestrationParameter.new(
-      :name        => "stack_onfailure",
-      :label       => "On Failure",
-      :data_type   => "string",
-      :description => "Select what to do if stack creation failed",
-      :constraints => [OrchestrationTemplate::OrchestrationParameterAllowed.new(:allowed_values => choices)]
+      :name          => "stack_onfailure",
+      :label         => "On Failure",
+      :data_type     => "string",
+      :description   => "Select what to do if stack creation failed",
+      :default_value => 'ROLLBACK',
+      :required      => true,
+      :constraints   => [OrchestrationTemplate::OrchestrationParameterAllowed.new(:allowed_values => choices)]
     )
   end
 
@@ -102,7 +125,7 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate < Orchest
   end
 
   def capabilities_opt
-    choices = {'' => '<default>', 'CAPABILITY_IAM' => 'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM' => 'CAPABILITY_NAMED_IAM'}
+    choices = {'CAPABILITY_IAM' => 'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM' => 'CAPABILITY_NAMED_IAM'}
     OrchestrationTemplate::OrchestrationParameter.new(
       :name        => "stack_capabilities",
       :label       => "Capabilities",

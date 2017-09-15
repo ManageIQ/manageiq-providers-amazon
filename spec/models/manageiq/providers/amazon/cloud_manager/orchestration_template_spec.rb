@@ -7,11 +7,12 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate do
     end
   end
 
-  let(:valid_template) { FactoryGirl.create(:orchestration_template_cfn_with_content) }
+  let(:json_template) { FactoryGirl.create(:orchestration_template_amazon_in_json) }
+  let(:yaml_template) { FactoryGirl.create(:orchestration_template_amazon_in_yaml) }
 
-  context "when a raw template in JSON format is given" do
+  shared_examples_for "a template with content" do
     it "parses parameters from a template" do
-      groups = valid_template.parameter_groups
+      groups = template.parameter_groups
       expect(groups.size).to eq(1)
       expect(groups[0].label).to eq("Parameters")
 
@@ -26,7 +27,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate do
     end
 
     it "parses resources from a template" do
-      resource_types = valid_template.resources.collect(&:type).sort!
+      resource_types = template.resources.collect(&:type).sort!
 
       expect(resource_types).to eq(
         ["AWS::AutoScaling::ScalingPolicy",
@@ -34,6 +35,18 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate do
          "AWS::EC2::Instance",
          "AWS::EC2::SecurityGroup"]
       )
+    end
+  end
+
+  describe "JSON template" do
+    it_should_behave_like "a template with content" do
+      let(:template) { json_template }
+    end
+  end
+
+  describe "YAML template" do
+    it_should_behave_like "a template with content" do
+      let(:template) { yaml_template }
     end
   end
 
@@ -150,11 +163,20 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate do
     end
 
     it 'passes validation with correct JSON content' do
-      expect(valid_template.validate_format).to be_nil
+      expect(json_template.validate_format).to be_nil
+    end
+
+    it 'passes validation with correct YAML content' do
+      expect(yaml_template.validate_format).to be_nil
     end
 
     it 'fails validations with incorrect JSON content' do
-      template = described_class.new(:content => "invalid string")
+      template = described_class.new(:content => '{"AWSTemplateFormatVersion": "2010-09-09}')
+      expect(template.validate_format).not_to be_nil
+    end
+
+    it 'fails validations with incorrect YAML content' do
+      template = described_class.new(:content => 'AWSTemplateFormatVersion: "2010-09-09')
       expect(template.validate_format).not_to be_nil
     end
   end
@@ -164,7 +186,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate do
       options = subject.deployment_options('ManageIQ::Providers::Amazon::CloudManager')
       assert_deployment_option(options[0], "tenant_name", :OrchestrationParameterAllowedDynamic, true)
       assert_deployment_option(options[1], "stack_name", :OrchestrationParameterPattern, true)
-      assert_deployment_option(options[2], "stack_onfailure", :OrchestrationParameterAllowed, false)
+      assert_deployment_option(options[2], "stack_onfailure", :OrchestrationParameterAllowed, true)
       assert_deployment_option(options[3], "stack_timeout", nil, false, 'integer')
       assert_deployment_option(options[4], "stack_notifications", nil, false, 'text')
       assert_deployment_option(options[5], "stack_capabilities", :OrchestrationParameterAllowed, false)
