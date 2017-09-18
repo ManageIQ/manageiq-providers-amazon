@@ -27,6 +27,19 @@
     #   :name: Special Region
     #   :hostname: ec2.spec-region-1.amazonaws.com
     #   :description: Super Special Region
+
+    # add additional instance_types as found in app/models/manageiq/providers/amazon/instance_types.rb
+    :additional_instance_types: {}
+    #  :t9.large:
+    #  :name: t9.large
+    #  :family: General purpose
+    #  :description: T9 Large
+    #  ...
+
+    :disabled_instance_types: []
+    # disable instance_types by their keys found in app/models/manageiq/providers/amazon/instance_types.rb e.g.
+    # - t2.nano
+
 :ems_refresh:
   :ec2:
     :get_private_images: true

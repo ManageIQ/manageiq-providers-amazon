@@ -1373,7 +1373,7 @@ module ManageIQ::Providers::Amazon::InstanceTypes
       :cluster_networking      => nil,
       :vpc_only                => false,
     },
-  }
+  }.freeze
 
   # Types that are still advertised, but not recommended for new instances.
   DEPRECATED_TYPES = {
@@ -1832,7 +1832,7 @@ module ManageIQ::Providers::Amazon::InstanceTypes
       :cluster_networking      => true,
       :vpc_only                => false,
     },
-  }
+  }.freeze
 
   # Types that are no longer advertised
   DISCONTINUED_TYPES = {
@@ -1885,13 +1885,19 @@ module ManageIQ::Providers::Amazon::InstanceTypes
       :cluster_networking      => nil,
       :vpc_only                => false,
     },
-  }
+  }.freeze
+
+  def self.instance_types
+    additional = Hash(Settings.ems.ems_amazon.try!(:additional_instance_types)).stringify_keys
+    disabled = Array(Settings.ems.ems_amazon.try!(:disabled_instance_types))
+    AVAILABLE_TYPES.merge(DEPRECATED_TYPES).merge(DISCONTINUED_TYPES).merge(additional).except(*disabled)
+  end
 
   def self.all
-    AVAILABLE_TYPES.values + DEPRECATED_TYPES.values + DISCONTINUED_TYPES.values
+    instance_types.values
   end
 
   def self.names
-    AVAILABLE_TYPES.keys + DEPRECATED_TYPES.keys + DISCONTINUED_TYPES.keys
+    instance_types.keys
   end
 end

@@ -4,9 +4,9 @@ task :instance_types => [:environment] do
   #
   # This task creates a instance_types.rb file in the current directory based upon the current
   # instance_types.rb file and data from
-  #  curl https://raw.githubusercontent.com/powdahound/ec2instances.info/master/www/instances.json > lib/tasks/instance_types_data/instances.json
-  #  https://aws.amazon.com/ec2/instance-types/#instance-type-matrix > lib/tasks/instance_types_data/instance_types.csv
-  #  https://aws.amazon.com/ec2/previous-generation/#Previous_Generation_Instance_Details_and_Pricing_ > lib/tasks/instance_types_data/instance_types_previous.csv
+  #  curl https://raw.githubusercontent.com/powdahound/ec2instances.info/master/www/instances.json > lib/tasks_private/instance_types_data/instances.json
+  #  https://aws.amazon.com/ec2/instance-types/#instance-type-matrix > lib/tasks_private/instance_types_data/instance_types.csv
+  #  https://aws.amazon.com/ec2/previous-generation/#Previous_Generation_Instance_Details_and_Pricing_ > lib/tasks_private/instance_types_data/instance_types_previous.csv
   #     converted to csv via http://www.convertcsv.com/html-table-to-csv.htm
   #
   # Other useful resources
@@ -49,7 +49,7 @@ task :instance_types => [:environment] do
 
   def cluster_networking?(type)
     # https://aws.amazon.com/ec2/instance-types/#Cluster_Networking
-    type.split('.').first.in? %w(r4 x1 m4 c4 c3 i2 cr1 g2 hs1 p2 d2)
+    type.split('.').first.in?(%w(r4 x1 m4 c4 c3 i2 cr1 g2 hs1 p2 d2))
   end
 
   instances = YAML.safe_load(File.open(File.join(__dir__, 'instance_types_data/instances.json')).read)
@@ -132,7 +132,7 @@ task :instance_types => [:environment] do
 
   new_instance_types_file << output_instances.map { |i| format_instance(i) }.join("\n")
   new_instance_types_file << <<EOT
-  }
+  }.freeze
 
   # Types that are still advertised, but not recommended for new instances.
   DEPRECATED_TYPES = {
@@ -161,7 +161,7 @@ EOT
 
   new_instance_types_file << output_instances.map { |i| format_instance(i) }.join("\n")
   new_instance_types_file << <<EOT
-  }
+  }.freeze
 
   # Types that are no longer advertised
   DISCONTINUED_TYPES = {
@@ -190,14 +190,20 @@ EOT
 
   new_instance_types_file << output_instances.map { |i| format_instance(i) }.join("\n")
   new_instance_types_file << <<EOT
-  }
+  }.freeze
+
+  def self.instance_types
+    additional = Hash(Settings.ems.ems_amazon.try!(:additional_instance_types)).stringify_keys
+    disabled = Array(Settings.ems.ems_amazon.try!(:disabled_instance_types))
+    AVAILABLE_TYPES.merge(DEPRECATED_TYPES).merge(DISCONTINUED_TYPES).merge(additional).except(*disabled)
+  end
 
   def self.all
-    AVAILABLE_TYPES.values + DEPRECATED_TYPES.values + DISCONTINUED_TYPES.values
+    instance_types.values
   end
 
   def self.names
-    AVAILABLE_TYPES.keys + DEPRECATED_TYPES.keys + DISCONTINUED_TYPES.keys
+    instance_types.keys
   end
 end
 EOT
