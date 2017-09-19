@@ -86,9 +86,9 @@ task :instance_types => [:environment] do
                               end
     # see https://github.com/ManageIQ/manageiq/issues/741#issuecomment-57353290
     # o[:ebs_only] = i[:instance_store_volumes] == 0 && i[:instance_store_size] == 0
+    o[:ebs_only] = i[:storage].nil?
 
     # we take ebs_only from `instance_types.csv`
-    o[:ebs_only] = row[:storage_gb] == 'EBS Only'
     o[:physical_processor] = row[:physical_processor].chomp('*')
     o[:processor_clock_speed] = row[:clock_speed_ghz].scan(/[\d\.]/).join
     o[:intel_aes_ni] = true # looks like only deprecated types dont support it, so we assume all new types support it
