@@ -1,8 +1,8 @@
 class ManageIQ::Providers::Amazon::Provider < ::Provider
-  has_one :object_storage_manager,
-          :foreign_key => "provider_id",
-          :class_name  => "ManageIQ::Providers::Amazon::StorageManager::S3",
-          :autosave    => true
+  has_one  :object_storage_manager,
+           :foreign_key => "provider_id",
+           :class_name  => "ManageIQ::Providers::Amazon::StorageManager::S3",
+           :autosave    => true
   has_many :cloud_ems,
            :foreign_key => "provider_id",
            :class_name  => "ManageIQ::Providers::Amazon::CloudManager",
