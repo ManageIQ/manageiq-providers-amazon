@@ -113,6 +113,11 @@ module ManageIQ
       def self.find_by_hostname(hostname)
         regions_by_hostname[hostname]
       end
+
+      # TODO (Julian) allow default region to be changed by config.
+      def self.default
+        regions['us-east-1']
+      end
     end
   end
 end
