@@ -81,7 +81,18 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot < ::
   def delete_snapshot(_options = {})
     with_provider_object do |snapshot|
       if snapshot
-        snapshot.delete
+        begin
+          snapshot.delete
+        rescue => e
+          notification_options = {
+            :snapshot_op => 'delete',
+            :subject     => "[#{name}]",
+            :error       => e.to_s
+          }
+
+          Notification.create(:type => :vm_snapshot_failure, :options => notification_options)
+          raise MiqException::MiqVolumeSnapshotDeleteError, e.to_s
+        end
       else
         _log.warn "snapshot=[#{name}] already deleted"
       end
