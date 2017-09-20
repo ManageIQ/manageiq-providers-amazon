@@ -134,7 +134,7 @@ module Authenticator
         :access_key_id     => access_key_id,
         :secret_access_key => secret_access_key,
         # IAM doesnt support regions, but the sdk requires one
-        :region            => 'us-east-1',
+        :region            => ManageIQ::Providers::Amazon::Regions.default[:name],
         :http_proxy        => proxy_uri,
         :logger            => $aws_log,
         :log_level         => :debug,
