@@ -24,7 +24,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventParser do
 
   context "AWS CloudWatch with CloudTrail API" do
     it "parses StartInstances event" do
-      event = parse_event("cloud_watch/StartInstances.json")
+      event = parse_event("cloud_watch/AWS_API_CALL_StartInstances.json")
 
       expect(described_class.event_to_hash(event, nil)).to(
         include(
@@ -35,7 +35,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventParser do
     end
 
     it "parses StopInstances" do
-      event = parse_event("cloud_watch/StopInstances.json")
+      event = parse_event("cloud_watch/AWS_API_CALL_StopInstances.json")
 
       expect(described_class.event_to_hash(event, nil)).to(
         include(

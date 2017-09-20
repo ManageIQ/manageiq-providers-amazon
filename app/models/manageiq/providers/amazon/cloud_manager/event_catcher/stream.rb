@@ -173,7 +173,7 @@ class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
       event["event_source"] = :config
     elsif event.fetch_path("detail", "eventType") == "AwsApiCall"
       # CloudWatch with CloudTrail for API requests Events
-      event["eventType"]    = event.fetch_path("detail", "eventName")
+      event["eventType"]    = "AWS_API_CALL_" + event.fetch_path("detail", "eventName")
       event["event_source"] = :cloud_watch_api
     elsif event["detail-type"] == "EC2 Instance State-change Notification"
       # CloudWatch EC2 Events
