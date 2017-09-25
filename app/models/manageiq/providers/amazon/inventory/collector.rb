@@ -15,6 +15,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManagerRefresh::Invent
   attr_reader :security_groups
   attr_reader :floating_ips
   attr_reader :network_ports
+  attr_reader :network_routers
   attr_reader :load_balancers
   attr_reader :stacks
   attr_reader :cloud_volumes
@@ -41,6 +42,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManagerRefresh::Invent
     @security_groups             = []
     @floating_ips                = []
     @network_ports               = []
+    @network_routers             = []
     @load_balancers              = []
     @stacks                      = []
     @cloud_volumes               = []

@@ -65,6 +65,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
           :status,
           :availability_zone,
           :cloud_network,
+          :network_router,
         ]
       }
 
@@ -121,6 +122,24 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager < 
       }
 
       super(attributes.merge!(extra_attributes))
+    end
+
+    def network_routers(extra_attributes = {})
+      attributes = {
+        :model_class                 => ::ManageIQ::Providers::Amazon::NetworkManager::NetworkRouter,
+        :association                 => :network_routers,
+        :inventory_object_attributes => [
+          :type,
+          :name,
+          :status,
+          :extra_attributes,
+        ],
+        :builder_params              => {
+          :ems_id => ->(persister) { persister.manager.try(:network_manager).try(:id) || persister.manager.id },
+        }
+      }
+
+      attributes.merge!(extra_attributes)
     end
 
     def load_balancers(extra_attributes = {})
