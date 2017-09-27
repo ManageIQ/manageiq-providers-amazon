@@ -5,9 +5,6 @@ task :instance_types => [:environment] do
   # This task creates a instance_types.rb file in the current directory based upon the current
   # instance_types.rb file and data from
   #  curl https://raw.githubusercontent.com/powdahound/ec2instances.info/master/www/instances.json > lib/tasks_private/instance_types_data/instances.json
-  #  https://aws.amazon.com/ec2/instance-types/#instance-type-matrix > lib/tasks_private/instance_types_data/instance_types.csv
-  #  https://aws.amazon.com/ec2/previous-generation/#Previous_Generation_Instance_Details_and_Pricing_ > lib/tasks_private/instance_types_data/instance_types_previous.csv
-  #     converted to csv via http://www.convertcsv.com/html-table-to-csv.htm
   #
   # Other useful resources
   #   http://aws.amazon.com/ec2/instance-types
@@ -34,7 +31,7 @@ task :instance_types => [:environment] do
       :virtualization_type     => #{instance[:virtualization_type]},
       :network_performance     => :#{instance[:network_performance]},
       :physical_processor      => "#{instance[:physical_processor]}",
-      :processor_clock_speed   => #{instance[:processor_clock_speed] || 'nil'},
+      :processor_clock_speed   => "#{instance[:processor_clock_speed]}",
       :intel_aes_ni            => #{instance[:intel_aes_ni] ? 'true' : 'nil'},
       :intel_avx               => #{instance[:intel_avx] ? 'true' : 'nil'},
       :intel_avx2              => #{instance[:intel_avx2] ? 'true' : 'nil'},
@@ -52,58 +49,55 @@ task :instance_types => [:environment] do
     type.split('.').first.in?(%w(r4 x1 m4 c4 c3 i2 cr1 g2 hs1 p2 d2))
   end
 
-  instances = YAML.safe_load(File.open(File.join(__dir__, 'instance_types_data/instances.json')).read)
-  ec2instances = instances.each_with_object({}) do |i, h|
-    i.deep_symbolize_keys!
-    h[i[:instance_type]] = i
+  def format_instance_miq(i)
+    {}.tap do |o|
+      # x1.16large manually fixed to x1.16xlarge
+      # i3.16large manually fixed to i3.16xlarge
+      %i(family instance_store_size instance_store_volumes vpc_only enhanced_networking).each do |key|
+        o[key] = i[key]
+      end
+      o[:memory] = i[:memory].to_f.gigabyte
+      o[:name] = i[:instance_type]
+      o[:description] = i[:pretty_name]
+      o[:vcpu] = i[:vCPU]
+      o[:ebs_optimized_available] = i[:ebs_optimized]
+      o[:instance_store_volumes] = i.fetch_path(:storage, :devices).to_i
+      o[:instance_store_size] = (o[:instance_store_volumes] * i.fetch_path(:storage, :size).to_f).gigabyte
+      o[:instance_store_ssd] = i.fetch_path(:storage, :ssd)
+      o[:architecture] = i[:arch].map(&:to_sym).sort
+      o[:virtualization_type] = i[:linux_virtualization_types].map(&:downcase).map(&:to_sym).sort.map { |v| v == :pv ? :paravirtual : v }
+      o[:network_performance] =
+        case i[:network_performance]
+        when '10 Gigabit', '20 Gigabit', '25 Gigabit'
+          :very_high
+        when ''
+          :unknown
+        else
+          i[:network_performance].downcase.tr(' ', '_').to_sym
+        end
+      o[:ebs_only] = i[:storage].nil? # see https://github.com/ManageIQ/manageiq/issues/741#issuecomment-57353290
+      o[:physical_processor] = i[:physical_processor].nil? ? '' : i[:physical_processor].chomp('*')
+      o[:processor_clock_speed] = i[:clock_speed_ghz]
+      o[:intel_aes_ni] = true # looks like only deprecated types dont support it, so we assume all new types support it
+      #  https://aws.amazon.com/ec2/instance-types/#intel
+      o[:intel_avx] = i[:intel_avx]
+      o[:intel_avx2] = i[:intel_avx2]
+      o[:intel_turbo] = i[:intel_turbo]
+      o[:cluster_networking] = cluster_networking?(i[:instance_type])
+    end
   end
 
   available = {}
-  CSV.foreach(File.join(__dir__, "instance_types_data/instance_types.csv"), :headers => true, :header_converters => :symbol) do |row|
-    i = ec2instances[row[:instance_type]]
-    o = {}
-    # x1.16large manually fixed to x1.16xlarge
-    # i3.16large manually fixed to i3.16xlarge
-    raise "no current instance #{row[:instance_type]} at ec2instances" unless i
-    %i(family instance_store_size instance_store_volumes vpc_only enhanced_networking).each do |key|
-      o[key] = i[key]
-    end
-    o[:memory] = i[:memory].to_f.gigabyte
-    o[:name] = i[:instance_type]
-    o[:description] = i[:pretty_name]
-    o[:vcpu] = i[:vCPU]
-    o[:ebs_optimized_available] = i[:ebs_optimized]
-    o[:instance_store_volumes] = i.fetch_path(:storage, :devices).to_i
-    o[:instance_store_size] = (o[:instance_store_volumes] * i.fetch_path(:storage, :size).to_f).gigabyte
-    o[:instance_store_ssd] = i.fetch_path(:storage, :ssd)
-    o[:architecture] = i[:arch].map(&:to_sym).sort
-    o[:virtualization_type] = i[:linux_virtualization_types].map(&:downcase).map(&:to_sym).sort.map { |v| v == :pv ? :paravirtual : v }
-    o[:network_performance] = case i[:network_performance]
-                              when '10 Gigabit', '20 Gigabit'
-                                :very_high
-                              else
-                                i[:network_performance].downcase.tr(' ', '_').to_sym
-                              end
-    # see https://github.com/ManageIQ/manageiq/issues/741#issuecomment-57353290
-    # o[:ebs_only] = i[:instance_store_volumes] == 0 && i[:instance_store_size] == 0
-
-    # we take ebs_only from `instance_types.csv`
-    o[:ebs_only] = row[:storage_gb] == 'EBS Only'
-    o[:physical_processor] = row[:physical_processor].chomp('*')
-    o[:processor_clock_speed] = row[:clock_speed_ghz].scan(/[\d\.]/).join
-    o[:intel_aes_ni] = true # looks like only deprecated types dont support it, so we assume all new types support it
-    #  https://aws.amazon.com/ec2/instance-types/#intel
-    o[:intel_avx] = row[:intel_avx] == 'Yes'
-    o[:intel_avx2] = row[:intel_avx2] == 'Yes'
-    o[:intel_turbo] = row[:intel_turbo] == 'Yes'
-
-    o[:cluster_networking] = cluster_networking?(row[:instance_type])
-    available[row[:instance_type]] = o
-  end
-
   previous = {}
-  CSV.foreach(File.join(__dir__, "instance_types_data/instance_types_previous.csv"), :headers => true, :header_converters => :symbol) do |row|
-    previous[row[:instance_type]] = row
+  instances = YAML.safe_load(File.open(File.join(__dir__, 'instance_types_data/instances.json')).read)
+  instances.each do |i|
+    i.deep_symbolize_keys!
+    miq_format = format_instance_miq(i)
+    if i[:generation] == 'current'
+      available[i[:instance_type]] = miq_format
+    else
+      previous[i[:instance_type]] = miq_format
+    end
   end
 
   new_instance_types_file = ''
