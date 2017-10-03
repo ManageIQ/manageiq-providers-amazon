@@ -11,7 +11,8 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     @data_index          = {}
     @known_flavors       = Set.new
     @options             = options
-    @label_tag_mapping   = ContainerLabelTagMapping.cache
+    @tag_mapper          = ContainerLabelTagMapping.mapper
+    @data[:tag_mapper]   = @tag_mapper
   end
 
   def ems_inv_to_hashes
@@ -37,7 +38,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
   private
 
   def map_labels(model_name, labels)
-    ContainerLabelTagMapping.map_labels(@label_tag_mapping, model_name, labels)
+    @tag_mapper.map_labels(model_name, labels)
   end
 
   def get_flavors
