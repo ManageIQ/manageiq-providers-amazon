@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 70 ending 2017-10-02
+
+### Added
+- Improve instance_types.rake logic [(#301)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/301)
+- Add YAML support for Amazon OrchestrationTemplate [(#298)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/298)
+- Prefix API based events so we can identify them easily [(#293)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/293)
+
 ## Unreleased as of Sprint 69 ending 2017-09-18
 
 ### Added
