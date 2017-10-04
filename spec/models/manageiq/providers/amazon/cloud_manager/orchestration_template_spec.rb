@@ -188,12 +188,12 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate do
       assert_deployment_option(options[1], "stack_name", :OrchestrationParameterPattern, true)
       assert_deployment_option(options[2], "stack_onfailure", :OrchestrationParameterAllowed, true)
       assert_deployment_option(options[3], "stack_timeout", nil, false, 'integer')
-      assert_deployment_option(options[4], "stack_notifications", nil, false, 'text')
+      assert_deployment_option(options[4], "stack_notifications", nil, false)
       assert_deployment_option(options[5], "stack_capabilities", :OrchestrationParameterAllowed, false)
-      assert_deployment_option(options[6], "stack_resource_types", nil, false, 'text')
+      assert_deployment_option(options[6], "stack_resource_types", nil, false)
       assert_deployment_option(options[7], "stack_role", nil, false)
-      assert_deployment_option(options[8], "stack_tags", nil, false, 'text')
-      assert_deployment_option(options[9], "stack_policy", nil, false, 'text')
+      assert_deployment_option(options[8], "stack_tags", nil, false)
+      assert_deployment_option(options[9], "stack_policy", nil, false)
     end
   end
 

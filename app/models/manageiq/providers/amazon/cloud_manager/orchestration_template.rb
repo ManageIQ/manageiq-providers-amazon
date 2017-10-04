@@ -119,8 +119,9 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate < Orchest
     OrchestrationTemplate::OrchestrationParameter.new(
       :name        => "stack_notifications",
       :label       => "Notification ARNs",
-      :data_type   => "text",
-      :description => "Notification SNS topic ARNs, one ARN per line"
+      :data_type   => "string",
+      :description => "Notification SNS topic ARNs, one ARN per line",
+      :constraints => [OrchestrationTemplate::OrchestrationParameterMultiline.new]
     )
   end
 
@@ -139,8 +140,9 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate < Orchest
     OrchestrationTemplate::OrchestrationParameter.new(
       :name        => "stack_resource_types",
       :label       => "Permitted resource types",
-      :data_type   => "text",
-      :description => "Grand permissions to selected types, one type per line"
+      :data_type   => "string",
+      :description => "Grand permissions to selected types, one type per line",
+      :constraints => [OrchestrationTemplate::OrchestrationParameterMultiline.new]
     )
   end
 
@@ -157,8 +159,9 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate < Orchest
     OrchestrationTemplate::OrchestrationParameter.new(
       :name        => "stack_tags",
       :label       => "AWS Tags",
-      :data_type   => "text",
-      :description => "Key-value pairs with format key1=>val1, one pair per line"
+      :data_type   => "string",
+      :description => "Key-value pairs with format key1=>val1, one pair per line",
+      :constraints => [OrchestrationTemplate::OrchestrationParameterMultiline.new]
     )
   end
 
@@ -166,8 +169,9 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate < Orchest
     OrchestrationTemplate::OrchestrationParameter.new(
       :name        => "stack_policy",
       :label       => "Policy",
-      :data_type   => "text",
-      :description => "URL of an policy file or the actual content of the policy"
+      :data_type   => "string",
+      :description => "URL of an policy file or the actual content of the policy",
+      :constraints => [OrchestrationTemplate::OrchestrationParameterMultiline.new]
     )
   end
 

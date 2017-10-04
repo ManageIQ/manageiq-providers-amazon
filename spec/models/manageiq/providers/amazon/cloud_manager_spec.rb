@@ -302,7 +302,7 @@ describe ManageIQ::Providers::Amazon::CloudManager do
 
   context "#orchestration_template_validate" do
     it "validates a correct template" do
-      template = FactoryGirl.create(:orchestration_template_cfn_with_content)
+      template = FactoryGirl.create(:orchestration_template_amazon_in_json)
       stubbed_aws = {:validate_template => {}}
       with_aws_stubbed(:cloudformation => stubbed_aws) do
         ems = FactoryGirl.create(:ems_amazon_with_authentication)
@@ -311,7 +311,7 @@ describe ManageIQ::Providers::Amazon::CloudManager do
     end
 
     it "returns an error string for an incorrect template" do
-      template      = FactoryGirl.create(:orchestration_template_cfn_with_content)
+      template      = FactoryGirl.create(:orchestration_template_amazon_in_json)
       stubbed_aws   = {:validate_template => 'ValidationError'}
       with_aws_stubbed(:cloudformation => stubbed_aws) do
         ems = FactoryGirl.create(:ems_amazon_with_authentication)
