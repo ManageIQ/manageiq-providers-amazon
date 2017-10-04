@@ -94,19 +94,5 @@ module ManageIQ::Providers::Amazon::ManagerMixin
         MiqException::MiqHostError.new "Unexpected response returned from system: #{err.message}"
       end
     end
-
-    def discover_queue(access_key_id, secret_access_key)
-      MiqQueue.put(
-        :class_name  => name,
-        :method_name => "discover_from_queue",
-        :args        => [access_key_id, MiqPassword.encrypt(secret_access_key)]
-      )
-    end
-
-    private
-
-    def discover_from_queue(access_key_id, secret_access_key)
-      discover(access_key_id, MiqPassword.decrypt(secret_access_key))
-    end
   end
 end
