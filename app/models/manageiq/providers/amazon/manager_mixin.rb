@@ -1,6 +1,8 @@
 module ManageIQ::Providers::Amazon::ManagerMixin
   extend ActiveSupport::Concern
 
+  include ManageIQ::Providers::Amazon::RegionBoundManagerMixin
+
   included do
     validates :provider_region, :inclusion => {:in => ->(_region) { ManageIQ::Providers::Amazon::Regions.names }}
   end
@@ -108,8 +110,9 @@ module ManageIQ::Providers::Amazon::ManagerMixin
       all_emses         = includes(:authentications)
       all_ems_names     = all_emses.map(&:name).to_set
       known_ems_regions = all_emses.select { |e| e.authentication_userid == access_key_id }.map(&:provider_region)
+      default_region    = ManageIQ::Providers::Amazon::Regions.default[:name]
 
-      ec2 = raw_connect(access_key_id, secret_access_key, :EC2, "us-east-1")
+      ec2 = raw_connect(access_key_id, secret_access_key, :EC2, default_region)
       region_names_to_discover = ec2.client.describe_regions.regions.map(&:region_name)
 
       (region_names_to_discover - known_ems_regions).each do |region_name|
@@ -120,9 +123,10 @@ module ManageIQ::Providers::Amazon::ManagerMixin
         new_emses << create_discovered_region(region_name, access_key_id, secret_access_key, all_ems_names)
       end
 
-      # If greenfield Amazon, at least create the us-east-1 region.
+      # If greenfield Amazon, at least create a default region.
       if new_emses.blank? && known_ems_regions.blank?
-        new_emses << create_discovered_region("us-east-1", access_key_id, secret_access_key, all_ems_names)
+        new_emses << create_discovered_region(default_region,
+                                                access_key_id, secret_access_key, all_ems_names)
       end
 
       EmsRefresh.queue_refresh(new_emses) unless new_emses.blank?
@@ -142,29 +146,6 @@ module ManageIQ::Providers::Amazon::ManagerMixin
 
     def discover_from_queue(access_key_id, secret_access_key)
       discover(access_key_id, MiqPassword.decrypt(secret_access_key))
-    end
-
-    def create_discovered_region(region_name, access_key_id, secret_access_key, all_ems_names)
-      name = region_name
-      name = "#{region_name} #{access_key_id}" if all_ems_names.include?(name)
-      while all_ems_names.include?(name)
-        name_counter = name_counter.to_i + 1 if defined?(name_counter)
-        name = "#{region_name} #{name_counter}"
-      end
-
-      new_ems = create!(
-        :name            => name,
-        :provider_region => region_name,
-        :zone            => Zone.default_zone
-      )
-      new_ems.update_authentication(
-        :default => {
-          :userid   => access_key_id,
-          :password => secret_access_key
-        }
-      )
-
-      new_ems
     end
   end
 end

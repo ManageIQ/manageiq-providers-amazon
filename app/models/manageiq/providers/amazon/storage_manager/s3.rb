@@ -7,7 +7,7 @@ class ManageIQ::Providers::Amazon::StorageManager::S3 < ManageIQ::Providers::Sto
 
   supports :cloud_object_store_container_create
 
-  include ManageIQ::Providers::Amazon::ManagerMixin
+  include ManageIQ::Providers::Amazon::RegionlessManagerMixin
   include ManageIQ::Providers::StorageManager::ObjectMixin
 
   delegate :authentication_check,
