@@ -3,6 +3,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{collector.manager.name}] id: [#{collector.manager.id}]"
 
     $aws_log.info("#{log_header}...")
+    # The order below matters
+    build_and_index_network_routers
+
     # The order of the below methods doesn't matter since they refer to each other using only lazy links
     cloud_networks
     cloud_subnets
@@ -15,6 +18,38 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
   end
 
   private
+
+  def build_and_index_network_routers
+    # We need to pre-calculate NetworkRouter relations, because AWS Subnet api doesn't offer us a foreign_key for each
+    # router
+    @indexed_routers = {:cloud_subnets_ems_ref => {}, :cloud_networks_ems_ref => {}}
+
+    collector.network_routers.each do |network_router|
+      uid              = network_router['route_table_id']
+      main_route_table = false
+      network_router['associations'].each do |association|
+        network_router_lazy = persister.network_routers.lazy_find(uid)
+        if association['main']
+          main_route_table                                                    = true
+          @indexed_routers[:cloud_networks_ems_ref][network_router['vpc_id']] = network_router_lazy
+        else
+          @indexed_routers[:cloud_subnets_ems_ref][association['subnet_id']] = network_router_lazy
+        end
+      end
+
+      persister.network_routers.find_or_build(uid).assign_attributes(
+        :status           => network_router['routes'].all? { |x| x['state'] == 'active' } ? 'active' : 'inactive',
+        :name             => get_from_tags(network_router, "Name") || uid,
+        :extra_attributes => {
+          :main_route_table => main_route_table,
+          :routes           => network_router['routes'],
+          :propagating_vgws => network_router['propagating_vgws']
+        },
+        # TODO(lsmola) model orchestration_stack_id relation for a NetworkRouter
+        # :orchestration_stack => persister.orchestration_stacks.lazy_find(get_from_tags(network_router, "aws:cloudformation:stack-id")),
+      )
+    end
+  end
 
   def cloud_networks
     collector.cloud_networks.each do |vpc|
@@ -32,13 +67,16 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
   def cloud_subnets
     collector.cloud_subnets.each do |subnet|
-      persister.cloud_subnets.find_or_build(subnet['subnet_id']).assign_attributes(
+      persister_cloud_subnet = persister.cloud_subnets.find_or_build(subnet['subnet_id']).assign_attributes(
         :name              => get_from_tags(subnet, 'name') || subnet['subnet_id'],
         :cidr              => subnet['cidr_block'],
         :status            => subnet['state'].try(:to_s),
         :availability_zone => persister.availability_zones.lazy_find(subnet['availability_zone']),
         :cloud_network     => persister.cloud_networks.lazy_find(subnet['vpc_id']),
       )
+
+      network_router_lazy = @indexed_routers[:cloud_subnets_ems_ref][subnet['subnet_id']] || @indexed_routers[:cloud_networks_ems_ref][subnet['vpc_id']]
+      persister_cloud_subnet.network_router = network_router_lazy if network_router_lazy
     end
   end
 

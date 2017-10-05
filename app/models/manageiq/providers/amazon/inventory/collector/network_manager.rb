@@ -32,4 +32,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::NetworkManager < Manage
   def instances
     hash_collection.new(aws_ec2.instances)
   end
+
+  def network_routers
+    hash_collection.new(aws_ec2.route_tables)
+  end
 end

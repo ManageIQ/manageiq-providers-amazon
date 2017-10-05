@@ -90,6 +90,8 @@ module AwsRefresherSpecCounts
     # Network ports count consists of VPC ENIs + ec2_classic_instances
     network_ports_count         = network_port_hashes.size + ec2_classic_instance_hashes.size + load_balancers_size
 
+    network_routers_count = network_routers.all.size
+
     floating_ip_hashes = floating_ips.all
     # VPC floating IPs are taken from floating_ips and network_ports + EC2 classic floating ips are taken from
     # floating_ips and instances. FloatingIp model then holds all AWS public and Elastic IPs.
@@ -134,6 +136,7 @@ module AwsRefresherSpecCounts
       :miq_template                  => images_count,
       :network                       => networks_count,
       :network_port                  => network_ports_count,
+      :network_router                => network_routers_count,
       :orchestration_stack           => orchestration_stacks_count,
       :orchestration_stack_output    => orchestration_stack_outputs_count,
       :orchestration_stack_parameter => orchestration_stack_parameters_count,
@@ -316,6 +319,10 @@ module AwsRefresherSpecCounts
 
   def network_ports
     hash_collection.new(aws_ec2.client.describe_network_interfaces.network_interfaces)
+  end
+
+  def network_routers
+    hash_collection.new(aws_ec2.route_tables)
   end
 
   def load_balancers

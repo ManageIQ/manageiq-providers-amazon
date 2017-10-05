@@ -41,6 +41,12 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
         end
       end
     end
+
+    def table_counts_from_api
+      counts = super
+      counts[:network_router] = 0 # We do not collect NetworkRouters in old refresh
+      counts
+    end
   end
 
   def assert_specific_flavor
