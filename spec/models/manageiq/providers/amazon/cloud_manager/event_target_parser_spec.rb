@@ -17,25 +17,348 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       expect(parsed_targets.collect(&:manager_ref).uniq).to match_array([{:ems_ref => 'i-06199fba'}])
     end
 
-    it "CloudFormation_StackCreate" do
+    it "parses AWS_CloudFormation_Stack_CREATE event" do
       ems_event = create_ems_event("config/AWS_CloudFormation_Stack_CREATE.json")
 
       parsed_targets = described_class.new(ems_event).parse
 
       expect(parsed_targets.size).to eq(1)
-      expect(parsed_targets.collect(&:manager_ref).uniq).to(
-        match_array([{:ems_ref=>"arn:aws:cloudformation:us-east-1:200278856672:stack/ladas-test31/0fb199a0-93c4-11e7-998e-500c217b4a62"}])
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:orchestration_stacks, {:ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/ladas-test31/0fb199a0-93c4-11e7-998e-500c217b4a62"}]
+          ]
+        )
       )
     end
 
-    it "CloudFormation_StackDelete" do
+    it "parses AWS_CloudFormation_Stack_DELETE.json event" do
       ems_event = create_ems_event("config/AWS_CloudFormation_Stack_DELETE.json")
 
       parsed_targets = described_class.new(ems_event).parse
 
       expect(parsed_targets.size).to eq(1)
-      expect(parsed_targets.collect(&:manager_ref).uniq).to(
-        match_array([{:ems_ref=>"arn:aws:cloudformation:us-east-1:200278856672:stack/ladas-test-22/ec875e20-93a9-11e7-b549-500c28b23699"}])
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:orchestration_stacks, {:ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/ladas-test-22/ec875e20-93a9-11e7-b549-500c28b23699"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_EIP_CREATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_EIP_CREATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:floating_ips, {:ems_ref => "eipalloc-3d8a720f"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_EIP_DELETE event" do
+      ems_event = create_ems_event("config/AWS_EC2_EIP_DELETE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:floating_ips, {:ems_ref => "eipalloc-45584474"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_EIP_UPDATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_EIP_UPDATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:floating_ips, {:ems_ref => "eipalloc-3d8a720f"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Instance_CREATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_Instance_CREATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:vms, {:ems_ref => "i-0b72e0b70e7fae3c9"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Instance_DELETE event" do
+      ems_event = create_ems_event("config/AWS_EC2_Instance_DELETE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:vms, {:ems_ref => "i-04863b664ebf1facf"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Instance_running event" do
+      ems_event = create_ems_event("config/AWS_EC2_Instance_running.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:vms, {:ems_ref => "i-fb694e66"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Instance_stopped event" do
+      ems_event = create_ems_event("config/AWS_EC2_Instance_stopped.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:vms, {:ems_ref => "i-0f7f3f02eaf99ea4b"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Instance_stopping event" do
+      ems_event = create_ems_event("config/AWS_EC2_Instance_stopping.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:vms, {:ems_ref => "i-02975d4eb8e53bafd"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Instance_UPDATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_Instance_UPDATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:vms, {:ems_ref => "i-0b72e0b70e7fae3c9"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_NetworkInterface_CREATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_NetworkInterface_CREATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:network_ports, {:ems_ref => "eni-b9cc7f19"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_NetworkInterface_DELETE event" do
+      ems_event = create_ems_event("config/AWS_EC2_NetworkInterface_DELETE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:network_ports, {:ems_ref => "eni-fd37e25d"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_NetworkInterface_UPDATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_NetworkInterface_UPDATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:network_ports, {:ems_ref => "eni-b9cc7f19"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_SecurityGroup_CREATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_SecurityGroup_CREATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:security_groups, {:ems_ref => "sg-aaa85e3c"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_SecurityGroup_DELETE event" do
+      ems_event = create_ems_event("config/AWS_EC2_SecurityGroup_DELETE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:security_groups, {:ems_ref => "sg-b30cfb25"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_SecurityGroup_UPDATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_SecurityGroup_UPDATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:security_groups, {:ems_ref => "sg-80f755ef"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Subnet_DELETE event" do
+      ems_event = create_ems_event("config/AWS_EC2_Subnet_DELETE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_subnets, {:ems_ref => "subnet-84055dde"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Subnet_UPDATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_Subnet_UPDATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_subnets, {:ems_ref => "subnet-f849ff96"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Volume_CREATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_Volume_CREATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_volumes, {:ems_ref => "vol-0ac7a66512bf0d20c"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Volume_DELETE event" do
+      ems_event = create_ems_event("config/AWS_EC2_Volume_DELETE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_volumes, {:ems_ref => "vol-0f0e3e1c4a2f2d285"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Volume_UPDATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_Volume_UPDATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_volumes, {:ems_ref => "vol-01ff7e549707b8e54"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_VPC_UPDATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_VPC_UPDATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_networks, {:ems_ref => "vpc-ff49ff91"}]
+          ]
+        )
       )
     end
   end
