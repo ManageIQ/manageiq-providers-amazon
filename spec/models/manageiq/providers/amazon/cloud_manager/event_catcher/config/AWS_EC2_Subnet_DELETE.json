@@ -1,0 +1,12 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "c0f165b3-de7f-52aa-8541-3799c9ce82f0",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Subject" : "[AWS Config:us-east-1] AWS::EC2::Subnet subnet-84055dde Deleted in Account 200278856672",
+  "Message" : "{\"configurationItemDiff\":{\"changedProperties\":{},\"changeType\":\"DELETE\"},\"configurationItem\":{\"relatedEvents\":[\"5a0515d3-1b98-4cf3-b5da-bc4814877695\"],\"relationships\":[],\"configuration\":null,\"supplementaryConfiguration\":{},\"tags\":{},\"configurationItemVersion\":\"1.2\",\"configurationItemCaptureTime\":\"2017-09-06T15:34:07.735Z\",\"configurationStateId\":1504712047735,\"awsAccountId\":\"200278856672\",\"configurationItemStatus\":\"ResourceDeleted\",\"resourceType\":\"AWS::EC2::Subnet\",\"resourceId\":\"subnet-84055dde\",\"resourceName\":null,\"ARN\":null,\"awsRegion\":\"us-east-1\",\"availabilityZone\":null,\"configurationStateMd5Hash\":\"7d04f08c3ab0a489456b6f7845fc1e28\",\"resourceCreationTime\":null},\"notificationCreationTime\":\"2017-09-06T15:34:08.796Z\",\"messageType\":\"ConfigurationItemChangeNotification\",\"recordVersion\":\"1.2\"}",
+  "Timestamp" : "2017-09-06T15:34:09.374Z",
+  "SignatureVersion" : "1",
+  "Signature" : "fJr62p1/c56LN+i26Evl8QcyKmAtaxfIHLE/jg96WgCOi3gC6sNa5RqDQbtUsq26mI3NDkG3U0dsu1RKj+GpI1vPBmpX55ZcLHMqLRP3N7e6WTgtCPBV4sqPmeDBZZy47kgapULyQ31+F4daSDmrG7PV/+sbqsULVenfh8ENn1xVkfRRJVpP+/eSmzZg6i70wlIX5uh4qUogf7MW56hhtJn/mhAFxSVXh2OrAck2X0+OoPnVghRaU6MQS3I5K9ZbBIZi7CrVfM/a4dfpmY34BGg74p3VkfxKPFWsFr4Oic1xy3gJJmsTWZ8hIrTwiiTGM+WYkVBsLRDgGZg74AB9mA==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:9fefb8fe-9bd0-4624-9281-a279994ed2b9"
+}
