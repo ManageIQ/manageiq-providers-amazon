@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "3762f706-5d8b-5b15-8d57-a52d6cee2466",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"271b2503-82d7-ce59-fd92-5fbea9af8420\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-07T11:35:04Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"200278856672\",\"arn\":\"arn:aws:iam::200278856672:root\",\"accountId\":\"200278856672\",\"invokedBy\":\"autoscaling.amazonaws.com\"},\"eventTime\":\"2017-09-07T11:35:04Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"TerminateInstances\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"autoscaling.amazonaws.com\",\"userAgent\":\"autoscaling.amazonaws.com\",\"requestParameters\":{\"instancesSet\":{\"items\":[{\"instanceId\":\"i-04863b664ebf1facf\"}]}},\"responseElements\":{\"instancesSet\":{\"items\":[{\"instanceId\":\"i-04863b664ebf1facf\",\"currentState\":{\"code\":32,\"name\":\"shutting-down\"},\"previousState\":{\"code\":16,\"name\":\"running\"}}]}},\"requestID\":\"26f30ec9-3d80-4e10-b051-d2c5364e0eba\",\"eventID\":\"6144f18f-e61f-4eea-b59d-ac2c24b1f2a8\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-07T11:36:05.278Z",
+  "SignatureVersion" : "1",
+  "Signature" : "bAmLDXSUHqhUteyvhFy16SV7SLvbCtZyAf6dvuN4mFcG/u4ZFE8+2SJoa/V4XUgTd9nMFFCn1h7ZO9vx6he3ZnRPrQRZYAhkMOA4HDhzWezqth4ioudZEPZZyxkJp/VjQl/vyJqPXT8MhYenM0bUdgJSSJ3083yMHPkAC3dRMuk8Ys2VMvmD2HyZ2Zr9pR1w09m6gFD+dkj6yNmj3w0OcI+IrAEFVlplCRIQHxMSKMC/49gYyS9/6T6ArlaiEYSvMR7IWupsE844Pc19kknB7cnEZvu9QhuAz4HtKbvmJm2t3uOGfH+8tUAiSPBDOG3gC9uYQSa6oxwvGpyUqtAuAA==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:61d4ffc8-72e3-41a7-b28d-86e700532cd1"
+}

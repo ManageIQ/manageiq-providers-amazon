@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "1c881b2c-2a63-55b8-ad4b-49071d77eed6",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"862c8516-a820-dd4c-9edd-6ba4404c9f47\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.cloudformation\",\"account\":\"200278856672\",\"time\":\"2017-09-07T11:59:54Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"AKIAJS5P4A2TYQUXGZYQ\",\"userName\":\"ladas\"},\"eventTime\":\"2017-09-07T11:59:54Z\",\"eventSource\":\"cloudformation.amazonaws.com\",\"eventName\":\"CreateStack\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources\",\"requestParameters\":{\"onFailure\":\"ROLLBACK\",\"parameters\":[{\"parameterKey\":\"InstanceType\"},{\"parameterKey\":\"KeyName\"},{\"parameterKey\":\"SSHLocation\"}],\"stackName\":\"ladas-test31\"},\"responseElements\":{\"stackId\":\"arn:aws:cloudformation:us-east-1:200278856672:stack/ladas-test31/0fb199a0-93c4-11e7-998e-500c217b4a62\"},\"requestID\":\"0f85a7d1-93c4-11e7-aa60-d740c414ad51\",\"eventID\":\"ff36a517-0eb1-43dd-8c66-1c556b30f555\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-07T12:00:20.116Z",
+  "SignatureVersion" : "1",
+  "Signature" : "aCym1TLx/AXok2tQmjc2Mt4/xw3qLHdvrjnBqBTG3hhysqSe0nJeWv1Jf0RWZcWN8l2oXY4OWj1g+pOflGEOrnLsqeX3JPXmlIJNztOZSmNNtWKElQxaCPWnoKEepF9sZeN4shtb0hpXLv+a80zuOB/BGlvOLin1iauaFC+G6TsRtFnsyxVa7v26LhG4hcNT5Mn4YApdq1o8181KY8886kyyaknSAlbM95hpdAP1C+cPTf4pOvZtKw/4/6BawI4EKsFrlyNEo2u/fsngm/s/dO4q5aIMyi9v2f89G/m0rco4kHs5M5AnYyJyEixBM+Asx8stXF8rr5wV7I1NhzsyCQ==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:61d4ffc8-72e3-41a7-b28d-86e700532cd1"
+}

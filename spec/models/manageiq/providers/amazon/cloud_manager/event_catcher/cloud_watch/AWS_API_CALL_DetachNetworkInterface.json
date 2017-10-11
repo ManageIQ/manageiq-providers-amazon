@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "0ede56f0-28b8-534a-9374-04da23b15298",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"300b8d02-8105-d684-f10f-cce8718098d0\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-06T14:39:12Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAJ2ZOO4EOXK7MYBZQ\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-09-06T06:37:24Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-09-06T14:39:12Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"DetachNetworkInterface\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"attachmentId\":\"eni-attach-010bacf4\"},\"responseElements\":{\"_return\":true},\"requestID\":\"6a53aed6-e69b-4353-bab4-3ee7d4e666ec\",\"eventID\":\"0bcd6a8f-b228-431d-aff7-7cd9ef209e0d\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-06T14:40:09.391Z",
+  "SignatureVersion" : "1",
+  "Signature" : "TXHYU5aKQu6TeDd6IJNAjXXtmC8ygkxJRU/pBQI6q/7l9fK9FOePiqS3PYnelArqfnuQ+zPO7XCAYpVmGbqUNhufdKhoRNpYxdv/LyOARM6jvSTTUWwss6to+RsaiV6uPPajwIBvvQYgmvphwo9dCpc97aNaeOHo7xkUnO6pVKx3x1TWWv1Y4j+N8oNJUPiDsc/p9i9NG3E/P0k00g50nUp26JrDlCjbO2q3gChZUYKBYSrVs2MACMBlm+wdGIENSav1aS1yXu/oQKYvlZ4k7MP2Os5TzbZDat8X4tV7BksHTlXM0NdVOHeft6EAMVBQzexQQMBzXsG2NSDM89e2AA==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:9fefb8fe-9bd0-4624-9281-a279994ed2b9"
+}

@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "b0f52dda-1728-50ed-a743-7ff1261ffac4",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"2a5fc27c-d654-c239-0d6f-b3342bc8dd36\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.cloudformation\",\"account\":\"200278856672\",\"time\":\"2017-09-07T11:34:36Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAIRGEBWGGQPJ32XXQ\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-09-07T09:20:25Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-09-07T11:34:36Z\",\"eventSource\":\"cloudformation.amazonaws.com\",\"eventName\":\"DeleteStack\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"stackName\":\"arn:aws:cloudformation:us-east-1:200278856672:stack/ladas-test-22/ec875e20-93a9-11e7-b549-500c28b23699\"},\"responseElements\":null,\"requestID\":\"86b60892-93c0-11e7-a189-73b1c399fb21\",\"eventID\":\"edd0c431-978d-43aa-8aed-0a24897dcd7d\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-07T11:35:19.537Z",
+  "SignatureVersion" : "1",
+  "Signature" : "KNytEgHKAHwQrQdynYy62q6+HhLWxN7kdwtnDCcx/8N5JuaYijnoJqRm4q++l/P+OG609TiKDIozzsSh5NoxQ+jcfknYiFD/lfEsTH9pSon8eeDkDITUx3b2YKlcEGKoZ2T8uMNcgudrK2jccjqJtoY/Q+3bKC2hPPAw4Ipe34IeT6rXo6v6nRZQOVsF0Bu4eKGIBXOzT53072F94V07Ik1xQEJucGvpuI/dxfArd8s/fJl1Nau0f8BXXjEiR+ZgmNh9vsORhOUnHoGtVT3MZad+YW374Zj52Sm7VUUlfqLvF/TXLbeRxYhArhU71XtZCMkVusDP7TiYPmW4UF4xiQ==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:61d4ffc8-72e3-41a7-b28d-86e700532cd1"
+}

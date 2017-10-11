@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "3c3a1e4a-7a68-5ebc-8413-4c62f051b128",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"f70224cc-7b79-065d-ee5d-401e01d64376\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-05T11:17:15Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-09-05T11:17:10Z\"}},\"invokedBy\":\"cloudformation.amazonaws.com\"},\"eventTime\":\"2017-09-05T11:17:15Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"CreateInternetGateway\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"cloudformation.amazonaws.com\",\"userAgent\":\"cloudformation.amazonaws.com\",\"errorCode\":\"Client.InternetGatewayLimitExceeded\",\"errorMessage\":\"The maximum number of internet gateways has been reached.\",\"requestParameters\":null,\"responseElements\":null,\"requestID\":\"dd7e2158-958c-4d0f-8eb3-11091459767d\",\"eventID\":\"ad65aa93-cd2b-44f1-ad6d-2053ebb71640\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-05T11:18:17.565Z",
+  "SignatureVersion" : "1",
+  "Signature" : "IYOiT77+pMqKL0STaDmrYvV6AqZeNyzIvjuwK4MEp7mvJMuRMvlcyf9jZzJ3z7kJyUVRZLzuGLzIculsdq4GEGZ+w0qCNYz4pObFG+qMJH3UEkBrzqv/gDhnPg268ffbdxFvtP2cZhrzH0VDkliiyDzPgZ35djX/YOA9VHZDz0mmxk2XOG0v0iOnNpCafyyywm3qugLf8fnpB6UONh6pIQvM9oCgQCfqU9ppT9882yt6tZ9zIl4Y32d0hdxvpiBcmTz0m9c/cESbYfYnX8ulfZMwG5HStfyXb3fgu7irYtAy2Qh9PwKVz6YXI6cbJ1xKc48EeRETaMohfRC/c4TOXg==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:9fefb8fe-9bd0-4624-9281-a279994ed2b9"
+}

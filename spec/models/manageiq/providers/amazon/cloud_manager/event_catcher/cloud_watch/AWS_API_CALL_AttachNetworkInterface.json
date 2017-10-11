@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "295d51c4-9b8d-5672-b627-03ee914d18a5",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"daf72ae6-7e98-629f-18d6-02f538a217bf\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-06T14:38:01Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAJ2ZOO4EOXK7MYBZQ\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-09-06T06:37:24Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-09-06T14:38:01Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"AttachNetworkInterface\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"errorCode\":\"Client.AttachmentLimitExceeded\",\"errorMessage\":\"Interface count 3 exceeds the limit for t2.micro\",\"requestParameters\":{\"networkInterfaceId\":\"eni-83fc5323\",\"instanceId\":\"i-099e794cfa830e9be\",\"deviceIndex\":2},\"responseElements\":null,\"requestID\":\"03ade627-5b39-475d-9a8c-6cd432eff5d9\",\"eventID\":\"a8f7eec4-ba0e-4b18-98c4-be864fec51fc\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-06T14:38:56.916Z",
+  "SignatureVersion" : "1",
+  "Signature" : "fHOamtKBAheZuXLitSBAAcyt+IKJ8XenPj4K1A4G+4Hsp9VfLigSY3bMqYzo4/i6ngyPa9pn9nplLELHsVzmJRceXdzIF6osFgvviUnXzlUgnJ4wpudRP6/EL6vmQpJ6i4FCr7bUoqezyLbpEcnWk0N5HQerhtOWCSwj3mY2ywjgo/d2t6tbnUz/4HAw4KaT35ZgWbVpsYDMCokrnJLZKZFd2d86N/WlvueRIuQIB7W7Lhjiwjm2S64hdIhMm5X77PYw0E2zh0OlDRJs6VQ7xV9lvheD3k2fuzczSs7ubIZ9qGr5gBh1wQsi4uotHVXd2N5hhev8W6BuTdulNStF4g==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:9fefb8fe-9bd0-4624-9281-a279994ed2b9"
+}

@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "06b387a7-730b-5016-ba27-d58d7b05b281",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"4b5f0a59-b399-b5b4-e4b2-c12427004168\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-06T14:26:52Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAJ2ZOO4EOXK7MYBZQ\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-09-06T06:37:24Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-09-06T14:26:52Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"DisassociateAddress\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"associationId\":\"eipassoc-2f8a391b\"},\"responseElements\":{\"_return\":true},\"requestID\":\"0ea1d8a5-5085-4e38-95ba-fd84dece4429\",\"eventID\":\"b7c490c7-e65d-4fae-a961-3f98718ce456\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-06T14:27:26.209Z",
+  "SignatureVersion" : "1",
+  "Signature" : "M6/D/H7OjMdLSSR1iwITPUjV733PF4Ce3e0P/lHS6jZOfcsSQujVxQz80WZWf/5QGiwV6XhGYA9IG/tCDDMZkOgW2dZp5apR09D7m0qQhuz0CoVctL6UrMD7UxzplXXjNv9TJcjM1r65OBapBH5j71xbmFPNGzyh/YQyF+UsnXhBZTpHcvB3pxYPWu4EkVfC1Xkrs7aAKBO1+OHFT89Nr9AN8BlJpPHo7UVqq0y2HDa+4ZrP/WFFo34X0iN4xWl/iRcRjXSKvRTDw2AFQtVJpQSeSocJEseTIPrTiDMDaECKu2KJ4Evrx7CyKfTFhW3uyontJWxMsBG0G7RfYeqChQ==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:9fefb8fe-9bd0-4624-9281-a279994ed2b9"
+}

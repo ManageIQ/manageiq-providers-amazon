@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "9ff8dc55-e6c4-522a-8a91-8e7ff1f1e347",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"8c8083e9-ca2c-b76a-8310-e1ac5816adef\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-06T15:31:47Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAJQN5DDY7EVUBTSCQ\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-09-06T06:37:24Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-09-06T15:31:47Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"DeleteSubnet\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"subnetId\":\"subnet-84055dde\"},\"responseElements\":{\"_return\":true},\"requestID\":\"b485fbd7-56bf-4994-b49a-6a28b8bb4195\",\"eventID\":\"7a00c5f6-e173-482b-a419-a9e09ca407ef\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-06T15:32:05.095Z",
+  "SignatureVersion" : "1",
+  "Signature" : "a3RuoG4mr7M6vMJjsqIQ8AmfdMkt6zFW2FJYdTKBzGEjKXTP3+OVQZmf0KA4nX+KPLOFGCTuiSWvZOLJikqJiTDlfIfghb8liMAKnSy9AcziVtuXxvsAK0WMVOwwdWycwdK/U2p5CXFm+u2QA8FMkSNTodrR0hrm4sOxAGmj++eerqGUPgGqMv/bx0+0vtA5ZEJC30tTyhX4TPW5YrO+21+zhcn3UgkINpgQdHIdlb/G5E25JJZYtrQi/nIqS+MhXugdj0CDbn5c9GWwe1rCU2LKiQs1zWbdx4wDIgeQlPhl///chmHrLzUaId/ZKgKpxw8MlM+Slotid264zXyi/Q==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:9fefb8fe-9bd0-4624-9281-a279994ed2b9"
+}
