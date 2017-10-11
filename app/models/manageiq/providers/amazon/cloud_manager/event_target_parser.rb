@@ -68,6 +68,8 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
                       :cloud_subnets
                     when "AWS::EC2::EIP"
                       :floating_ips
+                    when "AWS::CloudFormation::Stack"
+                      :orchestration_stacks
                     end
 
     add_target(target_collection, target_class, resource_id) if target_class && resource_id
