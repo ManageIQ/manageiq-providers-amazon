@@ -19,6 +19,22 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
   end
 
   context "AWS CloudWatch with CloudTrail API" do
+    it "parses AWS_API_CALL_CreateKeyPair" do
+      ems_event = create_ems_event("cloud_watch/AWS_API_CALL_CreateKeyPair.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(2)
+      expect(parsed_targets.collect(&:manager_ref).uniq).to match_array([{:name => "test_vcr_key_pair"}])
+    end
+
+    it "parses AWS_API_CALL_DeleteKeyPair" do
+      ems_event = create_ems_event("cloud_watch/AWS_API_CALL_DeleteKeyPair.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(parsed_targets.collect(&:manager_ref).uniq).to match_array([{:name => "test_vcr_key_pair"}])
+    end
+
     it "parses AWS_API_CALL_StartInstances event" do
       ems_event = create_ems_event("cloud_watch/AWS_API_CALL_StartInstances.json")
       parsed_targets = described_class.new(ems_event).parse
