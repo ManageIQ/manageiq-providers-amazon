@@ -92,7 +92,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
         match_array(
           [
             [:floating_ips, {:ems_ref => "eipalloc-3d8a720f"}],
-            [:vms, {:ems_ref => "i-0b72e0b70e7fae3c9"}]]
+            [:vms, {:ems_ref => "i-0b72e0b70e7fae3c9"}]
+          ]
         )
       )
     end
