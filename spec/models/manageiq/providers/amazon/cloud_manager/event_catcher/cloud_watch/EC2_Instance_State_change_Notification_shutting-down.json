@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "741d3115-a3bd-5d71-ab03-633e92941845",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"2867aa6c-b98e-735d-c257-66d8aa89eb72\",\"detail-type\":\"EC2 Instance State-change Notification\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-07T11:35:04Z\",\"region\":\"us-east-1\",\"resources\":[\"arn:aws:ec2:us-east-1:200278856672:instance/i-04863b664ebf1facf\"],\"detail\":{\"instance-id\":\"i-04863b664ebf1facf\",\"state\":\"shutting-down\"}}",
+  "Timestamp" : "2017-09-07T11:35:05.853Z",
+  "SignatureVersion" : "1",
+  "Signature" : "O5aV7LgsrgebU6VCjQdwkM1iLjrFaFb3yIkZXlRNGBm06pdGE6TljA8YDisRTVSi5AeRHsrTgJhWrlkrLaD+oN3a92/B5qu3grs7hICYoZLzBa0IuqZjxCDDGJ5Kpts22AzkXo/H4NcmwUSa9/JIatqAhJr6FTkZijZwGemKsl6cn8MHHxCZrx1btXGtrfammsBQfJwmg7W2qH1wK2e7ch97o/ihCqvV92IuoE6Af0RByAhu/ES0ULNKTEGHfVUKWN07tFWla+cgmrqe7do0NWlpa3BEEcdmgaoNnGHOnjeqitMaUDQDsAD/Nj9R9K1BIapwOwCVqvvPSK6g3gXS+w==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:61d4ffc8-72e3-41a7-b28d-86e700532cd1"
+}
