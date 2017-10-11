@@ -16,6 +16,28 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       expect(parsed_targets.size).to eq(1)
       expect(parsed_targets.collect(&:manager_ref).uniq).to match_array([{:ems_ref => 'i-06199fba'}])
     end
+
+    it "CloudFormation_StackCreate" do
+      ems_event = create_ems_event("config/AWS_CloudFormation_Stack_CREATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(parsed_targets.collect(&:manager_ref).uniq).to(
+        match_array([{:ems_ref=>"arn:aws:cloudformation:us-east-1:200278856672:stack/ladas-test31/0fb199a0-93c4-11e7-998e-500c217b4a62"}])
+      )
+    end
+
+    it "CloudFormation_StackDelete" do
+      ems_event = create_ems_event("config/AWS_CloudFormation_Stack_DELETE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(parsed_targets.collect(&:manager_ref).uniq).to(
+        match_array([{:ems_ref=>"arn:aws:cloudformation:us-east-1:200278856672:stack/ladas-test-22/ec875e20-93a9-11e7-b549-500c28b23699"}])
+      )
+    end
   end
 
   context "AWS CloudWatch with CloudTrail API" do
