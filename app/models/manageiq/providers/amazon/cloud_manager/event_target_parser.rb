@@ -42,7 +42,11 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
   end
 
   def add_target(target_collection, association, ref)
-    target_collection.add_target(:association => association, :manager_ref => {:ems_ref => ref})
+    target_collection.add_target(:association => association, :manager_ref => {:ems_ref => ref}) unless ref.blank?
+  end
+
+  def add_name_target(target_collection, association, ref)
+    target_collection.add_target(:association => association, :manager_ref => {:name => ref}) unless ref.blank?
   end
 
   def collect_cloudwatch_ec2_references!(target_collection, event_data)
@@ -80,7 +84,7 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
     # Cloud
     add_target(target_collection, :vms, event_data["instanceId"]) if event_data["instanceId"]
     add_target(target_collection, :miq_templates, event_data["imageId"]) if event_data["imageId"]
-    add_target(target_collection, :key_pairs, event_data["keyName"]) if event_data["keyName"]
+    add_name_target(target_collection, :key_pairs, event_data["keyName"]) if event_data["keyName"]
     add_target(target_collection, :orchestration_stacks, event_data["stackId"]) if event_data["stackId"]
     add_target(target_collection, :orchestration_stacks, event_data["stackName"]) if event_data["stackName"]
     # Network
