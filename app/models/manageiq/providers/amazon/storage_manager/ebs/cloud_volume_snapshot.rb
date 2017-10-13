@@ -59,33 +59,8 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot < ::
     raise MiqException::MiqVolumeSnapshotCreateError, e.to_s, e.backtrace
   end
 
-  def delete_snapshot_queue(userid = "system", _options = {})
-    task_opts = {
-      :action => "deleting volume snapshot #{inspect} in #{ext_management_system.inspect}",
-      :userid => userid
-    }
-
-    queue_opts = {
-      :class_name  => self.class.name,
-      :instance_id => id,
-      :method_name => 'delete_snapshot',
-      :priority    => MiqQueue::HIGH_PRIORITY,
-      :role        => 'ems_operations',
-      :zone        => my_zone,
-      :args        => []
-    }
-
-    MiqTask.generic_action_with_callback(task_opts, queue_opts)
-  end
-
-  def delete_snapshot(_options = {})
-    with_provider_object do |snapshot|
-      if snapshot
-        snapshot.delete
-      else
-        _log.warn "snapshot=[#{name}] already deleted"
-      end
-    end
+  def raw_delete_snapshot
+    with_provider_object(&:delete)
   rescue => e
     _log.error "volume=[#{name}], error: #{e}"
     raise MiqException::MiqVolumeSnapshotDeleteError, e.to_s, e.backtrace
