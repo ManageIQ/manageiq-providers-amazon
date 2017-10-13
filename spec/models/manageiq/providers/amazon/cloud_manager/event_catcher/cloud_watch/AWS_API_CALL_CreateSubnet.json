@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "5e9d602b-afe2-50de-81c8-3201b8d1e1ee",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"555fcd83-dce7-5616-2a00-627e38203a79\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-06T15:31:27Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAJQN5DDY7EVUBTSCQ\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-09-06T06:37:24Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-09-06T15:31:27Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"CreateSubnet\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"vpcId\":\"vpc-ff49ff91\",\"cidrBlock\":\"10.0.30.0/24\"},\"responseElements\":{\"subnet\":{\"subnetId\":\"subnet-84055dde\",\"state\":\"pending\",\"vpcId\":\"vpc-ff49ff91\",\"cidrBlock\":\"10.0.30.0/24\",\"ipv6CidrBlockAssociationSet\":{},\"availableIpAddressCount\":251,\"availabilityZone\":\"us-east-1d\",\"defaultForAz\":false,\"mapPublicIpOnLaunch\":false,\"assignIpv6AddressOnCreation\":false}},\"requestID\":\"60f5d295-1544-4adb-8f07-ceef9b15a924\",\"eventID\":\"fdefbbaa-43f3-47bd-a709-6f8f0fea8e15\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-06T15:32:03.766Z",
+  "SignatureVersion" : "1",
+  "Signature" : "MiMlAubbqxhUl6rD/q5NXwglmtBhdT8x3LAwjjnC80XoCHw19BW/UNkiKR+Ez4zw41dvbi/0n9qRRXhU6oU9JZuLaklBctXqgGxi16lTb+Xedx0k/ZMK7sfRp1HlsqC60w1F7HpsCEbLTu8EFnHeIJM3v6Y4qsuVe4TcgkmPVzLMoB/ik6ow6PBXWWKov1NhODAAsyP3sRUXsVJ39tXyhIVmB1unoTc5ay1SAYcpscGRTGjY2KU+R2JpObUPRMCfjwjCBRD8bObRs2jjyvfvepL9n0y1Cb72OYfa39qUZNJ2dKkt9eVotgZRh8/SpravZzRIxl9h166b9BEjh3HDPw==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:9fefb8fe-9bd0-4624-9281-a279994ed2b9"
+}

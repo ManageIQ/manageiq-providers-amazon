@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "ef555e49-609e-5d40-9c4e-0c62510d186c",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"21db91c2-370b-d063-a999-3213ee4e8892\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-07T11:36:15Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-09-07T09:20:25Z\"}},\"invokedBy\":\"cloudformation.amazonaws.com\"},\"eventTime\":\"2017-09-07T11:36:15Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"DeleteSecurityGroup\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"cloudformation.amazonaws.com\",\"userAgent\":\"cloudformation.amazonaws.com\",\"requestParameters\":{\"groupName\":\"ladas-test-22-InstanceSecurityGroup-1SG39VFG1U29M\"},\"responseElements\":{\"_return\":true},\"requestID\":\"8757d094-e7e8-43e9-8279-748e5be7f513\",\"eventID\":\"19a0621f-1cd6-45f8-8f46-bd6c103d2dfc\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-07T11:36:51.257Z",
+  "SignatureVersion" : "1",
+  "Signature" : "VtvzLjezCj3juUBAnZ10AyvV0RRv2DMdKniM57kcGugmbAk9OXUFTA3YuFATuuM4dXU5jfYaJPCQLcmthvYc/mlPwiSFNXxSJtr9wO6S6lBq9ByvMybcVsJIjpLwQMa4Ptu9z1XLkRgx+M9pg+3vwiWaNNMMMgKdKBG6jMb3qfVWweoCvIuRKaZFIbxl2xO7zW3XxUyqtLBum/k9c8ojv1jXE1XFBcpI645g6ZAgS++XEvCp5PikMO1ZILEe4x0zMUamcUzdM9PZzXCaUWWcVGVlYjbEzZqZrfkMQSWMYnW7SMZPhjwSzWaQKrwJa/r0d/+q3JZNcWxLf7hax199tw==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:61d4ffc8-72e3-41a7-b28d-86e700532cd1"
+}

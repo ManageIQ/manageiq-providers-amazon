@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "fa8e5721-1dc2-57e2-b53d-050a212fe456",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"9ddd3903-cd7c-ddb5-c173-69aa681a7d07\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-07T12:24:34Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"AKIAJS5P4A2TYQUXGZYQ\",\"userName\":\"ladas\"},\"eventTime\":\"2017-09-07T12:24:34Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"AssociateAddress\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources\",\"requestParameters\":{\"instanceId\":\"i-0b72e0b70e7fae3c9\",\"allocationId\":\"eipalloc-3d8a720f\"},\"responseElements\":{\"_return\":true,\"associationId\":\"eipassoc-54289160\"},\"requestID\":\"0d6bd068-1c95-4757-b202-d60d31dfaac7\",\"eventID\":\"acc16b73-43d6-4406-8749-c94526dbafb6\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-07T12:25:17.053Z",
+  "SignatureVersion" : "1",
+  "Signature" : "fbNvRS/FuwSer56JNhUh/T7WBLGqGG/2wWA5sVgabkue0jxTJK7IVtwcbko773fYbLY+fCYgMrZIDyLfCwGk06tpnjwHqkBCdaSaIUXYSpz3ZOHub26FH+G92xmdqFXgyeE5Hrn4lU5e0Uj7d8MXbzZYdP/zYnLglPRdPxgNU+66LLneDm2u5NI1b7iAZzrouVTP0j5gSBURmPWgDEEe2yy+oKLnIXSCRVt5eMRqvTmScnxf5kckfne9lMfNO/JZPEwYfs3/rvJxSObIJPi6xBIWgVON/Jnhi+lw8vPNmw2FzQ+lmntiQyI3wEuAGWoNmeir5hLRG+E81ltLpfaoug==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:61d4ffc8-72e3-41a7-b28d-86e700532cd1"
+}

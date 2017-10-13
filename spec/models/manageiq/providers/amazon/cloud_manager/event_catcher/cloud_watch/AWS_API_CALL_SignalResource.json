@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "f1f5a3bf-4e09-5479-a41c-f19479bdb437",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"c524cc71-1ece-b6ae-da0b-e65995c22bd5\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.cloudformation\",\"account\":\"200278856672\",\"time\":\"2017-09-07T12:02:13Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"Unknown\",\"principalId\":\"\",\"arn\":\"\",\"accountId\":\"200278856672\",\"accessKeyId\":\"\",\"userName\":\"\"},\"eventTime\":\"2017-09-07T12:02:13Z\",\"eventSource\":\"cloudformation.amazonaws.com\",\"eventName\":\"SignalResource\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"75.101.188.78\",\"userAgent\":\"CloudFormation Tools\",\"requestParameters\":{\"uniqueId\":\"i-00945be3d7c07ec6c\",\"status\":\"SUCCESS\",\"logicalResourceId\":\"WebServerGroup\",\"stackName\":\"ladas-test31\"},\"responseElements\":null,\"requestID\":\"62ba2992-93c4-11e7-abdd-d5bce0e15f22\",\"eventID\":\"dbffa6c7-222c-4209-85aa-7afcdc4227f5\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-07T12:03:00.103Z",
+  "SignatureVersion" : "1",
+  "Signature" : "ek8eGlv4tzBQT5EyI/nI1uztX2m/ssBlCQhZsC6f6OXdkGaL/LtKrR71HcmSQ00W5yMh6UE1WQvE4jzlL4TIoPMlnRby7nfozh2fEo4nChUycCYn7ZLc5XpeRoyQqiIOl2hqE4WQxjSrNQzM3zwvvZF+3F3ZkkdZ41+qSKC/vYfz8+CiYTkXzqiqLc/fsmEcF2T5TUUzXuKq7Mj60PIRtAfYS1PeDqLl7ExRQghHbA3anhZpuT/9LhaKExl6s6Ffagnm3nN0+D6Y6wNr+MIzhyHDD9Jba+u7SE3f7T1Fo2Mv4Q9EXjPzrPrDu0Uy9u2uM9h99ecpJRlk1SzLUh0IDA==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:61d4ffc8-72e3-41a7-b28d-86e700532cd1"
+}

@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "2f600ff2-321b-5f4b-a444-5dd82597e495",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"741e87b9-a177-2e79-c06f-1fc3c213fc24\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-06T15:32:38Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAJQN5DDY7EVUBTSCQ\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-09-06T06:37:24Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-09-06T15:32:38Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"AllocateAddress\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"domain\":\"standard\"},\"responseElements\":{\"publicIp\":\"23.23.209.146\",\"domain\":\"standard\"},\"requestID\":\"5acb12a7-13cd-4ad4-a2e4-40f4c4c4323b\",\"eventID\":\"e1092798-b275-4f8c-a0c7-22f8ca4eed46\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-06T15:33:32.725Z",
+  "SignatureVersion" : "1",
+  "Signature" : "TVQevx7nX7HOukV1X3UDVH4TIHCxBTl2OiBD6i47yIENOi4lLJimRtLRPbYX0U2d6H2+5R4OJD334Cyb4XrkwXUaYZoldsULMZ1E6TcnVXujudRNyIT0+QNvRN+1fx2GUTOjMQ6shGH8mjVPFhGtGp2av0zgQTAJkcfTKwGON1Wt8xYNWu0pPXNPim6ZHGGqbl21yfpEIwRqB85w/7ZcilyxRZS2SPDoN0fo32pcJLxB5vyuVS2vGD0ObcZUKjw28UkG/dxyzTAvnfd8VVQrwY9o/Lp+BDIhaXJZPhfBAvbzTh/gIvy9KXnipeDtRZTNugW7wHV9pCwOOuMCnvS63A==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:9fefb8fe-9bd0-4624-9281-a279994ed2b9"
+}

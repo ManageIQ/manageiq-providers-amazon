@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "7806efba-90bd-51b9-bd5f-bd91a7ff192c",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"52a4ee51-d2b1-4186-94b0-e0a7c673b9ff\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-09-07T12:00:05Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-09-07T11:59:54Z\"}},\"invokedBy\":\"cloudformation.amazonaws.com\"},\"eventTime\":\"2017-09-07T12:00:05Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"CreateSecurityGroup\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"cloudformation.amazonaws.com\",\"userAgent\":\"cloudformation.amazonaws.com\",\"requestParameters\":{\"groupName\":\"ladas-test31-InstanceSecurityGroup-WB54OMZ9Y46R\",\"groupDescription\":\"Enable SSH access and HTTP access on the inbound port\"},\"responseElements\":{\"_return\":true,\"groupId\":\"sg-aaa85e3c\"},\"requestID\":\"92040cb3-65d4-43af-ad7c-162e84eb76ea\",\"eventID\":\"c2ec62be-0cd2-4f51-8c67-62d1fdd0b853\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-09-07T12:01:06.869Z",
+  "SignatureVersion" : "1",
+  "Signature" : "csf180vWX4JIbVZFuiSHuSeBJDPc2iase0DeQicg/ueowWk5m2tW9tlO8HfJyNBFxjQkZpnRISm83BOGNWy+3m8jk5ZCpJwpmNGVZOCxvlIqhlq/lNVHnUhbKXoECzrn77EAsbxuKmgSMesbeBuZxNPg7p3wEDXFoBxf/4gDWt+0gil5jxu/9+RP9b8mIu3kksINCgG7D+KS2Z8Us6c0QblIpklMVvjgJBt9zXYQeZMEpgtkqfaCdVmwGwJNCA2HkKfBtTGFTYYtvx6KsfmKPAerQV9wAh7BuyboOYLeCcEd676taIKx41GyHwrxbNmWeEimmwaYUEpRt53/imLNsA==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:61d4ffc8-72e3-41a7-b28d-86e700532cd1"
+}
