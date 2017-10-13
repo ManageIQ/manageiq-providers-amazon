@@ -65,7 +65,7 @@ class ManageIQ::Providers::Amazon::CloudManager::Refresher < ManageIQ::Providers
   # TODO(lsmola) NetworkManager, remove this once we have a full representation of the NetworkManager.
   # NetworkManager should refresh base on its own conditions
   def save_inventory(ems, target, inventory_collections)
-    EmsRefresh.save_ems_inventory(ems, inventory_collections)
+    super
     EmsRefresh.queue_refresh(ems.network_manager) if target.kind_of?(ManageIQ::Providers::BaseManager)
     EmsRefresh.queue_refresh(ems.ebs_storage_manager) if target.kind_of?(ManageIQ::Providers::BaseManager)
   end
