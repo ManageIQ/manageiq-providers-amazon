@@ -49,7 +49,15 @@
     :disabled_instance_types: []
     # disable instance_types by their keys found in app/models/manageiq/providers/amazon/instance_types.rb e.g.
     # - t2.nano
-
+    :agent_coordinator:
+      :agent_ami_name: centos-7.2-hvm*
+      :agent_gem_file: scripts/agent_settings/agent_gemfile
+      :agent_idle_period: 900
+      :agent_label: MIQ_SSA
+      :agent_log_level: INFO
+      :agent_ruby_version: 2.3.3
+      :agent_setup_script: scripts/agent_settings/setup.sh
+      :heartbeat_interval: 120
 :ems_refresh:
   :ec2:
     :get_private_images: true
