@@ -50,6 +50,19 @@
     # disable instance_types by their keys found in app/models/manageiq/providers/amazon/instance_types.rb e.g.
     # - t2.nano
 
+    :agent_coordinator:
+      :bucket_prefix: miq-ssa
+      :request_queue_prefix: ssa_extract_request
+      :reply_queue_prefix: ssa_extract_reply
+      :reply_prefix: extract/queue-reply/
+      :heartbeat_prefix: extract/heartbeat/
+      :log_prefix: extract/logs/
+      :log_level: INFO
+      :heartbeat_interval: 120
+      :agent_idle_period: 900
+      :userdata_script_file: tools/amazon_agent_settings/prepare_userdata
+      :agent_ami: centos-7.2-hvm
+      :agent_ruby_version: 2.3.3
 :ems_refresh:
   :ec2:
     :get_private_images: true
