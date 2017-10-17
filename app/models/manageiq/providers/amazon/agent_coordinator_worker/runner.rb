@@ -1,6 +1,6 @@
 class ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner < MiqWorker::Runner
   def do_before_work_loop
-    @coordinators = self.class.all_amazon_agent_coordinators_in_zone
+    @coordinators = self.class.all_agent_coordinators_in_zone
   end
 
   def do_work
@@ -26,7 +26,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner < MiqWorker::R
   end
 
   def self.agent_coordinator_by_guid(guid)
-    all_amazon_agent_coordinators_in_zone.find { |e| e.ems.guid == guid }
+    all_agent_coordinators_in_zone.find { |e| e.ems.guid == guid }
   end
 
   def self.ems_by_guid(guid)
@@ -49,7 +49,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner < MiqWorker::R
     all_valid_ems_in_zone.select { |e| e.kind_of?(ManageIQ::Providers::Amazon::CloudManager) }
   end
 
-  def self.all_amazon_agent_coordinators_in_zone
+  def self.all_agent_coordinators_in_zone
     all_amazon_ems_in_zone.collect { |e| ManageIQ::Providers::Amazon::AgentCoordinator.new(e) }
   end
 
