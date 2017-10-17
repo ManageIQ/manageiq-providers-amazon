@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 71 ending 2017-10-16
+
+### Added
+- Parse aws config orchestration stack event [(#310)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/310)
+- Add routers to full refresh [(#304)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/304)
+- Add raw_delete_snapshot to CloudVolumeSnapshot model [(#277)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/277)
+
+### Fixed
+- Correctly parse key pair reference [(#311)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/311)
+- Compact targeted refresh references [(#308)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/308)
+- Add OrchestrationParameterMultiline constraints to options that require a text area [(#307)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/307)
+
+### Removed
+- Remove Amazon provider discovery [(#306)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/306)
+
 ## Unreleased as of Sprint 70 ending 2017-10-02
 
 ### Added
