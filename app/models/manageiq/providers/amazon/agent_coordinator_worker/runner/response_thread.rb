@@ -34,8 +34,10 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
     until @shutdown_instance_wait_thread
       @coordinators.each do |coord|
         _log.debug("Checking replies for Agent Coordinator Provider #{coord.ems.name}")
-        return if @shutdown_instance_wait_thread
-        unless coord.reply_queue_empty?
+        break if @shutdown_instance_wait_thread
+        if coord.reply_queue_empty?
+          _log.debug("No Replies visible for Provider #{coord.ems.name}")
+        else
           ssaq_args = {}
           ssaq_args[:ssa_bucket]    = coord.ssa_bucket
           ssaq_args[:reply_queue]   = coord.reply_queue
@@ -45,7 +47,7 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
           ssaq_args[:s3]            = coord.s3
           ssaq                      = AmazonSsaSupport::SsaQueue.new(ssaq_args)
           unless ssaq
-            _log.error "Error creating SsaQueue for #{coord.ems.name}"
+            _log.error("Error creating SsaQueue for #{coord.ems.name}")
             next
           end
           _log.debug("Getting replies for #{coord.ems.name}")
@@ -58,10 +60,9 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
             _log.error("Error #{err} processing replies for #{coord.ems.name}.  Continuing.")
             next
           end
-        else
-          _log.debug("No Replies visible for Provider #{coord.ems.name}")
         end
       end
+      break if @shutdown_instance_wait_thread
       # While this is WIP we will hard code this to 10 seconds.
       # reponse_check_sleep_seconds = response_thread_sleep_seconds
       response_check_sleep_seconds = 10
@@ -132,7 +133,7 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
           _log.debug("No XML loaded for [#{c}].")
           next
         elsif xml.root.nil?
-          _log.debug("No XML root loaded for [#{c}]: XML is #{xml.to_s}.")
+          _log.debug("No XML root loaded for [#{c}]: XML is #{xml}.")
           next
         end
         _log.debug("Writing scanned data to XML for [#{c}] to blackbox.")
