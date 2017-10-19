@@ -97,14 +97,16 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
     xml_summary.root.add_attributes("taskid" => ost.taskid)
     ost.taskid = ost.jobid
 
-    data_dir = File.expand_path(Rails.root.join("data/metadata"))
+    data_dir = File.expand_path(Rails.root.join("data", "metadata"))
     _log.debug("creating #{data_dir}")
-    begin
-      Dir.mkdir(data_dir)
-    rescue Errno::EEXIST
-      # Ignore if the directory was created by another thread
-      _log.debug("No need to create directory #{data_dir} since it exists.")
-    end unless File.exist?(data_dir)
+    unless File.exist?(data_dir)
+      begin
+        Dir.mkdir(data_dir)
+      rescue Errno::EEXIST
+        # Ignore if the directory was created by another thread
+        _log.debug("No need to create directory #{data_dir} since it exists.")
+      end
+    end
     ost.skipConfig = true
     ost.config     = OpenStruct.new(
       :dataDir            => data_dir,
@@ -150,7 +152,7 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
       _log.error("perform_metadata_sync Error - [#{scan_err}]")
       _log.error("perform_metadata_sync Error - [#{scan_err.backtrace.join("\n")}]")
     ensure
-      bb.close if bb
+      bb&.close
       ost.taskid = job.guid
       update_job_message(ost, "Scanning completed.")
       ost.taskid = ost.jobid
