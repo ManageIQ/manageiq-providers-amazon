@@ -77,14 +77,22 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
     ost.jobid = extract_reply[:job_id]
     job       = Job.find_by(:id => ost.jobid)
     raise _("Unable to sync data for job with id <%{number}>. Job not found.") % {:number => ost.jobid} if job.nil?
-    ost.taskid = ost.jobid
     target_id  = job.target_id
     vm         = VmOrTemplate.find(target_id)
-    unless vm.kind_of?(ManageIQ::Providers::Amazon::CloudManager::Vm)
-      raise "Vm #{vm.name} of class #{vm.class.name} is not an Amazon vm - unable to sync data"
+    ost.taskid = job.guid
+    unless vm.kind_of?(ManageIQ::Providers::Amazon::CloudManager::Vm) ||
+           vm.kind_of?(ManageIQ::Providers::Amazon::CloudManager::Template)
+      error = "Vm #{vm.name} of class #{vm.class.name} is not an Amazon instance or image - unable to sync data"
+      update_job_message(ost, error)
+      job.signal(:abort, error, "error")
+      return
     end
     _log.debug("Syncing Metadata for #{vm.ems_ref}")
-    ost.taskid = job.guid
+    if extract_reply[:error]
+      update_job_message(ost, extract_reply[:error])
+      job.signal(:abort, extract_reply[:error], "error")
+      return
+    end
     update_job_message(ost, "Synchronization in progress")
     status        = scan_message         = "OK"
     status_code   = categories_processed = 0
