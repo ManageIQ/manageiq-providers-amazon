@@ -13,7 +13,7 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
       begin
         # Wait a bit for the Agent Coordinators to be started
         sleep(20)
-        wait_for_responses
+        response_handler_loop
       rescue SystemExit
         _log.info("SystemExit received, exiting AWS SSA Response Thread")
         stop_response_thread
@@ -29,7 +29,7 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
     @shutdown_instance_wait_thread = true
   end
 
-  def wait_for_responses
+  def response_handler_loop
     @shutdown_instance_wait_thread = nil
     until @shutdown_instance_wait_thread
       @coordinators.each do |coord|
@@ -76,7 +76,7 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
     ost.reply = extract_reply
     ost.jobid = extract_reply[:job_id]
     job       = Job.find_by(:id => ost.jobid)
-    raise _("Unable to sync data for job with id <%{number}>. Job not found.") % {:number => ost.jobid} if job.nil?
+    raise _("Unable to sync data for job with id #{ost.jobid}") if job.nil?
     target_id  = job.target_id
     vm         = VmOrTemplate.find(target_id)
     ost.taskid = job.guid
