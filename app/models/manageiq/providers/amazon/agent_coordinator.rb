@@ -181,14 +181,14 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     register(instance)
 
     # prepare work directory
-    ssh_commands(instance, ["sudo mkdir -p #{WORK_DIR}; sudo chmod go+w #{WORK_DIR}"])
+    ssh_commands(instance, ["sudo mkdir -p #{WORK_DIR}; sudo chmod go+w #{WORK_DIR}"], agent_ami_login_user)
     # scp the default setting yaml file
     create_config_yaml("config.yml")
-    scp_file("config.yml", WORK_DIR.to_s, instance)
+    scp_file("config.yml", WORK_DIR.to_s, instance, agent_ami_login_user)
 
     # run docker image
-    command_line = "sudo docker run -d -v /dev:/host_dev -v #{WORK_DIR}/config.yml:#{WORK_DIR}/config.yml --privileged #{agent_docker_name}"
-    ssh_commands(instance, [command_line.to_s])
+    command_line = "sudo docker run -d --restart=always -v /dev:/host_dev -v #{WORK_DIR}/config.yml:#{WORK_DIR}/config.yml --privileged #{agent_docker_name}"
+    ssh_commands(instance, [command_line.to_s], agent_ami_login_user)
   end
 
   # TODO: for downstream
@@ -405,6 +405,10 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
   def agent_ami_name
     agent_coordinator_settings.try(:agent_ami_name) || raise { "Please specify AMI image name for SSA agent" }
+  end
+
+  def agent_ami_login_user
+    agent_coordinator_settings.try(:agent_ami_login_user) || raise { "Please specify AMI image's login user name for SSA agent" }
   end
 
   def agent_docker_name
