@@ -58,6 +58,7 @@
       :agent_label: smartstate
       :agent_log_level: INFO
       :heartbeat_interval: 120
+      :response_thread_sleep_seconds: 10
 
 :ems_refresh:
   :ec2:
