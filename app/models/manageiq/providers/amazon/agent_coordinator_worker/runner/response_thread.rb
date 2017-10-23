@@ -62,10 +62,8 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
           end
         end
       end
-      # While this is WIP we will hard code this to 10 seconds.
-      # reponse_check_sleep_seconds = response_thread_sleep_seconds
-      response_check_sleep_seconds = 10
-      _log.debug("going to sleep for #{response_check_sleep_seconds} seconds after getting all Agent Coordinators")
+      response_check_sleep_seconds = response_thread_sleep_seconds
+      _log.debug("going to sleep for #{response_check_sleep_seconds} seconds after checking all Agent Coordinators")
       sleep(response_check_sleep_seconds) unless @shutdown_instance_wait_thread
     end
   end
