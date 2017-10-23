@@ -62,7 +62,6 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
           end
         end
       end
-      break if @shutdown_instance_wait_thread
       # While this is WIP we will hard code this to 10 seconds.
       # reponse_check_sleep_seconds = response_thread_sleep_seconds
       response_check_sleep_seconds = 10
