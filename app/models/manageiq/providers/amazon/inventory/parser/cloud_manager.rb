@@ -43,9 +43,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       uid      = image['image_id']
       location = image['image_location']
       name     = get_from_tags(image, :name)
-      name     ||= image['name']
-      name     ||= $1 if location =~ /^(.+?)(\.(image|img))?\.manifest\.xml$/
-      name     ||= uid
+      name     = image['name'] if name.blank?
+      name     = $1 if name.blank? && location =~ /^(.+?)(\.(image|img))?\.manifest\.xml$/
+      name     = uid if name.blank?
 
       persister_image = persister.miq_templates.find_or_build(uid).assign_attributes(
         :uid_ems            => uid,
