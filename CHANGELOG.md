@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## Fine-4
+
+### Fixed
+- Handle empty string in image name tags [(#2730](https://github.com/ManageIQ/manageiq-providers-amazon/pull/273)
+
 ## Fine-3
 
 ### Fixed
