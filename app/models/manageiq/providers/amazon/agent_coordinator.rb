@@ -404,15 +404,15 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def agent_ami_name
-    agent_coordinator_settings.try(:agent_ami_name) || raise { "Please specify AMI image name for SSA agent" }
+    agent_coordinator_settings.try(:agent_ami_name) || raise("Please specify AMI image name for SSA agent")
   end
 
   def agent_ami_login_user
-    agent_coordinator_settings.try(:agent_ami_login_user) || raise { "Please specify AMI image's login user name for SSA agent" }
+    agent_coordinator_settings.try(:agent_ami_login_user) || raise("Please specify AMI image's login user name for SSA agent")
   end
 
   def agent_docker_name
-    agent_coordinator_settings.try(:agent_docker_name) || raise { "Please specify docker image name for SSA agent" }
+    agent_coordinator_settings.try(:agent_docker_name) || raise("Please specify docker image name for SSA agent")
   end
 
   # This label is used to name all objects (profile/role/instance, etc) we created in AWS.
