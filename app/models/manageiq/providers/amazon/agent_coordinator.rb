@@ -165,15 +165,15 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
           :value => label
         }]
       }]
-    )
-    ec2.client.wait_until(:instance_status_ok, :instance_ids => [instance[0].id])
+    ).first
+    ec2.client.wait_until(:instance_status_ok, :instance_ids => [instance.id])
 
     _log.info("Start to load SSA application, this may take a while ...")
 
-    setup_agent(instance[0])
+    setup_agent(instance)
     _log.info("SSA agent is ready to receive requests.")
 
-    instance[0].id
+    instance.id
   end
 
   def setup_agent(instance)
