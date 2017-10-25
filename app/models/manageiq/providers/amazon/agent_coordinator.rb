@@ -339,7 +339,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     kp = find_or_create_keypair(pair_name)
     pem_file_name = "#{pair_name}.pem"
     File.write(pem_file_name, kp.auth_key)
-    File.chmod(0o400, pem_file_name)
+    File.chmod(0400, pem_file_name)
     pem_file_name
   end
 
