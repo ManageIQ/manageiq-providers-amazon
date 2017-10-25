@@ -145,26 +145,16 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     find_or_create_profile
 
     instance = ec2.create_instances(
+      :iam_instance_profile => {:name => label},
       :image_id             => get_agent_image_id,
-      :min_count            => 1,
-      :max_count            => 1,
-      :key_name             => kp.name,
-      :security_group_ids   => [security_group_id],
       :instance_type        => 't2.micro',
-      :placement            => {
-        :availability_zone => zone_name
-      },
+      :key_name             => kp.name,
+      :max_count            => 1,
+      :min_count            => 1,
+      :placement            => {:availability_zone => zone_name},
+      :security_group_ids   => [security_group_id],
       :subnet_id            => subnets[0].subnet_id,
-      :iam_instance_profile => {
-        :name => label
-      },
-      :tag_specifications   => [{
-        :resource_type => "instance",
-        :tags          => [{
-          :key   => "Name",
-          :value => label
-        }]
-      }]
+      :tag_specifications   => [{:resource_type => "instance", :tags => [{:key => "Name", :value => label}]}]
     ).first
     ec2.client.wait_until(:instance_status_ok, :instance_ids => [instance.id])
 
