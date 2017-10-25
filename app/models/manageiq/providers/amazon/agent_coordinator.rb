@@ -144,7 +144,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     security_group_id = find_or_create_security_group(subnets[0].vpc_id)
     find_or_create_profile
 
-    instance                = ec2.create_instances(
+    instance = ec2.create_instances(
       :image_id             => get_agent_image_id,
       :min_count            => 1,
       :max_count            => 1,
