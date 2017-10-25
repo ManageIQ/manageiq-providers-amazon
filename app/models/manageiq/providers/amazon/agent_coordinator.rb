@@ -204,8 +204,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def get_keypair(keypair_name = label)
-    kps = @ems.authentications.where(:name => keypair_name)
-    kps.any? ? kps[0] : nil
+    @ems.authentications.find_by(:name => keypair_name)
   end
 
   def find_or_create_profile(profile_name = label, role_name = label)
