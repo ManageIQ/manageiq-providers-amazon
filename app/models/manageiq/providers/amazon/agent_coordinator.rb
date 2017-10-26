@@ -140,7 +140,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
       :max_count            => 1,
       :min_count            => 1,
       :placement            => {:availability_zone => zone_name},
-      :tag_specifications   => [{:resource_type => "instance", :tags => [{:key => "Name", :value => label}]}]
+      :tag_specifications   => [{:resource_type => "instance", :tags => [{:key => "Name", :value => label}]}],
       :network_interfaces   => [{
         :associate_public_ip_address => true,
         :delete_on_termination       => true,
@@ -195,7 +195,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def docker_auth
-    @ems.authentications.find_by(:type => "ssa_docker")
+    @ems.authentications.find_by(:type => "smartstate_docker")
   end
 
   # Get Key Pair for SSH. Create a new one if not exists.
@@ -339,8 +339,8 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     pem_file_name
   end
 
-  def create_config_yaml(yml = "config.yml")
-    defaults = agent_coordinator_settings.to_hash.except(:agent_ami_name, :docker_image, :agent_label, :agent_ami_login_user, :docker_login_required?, :response_thread_sleep_seconds)
+  def create_config_yaml
+    defaults = agent_coordinator_settings.to_hash.except(:agent_ami_name, :docker_image, :agent_label, :agent_ami_login_user, :docker_login_required, :response_thread_sleep_seconds)
     defaults[:reply_queue]   = reply_queue
     defaults[:request_queue] = request_queue
     defaults[:ssa_bucket]    = ssa_bucket
