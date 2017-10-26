@@ -1,6 +1,7 @@
 require 'yaml'
 require 'open3'
 require 'net/scp'
+require 'tempfile'
 require 'linux_admin'
 require 'amazon_ssa_support'
 
@@ -153,7 +154,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     _log.info("Start to load SSA application, this may take a while ...")
 
     setup_agent(instance)
-    _log.info("Docker #{agent_docker_name} is loaded. Start to heartbeat.")
+    _log.info("Docker #{docker_image} is loaded. Start to heartbeat.")
 
     instance.id
   end
@@ -168,26 +169,28 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     ssh = LinuxAdmin::SSH.new(ip, agent_ami_login_user, auth_key)
 
     # prepare work directory
-    ssh.perform_commands(["sudo mkdir -p #{WORK_DIR}; sudo chmod go+w #{WORK_DIR}"])
+    ssh.perform_commands(["sudo mkdir -p #{WORK_DIR}"])
+    ssh.perform_commands(["sudo chmod go+w #{WORK_DIR}"])
     # scp the default setting yaml file
-    create_config_yaml("config.yml")
-    scp_file(ip, agent_ami_login_user, auth_key, "config.yml", WORK_DIR)
-    File.delete("config.yml")
+    Tempfile.open('config.yml') do |config|
+      config.write(create_config_yaml)
+      scp_file(ip, agent_ami_login_user, auth_key, config, WORK_DIR)
+    end
 
     # docker register
-    if agent_ami_registration_required?
+    if docker_login_required?
       raise "Need credentials to login" unless docker_auth
 
       docker_username = docker_auth.userid
       docker_password = docker_auth.password
       command_line = "docker login"
-      command_line << " #{agent_docker_name}"
+      command_line << " #{docker_image}"
       command_line << " -u #{docker_username} -p #{docker_password}"
       ssh.perform_commands([command_line])
     end
 
     # run docker image
-    command_line = "sudo docker run -d --restart=always -v /dev:/host_dev -v #{WORK_DIR}/config.yml:#{WORK_DIR}/config.yml --privileged #{agent_docker_name}"
+    command_line = "sudo docker run -d --restart=always -v /dev:/host_dev -v #{WORK_DIR}/config.yml:#{WORK_DIR}/config.yml --privileged #{docker_image}"
     ssh.perform_commands([command_line])
   end
 
@@ -342,7 +345,8 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     defaults[:request_queue] = request_queue
     defaults[:ssa_bucket]    = ssa_bucket
     defaults[:log_prefix] = log_prefix
-    File.write(yml, defaults.to_yaml)
+
+    defaults.to_yaml
   end
 
   def messages_in_queue(q_name)
@@ -405,12 +409,16 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     agent_coordinator_settings.try(:agent_ami_login_user) || raise("Please specify AMI image's login user name for SSA agent")
   end
 
-  def agent_docker_name
-    agent_coordinator_settings.try(:agent_docker_name) || raise("Please specify docker image name for SSA agent")
+  def docker_image
+    agent_coordinator_settings.try(:docker_image) || raise("Please specify docker image name for SSA agent")
   end
 
-  def agent_ami_registration_required?
-    agent_coordinator_settings.try(:agent_ami_registration_required)
+  def docker_registry
+    agent_coordinator_settings.try(:docker_registry)
+  end
+
+  def docker_login_required?
+    agent_coordinator_settings.try(:docker_login_required)
   end
 
   # This label is used to name all objects (profile/role/instance, etc) we created in AWS.
