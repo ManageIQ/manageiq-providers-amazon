@@ -144,36 +144,26 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     security_group_id = find_or_create_security_group(subnets[0].vpc_id)
     find_or_create_profile
 
-    instance                = ec2.create_instances(
+    instance = ec2.create_instances(
+      :iam_instance_profile => {:name => label},
       :image_id             => get_agent_image_id,
-      :min_count            => 1,
-      :max_count            => 1,
-      :key_name             => kp.name,
-      :security_group_ids   => [security_group_id],
       :instance_type        => 't2.micro',
-      :placement            => {
-        :availability_zone => zone_name
-      },
+      :key_name             => kp.name,
+      :max_count            => 1,
+      :min_count            => 1,
+      :placement            => {:availability_zone => zone_name},
+      :security_group_ids   => [security_group_id],
       :subnet_id            => subnets[0].subnet_id,
-      :iam_instance_profile => {
-        :name => label
-      },
-      :tag_specifications   => [{
-        :resource_type => "instance",
-        :tags          => [{
-          :key   => "Name",
-          :value => label
-        }]
-      }]
-    )
-    ec2.client.wait_until(:instance_status_ok, :instance_ids => [instance[0].id])
+      :tag_specifications   => [{:resource_type => "instance", :tags => [{:key => "Name", :value => label}]}]
+    ).first
+    ec2.client.wait_until(:instance_status_ok, :instance_ids => [instance.id])
 
     _log.info("Start to load SSA application, this may take a while ...")
 
-    setup_agent(instance[0])
+    setup_agent(instance)
     _log.info("SSA agent is ready to receive requests.")
 
-    instance[0].id
+    instance.id
   end
 
   def setup_agent(instance)
@@ -204,8 +194,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def get_keypair(keypair_name = label)
-    kps = @ems.authentications.where(:name => keypair_name)
-    kps.any? ? kps[0] : nil
+    @ems.authentications.find_by(:name => keypair_name)
   end
 
   def find_or_create_profile(profile_name = label, role_name = label)
@@ -344,13 +333,10 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def create_config_yaml(yml = "config.yml")
-    defaults = agent_coordinator_settings.to_hash
-    defaults.delete("agent_ami_name")
-    defaults.delete("agent_docker_name")
-    defaults.delete("agent_label")
+    defaults = agent_coordinator_settings.to_hash.except(:agent_ami_name, :agent_docker_name, :agent_label)
+    defaults[:reply_queue]   = reply_queue
     defaults[:request_queue] = request_queue
-    defaults[:reply_queue] = reply_queue
-    defaults[:ssa_bucket] = ssa_bucket
+    defaults[:ssa_bucket]    = ssa_bucket
     File.write(yml, defaults.to_yaml)
   end
 
@@ -384,15 +370,15 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def ssa_bucket
-    @ssa_bucket ||= "#{AmazonSsaSupport::DEFAULT_BUCKET_PREFIX}-#{@ems.guid}"
+    @ssa_bucket ||= "#{AmazonSsaSupport::DEFAULT_BUCKET_PREFIX}-#{@ems.guid}".freeze
   end
 
   def request_queue
-    @request_queue ||= "#{AmazonSsaSupport::DEFAULT_REQUEST_QUEUE}-#{@ems.guid}"
+    @request_queue ||= "#{AmazonSsaSupport::DEFAULT_REQUEST_QUEUE}-#{@ems.guid}".freeze
   end
 
   def reply_queue
-    @reply_queue ||= "#{AmazonSsaSupport::DEFAULT_REPLY_QUEUE}-#{@ems.guid}"
+    @reply_queue ||= "#{AmazonSsaSupport::DEFAULT_REPLY_QUEUE}-#{@ems.guid}".freeze
   end
 
   def reply_prefix
