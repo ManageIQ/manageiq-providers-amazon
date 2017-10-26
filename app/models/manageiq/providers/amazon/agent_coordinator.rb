@@ -57,30 +57,22 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   def startup_agent
     agent_ids.empty? ? deploy_agent : activate_agents
   rescue => err
-    _log.error("No agent is set up to prcoess requests: #{err.message}")
+    _log.error("No agent is set up to process requests: #{err.message}")
     _log.error(err.backtrace.join("\n"))
   end
 
-  def scp_file(local_file, remote_file, instance, username = "centos")
-    ip = instance.public_dns_name
-    key_name = instance.key_name
-    auth_key = get_keypair(key_name).try(:auth_key)
-    _log.error("AuthKey [#{key_name}] is empty of #{instance.id}") if auth_key.nil?
+  private
+
+  def scp_file(ip, username, auth_key, local_file, remote_file)
     Net::SCP.upload!(ip, username, local_file, remote_file, :ssh => {:key_data => auth_key})
   rescue => err
     _log.error(err.message)
   end
 
-  def ssh_commands(instance, commands = [], username = "centos")
-    ip = instance.public_dns_name
-    key_name = instance.key_name
-    auth_key = get_keypair(key_name).try(:auth_key)
-    _log.error("AuthKey [#{key_name}] is empty of #{instance.id}") if auth_key.nil?
+  def ssh_commands(ip, username = "centos", auth_key = '', commands = [])
     ssh = LinuxAdmin::SSH.new(ip, username, auth_key)
     ssh.perform_commands(commands)
   end
-
-  private
 
   def agent_ids
     # reset to empty
@@ -152,43 +144,68 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
       :max_count            => 1,
       :min_count            => 1,
       :placement            => {:availability_zone => zone_name},
-      :security_group_ids   => [security_group_id],
-      :subnet_id            => subnets[0].subnet_id,
       :tag_specifications   => [{:resource_type => "instance", :tags => [{:key => "Name", :value => label}]}]
+      :network_interfaces   => [{
+        :associate_public_ip_address => true,
+        :delete_on_termination       => true,
+        :device_index                => 0,
+        :subnet_id                   => subnets[0].subnet_id,
+        :groups                      => [security_group_id]
+      }],
     ).first
     ec2.client.wait_until(:instance_status_ok, :instance_ids => [instance.id])
 
     _log.info("Start to load SSA application, this may take a while ...")
 
     setup_agent(instance)
-    _log.info("SSA agent is ready to receive requests.")
+    _log.info("Docker #{agent_docker_name} is loaded. Start to heartbeat.")
 
     instance.id
   end
 
   def setup_agent(instance)
-    # register if needed
-    register(instance)
+    # Somehow instance.public_dns_name is empty, need to reinitialize to get it back
+    ip = ec2.instance(instance.id).public_dns_name || raise("Failed to get agent's public ip!")
+    key_name = instance.key_name
+    auth_key = get_keypair(key_name).try(:auth_key)
+    _log.error("Key [#{key_name}] is missing. Cannot SSH to the agent:#{instance.id}") if auth_key.nil?
+
+    ssh = LinuxAdmin::SSH.new(ip, agent_ami_login_user, auth_key)
 
     # prepare work directory
-    ssh_commands(instance, ["sudo mkdir -p #{WORK_DIR}; sudo chmod go+w #{WORK_DIR}"], agent_ami_login_user)
+    ssh.perform_commands(["sudo mkdir -p #{WORK_DIR}; sudo chmod go+w #{WORK_DIR}"])
     # scp the default setting yaml file
     create_config_yaml("config.yml")
-    scp_file("config.yml", WORK_DIR.to_s, instance, agent_ami_login_user)
+    scp_file(ip, agent_ami_login_user, auth_key, "config.yml", WORK_DIR)
+    File.delete("config.yml")
+
+    # docker register
+    if agent_ami_registration_required?
+      raise "Need credentials to login" unless docker_auth
+
+      docker_username = docker_auth.userid
+      docker_password = docker_auth.password
+      command_line = "docker login"
+      command_line << " #{agent_docker_name}"
+      command_line << " -u #{docker_username} -p #{docker_password}"
+      ssh.perform_commands([command_line])
+    end
 
     # run docker image
     command_line = "sudo docker run -d --restart=always -v /dev:/host_dev -v #{WORK_DIR}/config.yml:#{WORK_DIR}/config.yml --privileged #{agent_docker_name}"
-    ssh_commands(instance, [command_line.to_s], agent_ami_login_user)
+    ssh.perform_commands([command_line])
   end
 
-  # TODO: for downstream
-  def register(instance)
+  def docker_auth
+    @ems.authentications.find_by(:type => "Smartstate_Docker")
   end
 
   # Get Key Pair for SSH. Create a new one if not exists.
-  def find_or_create_keypair(keypair_name = label)
+  def find_or_create_keypair(keypair_name = default_keypair_name)
     get_keypair(keypair_name) || begin
       _log.info("KeyPair #{keypair_name} will be created!")
+      # Delete from Aws if existing
+      ec2.key_pair(keypair_name).try(:delete)
       ManageIQ::Providers::CloudManager::AuthKeyPair.create_key_pair(@ems.id, :key_name => keypair_name)
     end
   end
@@ -228,25 +245,15 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     )
 
     # grant all priviledges
-    role.attach_policy(
-      :policy_arn => 'arn:aws:iam::aws:policy/AmazonS3FullAccess'
-    )
-
-    role.attach_policy(
-      :policy_arn => 'arn:aws:iam::aws:policy/AmazonEC2FullAccess'
-    )
-
-    role.attach_policy(
-      :policy_arn => 'arn:aws:iam::aws:policy/AmazonSQSFullAccess'
-    )
+    %w(AmazonS3FullAccess AmazonEC2FullAccess AmazonSQSFullAccess).each do |policy|
+      role.attach_policy(:policy_arn => "arn:aws:iam::aws:policy/#{policy}")
+    end
 
     role
   end
 
   def role_exists?(role_name)
-    role = iam.role(role_name)
-    role.role_id
-    true
+    !!iam.role(role_name).role_id
   rescue ::Aws::IAM::Errors::NoSuchEntity
     false
   end
@@ -321,22 +328,25 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
       }]
     ).images
 
+    _log.info("AMI Image: #{image_name} [#{imgs[0].image_id}] is used to launch SSA agent.")
+
     imgs[0].image_id
   end
 
-  def create_pem_file(pair_name = keypair_name)
-    kp = find_or_create_keypair(pair_name)
+  def create_pem_file(pair_name = default_keypair_name)
+    keypair = find_or_create_keypair(pair_name)
     pem_file_name = "#{pair_name}.pem"
-    File.write(pem_file_name, kp.auth_key)
+    File.write(pem_file_name, keypair.auth_key)
     File.chmod(0o400, pem_file_name)
     pem_file_name
   end
 
   def create_config_yaml(yml = "config.yml")
-    defaults = agent_coordinator_settings.to_hash.except(:agent_ami_name, :agent_docker_name, :agent_label)
+    defaults = agent_coordinator_settings.to_hash.except(:agent_ami_name, :agent_docker_name, :agent_label, :agent_ami_login_user, :agent_ami_registration_required, :response_thread_sleep_seconds)
     defaults[:reply_queue]   = reply_queue
     defaults[:request_queue] = request_queue
     defaults[:ssa_bucket]    = ssa_bucket
+    defaults[:log_prefix] = log_prefix
     File.write(yml, defaults.to_yaml)
   end
 
@@ -344,7 +354,6 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     q = sqs.get_queue_by_name(:queue_name => q_name)
     q.attributes["ApproximateNumberOfMessages"].to_i + q.attributes["ApproximateNumberOfMessagesNotVisible"].to_i
   rescue => err
-    _log.warn(err.message)
     0
   end
 
@@ -357,7 +366,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def agent_log_level
-    ll = agent_coordinator_settings.try(:agent_log_level) || AmazonSsaSupport::DEFAULT_LOG_LEVEL
+    ll = agent_coordinator_settings.try(:log_level) || AmazonSsaSupport::DEFAULT_LOG_LEVEL
     ll.upcase
   end
 
@@ -381,6 +390,10 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     @reply_queue ||= "#{AmazonSsaSupport::DEFAULT_REPLY_QUEUE}-#{@ems.guid}".freeze
   end
 
+  def default_keypair_name
+    "#{label}-#{@ems.guid}".freeze
+  end
+
   def reply_prefix
     AmazonSsaSupport::DEFAULT_REPLY_PREFIX
   end
@@ -399,6 +412,10 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
   def agent_docker_name
     agent_coordinator_settings.try(:agent_docker_name) || raise("Please specify docker image name for SSA agent")
+  end
+
+  def agent_ami_registration_required?
+    agent_coordinator_settings.try(:agent_ami_registration_required)
   end
 
   # This label is used to name all objects (profile/role/instance, etc) we created in AWS.
