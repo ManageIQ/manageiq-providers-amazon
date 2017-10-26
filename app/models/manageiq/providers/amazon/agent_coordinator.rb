@@ -69,11 +69,6 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     _log.error(err.message)
   end
 
-  def ssh_commands(ip, username = "centos", auth_key = '', commands = [])
-    ssh = LinuxAdmin::SSH.new(ip, username, auth_key)
-    ssh.perform_commands(commands)
-  end
-
   def agent_ids
     # reset to empty
     @agent_ids = []
