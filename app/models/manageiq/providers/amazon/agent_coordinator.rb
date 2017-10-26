@@ -340,7 +340,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def create_config_yaml(yml = "config.yml")
-    defaults = agent_coordinator_settings.to_hash.except(:agent_ami_name, :agent_docker_name, :agent_label, :agent_ami_login_user, :agent_ami_registration_required, :response_thread_sleep_seconds)
+    defaults = agent_coordinator_settings.to_hash.except(:agent_ami_name, :docker_image, :agent_label, :agent_ami_login_user, :docker_login_required?, :response_thread_sleep_seconds)
     defaults[:reply_queue]   = reply_queue
     defaults[:request_queue] = request_queue
     defaults[:ssa_bucket]    = ssa_bucket
