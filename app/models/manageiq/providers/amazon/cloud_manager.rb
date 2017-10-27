@@ -121,6 +121,14 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     Settings.ems.ems_amazon.blacklisted_event_names
   end
 
+  def supported_auth_types
+    %w(default smartstate_docker)
+  end
+
+  def supports_authentication?(authtype)
+    supported_auth_types.include?(authtype.to_s)
+  end
+
   #
   # Operations
   #
