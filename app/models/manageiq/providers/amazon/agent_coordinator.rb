@@ -220,6 +220,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   def find_or_create_profile(profile_name = label, role_name = label)
     ssa_profile = iam.instance_profile(profile_name)
     ssa_profile = iam.create_instance_profile(:instance_profile_name => profile_name) unless ssa_profile.exists?
+    ssa_profile.wait_until_exists
 
     find_or_create_role(role_name)
     ssa_profile.add_role(:role_name => role_name) if ssa_profile.roles.empty?
