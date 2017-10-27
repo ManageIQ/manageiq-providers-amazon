@@ -200,7 +200,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def docker_auth
-    @ems.authentications.find_by(:type => "smartstate_docker")
+    @ems.authentications.find_by(:authtype => "smartstate_docker")
   end
 
   # Get Key Pair for SSH. Create a new one if not exists.
