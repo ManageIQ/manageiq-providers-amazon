@@ -50,15 +50,15 @@
     # disable instance_types by their keys found in app/models/manageiq/providers/amazon/instance_types.rb e.g.
     # - t2.nano
     :agent_coordinator:
-      :agent_ami_name: CentOS Atomic Host 7 x86_64 HVM EBS 1706_01
       :agent_ami_login_user: centos
+      :agent_ami_name: CentOS Atomic Host 7 x86_64 HVM EBS 1706_01
       :agent_idle_period: 900
       :agent_label: smartstate
       :docker_image: manageiq/amazon-smartstate:latest
       :docker_login_required: false
       :docker_registry:
-      :log_level: INFO
       :heartbeat_interval: 120
+      :log_level: INFO
       :response_thread_sleep_seconds: 10
 
 :ems_refresh:
