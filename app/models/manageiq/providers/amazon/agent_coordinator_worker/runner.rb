@@ -40,11 +40,11 @@ class ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner < MiqWorker::R
   end
 
   def self.all_ems_in_zone
-    ExtManagementSystem.where(:zone_id => MiqServer.my_server.zone.id).to_a
+    MiqServer.my_server.zone.ext_management_systems
   end
 
   def self.all_valid_ems_in_zone
-    all_ems_in_zone.select {|e| e.enabled && e.authentication_status_ok?}
+    all_ems_in_zone.select { |e| e.enabled && e.authentication_status_ok? }
   end
 
   def self.all_amazon_ems_in_zone

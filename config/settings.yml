@@ -52,11 +52,12 @@
     :agent_coordinator:
       :agent_ami_name: CentOS Atomic Host 7 x86_64 HVM EBS 1706_01
       :agent_ami_login_user: centos
-      # TODO: will replace with official docker image name
-      :agent_docker_name: docker.io/hsong/ssa_support
       :agent_idle_period: 900
       :agent_label: smartstate
-      :agent_log_level: INFO
+      :docker_image: manageiq/amazon-smartstate:latest
+      :docker_login_required: false
+      :docker_registry_url:
+      :log_level: INFO
       :heartbeat_interval: 120
       :response_thread_sleep_seconds: 10
 
