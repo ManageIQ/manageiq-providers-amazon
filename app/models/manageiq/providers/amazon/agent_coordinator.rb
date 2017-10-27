@@ -171,10 +171,15 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     # prepare work directory
     ssh.perform_commands(["sudo mkdir -p #{WORK_DIR}"])
     ssh.perform_commands(["sudo chmod go+w #{WORK_DIR}"])
+
     # scp the default setting yaml file
-    Tempfile.open('config.yml') do |config|
+    config = Tempfile.new('config.yml')
+    begin
       config.write(create_config_yaml)
-      scp_file(ip, agent_ami_login_user, auth_key, config, WORK_DIR)
+      config.close
+      out = scp_file(ip, agent_ami_login_user, auth_key, config.path, "#{WORK_DIR}/config.yml")
+    ensure
+      config.unlink
     end
 
     # docker register
