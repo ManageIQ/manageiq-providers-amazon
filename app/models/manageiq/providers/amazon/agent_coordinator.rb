@@ -3,6 +3,7 @@ require 'open3'
 require 'net/scp'
 require 'tempfile'
 require 'linux_admin'
+require 'awesome_spawn'
 require 'amazon_ssa_support'
 
 class ManageIQ::Providers::Amazon::AgentCoordinator
@@ -308,16 +309,31 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
       docker_username = docker_auth.userid
       docker_password = docker_auth.password
-      command_line = "sudo docker login"
-      command_line << " #{docker_registry}"
-      command_line << " -u #{docker_username} -p #{docker_password}"
-      perform_commands(ssh, [command_line])
+
+      login_params = [
+        docker_registry,
+        {
+          :u => docker_username,
+          :p => docker_password
+        }
+      ]
+      login_cmd = AwesomeSpawn.build_command_line("sudo docker login", login_params)
+
+      perform_commands(ssh, [login_cmd])
     end
 
     # run docker image
     image = docker_registry.present? ? "#{docker_registry}/#{docker_image}" : docker_image
-    command_line = "sudo docker run -d --restart=always -v /dev:/host_dev -v #{WORK_DIR}/config.yml:#{WORK_DIR}/config.yml --privileged #{image}"
-    perform_commands(ssh, [command_line])
+    run_params = [
+      :d,
+      {:restart => "always"},
+      ['-v', '/dev:/host_dev'],
+      ['-v', "#{WORK_DIR}/config.yml:#{WORK_DIR}/config.yml"],
+      :privileged,
+      image
+    ]
+    run_cmd = AwesomeSpawn.build_command_line("sudo docker run", run_params)
+    perform_commands(ssh, [run_cmd])
   end
 
   def perform_commands(ssh, commands)
