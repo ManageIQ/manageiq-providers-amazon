@@ -116,7 +116,9 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
     it "remove bucket (trigger)" do
       options = {:ids => [bucket.id], :task => "delete_cloud_object_store_container", :userid => "admin"}
 
-      expect { CloudObjectStoreContainer.process_tasks(options) }.to change { MiqQueue.count }.by(1)
+      User.with_user(FactoryGirl.create(:user_with_group, :userid => "admin")) do
+        expect { CloudObjectStoreContainer.process_tasks(options) }.to change { MiqQueue.count }.by(1)
+      end
     end
 
     it "remove bucket (process)" do
@@ -150,7 +152,9 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
     it "clear bucket (trigger)" do
       options = {:ids => [bucket.id], :task => "cloud_object_store_container_clear", :userid => "admin"}
 
-      expect { CloudObjectStoreContainer.process_tasks(options) }.to change { MiqQueue.count }.by(1)
+      User.with_user(FactoryGirl.create(:user_with_group, :userid => "admin")) do
+        expect { CloudObjectStoreContainer.process_tasks(options) }.to change { MiqQueue.count }.by(1)
+      end
     end
 
     it "clear bucket (process)" do
@@ -221,7 +225,9 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
     it "remove object (trigger)" do
       options = {:ids => [object.id], :task => "delete_cloud_object_store_object", :userid => "admin"}
 
-      expect { CloudObjectStoreObject.process_tasks(options) }.to change { MiqQueue.count }.by(1)
+      User.with_user(FactoryGirl.create(:user_with_group, :userid => "admin")) do
+        expect { CloudObjectStoreObject.process_tasks(options) }.to change { MiqQueue.count }.by(1)
+      end
     end
 
     it "remove object (process)" do
