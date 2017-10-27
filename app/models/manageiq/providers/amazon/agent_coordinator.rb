@@ -188,7 +188,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
       docker_username = docker_auth.userid
       docker_password = docker_auth.password
-      command_line = "docker login"
+      command_line = "sudo docker login"
       command_line << " #{docker_registry}"
       command_line << " -u #{docker_username} -p #{docker_password}"
       ssh.perform_commands([command_line])
