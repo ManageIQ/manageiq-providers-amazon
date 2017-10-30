@@ -32,6 +32,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
   def verify_credentials(auth_type = nil, options = {})
     raise MiqException::MiqHostError, "No credentials defined" if missing_credentials?(auth_type)
 
+    return true if auth_type == "smartstate_docker"
     self.class.connection_rescue_block do
       # EC2 does Lazy Connections, so call a cheap function
       with_provider_connection(options.merge(:auth_type => auth_type)) do |ec2|
