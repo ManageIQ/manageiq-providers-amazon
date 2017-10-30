@@ -1,5 +1,4 @@
 module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThread
-  extend ActiveSupport::Concern
   include ScanningMixin
   require 'xml/xml_utils'
 
