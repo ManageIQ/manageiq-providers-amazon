@@ -38,18 +38,7 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
         if coord.reply_queue_empty?
           _log.debug("No Replies visible for Provider #{coord.ems.name}")
         else
-          ssaq_args = {}
-          ssaq_args[:ssa_bucket]    = coord.ssa_bucket
-          ssaq_args[:reply_queue]   = coord.reply_queue
-          ssaq_args[:request_queue] = coord.request_queue
-          ssaq_args[:region]        = coord.ems.provider_region
-          ssaq_args[:sqs]           = coord.sqs
-          ssaq_args[:s3]            = coord.s3
-          ssaq                      = AmazonSsaSupport::SsaQueue.new(ssaq_args)
-          unless ssaq
-            _log.error("Error creating SsaQueue for #{coord.ems.name}")
-            next
-          end
+          ssaq = coord.ssa_queue
           _log.debug("Getting replies for #{coord.ems.name}")
           begin
             ssaq.reply_loop do |reply|

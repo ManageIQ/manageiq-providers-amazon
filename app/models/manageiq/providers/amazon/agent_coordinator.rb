@@ -62,6 +62,17 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     _log.error(err.backtrace.join("\n"))
   end
 
+  def ssa_queue
+    AmazonSsaSupport::SsaQueue.new(
+      :ssa_bucket    => ssa_bucket,
+      :reply_queue   => reply_queue,
+      :request_queue => request_queue,
+      :region        => ems.provider_region,
+      :sqs           => sqs,
+      :s3            => s3
+    )
+  end
+
   private
 
   def scp_file(ip, username, auth_key, local_file, remote_file)
