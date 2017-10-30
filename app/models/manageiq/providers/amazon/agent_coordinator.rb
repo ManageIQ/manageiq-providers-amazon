@@ -162,7 +162,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     ).first
     ec2.client.wait_until(:instance_status_ok, :instance_ids => [instance.id])
 
-    _log.info("Start to load SSA application, this may take a while ...")
+    _log.info("Start to load smartstate application, this may take a while ...")
 
     setup_agent(instance)
     _log.info("Docker #{docker_image} is loaded. Start to heartbeat.")
@@ -343,7 +343,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
       }]
     ).images
 
-    _log.info("AMI Image: #{image_name} [#{imgs[0].image_id}] is used to launch SSA agent.")
+    _log.info("AMI Image: #{image_name} [#{imgs[0].image_id}] is used to launch smartstate agent.")
 
     imgs[0].image_id
   end
@@ -419,15 +419,15 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def agent_ami_name
-    agent_coordinator_settings.try(:agent_ami_name) || raise("Please specify AMI image name for SSA agent")
+    agent_coordinator_settings.try(:agent_ami_name) || raise("Please specify AMI image name for smartstate agent")
   end
 
   def agent_ami_login_user
-    agent_coordinator_settings.try(:agent_ami_login_user) || raise("Please specify AMI image's login user name for SSA agent")
+    agent_coordinator_settings.try(:agent_ami_login_user) || raise("Please specify AMI image's login user name for smartstate agent")
   end
 
   def docker_image
-    agent_coordinator_settings.try(:docker_image) || raise("Please specify docker image name for SSA agent")
+    agent_coordinator_settings.try(:docker_image) || raise("Please specify docker image name for smartstate agent")
   end
 
   def docker_registry
