@@ -137,10 +137,11 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     @deploying = true
 
     kp = find_or_create_keypair
-    zone_name = ec2.client.describe_availability_zones.availability_zones[0].zone_name
+    zone_name = ec2.client.describe_availability_zones.availability_zones.first.zone_name
     subnets = get_subnets(zone_name)
     raise "No subnet_id is available for #{zone_name}!" if subnets.empty?
-    security_group_id = find_or_create_security_group(subnets[0].vpc_id)
+    subnet = subnets.first
+    security_group_id = find_or_create_security_group(subnet.vpc_id)
     find_or_create_profile
 
     instance = ec2.create_instances(
@@ -156,7 +157,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
         :associate_public_ip_address => true,
         :delete_on_termination       => true,
         :device_index                => 0,
-        :subnet_id                   => subnets[0].subnet_id,
+        :subnet_id                   => subnet.subnet_id,
         :groups                      => [security_group_id]
       }],
     ).first
@@ -274,13 +275,13 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def find_or_create_security_group(vpc_id = nil, group_name = label)
-    sgs = ec2.client.describe_security_groups(
+    security_group = ec2.client.describe_security_groups(
       :filters => [{
         :name   => "group-name",
         :values => [group_name]
       }]
-    ).security_groups
-    return sgs[0].group_id unless sgs.empty?
+    ).security_groups.first
+    return security_group.group_id unless security_group.empty?
 
     # create security group if not exist
     security_group = ec2.create_security_group(
@@ -336,16 +337,16 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
   # possible RHEL image name: values: [ "RHEL-7.3_HVM_GA*" ]
   def get_agent_image_id(image_name = agent_ami_name)
-    imgs = ec2.client.describe_images(
+    image = ec2.client.describe_images(
       :filters => [{
         :name   => "name",
         :values => [image_name]
       }]
-    ).images
+    ).images.first
 
-    _log.info("AMI Image: #{image_name} [#{imgs[0].image_id}] is used to launch smartstate agent.")
+    _log.info("AMI Image: #{image_name} [#{image.image_id}] is used to launch smartstate agent.")
 
-    imgs[0].image_id
+    image.image_id
   end
 
   def create_pem_file(pair_name = default_keypair_name)
