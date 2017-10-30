@@ -1,7 +1,6 @@
 module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThread
-  require 'xml/xml_utils'
-  require 'scanning_mixin'
   include ScanningMixin
+  require 'xml/xml_utils'
 
   #
   # This thread startup method is called by the AgentCoordinatorWorker::Runner
