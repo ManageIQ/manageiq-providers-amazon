@@ -74,6 +74,13 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   supports :regions
   supports :discovery
 
+  def self.seed
+    all.each do |manager|
+      manager.ensure_managers
+      manager.save!
+    end
+  end
+
   def ensure_managers
     build_network_manager unless network_manager
     network_manager.name = "#{name} Network Manager"
