@@ -180,8 +180,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     ssh = LinuxAdmin::SSH.new(ip, agent_ami_login_user, auth_key)
 
     # prepare work directory
-    ssh.perform_commands(["sudo mkdir -p #{WORK_DIR}"])
-    ssh.perform_commands(["sudo chmod go+w #{WORK_DIR}"])
+    ssh.perform_commands(["sudo mkdir -p #{WORK_DIR}", "sudo chmod go+w #{WORK_DIR}"])
 
     # scp the default setting yaml file
     config = Tempfile.new('config.yml')
