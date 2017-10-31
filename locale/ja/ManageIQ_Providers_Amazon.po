@@ -17,7 +17,49 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "\n"
 
-msgid "Timeline is not available for %{model}"
+msgid "\"Unable to process data for job with id #{ost.jobid}\""
+msgstr ""
+
+msgid "\"Unable to sync data for job with id #{ost.jobid}\""
+msgstr ""
+
+msgid "Access key %{number} belongs to IAM user, not to the AWS account holder."
+msgstr ""
+
+msgid "Access key %{number} does not match an IAM user for aws account holder."
+msgstr ""
+
+msgid "Authentication failed"
+msgstr ""
+
+msgid "Login failed due to a bad username or password."
+msgstr ""
+
+msgid "SignatureMismatch - check your AWS Secret Access Key and signing method"
+msgstr ""
+
+msgid "The Keypair is not connected to an active %{table}"
+msgstr ""
+
+msgid "The Storage Container is already empty"
+msgstr ""
+
+msgid "The Storage Container is not connected to an active %{table}"
+msgstr ""
+
+msgid "The Storage Object is not connected to an active %{table}"
+msgstr ""
+
+msgid "The VM is not powered on"
+msgstr ""
+
+msgid "Unexpected response returned from system, see log for details"
+msgstr ""
+
+msgid "cloud_volume cannot be nil"
+msgstr ""
+
+msgid "ext_management_system cannot be nil"
 msgstr ""
 
 msgid "not connected to ems"
