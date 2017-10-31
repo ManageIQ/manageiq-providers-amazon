@@ -5,91 +5,47 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Unreleased as of Sprint 71 ending 2017-10-16
+## Gaprindshavili Beta1
 
 ### Added
 - Parse aws config orchestration stack event [(#310)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/310)
 - Add routers to full refresh [(#304)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/304)
 - Add raw_delete_snapshot to CloudVolumeSnapshot model [(#277)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/277)
-
-### Fixed
-- Correctly parse key pair reference [(#311)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/311)
-- Compact targeted refresh references [(#308)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/308)
-- Add OrchestrationParameterMultiline constraints to options that require a text area [(#307)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/307)
-
-### Removed
-- Remove Amazon provider discovery [(#306)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/306)
-
-## Unreleased as of Sprint 70 ending 2017-10-02
-
-### Added
 - Improve instance_types.rake logic [(#301)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/301)
 - Add YAML support for Amazon OrchestrationTemplate [(#298)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/298)
 - Prefix API based events so we can identify them easily [(#293)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/293)
-
-## Unreleased as of Sprint 69 ending 2017-09-18
-
-### Added
 - Turn on graph refresh with targeted refresh as default [(#290)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/290)
 - Support custom instance_types [(#289)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/289)
-
-## Unreleased as of Sprint 68 ending 2017-09-04
-
-### Added
 - Overriding queue name to generate an array of queue names [(#280)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/280)
-
-### Fixed
-- Add nil checks for stack [(#291)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/291)
-
-## Unreleased Sprint 66
-
-### Added
 - Enable to save key_pair in Authentication [(#268)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/268)
-
-## Unreleased Sprint 65
-
-### Added
 - Enable SSA for AWS Images [(#266)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/266)
 - Allow raw_connect to validate the connection and decrypt the password [(#264)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/264)
 - Handle SSA Response from AWS Scanning Instance [(#267)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/267)
-
-### Fixed
-- Adjust test result to match new data_type [(#272)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/272)
-- Handle empty string in image name tags [(#273)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/273)
-
-## Unreleased Sprint 63
-
-### Added
 - Collect encryption status of cloud volume snapshot [(#259)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/259)
-
-## Unreleased Sprint 62
-
-### Added
 - Simplify TargetCollection Persistor by using IC configurations [(#255)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/255)
 - Leverage builder params to provide ems id and defaults [(#253)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/253)
 - Upgrade aws-sdk to 2.9.7 [(#252)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/252)
 - Initial Changes to Amazon Provider for SSA Support [(#251)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/251)
 - Collect IOPS and encryption status of cloud volume [(#211)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/211)
-
-## Unreleased Sprint 61
-
-### Fixed
-- Parse timestamp for aws alarm events [(#246)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/246)
-
-## Unreleased Sprint 60
-
-### Added
 - Bump ruby to 2.3.3 and add 2.4.1 [(#245)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/245)
 - Refresh port and floating ip for a lb [(#244)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/244)
 - Rewrite network ports and floating ips parser to a new format [(#233)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/233)
 - Rewrite load balancers parser to a new format [(#231)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/231)
-
-## Unreleased Sprint 59
-
-### Added
 - Rewrite network and subnet parser to a new format [(#229)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/229)
 - Rewrite EBS parser to a new format [(#228)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/228)
 - Rewrite S3 parser to a new format [(#227)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/227)
+
+### Fixed
+- Correctly parse key pair reference [(#311)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/311)
+- Compact targeted refresh references [(#308)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/308)
+- Add OrchestrationParameterMultiline constraints to options that require a text area [(#307)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/307)
+- Add nil checks for stack [(#291)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/291)
+- Adjust test result to match new data_type [(#272)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/272)
+- Handle empty string in image name tags [(#273)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/273)
+- Parse timestamp for aws alarm events [(#246)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/246)
+
+### Removed
+- Remove Amazon provider discovery [(#306)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/306)
 
 ## Fine-3
 
