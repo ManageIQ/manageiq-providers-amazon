@@ -186,8 +186,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate do
       options = subject.deployment_options('ManageIQ::Providers::Amazon::CloudManager')
       assert_deployment_option(options[0], "tenant_name", :OrchestrationParameterAllowedDynamic, true)
       assert_deployment_option(options[1], "stack_name", :OrchestrationParameterPattern, true)
-      assert_deployment_option(options[2], "stack_onfailure", :OrchestrationParameterAllowed, true)
-      assert_deployment_option(options[3], "stack_timeout", nil, false, 'integer')
+      assert_deployment_option(options[2], "stack_onfailure", :OrchestrationParameterAllowed, true, :reconfigurable => false)
+      assert_deployment_option(options[3], "stack_timeout", nil, false, :reconfigurable => false, :data_type => 'integer')
       assert_deployment_option(options[4], "stack_notifications", nil, false)
       assert_deployment_option(options[5], "stack_capabilities", :OrchestrationParameterAllowed, false)
       assert_deployment_option(options[6], "stack_resource_types", nil, false)
@@ -197,9 +197,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate do
     end
   end
 
-  def assert_deployment_option(option, name, constraint_type, required, data_type = 'string')
-    expect(option.name).to eq(name)
-    expect(option.data_type).to eq(data_type)
+  def assert_deployment_option(option, name, constraint_type, required, attrs = {})
+    expect(option).to have_attributes(attrs.merge(:name => name))
     expect(option.required?).to eq(required)
     expect(option.constraints[0]).to be_kind_of("OrchestrationTemplate::#{constraint_type}".constantize) if constraint_type
   end
