@@ -137,11 +137,25 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     @deploying = true
 
     kp = find_or_create_keypair
-    zone_name = ec2.client.describe_availability_zones.availability_zones.first.zone_name
-    subnets = get_subnets(zone_name)
-    raise "No subnet_id is available for #{zone_name}!" if subnets.empty?
-    subnet = subnets.first
-    security_group_id = find_or_create_security_group(subnet.vpc_id)
+    vpc_ids = get_dns_enabled_vpc_ids
+    raise "Smartstate analysis needs a VPC whose enablDnsHostnames setting is true!" if vpc_ids.empty?
+
+    zone_names = ec2.client.describe_availability_zones.availability_zones.map(&:zone_name)
+    subnets = []
+    zone_names.each do |zone_name|
+      vpc_ids.each { |id| subnets << get_subnets(zone_name, id) }
+    end
+    subnets.flatten!
+    raise "No subnet is qualiified to deploy smartstate agent!" if subnets.empty?
+
+    # Use the first qualified subnet to deploy agent.
+    vpc_id = subnets[0].vpc_id
+    zone_name = subnets[0].availability_zone
+    subnet_id = subnets[0].subnet_id
+
+    _log.info("Smartstate agent will be deployed in vpc: [#{vpc_id}], zone: [#{zone_name}] subnet: [#{subnet_id}]")
+
+    security_group_id = find_or_create_security_group(vpc_id)
     find_or_create_profile
 
     instance = ec2.create_instances(
@@ -157,7 +171,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
         :associate_public_ip_address => true,
         :delete_on_termination       => true,
         :device_index                => 0,
-        :subnet_id                   => subnet.subnet_id,
+        :subnet_id                   => subnet_id,
         :groups                      => [security_group_id]
       }],
     ).first
@@ -213,6 +227,12 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
   def docker_auth
     @ems.authentications.find_by(:authtype => "smartstate_docker")
+  end
+
+  # To run SSA, VPC needs to turn on enableDnsHostname
+  def get_dns_enabled_vpc_ids
+    vpc_ids = ec2.client.describe_vpcs.vpcs.map(&:vpc_id)
+    vpc_ids.select { |id| ec2.vpc(id).describe_attribute({:attribute => 'enableDnsHostnames', :vpc_id => id}).enable_dns_hostnames.value }
   end
 
   # Get Key Pair for SSH. Create a new one if not exists.
@@ -326,11 +346,15 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     security_group.group_id
   end
 
-  def get_subnets(az)
+  def get_subnets(az, vpc_id)
     ec2.client.describe_subnets(
       :filters => [{
         :name   => "availability-zone",
         :values => [az]
+      },
+      {
+        :name   => "vpc-id",
+        :values => [vpc_id]
       }]
     ).subnets
   end
