@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 72 ending 2017-10-30
+
+### Added
+- Amazon SSA Response Handling Thread [(#319)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/319)
+- Add agent coordinator for smartstate support [(#318)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/318)
+
+### Fixed
+- Use Concern for ResponseThread include [(#343)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/343)
+- Add ssa_queue public method to the coordinator [(#340)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/340)
+- Unpriveleged user can't docker login [(#337)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/337)
+- Login is for the docker_registry not the image [(#333)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/333)
+- Add wait_until_exists on instance_profile creation [(#332)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/332)
+- Raise the intended message [(#326)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/326)
+- Include ResponseThread in Runner [(#325)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/325)
+
 ## Unreleased as of Sprint 71 ending 2017-10-16
 
 ### Added
