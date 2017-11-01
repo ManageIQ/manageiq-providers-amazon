@@ -206,7 +206,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     end
 
     # run docker image
-    image = docker_login_required? ? "#{docker_registry}/#{docker_image}" : docker_image
+    image = docker_registry.present? ? "#{docker_registry}/#{docker_image}" : docker_image
     command_line = "sudo docker run -d --restart=always -v /dev:/host_dev -v #{WORK_DIR}/config.yml:#{WORK_DIR}/config.yml --privileged #{image}"
     ssh.perform_commands([command_line])
   end
