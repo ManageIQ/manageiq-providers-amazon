@@ -229,10 +229,18 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     @ems.authentications.find_by(:authtype => "smartstate_docker")
   end
 
-  # To run SSA, VPC needs to turn on enableDnsHostname
+  # To run SSA, VPC needs to turn on enableDnsSupport and enableDnsHostname
   def get_dns_enabled_vpc_ids
     vpc_ids = ec2.client.describe_vpcs.vpcs.map(&:vpc_id)
-    vpc_ids.select { |id| ec2.vpc(id).describe_attribute({:attribute => 'enableDnsHostnames', :vpc_id => id}).enable_dns_hostnames.value }
+    vpc_ids.select { |id| enabled_dns_support?(id) && enabled_dns_hostnames?(id) }
+  end
+
+  def enabled_dns_hostnames?(vpc_id)
+    ec2.vpc(vpc_id).describe_attribute({:attribute => 'enableDnsHostnames', :vpc_id => vpc_id}).enable_dns_hostnames.value
+  end
+
+  def enabled_dns_support?(vpc_id)
+    ec2.vpc(vpc_id).describe_attribute({:attribute => 'enableDnsSupport', :vpc_id => vpc_id}).enable_dns_support.value
   end
 
   # Get Key Pair for SSH. Create a new one if not exists.
