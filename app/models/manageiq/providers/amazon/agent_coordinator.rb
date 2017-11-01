@@ -138,7 +138,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
     kp = find_or_create_keypair
     vpc_ids = get_dns_enabled_vpc_ids
-    raise "Smartstate analysis needs a VPC whose enablDnsHostnames setting is true!" if vpc_ids.empty?
+    raise "Smartstate analysis needs a VPC whose enableDnsSupport/enableDnsHostnames settings are true!" if vpc_ids.empty?
 
     zone_names = ec2.client.describe_availability_zones.availability_zones.map(&:zone_name)
     subnets = []
@@ -229,18 +229,18 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     @ems.authentications.find_by(:authtype => "smartstate_docker")
   end
 
-  # To run SSA, VPC needs to turn on enableDnsSupport and enableDnsHostname
+  # To run SSA, VPC needs to turn on enableDnsSupport and enableDnsHostnames
   def get_dns_enabled_vpc_ids
     vpc_ids = ec2.client.describe_vpcs.vpcs.map(&:vpc_id)
     vpc_ids.select { |id| enabled_dns_support?(id) && enabled_dns_hostnames?(id) }
   end
 
   def enabled_dns_hostnames?(vpc_id)
-    ec2.vpc(vpc_id).describe_attribute({:attribute => 'enableDnsHostnames', :vpc_id => vpc_id}).enable_dns_hostnames.value
+    ec2.vpc(vpc_id).describe_attribute(:attribute => 'enableDnsHostnames', :vpc_id => vpc_id).enable_dns_hostnames.value
   end
 
   def enabled_dns_support?(vpc_id)
-    ec2.vpc(vpc_id).describe_attribute({:attribute => 'enableDnsSupport', :vpc_id => vpc_id}).enable_dns_support.value
+    ec2.vpc(vpc_id).describe_attribute(:attribute => 'enableDnsSupport', :vpc_id => vpc_id).enable_dns_support.value
   end
 
   # Get Key Pair for SSH. Create a new one if not exists.
@@ -356,14 +356,16 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
   def get_subnets(az, vpc_id)
     ec2.client.describe_subnets(
-      :filters => [{
-        :name   => "availability-zone",
-        :values => [az]
-      },
-      {
-        :name   => "vpc-id",
-        :values => [vpc_id]
-      }]
+      :filters => [
+        {
+          :name   => "availability-zone",
+          :values => [az]
+        },
+        {
+          :name   => "vpc-id",
+          :values => [vpc_id]
+        }
+      ]
     ).subnets
   end
 
