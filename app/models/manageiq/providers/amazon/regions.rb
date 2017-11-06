@@ -80,7 +80,12 @@ module ManageIQ
           :name        => "us-gov-west-1",
           :hostname    => "ec2.us-gov-west-1.amazonaws.com",
           :description => "GovCloud (US)",
-        }
+        },
+        "cn-north-1"   => {
+          :name        => "cn-north-1",
+          :hostname    => "ec2.cn-north-1.amazonaws.com.cn",
+          :description => "China (Beijing)",
+        },
       }
 
       def self.regions
