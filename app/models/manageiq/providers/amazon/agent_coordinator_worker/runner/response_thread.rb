@@ -1,6 +1,6 @@
 module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThread
   include ScanningMixin
-  require 'xml/xml_utils'
+  require 'util/xml/xml_utils'
 
   #
   # This thread startup method is called by the AgentCoordinatorWorker::Runner
@@ -30,29 +30,31 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
 
   def response_handler_loop
     @shutdown_instance_wait_thread = nil
+    @response_data_dir = response_data_dir
     until @shutdown_instance_wait_thread
-      @coordinators.each do |coord|
-        _log.debug("Checking replies for Agent Coordinator Provider #{coord.ems.name}")
-        break if @shutdown_instance_wait_thread
-        if coord.reply_queue_empty?
-          _log.debug("No Replies visible for Provider #{coord.ems.name}")
-        else
-          ssaq = coord.ssa_queue
-          _log.debug("Getting replies for #{coord.ems.name}")
-          begin
+      @coordinators_mutex.synchronize do
+        @coordinators.each do |coord|
+          _log.debug("Checking replies for Agent Coordinator Provider #{coord.ems.name}")
+          break if @shutdown_instance_wait_thread
+          if coord.reply_queue_empty?
+            _log.debug("No Replies visible for Provider #{coord.ems.name}")
+          else
+            ssaq = coord.ssa_queue
+            _log.debug("Getting replies for #{coord.ems.name}")
             ssaq.reply_loop do |reply|
-              _log.debug("Reply for #{coord.ems.name}: #{reply}")
-              perform_metadata_sync(reply)
+              begin
+                _log.debug("Reply for #{coord.ems.name}: #{reply}")
+                perform_metadata_sync(reply)
+              rescue => err
+                _log.error("Error #{err} processing replies for #{coord.ems.name}.  Continuing.")
+                next
+              end
             end
-          rescue => err
-            _log.error("Error #{err} processing replies for #{coord.ems.name}.  Continuing.")
-            next
           end
         end
-      end
-      response_check_sleep_seconds = response_thread_sleep_seconds
-      _log.debug("going to sleep for #{response_check_sleep_seconds} seconds after checking all Agent Coordinators")
-      sleep(response_check_sleep_seconds) unless @shutdown_instance_wait_thread
+      end # end of synchronized block
+      _log.debug("going to sleep for #{response_thread_sleep_seconds} seconds after checking all Agent Coordinators")
+      sleep(response_thread_sleep_seconds) unless @shutdown_instance_wait_thread
     end
   end
 
@@ -90,19 +92,9 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
     xml_summary.root.add_attributes("taskid" => ost.taskid)
     ost.taskid = ost.jobid
 
-    data_dir = File.expand_path(Rails.root.join("data", "metadata"))
-    _log.debug("creating #{data_dir}")
-    unless File.exist?(data_dir)
-      begin
-        Dir.mkdir(data_dir)
-      rescue Errno::EEXIST
-        # Ignore if the directory was created by another thread
-        _log.debug("No need to create directory #{data_dir} since it exists.")
-      end
-    end
     ost.skipConfig = true
     ost.config     = OpenStruct.new(
-      :dataDir            => data_dir,
+      :dataDir            => @response_data_dir,
       :forceFleeceDefault => false
     )
 
@@ -125,10 +117,10 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
         st = Time.current
         xml = MIQRexml.load(ost.reply[:categories][c.to_sym])
         if xml.nil?
-          _log.debug("No XML loaded for [#{c}].")
+          _log.warn("No XML loaded for [#{c}].")
           next
         elsif xml.root.nil?
-          _log.debug("No XML root loaded for [#{c}]: XML is #{xml}.")
+          _log.warn("No XML root loaded for [#{c}]: XML is #{xml}.")
           next
         end
         _log.debug("Writing scanned data to XML for [#{c}] to blackbox.")
@@ -169,7 +161,16 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
     end
   end
 
+  def response_data_dir
+    response_data_dir = Rails.root.join("data", "metadata").expand_path
+    unless File.exist?(response_data_dir)
+      _log.debug("creating #{response_data_dir}")
+      FileUtils.mkdir_p(response_data_dir)
+    end
+    response_data_dir
+  end
+
   def response_thread_sleep_seconds
-    @response_thread_sleep_seconds ||= Settings.ems.ems_amazon.agent_coordinator.response_thread_sleep_seconds
+    Settings.ems.ems_amazon.agent_coordinator.response_thread_sleep_seconds
   end
 end
