@@ -43,6 +43,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Adjust test result to match new data_type [(#272)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/272)
 - Handle empty string in image name tags [(#273)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/273)
 - Parse timestamp for aws alarm events [(#246)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/246)
+- Combine registry and image together when registry needs. [(#353)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/353)
 
 ### Removed
 - Remove Amazon provider discovery [(#306)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/306)
