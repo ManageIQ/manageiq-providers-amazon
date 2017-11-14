@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 73 ending 2017-11-13
+
+### Added
+- Turn on batch saving by default [(#292)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/292)
+
+### Fixed
+- Combine registry and image together when registry needs. [(#353)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/353)
+
 ## Unreleased as of Sprint 72 ending 2017-10-30
 
 ### Added
