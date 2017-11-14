@@ -14,7 +14,7 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack < ManageIQ::
 
   def raw_update_stack(template, options)
     options = self.class.format_v2_options(options)
-    update_options = {:template_body => template.content}.merge(options.except(:disable_rollback, :timeout))
+    update_options = {:template_body => template.content}.merge(options.except(:on_failure, :timeout_in_minutes))
     ext_management_system.with_provider_connection(:service => :CloudFormation) do |service|
       service.stack(name).update(update_options)
     end
