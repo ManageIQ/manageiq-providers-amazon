@@ -96,22 +96,24 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate < Orchest
     choices = {'ROLLBACK' => 'Rollback', 'DO_NOTHING' => 'Do nothing', 'DELETE' => 'Delete stack'}
 
     OrchestrationTemplate::OrchestrationParameter.new(
-      :name          => "stack_onfailure",
-      :label         => "On Failure",
-      :data_type     => "string",
-      :description   => "Select what to do if stack creation failed",
-      :default_value => 'ROLLBACK',
-      :required      => true,
-      :constraints   => [OrchestrationTemplate::OrchestrationParameterAllowed.new(:allowed_values => choices)]
+      :name           => "stack_onfailure",
+      :label          => "On Failure",
+      :data_type      => "string",
+      :description    => "Select what to do if stack creation failed",
+      :default_value  => 'ROLLBACK',
+      :required       => true,
+      :reconfigurable => false,
+      :constraints    => [OrchestrationTemplate::OrchestrationParameterAllowed.new(:allowed_values => choices)]
     )
   end
 
   def timeout_opt
     OrchestrationTemplate::OrchestrationParameter.new(
-      :name        => "stack_timeout",
-      :label       => "Timeout(minutes, optional)",
-      :data_type   => "integer",
-      :description => "Abort the creation if it does not complete in a proper time window"
+      :name           => "stack_timeout",
+      :label          => "Timeout(minutes, optional)",
+      :data_type      => "integer",
+      :reconfigurable => false,
+      :description    => "Abort the creation if it does not complete in a proper time window"
     )
   end
 
