@@ -7,7 +7,8 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshWorker < ManageIQ::Provi
   # of the Amazon inventory across all managers.
   def self.queue_name_for_ems(ems)
     if ems.kind_of?(ExtManagementSystem)
-      ["ems_#{ems.id}"] + ems.child_managers.collect { |manager| "ems_#{manager.id}" }
+      queue = ["ems_#{ems.id}"] + ems.child_managers.collect { |manager| "ems_#{manager.id}" }
+      queue.sort
     else
       super
     end
