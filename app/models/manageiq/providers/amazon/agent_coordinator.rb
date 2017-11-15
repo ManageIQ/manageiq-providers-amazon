@@ -137,21 +137,24 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     @deploying = true
 
     kp = find_or_create_keypair
-    vpc_ids = get_dns_enabled_vpc_ids
-    raise "Smartstate analysis needs a VPC whose enableDnsSupport/enableDnsHostnames settings are true!" if vpc_ids.empty?
+    vpcs = get_dns_enabled_vpcs
+    raise "Smartstate analysis needs a VPC whose enableDnsSupport/enableDnsHostnames settings are true!" if vpcs.empty?
 
     zone_names = ec2.client.describe_availability_zones.availability_zones.map(&:zone_name)
-    subnets = []
+    subnet = nil
     zone_names.each do |zone_name|
-      vpc_ids.each { |id| subnets << get_subnets(zone_name, id) }
+      vpcs.each do |vpc|
+        subnet = get_subnets(zone_name, vpc.vpc_id).try(:first)
+        break if subnet
+      end
+      break if subnet
     end
-    subnets.flatten!
-    raise "No subnet is qualiified to deploy smartstate agent!" if subnets.empty?
+    raise "No subnet is qualiified to deploy smartstate agent!" if subnet.nil?
 
     # Use the first qualified subnet to deploy agent.
-    vpc_id = subnets[0].vpc_id
-    zone_name = subnets[0].availability_zone
-    subnet_id = subnets[0].subnet_id
+    vpc_id = subnet.vpc_id
+    zone_name = subnet.availability_zone
+    subnet_id = subnet.subnet_id
 
     _log.info("Smartstate agent will be deployed in vpc: [#{vpc_id}], zone: [#{zone_name}] subnet: [#{subnet_id}]")
 
@@ -202,7 +205,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     begin
       config.write(create_config_yaml)
       config.close
-      out = scp_file(ip, agent_ami_login_user, auth_key, config.path, "#{WORK_DIR}/config.yml")
+      scp_file(ip, agent_ami_login_user, auth_key, config.path, "#{WORK_DIR}/config.yml")
     ensure
       config.unlink
     end
@@ -230,9 +233,11 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   # To run SSA, VPC needs to turn on enableDnsSupport and enableDnsHostnames
-  def get_dns_enabled_vpc_ids
-    vpc_ids = ec2.client.describe_vpcs.vpcs.map(&:vpc_id)
-    vpc_ids.select { |id| enabled_dns_support?(id) && enabled_dns_hostnames?(id) }
+  def get_dns_enabled_vpcs
+    ec2.client.describe_vpcs.vpcs.select do |vpc|
+      id = vpc.vpc_id
+      enabled_dns_support?(id) && enabled_dns_hostnames?(id)
+    end
   end
 
   def enabled_dns_hostnames?(vpc_id)
@@ -404,7 +409,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   def messages_in_queue(q_name)
     q = sqs.get_queue_by_name(:queue_name => q_name)
     q.attributes["ApproximateNumberOfMessages"].to_i + q.attributes["ApproximateNumberOfMessagesNotVisible"].to_i
-  rescue => err
+  rescue
     0
   end
 
