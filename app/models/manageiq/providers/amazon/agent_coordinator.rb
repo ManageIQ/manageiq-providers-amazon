@@ -281,7 +281,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
         :values => [group_name]
       }]
     ).security_groups.first
-    return security_group.group_id unless security_group.empty?
+    return security_group.group_id unless security_group.nil?
 
     # create security group if not exist
     security_group = ec2.create_security_group(
