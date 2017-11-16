@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "a2832658-22c3-5f6d-8364-74df45602e39",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"c7637893-022b-4fbf-9565-a8b5b64b45dc\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-11-16T10:15:34Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAIXA4NYJIDT6VVBPA\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-11-16T08:35:35Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-11-16T10:15:34Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"DeleteInternetGateway\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"internetGatewayId\":\"igw-1e943f7b\"},\"responseElements\":{\"_return\":true},\"requestID\":\"0d5f138c-9938-47c4-a767-ad6a3e64a52c\",\"eventID\":\"cb23bfd5-f598-47f2-8abd-f9691919e811\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-11-16T10:16:03.904Z",
+  "SignatureVersion" : "1",
+  "Signature" : "GcRmIeIwjgIw6xqVtDBbHBndUe1BmcQnK3QPDIsgdt8pBqEvYKjYzggYoyS+uEmYvB4ToyTmBIFqw86vr2tQXK0BPOd2EVd1kAxpLG21VnpGVyEvyaHDwlNuau10XL7GF+D1C/ggL7/27avfInfPUBVKPfrBfmm5OSfaXoDSM2auIw6jjTQZVT/4z2gobhQTzbeTRXz0pDTFiFALRKu4xuVc36tfEd4IHTfTxUfelG+t9sTHpxa5YKmJopkxGzGXZp7l9VSRj1bXJUrAClo9bvkouoswXc9iiWy3jWG6ryrWFomNuTGQW8JFBfzrSrBhQ+1JxVwQYrLJaTZ9KdHRfw==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:515bacb7-efef-41f8-9266-7765b9afe39d"
+}

@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "d9ef3235-34b8-53f2-ac78-60b25bc06e22",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"4ad57195-6868-f2b7-a05c-5e8b510e4b32\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-11-16T10:48:39Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAIXA4NYJIDT6VVBPA\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-11-16T08:35:35Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-11-16T10:48:39Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"DeleteRouteTable\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"routeTableId\":\"rtb-c18ca4bb\"},\"responseElements\":{\"_return\":true},\"requestID\":\"0e70085f-ffe0-45d7-85c6-848030fe4b71\",\"eventID\":\"58df13fd-f2fe-47f6-bf6d-3713d4664d1c\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-11-16T10:49:28.713Z",
+  "SignatureVersion" : "1",
+  "Signature" : "WEd4vtRRdZqo3DszR0JBn827SGr+AiQiBRD4dt0vYo3ZlzF6jU1mqAI3Ya/9V7HWZm8oekwpLNTQnh89i2zUQszZm7b6iw51l+jBenvpUZ6wWKL4qU2xWPAruwzjHjOySFIDMr0GGWdm3H1UAzS2IfqbNAma8pHwxaKqJdBUOmJgDmbWeUqCfpf6YP74v1NTOUamL6mFInGnoTuDEGXBUSnrgTE3G7f7whEuSwZQcLZcszbG0F5+3BkfrKVYlwlS9mYUq/9ZsqU6lCuyyflfKR7ai9aEIDgnp65POL1GAKjc3zhlBQucxKVUyP2j6BEFp9RNLkhW+JIxp2KioyFyjA==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:515bacb7-efef-41f8-9266-7765b9afe39d"
+}

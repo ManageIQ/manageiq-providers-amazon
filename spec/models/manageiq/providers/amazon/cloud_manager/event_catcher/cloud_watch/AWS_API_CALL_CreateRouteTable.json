@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "46be8206-2665-5df2-9dc9-d0814b924883",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"b0c5175f-3d9f-e168-72f4-ac5c2fba0be5\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-11-16T10:42:58Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAIXA4NYJIDT6VVBPA\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-11-16T08:35:35Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-11-16T10:42:58Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"CreateRouteTable\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"vpcId\":\"vpc-2e7df256\"},\"responseElements\":{\"routeTable\":{\"routeTableId\":\"rtb-d98ba3a3\",\"vpcId\":\"vpc-2e7df256\",\"routeSet\":{\"items\":[{\"destinationCidrBlock\":\"10.3.0.0/16\",\"gatewayId\":\"local\",\"state\":\"active\",\"origin\":\"CreateRouteTable\"}]},\"associationSet\":{},\"propagatingVgwSet\":{},\"tagSet\":{}}},\"requestID\":\"ab6718ae-7fe5-41ef-a8b4-040db27c260b\",\"eventID\":\"8898871b-367a-49cf-9168-1cc9c6aa67cd\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-11-16T10:43:03.457Z",
+  "SignatureVersion" : "1",
+  "Signature" : "DmcKBCfZE81x/WPA0V1m9X7EPIIBykcJIJZv94xccZfPIQwybuumDlECYe4xU26SBRWuDmOmkiXjKqFp9y0XgEQrPbC4aJ4+lpBC1BVgH+Ah48C8bs77wtU0LYG+ojkdIki+4ne1XUQIr3phHa1HAnAOzxrnf/K9ktr6dfxIotw15u8ZwIg7WyWrLB18rRtYTasFgjuw9Rc5LB8lHI3OalWqMxYgOmTlV7CKKHa6kX+gONjnHSsTn/hNphnhX2+tedVjdszqZbR8uQ7lSO1/VyMo/djtLDDDi+CbUZyLkCTJ210tc0YuMN+t2feapQwISZj7yIKi9OJDOSJdoePZmg==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:515bacb7-efef-41f8-9266-7765b9afe39d"
+}

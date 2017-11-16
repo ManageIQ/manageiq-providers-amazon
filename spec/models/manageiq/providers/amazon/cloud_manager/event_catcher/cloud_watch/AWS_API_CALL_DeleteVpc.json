@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "45147477-8475-5cc4-96da-26f0ec49589b",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"6ae702a2-162a-1ee9-068a-c3e88d51dcca\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-11-16T10:18:15Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAIXA4NYJIDT6VVBPA\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-11-16T08:35:35Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-11-16T10:18:15Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"DeleteVpc\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"vpcId\":\"vpc-a06de3c5\"},\"responseElements\":{\"_return\":true},\"requestID\":\"1a879c62-37f5-4ce2-8310-39d7bdeb70a2\",\"eventID\":\"c25b3cec-7de3-4e09-aff5-d863c89e43f0\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-11-16T10:18:36.463Z",
+  "SignatureVersion" : "1",
+  "Signature" : "O9MfRI13wbJbZEFT2dutt5SshwzaVYjpAkoG6AQMETg2g16c9iFScqSNiPYsRdJ00xp8W7R4n6cwFbZ8FdQTfuUyh3mGmc7bXr2LMnYeEmWitgI1EF+UXcWrRb7q7ypn/hiTsvSaxWVEh6dQ+DkXuuNllKmLs7ISbIQtRL+ZDWCGU0mW548dP5qlKTjWJqvHxK5YNlBTdp2kyZoaELq0ZAV+E3gNrh+szMW7//YZt7PaPkL1XYfwzNIlR6AbHGR5RUyw9QL8VUTmCeWWr7a2QQyaDBg2z/X9KNhvVLMiWcMxfxGPFu6GsKiV9OpmNgGxww0jmgLBbhjs2k6G0kDffw==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:515bacb7-efef-41f8-9266-7765b9afe39d"
+}

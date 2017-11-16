@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "0726e527-e8e8-5332-9bab-b7a082c0b244",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"fd7e8e4a-78eb-c7f4-0868-7b99c09146e1\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-11-16T10:26:29Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAIXA4NYJIDT6VVBPA\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-11-16T08:35:35Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-11-16T10:26:29Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"EnableVpcClassicLink\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"vpcId\":\"vpc-d87ff0a0\"},\"responseElements\":{\"_return\":true},\"requestID\":\"124f81fa-a466-4356-bc8c-ffbc0051e69e\",\"eventID\":\"c08f4534-349a-4cc5-908f-ae7b445d9701\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-11-16T10:26:48.557Z",
+  "SignatureVersion" : "1",
+  "Signature" : "AbPGtMmwf4a2YL4Y5LETZvz11y43QJpTM6kNUVUiyQM0jBUV92d19Lqtw349MIbam/twiqEABTRlZx4n9grX8A2O/s5ahv4NAueyHOMccmH4enK6ninfjmiF4p30eF7rRBPubf4vKIEHV80+Z8cODJwK16HpB8/6gdtFGZ//7KeYdCbfyai1Ltkbjc/cvKT7mTnnzDoMUX8G255BjVvbCbq+TSetB1bBAAyefZ8T1vQ0OTP2zzkJqG5bTNbktwAsl3NbUH9DrBfqoNagB9PczOo076A2rwGk4NY/o3+kVgqsWkdSl9B9bmQUcwLQHUz1sjaWIpGh64Z/cP1p/n3f3w==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:515bacb7-efef-41f8-9266-7765b9afe39d"
+}

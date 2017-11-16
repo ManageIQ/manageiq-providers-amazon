@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "016ece18-a18e-5840-bd52-9c9fcbdc480f",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"e5958dc0-4cdd-9f48-8439-cd6faf38690c\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-11-16T10:26:37Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAIXA4NYJIDT6VVBPA\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-11-16T08:35:35Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-11-16T10:26:37Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"ModifyVpcAttribute\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"vpcId\":\"vpc-d87ff0a0\",\"enableDnsSupport\":{\"value\":false}},\"responseElements\":{\"_return\":true},\"requestID\":\"70b8f20a-696b-4011-be4d-04823e3eacf4\",\"eventID\":\"c6518d4c-6ecd-45dc-a079-8057675e5055\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-11-16T10:27:30.884Z",
+  "SignatureVersion" : "1",
+  "Signature" : "i/HtVHLq1nrlBosU3Up++Is3louw8e24jXSFdy/TZNKTuLzJKNBCGDX5/abYq7VSFO2QHqYloi+GkTOBaQWnTeVbejEu+WPq/qtEcHc42Sic6XFaTbgSS80jyxXA5fC9ScumsTBLz+Z9aMcgq8hVn69esGaynW8vMoG5M7ojs9YXiWcY70WC+ugMMAZckXY4qzkwfRlPsstnFI3nAfr29wi4dOH8nzgjGBt4+u/yos8pmNwMbVe44VkNsZQqRQhtRxNh8xdTbhOcTYl6zrHV/tQy1PuB+wmiYxfrUkVu+/Rf/OO0iqhsN9mrVx+wOKE8pc9cymwCrCayDJ55U2WCVg==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:515bacb7-efef-41f8-9266-7765b9afe39d"
+}
