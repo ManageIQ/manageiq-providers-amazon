@@ -1,0 +1,12 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "239e8f11-579e-52c6-8cc2-dd9625fde55c",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Subject" : "[AWS Config:us-east-1] AWS::EC2::InternetGateway igw-d90194a0 Created in Account 200278856672",
+  "Message" : "{\"configurationItemDiff\":{\"changedProperties\":{},\"changeType\":\"CREATE\"},\"configurationItem\":{\"relatedEvents\":[\"c8554bec-0791-4815-a383-9fb5f8ec6832\"],\"relationships\":[],\"configuration\":{\"attachments\":[],\"internetGatewayId\":\"igw-d90194a0\",\"tags\":[{\"key\":\"Name\",\"value\":\"LadasTest\"}]},\"supplementaryConfiguration\":{},\"tags\":{\"Name\":\"LadasTest\"},\"configurationItemVersion\":\"1.2\",\"configurationItemCaptureTime\":\"2017-11-16T11:01:55.074Z\",\"configurationStateId\":1510830115074,\"awsAccountId\":\"200278856672\",\"configurationItemStatus\":\"ResourceDiscovered\",\"resourceType\":\"AWS::EC2::InternetGateway\",\"resourceId\":\"igw-d90194a0\",\"resourceName\":null,\"ARN\":\"arn:aws:ec2:us-east-1:200278856672:internet-gateway/igw-d90194a0\",\"awsRegion\":\"us-east-1\",\"availabilityZone\":\"Multiple Availability Zones\",\"configurationStateMd5Hash\":\"ffd5cd8ccb217300f3278676adc201c2\",\"resourceCreationTime\":null},\"notificationCreationTime\":\"2017-11-16T11:01:55.289Z\",\"messageType\":\"ConfigurationItemChangeNotification\",\"recordVersion\":\"1.2\"}",
+  "Timestamp" : "2017-11-16T11:01:55.470Z",
+  "SignatureVersion" : "1",
+  "Signature" : "OOCxJjrZALcqXeJCR6ySELVuQ/qdo5ux5dKQyKsOQt4aJtbYby+N0NK0NQfz+ELmrn5IyPHFfcj1il0S+vl7O0ziWf2Szw9c711I10auyUV26Ew38d7bCUk39E6wA2ULHzZgRu6xv2Bhm72r4CTvfTrz+B9olOVyevRozsNpx9Pvgep8oIgq/lzEvSZZy4YKJ99QzRkB268N/gFfHngVU3JTCi2f1UMg/cYbVNRGZcgI7tzRyo31bXLkaihWA0XmQEHnSn4hMHmP0MEZZ38mgG/BnF2hHUjSazsityURftv48FaWTk8aRbh6UBzDhCPfiRnAprvH1JoZrJzRZvj+UQ==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:515bacb7-efef-41f8-9266-7765b9afe39d"
+}
