@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "788a1301-7548-5e0d-a2dd-41860bf7caa0",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"95309fd9-c388-67a1-e715-a77e19bd607d\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-11-16T11:54:23Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAI6JCUU3S6M256HAA\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-11-16T08:35:35Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-11-16T11:54:23Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"DeregisterImage\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"errorCode\":\"Client.InvalidAMIID.Unavailable\",\"errorMessage\":\"The image ID 'ami-a944c4d3' is no longer available\",\"requestParameters\":{\"imageId\":\"ami-a944c4d3\"},\"responseElements\":null,\"requestID\":\"98415cb0-c168-4f28-b996-30ecc2a8d0d0\",\"eventID\":\"e758d9db-79a9-4ae3-9cb6-47c85acfc2f9\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-11-16T11:54:39.824Z",
+  "SignatureVersion" : "1",
+  "Signature" : "LSQ5FojUgw4d5bvMnrdp/3WBrBXx7SpzbNHlX1zWiX3Nrg+qoWkvqKJ0u7O4SfcmA9qXe6248q9m4Rzbemsj1sdY7w+ePGHFm8ky+ob7ynNfQjgLhlUdAgh0eaqmuLjCNhJSstziuEAlJn2NVa9xUSS4/rbO8+73ffqnWQFRPxVyEX4j7a82UqwkVHcMwfOyR8DPY6LHME5YojrxDo4K/MsYVrrXeOt6tnZ7J4HW+pTHxl9sUeuUUywvqH7UwLb9qS5Ij4bfkNsliQ/aHQgn3OKHxr7n6MxcUBw59ynCbvGhdQgRhPbEfqWZE5Nj+v/urHgb0wUI/CUEcsUfrxEIoQ==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:515bacb7-efef-41f8-9266-7765b9afe39d"
+}
