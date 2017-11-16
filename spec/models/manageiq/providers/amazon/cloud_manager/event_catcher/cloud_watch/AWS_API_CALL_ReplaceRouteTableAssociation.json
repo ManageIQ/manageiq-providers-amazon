@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "30fac236-1261-5fa1-bba1-90b17c51e613",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"45aef776-cdc6-4b14-4996-03e3e4339c9a\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-11-16T10:43:19Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAIXA4NYJIDT6VVBPA\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-11-16T08:35:35Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-11-16T10:43:19Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"ReplaceRouteTableAssociation\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"associationId\":\"rtbassoc-c771e8ba\",\"routeTableId\":\"rtb-d98ba3a3\"},\"responseElements\":{\"newAssociationId\":\"rtbassoc-d27ee7af\"},\"requestID\":\"1859d818-b46b-44c4-96d9-1e395bdcde04\",\"eventID\":\"40202a62-0dbb-44ee-9f12-c65701613a7b\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-11-16T10:44:00.535Z",
+  "SignatureVersion" : "1",
+  "Signature" : "HuGBbtU6XZa244SrL+BXWmm5a8MNpsaKZqOGkzX8mjK30HcKzG5uTvSnx0lKtTduR29YSX18pkgIgcmcER9b3lmPkAgii+0ilN3tnvhD0PGSwPuWslrxWvV+tJ5JRHMmtj1D7QteSD3rwWWuHgw9uKc95g1MiufjBEoiJKPPzaQ6onJfkz5VvL6SjB7QXIh+pkw+dCv08hHM5gjPRiEuT+Egv+XudKyDbbyVTN6+i/cqaw+pdjvtfPoqrNkKdgmE9mreh8JX628K3qty88CIqJBfTDvnHKej2hfnDME1SYgYZ+EA4tMsvhssxEKaGs1cfKo19ttAboIUF1AQx+hwrg==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:515bacb7-efef-41f8-9266-7765b9afe39d"
+}

@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "a355ca66-2c81-549d-abd6-98e1427de0b0",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"d1976893-6de3-bb8c-c02d-252647aa80ff\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-11-16T10:47:12Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAIXA4NYJIDT6VVBPA\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-11-16T08:35:35Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-11-16T10:47:12Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"CreateRoute\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"errorCode\":\"Client.InvalidParameterValue\",\"errorMessage\":\"cannot create a more specific route for 10.3.0.0/16 than CIDR 10.3.0.0/16 associated with the VPC, with association-id vpc-cidr-assoc-2a32b140, in route table rtb-d98ba3a3\",\"requestParameters\":{\"routeTableId\":\"rtb-d98ba3a3\",\"destinationCidrBlock\":\"10.3.0.0/16\",\"gatewayId\":\"igw-e207929b\"},\"responseElements\":null,\"requestID\":\"609d6251-1d90-4a9b-b376-1a2f419e9b03\",\"eventID\":\"50cd5e6f-4127-4f33-bdf3-b1a118b6232c\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-11-16T10:47:24.412Z",
+  "SignatureVersion" : "1",
+  "Signature" : "hyTHcTrcyUTA3VGMRpoHrtRh0l+oDYZuHERalZlOLKglpcv3wnRA2fy4GSlULT3m8e2+E+vQscM9iaNPKX5Pn/NBnec00/asV75oV69J/KKabR4cGWj1kuzyZ3Ah/7YpKkOiozTVwcw5RtGQyGGHBgNR4IG4YmQ9kFyvoVzKR75pCw3FqbP4SVMVil1IW3iPeNoIvrCjCIIbpGfXjqVQhSiQilEcVHyGnwzHvNa//P9btkxiz/+iOWjXcO2B4fXP8JXfj/QIKh8Xz4oeq0q/0qoYcNibuxhkt9PlD0Dsaa9xMaUdw25xw6CAvnu3O8EXfpdN+XZrhWyTifh1v5xIAA==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:515bacb7-efef-41f8-9266-7765b9afe39d"
+}

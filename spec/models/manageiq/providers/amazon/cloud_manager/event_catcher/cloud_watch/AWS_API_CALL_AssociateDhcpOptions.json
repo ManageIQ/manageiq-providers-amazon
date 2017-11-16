@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "2d78bee6-d589-5b91-b173-ec61bc1bc43d",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"3e4e3740-5745-49bb-5c37-b2334a357a1d\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2017-11-16T10:24:09Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAIXA4NYJIDT6VVBPA\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2017-11-16T08:35:35Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2017-11-16T10:24:09Z\",\"eventSource\":\"ec2.amazonaws.com\",\"eventName\":\"AssociateDhcpOptions\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"dhcpOptionsId\":\"default\",\"vpcId\":\"vpc-d87ff0a0\"},\"responseElements\":{\"_return\":true},\"requestID\":\"0012c5b7-162e-4d6f-b095-920d935658a5\",\"eventID\":\"87cf35ec-1e0b-424a-a54e-eaf5c7f58a56\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2017-11-16T10:24:18.884Z",
+  "SignatureVersion" : "1",
+  "Signature" : "TxgIaZwmZe7B0PMp3y5kJGFvsW+T2s3TMoq39BLNF1CI5x1nQGqcdkWQ3xuB0TXipcW1WtMKuNatflbuprc0zuQUvpHyv8VWDfohAfxd3zF/G1/RLfPqbh+SPEJY71Ypd5YokT+QNWBbRWB4nh+yovmDf0Ev/4ORMWtJV3DaOMyoXx9v8vXfGuteuw4DNBoYv3UGnbrz6YPsQeZR6gbJ2UnyDEpHFTvzxwJE0+0Ob/zifrbUMgBAfp7sStY+e2jNxaRZ1P92a3w+9Ur2IP3IvaFaGD19s3+HXM4a250jYV3aCUqUZoLLspO4U7/D9Nsz/kgJ6SxTqcQAcQUHBb5UGA==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:515bacb7-efef-41f8-9266-7765b9afe39d"
+}
