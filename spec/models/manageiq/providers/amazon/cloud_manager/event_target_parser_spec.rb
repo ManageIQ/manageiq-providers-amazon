@@ -182,6 +182,42 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       )
     end
 
+    it "parses AWS_EC2_InternetGateway_CREATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_InternetGateway_CREATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      # TODO(lsmola) we do not refresh and model Gateway
+      expect(parsed_targets.size).to eq(0)
+    end
+
+    it "parses AWS_EC2_InternetGateway_DELETE event" do
+      ems_event = create_ems_event("config/AWS_EC2_InternetGateway_DELETE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      # TODO(lsmola) we do not refresh and model Gateway
+      expect(parsed_targets.size).to eq(0)
+    end
+
+    it "parses AWS_EC2_NetworkAcl_CREATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_NetworkAcl_CREATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      # TODO(lsmola) we do not refresh and model NetworkAcl
+      expect(parsed_targets.size).to eq(0)
+    end
+
+    it "parses AWS_EC2_NetworkAcl_UPDATE_event" do
+      ems_event = create_ems_event("config/AWS_EC2_NetworkAcl_UPDATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      # TODO(lsmola) we do not refresh and model NetworkAcl
+      expect(parsed_targets.size).to eq(0)
+    end
+
     it "parses AWS_EC2_NetworkInterface_CREATE event" do
       ems_event = create_ems_event("config/AWS_EC2_NetworkInterface_CREATE.json")
 
@@ -227,6 +263,30 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       )
     end
 
+    it "parses AWS_EC2_RouteTable_CREATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_RouteTable_CREATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
+    end
+
+    it "parses AWS_EC2_RouteTable_DELETE event" do
+      ems_event = create_ems_event("config/AWS_EC2_RouteTable_DELETE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
+    end
+
+    it "parses AWS_EC2_RouteTable_UPDATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_RouteTable_UPDATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
+    end
+
     it "parses AWS_EC2_SecurityGroup_CREATE event" do
       ems_event = create_ems_event("config/AWS_EC2_SecurityGroup_CREATE.json")
 
@@ -267,6 +327,21 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
         match_array(
           [
             [:security_groups, {:ems_ref => "sg-80f755ef"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_Subnet_CREATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_Subnet_CREATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_subnets, {:ems_ref => "subnet-5f5a9670"}]
           ]
         )
       )
@@ -342,6 +417,36 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
         match_array(
           [
             [:cloud_volumes, {:ems_ref => "vol-01ff7e549707b8e54"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_VPC_CREATE event" do
+      ems_event = create_ems_event("config/AWS_EC2_VPC_CREATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_networks, {:ems_ref => "vpc-2e7df256"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_EC2_VPC_DELETE event" do
+      ems_event = create_ems_event("config/AWS_EC2_VPC_DELETE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_networks, {:ems_ref => "vpc-4d73fc35"}]
           ]
         )
       )
@@ -498,8 +603,6 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_CreateInternetGateway.json")
       parsed_targets = described_class.new(ems_event).parse
 
-      # TODO(lsmola) recorded VCR has error The maximum number of internet gateways has been reached, so maybe we can
-      # parse targets here
       expect(parsed_targets.size).to eq(0)
       expect(target_references(parsed_targets)).to(
         match_array(
@@ -658,8 +761,6 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_CreateVpc.json")
       parsed_targets = described_class.new(ems_event).parse
 
-      # TODO(lsmola) VCR containes error The maximum number of VPCs has been reached, rerecord, we should see
-      # cloud_network target inside
       expect(parsed_targets.size).to eq(0)
       expect(target_references(parsed_targets)).to(
         match_array(
