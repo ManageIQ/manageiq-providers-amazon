@@ -91,6 +91,10 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
     add_target(target_collection, :orchestration_stacks, event_data["stackName"]) if event_data["stackName"]
     # Network
     add_target(target_collection, :cloud_networks, event_data["vpcId"]) if event_data["vpcId"]
+    add_target(target_collection, :cloud_networks, event_data.fetch_path("vpc", "vpcId")) if event_data.fetch_path("vpc", "vpcId")
+    if event_data.fetch_path("EnableVpcClassicLinkDnsSupportRequest", "VpcId")
+      add_target(target_collection, :cloud_networks, event_data.fetch_path("EnableVpcClassicLinkDnsSupportRequest", "VpcId"))
+    end
     add_target(target_collection, :cloud_subnets, event_data["subnetId"]) if event_data["subnetId"]
     add_target(target_collection, :network_ports, event_data["networkInterfaceId"]) if event_data["networkInterfaceId"]
     add_target(target_collection, :security_groups, event_data["groupId"]) if event_data["groupId"]
