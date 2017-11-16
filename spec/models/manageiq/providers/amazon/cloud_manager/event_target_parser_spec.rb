@@ -526,6 +526,48 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       )
     end
 
+    it "parses AWS_API_CALL_AssociateDhcpOptions" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_AssociateDhcpOptions.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_networks, {:ems_ref=>"vpc-d87ff0a0"}],
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_AssociateRouteTable" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_AssociateRouteTable.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_subnets, {:ems_ref=>"subnet-43992b7c"}],
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_AttachInternetGateway" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_AttachInternetGateway.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_networks, {:ems_ref=>"vpc-2e7df256"}]
+          ]
+        )
+      )
+    end
+
     it "parses AWS_API_CALL_AttachNetworkInterface" do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_AttachNetworkInterface.json")
       parsed_targets = described_class.new(ems_event).parse
@@ -579,6 +621,20 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
         match_array(
           [
             [:load_balancers, {:ems_ref => "ladas-tes-ElasticL-1TF5KASVJA6TN"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_CopySnapshot" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_CopySnapshot.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_volume_snapshots, {:ems_ref=>"snap-0b1bfdb21caec2dcd"}]
           ]
         )
       )
@@ -665,6 +721,27 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
             [:cloud_subnets, {:ems_ref => "subnet-16c70477"}],
             [:network_ports, {:ems_ref => "eni-f2397458"}],
             [:security_groups, {:ems_ref => "sg-0d2cd677"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_CreateRoute" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_CreateRoute.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
+    end
+
+    it "parses AWS_API_CALL_CreateRouteTable" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_CreateRouteTable.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_networks, {:ems_ref=>"vpc-2e7df256"}]
           ]
         )
       )
@@ -761,12 +838,21 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_CreateVpc.json")
       parsed_targets = described_class.new(ems_event).parse
 
-      expect(parsed_targets.size).to eq(0)
+      expect(parsed_targets.size).to eq(1)
       expect(target_references(parsed_targets)).to(
         match_array(
-          []
+          [
+            [:cloud_networks, {:ems_ref=>"vpc-d87ff0a0"}]
+          ]
         )
       )
+    end
+
+    it "parses AWS_API_CALL_DeleteInternetGateway" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DeleteInternetGateway.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
     end
 
     it "parses AWS_API_CALL_DeleteKeyPair" do
@@ -795,6 +881,34 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
           ]
         )
       )
+    end
+
+    it "parses AWS_API_CALL_DeleteNetworkInterface" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DeleteNetworkInterface.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:network_ports, {:ems_ref=>"eni-3f67fd15"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_DeleteRoute" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DeleteRoute.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
+    end
+
+    it "parses AWS_API_CALL_DeleteRouteTable" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DeleteRouteTable.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
     end
 
     it "parses AWS_API_CALL_DeleteSecurityGroup" do
@@ -879,6 +993,34 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       )
     end
 
+    it "parses AWS_API_CALL_DeleteVpc" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DeleteVpc.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_networks, {:ems_ref=>"vpc-a06de3c5"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_DeregisterImage" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DeregisterImage.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:miq_templates, {:ems_ref=>"ami-a944c4d3"}]
+          ]
+        )
+      )
+    end
+
     it "parses AWS_API_CALL_DeregisterInstancesFromLoadBalancer" do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DeregisterInstancesFromLoadBalancer.json")
       parsed_targets = described_class.new(ems_event).parse
@@ -889,6 +1031,21 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
           [
             [:load_balancers, {:ems_ref => "ladas-tes-ElasticL-19VL2K06WQ7KI"}],
             [:vms, {:ems_ref => "i-04863b664ebf1facf"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_DetachInternetGateway.json" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DetachInternetGateway.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      # TODO(lsmola) event mentions only attachmentId, which we do not track
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_networks, {:ems_ref=>"vpc-a06de3c5"}]
           ]
         )
       )
@@ -935,6 +1092,60 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       )
     end
 
+    it "parses AWS_API_CALL_DisassociateRouteTable.json" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DisassociateRouteTable.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          []
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_EnableVpcClassicLinkDnsSupport.json" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_EnableVpcClassicLinkDnsSupport.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_networks, {:ems_ref=>"vpc-d87ff0a0"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_EnableVpcClassicLink.json" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_EnableVpcClassicLink.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_networks, {:ems_ref=>"vpc-d87ff0a0"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_ImportKeyPair.json" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_ImportKeyPair.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(2)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:key_pairs, {:name => "ladas_test_2"}]
+          ]
+        )
+      )
+    end
+
     it "parses AWS_API_CALL_ModifyLoadBalancerAttributes" do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_ModifyLoadBalancerAttributes.json")
       parsed_targets = described_class.new(ems_event).parse
@@ -961,6 +1172,20 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
             [:security_groups, {:ems_ref => "sg-734efc0f"}],
             [:security_groups, {:ems_ref => "sg-0d2cd677"}],
             [:security_groups, {:ems_ref => "sg-da58eaa6"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_ModifyVpcAttribute" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_ModifyVpcAttribute.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_networks, {:ems_ref=>"vpc-d87ff0a0"}]
           ]
         )
       )
@@ -1018,6 +1243,46 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       expect(target_references(parsed_targets)).to(
         match_array(
           []
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_ReplaceRouteTableAssociation" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_ReplaceRouteTableAssociation.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          []
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_RevokeSecurityGroupEgress" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_RevokeSecurityGroupEgress.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:security_groups, {:ems_ref=>"sg-cf2dd7be"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_RevokeSecurityGroupIngress" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_RevokeSecurityGroupIngress.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:security_groups, {:ems_ref=>"sg-f0d92a94"}]
+          ]
         )
       )
     end
