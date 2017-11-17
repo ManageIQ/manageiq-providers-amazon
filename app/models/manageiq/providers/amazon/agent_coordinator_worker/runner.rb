@@ -1,7 +1,8 @@
 class ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner < MiqWorker::Runner
   include_concern 'ResponseThread'
   def do_before_work_loop
-    @coordinators = self.class.all_agent_coordinators_in_zone
+    @coordinators       = self.class.all_agent_coordinators_in_zone
+    @coordinators_mutex = Mutex.new
     start_response_thread
   end
 
@@ -23,8 +24,10 @@ class ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner < MiqWorker::R
 
     # Amazon providers may be added/removed. Keep monitor and update if needed.
     latest_ems_guids = self.class.amazon_ems_guids
-    coordinator_guids = @coordinators.collect { |m| m.ems.guid }
-    self.class.refresh_coordinators(@coordinators, coordinator_guids, latest_ems_guids)
+    @coordinators_mutex.synchronize do
+      coordinator_guids = @coordinators.collect { |m| m.ems.guid }
+      self.class.refresh_coordinators(@coordinators, coordinator_guids, latest_ems_guids)
+    end
   end
 
   def self.agent_coordinator_by_guid(guid)
