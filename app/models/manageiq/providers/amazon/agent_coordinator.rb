@@ -230,7 +230,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
         return subnet if subnet
       end
     end
-    raise("No subnet is qualiified to deploy smartstate agent!")
+    raise("No subnet is qualified to deploy smartstate agent!")
   end
 
   # To run SSA, VPC needs to turn on enableDnsSupport and enableDnsHostnames
