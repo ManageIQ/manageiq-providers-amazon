@@ -181,7 +181,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     ip = ec2.instance(instance.id).public_dns_name || raise("Failed to get agent's public ip!")
     key_name = instance.key_name
     auth_key = get_keypair(key_name).try(:auth_key)
-    _log.error("Key [#{key_name}] is missing. Cannot SSH to the agent:#{instance.id}") if auth_key.nil?
+    raise("Key [#{key_name}] is missing. Cannot SSH to the agent:#{instance.id}") if auth_key.nil?
 
     ssh = LinuxAdmin::SSH.new(ip, agent_ami_login_user, auth_key)
 
@@ -200,7 +200,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
     # docker register
     if docker_login_required?
-      raise "Need credentials to login" unless docker_auth
+      raise("Need credentials to login") unless docker_auth
 
       docker_username = docker_auth.userid
       docker_password = docker_auth.password
@@ -214,6 +214,11 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     image = docker_registry.present? ? "#{docker_registry}/#{docker_image}" : docker_image
     command_line = "sudo docker run -d --restart=always -v /dev:/host_dev -v #{WORK_DIR}/config.yml:#{WORK_DIR}/config.yml --privileged #{image}"
     ssh.perform_commands([command_line])
+  rescue => err
+    _log.error(err.backtrace.join("\n"))
+    instance.terminate
+    instance.wait_until_terminated
+    raise("Failed to set up smartstate agent: #{err.message}")
   end
 
   def docker_auth
