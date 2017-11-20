@@ -137,11 +137,16 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     @deploying = true
 
     kp = find_or_create_keypair
-    zone_name = ec2.client.describe_availability_zones.availability_zones.first.zone_name
-    subnets = get_subnets(zone_name)
-    raise "No subnet_id is available for #{zone_name}!" if subnets.empty?
-    subnet = subnets.first
-    security_group_id = find_or_create_security_group(subnet.vpc_id)
+    subnet = get_subnet_from_vpc_zone
+
+    # Use the first qualified subnet to deploy agent.
+    vpc_id = subnet.vpc_id
+    zone_name = subnet.availability_zone
+    subnet_id = subnet.subnet_id
+
+    _log.info("Smartstate agent will be deployed in vpc: [#{vpc_id}], zone: [#{zone_name}] subnet: [#{subnet_id}]")
+
+    security_group_id = find_or_create_security_group(vpc_id)
     find_or_create_profile
 
     instance = ec2.create_instances(
@@ -157,7 +162,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
         :associate_public_ip_address => true,
         :delete_on_termination       => true,
         :device_index                => 0,
-        :subnet_id                   => subnet.subnet_id,
+        :subnet_id                   => subnet_id,
         :groups                      => [security_group_id]
       }],
     ).first
@@ -188,7 +193,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     begin
       config.write(create_config_yaml)
       config.close
-      out = scp_file(ip, agent_ami_login_user, auth_key, config.path, "#{WORK_DIR}/config.yml")
+      scp_file(ip, agent_ami_login_user, auth_key, config.path, "#{WORK_DIR}/config.yml")
     ensure
       config.unlink
     end
@@ -213,6 +218,34 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
   def docker_auth
     @ems.authentications.find_by(:authtype => "smartstate_docker")
+  end
+
+  def get_subnet_from_vpc_zone
+    vpcs = get_dns_enabled_vpcs
+    raise "Smartstate analysis needs a VPC whose enableDnsSupport/enableDnsHostnames settings are true!" if vpcs.empty?
+
+    ec2.client.describe_availability_zones.availability_zones.each do |availability_zone|
+      vpcs.each do |vpc|
+        subnet = get_subnets(availability_zone.zone_name, vpc.vpc_id).try(:first)
+        return subnet if subnet
+      end
+    end
+    raise("No subnet is qualified to deploy smartstate agent!")
+  end
+
+  # To run SSA, VPC needs to turn on enableDnsSupport and enableDnsHostnames
+  def get_dns_enabled_vpcs
+    ec2.vpcs.select do |vpc|
+      enabled_dns_support?(vpc) && enabled_dns_hostnames?(vpc)
+    end
+  end
+
+  def enabled_dns_hostnames?(vpc)
+    vpc.describe_attribute(:attribute => 'enableDnsHostnames', :vpc_id => vpc.vpc_id).enable_dns_hostnames.value
+  end
+
+  def enabled_dns_support?(vpc)
+    vpc.describe_attribute(:attribute => 'enableDnsSupport', :vpc_id => vpc.vpc_id).enable_dns_support.value
   end
 
   # Get Key Pair for SSH. Create a new one if not exists.
@@ -326,12 +359,18 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     security_group.group_id
   end
 
-  def get_subnets(az)
+  def get_subnets(az, vpc_id)
     ec2.client.describe_subnets(
-      :filters => [{
-        :name   => "availability-zone",
-        :values => [az]
-      }]
+      :filters => [
+        {
+          :name   => "availability-zone",
+          :values => [az]
+        },
+        {
+          :name   => "vpc-id",
+          :values => [vpc_id]
+        }
+      ]
     ).subnets
   end
 
@@ -370,7 +409,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   def messages_in_queue(q_name)
     q = sqs.get_queue_by_name(:queue_name => q_name)
     q.attributes["ApproximateNumberOfMessages"].to_i + q.attributes["ApproximateNumberOfMessagesNotVisible"].to_i
-  rescue => err
+  rescue
     0
   end
 
