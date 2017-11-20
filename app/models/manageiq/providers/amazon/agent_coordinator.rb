@@ -137,19 +137,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     @deploying = true
 
     kp = find_or_create_keypair
-    vpcs = get_dns_enabled_vpcs
-    raise "Smartstate analysis needs a VPC whose enableDnsSupport/enableDnsHostnames settings are true!" if vpcs.empty?
-
-    zone_names = ec2.client.describe_availability_zones.availability_zones.map(&:zone_name)
-    subnet = nil
-    zone_names.each do |zone_name|
-      vpcs.each do |vpc|
-        subnet = get_subnets(zone_name, vpc.vpc_id).try(:first)
-        break if subnet
-      end
-      break if subnet
-    end
-    raise "No subnet is qualiified to deploy smartstate agent!" if subnet.nil?
+    subnet = get_subnet_from_vpc_zone
 
     # Use the first qualified subnet to deploy agent.
     vpc_id = subnet.vpc_id
@@ -232,20 +220,32 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     @ems.authentications.find_by(:authtype => "smartstate_docker")
   end
 
+  def get_subnet_from_vpc_zone
+    vpcs = get_dns_enabled_vpcs
+    raise "Smartstate analysis needs a VPC whose enableDnsSupport/enableDnsHostnames settings are true!" if vpcs.empty?
+
+    ec2.client.describe_availability_zones.availability_zones.each do |availability_zone|
+      vpcs.each do |vpc|
+        subnet = get_subnets(availability_zone.zone_name, vpc.vpc_id).try(:first)
+        return subnet if subnet
+      end
+    end
+    raise("No subnet is qualiified to deploy smartstate agent!")
+  end
+
   # To run SSA, VPC needs to turn on enableDnsSupport and enableDnsHostnames
   def get_dns_enabled_vpcs
-    ec2.client.describe_vpcs.vpcs.select do |vpc|
-      id = vpc.vpc_id
-      enabled_dns_support?(id) && enabled_dns_hostnames?(id)
+    ec2.vpcs.select do |vpc|
+      enabled_dns_support?(vpc) && enabled_dns_hostnames?(vpc)
     end
   end
 
-  def enabled_dns_hostnames?(vpc_id)
-    ec2.vpc(vpc_id).describe_attribute(:attribute => 'enableDnsHostnames', :vpc_id => vpc_id).enable_dns_hostnames.value
+  def enabled_dns_hostnames?(vpc)
+    vpc.describe_attribute(:attribute => 'enableDnsHostnames', :vpc_id => vpc.vpc_id).enable_dns_hostnames.value
   end
 
-  def enabled_dns_support?(vpc_id)
-    ec2.vpc(vpc_id).describe_attribute(:attribute => 'enableDnsSupport', :vpc_id => vpc_id).enable_dns_support.value
+  def enabled_dns_support?(vpc)
+    vpc.describe_attribute(:attribute => 'enableDnsSupport', :vpc_id => vpc.vpc_id).enable_dns_support.value
   end
 
   # Get Key Pair for SSH. Create a new one if not exists.
