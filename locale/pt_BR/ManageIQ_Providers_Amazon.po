@@ -1,84 +1,95 @@
-# asasaki <asasaki@redhat.com>, 2017. #zanata
+# renata <translator01_redhat@roundtableinc.net>, 2017. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: ManageIQ_Providers_Amazon 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-31 15:15+0100\n"
-"PO-Revision-Date: 2017-11-13 12:56-0500\n"
-"Last-Translator: asasaki <asasaki@redhat.com>\n"
-"Language-Team: Japanese\n"
+"PO-Revision-Date: 2017-11-10 07:16-0500\n"
+"Last-Translator: renata <translator01_redhat@roundtableinc.net>\n"
+"Language-Team: Portuguese (Brazil)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ja\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Language: pt-BR\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "X-Generator: Zanata 3.9.6\n"
 
 #: ../app/models/manageiq/providers/amazon/cloud_manager/vm_or_template_shared/scanning.rb:51
 msgid "\"Unable to process data for job with id #{ost.jobid}\""
-msgstr "\"ID #{ost.jobid} のジョブのデータを処理できません\""
+msgstr ""
+"\"Não foi possível processar os dados para o trabalho com a ID "
+"#{ost.jobid}\""
 
 #: ../app/models/manageiq/providers/amazon/agent_coordinator_worker/runner/response_thread.rb:64
 msgid "\"Unable to sync data for job with id #{ost.jobid}\""
-msgstr "\"ID #{ost.jobid} のジョブのデータを同期できません\""
+msgstr ""
+"\"Não foi possível sincronizar os dados para o trabalho com a ID "
+"#{ost.jobid}\""
 
 #: ../app/models/authenticator/amazon.rb:42
 msgid ""
 "Access key %{number} belongs to IAM user, not to the AWS account holder."
-msgstr "アクセスキー %{number} はAWS アカウントの所有者ではなく IAM ユーザーに属しています。"
+msgstr ""
+"A chave de acesso %{number} pertence ao usuário do IAM, não ao titular da "
+"conta da AWS."
 
 #: ../app/models/authenticator/amazon.rb:96
 msgid ""
 "Access key %{number} does not match an IAM user for aws account holder."
-msgstr "アクセスキー %{number} が AWS アカウント所有者用の IAM ユーザーと一致しません。"
+msgstr ""
+"A chave de acesso %{number} não faz a correspondência entre um usuário do "
+"IAM e o titular da conta da AWS."
 
 #: ../app/models/authenticator/amazon.rb:26
 msgid "Authentication failed"
-msgstr "認証に失敗しました"
+msgstr "Falha na autenticação"
 
 #: ../app/models/authenticator/amazon.rb:117
 msgid "Login failed due to a bad username or password."
-msgstr "ユーザー名またはパスワードが正しくないため、ログインに失敗しました。"
+msgstr "Falha no login devido a um nome de usuário ou senha incorreto."
 
 #: ../app/models/authenticator/amazon.rb:115
 msgid ""
 "SignatureMismatch - check your AWS Secret Access Key and signing method"
-msgstr "SignatureMismatch - AWS シークレットアクセスキーと署名方法をチェックします"
+msgstr ""
+"SignatureMismatch - verifique sua chave de acesso secreta AWS e o método de "
+"assinatura"
 
 #: ../app/models/manageiq/providers/amazon/cloud_manager/auth_key_pair.rb:18
 msgid "The Keypair is not connected to an active %{table}"
-msgstr "Keypair はアクティブな %{table} に接続されません"
+msgstr "O par de chaves não está conectado a um %{table} ativo"
 
 #: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:21
 msgid "The Storage Container is already empty"
-msgstr "ストレージコンテナーはすでに空になっています"
+msgstr "O contêiner de armazenamento já está vazio"
 
 #: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:4
 #: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:14
 msgid "The Storage Container is not connected to an active %{table}"
-msgstr "ストレージコンテナーはアクティブな %{table} に接続されていません"
+msgstr "O contêiner de armazenamento não está conectado a um %{table} ativo"
 
 #: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_object.rb:4
 #: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_object.rb:10
 msgid "The Storage Object is not connected to an active %{table}"
-msgstr "ストレージオブジェクトはアクティブな %{table} に接続されていません"
+msgstr "O objeto de armazenamento não está conectado a um %{table} ativo"
 
 #: ../app/models/manageiq/providers/amazon/cloud_manager/vm/operations/guest.rb:7
 msgid "The VM is not powered on"
-msgstr "VM の電源がオンになっていません"
+msgstr "A VM não está ligada"
 
 #: ../app/models/authenticator/amazon.rb:123
 msgid "Unexpected response returned from system, see log for details"
-msgstr "予期しない応答がシステムから返されました。詳細についてはログを参照してください"
+msgstr ""
+"Houve uma resposta inesperada do sistema, consulte o log para obter detalhes"
 
 #: ../app/models/manageiq/providers/amazon/storage_manager/ebs/cloud_volume_snapshot.rb:27
 msgid "cloud_volume cannot be nil"
-msgstr "cloud_volume を nil にすることはできません"
+msgstr "cloud_volume não pode ser nil"
 
 #: ../app/models/manageiq/providers/amazon/storage_manager/ebs/cloud_volume_snapshot.rb:29
 msgid "ext_management_system cannot be nil"
-msgstr "ext_management_system を nil にすることはできません"
+msgstr "ext_management_system não pode ser nil"
 
 #: ../app/models/manageiq/providers/amazon/cloud_manager/template.rb:8
 msgid "not connected to ems"
-msgstr "EMS に接続されていません"
+msgstr "não conectado a EMS"

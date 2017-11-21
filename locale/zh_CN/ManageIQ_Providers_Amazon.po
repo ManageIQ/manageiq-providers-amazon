@@ -1,66 +1,84 @@
-# Chinese translations for ManageIQ_Providers_Amazon package.
-# Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the ManageIQ_Providers_Amazon package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-#
+# Joy Cai <joy.sh@linguitronics.com>, 2017. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: ManageIQ_Providers_Amazon 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-08-30 14:51+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Chinese\n"
-"Language: zh_CN\n"
+"POT-Creation-Date: 2017-10-31 15:15+0100\n"
+"PO-Revision-Date: 2017-11-10 02:53-0500\n"
+"Last-Translator: Joy Cai <joy.sh@linguitronics.com>\n"
+"Language-Team: Chinese (Simplified, China)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"\n"
+"Language: zh-Hans-CN\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Zanata 3.9.6\n"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/vm_or_template_shared/scanning.rb:51
 msgid "\"Unable to process data for job with id #{ost.jobid}\""
-msgstr ""
+msgstr "\"无法为 id 为 #{ost.jobid} 的任务处理数据\""
 
+#: ../app/models/manageiq/providers/amazon/agent_coordinator_worker/runner/response_thread.rb:64
 msgid "\"Unable to sync data for job with id #{ost.jobid}\""
-msgstr ""
+msgstr "\"无法为 id 为 #{ost.jobid} 的任务同步数据\""
 
-msgid "Access key %{number} belongs to IAM user, not to the AWS account holder."
-msgstr ""
+#: ../app/models/authenticator/amazon.rb:42
+msgid ""
+"Access key %{number} belongs to IAM user, not to the AWS account holder."
+msgstr "访问密钥 %{number} 属于 IAM 用户，而不是 AWS 账户持有者。"
 
-msgid "Access key %{number} does not match an IAM user for aws account holder."
-msgstr ""
+#: ../app/models/authenticator/amazon.rb:96
+msgid ""
+"Access key %{number} does not match an IAM user for aws account holder."
+msgstr "访问密钥 %{number} 不匹配 AWS 账户持有者和 IAM 用户。"
 
+#: ../app/models/authenticator/amazon.rb:26
 msgid "Authentication failed"
-msgstr ""
+msgstr "验证失败"
 
+#: ../app/models/authenticator/amazon.rb:117
 msgid "Login failed due to a bad username or password."
-msgstr ""
+msgstr "用户名或密码错误，登录失败。"
 
-msgid "SignatureMismatch - check your AWS Secret Access Key and signing method"
-msgstr ""
+#: ../app/models/authenticator/amazon.rb:115
+msgid ""
+"SignatureMismatch - check your AWS Secret Access Key and signing method"
+msgstr "SignatureMismatch - 检查您的 AWS 秘密访问密钥和签名方法"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/auth_key_pair.rb:18
 msgid "The Keypair is not connected to an active %{table}"
-msgstr ""
+msgstr "密钥对没有连接至活动的 %{table}"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:21
 msgid "The Storage Container is already empty"
-msgstr ""
+msgstr "存储容器已经清空"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:4
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:14
 msgid "The Storage Container is not connected to an active %{table}"
-msgstr ""
+msgstr "存储容器未连接至活动的 %{table}"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_object.rb:4
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_object.rb:10
 msgid "The Storage Object is not connected to an active %{table}"
-msgstr ""
+msgstr "存储对象未连接至活动的 %{table}"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/vm/operations/guest.rb:7
 msgid "The VM is not powered on"
-msgstr ""
+msgstr "虚拟机未开启"
 
+#: ../app/models/authenticator/amazon.rb:123
 msgid "Unexpected response returned from system, see log for details"
-msgstr ""
+msgstr "系统返回意外响应，请参阅日志了解详情"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/ebs/cloud_volume_snapshot.rb:27
 msgid "cloud_volume cannot be nil"
-msgstr ""
+msgstr "cloud_volume 不能为空"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/ebs/cloud_volume_snapshot.rb:29
 msgid "ext_management_system cannot be nil"
-msgstr ""
+msgstr "ext_management_system 不能为空"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/template.rb:8
 msgid "not connected to ems"
-msgstr ""
+msgstr "未连接至 EMS"
