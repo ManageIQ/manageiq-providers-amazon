@@ -254,7 +254,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
       _log.info("KeyPair #{keypair_name} will be created!")
       # Delete from Aws if existing
       ec2.key_pair(keypair_name).try(:delete)
-      ManageIQ::Providers::CloudManager::AuthKeyPair.create_key_pair(@ems.id, :key_name => keypair_name)
+      ManageIQ::Providers::CloudManager::AuthKeyPair.create_key_pair(@ems.id, :name => keypair_name)
     end
   end
 
