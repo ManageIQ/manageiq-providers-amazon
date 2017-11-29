@@ -160,7 +160,7 @@ module AwsRefresherSpecCommon
         :name    => "EmsRefreshSpec-VPC",
         :ems_ref => "vpc-ff49ff91",
         :cidr    => "10.0.0.0/16",
-        :status  => "inactive",
+        :status  => "active",
         :enabled => true
       )
     )

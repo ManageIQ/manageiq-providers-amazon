@@ -211,7 +211,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     name   = get_from_tags(vpc, :name)
     name ||= uid
 
-    status  = (vpc.state == :available) ? "active" : "inactive"
+    status = (vpc.state == "available") ? "active" : "inactive"
 
     new_result = {
       :type                => self.class.cloud_network_type,
