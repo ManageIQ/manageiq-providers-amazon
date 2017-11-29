@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Gaprindshavili Beta2
+
+### Added
+- Suggested Changes from Initial Implementation [(#360)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/360)
+
+### Fixed
+- exclude on_failure and timeout_in_minutes when update a stack [(#350)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/350)
+- Fix no security group exists at the first time [(#363)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/363)
+- Always sort ems queue names before hitting miq_queue [(#361)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/361)
+- Handle possibility of empty string for Name tag [(#322)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/322)
+- Fix KeyPair create and import actions [(#365)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/365)
+- Choose VPC with enabled DNS support to deploy SSA Agent [(#354)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/354)
+
 ## Gaprindshavili Beta1
 
 ### Added
