@@ -56,7 +56,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
       persister.cloud_networks.find_or_build(vpc['vpc_id']).assign_attributes(
         :name                => get_from_tags(vpc, 'name') || vpc['vpc_id'],
         :cidr                => vpc['cidr_block'],
-        :status              => vpc['state'] == :available ? "active" : "inactive",
+        :status              => vpc['state'] == "available" ? "active" : "inactive",
         :enabled             => true,
         :orchestration_stack => persister.orchestration_stacks.lazy_find(
           get_from_tags(vpc, "aws:cloudformation:stack-id")
