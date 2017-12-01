@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 74 ending 2017-11-27
+
+### Fixed
+- Fix KeyPair create and import actions [(#365)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/365)
+- Fix no security group exists at the first time [(#363)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/363)
+- Always sort ems queue names before hitting miq_queue [(#361)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/361)
+- exclude on_failure and timeout_in_minutes when update a stack [(#350)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/350)
+- Handle possibility of empty string for Name tag [(#322)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/322)
+
 ## Unreleased as of Sprint 73 ending 2017-11-13
 
 ### Added
