@@ -100,11 +100,13 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
   #   should they override port and end_port like the Amazon API.
   def firewall_rule(persister_security_group, perm, direction)
     common = {
-      :direction     => direction,
-      :host_protocol => perm['ip_protocol'].to_s.upcase,
-      :port          => perm['from_port'],
-      :end_port      => perm['to_port'],
-      :resource      => persister_security_group
+      :direction             => direction,
+      :host_protocol         => perm['ip_protocol'].to_s.upcase,
+      :port                  => perm['from_port'],
+      :end_port              => perm['to_port'],
+      :resource              => persister_security_group,
+      :source_security_group => nil,
+      :source_ip_range       => nil,
     }
 
     (perm['user_id_group_pairs'] || []).each do |g|
@@ -250,10 +252,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
       # These are solved by the ec2_floating_ips_and_ports and they need to be solved there. Seems like there is a bug
       # that the private ip is not present in this list, but it's under ec2_floating_ips_and_ports ips, but only for
       # the non VPC instances.
-      # TODO(lsmola) find a nicer way to do the find only in the data_index. The find method can go into the DB with
-      # some strategies, which is not wanted here. We need to separate find used for crosslinks and find used for saving
-      # of the data.
-      next if !cloud_network_only && ip['instance_id'] && persister.floating_ips.data_index[uid]
+      next if !cloud_network_only && ip['instance_id'] && persister.floating_ips.primary_index.find(uid)
 
       persister.floating_ips.find_or_build(uid).assign_attributes(
         :address            => address,
