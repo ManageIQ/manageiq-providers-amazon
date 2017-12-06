@@ -80,6 +80,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def image_operating_system(persister_image, image)
     persister.operating_systems.find_or_build(persister_image).assign_attributes(
+      # FIXME: duplicated information used by some default reports
       :product_name => persister.hardwares.lazy_find(image['image_id'], :key => :guest_os)
     )
   end
@@ -223,6 +224,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def instance_operating_system(persister_instance, instance)
     persister.operating_systems.find_or_build(persister_instance).assign_attributes(
+      # FIXME: duplicated information used by some default reports
       :product_name => persister.hardwares.lazy_find(instance['image_id'], :key => :guest_os)
     )
   end
