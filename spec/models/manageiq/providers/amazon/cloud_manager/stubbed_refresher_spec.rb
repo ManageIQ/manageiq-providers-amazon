@@ -147,7 +147,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :guest_device                      => 0,
       :hardware                          => vm_count_plus_disconnect_inv + image_count_plus_disconnect_inv,
       :network                           => vm_count_plus_disconnect_inv * 2,
-      :operating_system                  => 0,
+      :operating_system                  => vm_count_plus_disconnect_inv + image_count_plus_disconnect_inv,
       :snapshot                          => 0,
       :system_service                    => 0,
       :relationship                      => vm_count_plus_disconnect_inv + image_count_plus_disconnect_inv,
