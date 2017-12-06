@@ -884,11 +884,17 @@ module AwsRefresherSpecCommon
     expect(v.network_ports.first.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
     expect(v.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
 
+    if options.inventory_object_refresh
     expect(v.operating_system).to(
       have_attributes(
         :product_name => "linux_redhat",
       )
     )
+    else
+      # Old refresh can't fetch the public image and there fore also operating_system
+      expect(v.operating_system).to be_nil
+    end
+
     expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-VPC1")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
@@ -898,7 +904,7 @@ module AwsRefresherSpecCommon
       have_attributes(
         :config_version       => nil,
         :virtual_hw_version   => nil,
-        :guest_os             => "linux_redhat",
+        :guest_os             => options.inventory_object_refresh ? "linux_redhat" : nil,
         :cpu_sockets          => 1,
         :bios                 => nil,
         :bios_location        => nil,
