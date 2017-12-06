@@ -58,15 +58,16 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       )
 
       image_hardware(persister_image, image)
+      image_operating_system(persister_image, image)
       vm_and_template_labels(persister_image, image["tags"] || [])
     end
   end
 
   def image_hardware(persister_image, image)
-    guest_os = image['platform'] == "windows" ? "windows" : "linux"
-    if guest_os == "linux"
+    guest_os = image['platform'] == "windows" ? "windows_generic" : "linux_generic"
+    if guest_os == "linux_generic"
       guest_os = OperatingSystem.normalize_os_name(image['image_location'])
-      guest_os = "linux" if guest_os == "unknown"
+      guest_os = "linux_generic" if guest_os == "unknown"
     end
 
     persister.hardwares.find_or_build(persister_image).assign_attributes(
@@ -74,6 +75,12 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :bitness             => architecture_to_bitness(image['architecture']),
       :virtualization_type => image['virtualization_type'],
       :root_device_type    => image['root_device_type'],
+    )
+  end
+
+  def image_operating_system(persister_image, image)
+    persister.operating_systems.find_or_build(persister_image).assign_attributes(
+      :product_name => persister.hardwares.lazy_find(image['image_id'], :key => :guest_os)
     )
   end
 
@@ -192,6 +199,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       )
 
       instance_hardware(persister_instance, instance, flavor)
+      instance_operating_system(persister_instance, instance)
       vm_and_template_labels(persister_instance, instance["tags"] || [])
     end
   end
@@ -211,6 +219,12 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
     hardware_networks(persister_hardware, instance)
     hardware_disks(persister_hardware, instance, flavor)
+  end
+
+  def instance_operating_system(persister_instance, instance)
+    persister.operating_systems.find_or_build(persister_instance).assign_attributes(
+      :product_name => persister.hardwares.lazy_find(instance['image_id'], :key => :guest_os)
+    )
   end
 
   def hardware_networks(persister_hardware, instance)
