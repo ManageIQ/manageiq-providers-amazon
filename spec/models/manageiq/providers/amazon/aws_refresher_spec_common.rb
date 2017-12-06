@@ -885,11 +885,11 @@ module AwsRefresherSpecCommon
     expect(v.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
 
     if options.inventory_object_refresh
-    expect(v.operating_system).to(
-      have_attributes(
-        :product_name => "linux_redhat",
+      expect(v.operating_system).to(
+        have_attributes(
+          :product_name => "linux_redhat",
+        )
       )
-    )
     else
       # Old refresh can't fetch the public image and there fore also operating_system
       expect(v.operating_system).to be_nil

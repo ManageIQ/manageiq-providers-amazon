@@ -171,7 +171,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
   def parse_image(image, is_public)
     uid      = image.image_id
     location = image.image_location
-    guest_os = (image.platform == "windows") ? "windows_generic" : "linux_generic"
+    guest_os = image.platform == "windows" ? "windows_generic" : "linux_generic"
     if guest_os == "linux_generic"
       guest_os = OperatingSystem.normalize_os_name(location)
       guest_os = "linux_generic" if guest_os == "unknown"
