@@ -273,12 +273,16 @@ module AwsRefresherSpecCommon
     )
 
     expect(@template.ext_management_system).to eq(@ems)
-    expect(@template.operating_system).to       be_nil # TODO: This should probably not be nil
+    expect(@template.operating_system).to(
+      have_attributes(
+        :product_name => "linux_generic",
+      )
+    )
     expect(@template.custom_attributes.size).to eq(0)
     expect(@template.snapshots.size).to eq(0)
 
     expect(@template.hardware).to have_attributes(
-      :guest_os            => "linux",
+      :guest_os            => "linux_generic",
       :guest_os_full_name  => nil,
       :bios                => nil,
       :annotation          => nil,
@@ -336,7 +340,11 @@ module AwsRefresherSpecCommon
     )
 
     expect(@template2.ext_management_system).to eq(@ems)
-    expect(@template2.operating_system).to       be_nil # TODO: This should probably not be nil
+    expect(@template2.operating_system).to(
+      have_attributes(
+        :product_name => "linux_redhat",
+      )
+    )
     expect(@template2.custom_attributes.size).to eq(0)
     expect(@template2.snapshots.size).to eq(0)
 
@@ -520,13 +528,17 @@ module AwsRefresherSpecCommon
     expect(v.security_groups)
       .to match_array [sg_2, @sg]
 
-    expect(v.operating_system).to       be_nil # TODO: This should probably not be nil
+    expect(v.operating_system).to(
+      have_attributes(
+        :product_name => "linux_generic",
+      )
+    )
     expect(v.custom_attributes.size).to eq(2)
     expect(v.snapshots.size).to eq(0)
     # expect(v.tags.size).to eq(0)
 
     expect(v.hardware).to have_attributes(
-      :guest_os            => "linux",
+      :guest_os            => "linux_generic",
       :guest_os_full_name  => nil,
       :bios                => nil,
       :annotation          => nil,
@@ -613,7 +625,11 @@ module AwsRefresherSpecCommon
            .where(:name => "EmsRefreshSpec-SecurityGroup2").first
     expect(v.security_groups)
       .to match_array [sg_2, @sg]
-    expect(v.operating_system).to be_nil # TODO: This should probably not be nil
+    expect(v.operating_system).to(
+      have_attributes(
+        :product_name => "linux_generic",
+      )
+    )
     expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOff")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
@@ -622,7 +638,7 @@ module AwsRefresherSpecCommon
     expect(v.hardware).to have_attributes(
       :config_version       => nil,
       :virtual_hw_version   => nil,
-      :guest_os             => "linux",
+      :guest_os             => "linux_generic",
       :cpu_sockets          => 1,
       :bios                 => nil,
       :bios_location        => nil,
@@ -720,7 +736,11 @@ module AwsRefresherSpecCommon
     ]
     expect(v.load_balancer_health_check_states_with_reason).to match_array healt_check_states_with_reason
 
-    expect(v.operating_system).to be_nil # TODO: This should probably not be nil
+    expect(v.operating_system).to(
+      have_attributes(
+        :product_name => "linux_generic",
+      )
+    )
     expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-VPC")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
@@ -730,7 +750,7 @@ module AwsRefresherSpecCommon
       have_attributes(
         :config_version       => nil,
         :virtual_hw_version   => nil,
-        :guest_os             => "linux",
+        :guest_os             => "linux_generic",
         :cpu_sockets          => 1,
         :bios                 => nil,
         :bios_location        => nil,
@@ -864,7 +884,17 @@ module AwsRefresherSpecCommon
     expect(v.network_ports.first.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
     expect(v.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
 
-    expect(v.operating_system).to be_nil # TODO: This should probably not be nil
+    if options.inventory_object_refresh
+      expect(v.operating_system).to(
+        have_attributes(
+          :product_name => "linux_redhat",
+        )
+      )
+    else
+      # Old refresh can't fetch the public image and there fore also operating_system
+      expect(v.operating_system).to be_nil
+    end
+
     expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-VPC1")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
@@ -874,7 +904,7 @@ module AwsRefresherSpecCommon
       have_attributes(
         :config_version       => nil,
         :virtual_hw_version   => nil,
-        :guest_os             => @template2.try(:hardware).try(:guest_os),
+        :guest_os             => options.inventory_object_refresh ? "linux_redhat" : nil,
         :cpu_sockets          => 1,
         :bios                 => nil,
         :bios_location        => nil,

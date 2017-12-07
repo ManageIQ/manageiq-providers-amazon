@@ -72,6 +72,16 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
       super(attributes.merge!(extra_attributes))
     end
 
+    def operating_systems(extra_attributes = {})
+      attributes = {
+        :inventory_object_attributes => [
+          :product_name,
+        ]
+      }
+
+      super(attributes.merge!(extra_attributes))
+    end
+
     def networks(extra_attributes = {})
       attributes = {
         :inventory_object_attributes => [

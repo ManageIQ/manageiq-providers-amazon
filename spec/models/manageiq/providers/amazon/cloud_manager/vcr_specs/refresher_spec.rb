@@ -41,6 +41,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   def table_counts_from_api
     counts = super
     counts[:network_router] = 0 # We do not collect NetworkRouters in old refresh
+    # Old refresh can't fetch some images, those will have missing operating_system
+    counts[:operating_system] = counts[:operating_system] - Vm.all.select { |x| x.genealogy_parent.nil? }.count
     counts
   end
 end

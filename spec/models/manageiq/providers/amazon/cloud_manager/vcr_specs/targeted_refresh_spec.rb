@@ -44,21 +44,22 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           assert_specific_vm_powered_on
 
           assert_counts(
-            :auth_private_key              => 1,
-            :availability_zone             => 1,
-            :cloud_volume                  => 1,
-            :custom_attribute              => 2,
-            :disk                          => 1,
-            :firewall_rule                 => 13,
-            :flavor                        => 3,
-            :floating_ip                   => 2,
-            :hardware                      => 2,
-            :miq_template                  => 1,
-            :network                       => 2,
-            :network_port                  => 2,
-            :security_group                => 2,
-            :vm                            => 1,
-            :vm_or_template                => 2
+            :auth_private_key  => 1,
+            :availability_zone => 1,
+            :cloud_volume      => 1,
+            :custom_attribute  => 2,
+            :disk              => 1,
+            :firewall_rule     => 13,
+            :flavor            => 3,
+            :floating_ip       => 2,
+            :hardware          => 2,
+            :operating_system  => 2,
+            :miq_template      => 1,
+            :network           => 2,
+            :network_port      => 2,
+            :security_group    => 2,
+            :vm                => 1,
+            :vm_or_template    => 2
           )
         end
       end
@@ -96,23 +97,24 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           assert_specific_vm_on_cloud_network
 
           assert_counts(
-            :auth_private_key              => 1,
-            :availability_zone             => 1,
-            :cloud_network                 => 1,
-            :cloud_subnet                  => 1,
-            :cloud_volume                  => 2,
-            :custom_attribute              => 2,
-            :disk                          => 2,
-            :firewall_rule                 => 3,
-            :flavor                        => 3,
-            :floating_ip                   => 3,
-            :hardware                      => 2,
-            :miq_template                  => 1,
-            :network                       => 2,
-            :network_port                  => 3,
-            :security_group                => 1,
-            :vm                            => 1,
-            :vm_or_template                => 2
+            :auth_private_key  => 1,
+            :availability_zone => 1,
+            :cloud_network     => 1,
+            :cloud_subnet      => 1,
+            :cloud_volume      => 2,
+            :custom_attribute  => 2,
+            :disk              => 2,
+            :firewall_rule     => 3,
+            :flavor            => 3,
+            :floating_ip       => 3,
+            :hardware          => 2,
+            :operating_system  => 2,
+            :miq_template      => 1,
+            :network           => 2,
+            :network_port      => 3,
+            :security_group    => 1,
+            :vm                => 1,
+            :vm_or_template    => 2
           )
         end
       end
@@ -141,23 +143,24 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           assert_specific_vm_on_cloud_network_public_ip
 
           assert_counts(
-            :auth_private_key              => 1,
-            :availability_zone             => 1,
-            :cloud_network                 => 1,
-            :cloud_subnet                  => 1,
-            :cloud_volume                  => 2,
-            :custom_attribute              => 2,
-            :disk                          => 2,
-            :firewall_rule                 => 3,
-            :flavor                        => 3,
-            :floating_ip                   => 1,
-            :hardware                      => 2,
-            :miq_template                  => 1,
-            :network                       => 2,
-            :network_port                  => 1,
-            :security_group                => 1,
-            :vm                            => 1,
-            :vm_or_template                => 2
+            :auth_private_key  => 1,
+            :availability_zone => 1,
+            :cloud_network     => 1,
+            :cloud_subnet      => 1,
+            :cloud_volume      => 2,
+            :custom_attribute  => 2,
+            :disk              => 2,
+            :firewall_rule     => 3,
+            :flavor            => 3,
+            :floating_ip       => 1,
+            :hardware          => 2,
+            :operating_system  => 2,
+            :miq_template      => 1,
+            :network           => 2,
+            :network_port      => 1,
+            :security_group    => 1,
+            :vm                => 1,
+            :vm_or_template    => 2
           )
         end
       end
@@ -306,6 +309,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :flavor                        => 3,
             :floating_ip                   => 1,
             :hardware                      => 2,
+            :operating_system              => 2,
             :miq_template                  => 1,
             :network                       => 2,
             :network_port                  => 1,
