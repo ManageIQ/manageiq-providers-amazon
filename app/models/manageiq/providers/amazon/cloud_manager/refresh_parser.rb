@@ -171,10 +171,10 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
   def parse_image(image, is_public)
     uid      = image.image_id
     location = image.image_location
-    guest_os = (image.platform == "windows") ? "windows" : "linux"
-    if guest_os == "linux"
+    guest_os = image.platform == "windows" ? "windows_generic" : "linux_generic"
+    if guest_os == "linux_generic"
       guest_os = OperatingSystem.normalize_os_name(location)
-      guest_os = "linux" if guest_os == "unknown"
+      guest_os = "linux_generic" if guest_os == "unknown"
     end
 
     name = get_from_tags(image, :name)
@@ -198,7 +198,9 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
       # the is_public flag here avoids having to make an additional API call
       # per image, since we already know whether it's a public image
       :publicly_available => is_public,
-
+      :operating_system   => {
+        :product_name => guest_os # FIXME: duplicated information used by some default reports
+      },
       :hardware           => {
         :guest_os            => guest_os,
         :bitness             => architecture_to_bitness(image.architecture),
@@ -273,7 +275,9 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     parent_image = @data_index.fetch_path(:vms, instance.image_id)
     if parent_image
       new_result[:parent_vm] = parent_image
-      new_result.store_path(:hardware, :guest_os, parent_image.fetch_path(:hardware, :guest_os))
+      guest_os = parent_image.fetch_path(:hardware, :guest_os)
+      new_result.store_path(:hardware, :guest_os, guest_os)
+      new_result.store_path(:operating_system, :product_name, guest_os) # FIXME: duplicated information used by some default reports
     end
 
     if flavor[:ephemeral_disk_count] > 0

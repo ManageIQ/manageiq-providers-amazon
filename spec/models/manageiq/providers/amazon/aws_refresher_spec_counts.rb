@@ -137,6 +137,7 @@ module AwsRefresherSpecCounts
       :network                       => networks_count,
       :network_port                  => network_ports_count,
       :network_router                => network_routers_count,
+      :operating_system              => instances_and_images_count,
       :orchestration_stack           => orchestration_stacks_count,
       :orchestration_stack_output    => orchestration_stack_outputs_count,
       :orchestration_stack_parameter => orchestration_stack_parameters_count,

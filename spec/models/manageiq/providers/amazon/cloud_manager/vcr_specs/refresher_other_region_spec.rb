@@ -45,6 +45,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     def table_counts_from_api
       counts = super
       counts[:network_router] = 0 # We do not collect NetworkRouters in old refresh
+      # Old refresh can't fetch some images, those will have missing operating_system
+      counts[:operating_system] = counts[:operating_system] - Vm.all.select { |x| x.genealogy_parent.nil? }.count
       counts
     end
   end
@@ -146,12 +148,16 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     )
 
     expect(@template.ext_management_system).to eq(@ems)
-    expect(@template.operating_system).to       be_nil # TODO: This should probably not be nil
+    expect(@template.operating_system).to(
+      have_attributes(
+        :product_name => "linux_generic",
+      )
+    )
     expect(@template.custom_attributes.size).to eq(0)
     expect(@template.snapshots.size).to eq(0)
 
     expect(@template.hardware).to have_attributes(
-      :guest_os           => "linux",
+      :guest_os           => "linux_generic",
       :guest_os_full_name => nil,
       :bios               => nil,
       :annotation         => nil,
@@ -202,12 +208,16 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(v.cloud_subnet).to           be_nil
     expect(v.security_groups).to eq([@sg])
     expect(v.key_pairs).to eq([@kp])
-    expect(v.operating_system).to       be_nil # TODO: This should probably not be nil
+    expect(v.operating_system).to(
+      have_attributes(
+        :product_name => "linux_generic",
+      )
+    )
     expect(v.custom_attributes.size).to eq(1)
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to have_attributes(
-      :guest_os           => "linux",
+      :guest_os           => "linux_generic",
       :guest_os_full_name => nil,
       :bios               => nil,
       :annotation         => nil,
