@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Gaprindshavili RC
+
+### Added
+- Add Gaprindashvili translations [(#368)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/368)
+
+### Fixed
+- Correct status for network [(#373)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/373)
+- Added supported_catalog_types [(#377)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/377)
+- Refresh operating system and fix normalized guest os [(#376)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/376)
+
 ## Gaprindshavili Beta2
 
 ### Added
