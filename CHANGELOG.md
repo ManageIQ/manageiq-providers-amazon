@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 75 ending 2017-12-11
+
+### Fixed
+- Added supported_catalog_types [(#377)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/377)
+- Refresh operating system and fix normalized guest os [(#376)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/376)
+- Correct status for network [(#373)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/373)
+- Use name to create key pair [(#370)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/370)
+- Suggested Changes from Initial Implementation [(#360)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/360)
+
 ## Unreleased as of Sprint 74 ending 2017-11-27
 
 ### Fixed
