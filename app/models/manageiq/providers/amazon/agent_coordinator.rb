@@ -81,7 +81,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     )
 
     vms.each do |vm|
-      next if @agent_ids.include?(vm.id)
+      next if agent_ids.include?(vm.id)
       vm.terminate
       vm.wait_until_terminated
       _log.info("Instance: #{vm.id} is deleted!")
