@@ -62,6 +62,32 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     _log.error(err.backtrace.join("\n"))
   end
 
+  def cleanup_agents
+    _log.info("Clean up agents ...")
+
+    # Use the uniqe keypair name to filter out created instances
+    vms = ec2.instances(
+      :filters => [
+        {
+          :name   => "key-name",
+          :values => [default_keypair_name],
+        },
+        {
+          :name   => "instance-state-name",
+          # skip the state of 'terminated'
+          :values => ["pending", "running", "shutting-down", "stopping", "stopped"],
+        },
+      ]
+    )
+
+    vms.each do |vm|
+      next if @agent_ids.include?(vm.id)
+      vm.terminate
+      vm.wait_until_terminated
+      _log.info("Instance: #{vm.id} is deleted!")
+    end
+  end
+
   def ssa_queue
     AmazonSsaSupport::SsaQueue.new(
       :ssa_bucket    => ssa_bucket,
@@ -129,7 +155,8 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
       end
     end
 
-    _log.error("Failed to activate agents: #{agent_ids}.")
+    _log.warn("Failed to activate agents: #{agent_ids}. Will deploy a new agent!")
+    deploy_agent
   end
 
   def deploy_agent
