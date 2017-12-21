@@ -1,7 +1,9 @@
 class ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner < MiqWorker::Runner
   include_concern 'ResponseThread'
   def do_before_work_loop
-    @coordinators       = self.class.all_agent_coordinators_in_zone
+    @coordinators = self.class.all_agent_coordinators_in_zone
+    @coordinators.each(&:cleanup_agents)
+
     @coordinators_mutex = Mutex.new
     start_response_thread
   end
@@ -28,6 +30,11 @@ class ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner < MiqWorker::R
       coordinator_guids = @coordinators.collect { |m| m.ems.guid }
       self.class.refresh_coordinators(@coordinators, coordinator_guids, latest_ems_guids)
     end
+  end
+
+  def before_exit(_message, _exit_code)
+    _log.info("Do cleanup before worker exits.")
+    @coordinators.each(&:cleanup_agents)
   end
 
   def self.agent_coordinator_by_guid(guid)
