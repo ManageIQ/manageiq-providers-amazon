@@ -81,7 +81,7 @@ module AwsRefresherSpecCommon
     assert_specific_orchestration_stack
     assert_network_router
     assert_relationship_tree
-    # assert_specific_tags_on_vm
+    assert_specific_labels_on_vm
   end
 
   def assert_specific_flavor
@@ -1416,9 +1416,32 @@ module AwsRefresherSpecCommon
     expect(@ems.descendants_arranged).to match_relationship_tree({})
   end
 
-  # TODO: Add some real specs here
-  # def assert_specific_tags_on_vm
-  #   vm = ManageIQ::Providers::Amazon::CloudManager::Vm.where(:name => "EmsRefreshSpec-PoweredOn-Basic3").first
-  #   expect(vm.tags).to be_empty
-  # end
+  def assert_specific_labels_on_vm
+    vm = ManageIQ::Providers::Amazon::CloudManager::Vm.find_by(:name => "ladas_test_5")
+    expect(vm.labels).to include(
+      an_object_having_attributes(
+        :name   => "EmsRefreshSpecResourceGroupTag",
+        :value  => "EmsRefreshSpecResourceGroupTagValue",
+        :source => "amazon"
+      )
+    )
+  end
+
+  def create_tag_mapping
+    @tag_mapping = FactoryGirl.create(:tag_mapping_with_category,
+                                      :label_name => "EmsRefreshSpecResourceGroupTag")
+    @tag_mapping_category = @tag_mapping.tag.classification
+  end
+
+  # Tests can assert this if they called create_tag_mapping before refresh.
+  def assert_mapped_tags_on_vm
+    expect(@tag_mapping_category.children.collect(&:description)).to contain_exactly(
+      "EmsRefreshSpecResourceGroupTagValue"
+    )
+
+    vm = ManageIQ::Providers::Amazon::CloudManager::Vm.find_by(:name => "ladas_test_5")
+    expect(vm.tags.count).to eq(1)
+    expect(vm.tags.first.category).to eq(@tag_mapping_category)
+    expect(vm.tags.first.classification.description).to eq("EmsRefreshSpecResourceGroupTagValue")
+  end
 end

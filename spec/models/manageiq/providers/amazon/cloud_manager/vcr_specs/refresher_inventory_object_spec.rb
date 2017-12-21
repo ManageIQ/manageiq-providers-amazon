@@ -17,6 +17,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     context "with settings #{settings}" do
       before(:each) do
         stub_refresh_settings(settings)
+        create_tag_mapping
       end
 
       it "will perform a full refresh" do
@@ -32,6 +33,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           end
 
           assert_common
+          assert_mapped_tags_on_vm
         end
       end
     end
