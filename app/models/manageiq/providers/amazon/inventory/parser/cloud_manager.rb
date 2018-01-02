@@ -221,10 +221,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     return result if attributes.nil?
       attributes.each do |tag|
         custom_attr = {
-          :section => section,
           :name    => tag["key"],
           :value   => tag["value"],
-          :source  => source
         }
       result << custom_attr
     end
