@@ -199,9 +199,48 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         ),
       )
 
+      @tag_mapper = ContainerLabelTagMapping.mapper
+
+      labels = parse_labels(instance["tags"])
+      taggings = map_labels_to_tags("Vm", labels)
+      map_taggings(persister_instance, taggings)
+
       instance_hardware(persister_instance, instance, flavor)
       instance_operating_system(persister_instance, instance)
+
       vm_and_template_labels(persister_instance, instance["tags"] || [])
+    end
+  end
+
+  def parse_labels(entity)
+    parse_identifying_attributes(entity, 'labels')
+  end
+
+  def parse_identifying_attributes(attributes, section, source = "amazon")
+    result = []
+    return result if attributes.nil?
+      attributes.each do |tag|
+        custom_attr = {
+          :name    => tag["key"],
+          :value   => tag["value"],
+        }
+      result << custom_attr
+    end
+    result
+  end
+
+  def map_labels_to_tags(model_name, labels)
+    @tag_mapper.map_labels(model_name, labels)
+  end
+
+  # Conveniently, the tags map_labels emits are already in InventoryObject<Tag> form
+  def map_taggings(parent, tags_inventory_objects)
+    model_name = parent.inventory_collection.model_class.base_class.name
+    key = [:taggings_for, model_name]
+    collection = @inv_collections[key]
+    raise("can't save: missing @inv_collections[#{key}]") if collection.nil?
+    tags_inventory_objects.each do |tag|
+      collection.build(:taggable => parent, :tag => tag)
     end
   end
 
