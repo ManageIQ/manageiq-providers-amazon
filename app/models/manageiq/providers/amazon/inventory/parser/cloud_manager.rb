@@ -4,10 +4,16 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def parse
     log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{collector.manager.name}] id: [#{collector.manager.id}]"
     $aws_log.info("#{log_header}...")
+
     # The order of the below methods does matter, because they are searched using find instead of lazy_find
     flavors
 
+    # @mapper has to be initialized for parsing images & instances
+    # TODO: maybe do this in Persister?
+    @tag_mapper = ContainerLabelTagMapping.mapper
+
     # The order of the below methods doesn't matter since they refer to each other using only lazy links
+    persister.collections[:tags_to_resolve] = @tag_mapper.tags_to_resolve_collection
     availability_zones
     key_pairs
     stacks
@@ -59,6 +65,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
       image_hardware(persister_image, image)
       image_operating_system(persister_image, image)
+      # TODO map labels to tags
       vm_and_template_labels(persister_image, image["tags"] || [])
     end
   end
@@ -201,10 +208,35 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
       instance_hardware(persister_instance, instance, flavor)
       instance_operating_system(persister_instance, instance)
+
+      labels = parse_labels(instance["tags"])
+      tags = map_labels_to_tags("Vm", labels)
       vm_and_template_labels(persister_instance, instance["tags"] || [])
     end
   end
 
+  def parse_labels(entity)
+    parse_identifying_attributes(entity, 'labels')
+  end
+
+  def parse_identifying_attributes(attributes, section, source = "amazon")
+    result = []
+    return result if attributes.nil?
+      attributes.each do |tag|
+        custom_attr = {
+          :section => section,
+          :name    => tag["key"],
+          :value   => tag["value"],
+          :source  => source
+        }
+      result << custom_attr
+    end
+    result
+  end
+
+  def map_labels_to_tags(model_name, labels)
+    @tag_mapper.map_labels(model_name, labels)
+  end
   def instance_hardware(persister_instance, instance, flavor)
     persister_hardware = persister.hardwares.find_or_build(persister_instance).assign_attributes(
       :bitness              => architecture_to_bitness(instance['architecture']),
