@@ -1431,6 +1431,10 @@ module AwsRefresherSpecCommon
     @tag_mapping = FactoryGirl.create(:tag_mapping_with_category,
                                       :label_name => "EmsRefreshSpecResourceGroupTag")
     @tag_mapping_category = @tag_mapping.tag.classification
+
+    @image_tag_mapping = FactoryGirl.create(:tag_mapping_with_category,
+                                            :label_name => "Name", :labeled_resource_type => "Image")
+    @image_tag_mapping_category = @image_tag_mapping.tag.classification
   end
 
   # Tests can assert this if they called create_tag_mapping before refresh.
@@ -1443,5 +1447,19 @@ module AwsRefresherSpecCommon
     expect(vm.tags.count).to eq(1)
     expect(vm.tags.first.category).to eq(@tag_mapping_category)
     expect(vm.tags.first.classification.description).to eq("EmsRefreshSpecResourceGroupTagValue")
+  end
+
+  # Tests can assert this if they called create_tag_mapping before refresh.
+  def assert_mapped_tags_on_template
+    expect(@image_tag_mapping_category.children.collect(&:description)).to include(
+      "suse-11-server-64",
+      "ubuntu-12.04-server-32",
+      # and many more...
+    )
+
+    template = ManageIQ::Providers::Amazon::CloudManager::Template.find_by(:name => "suse-11-server-64")
+    expect(template.tags.count).to eq(1)
+    expect(template.tags.first.category).to eq(@image_tag_mapping_category)
+    expect(template.tags.first.classification.description).to eq("suse-11-server-64")
   end
 end

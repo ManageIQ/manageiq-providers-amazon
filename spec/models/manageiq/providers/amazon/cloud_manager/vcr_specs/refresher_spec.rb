@@ -34,6 +34,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           end
 
           assert_common
+          assert_mapped_tags_on_template
           assert_mapped_tags_on_vm
         end
       end
