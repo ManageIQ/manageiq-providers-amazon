@@ -533,9 +533,7 @@ module AwsRefresherSpecCommon
         :product_name => "linux_generic",
       )
     )
-    expect(v.custom_attributes.size).to eq(2)
     expect(v.snapshots.size).to eq(0)
-    # expect(v.tags.size).to eq(0)
 
     expect(v.hardware).to have_attributes(
       :guest_os            => "linux_generic",
@@ -580,8 +578,10 @@ module AwsRefresherSpecCommon
     v.with_relationship_type("genealogy") do
       expect(v.parent).to eq(@template)
     end
+    expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-Basic3")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
+    assert_mapped_tags_on_vm(v, :owner => "UNKNOWN")
   end
 
   def assert_specific_vm_powered_off
@@ -633,6 +633,7 @@ module AwsRefresherSpecCommon
     expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOff")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
+    assert_mapped_tags_on_vm(v, :owner => "UNKNOWN")
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to have_attributes(
@@ -744,6 +745,7 @@ module AwsRefresherSpecCommon
     expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-VPC")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
+    assert_mapped_tags_on_vm(v, :owner => "UNKNOWN")
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to(
@@ -898,6 +900,7 @@ module AwsRefresherSpecCommon
     expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-VPC1")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
+    assert_mapped_tags_on_vm(v, :owner => "UNKNOWN")
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to(
@@ -1428,9 +1431,9 @@ module AwsRefresherSpecCommon
   end
 
   def create_tag_mapping
-    @tag_mapping = FactoryGirl.create(:tag_mapping_with_category,
-                                      :label_name => "EmsRefreshSpecResourceGroupTag")
-    @tag_mapping_category = @tag_mapping.tag.classification
+    @all_tag_mapping = FactoryGirl.create(:tag_mapping_with_category,
+                                          :label_name => "owner")
+    @all_tag_mapping_category = @all_tag_mapping.tag.classification
 
     @image_tag_mapping = FactoryGirl.create(:tag_mapping_with_category,
                                             :label_name => "Name", :labeled_resource_type => "Image")
@@ -1438,15 +1441,12 @@ module AwsRefresherSpecCommon
   end
 
   # Tests can assert this if they called create_tag_mapping before refresh.
-  def assert_mapped_tags_on_vm
-    expect(@tag_mapping_category.children.collect(&:description)).to contain_exactly(
-      "EmsRefreshSpecResourceGroupTagValue"
-    )
+  def assert_mapped_tags_on_vm(vm, owner:)
+    expect(@all_tag_mapping_category.children.collect(&:description)).to include(owner)
 
-    vm = ManageIQ::Providers::Amazon::CloudManager::Vm.find_by(:name => "ladas_test_5")
     expect(vm.tags.count).to eq(1)
-    expect(vm.tags.first.category).to eq(@tag_mapping_category)
-    expect(vm.tags.first.classification.description).to eq("EmsRefreshSpecResourceGroupTagValue")
+    expect(vm.tags.first.category).to eq(@all_tag_mapping_category)
+    expect(vm.tags.first.classification.description).to eq("UNKNOWN")
   end
 
   # Tests can assert this if they called create_tag_mapping before refresh.

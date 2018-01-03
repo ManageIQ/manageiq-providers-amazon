@@ -13,6 +13,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     context "with settings #{settings}" do
       before(:each) do
         stub_refresh_settings(settings.merge(:allow_targeted_refresh => true))
+        create_tag_mapping
         # The flavors are not fetched from the API, they can go in only by appliance update, so must be in place after
         # the full refresh, lets pre-create them in the DB.
         create_flavors
