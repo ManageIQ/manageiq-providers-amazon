@@ -2,7 +2,8 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::CloudManager < ManageIQ
   def initialize_inventory_collections
     add_inventory_collections(
       cloud,
-      %i(vms miq_templates hardwares operating_systems networks disks availability_zones vm_and_template_labels
+      %i(vms miq_templates hardwares operating_systems networks disks availability_zones
+         vm_and_template_labels vm_and_template_taggings
          flavors key_pairs orchestration_stacks orchestration_stacks_resources
          orchestration_stacks_outputs orchestration_stacks_parameters orchestration_templates)
     )

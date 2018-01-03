@@ -211,6 +211,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
       labels = parse_labels(instance["tags"])
       tags = map_labels_to_tags("Vm", labels)
+      vm_and_template_taggings(persister_instance, tags)
       vm_and_template_labels(persister_instance, instance["tags"] || [])
     end
   end
@@ -237,6 +238,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def map_labels_to_tags(model_name, labels)
     @tag_mapper.map_labels(model_name, labels)
   end
+
+  # Conveniently, the tags map_labels emits are already in InventoryObject<Tag> form
+  def vm_and_template_taggings(parent, tags_inventory_objects)
+    tags_inventory_objects.each do |tag|
+      persister.vm_and_template_taggings.build(:taggable => parent, :tag => tag)
+    end
+  end
+
   def instance_hardware(persister_instance, instance, flavor)
     persister_hardware = persister.hardwares.find_or_build(persister_instance).assign_attributes(
       :bitness              => architecture_to_bitness(instance['architecture']),
