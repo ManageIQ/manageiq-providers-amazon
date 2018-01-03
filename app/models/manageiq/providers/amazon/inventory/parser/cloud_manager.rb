@@ -9,7 +9,6 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     flavors
 
     # @mapper has to be initialized for parsing images & instances
-    # TODO: maybe do this in Persister?
     @tag_mapper = ContainerLabelTagMapping.mapper
 
     # The order of the below methods doesn't matter since they refer to each other using only lazy links
@@ -65,8 +64,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
       image_hardware(persister_image, image)
       image_operating_system(persister_image, image)
-      # TODO map labels to tags
       vm_and_template_labels(persister_image, image["tags"] || [])
+      vm_and_template_taggings(persister_image, map_labels("Image", image["tags"] || []))
     end
   end
 
@@ -99,6 +98,20 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :value   => tag["value"],
         :source  => 'amazon'
       )
+    end
+  end
+
+  # Returns array of InventoryObject<Tag>.
+  def map_labels(model_name, labels)
+    label_hashes = labels.collect do |tag|
+      {:name => tag["key"], :value => tag["value"]}
+    end
+    @tag_mapper.map_labels(model_name, label_hashes)
+  end
+
+  def vm_and_template_taggings(resource, tags_inventory_objects)
+    tags_inventory_objects.each do |tag|
+      persister.vm_and_template_taggings.build(:taggable => resource, :tag => tag)
     end
   end
 
@@ -208,41 +221,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
       instance_hardware(persister_instance, instance, flavor)
       instance_operating_system(persister_instance, instance)
-
-      labels = parse_labels(instance["tags"])
-      tags = map_labels_to_tags("Vm", labels)
-      vm_and_template_taggings(persister_instance, tags)
       vm_and_template_labels(persister_instance, instance["tags"] || [])
-    end
-  end
-
-  def parse_labels(entity)
-    parse_identifying_attributes(entity, 'labels')
-  end
-
-  def parse_identifying_attributes(attributes, section, source = "amazon")
-    result = []
-    return result if attributes.nil?
-      attributes.each do |tag|
-        custom_attr = {
-          :section => section,
-          :name    => tag["key"],
-          :value   => tag["value"],
-          :source  => source
-        }
-      result << custom_attr
-    end
-    result
-  end
-
-  def map_labels_to_tags(model_name, labels)
-    @tag_mapper.map_labels(model_name, labels)
-  end
-
-  # Conveniently, the tags map_labels emits are already in InventoryObject<Tag> form
-  def vm_and_template_taggings(parent, tags_inventory_objects)
-    tags_inventory_objects.each do |tag|
-      persister.vm_and_template_taggings.build(:taggable => parent, :tag => tag)
+      vm_and_template_taggings(persister_instance, map_labels("Vm", instance["tags"] || []))
     end
   end
 
