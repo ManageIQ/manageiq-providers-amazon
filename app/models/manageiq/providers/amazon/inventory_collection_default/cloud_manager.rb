@@ -193,7 +193,7 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
         manager_uuids = inventory_collection.parent_inventory_collections.collect(&:manager_uuids).map(&:to_a).flatten
         ems = inventory_collection.parent
         ems.vm_and_template_taggings.where(
-          'taggable_id'   => ems.vms_and_templates(:ems_ref => manager_uuids)
+          'taggable_id'   => ems.vms_and_templates.where(:ems_ref => manager_uuids)
         )
       end
 
