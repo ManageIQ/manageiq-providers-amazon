@@ -4,6 +4,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def parse
     log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{collector.manager.name}] id: [#{collector.manager.id}]"
     $aws_log.info("#{log_header}...")
+
     # The order of the below methods does matter, because they are searched using find instead of lazy_find
     flavors
 
@@ -60,6 +61,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       image_hardware(persister_image, image)
       image_operating_system(persister_image, image)
       vm_and_template_labels(persister_image, image["tags"] || [])
+      vm_and_template_taggings(persister_image, map_labels("Image", image["tags"] || []))
     end
   end
 
@@ -92,6 +94,20 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :value   => tag["value"],
         :source  => 'amazon'
       )
+    end
+  end
+
+  # Returns array of InventoryObject<Tag>.
+  def map_labels(model_name, labels)
+    label_hashes = labels.collect do |tag|
+      {:name => tag["key"], :value => tag["value"]}
+    end
+    persister.tag_mapper.map_labels(model_name, label_hashes)
+  end
+
+  def vm_and_template_taggings(resource, tags_inventory_objects)
+    tags_inventory_objects.each do |tag|
+      persister.vm_and_template_taggings.build(:taggable => resource, :tag => tag)
     end
   end
 
@@ -202,6 +218,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       instance_hardware(persister_instance, instance, flavor)
       instance_operating_system(persister_instance, instance)
       vm_and_template_labels(persister_instance, instance["tags"] || [])
+      vm_and_template_taggings(persister_instance, map_labels("Vm", instance["tags"] || []))
     end
   end
 
