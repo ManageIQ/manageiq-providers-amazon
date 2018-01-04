@@ -59,6 +59,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :network           => 2,
             :network_port      => 2,
             :security_group    => 2,
+            :tagging           => 1,
             :vm                => 1,
             :vm_or_template    => 2
           )
@@ -114,6 +115,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :network           => 2,
             :network_port      => 3,
             :security_group    => 1,
+            :tagging           => 1,
             :vm                => 1,
             :vm_or_template    => 2
           )
@@ -160,6 +162,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :network           => 2,
             :network_port      => 1,
             :security_group    => 1,
+            :tagging           => 1,
             :vm                => 1,
             :vm_or_template    => 2
           )
