@@ -1,5 +1,7 @@
 class ManageIQ::Providers::Amazon::Inventory::Persister::CloudManager < ManageIQ::Providers::Amazon::Inventory::Persister
   def initialize_inventory_collections
+    initialize_tag_mapper
+
     add_inventory_collections(
       cloud,
       %i(vms miq_templates hardwares operating_systems networks disks availability_zones

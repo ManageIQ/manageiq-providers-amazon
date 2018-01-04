@@ -8,11 +8,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     # The order of the below methods does matter, because they are searched using find instead of lazy_find
     flavors
 
-    # @mapper has to be initialized for parsing images & instances
-    @tag_mapper = ContainerLabelTagMapping.mapper
-
     # The order of the below methods doesn't matter since they refer to each other using only lazy links
-    persister.collections[:tags_to_resolve] = @tag_mapper.tags_to_resolve_collection
     availability_zones
     key_pairs
     stacks
@@ -106,7 +102,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     label_hashes = labels.collect do |tag|
       {:name => tag["key"], :value => tag["value"]}
     end
-    @tag_mapper.map_labels(model_name, label_hashes)
+    persister.tag_mapper.map_labels(model_name, label_hashes)
   end
 
   def vm_and_template_taggings(resource, tags_inventory_objects)

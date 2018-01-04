@@ -1,6 +1,8 @@
 class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < ManageIQ::Providers::Amazon::Inventory::Persister
   def initialize_inventory_collections
     ######### Cloud ##########
+    initialize_tag_mapper
+
     # Top level models with direct references for Cloud
     add_inventory_collections_with_references(
       cloud,
