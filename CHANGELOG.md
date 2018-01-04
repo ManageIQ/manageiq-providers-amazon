@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 76 ending 2018-01-01
+
+### Fixed
+- Fixes to cleanup agents if AgentCoordinatorWorker is restarted. [(#381)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/381)
+- Add cleanup logic to remove zombie instance in unexpected cases [(#367)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/367)
+
 ## Unreleased as of Sprint 75 ending 2017-12-11
 
 ### Fixed
