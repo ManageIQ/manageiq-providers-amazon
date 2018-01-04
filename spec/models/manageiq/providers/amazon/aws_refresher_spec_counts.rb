@@ -36,7 +36,8 @@ module AwsRefresherSpecCounts
       :snapshot                      => 0,
       :system_service                => 0,
       :vm                            => 0,
-      :vm_or_template                => 0
+      :vm_or_template                => 0,
+      :tagging                       => 0
     }
   end
 
@@ -56,8 +57,22 @@ module AwsRefresherSpecCounts
     images_count               = image_hashes.size
     instances_and_images_count = instances_count + images_count
 
+    vms_tags = instance_hashes.map { |x| x["tags"] }.flatten.compact
+    images_tags = image_hashes.map { |x| x["tags"] }.flatten.compact
     # Custom attributes of all Vms and Images
-    custom_attributes_count    = (instance_hashes + image_hashes).map { |x| x["tags"] }.flatten.compact.size
+    custom_attributes_count = (vms_tags + images_tags).size
+
+    vms_mappings = ContainerLabelTagMapping.where(:labeled_resource_type => nil).or(
+      ContainerLabelTagMapping.where(:labeled_resource_type => "Vm")
+    ).pluck(:label_name)
+    # Correct count of mapped tags for Vms
+    vms_tags_count = vms_tags.select { |x| vms_mappings.include?(x["key"]) }.count
+
+    images_mappings = ContainerLabelTagMapping.where(:labeled_resource_type => nil).or(
+      ContainerLabelTagMapping.where(:labeled_resource_type => "Image")
+    ).pluck(:label_name)
+    # Correct count of mapped tags for Images
+    images_tags_count = images_tags.select { |x| images_mappings.include?(x["key"]) }.count
 
     # Networks for all Vms is a list of private and public addresses of a 1 interface of a Vm
     networks_count             = instance_hashes.map { |x| [x['public_ip_address'], x['private_ip_address']] }.flatten.compact.size
@@ -144,6 +159,7 @@ module AwsRefresherSpecCounts
       :orchestration_stack_resource  => orchestration_stack_resources_count,
       :orchestration_template        => orchestration_stacks_count,
       :security_group                => security_groups_count,
+      :tagging                       => vms_tags_count + images_tags_count,
       :vm                            => instances_count,
       :vm_or_template                => instances_and_images_count
     )
@@ -180,7 +196,8 @@ module AwsRefresherSpecCounts
       :floating_ip                   => FloatingIp.count,
       :network_router                => NetworkRouter.count,
       :cloud_subnet                  => CloudSubnet.count,
-      :custom_attribute              => CustomAttribute.count
+      :custom_attribute              => CustomAttribute.count,
+      :tagging                       => Tagging.count,
     }
     expect(actual).to eq expected_table_counts
   end
