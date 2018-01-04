@@ -1,6 +1,8 @@
 class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < ManageIQ::Providers::Amazon::Inventory::Persister
   def initialize_inventory_collections
     ######### Cloud ##########
+    initialize_tag_mapper
+
     # Top level models with direct references for Cloud
     add_inventory_collections_with_references(
       cloud,
@@ -16,8 +18,8 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     # Child models with references in the Parent InventoryCollections for Cloud
     add_inventory_collections(
       cloud,
-      %i(hardwares operating_systems networks disks vm_and_template_labels orchestration_stacks_resources
-         orchestration_stacks_outputs orchestration_stacks_parameters)
+      %i(hardwares operating_systems networks disks vm_and_template_labels vm_and_template_taggings
+         orchestration_stacks_resources orchestration_stacks_outputs orchestration_stacks_parameters)
     )
 
     add_inventory_collection(cloud.orchestration_templates)
