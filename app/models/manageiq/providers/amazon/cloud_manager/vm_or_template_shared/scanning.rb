@@ -38,8 +38,8 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
       raise "Error creating SsaQueue for #{ems_ref}" unless ssaq
       ost.ssaq = ssaq
       _log.debug("sending extract request for #{ems_ref}")
-      ost.category   = AmazonSsaSupport::SsaQueueExtractor::CATEGORIES
-      request        = ssaq.send_extract_request(ems_ref, ost.jobid, ost.category)
+      categories     = ost.category&.split(',') || AmazonSsaSupport::SsaQueueExtractor::CATEGORIES
+      request        = ssaq.send_extract_request(ems_ref, ost.jobid, categories)
       ost.message_id = request.message_id
       _log.debug("Extract request ID #{request.message_id} submitted")
     rescue => err
