@@ -5,32 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Gaprindshavili RC
+## Gaprindshavili-1
 
 ### Added
 - Add Gaprindashvili translations [(#368)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/368)
-
-### Fixed
-- Correct status for network [(#373)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/373)
-- Added supported_catalog_types [(#377)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/377)
-- Refresh operating system and fix normalized guest os [(#376)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/376)
-
-## Gaprindshavili Beta2
-
-### Added
 - Suggested Changes from Initial Implementation [(#360)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/360)
-
-### Fixed
-- exclude on_failure and timeout_in_minutes when update a stack [(#350)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/350)
-- Fix no security group exists at the first time [(#363)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/363)
-- Always sort ems queue names before hitting miq_queue [(#361)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/361)
-- Handle possibility of empty string for Name tag [(#322)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/322)
-- Fix KeyPair create and import actions [(#365)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/365)
-- Choose VPC with enabled DNS support to deploy SSA Agent [(#354)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/354)
-
-## Gaprindshavili Beta1
-
-### Added
 - Parse aws config orchestration stack event [(#310)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/310)
 - Add routers to full refresh [(#304)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/304)
 - Add raw_delete_snapshot to CloudVolumeSnapshot model [(#277)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/277)
@@ -59,6 +38,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Rewrite S3 parser to a new format [(#227)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/227)
 
 ### Fixed
+- Correct status for network [(#373)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/373)
+- Added supported_catalog_types [(#377)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/377)
+- Refresh operating system and fix normalized guest os [(#376)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/376)
+- exclude on_failure and timeout_in_minutes when update a stack [(#350)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/350)
+- Fix no security group exists at the first time [(#363)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/363)
+- Always sort ems queue names before hitting miq_queue [(#361)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/361)
+- Handle possibility of empty string for Name tag [(#322)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/322)
+- Fix KeyPair create and import actions [(#365)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/365)
+- Choose VPC with enabled DNS support to deploy SSA Agent [(#354)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/354)
 - Correctly parse key pair reference [(#311)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/311)
 - Compact targeted refresh references [(#308)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/308)
 - Add OrchestrationParameterMultiline constraints to options that require a text area [(#307)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/307)
@@ -67,6 +55,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Handle empty string in image name tags [(#273)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/273)
 - Parse timestamp for aws alarm events [(#246)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/246)
 - Combine registry and image together when registry needs. [(#353)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/353)
+- Implement tag mapping in graph refresh [(#382)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/382)
+- Fixes to cleanup agents if AgentCoordinatorWorker is restarted [(#381)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/381)
 
 ### Removed
 - Remove Amazon provider discovery [(#306)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/306)
