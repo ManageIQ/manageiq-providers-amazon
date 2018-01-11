@@ -200,6 +200,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
       @az3 = FactoryGirl.create(:availability_zone_amazon, :ext_management_system => ems)
 
       @cn1 = FactoryGirl.create(:cloud_network, :ext_management_system => ems.network_manager)
+      @cn2 = FactoryGirl.create(:cloud_network, :ext_management_system => ems.network_manager)
 
       @cs1 = FactoryGirl.create(:cloud_subnet, :cloud_network         => @cn1,
                                                :availability_zone     => @az1,
@@ -216,11 +217,23 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
       @sg1 = FactoryGirl.create(:security_group_amazon, :name                  => "sgn_1",
                                                         :ext_management_system => ems.network_manager,
                                                         :cloud_network         => @cn1)
+      @cs3 = FactoryGirl.create(:cloud_subnet, :cloud_network         => @cn2,
+                                               :availability_zone     => @az2,
+                                               :ext_management_system => ems.network_manager)
+
       @sg2 = FactoryGirl.create(:security_group_amazon, :name => "sgn_2", :ext_management_system => ems.network_manager)
     end
 
-    it "#allowed_cloud_networks" do
-      expect(workflow.allowed_cloud_networks.length).to eq(1)
+    context "#allowed_cloud_networks" do
+      it "without a zone" do
+        expect(workflow.allowed_cloud_networks.length).to eq(2)
+      end
+
+      it "with a zone" do
+        workflow.values[:placement_availability_zone] = [@az1.id, @az1.name]
+        expect(workflow.allowed_cloud_networks.length).to eq(1)
+        expect(workflow.allowed_cloud_networks).to eq(@cn1.id => @cn1.name)
+      end
     end
 
     context "#allowed_availability_zones" do
