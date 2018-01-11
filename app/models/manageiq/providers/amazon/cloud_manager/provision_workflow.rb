@@ -41,6 +41,12 @@ class ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow < ManageIQ::P
     end
   end
 
+  def allowed_cloud_networks(_options = {})
+    source = load_ar_obj(get_source_vm)
+    targets = get_targets_for_source(source, :cloud_filter, CloudNetwork, 'cloud_network_id')
+    allowed_ci(:cloud_network, [:availability_zone], targets.map(&:id))
+  end
+
   def allowed_availability_zones(_options = {})
     source = load_ar_obj(get_source_vm)
     targets = get_targets_for_ems(source, :cloud_filter, AvailabilityZone, 'availability_zones.available')
@@ -55,6 +61,20 @@ class ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow < ManageIQ::P
 
   def self.provider_model
     ManageIQ::Providers::Amazon::CloudManager
+  end
+
+  def availability_zone_to_cloud_network(src)
+    if src[:availability_zone]
+      load_ar_obj(src[:availability_zone]).cloud_subnets.each_with_object({}) do |cs, hash|
+        cn = cs.cloud_network
+        hash[cn.id] = cn.name
+      end
+    else
+      return {} unless load_ar_obj(src[:ems]).cloud_subnets
+      load_ar_obj(src[:ems]).cloud_subnets.collect(&:cloud_network).each_with_object({}) do |cn, hash|
+        hash[cn.id] = cn.name
+      end
+    end
   end
 
   def security_group_to_availability_zones(src)
