@@ -36,6 +36,11 @@ module ManageIQ
           :hostname    => "ec2.eu-west-2.amazonaws.com",
           :description => "EU (London)",
         },
+        "eu-west-3"      => {
+          :name        => "eu-west-3",
+          :hostname    => "ec2.eu-west-3.amazonaws.com",
+          :description => "EU (Paris)",
+        },
         "eu-central-1"   => {
           :name        => "eu-central-1",
           :hostname    => "ec2.eu-central-1.amazonaws.com",
