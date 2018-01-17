@@ -39,7 +39,7 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
       ost.ssaq = ssaq
       _log.debug("sending extract request for #{ems_ref}")
       categories     = ost.category&.split(',') || AmazonSsaSupport::SsaQueueExtractor::CATEGORIES
-      request        = ssaq.send_extract_request(ems_ref, ost.jobid, categories)
+      request        = ssaq.send_extract_request(ems_ref, ost.jobid, categories, ost)
       ost.message_id = request.message_id
       _log.debug("Extract request ID #{request.message_id} submitted")
     rescue => err
