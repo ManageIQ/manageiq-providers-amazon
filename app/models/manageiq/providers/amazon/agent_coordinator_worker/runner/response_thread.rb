@@ -103,7 +103,7 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
       _log.debug("instantiating BlackBox")
       bb = Manageiq::BlackBox.new(vm.guid, ost)
       _log.debug("instantiated BlackBox")
-      categories = AmazonSsaSupport::SsaQueueExtractor::CATEGORIES
+      categories = ost.reply[:categories].keys
       #
       # The amazon_ssa_support gem defines the categories as an array,
       # But the scanning_mixin expects it to be a comma-separated string.
@@ -115,7 +115,7 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
         update_job_message(ost, "Syncing #{c}")
         ost.taskid = ost.jobid
         st = Time.current
-        xml = MIQRexml.load(ost.reply[:categories][c.to_sym])
+        xml = MIQRexml.load(ost.reply[:categories][c])
         if xml.nil?
           _log.warn("No XML loaded for [#{c}].")
           next
@@ -124,7 +124,7 @@ module ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner::ResponseThre
           next
         end
         _log.debug("Writing scanned data to XML for [#{c}] to blackbox.")
-        bb.saveXmlData(xml, c)
+        bb.saveXmlData(xml, c.to_s)
         _log.debug("Writing XML complete.")
 
         category_node = xml_summary.class.load(xml.root.shallow_copy.to_xml.to_s).root
