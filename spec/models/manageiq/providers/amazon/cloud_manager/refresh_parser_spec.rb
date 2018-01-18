@@ -4,7 +4,10 @@ describe ManageIQ::Providers::Amazon::CloudManager::RefreshParser do
 
   context "#get_public_images" do
     it "applies filter from settings.yml" do
-      filter = {:filters => [{:name => "image-type", :values => ["machine"]}]}
+      cfg = Config::Options.new
+      cfg.name = "image-type"
+      cfg.values = ["machine"]
+      filter = {:filters => [cfg]}
       expect(subject).to receive(:get_images)
       expect(subject.instance_variable_get(:@aws_ec2).client)
         .to receive(:describe_images).with(hash_including(filter)).and_return({})
