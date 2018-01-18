@@ -149,6 +149,9 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
         agent.wait_until_running
         _log.info("Agent #{id} is activated to serve requests.")
         return id
+      elsif agent.state.name == "running"
+        _log.info("Agent #{id} is running already.")
+        return id
       else
         _log.warn("Agent #{id} is in abnormal state: #{agent.state.name}.")
         next
