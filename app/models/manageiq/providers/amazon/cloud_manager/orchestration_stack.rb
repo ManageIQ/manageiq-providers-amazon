@@ -53,4 +53,8 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack < ManageIQ::
     _log.error "stack=[#{name}], error: #{err}"
     raise MiqException::MiqOrchestrationStatusError, err.to_s, err.backtrace
   end
+
+  def self.display_name(number = 1)
+    n_('Orchestration Stack (Amazon)', 'Orchestration Stacks (Amazon)', number)
+  end
 end

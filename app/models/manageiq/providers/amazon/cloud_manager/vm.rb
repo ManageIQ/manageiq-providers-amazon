@@ -63,4 +63,8 @@ class ManageIQ::Providers::Amazon::CloudManager::Vm < ManageIQ::Providers::Cloud
     # http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_InstanceState.html
     POWER_STATES[raw_power_state.to_s] || "terminated"
   end
+
+  def self.display_name(number = 1)
+    n_('Instance (Amazon)', 'Instances (Amazon)', number)
+  end
 end

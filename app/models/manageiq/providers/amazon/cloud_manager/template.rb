@@ -20,4 +20,8 @@ class ManageIQ::Providers::Amazon::CloudManager::Template < ManageIQ::Providers:
       :message => 'Perform SmartState Analysis on this Image'
     }
   end
+
+  def self.display_name(number = 1)
+    n_('Image (Amazon)', 'Images (Amazon)', number)
+  end
 end

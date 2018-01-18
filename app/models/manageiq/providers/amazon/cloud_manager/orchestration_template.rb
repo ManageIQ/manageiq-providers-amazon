@@ -62,6 +62,10 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate < Orchest
     content.strip.start_with?('{') ? :json : :yaml
   end
 
+  def self.display_name(number = 1)
+    n_('CloudFormation Template', 'CloudFormation Templates', number)
+  end
+
   private
 
   def parse
