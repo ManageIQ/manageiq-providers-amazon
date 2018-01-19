@@ -53,4 +53,8 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
       ConfigurationSnapshotDeliveryFailed
     )
   end
+
+  def self.display_name(number = 1)
+    n_('Network Provider (Amazon)', 'Network Providers (Amazon)', number)
+  end
 end

@@ -174,4 +174,8 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     _log.error "template=[#{template.name}], error: #{err}"
     raise MiqException::MiqOrchestrationValidationError, err.to_s, err.backtrace
   end
+
+  def self.display_name(number = 1)
+    n_('Cloud Provider (Amazon)', 'Cloud Providers (Amazon)', number)
+  end
 end
