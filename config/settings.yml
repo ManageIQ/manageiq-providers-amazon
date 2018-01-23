@@ -7,9 +7,11 @@
           :critical:
           - AWS_EC2_Instance_CREATE
           - AWS_EC2_Instance_UPDATE
+          - AWS_API_CALL_RunInstances
+        :deletion:
+          :critical:
           - AWS_EC2_Instance_DELETE
           - AWS_API_CALL_TerminateInstances
-          - AWS_API_CALL_RunInstances
         :power:
           :critical:
           - AWS_EC2_Instance_running
