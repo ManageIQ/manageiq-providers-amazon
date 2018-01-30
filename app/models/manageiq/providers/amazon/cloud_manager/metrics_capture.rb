@@ -19,6 +19,18 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
       :calculation           => ->(*stats, interval) { stats.compact.sum / 1024.0 / interval },
       :vim_style_counter_key => "net_usage_rate_average"
     },
+
+    {
+      :amazon_counters       => ["MemoryUtilization"],
+      :calculation           => ->(stat, _) { stat },
+      :vim_style_counter_key => "mem_usage_absolute_average"
+    },
+
+    {
+      :amazon_counters       => ["SwapUtilization"],
+      :calculation           => ->(stat, _) { stat },
+      :vim_style_counter_key => "mem_swapped_absolute_average"
+    },
   ]
 
   COUNTER_NAMES = COUNTER_INFO.collect { |i| i[:amazon_counters] }.flatten.uniq
@@ -51,6 +63,26 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
       :precision             => 2,
       :rollup                => "average",
       :unit_key              => "kilobytespersecond",
+      :capture_interval_name => "realtime"
+    },
+
+    "mem_usage_absolute_average"   => {
+      :counter_key           => "mem_usage_absolute_average",
+      :instance              => "",
+      :capture_interval      => "20",
+      :precision             => 1,
+      :rollup                => "average",
+      :unit_key              => "percent",
+      :capture_interval_name => "realtime"
+    },
+
+    "mem_swapped_absolute_average" => {
+      :counter_key           => "mem_swapped_absolute_average",
+      :instance              => "",
+      :capture_interval      => "20",
+      :precision             => 1,
+      :rollup                => "average",
+      :unit_key              => "percent",
       :capture_interval_name => "realtime"
     }
   }
