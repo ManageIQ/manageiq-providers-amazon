@@ -1,70 +1,68 @@
+# frozen_string_literal: true
+
 class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Providers::BaseManager::MetricsCapture
-  INTERVALS = [5.minutes, 1.minute]
+  INTERVALS = [5.minutes.freeze, 1.minute.freeze].freeze
 
   COUNTER_INFO = [
     {
-      :amazon_counters       => ["CPUUtilization"],
+      :amazon_counters       => %w[CPUUtilization].freeze,
       :calculation           => ->(stat, _) { stat },
-      :vim_style_counter_key => "cpu_usage_rate_average"
-    },
-
+      :vim_style_counter_key => "cpu_usage_rate_average",
+    }.freeze,
     {
-      :amazon_counters       => ["DiskReadBytes", "DiskWriteBytes"],
+      :amazon_counters       => %w[DiskReadBytes DiskWriteBytes].freeze,
       :calculation           => ->(*stats, interval) { stats.compact.sum / 1024.0 / interval },
-      :vim_style_counter_key => "disk_usage_rate_average"
-    },
-
+      :vim_style_counter_key => "disk_usage_rate_average",
+    }.freeze,
     {
-      :amazon_counters       => ["NetworkIn", "NetworkOut"],
+      :amazon_counters       => %w[NetworkIn NetworkOut].freeze,
       :calculation           => ->(*stats, interval) { stats.compact.sum / 1024.0 / interval },
-      :vim_style_counter_key => "net_usage_rate_average"
-    },
-
+      :vim_style_counter_key => "net_usage_rate_average",
+    }.freeze,
     {
-      :amazon_counters       => ["MemoryUtilization"],
+      :amazon_counters       => %w[MemoryUtilization].freeze,
       :calculation           => ->(stat, _) { stat },
-      :vim_style_counter_key => "mem_usage_absolute_average"
-    },
-
+      :vim_style_counter_key => "mem_usage_absolute_average",
+    }.freeze,
     {
-      :amazon_counters       => ["SwapUtilization"],
+      :amazon_counters       => %w[SwapUtilization].freeze,
       :calculation           => ->(stat, _) { stat },
-      :vim_style_counter_key => "mem_swapped_absolute_average"
-    },
-  ]
+      :vim_style_counter_key => "mem_swapped_absolute_average",
+    }.freeze,
+  ].freeze
 
-  COUNTER_NAMES = COUNTER_INFO.collect { |i| i[:amazon_counters] }.flatten.uniq
+  COUNTER_NAMES = COUNTER_INFO.collect { |i| i[:amazon_counters] }.flatten.uniq.freeze
 
   VIM_STYLE_COUNTERS = {
-    "cpu_usage_rate_average"  => {
+    "cpu_usage_rate_average"       => {
       :counter_key           => "cpu_usage_rate_average",
       :instance              => "",
       :capture_interval      => "20",
       :precision             => 1,
       :rollup                => "average",
       :unit_key              => "percent",
-      :capture_interval_name => "realtime"
-    },
+      :capture_interval_name => "realtime",
+    }.freeze,
 
-    "disk_usage_rate_average" => {
+    "disk_usage_rate_average"      => {
       :counter_key           => "disk_usage_rate_average",
       :instance              => "",
       :capture_interval      => "20",
       :precision             => 2,
       :rollup                => "average",
       :unit_key              => "kilobytespersecond",
-      :capture_interval_name => "realtime"
-    },
+      :capture_interval_name => "realtime",
+    }.freeze,
 
-    "net_usage_rate_average"  => {
+    "net_usage_rate_average"       => {
       :counter_key           => "net_usage_rate_average",
       :instance              => "",
       :capture_interval      => "20",
       :precision             => 2,
       :rollup                => "average",
       :unit_key              => "kilobytespersecond",
-      :capture_interval_name => "realtime"
-    },
+      :capture_interval_name => "realtime",
+    }.freeze,
 
     "mem_usage_absolute_average"   => {
       :counter_key           => "mem_usage_absolute_average",
@@ -73,8 +71,8 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
       :precision             => 1,
       :rollup                => "average",
       :unit_key              => "percent",
-      :capture_interval_name => "realtime"
-    },
+      :capture_interval_name => "realtime",
+    }.freeze,
 
     "mem_swapped_absolute_average" => {
       :counter_key           => "mem_swapped_absolute_average",
@@ -83,16 +81,16 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
       :precision             => 1,
       :rollup                => "average",
       :unit_key              => "percent",
-      :capture_interval_name => "realtime"
-    }
-  }
+      :capture_interval_name => "realtime",
+    }.freeze,
+  }.freeze
 
   def perf_collect_metrics(interval_name, start_time = nil, end_time = nil)
     raise "No EMS defined" if target.ext_management_system.nil?
 
     log_header = "[#{interval_name}] for: [#{target.class.name}], [#{target.id}], [#{target.name}]"
 
-    end_time ||= Time.now
+    end_time   ||= Time.now
     end_time     = end_time.utc
     start_time ||= end_time - 4.hours # 4 hours for symmetry with VIM
     start_time   = start_time.utc
