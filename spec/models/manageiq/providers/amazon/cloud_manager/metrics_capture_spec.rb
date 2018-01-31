@@ -1,8 +1,10 @@
 require_relative "../aws_helper"
 
 describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
+  let(:vm_name) { 'amazon-perf-vm' }
+
   let(:ems) { FactoryGirl.create(:ems_amazon_with_authentication) }
-  let(:vm)  { FactoryGirl.build(:vm_amazon, :ems_ref => "amazon-perf-vm", :ext_management_system => ems) }
+  let(:vm)  { FactoryGirl.build(:vm_amazon, :ems_ref => vm_name, :ext_management_system => ems) }
 
   context "#perf_collect_metrics" do
     it "raises an error when no EMS is defined" do
@@ -53,5 +55,35 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
                                                           ])
       end
     end
+  end
+
+  context 'counters present' do
+    let(:vm_name) { 'i-091369dd8a8d470ab' }
+    let(:ems) { FactoryGirl.create(:ems_amazon_with_vcr_authentication, :provider_region => 'eu-central-1') }
+
+    subject do
+      with_vcr_data { vm.perf_collect_metrics('realtime').last.first.last.first.last }
+    end
+
+    it { is_expected.to have_key('mem_usage_absolute_average') }
+    it { is_expected.to have_key('mem_swapped_absolute_average') }
+
+    context 'and stored in the database' do
+      let(:vm) { FactoryGirl.create(:vm_amazon, :ext_management_system => ems, :name => vm_name) }
+
+      subject do
+        with_vcr_data { vm.perf_capture('realtime') }
+        vm.metrics.reload.last
+      end
+
+      it { expect(subject.mem_usage_absolute_average).to_not be_nil }
+      it { expect(subject.mem_swapped_absolute_average).to_not be_nil }
+    end
+  end
+
+  private
+
+  def with_vcr_data
+    VCR.use_cassette(described_class.name.underscore, :allow_unused_http_interactions => true) { yield }
   end
 end
