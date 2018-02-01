@@ -59,6 +59,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     agent_ids.empty? ? deploy_agent : activate_agents
   rescue => err
     _log.error("No agent is set up to process requests: #{err.message}")
+    _log.error(err.backtrace.join("\n"))
   end
 
   def cleanup_agents
@@ -205,10 +206,10 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
     instance.id
   rescue => err
-    _log.error(err.backtrace.join("\n"))
+    _log.error(err.message)
     instance&.terminate
     instance&.wait_until_terminated
-    raise("Failed to set up smartstate agent: #{err.message}")
+    raise
   end
 
   def setup_agent(instance)
