@@ -105,6 +105,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     Net::SCP.upload!(ip, username, local_file, remote_file, :ssh => {:key_data => auth_key})
   rescue => err
     _log.error(err.message)
+    raise("Failed to copy #{local_file} to #{ip}:#{remote_file}")
   end
 
   def agent_ids
@@ -204,6 +205,11 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     _log.info("Docker #{docker_image} is loaded. Start to heartbeat.")
 
     instance.id
+  rescue => err
+    _log.error(err.message)
+    instance&.terminate
+    instance&.wait_until_terminated
+    raise
   end
 
   def setup_agent(instance)
@@ -216,7 +222,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     ssh = LinuxAdmin::SSH.new(ip, agent_ami_login_user, auth_key)
 
     # prepare work directory
-    ssh.perform_commands(["sudo mkdir -p #{WORK_DIR}", "sudo chmod go+w #{WORK_DIR}"])
+    perform_commands(ssh, ["sudo mkdir -p #{WORK_DIR}", "sudo chmod go+w #{WORK_DIR}"])
 
     # scp the default setting yaml file
     config = Tempfile.new('config.yml')
@@ -237,18 +243,23 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
       command_line = "sudo docker login"
       command_line << " #{docker_registry}"
       command_line << " -u #{docker_username} -p #{docker_password}"
-      ssh.perform_commands([command_line])
+      perform_commands(ssh, [command_line])
     end
 
     # run docker image
     image = docker_registry.present? ? "#{docker_registry}/#{docker_image}" : docker_image
     command_line = "sudo docker run -d --restart=always -v /dev:/host_dev -v #{WORK_DIR}/config.yml:#{WORK_DIR}/config.yml --privileged #{image}"
-    ssh.perform_commands([command_line])
-  rescue => err
-    _log.error(err.backtrace.join("\n"))
-    instance.terminate
-    instance.wait_until_terminated
-    raise("Failed to set up smartstate agent: #{err.message}")
+    perform_commands(ssh, [command_line])
+  end
+
+  def perform_commands(ssh, commands)
+    _log.debug("SSH commands: #{commands}")
+    result = ssh.perform_commands(commands)
+
+    unless result[:exit_status].zero?
+      _log.error("Failed to run command: #{result[:last_command]}")
+      raise("SSH failed to run command: #{result[:last_command]}")
+    end
   end
 
   def docker_auth
