@@ -54,7 +54,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
       dev = File.basename(a['device'])
 
       persister.disks.find_or_build_by(
-        :hardware    => persister.hardwares.lazy_find(a["instance_id"]),
+        :hardware    => persister.hardwares.lazy_find(persister.vms.lazy_find(a["instance_id"])),
         :device_name => dev
       ).assign_attributes(
         :location => dev,

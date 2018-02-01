@@ -83,7 +83,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def image_operating_system(persister_image, image)
     persister.operating_systems.find_or_build(persister_image).assign_attributes(
       # FIXME: duplicated information used by some default reports
-      :product_name => persister.hardwares.lazy_find(image['image_id'], :key => :guest_os)
+      :product_name => persister.hardwares.lazy_find(persister.miq_templates.lazy_find(image['image_id']), :key => :guest_os)
     )
   end
 
@@ -199,6 +199,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       name = get_from_tags(instance, :name)
       name = name.blank? ? uid : name
 
+      lazy_vm = persister.vms.lazy_find(uid)
+
       persister_instance = persister.vms.find_or_build(uid).assign_attributes(
         :uid_ems             => uid,
         :name                => name,
@@ -209,7 +211,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :flavor              => flavor,
         :genealogy_parent    => persister.miq_templates.lazy_find(instance['image_id']),
         :key_pairs           => [persister.key_pairs.lazy_find(instance['key_name'])].compact,
-        :location            => persister.networks.lazy_find("#{uid}__public", :key => :hostname, :default => 'unknown'),
+        :location            => persister.networks.lazy_find({
+                                                               :hardware    => persister.hardwares.lazy_find(:vm_or_template => lazy_vm),
+                                                               :description => "public"
+                                                             },
+                                                             {
+                                                               :key     => :hostname,
+                                                               :default => 'unknown'
+                                                             }),
         :orchestration_stack => persister.orchestration_stacks.lazy_find(
           get_from_tags(instance, "aws:cloudformation:stack-id")
         ),
@@ -232,7 +241,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :cpu_total_cores      => flavor[:cpus],
       :memory_mb            => flavor[:memory] / 1.megabyte,
       :disk_capacity        => flavor[:ephemeral_disk_size],
-      :guest_os             => persister.hardwares.lazy_find(instance['image_id'], :key => :guest_os),
+      :guest_os             => persister.hardwares.lazy_find(persister.miq_templates.lazy_find(instance['image_id']), :key => :guest_os),
     )
 
     hardware_networks(persister_hardware, instance)
@@ -242,7 +251,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def instance_operating_system(persister_instance, instance)
     persister.operating_systems.find_or_build(persister_instance).assign_attributes(
       # FIXME: duplicated information used by some default reports
-      :product_name => persister.hardwares.lazy_find(instance['image_id'], :key => :guest_os)
+      :product_name => persister.hardwares.lazy_find(persister.miq_templates.lazy_find(instance['image_id']), :key => :guest_os)
     )
   end
 

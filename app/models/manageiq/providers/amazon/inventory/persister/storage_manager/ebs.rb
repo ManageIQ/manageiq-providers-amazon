@@ -2,7 +2,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::StorageManager::Ebs < M
   def initialize_inventory_collections
     add_inventory_collections(storage, %i(cloud_volumes cloud_volume_snapshots))
 
-    add_inventory_collections(cloud, %i(availability_zones hardwares),
+    add_inventory_collections(cloud, %i(availability_zones hardwares vms),
                               :parent   => manager.parent_manager,
                               :strategy => :local_db_cache_all)
 
