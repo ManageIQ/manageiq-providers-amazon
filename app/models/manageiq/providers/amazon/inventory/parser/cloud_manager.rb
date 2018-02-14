@@ -165,7 +165,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def stack_parameters(persister_orchestration_stack, stack)
-    return unless stack['outputs']
+    return unless stack['parameters']
 
     stack['parameters'].each do |parameter|
       uid = compose_ems_ref(stack['stack_id'].to_s, parameter['parameter_key'])
