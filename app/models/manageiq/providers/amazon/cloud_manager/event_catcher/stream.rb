@@ -124,8 +124,9 @@ class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
   end
 
   def create_topic(sns)
-    sns.create_topic(:name => @topic_name)
+    topic = sns.create_topic(:name => @topic_name)
     $aws_log.info("Created SNS topic #{@topic_name}")
+    topic
   rescue Aws::SNS::Errors::ServiceError => err
     raise ProviderUnreachable, "Cannot create SNS topic #{@topic_name}, #{err.class.name}, Message=#{err.message}"
   end
