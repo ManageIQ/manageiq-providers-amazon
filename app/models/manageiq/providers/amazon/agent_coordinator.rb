@@ -428,6 +428,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
         :values => [image_name]
       }]
     ).images.first
+    raise("Unable to find AMI Image #{image_name} to launch Smartstate agent") if image.nil?
 
     _log.info("AMI Image: #{image_name} [#{image.image_id}] is used to launch smartstate agent.")
 
