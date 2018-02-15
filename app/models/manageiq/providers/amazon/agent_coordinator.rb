@@ -87,7 +87,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     ost       = OpenStruct.new
     ost.jobid = request[:job_id]
     job       = Job.find_by(:id =>ost.jobid)
-    raise ("Unable to clean request for job with id #{ost.jobid}") if job.nil?
+    raise "Unable to clean request for job with id #{ost.jobid}" if job.nil?
     target_id  = job.target_id
     vm         = VmOrTemplate.find(target_id)
     ost.taskid = job.guid
@@ -105,7 +105,6 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     _log.debug("Cleaning request for #{vm.ems_ref} because #{message}")
     update_job_message(ost, message)
     job.signal(:abort, message, "error")
-    return
   end
 
   def cleanup_agents
