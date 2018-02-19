@@ -7,6 +7,7 @@ require 'amazon_ssa_support'
 
 class ManageIQ::Providers::Amazon::AgentCoordinator
   include Vmdb::Logging
+  include ScanningMixin
   attr_accessor :ems, :deploying
 
   SSA_LABEL = "smartstate".freeze
@@ -59,7 +60,51 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     agent_ids.empty? ? deploy_agent : activate_agents
   rescue => err
     _log.error("No agent is set up to process requests: #{err.message}")
-    _log.error(err.backtrace.join("\n"))
+    cleanup_requests(err.message)
+  end
+
+  def cleanup_requests(message)
+    _log.info("Cleaning up outstanding requests due to Agent deployment error")
+    if request_queue_empty?
+      _log.debug("No requests visible for provider #{ems.name}")
+    else
+      @ssaq = ssa_queue
+      _log.debug("Getting requests for #{ems.name}")
+      @ssaq.request_loop do |request|
+        begin
+          _log.debug("Request for #{ems.name}: #{request}")
+          clean_request(request, message)
+        rescue => err
+          _log.error("Error #{err} cleaning requests for #{ems.name}. Continuing.")
+          next
+        end
+      end
+    end
+  end
+
+  def clean_request(request, message)
+    @ssaq.delete_request(request)
+    ost       = OpenStruct.new
+    ost.jobid = request[:job_id]
+    job       = Job.find_by(:id =>ost.jobid)
+    raise "Unable to clean request for job with id #{ost.jobid}" if job.nil?
+    target_id  = job.target_id
+    vm         = VmOrTemplate.find(target_id)
+    ost.taskid = job.guid
+    unless vm.kind_of?(ManageIQ::Providers::Amazon::CloudManager::Vm) ||
+           vm.kind_of?(ManageIQ::Providers::Amazon::CloudManager::Template)
+      if vm.nil?
+        error = "Vm for Job #{ost.jobid} not found"
+      else
+        error = "Vm #{vm.name} of class #{vm.class.name} is not an Amazon instance or image" unless vm.nil?
+      end
+      update_job_message(ost, error)
+      job.signal(:abort, error, "error")
+      return
+    end
+    _log.debug("Cleaning request for #{vm.ems_ref} because #{message}")
+    update_job_message(ost, message)
+    job.signal(:abort, message, "error")
   end
 
   def cleanup_agents
