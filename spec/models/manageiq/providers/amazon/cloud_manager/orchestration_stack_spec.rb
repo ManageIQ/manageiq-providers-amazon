@@ -116,7 +116,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack do
       context 'options are for sdk v1' do
         it 'converts options to sdk v2 format' do
           v1_options = {:stack_name => 'mystack', :parameters => {'user' => 'smith'}}
-          expect(described_class.format_v2_options(v1_options)).to have_attributes(
+          expect(described_class.format_v2_options(v1_options)).to include(
             :stack_name => expected_options[:stack_name],
             :parameters => expected_options[:parameters]
           )
