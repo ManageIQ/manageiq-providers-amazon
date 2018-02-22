@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 79 ending 2018-02-12
+
+### Added 
+- Add display_name() for Network Router model [(#406)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/406)
+- AWS memory usage collection [(#393)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/393)
+- Use proper nested references in parser [(#383)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/383)
+
+### Fixed
+- Raise exceptions if SSH command fail [(#405)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/405)
+
 ## Gaprindshavili-1 - Released 2018-01-31
 
 ### Added
@@ -57,6 +67,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Combine registry and image together when registry needs. [(#353)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/353)
 - Implement tag mapping in graph refresh [(#382)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/382)
 - Fixes to cleanup agents if AgentCoordinatorWorker is restarted [(#381)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/381)
+- Handle possibility of empty string for Name tag [(#322)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/322)
+- Use name to create key pair [(#370)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/370)
+- Suggested Changes from Initial Implementation [(#360)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/360)
+- Moved AWS_API_CALL_TerminateInstances from addition to deletion category [(#402)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/402)
+- Don't dependent => destroy child_managers [(#401)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/401)
+- Fixes to send job defined scanning categories in request message [(#389)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/389)
 
 ### Removed
 - Remove Amazon provider discovery [(#306)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/306)
@@ -68,26 +84,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Added Paris (EU) region [(#392)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/392)
 
 ### Fixed
-- Moved AWS_API_CALL_TerminateInstances from addition to deletion category [(#402)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/402)
-- Don't dependent => destroy child_managers [(#401)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/401)
-- Fixes to send job defined scanning categories in request message [(#389)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/389)
 - Fix network_parser after the indexes refactoring [(#375)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/375)
 
 ## Unreleased as of Sprint 76 ending 2018-01-01
 
 ### Fixed
 - Add cleanup logic to remove zombie instance in unexpected cases [(#367)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/367)
-
-## Unreleased as of Sprint 75 ending 2017-12-11
-
-### Fixed
-- Use name to create key pair [(#370)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/370)
-- Suggested Changes from Initial Implementation [(#360)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/360)
-
-## Unreleased as of Sprint 74 ending 2017-11-27
-
-### Fixed
-- Handle possibility of empty string for Name tag [(#322)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/322)
 
 ## Unreleased as of Sprint 73 ending 2017-11-13
 
