@@ -1,0 +1,685 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://ec2.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeAvailabilityZones&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.3.6 x86_64-darwin17 resources
+      X-Amz-Date:
+      - 20180201T190501Z
+      X-Amz-Content-Sha256:
+      - 2bd59c58bf8c2bcc1c39ea3a5a38bb7cd5a643758cbd1b78a746d3a3aa5c1580
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180201/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=bb9c7dc79fad70a9c8361fcd014cb38876a2496e2aeceaa6d4c6bda4a379e63c
+      Content-Length:
+      - '51'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 01 Feb 2018 19:05:01 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeAvailabilityZonesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>9e747d2f-a8df-4201-8bb3-360fe58d70a5</requestId>
+            <availabilityZoneInfo>
+                <item>
+                    <zoneName>eu-central-1a</zoneName>
+                    <zoneState>available</zoneState>
+                    <regionName>eu-central-1</regionName>
+                    <messageSet/>
+                </item>
+                <item>
+                    <zoneName>eu-central-1b</zoneName>
+                    <zoneState>available</zoneState>
+                    <regionName>eu-central-1</regionName>
+                    <messageSet/>
+                </item>
+                <item>
+                    <zoneName>eu-central-1c</zoneName>
+                    <zoneState>available</zoneState>
+                    <regionName>eu-central-1</regionName>
+                    <messageSet/>
+                </item>
+            </availabilityZoneInfo>
+        </DescribeAvailabilityZonesResponse>
+    http_version:
+  recorded_at: Thu, 01 Feb 2018 19:05:02 GMT
+- request:
+    method: post
+    uri: https://ec2.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeKeyPairs&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.3.6 x86_64-darwin17 resources
+      X-Amz-Date:
+      - 20180201T190502Z
+      X-Amz-Content-Sha256:
+      - e7326d4766918579e6d040a9c8d2243cefc0ab1aaa37cd7a9dab76d8c3538b59
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180201/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=72a7d070b2e9426a6c10164b90c06ba8d72fbfa0f6797377a36cfc1e9f62db7a
+      Content-Length:
+      - '42'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 01 Feb 2018 19:05:01 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeKeyPairsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>c2182802-0954-4576-adc3-6c8511aaca10</requestId>
+            <keySet>
+                <item>
+                    <keyName>azagayno</keyName>
+                    <keyFingerprint>ba:e4:ba:6e:80:7e:0d:1d:36:60:79:87:e9:35:44:9a:55:87:1b:35</keyFingerprint>
+                </item>
+                <item>
+                    <keyName>mpovolny</keyName>
+                    <keyFingerprint>3e:20:56:54:4c:33:f6:e1:bd:cc:41:a9:a8:01:e6:9c:53:8b:1d:44</keyFingerprint>
+                </item>
+            </keySet>
+        </DescribeKeyPairsResponse>
+    http_version:
+  recorded_at: Thu, 01 Feb 2018 19:05:02 GMT
+- request:
+    method: post
+    uri: https://cloudformation.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeStacks&Version=2010-05-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.3.6 x86_64-darwin17 resources
+      X-Amz-Date:
+      - 20180201T190502Z
+      X-Amz-Content-Sha256:
+      - 1c0d327d16f37b15838ca07a3964664f2dcff8d7051d9f1d87552e7df79be01f
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180201/eu-central-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=6c0d1d5df046c66cb1474e79eb395d2795e81fe88ea3d299f156861d1b1a54b4
+      Content-Length:
+      - '40'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - ce56d48a-0782-11e8-aa97-3947ed6aaf0c
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '283'
+      Date:
+      - Thu, 01 Feb 2018 19:05:01 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <DescribeStacksResponse xmlns="http://cloudformation.amazonaws.com/doc/2010-05-15/">
+          <DescribeStacksResult>
+            <Stacks/>
+          </DescribeStacksResult>
+          <ResponseMetadata>
+            <RequestId>ce56d48a-0782-11e8-aa97-3947ed6aaf0c</RequestId>
+          </ResponseMetadata>
+        </DescribeStacksResponse>
+    http_version:
+  recorded_at: Thu, 01 Feb 2018 19:05:02 GMT
+- request:
+    method: post
+    uri: https://ec2.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeImages&Filter.1.Name=image-type&Filter.1.Value.1=machine&Owner.1=self&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.3.6 x86_64-darwin17 resources
+      X-Amz-Date:
+      - 20180201T190502Z
+      X-Amz-Content-Sha256:
+      - 353f42a6b4f35502116ce0f2e997ba13b57b156b7a2d476afc85d222902f4415
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180201/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=450c78a330ab21ca5767f58410e200b7186b0335ea2a259bf40389bce19c2c63
+      Content-Length:
+      - '103'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 01 Feb 2018 19:05:01 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>5fd0b072-3ea8-49c3-b1f3-867edcb389b0</requestId>
+            <imagesSet/>
+        </DescribeImagesResponse>
+    http_version:
+  recorded_at: Thu, 01 Feb 2018 19:05:02 GMT
+- request:
+    method: post
+    uri: https://ec2.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeImages&ExecutableBy.1=self&Filter.1.Name=image-type&Filter.1.Value.1=machine&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.3.6 x86_64-darwin17 resources
+      X-Amz-Date:
+      - 20180201T190502Z
+      X-Amz-Content-Sha256:
+      - 13559d63912d4017a9523f9e8bda64c2a6870c83adb807d3bccff29a4065cdfc
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180201/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=e8acecbe1795cb9b4caf720853f41eba297fbec91e3b37f765933554734b882d
+      Content-Length:
+      - '110'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 01 Feb 2018 19:05:02 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>b601a64f-a722-4e4c-bd7f-a10720cdb50c</requestId>
+            <imagesSet>
+                <item>
+                    <imageId>ami-40dc532f</imageId>
+                    <imageLocation>aws-marketplace/ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20171115.1-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-c29e1cb8.4</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>679593333241</imageOwnerId>
+                    <creationDate>2017-11-30T05:35:42.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <productCodes>
+                        <item>
+                            <productCode>b3dl4415quatdndl4qa6kcu45</productCode>
+                            <type>marketplace</type>
+                        </item>
+                    </productCodes>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <imageOwnerAlias>aws-marketplace</imageOwnerAlias>
+                    <name>ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20171115.1-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-c29e1cb8.4</name>
+                    <description>Canonical, Ubuntu, 14.04 LTS, amd64 trusty image build on 2017-11-15</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-01486422066a3eedf</snapshotId>
+                                <volumeSize>8</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdb</deviceName>
+                            <virtualName>ephemeral0</virtualName>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdc</deviceName>
+                            <virtualName>ephemeral1</virtualName>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                </item>
+                <item>
+                    <imageId>ami-41dc532e</imageId>
+                    <imageLocation>aws-marketplace/ubuntu/images/ebs-ssd/ubuntu-trusty-14.04-amd64-server-20171115.1-ecd5575e-d805-450e-843e-f2a9872b8c80-ami-299c1e53.4</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>679593333241</imageOwnerId>
+                    <creationDate>2017-11-30T05:35:40.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <productCodes>
+                        <item>
+                            <productCode>e0rcty0t3zp1mkin7a899fmgw</productCode>
+                            <type>marketplace</type>
+                        </item>
+                    </productCodes>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <kernelId>aki-184c7a05</kernelId>
+                    <imageOwnerAlias>aws-marketplace</imageOwnerAlias>
+                    <name>ubuntu/images/ebs-ssd/ubuntu-trusty-14.04-amd64-server-20171115.1-ecd5575e-d805-450e-843e-f2a9872b8c80-ami-299c1e53.4</name>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0f52f4539065d3bd1</snapshotId>
+                                <volumeSize>8</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdb</deviceName>
+                            <virtualName>ephemeral0</virtualName>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>false</enaSupport>
+                </item>
+                <item>
+                    <imageId>ami-4b1bb524</imageId>
+                    <imageLocation>aws-marketplace/ubuntu/images/ebs-ssd/ubuntu-trusty-14.04-amd64-server-20170803-ecd5575e-d805-450e-843e-f2a9872b8c80-ami-599bb422.4</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>679593333241</imageOwnerId>
+                    <creationDate>2017-08-10T00:12:34.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <productCodes>
+                        <item>
+                            <productCode>e0rcty0t3zp1mkin7a899fmgw</productCode>
+                            <type>marketplace</type>
+                        </item>
+                    </productCodes>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <kernelId>aki-184c7a05</kernelId>
+                    <imageOwnerAlias>aws-marketplace</imageOwnerAlias>
+                    <name>ubuntu/images/ebs-ssd/ubuntu-trusty-14.04-amd64-server-20170803-ecd5575e-d805-450e-843e-f2a9872b8c80-ami-599bb422.4</name>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0e74b8ce54a76cbc3</snapshotId>
+                                <volumeSize>8</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdb</deviceName>
+                            <virtualName>ephemeral0</virtualName>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>false</enaSupport>
+                </item>
+                <item>
+                    <imageId>ami-b51bb5da</imageId>
+                    <imageLocation>aws-marketplace/ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20170803-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-5c95ba27.4</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>679593333241</imageOwnerId>
+                    <creationDate>2017-08-10T00:12:46.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <productCodes>
+                        <item>
+                            <productCode>b3dl4415quatdndl4qa6kcu45</productCode>
+                            <type>marketplace</type>
+                        </item>
+                    </productCodes>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <imageOwnerAlias>aws-marketplace</imageOwnerAlias>
+                    <name>ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20170803-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-5c95ba27.4</name>
+                    <description>Canonical, Ubuntu, 14.04 LTS, amd64 trusty image build on 2017-08-03</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-01a9b43bc99c8298d</snapshotId>
+                                <volumeSize>8</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdb</deviceName>
+                            <virtualName>ephemeral0</virtualName>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdc</deviceName>
+                            <virtualName>ephemeral1</virtualName>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                </item>
+            </imagesSet>
+        </DescribeImagesResponse>
+    http_version:
+  recorded_at: Thu, 01 Feb 2018 19:05:02 GMT
+- request:
+    method: post
+    uri: https://ec2.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeInstances&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.3.6 x86_64-darwin17 resources
+      X-Amz-Date:
+      - 20180201T190502Z
+      X-Amz-Content-Sha256:
+      - 6171eb09865e32b0602af0f7957e26573a51f53caaedff02ff88883cb0275885
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180201/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=317c1940e8a2b661c5b81c61fbdca8f118a9d5dca0f15b464feab92e10ebf32d
+      Content-Length:
+      - '43'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 01 Feb 2018 19:05:01 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>ab472aab-2052-4532-bd5a-37a58eb417eb</requestId>
+            <reservationSet>
+                <item>
+                    <reservationId>r-056692f6dc68b8043</reservationId>
+                    <ownerId>200278856672</ownerId>
+                    <groupSet/>
+                    <instancesSet>
+                        <item>
+                            <instanceId>i-091369dd8a8d470ab</instanceId>
+                            <imageId>ami-0fc85a60</imageId>
+                            <instanceState>
+                                <code>16</code>
+                                <name>running</name>
+                            </instanceState>
+                            <privateDnsName>ip-172-31-9-14.eu-central-1.compute.internal</privateDnsName>
+                            <dnsName>ec2-18-196-99-129.eu-central-1.compute.amazonaws.com</dnsName>
+                            <reason/>
+                            <keyName>azagayno</keyName>
+                            <amiLaunchIndex>0</amiLaunchIndex>
+                            <productCodes/>
+                            <instanceType>t2.micro</instanceType>
+                            <launchTime>2018-01-15T10:28:27.000Z</launchTime>
+                            <placement>
+                                <availabilityZone>eu-central-1b</availabilityZone>
+                                <groupName/>
+                                <tenancy>default</tenancy>
+                            </placement>
+                            <monitoring>
+                                <state>disabled</state>
+                            </monitoring>
+                            <subnetId>subnet-95b0b1ed</subnetId>
+                            <vpcId>vpc-d78f69be</vpcId>
+                            <privateIpAddress>172.31.9.14</privateIpAddress>
+                            <ipAddress>18.196.99.129</ipAddress>
+                            <sourceDestCheck>true</sourceDestCheck>
+                            <groupSet>
+                                <item>
+                                    <groupId>sg-8bae2ee0</groupId>
+                                    <groupName>miq-ssh-http-https</groupName>
+                                </item>
+                            </groupSet>
+                            <architecture>x86_64</architecture>
+                            <rootDeviceType>ebs</rootDeviceType>
+                            <rootDeviceName>/dev/xvda</rootDeviceName>
+                            <blockDeviceMapping>
+                                <item>
+                                    <deviceName>/dev/xvda</deviceName>
+                                    <ebs>
+                                        <volumeId>vol-006e52cf74d8f3e7c</volumeId>
+                                        <status>attached</status>
+                                        <attachTime>2018-01-15T10:28:27.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </ebs>
+                                </item>
+                            </blockDeviceMapping>
+                            <virtualizationType>hvm</virtualizationType>
+                            <clientToken/>
+                            <hypervisor>xen</hypervisor>
+                            <networkInterfaceSet>
+                                <item>
+                                    <networkInterfaceId>eni-b023519b</networkInterfaceId>
+                                    <subnetId>subnet-95b0b1ed</subnetId>
+                                    <vpcId>vpc-d78f69be</vpcId>
+                                    <description/>
+                                    <ownerId>200278856672</ownerId>
+                                    <status>in-use</status>
+                                    <macAddress>06:c4:1b:46:94:1a</macAddress>
+                                    <privateIpAddress>172.31.9.14</privateIpAddress>
+                                    <privateDnsName>ip-172-31-9-14.eu-central-1.compute.internal</privateDnsName>
+                                    <sourceDestCheck>true</sourceDestCheck>
+                                    <groupSet>
+                                        <item>
+                                            <groupId>sg-8bae2ee0</groupId>
+                                            <groupName>miq-ssh-http-https</groupName>
+                                        </item>
+                                    </groupSet>
+                                    <attachment>
+                                        <attachmentId>eni-attach-b165785a</attachmentId>
+                                        <deviceIndex>0</deviceIndex>
+                                        <status>attached</status>
+                                        <attachTime>2018-01-15T10:28:27.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </attachment>
+                                    <association>
+                                        <publicIp>18.196.99.129</publicIp>
+                                        <publicDnsName>ec2-18-196-99-129.eu-central-1.compute.amazonaws.com</publicDnsName>
+                                        <ipOwnerId>amazon</ipOwnerId>
+                                    </association>
+                                    <privateIpAddressesSet>
+                                        <item>
+                                            <privateIpAddress>172.31.9.14</privateIpAddress>
+                                            <privateDnsName>ip-172-31-9-14.eu-central-1.compute.internal</privateDnsName>
+                                            <primary>true</primary>
+                                            <association>
+                                            <publicIp>18.196.99.129</publicIp>
+                                            <publicDnsName>ec2-18-196-99-129.eu-central-1.compute.amazonaws.com</publicDnsName>
+                                            <ipOwnerId>amazon</ipOwnerId>
+                                            </association>
+                                        </item>
+                                    </privateIpAddressesSet>
+                                    <ipv6AddressesSet/>
+                                </item>
+                            </networkInterfaceSet>
+                            <ebsOptimized>false</ebsOptimized>
+                            <enaSupport>true</enaSupport>
+                        </item>
+                    </instancesSet>
+                </item>
+            </reservationSet>
+        </DescribeInstancesResponse>
+    http_version:
+  recorded_at: Thu, 01 Feb 2018 19:05:02 GMT
+- request:
+    method: post
+    uri: https://ec2.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeImages&Filter.1.Name=image-id&Filter.1.Value.1=ami-0fc85a60&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.3.6 x86_64-darwin17 resources
+      X-Amz-Date:
+      - 20180201T190502Z
+      X-Amz-Content-Sha256:
+      - 97b5c640c4d026cb78b56efe042e22b5f5ea52221096f5e0d89000943ebdd37c
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180201/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=951aba47810b39e7731c3c48d0b710d1fcdba0b3293279652369e81091fb2047
+      Content-Length:
+      - '93'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 01 Feb 2018 19:05:02 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>a2f184cf-cd71-4923-a2f5-54b7105c09b3</requestId>
+            <imagesSet>
+                <item>
+                    <imageId>ami-0fc85a60</imageId>
+                    <imageLocation>amazon/amzn-ami-hvm-2017.09.1.20180108-x86_64-gp2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>137112412989</imageOwnerId>
+                    <creationDate>2018-01-08T18:43:51.000Z</creationDate>
+                    <isPublic>true</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <imageOwnerAlias>amazon</imageOwnerAlias>
+                    <name>amzn-ami-hvm-2017.09.1.20180108-x86_64-gp2</name>
+                    <description>Amazon Linux AMI 2017.09.1.20180108 x86_64 HVM GP2</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/xvda</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/xvda</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0a7717f070e33a371</snapshotId>
+                                <volumeSize>8</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                </item>
+            </imagesSet>
+        </DescribeImagesResponse>
+    http_version:
+  recorded_at: Thu, 01 Feb 2018 19:05:03 GMT
+recorded_with: VCR 3.0.3
