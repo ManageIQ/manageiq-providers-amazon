@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 80 ending 2018-02-26
+
+### Fixed
+- Raise Exception if AMI not visible [(#411)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/411)
+- Fix refresh for stack without parameters [(#410)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/410)
+- Return created topic [(#409)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/409)
+
 ## Unreleased as of Sprint 79 ending 2018-02-12
 
 ### Added 
