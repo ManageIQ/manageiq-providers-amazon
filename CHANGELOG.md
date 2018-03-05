@@ -5,7 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Gaprindshavili-1
+## Gaprindshavili-2
+
+### Fixed
+- Fix refresh for stack without parameters [(#410)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/410)
+
+## Gaprindshavili-1 - Released 2018-02-01
 
 ### Added
 - Add Gaprindashvili translations [(#368)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/368)
