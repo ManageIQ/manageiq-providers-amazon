@@ -2,6 +2,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
   include Spec::Support::WorkflowHelper
 
   let(:admin) { FactoryGirl.create(:user_with_group) }
+
   let(:ems) { FactoryGirl.create(:ems_amazon) }
   let(:template) { FactoryGirl.create(:template_amazon, :name => "template", :ext_management_system => ems) }
   let(:workflow) do
@@ -162,6 +163,48 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
         expect(ems.flavors.last.tags.size).to eq(0)
 
         expect(workflow.send(:get_targets_for_ems, ems, :cloud_filter, Flavor, 'flavors').size).to eq(1)
+      end
+    end
+  end
+
+  context "tenant filtering" do
+    before do
+      @ct1 = FactoryGirl.create(:cloud_tenant)
+      @ct2 = FactoryGirl.create(:cloud_tenant)
+    end
+
+    context "cloud networks" do
+      before do
+        @az1 = FactoryGirl.create(:availability_zone, :ext_management_system => ems)
+        @cn1 = FactoryGirl.create(:cloud_network_amazon,
+                                  :cloud_tenant          => @ct1,
+                                  :ext_management_system => ems.network_manager)
+        @cn2 = FactoryGirl.create(:cloud_network_amazon,
+                                  :cloud_tenant          => @ct2,
+                                  :ext_management_system => ems.network_manager)
+        @cn3 = FactoryGirl.create(:cloud_network_amazon,
+                                  :cloud_tenant          => @ct2,
+                                  :ext_management_system => ems.network_manager)
+        @cs1 = FactoryGirl.create(:cloud_subnet_amazon,
+                                  :cloud_network         => @cn2,
+                                  :availability_zone     => @az1,
+                                  :ext_management_system => ems.network_manager)
+        @cs2 = FactoryGirl.create(:cloud_subnet_amazon,
+                                  :cloud_network         => @cn3,
+                                  :availability_zone     => @az1,
+                                  :ext_management_system => ems.network_manager)
+      end
+
+      it "#allowed_cloud_networks with zone" do
+        workflow.values[:placement_availability_zone] = [@az1.id, @az1.name]
+        workflow.values[:cloud_tenant] = @ct2.id
+        cns = workflow.allowed_cloud_networks
+        expect(cns.keys).to match_array [@cn2.id, @cn3.id]
+      end
+
+      it "#allowed_cloud_networks without availability zone returns everything" do
+        cns = workflow.allowed_cloud_networks
+        expect(cns.keys).to match_array [@cn1.id, @cn2.id, @cn3.id]
       end
     end
   end
