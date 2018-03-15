@@ -6,8 +6,11 @@
         :addition:
           :critical:
           - AWS_EC2_Instance_CREATE
-          - AWS_EC2_Instance_UPDATE
           - AWS_EC2_Instance_DELETE
+          - AWS_API_CALL_CreateTags
+        :update:
+          :critical:
+          - AWS_EC2_Instance_UPDATE
         :power:
           :critical:
           - AWS_EC2_Instance_running
