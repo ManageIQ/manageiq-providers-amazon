@@ -224,23 +224,46 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     security_group_id = find_or_create_security_group(vpc_id)
     find_or_create_profile
 
-    instance = ec2.create_instances(
-      :iam_instance_profile => {:name => label},
-      :image_id             => get_agent_image_id,
-      :instance_type        => 't2.micro',
-      :key_name             => kp.name,
-      :max_count            => 1,
-      :min_count            => 1,
-      :placement            => {:availability_zone => zone_name},
-      :tag_specifications   => [{:resource_type => "instance", :tags => [{:key => "Name", :value => label}]}],
-      :network_interfaces   => [{
-        :associate_public_ip_address => true,
-        :delete_on_termination       => true,
-        :device_index                => 0,
-        :subnet_id                   => subnet_id,
-        :groups                      => [security_group_id]
-      }],
-    ).first
+    # Based on Amazon doc, add a retry logic in creating instance to solve time issue on IAM role.
+    #
+    # Important
+    #
+    # After you create an IAM role, it may take several seconds for the permissions to propagate.
+    # If your first attempt to launch an instance with a role fails, wait a few seconds before trying again.
+    # For more information, see Troubleshooting Working with Roles in the IAM User Guide.
+    #
+    # (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#launch-instance-with-role-console)
+
+    max_retries = 5
+    begin
+      instance = ec2.create_instances(
+        :iam_instance_profile => {:name => label},
+        :image_id             => get_agent_image_id,
+        :instance_type        => 't2.micro',
+        :key_name             => kp.name,
+        :max_count            => 1,
+        :min_count            => 1,
+        :placement            => {:availability_zone => zone_name},
+        :tag_specifications   => [{:resource_type => "instance", :tags => [{:key => "Name", :value => label}]}],
+        :network_interfaces   => [{
+          :associate_public_ip_address => true,
+          :delete_on_termination       => true,
+          :device_index                => 0,
+          :subnet_id                   => subnet_id,
+          :groups                      => [security_group_id]
+        }],
+      ).first
+    rescue Aws::EC2::Errors::InvalidParameterValue => e
+      if max_retries.positive?
+        sleep 5
+        max_retries -= 1
+        _log.warn("Will retry #{max_retries} times due to error: #{e.message}")
+        retry
+      else
+        raise "Failed to create instance. Reason: #{e.message}"
+      end
+    end
+
     ec2.client.wait_until(:instance_status_ok, :instance_ids => [instance.id])
 
     _log.info("Start to load smartstate application, this may take a while ...")
