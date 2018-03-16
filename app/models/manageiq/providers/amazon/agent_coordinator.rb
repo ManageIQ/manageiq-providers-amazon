@@ -235,7 +235,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     #
     # (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#launch-instance-with-role-console)
 
-    max_retries = 3
+    max_retries = 5
     begin
       instance = ec2.create_instances(
         :iam_instance_profile => {:name => label},
@@ -255,8 +255,8 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
         }],
       ).first
     rescue Aws::EC2::Errors::InvalidParameterValue => e
-      if max_retries > 0
-        sleep 5
+      if max_retries.positive?
+        sleep 10
         max_retries -= 1
         _log.warn("Will retry #{max_retries} times due to error: #{e.message}")
         retry
