@@ -256,7 +256,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
       ).first
     rescue Aws::EC2::Errors::InvalidParameterValue => e
       if max_retries.positive?
-        sleep 10
+        sleep 5
         max_retries -= 1
         _log.warn("Will retry #{max_retries} times due to error: #{e.message}")
         retry
