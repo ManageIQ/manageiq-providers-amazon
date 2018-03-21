@@ -319,7 +319,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   end
 
   def get_subnet_from_vpc_zone
-    vpcs = get_dns_enabled_vpcs
+    vpcs = validated_vpcs
     raise "Smartstate analysis needs a VPC whose enableDnsSupport/enableDnsHostnames settings are true!" if vpcs.empty?
 
     ec2.client.describe_availability_zones.availability_zones.each do |availability_zone|
@@ -331,10 +331,10 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     raise("No subnet is qualified to deploy smartstate agent!")
   end
 
-  # To run SSA, VPC needs to turn on enableDnsSupport and enableDnsHostnames
-  def get_dns_enabled_vpcs
+  # To run SSA, VPC needs to have gateway attached, enableDnsSupport and enableDnsHostnames are enabled
+  def validated_vpcs
     ec2.vpcs.select do |vpc|
-      enabled_dns_support?(vpc) && enabled_dns_hostnames?(vpc)
+      enabled_dns_support?(vpc) && enabled_dns_hostnames?(vpc) && enabled_internet_gateways?(vpc)
     end
   end
 
@@ -344,6 +344,29 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
   def enabled_dns_support?(vpc)
     vpc.describe_attribute(:attribute => 'enableDnsSupport', :vpc_id => vpc.vpc_id).enable_dns_support.value
+  end
+
+  def enabled_internet_gateways?(vpc)
+    igw_ids = vpc.internet_gateways.map(&:internet_gateway_id)
+
+    unless igw_ids.empty? # Gateway attached
+      _log.debug("Found a gateway [#{igw_ids.first}] on VPC [#{vpc.id}]")
+
+      # Make sure gateway has vaild route
+      route_tables = vpc.route_tables.select do |route_table|
+        route_table.routes.any? { |route| route.gateway_id == igw_ids.first }
+      end
+
+      unless route_tables.empty?
+        _log.debug("Found route tables #{route_tables} on the gateway [#{igw_ids.first}]")
+        subnets = route_tables.map { |rt| rt.associations.first.subnet_id }
+
+        # Now the gateway is proved to have associated route and subnet
+        return true if subnets.any?
+      end
+    end
+
+    false
   end
 
   # Get Key Pair for SSH. Create a new one if not exists.
