@@ -1,14 +1,30 @@
 describe ManageIQ::Providers::Amazon::CloudManager::RefreshParser do
   let(:ems) { FactoryGirl.create(:ems_amazon_with_authentication) }
-  subject { described_class.new(ems, Settings.ems_refresh.ec2) }
+  let(:parser) { described_class.new(ems, Settings.ems_refresh.ec2) }
+  let(:client) { parser.instance_variable_get(:@aws_ec2).client }
 
-  context "#get_public_images" do
-    it "applies filter from settings.yml" do
-      filter = {:filters => [Config::Options.new(:name => "image-type", :values => ["machine"])]}
-      expect(subject).to receive(:get_images)
-      expect(subject.instance_variable_get(:@aws_ec2).client)
-        .to receive(:describe_images).with(hash_including(filter)).and_return({})
-      subject.send(:get_public_images)
+  describe "#get_public_images" do
+    subject { parser.send(:get_public_images) }
+
+    context "default filter" do
+      let(:default_filter) { Settings.ems_refresh[ems.class.ems_type].to_hash[:public_images_filters] }
+
+      require 'aws-sdk'
+      before do
+        parser.instance_variable_set(:@aws_ec2, Aws::EC2::Resource.new(:stub_responses => true))
+      end
+
+      it "gets applied" do
+        expect(client).to receive(:describe_images)
+          .with(hash_including(:filters => default_filter))
+          .and_return(client.stub_data(:describe_images))
+
+        subject
+      end
+
+      it "validated by SDK" do
+        is_expected.to eq([])
+      end
     end
   end
 end

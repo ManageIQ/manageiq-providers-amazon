@@ -293,7 +293,7 @@ module AwsRefresherSpecCounts
 
     hash_collection.new(
       aws_ec2.client.describe_images(:executable_users => [:all],
-                                     :filters          => options.public_images_filters).images
+                                     :filters          => options.to_hash[:public_images_filters]).images
     ).all
   end
 
