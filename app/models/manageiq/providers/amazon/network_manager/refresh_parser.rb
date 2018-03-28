@@ -267,7 +267,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
 
     common = {
       :direction     => direction,
-      :host_protocol => perm.ip_protocol.to_s.upcase,
+      :host_protocol => perm.ip_protocol.to_s == "-1" ? _("All") : perm.ip_protocol.to_s.upcase,
       :port          => perm.from_port,
       :end_port      => perm.to_port,
     }
