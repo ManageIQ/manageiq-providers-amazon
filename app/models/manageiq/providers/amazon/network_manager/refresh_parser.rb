@@ -282,6 +282,11 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
       new_result[:source_ip_range] = r.cidr_ip
       ret << new_result
     end
+    perm.ipv_6_ranges.each do |r|
+      new_result = common.dup
+      new_result[:source_ip_range] = r.cidr_ipv_6
+      ret << new_result
+    end
 
     ret
   end

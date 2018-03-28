@@ -120,6 +120,12 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
       firewall_rule[:source_ip_range] = r['cidr_ip']
       persister.firewall_rules.build(firewall_rule)
     end
+
+    (perm['ipv_6_ranges'] || []).each do |r|
+      firewall_rule                   = common.dup
+      firewall_rule[:source_ip_range] = r['cidr_ipv_6']
+      persister.firewall_rules.build(firewall_rule)
+    end
   end
 
   def load_balancers
