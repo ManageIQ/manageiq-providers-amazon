@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 82 ending 2018-03-26
+
+### Fixed
+- Fix default filter for public images [(#425)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/425)
+- Fixes VPC selection to make sure it has internet gateway attached. [(#424)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/424)
+- Fixes to add a retry logic in EC2 instance creation when IAM role is not ready [(#422)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/422)
+- Updated flavors to include m5 instances [(#420)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/420)
+- Added instance update event handling [(#415)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/415)
+
 ## Gaprindshavili-2 released 2018-03-06
 
 ### Fixed
