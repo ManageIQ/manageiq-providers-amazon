@@ -91,10 +91,12 @@ module AwsRefresherSpecCounts
     # Total number of firewall rules is inferred from security groups
     firewall_rules_count  = security_group_hashes.map do |rule|
       (
-      rule["ip_permissions"].map { |perm| perm["user_id_group_pairs"] } +
+        rule["ip_permissions"].map { |perm| perm["user_id_group_pairs"] } +
         rule["ip_permissions"].map { |perm| perm["ip_ranges"] } +
+        rule["ip_permissions"].map { |perm| perm["ipv_6_ranges"] } +
         rule["ip_permissions_egress"].map { |perm| perm["user_id_group_pairs"] } +
-        rule["ip_permissions_egress"].map { |perm| perm["ip_ranges"] }
+        rule["ip_permissions_egress"].map { |perm| perm["ip_ranges"] } +
+        rule["ip_permissions_egress"].map { |perm| perm["ipv_6_ranges"] }
       )
     end.flatten.size
 
