@@ -8,6 +8,52 @@ module AwsRefresherSpecCommon
     end
   end
 
+  ALL_GRAPH_REFRESH_SETTINGS = [
+    {
+      :inventory_object_refresh => true,
+      :inventory_collections    => {
+        :saver_strategy => :default,
+      },
+    }, {
+      :inventory_object_refresh => true,
+      :inventory_collections    => {
+        :saver_strategy => :batch,
+        :use_ar_object  => true,
+      },
+    }, {
+      :inventory_object_refresh => true,
+      :inventory_collections    => {
+        :saver_strategy => :batch,
+        :use_ar_object  => false,
+      },
+    }, {
+      :inventory_object_saving_strategy => :recursive,
+      :inventory_object_refresh         => true
+    }
+  ].freeze
+
+  ALL_OLD_REFRESH_SETTINGS = [
+    {
+      :inventory_object_refresh => false
+    }
+  ].freeze
+
+  def stub_refresh_settings(settings)
+    # TODO(lsmola) extract the batch sizes to the settings and stub the settings instead
+    # Lower batch sizes to test multiple batches for each collection
+    allow_any_instance_of(ManagerRefresh::InventoryCollection).to receive(:batch_size).and_return(4)
+    allow_any_instance_of(ManagerRefresh::InventoryCollection).to receive(:batch_size_pure_sql).and_return(4)
+
+    stub_settings_merge(
+      :ems_refresh => {
+        :ec2             => settings,
+        :ec2_network     => settings,
+        :ec2_ebs_storage => settings,
+        :s3              => settings
+      }
+    )
+  end
+
   def assert_common
     expect(@ems.direct_orchestration_stacks.size).to eql(3)
     assert_specific_flavor
@@ -33,8 +79,9 @@ module AwsRefresherSpecCommon
     assert_specific_load_balancer_health_checks
     assert_specific_orchestration_template
     assert_specific_orchestration_stack
+    assert_network_router
     assert_relationship_tree
-    # assert_specific_tags_on_vm
+    assert_specific_labels_on_vm
   end
 
   def assert_specific_flavor
@@ -72,7 +119,7 @@ module AwsRefresherSpecCommon
     @ip = ManageIQ::Providers::Amazon::NetworkManager::FloatingIp.where(:address => "54.221.202.53").first
     expect(@ip).to have_attributes(
       :address            => "54.221.202.53",
-      :fixed_ip_address   => "10.170.73.43",
+      :fixed_ip_address   => "10.91.143.248",
       :ems_ref            => "54.221.202.53",
       :cloud_network_only => false
     )
@@ -89,11 +136,11 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_public_ip_for_cloud_network
-    @ip2 = ManageIQ::Providers::Amazon::NetworkManager::FloatingIp.where(:address => "52.207.210.230").first
+    @ip2 = ManageIQ::Providers::Amazon::NetworkManager::FloatingIp.where(:address => "54.208.71.4").first
     expect(@ip2).to have_attributes(
-      :address            => "52.207.210.230",
+      :address            => "54.208.71.4",
       :fixed_ip_address   => "10.0.0.122",
-      :ems_ref            => "52.207.210.230",
+      :ems_ref            => "54.208.71.4",
       :cloud_network_only => true
     )
   end
@@ -107,13 +154,13 @@ module AwsRefresherSpecCommon
   end
 
   def assert_vpc
-    @cn = CloudNetwork.where(:name => "EmsRefreshSpec-VPC").first
+    @cn = ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork.where(:name => "EmsRefreshSpec-VPC").first
     expect(@cn).to(
       have_attributes(
         :name    => "EmsRefreshSpec-VPC",
         :ems_ref => "vpc-ff49ff91",
         :cidr    => "10.0.0.0/16",
-        :status  => "inactive",
+        :status  => "active",
         :enabled => true
       )
     )
@@ -123,6 +170,7 @@ module AwsRefresherSpecCommon
     @subnet = @cn.cloud_subnets.where(:name => "EmsRefreshSpec-Subnet1").first
     expect(@subnet).to(
       have_attributes(
+        :type    => "ManageIQ::Providers::Amazon::NetworkManager::CloudSubnet",
         :name    => "EmsRefreshSpec-Subnet1",
         :ems_ref => "subnet-f849ff96",
         :cidr    => "10.0.0.0/24"
@@ -136,6 +184,7 @@ module AwsRefresherSpecCommon
     subnet2 = @cn.cloud_subnets.where(:name => "EmsRefreshSpec-Subnet2").first
     expect(subnet2).to(
       have_attributes(
+        :type    => "ManageIQ::Providers::Amazon::NetworkManager::CloudSubnet",
         :name    => "EmsRefreshSpec-Subnet2",
         :ems_ref => "subnet-16c70477",
         :cidr    => "10.0.1.0/24"
@@ -224,12 +273,16 @@ module AwsRefresherSpecCommon
     )
 
     expect(@template.ext_management_system).to eq(@ems)
-    expect(@template.operating_system).to       be_nil # TODO: This should probably not be nil
+    expect(@template.operating_system).to(
+      have_attributes(
+        :product_name => "linux_generic",
+      )
+    )
     expect(@template.custom_attributes.size).to eq(0)
     expect(@template.snapshots.size).to eq(0)
 
     expect(@template.hardware).to have_attributes(
-      :guest_os            => "linux",
+      :guest_os            => "linux_generic",
       :guest_os_full_name  => nil,
       :bios                => nil,
       :annotation          => nil,
@@ -287,7 +340,11 @@ module AwsRefresherSpecCommon
     )
 
     expect(@template2.ext_management_system).to eq(@ems)
-    expect(@template2.operating_system).to       be_nil # TODO: This should probably not be nil
+    expect(@template2.operating_system).to(
+      have_attributes(
+        :product_name => "linux_redhat",
+      )
+    )
     expect(@template2.custom_attributes.size).to eq(0)
     expect(@template2.snapshots.size).to eq(0)
 
@@ -437,7 +494,7 @@ module AwsRefresherSpecCommon
       :power_state           => "on",
       :location              => "ec2-54-221-202-53.compute-1.amazonaws.com",
       :tools_status          => nil,
-      :boot_time             => "2016-08-30 06:20:24.000000000 +0000",
+      :boot_time             => "2017-09-07 14:42:55.000000000 +0000",
       :standby_action        => nil,
       :connection_state      => nil,
       :cpu_affinity          => nil,
@@ -471,13 +528,15 @@ module AwsRefresherSpecCommon
     expect(v.security_groups)
       .to match_array [sg_2, @sg]
 
-    expect(v.operating_system).to       be_nil # TODO: This should probably not be nil
-    expect(v.custom_attributes.size).to eq(2)
+    expect(v.operating_system).to(
+      have_attributes(
+        :product_name => "linux_generic",
+      )
+    )
     expect(v.snapshots.size).to eq(0)
-    # expect(v.tags.size).to eq(0)
 
     expect(v.hardware).to have_attributes(
-      :guest_os            => "linux",
+      :guest_os            => "linux_generic",
       :guest_os_full_name  => nil,
       :bios                => nil,
       :annotation          => nil,
@@ -503,8 +562,8 @@ module AwsRefresherSpecCommon
     network = v.hardware.networks.where(:description => "private").first
     expect(network).to have_attributes(
       :description => "private",
-      :ipaddress   => "10.170.73.43",
-      :hostname    => "ip-10-170-73-43.ec2.internal"
+      :ipaddress   => "10.91.143.248",
+      :hostname    => "ip-10-91-143-248.ec2.internal"
     )
 
     expect(v.load_balancers.collect(&:name)).to match_array ["EmsRefreshSpec-LoadBalancer"]
@@ -519,8 +578,10 @@ module AwsRefresherSpecCommon
     v.with_relationship_type("genealogy") do
       expect(v.parent).to eq(@template)
     end
+    expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-Basic3")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
+    assert_mapped_tags_on_vm(v, :owner => "UNKNOWN")
   end
 
   def assert_specific_vm_powered_off
@@ -530,14 +591,14 @@ module AwsRefresherSpecCommon
     ).first
     expect(v).to have_attributes(
       :template              => false,
-      :ems_ref               => "i-6eeb97ef",
+      :ems_ref               => "i-047886b9fd2397967",
       :ems_ref_obj           => nil,
-      :uid_ems               => "i-6eeb97ef",
+      :uid_ems               => "i-047886b9fd2397967",
       :vendor                => "amazon",
       :power_state           => "off",
       :location              => "unknown",
       :tools_status          => nil,
-      :boot_time             => "2016-01-08T15:09:18.000",
+      :boot_time             => "2017-09-26 07:48:52.000000000 +0000",
       :standby_action        => nil,
       :connection_state      => nil,
       :cpu_affinity          => nil,
@@ -560,17 +621,25 @@ module AwsRefresherSpecCommon
     expect(v.key_pairs).to match_array([@kp])
     expect(v.cloud_network).to be_nil
     expect(v.cloud_subnet).to be_nil
-    expect(v.security_groups).to match_array([@sg])
-    expect(v.operating_system).to be_nil # TODO: This should probably not be nil
+    sg_2 = ManageIQ::Providers::Amazon::NetworkManager::SecurityGroup
+           .where(:name => "EmsRefreshSpec-SecurityGroup2").first
+    expect(v.security_groups)
+      .to match_array [sg_2, @sg]
+    expect(v.operating_system).to(
+      have_attributes(
+        :product_name => "linux_generic",
+      )
+    )
     expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOff")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
+    assert_mapped_tags_on_vm(v, :owner => "UNKNOWN")
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to have_attributes(
       :config_version       => nil,
       :virtual_hw_version   => nil,
-      :guest_os             => "linux",
+      :guest_os             => "linux_generic",
       :cpu_sockets          => 1,
       :bios                 => nil,
       :bios_location        => nil,
@@ -599,7 +668,7 @@ module AwsRefresherSpecCommon
     )
 
     expect(v.hardware.disks.size).to eq(1) # TODO: Change to a flavor that has disks
-    expect(v.cloud_volumes.pluck(:name, :volume_type)).to match_array([["vol-1aa43ec6", "standard"]])
+    expect(v.cloud_volumes.pluck(:name, :volume_type)).to match_array([["vol-0c2aaf810c8925376", "gp2"]])
     expect(v.hardware.guest_devices.size).to eq(0)
     expect(v.hardware.nics.size).to eq(0)
     expect(v.hardware.networks.size).to eq(0)
@@ -623,7 +692,7 @@ module AwsRefresherSpecCommon
         :power_state           => "on",
         :location              => "unknown",
         :tools_status          => nil,
-        :boot_time             => "2016-08-30 07:14:39.000000000 +0000",
+        :boot_time             => "2017-09-13 16:07:19.000000000 +0000",
         :standby_action        => nil,
         :connection_state      => nil,
         :cpu_affinity          => nil,
@@ -668,17 +737,22 @@ module AwsRefresherSpecCommon
     ]
     expect(v.load_balancer_health_check_states_with_reason).to match_array healt_check_states_with_reason
 
-    expect(v.operating_system).to be_nil # TODO: This should probably not be nil
+    expect(v.operating_system).to(
+      have_attributes(
+        :product_name => "linux_generic",
+      )
+    )
     expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-VPC")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
+    assert_mapped_tags_on_vm(v, :owner => "UNKNOWN")
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to(
       have_attributes(
         :config_version       => nil,
         :virtual_hw_version   => nil,
-        :guest_os             => "linux",
+        :guest_os             => "linux_generic",
         :cpu_sockets          => 1,
         :bios                 => nil,
         :bios_location        => nil,
@@ -783,7 +857,7 @@ module AwsRefresherSpecCommon
         :power_state           => "on",
         :location              => "unknown",
         :tools_status          => nil,
-        :boot_time             => "2016-08-30 07:17:58.000000000 +0000",
+        :boot_time             => "2017-09-26 07:43:04.000000000 +0000",
         :standby_action        => nil,
         :connection_state      => nil,
         :cpu_affinity          => nil,
@@ -812,17 +886,28 @@ module AwsRefresherSpecCommon
     expect(v.network_ports.first.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
     expect(v.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
 
-    expect(v.operating_system).to be_nil # TODO: This should probably not be nil
+    if options.inventory_object_refresh
+      expect(v.operating_system).to(
+        have_attributes(
+          :product_name => "linux_redhat",
+        )
+      )
+    else
+      # Old refresh can't fetch the public image and there fore also operating_system
+      expect(v.operating_system).to be_nil
+    end
+
     expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-VPC1")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
+    assert_mapped_tags_on_vm(v, :owner => "UNKNOWN")
     expect(v.snapshots.size).to eq(0)
 
     expect(v.hardware).to(
       have_attributes(
         :config_version       => nil,
         :virtual_hw_version   => nil,
-        :guest_os             => @template2.try(:hardware).try(:guest_os),
+        :guest_os             => options.inventory_object_refresh ? "linux_redhat" : nil,
         :cpu_sockets          => 1,
         :bios                 => nil,
         :bios_location        => nil,
@@ -945,10 +1030,12 @@ module AwsRefresherSpecCommon
     )
 
     expect(@elb.ext_management_system).to eq(@ems.network_manager)
-    # TODO(lsmola)
-    # expect(@elb.availability_zones).to eq(@az)
-    # expect(@elb.cloud_subnets).to eq(..)
-    # expect(@elb.network_ports).to eq(..)
+    expect(@elb.network_ports.map(&:name)).to(match_array("EmSRefreshSpecVPCELB"))
+    expect(@elb.floating_ips.map(&:address)).to(
+      match_array(
+        ["EmSRefreshSpecVPCELB-546141344.us-east-1.elb.amazonaws.com"]
+      )
+    )
   end
 
   def assert_specific_load_balancer_vpc_relations
@@ -957,6 +1044,7 @@ module AwsRefresherSpecCommon
     expect(@elb.load_balancer_pool_members.first.ext_management_system).to eq @ems.network_manager
     expect(@elb.vms.first.ext_management_system).to eq @ems
     expect(@elb.vms.collect(&:name)).to match_array ["EmsRefreshSpec-PoweredOn-VPC", "VMstate-8"]
+    expect(@elb.cloud_subnets.map(&:name)).to(match_array(["EmsRefreshSpec-Subnet1", "EmsRefreshSpec-Subnet2"]))
   end
 
   def assert_specific_load_balancer_vpc_and_vpc2_relations
@@ -1040,6 +1128,10 @@ module AwsRefresherSpecCommon
       "type"                     => "ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerListener"
     )
     expect(@listener_2.ext_management_system).to eq(@ems.network_manager)
+    expect(@listener_2.load_balancer_pools.count).to eq 1
+    expect(@listener_2.load_balancer_pools.first.type).to(
+      eq("ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPool")
+    )
 
     @listener_3 = @elb2.load_balancer_listeners.first
     expect(@listener_3).to have_attributes(
@@ -1119,6 +1211,12 @@ module AwsRefresherSpecCommon
 
     expect(health_check_1.load_balancer_pool_members.count).to eq 2
     expect(health_check_1.load_balancer_pool_members).to match_array health_check_2.load_balancer_pool_members
+
+    expect(health_check_1.load_balancer_pool_members.collect(&:type)).to(
+      match_array(
+        ["ManageIQ::Providers::Amazon::NetworkManager::LoadBalancerPoolMember"] * 2
+      )
+    )
     expect(health_check_1.vms).to match_array health_check_2.vms
   end
 
@@ -1128,7 +1226,7 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_orchestration_template
-    @orch_template = OrchestrationTemplateCfn.where(:md5 => "d986d851f5413fddcf1366914fbb2d28").first
+    @orch_template = ::ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate.where(:md5 => "d986d851f5413fddcf1366914fbb2d28").first
     expect(@orch_template.description).to start_with("AWS CloudFormation Sample Template VPC_Single_Instance_In_Subnet")
     expect(@orch_template.content).to start_with("{\n  \"AWSTemplateFormatVersion\" : \"2010-09-09\",")
     expect(@orch_template).to have_attributes(:draft => false, :orderable => false)
@@ -1145,14 +1243,15 @@ module AwsRefresherSpecCommon
 
   def assert_specific_parent_orchestration_stack_data
     @parent_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.find_by(
-      :name => "EmsRefreshSpecStack")
+      :name => "EmsRefreshSpecStack"
+    )
 
     expect(@parent_stack).to(
       have_attributes(
         :status_reason => nil,
         :status        => "CREATE_COMPLETE",
         :ems_ref       => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack/"\
-                          "07fba5b0-13aa-11e7-847a-500c28604cae",
+                          "b4e06950-2fed-11e7-bd93-500c286374d1",
       )
     )
 
@@ -1161,14 +1260,14 @@ module AwsRefresherSpecCommon
 
   def assert_specific_orchestration_stack_data
     @orch_stack = ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.find_by(
-      :name => "EmsRefreshSpecStack-WebServerInstance-1PAB3IELQ8EYT"
+      :name => "EmsRefreshSpecStack-WebServerInstance-1CTHQS2P5WJ7S"
     )
     expect(@orch_stack).to(
       have_attributes(
         :status_reason => nil,
         :status        => "CREATE_COMPLETE",
-        :ems_ref       => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance"\
-                          "-1PAB3IELQ8EYT/28cef7b0-13aa-11e7-8260-503aca4a58d1",
+        :ems_ref       => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-"\
+                          "WebServerInstance-1CTHQS2P5WJ7S/d3bb46b0-2fed-11e7-a3d9-503f23fb55fe",
       )
     )
 
@@ -1184,11 +1283,11 @@ module AwsRefresherSpecCommon
       match_array(
         [
           {"name" => "DBRootPassword", "value" => "****"},
-          {"name" => "InstanceSecurityGroupID", "value" => "sg-a5109cda"},
+          {"name" => "InstanceSecurityGroupID", "value" => "sg-76c10f08"},
           {"name" => "InstanceType", "value" => "t2.nano"},
           {"name" => "KeyName", "value" => "EmsRefreshSpec-KeyPair"},
           {"name" => "SSHLocation", "value" => "0.0.0.0/0"},
-          {"name" => "SubnetID", "value" => "subnet-fc014299"}
+          {"name" => "SubnetID", "value" => "subnet-2190b144"}
         ]
       )
     )
@@ -1206,14 +1305,14 @@ module AwsRefresherSpecCommon
           {
             "name"                   => "IPAddress",
             "logical_resource"       => "IPAddress",
-            "physical_resource"      => "34.206.127.107",
+            "physical_resource"      => "34.202.178.10",
             "resource_category"      => "AWS::EC2::EIP",
             "resource_status"        => "CREATE_COMPLETE",
             "resource_status_reason" => nil
           }, {
             "name"                   => "WebServerInstance",
             "logical_resource"       => "WebServerInstance",
-            "physical_resource"      => "i-015e4579bfa4fcc84",
+            "physical_resource"      => "i-0bca58e6e540ddc39",
             "resource_category"      => "AWS::EC2::Instance",
             "resource_status"        => "CREATE_COMPLETE",
             "resource_status_reason" => nil
@@ -1230,7 +1329,7 @@ module AwsRefresherSpecCommon
       match_array(
         [
           {"key"         => "URL",
-           "value"       => "http://34.206.127.107",
+           "value"       => "http://34.202.178.10",
            "description" => "Newly created application URL"}
         ]
       )
@@ -1238,7 +1337,7 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_orchestration_stack_associations
-    @orch_stack_vm = Vm.where(:name => "i-015e4579bfa4fcc84").first
+    @orch_stack_vm = Vm.where(:name => "i-0bca58e6e540ddc39").first
     @orch_stack_floating_ip = @orch_stack_vm.floating_ips.first
     @parent_stack_sg = @orch_stack_vm.security_groups.first
     @parent_stack_vpc = @orch_stack_vm.cloud_networks.first
@@ -1273,6 +1372,44 @@ module AwsRefresherSpecCommon
     expect(@parent_stack_vpc.orchestration_stack).to eq(@parent_stack)
   end
 
+  def assert_network_router
+    return unless options.inventory_object_refresh # we collect NetworkRouter only in new refresh
+
+    @network_router = ManageIQ::Providers::Amazon::NetworkManager::NetworkRouter.find_by(
+      :name => "EmsRefreshSpecRouter"
+    )
+
+    expect(@network_router).to(
+      have_attributes(
+        :propagating_vgws => [],
+        :main_route_table => false,
+        :status           => "active"
+      )
+    )
+
+    expect(@network_router.routes).to(
+      match_array(
+        [
+          {
+            "destination_cidr_block" => "10.0.0.0/16",
+            "gateway_id"             => "local",
+            "origin"                 => "CreateRouteTable",
+            "state"                  => "active"
+          }, {
+            "destination_cidr_block" => "0.0.0.0/0",
+            "gateway_id"             => "igw-fe49ff90",
+            "origin"                 => "CreateRoute",
+            "state"                  => "active"
+          }
+        ]
+      )
+    )
+
+    expect(@network_router.cloud_subnets.pluck(:name)).to include("EmsRefreshSpec-Subnet1")
+    expect(@network_router.vms.pluck(:name)).to include("EmsRefreshSpec-PoweredOn-VPC")
+    expect(@network_router.vms.pluck(:name)).to include("EmsRefreshSpec-PoweredOn-VPC1")
+  end
+
   def assert_specific_vm_in_other_region
     v = ManageIQ::Providers::Amazon::CloudManager::Vm.where(:name => "EmsRefreshSpec-PoweredOn-OtherRegion").first
     expect(v).to be_nil
@@ -1282,9 +1419,47 @@ module AwsRefresherSpecCommon
     expect(@ems.descendants_arranged).to match_relationship_tree({})
   end
 
-  # TODO: Add some real specs here
-  # def assert_specific_tags_on_vm
-  #   vm = ManageIQ::Providers::Amazon::CloudManager::Vm.where(:name => "EmsRefreshSpec-PoweredOn-Basic3").first
-  #   expect(vm.tags).to be_empty
-  # end
+  def assert_specific_labels_on_vm
+    vm = ManageIQ::Providers::Amazon::CloudManager::Vm.find_by(:name => "ladas_test_5")
+    expect(vm.labels).to include(
+      an_object_having_attributes(
+        :name   => "EmsRefreshSpecResourceGroupTag",
+        :value  => "EmsRefreshSpecResourceGroupTagValue",
+        :source => "amazon"
+      )
+    )
+  end
+
+  def create_tag_mapping
+    @all_tag_mapping = FactoryGirl.create(:tag_mapping_with_category,
+                                          :label_name => "owner")
+    @all_tag_mapping_category = @all_tag_mapping.tag.classification
+
+    @image_tag_mapping = FactoryGirl.create(:tag_mapping_with_category,
+                                            :label_name => "Name", :labeled_resource_type => "Image")
+    @image_tag_mapping_category = @image_tag_mapping.tag.classification
+  end
+
+  # Tests can assert this if they called create_tag_mapping before refresh.
+  def assert_mapped_tags_on_vm(vm, owner:)
+    expect(@all_tag_mapping_category.children.collect(&:description)).to include(owner)
+
+    expect(vm.tags.count).to eq(1)
+    expect(vm.tags.first.category).to eq(@all_tag_mapping_category)
+    expect(vm.tags.first.classification.description).to eq("UNKNOWN")
+  end
+
+  # Tests can assert this if they called create_tag_mapping before refresh.
+  def assert_mapped_tags_on_template
+    expect(@image_tag_mapping_category.children.collect(&:description)).to include(
+      "suse-11-server-64",
+      "ubuntu-12.04-server-32",
+      # and many more...
+    )
+
+    template = ManageIQ::Providers::Amazon::CloudManager::Template.find_by(:name => "suse-11-server-64")
+    expect(template.tags.count).to eq(1)
+    expect(template.tags.first.category).to eq(@image_tag_mapping_category)
+    expect(template.tags.first.classification.description).to eq("suse-11-server-64")
+  end
 end

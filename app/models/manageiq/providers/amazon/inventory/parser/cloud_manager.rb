@@ -66,7 +66,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       )
 
       image_hardware(persister_image, image)
-      vm_and_template_labels(persister_image, image["tags"] || [])
+      vm_and_template_taggings(persister_image, map_labels("Image", image["tags"] || []))
     end
   end
 
@@ -100,6 +100,20 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     end
   end
 
+  # Returns array of InventoryObject<Tag>.
+  def map_labels(model_name, labels)
+    label_hashes = labels.collect do |tag|
+      {:name => tag["key"], :value => tag["value"]}
+    end
+    persister.tag_mapper.map_labels(model_name, label_hashes)
+  end
+
+  def vm_and_template_taggings(resource, tags_inventory_objects)
+    tags_inventory_objects.each do |tag|
+      persister.vm_and_template_taggings.build(:taggable => resource, :tag => tag)
+    end
+  end
+
   def stacks
     collector.stacks.each do |stack|
       uid = stack['stack_id'].to_s
@@ -120,6 +134,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       stack_resources(persister_orchestration_stack, stack)
       stack_outputs(persister_orchestration_stack, stack)
       stack_parameters(persister_orchestration_stack, stack)
+      vm_and_template_taggings(persister_instance, map_labels("Vm", instance["tags"] || []))
     end
   end
 
