@@ -124,7 +124,7 @@ module AwsRefresherSpecCounts
       :custom_attribute              => custom_attributes_count,
       :disk                          => disks_count,
       :firewall_rule                 => firewall_rules_count,
-      :flavor                        => 76,
+      :flavor                        => 103,
       :floating_ip                   => floating_ips_refs.size,
       :hardware                      => instances_and_images_count,
       :miq_template                  => images_count,
