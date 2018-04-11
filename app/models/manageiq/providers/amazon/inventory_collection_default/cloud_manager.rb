@@ -176,30 +176,6 @@ class ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager < Ma
       attributes.merge!(extra_attributes)
     end
 
-    def vm_and_template_taggings(extra_attributes = {})
-      # TODO: make a generic Taggings IC and move it to base class?
-      attributes = {
-        :model_class                  => Tagging,
-        :association                  => :vm_and_template_taggings,
-        :manager_ref                  => [:taggable, :tag],
-        :parent_inventory_collections => [:vms, :miq_templates],
-        :inventory_object_attributes  => [
-          :taggable,
-          :tag,
-        ]
-      }
-
-      attributes[:targeted_arel] = lambda do |inventory_collection|
-        manager_uuids = inventory_collection.parent_inventory_collections.collect(&:manager_uuids).map(&:to_a).flatten
-        ems = inventory_collection.parent
-        ems.vm_and_template_taggings.where(
-          'taggable_id'   => ems.vms_and_templates.where(:ems_ref => manager_uuids)
-        )
-      end
-
-      attributes.merge!(extra_attributes)
-    end
-
     def orchestration_stacks(extra_attributes = {})
       attributes = {
         :model_class                 => ::ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack,
