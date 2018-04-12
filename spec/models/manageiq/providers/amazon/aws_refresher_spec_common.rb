@@ -38,6 +38,8 @@ module AwsRefresherSpecCommon
     }
   ].freeze
 
+  ALL_REFRESH_SETTINGS = (self::ALL_GRAPH_REFRESH_SETTINGS + self::ALL_OLD_REFRESH_SETTINGS).freeze
+
   def stub_refresh_settings(settings)
     # TODO(lsmola) extract the batch sizes to the settings and stub the settings instead
     # Lower batch sizes to test multiple batches for each collection
