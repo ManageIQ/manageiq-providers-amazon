@@ -13,7 +13,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     expect(described_class.ems_type).to eq(:ec2)
   end
 
-  AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS.each do |settings|
+  AwsRefresherSpecCommon::ALL_REFRESH_SETTINGS.each do |settings|
     context "with settings #{settings}" do
       before(:each) do
         stub_refresh_settings(settings)
