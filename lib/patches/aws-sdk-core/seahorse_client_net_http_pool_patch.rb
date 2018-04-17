@@ -1,3 +1,27 @@
+if Aws::VERSION != "2.9.44"
+  raise <<-ERROR.gsub(/ {4}/, '')
+    Mismatch Aws::VERSION detected with Seahorse::Client patch!
+
+    Patch file:  #{__FILE__}
+
+    Please review the current version of the `aws-sdk-version` and confirm that
+    this patch is still valid.  If it is, simply update the version number
+    being checked here at the top of the file.
+
+    If not, determine the best fix (if it is still valid), apply that, and then
+    also update the version number in this file.
+
+    To check if the patch is necessary, check out the `aws-sdk-ruby` repo and run:
+
+        $ git clone https://github.com/aws/aws-sdk-ruby.git
+        $ cd aws-sdk-ruby
+        $ git tag --contains 640297066fff98d248ba957e85858b921e25f1e1
+
+    If the current version is included in those tags, simply remove this file,
+    otherwise update the patch (if necessary) and the version number in this file.
+  ERROR
+end
+
 # Autoload the connection pool
 Seahorse::Client::NetHttp::ConnectionPool
 
