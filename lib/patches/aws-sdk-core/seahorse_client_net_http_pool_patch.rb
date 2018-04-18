@@ -5,6 +5,8 @@ module Seahorse
   module Client
     module NetHttp
       class ConnectionPool
+        @_original_start_session_source_loc = self.new.method(:start_session).source_location
+
         def start_session endpoint
 
           endpoint = URI.parse(endpoint)
