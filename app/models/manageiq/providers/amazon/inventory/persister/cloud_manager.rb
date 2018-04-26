@@ -1,31 +1,40 @@
 class ManageIQ::Providers::Amazon::Inventory::Persister::CloudManager < ManageIQ::Providers::Amazon::Inventory::Persister
+  include ManageIQ::Providers::Amazon::Inventory::Persister::Shared::CloudCollections
+
   def initialize_inventory_collections
     initialize_tag_mapper
 
-    add_inventory_collections(
-      cloud,
-      %i(vms miq_templates hardwares operating_systems networks disks availability_zones
-         vm_and_template_labels vm_and_template_taggings
-         flavors key_pairs orchestration_stacks orchestration_stacks_resources
-         orchestration_stacks_outputs orchestration_stacks_parameters orchestration_templates)
-    )
+    %i(vms
+       hardwares
+       operating_systems
+       networks
+       disks
+       flavors
+       availability_zones).each do |name|
 
-    add_inventory_collection(
-      cloud.vm_and_miq_template_ancestry(
-        :dependency_attributes => {
-          :vms           => [collections[:vms]],
-          :miq_templates => [collections[:miq_templates]]
-        }
-      )
-    )
+      add_collection(cloud, name)
+    end
 
-    add_inventory_collection(
-      cloud.orchestration_stack_ancestry(
-        :dependency_attributes => {
-          :orchestration_stacks           => [collections[:orchestration_stacks]],
-          :orchestration_stacks_resources => [collections[:orchestration_stacks_resources]]
-        }
-      )
-    )
+    add_miq_templates
+
+    add_key_pairs
+
+    add_orchestration_stacks
+
+    add_vm_and_template_labels
+
+    add_vm_and_template_taggings
+
+    %i(orchestration_stacks_resources
+       orchestration_stacks_outputs
+       orchestration_stacks_parameters
+       orchestration_templates).each do |name|
+
+      add_collection(cloud, name)
+    end
+
+    add_vm_and_miq_template_ancestry
+
+    add_orchestration_stack_ancestry
   end
 end
