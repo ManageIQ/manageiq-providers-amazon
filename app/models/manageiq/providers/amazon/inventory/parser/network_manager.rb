@@ -101,7 +101,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
   def firewall_rule(persister_security_group, perm, direction)
     common = {
       :direction             => direction,
-      :host_protocol         => perm['ip_protocol'].to_s.upcase,
+      :host_protocol         => perm['ip_protocol'].to_s == "-1" ? _("All") : perm['ip_protocol'].to_s.upcase,
       :port                  => perm['from_port'],
       :end_port              => perm['to_port'],
       :resource              => persister_security_group,
@@ -118,6 +118,12 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     (perm['ip_ranges'] || []).each do |r|
       firewall_rule                   = common.dup
       firewall_rule[:source_ip_range] = r['cidr_ip']
+      persister.firewall_rules.build(firewall_rule)
+    end
+
+    (perm['ipv_6_ranges'] || []).each do |r|
+      firewall_rule                   = common.dup
+      firewall_rule[:source_ip_range] = r['cidr_ipv_6']
       persister.firewall_rules.build(firewall_rule)
     end
   end
