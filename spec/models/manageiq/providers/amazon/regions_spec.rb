@@ -1,4 +1,7 @@
 describe ManageIQ::Providers::Amazon::Regions do
+  # https://github.com/aws/aws-sdk-ruby/blob/5fe5795e8910bb667996dfc75e4f16b7e69e3980/gems/aws-partitions/partitions.json#L11
+  let(:default_regions_regexp) { /^(us|eu|ap|sa|ca)\-\w+\-\d+$/ }
+
   it "has all the regions" do
     ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication)
 
@@ -6,13 +9,14 @@ describe ManageIQ::Providers::Amazon::Regions do
       current_regions = described_class.regions.map do |_name, config|
         {:region_name => config[:name], :endpoint => config[:hostname]}
       end
-      current_regions.reject! { |r| r[:region_name] == 'us-gov-west-1' }
+      current_regions.select! { |r| r[:region_name] =~ default_regions_regexp }
 
       online_regions = ems.connect.client.describe_regions.to_h[:regions]
 
       # sort for better diff
       current_regions.sort_by! { |r| r[:region_name] }
       online_regions.sort_by! { |r| r[:region_name] }
+
       expect(online_regions).to eq(current_regions)
     end
   end
