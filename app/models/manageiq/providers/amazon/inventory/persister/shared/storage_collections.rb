@@ -13,7 +13,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::StorageCollect
       )
 
       builder.add_builder_params(
-        :ems_id => ->(persister) { persister.manager.try(:ebs_storage_manager).try(:id) || persister.manager.id }
+        :ems_id => block_storage_manager_id
       )
     end
   end
@@ -25,7 +25,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::StorageCollect
       )
 
       builder.add_builder_params(
-        :ems_id => ->(persister) { persister.manager.try(:ebs_storage_manager).try(:id) || persister.manager.id }
+        :ems_id => block_storage_manager_id
       )
     end
   end
@@ -37,7 +37,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::StorageCollect
       )
 
       builder.add_builder_params(
-        :ems_id => ->(persister) { persister.manager.try(:s3_storage_manager).try(:id) || persister.manager.id }
+        :ems_id => object_storage_manager_id
       )
     end
   end
@@ -49,8 +49,18 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::StorageCollect
       )
 
       builder.add_builder_params(
-        :ems_id => ->(persister) { persister.manager.try(:s3_storage_manager).try(:id) || persister.manager.id }
+        :ems_id => object_storage_manager_id
       )
     end
+  end
+
+  protected
+
+  def block_storage_manager_id
+    manager.try(:ebs_storage_manager).try(:id) || manager.id
+  end
+
+  def object_storage_manager_id
+    manager.try(:s3_storage_manager).try(:id) || manager.id
   end
 end
