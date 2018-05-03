@@ -30,10 +30,6 @@ class ManageIQ::Providers::Amazon::Inventory::Persister < ManagerRefresh::Invent
     collections[:tags_to_resolve] = @tag_mapper.tags_to_resolve_collection
   end
 
-  def targeted?
-    false
-  end
-
   def strategy
     nil
   end

@@ -45,6 +45,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::CloudCollectio
 
   # ------ IC provider specific definitions -------------------------
 
+  # TODO: Derive model class in core
   def add_miq_templates(extra_properties = {})
     add_collection(cloud, :miq_templates, extra_properties) do |builder|
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::CloudManager::Template)
@@ -99,6 +100,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::CloudCollectio
     end
   end
 
+  # TODO: mslemr - parent model_class used anywhere? If not, should be deleted
   def add_orchestration_stacks(extra_properties = {})
     add_collection(cloud, :orchestration_stacks, extra_properties) do |builder|
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack)
