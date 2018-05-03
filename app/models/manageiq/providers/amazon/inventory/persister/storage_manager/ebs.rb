@@ -8,13 +8,13 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::StorageManager::Ebs < M
     initialize_cloud_inventory_collections
   end
 
-  def initialize_cloud_inventory_collections
+  def initialize_storage_inventory_collections
     add_cloud_volumes
 
     add_cloud_volume_snapshots
   end
 
-  def initialize_storage_inventory_collections
+  def initialize_cloud_inventory_collections
     %i(availability_zones
        hardwares
        vms

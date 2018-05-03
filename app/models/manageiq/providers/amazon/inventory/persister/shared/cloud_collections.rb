@@ -6,6 +6,45 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::CloudCollectio
     ::ManagerRefresh::InventoryCollection::Builder::CloudManager
   end
 
+  def initialize_cloud_inventory_collections
+    %i(vms
+       hardwares
+       operating_systems
+       networks
+       disks
+       availability_zones).each do |name|
+
+      add_collection(cloud, name)
+    end
+
+    add_miq_templates
+
+    add_flavors
+
+    add_key_pairs
+
+    add_vm_and_template_labels
+
+    add_vm_and_template_taggings
+
+    add_orchestration_stacks
+
+    %i(orchestration_stacks_resources
+       orchestration_stacks_outputs
+       orchestration_stacks_parameters
+       orchestration_templates).each do |name|
+
+      add_collection(cloud, name)
+    end
+
+    # Custom processing of Ancestry
+    add_vm_and_miq_template_ancestry
+
+    add_orchestration_stack_ancestry
+  end
+
+  # ------ IC provider specific definitions -------------------------
+
   def add_miq_templates(extra_properties = {})
     add_collection(cloud, :miq_templates, extra_properties) do |builder|
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::CloudManager::Template)
@@ -14,7 +53,10 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::CloudCollectio
   end
 
   def add_flavors(extra_properties = {})
-    add_collection(cloud, :flavors, extra_properties)
+    add_collection(cloud, :flavors, extra_properties) do |builder|
+      # Model we take just from a DB, there is no flavors API
+      builder.add_properties(:strategy => :local_db_find_references) if targeted?
+    end
   end
 
   def add_vm_and_template_labels
@@ -53,6 +95,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::CloudCollectio
   def add_key_pairs(extra_properties = {})
     add_collection(cloud, :key_pairs, extra_properties) do |builder|
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair)
+      builder.add_properties(:manager_uuids => name_references(:key_pairs)) if targeted?
     end
   end
 

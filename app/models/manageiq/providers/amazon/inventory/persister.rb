@@ -30,7 +30,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister < ManagerRefresh::Invent
     collections[:tags_to_resolve] = @tag_mapper.tags_to_resolve_collection
   end
 
-  def targeted
+  def targeted?
     false
   end
 
@@ -41,7 +41,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister < ManagerRefresh::Invent
   def shared_options
     {
       :strategy => strategy,
-      :targeted => targeted,
+      :targeted => targeted?,
     }
   end
 end
