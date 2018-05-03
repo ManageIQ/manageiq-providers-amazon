@@ -90,11 +90,13 @@ describe ManageIQ::Providers::Amazon::CloudManager do
   end
 
   it "#description" do
-    ems = FactoryGirl.build(:ems_amazon, :provider_region => "us-east-1")
-    expect(ems.description).to eq("US East (Northern Virginia)")
+    aggregate_failures do
+      ems = FactoryGirl.build(:ems_amazon, :provider_region => "us-east-1")
+      expect(ems.description).to eq("US East (N. Virginia)")
 
-    ems = FactoryGirl.build(:ems_amazon, :provider_region => "us-west-1")
-    expect(ems.description).to eq("US West (Northern California)")
+      ems = FactoryGirl.build(:ems_amazon, :provider_region => "us-west-1")
+      expect(ems.description).to eq("US West (N. California)")
+    end
   end
 
   context "validates_uniqueness_of" do
