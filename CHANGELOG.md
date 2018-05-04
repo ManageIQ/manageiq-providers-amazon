@@ -5,7 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Gaprindshavili-2
+## Gaprindshavili-3
+
+### Added
+- AWS memory usage collection [(#393)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/393)
+
+### Fixed
+- Raise Exception if AMI not visible [(#411)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/411)
+- Cleanup Smartstate Requests When AMI Unavailable for Agent [(#412)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/412)
+- Updated flavors to include m5 instances [(#420)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/420)
+- Fixes to add a retry logic in EC2 instance creation when IAM role is not ready [(#422)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/422)
+- Added instance update event handling [(#415)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/415)
+- Fixes VPC selection to make sure it has internet gateway attached. [(#424)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/424)
+- Fix default filter for public images [(#425)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/425)
+- Add patch to aws-sdk-core to fix auth bug [(#432)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/432)
+
+## Gaprindshavili-2 - Released 2018-03-07
 
 ### Fixed
 - Fix refresh for stack without parameters [(#410)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/410)
