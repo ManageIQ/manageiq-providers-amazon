@@ -214,12 +214,12 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
       expect(object).to receive(:with_provider_object)
 
       with_aws_stubbed(stub_responses) do
-        object.delete_cloud_object_store_object
+        object.cloud_object_store_object_delete
       end
     end
 
     it "remove object (trigger)" do
-      options = {:ids => [object.id], :task => "delete_cloud_object_store_object", :userid => "admin"}
+      options = {:ids => [object.id], :task => "cloud_object_store_object_delete", :userid => "admin"}
 
       expect { CloudObjectStoreObject.process_tasks(options) }.to change { MiqQueue.count }.by(1)
     end
@@ -227,7 +227,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
     it "remove object (process)" do
       with_aws_stubbed(stub_responses) do
         # should not remove from MIQ database, we rather rely on refresh
-        expect { object.delete_cloud_object_store_object }.to change { ems.cloud_object_store_objects.count }.by(0)
+        expect { object.cloud_object_store_object_delete }.to change { ems.cloud_object_store_objects.count }.by(0)
       end
     end
 
@@ -290,7 +290,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
         expect(single_object).not_to receive(:delete)
 
         with_aws_stubbed(stub_responses) do
-          object.delete_cloud_object_store_object
+          object.cloud_object_store_object_delete
         end
       end
 
@@ -300,7 +300,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
         expect(single_object).not_to receive(:delete)
 
         with_aws_stubbed(stub_responses) do
-          object.delete_cloud_object_store_object
+          object.cloud_object_store_object_delete
         end
       end
 
@@ -310,7 +310,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
         expect(single_object).to receive(:delete)
 
         with_aws_stubbed(stub_responses) do
-          object.delete_cloud_object_store_object
+          object.cloud_object_store_object_delete
         end
       end
     end
