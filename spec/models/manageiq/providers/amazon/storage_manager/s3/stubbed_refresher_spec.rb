@@ -107,14 +107,14 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
       end
     end
 
-    it "delete_cloud_object_store_container triggers remote action" do
+    it "cloud_object_store_container_delete triggers remote action" do
       expect(bucket).to receive(:with_provider_object)
 
-      bucket.delete_cloud_object_store_container
+      bucket.cloud_object_store_container_delete
     end
 
     it "remove bucket (trigger)" do
-      options = {:ids => [bucket.id], :task => "delete_cloud_object_store_container", :userid => "admin"}
+      options = {:ids => [bucket.id], :task => "cloud_object_store_container_delete", :userid => "admin"}
 
       expect { CloudObjectStoreContainer.process_tasks(options) }.to change { MiqQueue.count }.by(1)
     end
@@ -122,7 +122,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
     it "remove bucket (process)" do
       with_aws_stubbed(stub_responses) do
         # should not remove from MIQ database, we rather rely on refresh
-        expect { bucket.delete_cloud_object_store_container }.to change { ems.cloud_object_store_containers.count }.by(0)
+        expect { bucket.cloud_object_store_container_delete }.to change { ems.cloud_object_store_containers.count }.by(0)
       end
     end
 
