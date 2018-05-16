@@ -20,40 +20,46 @@
       - ConfigurationSnapshotDeliveryCompleted
       - ConfigurationSnapshotDeliveryStarted
       - ConfigurationSnapshotDeliveryFailed
-    :disabled_regions: []
+
     # disable regions by their keys found in app/models/manageiq/providers/amazon/regions.rb e.g.
     # - us-gov-west-1
-    #
+    :disabled_regions:
+      - cn-north-1
+      - cn-northwest-1
+      - us-gov-west-1
+
     # add additional regions as found in app/models/manageiq/providers/amazon/regions.rb
-    :additional_regions: {}
     # :spec-region-1:
     #   :name: Special Region
     #   :hostname: ec2.spec-region-1.amazonaws.com
     #   :description: Super Special Region
+    :additional_regions: {}
 
     # add additional instance_types as found in app/models/manageiq/providers/amazon/instance_types.rb
-    :additional_instance_types: {}
     #  :t9.large:
     #  :name: t9.large
     #  :family: General purpose
     #  :description: T9 Large
     #  ...
+    :additional_instance_types: {}
 
-    :disabled_instance_types: []
     # disable instance_types by their keys found in app/models/manageiq/providers/amazon/instance_types.rb e.g.
     # - t2.nano
+    :disabled_instance_types: []
 
 :ems_refresh:
   :ec2:
     :get_private_images: true
     :get_shared_images: true
     :get_public_images: false
+
     # configure an array of filters to be added to describe_images
     # see: http://docs.aws.amazon.com/sdkforruby/api/Aws/EC2/Client.html#describe_images-instance_method
     :public_images_filters:
       - :name: image-type
         :values:
           - machine
+
     :ignore_terminated_instances: true
     :inventory_object_refresh: false
     :allow_targeted_refresh: false
