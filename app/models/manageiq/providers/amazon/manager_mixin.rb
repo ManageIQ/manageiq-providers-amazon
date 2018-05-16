@@ -48,11 +48,11 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     # Connections
     #
 
-    def raw_connect(access_key_id, secret_access_key, service, region, proxy_uri = nil, validate = false)
+    def raw_connect(access_key_id, secret_access_key, service, region, proxy_uri = nil, validate = false, uri = nil)
       require 'aws-sdk'
       require 'patches/aws-sdk-core/seahorse_client_net_http_pool_patch'
 
-      connection = Aws.const_get(service)::Resource.new(
+      options = {
         :access_key_id     => access_key_id,
         :secret_access_key => MiqPassword.try_decrypt(secret_access_key),
         :region            => region,
@@ -60,7 +60,11 @@ module ManageIQ::Providers::Amazon::ManagerMixin
         :logger            => $aws_log,
         :log_level         => :debug,
         :log_formatter     => Aws::Log::Formatter.new(Aws::Log::Formatter.default.pattern.chomp)
-      )
+      }
+
+      options[:endpoint] = uri.to_s if uri.to_s.present?
+
+      connection = Aws.const_get(service)::Resource.new(options)
 
       validate_connection(connection) if validate
 

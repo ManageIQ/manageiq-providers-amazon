@@ -14,6 +14,12 @@ describe ManageIQ::Providers::Amazon::CloudManager do
       described_class.raw_connect('access_key', 'secret_access_key', :EC2, 'region', 'uri', true)
     end
 
+    it "validates credentials with an optional uri endpoint" do
+      expect(described_class).to receive(:validate_connection)
+      endpoint_uri = URI.parse('https://apigateway.us-east-1.amazonaws.com')
+      described_class.raw_connect('access_key', 'secret_access_key', :EC2, 'region', 'uri', true, endpoint_uri)
+    end
+
     it "returns the connection if not specified" do
       expect(described_class.raw_connect('access_key', 'secret_access_key', :EC2, 'region', 'uri')).to be_a_kind_of(Aws::EC2::Resource)
     end
