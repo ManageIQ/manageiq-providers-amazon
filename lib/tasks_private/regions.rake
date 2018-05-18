@@ -41,7 +41,7 @@ namespace 'aws:extract' do
     end
 
     settings_file = engine_root.join('config/settings.yml')
-    setting_lines = settings_file.readlines # can't just read & dump YAML keeping it's comments
+    setting_lines = settings_file.readlines # can't just read & dump YAML keeping its comments
 
     line_index  = setting_lines.index { |line| line =~ /\s*:disabled_regions:\s*/ }
     indentation = setting_lines[line_index] =~ /\S/
