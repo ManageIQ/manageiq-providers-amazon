@@ -13,9 +13,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ### Changed
 - Renamed method for consistency reasons [(#419)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/419)
 
-### Fixed
-- Renamed method for consistency reasons [(#419)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/419)
-
 ## Unreleased as of Sprint 82 ending 2018-03-26
 
 ### Fixed
