@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 85 ending 2018-05-07
+
+### Added
+- load regions list from aws-sdk gem's source [(#436)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/436) 
+
+### Changed
+- Renamed method for consistency reasons [(#419)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/419)
+
 ## Unreleased as of Sprint 82 ending 2018-03-26
 
 ### Fixed
