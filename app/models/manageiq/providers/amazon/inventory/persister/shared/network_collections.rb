@@ -1,11 +1,6 @@
 module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::NetworkCollections
   extend ActiveSupport::Concern
 
-  # Builder class for Network
-  def network
-    ::ManagerRefresh::InventoryCollection::Builder::NetworkManager
-  end
-
   def initialize_network_inventory_collections
     %i(cloud_networks
        cloud_subnets

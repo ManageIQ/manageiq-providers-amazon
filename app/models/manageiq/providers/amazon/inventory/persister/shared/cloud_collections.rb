@@ -1,11 +1,6 @@
 module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::CloudCollections
   extend ActiveSupport::Concern
 
-  # Builder class for Cloud
-  def cloud
-    ::ManagerRefresh::InventoryCollection::Builder::CloudManager
-  end
-
   def initialize_cloud_inventory_collections
     %i(vms
        hardwares

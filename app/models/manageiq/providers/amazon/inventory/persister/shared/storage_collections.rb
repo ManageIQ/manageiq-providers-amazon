@@ -1,11 +1,6 @@
 module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::StorageCollections
   extend ActiveSupport::Concern
 
-  # Builder class for Storage
-  def storage
-    ::ManagerRefresh::InventoryCollection::Builder::StorageManager
-  end
-
   def initialize_storage_inventory_collections
     # should be defined by concrete persisters
   end
