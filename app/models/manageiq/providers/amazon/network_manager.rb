@@ -34,6 +34,8 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
            :to        => :parent_manager,
            :allow_nil => true
 
+  supports_not :ems_network_new
+
   def self.ems_type
     @ems_type ||= "ec2_network".freeze
   end
