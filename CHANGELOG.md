@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 87 ending 2018-06-04
+
+### Added
+- Explicitly disable ems_network_new creation [(#448)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/448)
+- Add endpoint support to raw_connect [(#444)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/444)
+
 ## Unreleased as of Sprint 86 ending 2018-05-21
 
 ### Fixed
