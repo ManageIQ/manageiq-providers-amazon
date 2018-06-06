@@ -1,4 +1,4 @@
-module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::CloudCollections
+module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudCollections
   extend ActiveSupport::Concern
 
   def initialize_cloud_inventory_collections

@@ -1,7 +1,7 @@
 class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < ManageIQ::Providers::Amazon::Inventory::Persister
-  include ManageIQ::Providers::Amazon::Inventory::Persister::Shared::CloudCollections
-  include ManageIQ::Providers::Amazon::Inventory::Persister::Shared::NetworkCollections
-  include ManageIQ::Providers::Amazon::Inventory::Persister::Shared::StorageCollections
+  include ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudCollections
+  include ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::NetworkCollections
+  include ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::StorageCollections
 
   def targeted?
     true

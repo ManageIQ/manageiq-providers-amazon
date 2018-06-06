@@ -1,4 +1,4 @@
-module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::NetworkCollections
+module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::NetworkCollections
   extend ActiveSupport::Concern
 
   def initialize_network_inventory_collections

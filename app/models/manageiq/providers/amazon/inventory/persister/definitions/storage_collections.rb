@@ -1,4 +1,4 @@
-module ManageIQ::Providers::Amazon::Inventory::Persister::Shared::StorageCollections
+module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::StorageCollections
   extend ActiveSupport::Concern
 
   def initialize_storage_inventory_collections

@@ -1,5 +1,5 @@
 class ManageIQ::Providers::Amazon::Inventory::Persister::StorageManager::S3 < ManageIQ::Providers::Amazon::Inventory::Persister
-  include ManageIQ::Providers::Amazon::Inventory::Persister::Shared::StorageCollections
+  include ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::StorageCollections
 
   def initialize_inventory_collections
     initialize_storage_inventory_collections
