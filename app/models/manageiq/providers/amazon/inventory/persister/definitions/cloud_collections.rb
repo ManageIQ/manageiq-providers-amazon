@@ -103,7 +103,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
   end
 
   def add_vm_and_miq_template_ancestry
-    add_collection(cloud, :vm_and_miq_template_ancestry, {}, {:auto_inventory_attributes => false, :auto_model_class => false, :without_model_class => true}) do |builder|
+    add_collection(cloud, :vm_and_miq_template_ancestry, {}, {:auto_inventory_attributes => false, :without_model_class => true}) do |builder|
       builder.add_dependency_attributes(
         :vms           => [collections[:vms]],
         :miq_templates => [collections[:miq_templates]]
@@ -112,7 +112,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
   end
 
   def add_orchestration_stack_ancestry
-    add_collection(cloud, :orchestration_stack_ancestry, {}, {:auto_inventory_attributes => false, :auto_model_class => false, :without_model_class => true}) do |builder|
+    add_collection(cloud, :orchestration_stack_ancestry, {}, {:auto_inventory_attributes => false, :without_model_class => true}) do |builder|
       builder.add_dependency_attributes(
         :orchestration_stacks           => [collections[:orchestration_stacks]],
         :orchestration_stacks_resources => [collections[:orchestration_stacks_resources]]

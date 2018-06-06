@@ -34,10 +34,15 @@ class ManageIQ::Providers::Amazon::Inventory::Persister < ManagerRefresh::Invent
     nil
   end
 
+  def parent
+    manager.presence
+  end
+
   def shared_options
     {
       :strategy => strategy,
       :targeted => targeted?,
+      :parent   => parent
     }
   end
 end
