@@ -151,6 +151,7 @@ describe Authenticator::Amazon do
   end
 
   describe '#authenticate' do
+    before { EvmSpecHelper.local_miq_server(:is_master => true) }
     def authenticate
       subject.authenticate(username, "some_password")
     end
