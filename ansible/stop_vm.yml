@@ -1,0 +1,9 @@
+---
+- name: Stop VM
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    vm_state: stopped
+  roles:
+    - change_vm_state
