@@ -71,6 +71,18 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   supports :provisioning
   supports :regions
 
+  def ansible_env_vars
+    {
+      'EC2_ACCESS_KEY' => default_authentication.userid,
+      'EC2_SECRET_KEY' => default_authentication.password,
+      'EC2_REGION'     => provider_region,
+    }
+  end
+
+  def ansible_root
+    ManageIQ::Providers::Amazon::Engine.root.join("ansible")
+  end
+
   def ensure_managers
     build_network_manager unless network_manager
     network_manager.name = "#{name} Network Manager"
