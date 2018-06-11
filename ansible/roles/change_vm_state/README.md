@@ -14,7 +14,7 @@ Uses https://docs.ansible.com/ansible/latest/modules/ec2_module.html
 Role Variables
 --------------
 
-    # Required vm state, allowed: [absent, running, restarted, stopped]
+    # Required VM state, allowed: [absent, running, restarted, stopped]
     vm_state: 
     # List of instance ids or one id
     instance_ids: 
@@ -26,8 +26,6 @@ None
 
 Example Playbook
 ----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - name: Start VM
       hosts: localhost
