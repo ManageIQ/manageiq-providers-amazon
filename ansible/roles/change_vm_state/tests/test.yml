@@ -1,0 +1,7 @@
+---
+- name: Change VM state
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  roles:
+    - change_vm_state
