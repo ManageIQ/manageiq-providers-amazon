@@ -80,7 +80,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   end
 
   def ansible_root
-    ManageIQ::Providers::Amazon::Engine.root.join("ansible")
+    ManageIQ::Providers::Amazon::Engine.root.join("content/ansible")
   end
 
   def ensure_managers
