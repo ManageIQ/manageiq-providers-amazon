@@ -466,6 +466,15 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
         )
       )
     end
+
+    it 'parses EBS_Snapshot_Notification event' do
+      ems_event = create_ems_event("config/EBS_Snapshot_Notification.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets))
+        .to match_array([[:cloud_volume_snapshots, { :ems_ref => 'snap-0089df02c4373d7a0' }]])
+    end
   end
 
   context "AWS CloudWatch with CloudTrail API" do

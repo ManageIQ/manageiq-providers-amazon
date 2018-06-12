@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "38a41df6-c96f-52fe-86b5-4e93f8ca43e1",
+  "TopicArn" : "arn:aws:sns:eu-central-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"29df4485-86c1-db72-78d1-e0ecdbdd3021\",\"detail-type\":\"EBS Snapshot Notification\",\"source\":\"aws.ec2\",\"account\":\"200278856672\",\"time\":\"2018-05-03T15:48:52Z\",\"region\":\"eu-central-1\",\"resources\":[\"arn:aws:ec2::eu-central-1:snapshot/snap-0089df02c4373d7a0\"],\"detail\":{\"event\":\"createSnapshot\",\"result\":\"succeeded\",\"cause\":\"\",\"request-id\":\"\",\"snapshot_id\":\"arn:aws:ec2::eu-central-1:snapshot/snap-0089df02c4373d7a0\",\"source\":\"arn:aws:ec2::eu-central-1:volume/vol-006e52cf74d8f3e7c\",\"startTime\":\"2018-05-03T15:48:26.000Z\",\"endTime\":\"2018-05-03T15:48:52.883Z\"}}",
+  "Timestamp" : "2018-05-03T15:48:53.716Z",
+  "SignatureVersion" : "1",
+  "Signature" : "A1pihqCuih3CEAqzej6OZLjUQw3UVjmvucSKZu90Rqak/pKH1gbiLOzz5hEEm6scFt/RAhSZ/tQpjs5tWyKylDWgawUFr9KZlir5uqZnjAA/8PVdtSG4h7Rz6mM6T9aZliXDdx/NfrOX6rgDM6PomzqDkAAM1M2bQkq6wLRr+OUjKjutJP0otLNwl834QHRNOf9SCdBuCK7I6Rr0LtS304jo/grcodc8DROMfunihjSItbamtEudSSS1DlcQBbcc/me7r1u3nzLHxFXyijUxTr4lqPqPE7Do51/TMcT9QzVyMyl3TNfemR+7cwiPPa4fdmaxZ8ySVkn9s/1nVhsIBg==",
+  "SigningCertURL" : "https://sns.eu-central-1.amazonaws.com/SimpleNotificationService-ac565b8b1a6c5d002d285f9598aa1d9b.pem",
+  "UnsubscribeURL" : "https://sns.eu-central-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-central-1:200278856672:AWSConfig_topic:fb3aae8a-78bd-45c2-aeb7-75097bd230d9"
+}
