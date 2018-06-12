@@ -10,7 +10,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister < ManagerRefresh::Invent
 
   # @param manager [ManageIQ::Providers::BaseManager] A manager object
   # @param target [Object] A refresh Target object
-  # @param target [ManagerRefresh::Inventory::Collector] A Collector object
+  # @param collector [ManagerRefresh::Inventory::Collector] A Collector object
   def initialize(manager, target = nil, collector = nil)
     @manager   = manager
     @target    = target
@@ -30,32 +30,19 @@ class ManageIQ::Providers::Amazon::Inventory::Persister < ManagerRefresh::Invent
     collections[:tags_to_resolve] = @tag_mapper.tags_to_resolve_collection
   end
 
-  def cloud
-    ManageIQ::Providers::Amazon::InventoryCollectionDefault::CloudManager
-  end
-
-  def network
-    ManageIQ::Providers::Amazon::InventoryCollectionDefault::NetworkManager
-  end
-
-  def storage
-    ManageIQ::Providers::Amazon::InventoryCollectionDefault::StorageManager
-  end
-
-  def targeted
-    false
-  end
-
   def strategy
     nil
   end
 
-  def shared_options
-    settings_options = options[:inventory_collections].try(:to_hash) || {}
+  def parent
+    manager.presence
+  end
 
-    settings_options.merge(
+  def shared_options
+    {
       :strategy => strategy,
-      :targeted => targeted,
-    )
+      :targeted => targeted?,
+      :parent   => parent
+    }
   end
 end
