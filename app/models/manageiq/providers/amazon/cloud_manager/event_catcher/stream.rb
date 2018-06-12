@@ -172,19 +172,27 @@ class ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream
       # Aws Config Events
       event["eventType"]    = parse_event_type(event)
       event["event_source"] = :config
+
     elsif event.fetch_path("detail", "eventType") == "AwsApiCall"
       # CloudWatch with CloudTrail for API requests Events
       event["eventType"]    = "AWS_API_CALL_" + event.fetch_path("detail", "eventName")
       event["event_source"] = :cloud_watch_api
+
     elsif event["detail-type"] == "EC2 Instance State-change Notification"
       # CloudWatch EC2 Events
       state                 = "_#{event.fetch_path("detail", "state")}" if event.fetch_path("detail", "state")
       event["eventType"]    = "#{event["detail-type"].tr(" ", "_").tr("-", "_")}#{state}"
       event["event_source"] = :cloud_watch_ec2
+
+    elsif event['detail-type'] == 'EBS Snapshot Notification'
+      event['eventType']    = event['detail-type'].gsub(/[\s-]/, '_')
+      event['event_source'] = :cloud_watch_ec2_ebs_snapshot
+
     elsif event["AlarmName"]
       # CloudWatch Alarm
       event["eventType"]    = "AWS_ALARM_#{event["AlarmName"]}"
       event["event_source"] = :cloud_watch_alarm
+
     else
       # Not recognized event, ignoring...
       $log.debug("#{log_header} Parsed event from SNS Message not recognized #{event}")
