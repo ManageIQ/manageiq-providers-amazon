@@ -9,4 +9,8 @@ class ManageIQ::Providers::Amazon::CloudManager::Flavor < ::Flavor
   def supports_ebs?
     block_storage_based_only?
   end
+
+  def self.display_name(number = 1)
+    n_('Flavor (Amazon)', 'Flavors (Amazon)', number)
+  end
 end
