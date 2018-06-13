@@ -1,0 +1,13 @@
+---
+- name: Create a security group
+  local_action:
+    module: ec2_group
+    vpc_id: "{{ vpc_id }}"
+    name: "{{ security_group_name }}"
+    description: "{{ security_group_description }}"
+    rules: "{{ security_group_rules }}"
+    rules_egress: "{{ security_group_rules_egress }}"
+  register: created_security_group
+- set_stats:
+    data:
+      created_security_group: "{{ created_security_group }}"
