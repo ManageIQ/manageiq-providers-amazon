@@ -30,6 +30,8 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
                                          event.full_data.fetch_path("detail", "responseElements") || {})
     when :cloud_watch_ec2
       collect_cloudwatch_ec2_references!(target_collection, event.full_data)
+    when :cloud_watch_ec2_ebs_snapshot
+      collect_cloudwatch_ec2_ebs_snapshot_references!(target_collection, event.full_data)
     when :config
       collect_config_references!(target_collection, event.full_data)
     end
@@ -52,6 +54,12 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
   def collect_cloudwatch_ec2_references!(target_collection, event_data)
     instance_id = event_data.fetch_path("detail", "instance-id")
     add_target(target_collection, :vms, instance_id) if instance_id
+  end
+
+  def collect_cloudwatch_ec2_ebs_snapshot_references!(target_collection, event_data)
+    if (snapshot_id = event_data.fetch_path('detail', 'snapshot_id'))
+      add_target(target_collection, :cloud_volume_snapshots, snapshot_id.split('/').last)
+    end
   end
 
   def collect_config_references!(target_collection, event_data)

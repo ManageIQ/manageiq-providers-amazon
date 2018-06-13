@@ -61,6 +61,14 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot < ::
 
   def raw_delete_snapshot
     with_provider_object(&:delete)
+    update!(:status => 'deleting')
+    EmsRefresh.queue_refresh(
+      ManagerRefresh::Target.new(
+        :association => :cloud_volume_snapshots,
+        :manager_ref => { :ems_ref => ems_ref },
+        :manager_id  => ems_id,
+      )
+    )
   rescue => e
     _log.error "volume=[#{name}], error: #{e}"
     raise MiqException::MiqVolumeSnapshotDeleteError, e.to_s, e.backtrace
