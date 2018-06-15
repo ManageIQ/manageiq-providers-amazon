@@ -6,7 +6,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::SecurityGroup < ::SecurityGro
   end
 
   def self.raw_create_security_group(ext_management_system, options)
-    Ansible::Runner.run(ext_management_system.ansible_env_vars,
+    Ansible::Runner.run(ext_management_system.parent_manager.ansible_env_vars,
                         {
                           :vpc_id                      => options[:vpc_id],
                           :security_group_name         => options[:security_group_name],
@@ -14,7 +14,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::SecurityGroup < ::SecurityGro
                           :security_group_rules        => options[:security_group_rules],
                           :security_group_rules_egress => options[:security_group_rules_egress],
                         },
-                        ext_management_system.ansible_root.join("create_security_group.yml"))
+                        ext_management_system.parent_manager.ansible_root.join("create_security_group.yml"))
   rescue => e
     _log.error("security_group=[#{options[:name]}], error: #{e}")
     raise MiqException::MiqSecurityGroupCreateError, e.message, e.backtrace
