@@ -63,7 +63,6 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
   end
 
   def create_security_group(options)
-    byebug
     SecurityGroup.raw_create_security_group(self, options)
   end
 end
