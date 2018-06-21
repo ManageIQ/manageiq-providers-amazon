@@ -12,7 +12,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::StorageCo
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume)
       builder.add_properties(:parent => manager.ebs_storage_manager) if targeted?
 
-      builder.add_builder_params(
+      builder.add_default_values(
         :ems_id => block_storage_manager_id
       )
     end
@@ -23,7 +23,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::StorageCo
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot)
       builder.add_properties(:parent => manager.ebs_storage_manager) if targeted?
 
-      builder.add_builder_params(
+      builder.add_default_values(
         :ems_id => block_storage_manager_id
       )
     end
@@ -34,7 +34,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::StorageCo
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer)
       builder.add_properties(:parent => manager.s3_storage_manager) if targeted?
 
-      builder.add_builder_params(
+      builder.add_default_values(
         :ems_id => object_storage_manager_id
       )
     end
@@ -45,7 +45,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::StorageCo
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject)
       builder.add_properties(:parent => manager.s3_storage_manager) if targeted?
 
-      builder.add_builder_params(
+      builder.add_default_values(
         :ems_id => object_storage_manager_id
       )
     end

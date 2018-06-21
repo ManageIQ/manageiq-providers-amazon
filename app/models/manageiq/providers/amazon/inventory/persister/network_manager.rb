@@ -15,8 +15,9 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::NetworkManager < Manage
   end
 
   def initialize_cloud_inventory_collections
-    %i(vms
-       availability_zones).each do |name|
+    %i(availability_zones
+       orchestration_stacks
+       vms).each do |name|
 
       add_collection(cloud, name) do |builder|
         builder.add_properties(
@@ -25,10 +26,5 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::NetworkManager < Manage
         )
       end
     end
-
-    add_orchestration_stacks(
-      :parent   => manager.parent_manager,
-      :strategy => :local_db_cache_all
-    )
   end
 end
