@@ -35,6 +35,14 @@ class ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair < ManageIQ::Provide
   end
 
   def validate_delete_key_pair
-    {:available => true, :message => nil}
+    {:available => allow_delete?, :message => nil}
+  end
+
+  private
+
+  # Returns false if an auth_key is available true if not.
+  # Meaning we can delete if there is no auth_key.
+  def allow_delete?
+    !self.auth_key.present?
   end
 end
