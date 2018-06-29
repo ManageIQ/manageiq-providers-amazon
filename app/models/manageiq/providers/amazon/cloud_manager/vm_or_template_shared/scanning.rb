@@ -48,7 +48,7 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
     msg = "Scanning in AWS region #{ssaq_args[:region]} in progress"
     update_job_message(ost, msg)
     job = Job.find_by(:id => ost.jobid)
-    raise _("Unable to process data for job with id #{ost.jobid}") if job.nil?
+    raise _("Unable to process data for job with id %{job_id}") % {:job_id => ost.jobid} if job.nil?
     job.process_finished(msg, "ok")
   end
 
