@@ -39,7 +39,8 @@ class AwsInstanceDataParser
   # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/
   #   virtualization_types.html
   VIRT_TYPES = Hash.new(%i(hvm).freeze).tap do |virt_types|
-    { %w(t1 m1 m2 c1)   => %i(paravirtual).freeze,
+    {
+      %w(t1 m1 m2 c1)   => %i(paravirtual).freeze,
       %w(m3 c3 hs1 hi1) => %i(paravirtual hvm).freeze,
     }.each do |type_names, types_set|
       type_names.each { |type_name| virt_types[type_name] = types_set }
@@ -77,8 +78,8 @@ class AwsInstanceDataParser
   #   enhanced-networking.html#supported_instances
   ENHANCED_NETWORKING_TYPES = %w(f1).freeze
 
-  ParsedName = Struct.new(*%i(base_type size_factor size_name))
-  ParsedStorage = Struct.new(*%i(volumes size type))
+  ParsedName = Struct.new(:base_type, :size_factor, :size_name)
+  ParsedStorage = Struct.new(:volumes, :size, :type)
 
   concerning :Memoizable do
     SUBS = { '?' => '_q', '!' => '_b' }.freeze
@@ -105,7 +106,7 @@ class AwsInstanceDataParser
     end
   end
 
-  private_constant *constants(false).without(:REQUIRED_ATTRIBUTES)
+  private_constant(*constants(false).without(:REQUIRED_ATTRIBUTES))
 
   attr_reader :product_data
 
@@ -149,9 +150,7 @@ class AwsInstanceDataParser
     product_data['instanceFamily']
   end
 
-  memoized def base_type
-    parsed_name.base_type
-  end
+  delegate :base_type, :to => :parsed_name
 
   memoized def description
     description = [base_type.upcase]
@@ -166,13 +165,7 @@ class AwsInstanceDataParser
     VIRT_TYPES[base_type]
   end
 
-  memoized def size_factor
-    parsed_name.size_factor
-  end
-
-  memoized def size_name
-    parsed_name.size_name
-  end
+  delegate :size_factor, :size_name, :to => :parsed_name
 
   memoized def vcpus
     product_data['vcpu'].to_i
@@ -200,20 +193,20 @@ class AwsInstanceDataParser
 
   memoized def intel_avx?
     product_data['intelAvxAvailable'] == 'Yes' ||
-      !(processor_features !~ INTEL_AVX_REGEXP) ||
-      CPU_FEATURES[physical_processor]&.include?(:avx)
+    !!(processor_features =~ INTEL_AVX_REGEXP) ||
+    CPU_FEATURES[physical_processor]&.include?(:avx)
   end
 
   memoized def intel_avx2?
     product_data['intelAvx2Available'] == 'Yes' ||
-      !(processor_features !~ INTEL_AVX2_REGEXP) ||
-      CPU_FEATURES[physical_processor]&.include?(:avx2)
+    !!(processor_features =~ INTEL_AVX2_REGEXP) ||
+    CPU_FEATURES[physical_processor]&.include?(:avx2)
   end
 
   memoized def intel_turbo?
     product_data['intelTurboAvailable'] == 'Yes' ||
-      !(processor_features !~ INTEL_TURBO_REGEXP) ||
-      CPU_FEATURES[physical_processor]&.include?(:turbo)
+    !!(processor_features =~ INTEL_TURBO_REGEXP) ||
+    CPU_FEATURES[physical_processor]&.include?(:turbo)
   end
 
   memoized def intel_aes_ni?
@@ -239,8 +232,8 @@ class AwsInstanceDataParser
 
   memoized def ebs_optimized?
     product_data['ebsOptimized'] == 'Yes' ||
-      product_data['dedicatedEbsThroughput'].present? ||
-      EBS_OPTIMIZED_TYPES.include?(base_type)
+    product_data['dedicatedEbsThroughput'].present? ||
+    EBS_OPTIMIZED_TYPES.include?(base_type)
   end
 
   memoized def storage_volumes
@@ -264,7 +257,7 @@ class AwsInstanceDataParser
 
   memoized def enhanced_networking?
     product_data['enhancedNetworkingSupported'] == 'Yes' ||
-      ENHANCED_NETWORKING_TYPES.include?(base_type)
+    ENHANCED_NETWORKING_TYPES.include?(base_type)
   end
 
   memoized def clusterable_networking?
@@ -319,9 +312,12 @@ class AwsInstanceDataParser
   ### compound attributes
 
   memoized def parsed_name
-    ParsedName.new(*(TYPE_REGEXP.match(instance_type)&.captures ||
-      save_unknown(instance_type, :instance_type, :nils => 3)
-    )).freeze
+    ParsedName.new(
+      *(
+        TYPE_REGEXP.match(instance_type)&.captures ||
+        save_unknown(instance_type, :instance_type, :nils => 3)
+      )
+    ).freeze
   end
 
   memoized def parsed_storage
@@ -330,7 +326,7 @@ class AwsInstanceDataParser
         Array.new(3, nil)
       else
         STORAGE_REGEXP.match(storage)&.captures ||
-          save_unknown(storage, :storage, :nils => 3)
+        save_unknown(storage, :storage, :nils => 3)
       end
     volumes = volumes.to_i
     type = type&.gsub(/\bGB\b/i, '').presence
