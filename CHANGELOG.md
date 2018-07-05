@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 89 ending 2018-07-02
+
+### Fixed
+- Added allow_delete method on AuthKeyPairs [(#457)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/457)
+
 ## Unreleased as of Sprint 88 ending 2018-06-18
 
 ### Added
