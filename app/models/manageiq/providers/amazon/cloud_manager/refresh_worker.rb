@@ -14,7 +14,10 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshWorker < ManageIQ::Provi
     private
 
     def combined_managers(ems)
-      [ems].concat(ems.child_managers)
+      child_managers = ems.child_managers.reject do |child_ems|
+        child_ems.kind_of?(ManageIQ::Providers::Amazon::StorageManager::S3)
+      end
+      [ems].concat(child_managers)
     end
   end
 
