@@ -17,16 +17,16 @@ const createGroups = (values, providerId) =>
     resource: { ...values },
   });
 
-const CreateAmazonSecurityGroupForm = ({ providerId }) => (
+const CreateAmazonSecurityGroupForm = ({ recordId }) => (
   <AmazonSecurityGroupForm
-    onSave={values => createGroups(values, providerId)}
+    onSave={values => createGroups(values, recordId)}
     onCancel={() => console.log('Cancel clicked')}
     loadData={getData}
   />
 );
 
 CreateAmazonSecurityGroupForm.propTypes = {
-  providerId: PropTypes.number.isRequired,
+  recordId: PropTypes.string.isRequired,
 };
 
 export default CreateAmazonSecurityGroupForm;
