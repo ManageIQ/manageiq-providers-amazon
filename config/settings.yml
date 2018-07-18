@@ -82,8 +82,17 @@
     :public_images_filters:
       - :name: image-type
         :values:
-          - machine
-
+        - machine
+      - :name: state
+        :values:
+        - available
+      - :name: is-public
+        :values:
+        - 'true'
+      #- :name: owner-id
+      #  :values:
+      #  - '12345' # Set these to your own provider account number(s) to restrict the list
+      #  - '34567' # to only those images available within those accounts.
     :ignore_terminated_instances: true
     :inventory_object_refresh: true
     :allow_targeted_refresh: true
