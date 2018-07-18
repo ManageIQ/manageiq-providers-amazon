@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 90 ending 2018-07-16
+
+### Added
+- Don't use #{} inside a gettext string [(#458)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/458)
+- Persister: optimized InventoryCollection definitions [(#456)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/456)
+
 ## Unreleased as of Sprint 89 ending 2018-07-02
 
 ### Fixed
