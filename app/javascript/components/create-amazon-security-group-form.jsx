@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { AmazonSecurityGroupForm } from '@manageiq/react-ui-components/dist/amazon-security-form-group';
-import '@manageiq/react-ui-components/dist/amazon-security-form-group.css';
 
 const API = window.API;
 
@@ -17,16 +17,55 @@ const createGroups = (values, providerId) =>
     resource: { ...values },
   });
 
-const CreateAmazonSecurityGroupForm = ({ recordId }) => (
-  <AmazonSecurityGroupForm
-    onSave={values => createGroups(values, recordId)}
-    onCancel={() => console.log('Cancel clicked')}
-    loadData={getData}
-  />
-);
+class CreateAmazonSecurityGroupForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      values: {},
+    };
+    this.handleFormStateUpdate = this.handleFormStateUpdate.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'FormButtons.init',
+      payload: {
+        newRecord: true,
+        pristine: true,
+        addClicked: () => {
+          createGroups(this.state.values, ManageIQ.record.recordId);
+        },
+      },
+    });
+  }
+
+  handleFormStateUpdate(formState) {
+    this.props.dispatch({
+      type: 'FormButtons.saveable',
+      payload: formState.valid,
+    });
+    this.props.dispatch({
+      type: 'FormButtons.pristine',
+      payload: formState.pristine,
+    });
+    this.setState({ values: formState.values });
+  }
+
+  render() {
+    return (
+      <AmazonSecurityGroupForm
+        onSave={values => createGroups(values, ManageIQ.record.recordId)}
+        onCancel={() => console.log('Cancel clicked')}
+        loadData={getData}
+        updateFormState={this.handleFormStateUpdate}
+        hideControls
+      />
+    );
+  }
+}
 
 CreateAmazonSecurityGroupForm.propTypes = {
-  recordId: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default CreateAmazonSecurityGroupForm;
+export default connect()(CreateAmazonSecurityGroupForm);
