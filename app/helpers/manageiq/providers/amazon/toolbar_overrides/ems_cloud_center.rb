@@ -13,8 +13,19 @@ module ManageIQ
                          'function-data' => {:controller     => 'provider_dialogs', # this one is required
                                              :button         => :magic,
                                              :modal_title    => N_('Create a Security Group'),
-                                             :component_name => 'CreateAmazonSecurityGroupForm',
-                                             :ems_id         => EmsCloud.first.id}.to_json}, # this line to be removed, usage replaced with ManageIQ.record.recordId
+                                             :component_name => 'CreateAmazonSecurityGroupForm'}.to_json},
+              :klass => ApplicationHelper::Button::ButtonWithoutRbacCheck),
+            button(
+              :magic,
+              'fa fa-magic fa-lg',
+              t = N_('API call'),
+              t,
+              :data  => {'function'      => 'sendDataWithRx',
+                         'function-data' => {:controller      => 'provider_dialogs', # this one is required
+                                             :button          => :magic,
+                                             :success_message => N_('API succesfully called'),
+                                             :entity_name     => 'provider',
+                                             :action_name     => 'foobar'}.to_json},
               :klass => ApplicationHelper::Button::ButtonWithoutRbacCheck),
             button(
               :magic_dialog,
