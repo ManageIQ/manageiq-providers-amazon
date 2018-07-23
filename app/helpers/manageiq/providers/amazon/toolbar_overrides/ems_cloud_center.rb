@@ -16,25 +16,29 @@ module ManageIQ
                                              :component_name => 'CreateAmazonSecurityGroupForm'}.to_json},
               :klass => ApplicationHelper::Button::ButtonWithoutRbacCheck),
             button(
-              :magic,
+              :magic_api,
               'fa fa-magic fa-lg',
               t = N_('API call'),
               t,
               :data  => {'function'      => 'sendDataWithRx',
                          'function-data' => {:controller      => 'provider_dialogs', # this one is required
-                                             :button          => :magic,
+                                             :button          => :magic_api,
                                              :success_message => N_('API succesfully called'),
                                              :entity_name     => 'provider',
                                              :action_name     => 'foobar'}.to_json},
               :klass => ApplicationHelper::Button::ButtonWithoutRbacCheck),
             button(
-              :magic_dialog,
+              :magic_player,
               'fa fa-magic fa-lg',
-              t = N_('Magic'),
+              t = N_('Magic player'),
               t,
               :data  => {'function'      => 'sendDataWithRx',
-                         'function-data' => {:controller => 'provider_dialogs', # this one is required
-                                             :button     => :magic_dialog}.to_json},
+                         'function-data' => {:controller  => 'provider_dialogs', # this one is required
+                                             :button      => :magic_player,
+                                             :dialog_name => 'test',
+                                             :dialog_title => N_('Magic Provider Dialog'),
+                                             :class       => 'ManageIQ::Providers::Amazon',
+                        }.to_json},
               :klass => ApplicationHelper::Button::ButtonWithoutRbacCheck),
           ])
         end
