@@ -15,6 +15,14 @@ const createGroups = (values, providerId) =>
   API.post(`/api/providers/${providerId}/security_groups`, {
     action: 'create',
     resource: { ...values },
+  }).then(response => {
+    response.results.forEach((result) => {
+      if(result.success) {
+        window.add_flash(result.message, 'success');
+      } else {
+        window.add_flash(result.message, 'error');
+      }
+    })
   });
 
 class CreateAmazonSecurityGroupForm extends React.Component {
