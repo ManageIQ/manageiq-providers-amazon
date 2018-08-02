@@ -11,3 +11,4 @@ rules:
     indent-sequences: false
   line-length:
     max: 120
+  trailing-spaces: false
