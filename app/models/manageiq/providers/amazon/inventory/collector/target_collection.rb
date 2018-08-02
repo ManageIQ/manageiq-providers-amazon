@@ -20,37 +20,45 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     return [] if references(:vms).blank?
     return @instances_hashes if @instances_hashes
 
-    @instances_hashes = hash_collection.new(
-      aws_ec2.instances(:filters => [{:name => 'instance-id', :values => references(:vms)}])
-    ).all
+    multi_query(references(:vms)) do |refs|
+      @instances_hashes = hash_collection.new(
+        aws_ec2.instances(:filters => [{:name => 'instance-id', :values => refs}])
+      ).all
+    end
   end
 
   def availability_zones
     return [] if references(:availability_zones).blank?
 
-    hash_collection.new(
-      aws_ec2.client.describe_availability_zones(
-        :filters => [{:name => 'zone-name', :values => references(:availability_zones)}]
-      ).availability_zones
-    )
+    multi_query(references(:availability_zones)) do |refs|
+      hash_collection.new(
+        aws_ec2.client.describe_availability_zones(
+          :filters => [{:name => 'zone-name', :values => refs}]
+        ).availability_zones
+      ).all
+    end
   end
 
   def key_pairs
     return [] if name_references(:key_pairs).blank?
 
-    hash_collection.new(
-      aws_ec2.client.describe_key_pairs(
-        :filters => [{:name => 'key-name', :values => name_references(:key_pairs)}]
-      ).key_pairs
-    )
+    multi_query(name_references(:key_pairs)) do |refs|
+      hash_collection.new(
+        aws_ec2.client.describe_key_pairs(
+          :filters => [{:name => 'key-name', :values => refs}]
+        ).key_pairs
+      ).all
+    end
   end
 
   def referenced_images
     return [] if references(:miq_templates).blank?
 
-    hash_collection.new(
-      aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => references(:miq_templates)}]).images
-    )
+    multi_query(references(:miq_templates)) do |refs|
+      hash_collection.new(
+        aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => refs}]).images
+      ).all
+    end
   end
 
   def stacks
@@ -72,34 +80,43 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   def cloud_networks
     return [] if references(:cloud_networks).blank?
 
-    hash_collection.new(
-      aws_ec2.client.describe_vpcs(:filters => [{:name => 'vpc-id', :values => references(:cloud_networks)}]).vpcs
-    )
+    multi_query(references(:cloud_networks)) do |refs|
+      hash_collection.new(
+        aws_ec2.client.describe_vpcs(:filters => [{:name => 'vpc-id', :values => refs}]).vpcs
+      ).all
+    end
   end
 
   def cloud_subnets
     return [] if references(:cloud_subnets).blank?
 
-    hash_collection.new(
-      aws_ec2.client.describe_subnets(:filters => [{:name => 'subnet-id', :values => references(:cloud_subnets)}]).subnets
-    )
+    multi_query(references(:cloud_subnets)) do |refs|
+      hash_collection.new(
+        aws_ec2.client.describe_subnets(:filters => [{:name => 'subnet-id', :values => refs}]).subnets
+      ).all
+    end
   end
 
   def security_groups
     return [] if references(:security_groups).blank?
 
-    hash_collection.new(
-      aws_ec2.security_groups(:filters => [{:name => 'group-id', :values => references(:security_groups)}])
-    )
+    multi_query(references(:security_groups)) do |refs|
+      hash_collection.new(
+        aws_ec2.security_groups(:filters => [{:name => 'group-id', :values => refs}])
+      ).all
+    end
   end
 
   def network_ports
     return [] if references(:network_ports).blank?
     return @network_ports_hashes if @network_ports_hashes
 
-    @network_ports_hashes = hash_collection.new(aws_ec2.client.describe_network_interfaces(
-      :filters => [{:name => 'network-interface-id', :values => references(:network_ports)}]
-    ).network_interfaces).all
+
+    @network_ports_hashes = multi_query(references(:network_ports)) do |refs|
+      hash_collection.new(aws_ec2.client.describe_network_interfaces(
+        :filters => [{:name => 'network-interface-id', :values => refs}]
+      ).network_interfaces).all
+    end
   end
 
   def load_balancers
@@ -123,27 +140,33 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   def floating_ips
     return [] if references(:floating_ips).blank?
 
-    hash_collection.new(
-      aws_ec2.client.describe_addresses(:filters => [{:name => 'allocation-id', :values => references(:floating_ips)}]).addresses
-    )
+    multi_query(references(:floating_ips)) do |refs|
+      hash_collection.new(
+        aws_ec2.client.describe_addresses(:filters => [{:name => 'allocation-id', :values => refs}]).addresses
+      ).all
+    end
   end
 
   def cloud_volumes
     return [] if references(:cloud_volumes).blank?
 
-    hash_collection.new(
-      aws_ec2.client.describe_volumes(:filters => [{:name => 'volume-id', :values => references(:cloud_volumes)}]).volumes
-    )
+    multi_query(references(:cloud_volumes)) do |refs|
+      hash_collection.new(
+        aws_ec2.client.describe_volumes(:filters => [{:name => 'volume-id', :values => refs}]).volumes
+      ).all
+    end
   end
 
   def cloud_volume_snapshots
     return [] if references(:cloud_volume_snapshots).blank?
 
-    hash_collection.new(
-      aws_ec2.client.describe_snapshots(
-        :filters => [{:name => 'snapshot-id', :values => references(:cloud_volume_snapshots)}]
-      ).snapshots
-    )
+    multi_query(references(:cloud_volume_snapshots)) do |refs|
+      hash_collection.new(
+        aws_ec2.client.describe_snapshots(
+          :filters => [{:name => 'snapshot-id', :values => refs}]
+        ).snapshots
+      ).all
+    end
   end
 
   def cloud_object_store_containers

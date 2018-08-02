@@ -47,9 +47,11 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
   def referenced_images
     return [] if extra_image_references.blank?
 
-    hash_collection.new(
-      aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => extra_image_references}]).images
-    )
+    multi_query(extra_image_references) do |refs|
+      hash_collection.new(
+        aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => refs}]).images
+      ).all
+    end
   end
 
   def stacks
