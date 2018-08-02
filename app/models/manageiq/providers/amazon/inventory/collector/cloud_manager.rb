@@ -76,10 +76,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
     # public_images
     return @extra_image_references if @extra_image_references
 
-    db_image_refs        = Set.new(manager.miq_templates.pluck(:ems_ref))
     instances_image_refs = Set.new(instances.map { |x| x["image_id"] })
     api_images_refs      = Set.new((private_images + shared_images + public_images).map { |x| x["image_id"] })
 
-    @extra_image_references = ((db_image_refs + instances_image_refs) - api_images_refs).to_a
+    @extra_image_references = (instances_image_refs - api_images_refs).to_a
   end
 end
