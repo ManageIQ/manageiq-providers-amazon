@@ -111,7 +111,6 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     return [] if references(:network_ports).blank?
     return @network_ports_hashes if @network_ports_hashes
 
-
     @network_ports_hashes = multi_query(references(:network_ports)) do |refs|
       hash_collection.new(aws_ec2.client.describe_network_interfaces(
         :filters => [{:name => 'network-interface-id', :values => refs}]
