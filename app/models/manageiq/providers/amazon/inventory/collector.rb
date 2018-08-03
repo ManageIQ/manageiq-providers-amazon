@@ -99,4 +99,13 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManagerRefresh::Invent
   def health_check_members_refs(load_balancer_name)
     @health_check_members_refs.try(:[], load_balancer_name) || []
   end
+
+  def max_filter_size
+    200
+  end
+
+  def multi_query(all_uuids)
+    # AWS supports filtering only limited amount of items, so we need to send several queries
+    all_uuids.each_slice(max_filter_size).map { |uuids_batch| yield(uuids_batch) }.flatten
+  end
 end
