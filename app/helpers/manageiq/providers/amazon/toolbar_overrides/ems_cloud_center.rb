@@ -38,6 +38,9 @@ module ManageIQ
                                              :dialog_name => 'test',
                                              :dialog_title => N_('Magic Provider Dialog'),
                                              :class       => 'ManageIQ::Providers::Amazon',
+                                             :entity_name => 'ems_cloud',
+                                             :action_name => 'more_foobar',
+                                             :success_message => N_('Magic just happened !'),
                         }.to_json},
               :klass => ApplicationHelper::Button::ButtonWithoutRbacCheck),
           ])
