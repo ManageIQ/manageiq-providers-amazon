@@ -100,7 +100,7 @@ module Authenticator
     def iam_user?(iam)
       # for AWS root account keys: resource in arn will be root
       # for IAM users: resource will be 'user/...user_name'
-      # http://docs.aws.amazon.com/de_de/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+      # https://docs.aws.amazon.com/en_gb/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
       # or get_user will throw an exception (for less-privileged users)
 
       iam.client.get_user[:user][:arn].split(/:/)[5].to_s != 'root'
