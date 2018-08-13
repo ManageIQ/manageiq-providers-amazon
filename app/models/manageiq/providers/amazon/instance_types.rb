@@ -9,12 +9,12 @@ module ManageIQ::Providers::Amazon::InstanceTypes
 
   # Types that are still advertised, but not recommended for new instances.
   DEPRECATED_TYPES = ALL_TYPES.select do |_, attrs|
-    attrs[:deprecated] == true && !attrs[:discontinued]
+    attrs[:deprecated] && !attrs[:discontinued]
   end.to_h.freeze
 
   # Types that are no longer advertised
   DISCONTINUED_TYPES = ALL_TYPES.select do |_, attrs|
-    !attrs[:deprecated] && attrs[:discontinued] == true
+    !attrs[:deprecated] && attrs[:discontinued]
   end.to_h.freeze
 
   # Types that are currently advertised for use

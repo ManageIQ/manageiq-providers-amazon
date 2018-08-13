@@ -11,4 +11,6 @@ rules:
     indent-sequences: false
   line-length:
     max: 120
-  trailing-spaces: false
+  trailing-spaces:
+    ignore: |
+      /db/fixtures/aws_instance_types.yml
