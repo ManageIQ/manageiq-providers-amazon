@@ -3,20 +3,20 @@
 module ManageIQ::Providers::Amazon::InstanceTypes
   ALL_TYPES = YAML.load_file(
     ManageIQ::Providers::Amazon::Engine.root.join('db/fixtures/aws_instance_types.yml')
-  ).each_value(&:freeze).freeze
+  )
 
   # Types that are still advertised, but not recommended for new instances.
   DEPRECATED_TYPES = ALL_TYPES.select do |_, attrs|
     attrs[:deprecated] && !attrs[:discontinued]
-  end.to_h.freeze
+  end.to_h
 
   # Types that are no longer advertised
   DISCONTINUED_TYPES = ALL_TYPES.select do |_, attrs|
     !attrs[:deprecated] && attrs[:discontinued]
-  end.to_h.freeze
+  end.to_h
 
   # Types that are currently advertised for use
-  AVAILABLE_TYPES = ALL_TYPES.except(*(DEPRECATED_TYPES.keys + DISCONTINUED_TYPES.keys)).freeze
+  AVAILABLE_TYPES = ALL_TYPES.except(*(DEPRECATED_TYPES.keys + DISCONTINUED_TYPES.keys))
 
   def self.instance_types
     additional = Hash(Settings.ems.ems_amazon.try!(:additional_instance_types)).stringify_keys
