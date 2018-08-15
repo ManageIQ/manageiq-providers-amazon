@@ -15,6 +15,7 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
   require_nested :SecurityGroup
 
   include ManageIQ::Providers::Amazon::ManagerMixin
+  include NotificationMixin
 
   # Auth and endpoints delegations, editing of this type of manager must be disabled
   delegate :authentication_check,
