@@ -5,7 +5,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::SecurityGroup < ::SecurityGro
     n_('Security Group (Amazon)', 'Security Groups (Amazon)', number)
   end
 
-  def self.raw_create_security_group(ext_management_system, options)
+  def self.raw_create_security_group(ext_management_system, options, user_id)
     Ansible::Runner.run(ext_management_system.parent_manager.ansible_env_vars,
                         {
                           :vpc_id                      => options["vpc_id"],

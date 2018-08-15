@@ -62,7 +62,7 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
     n_('Network Provider (Amazon)', 'Network Providers (Amazon)', number)
   end
 
-  def create_security_group(options)
-    SecurityGroup.raw_create_security_group(self, options)
+  def create_security_group(options, user_id)
+    SecurityGroup.raw_create_security_group(self, options, user_id)
   end
 end
