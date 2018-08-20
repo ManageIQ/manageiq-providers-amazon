@@ -3181,35 +3181,6 @@ r5.xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: false
-r5d:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: " Memory optimized R5d"
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 0
-  :memory_gb: 0.0
-  :name: r5d
-  :network_performance: :na
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
-  :vcpu: 96
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
 r5d.12xlarge:
   :architecture:
   - :x86_64
