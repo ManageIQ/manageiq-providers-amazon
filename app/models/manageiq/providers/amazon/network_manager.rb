@@ -36,6 +36,8 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
 
   supports_not :ems_network_new
 
+  supports :create_security_group
+
   def self.ems_type
     @ems_type ||= "ec2_network".freeze
   end
@@ -58,5 +60,9 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
 
   def self.display_name(number = 1)
     n_('Network Provider (Amazon)', 'Network Providers (Amazon)', number)
+  end
+
+  def create_security_group(options)
+    SecurityGroup.raw_create_security_group(self, options)
   end
 end

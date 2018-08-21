@@ -1,0 +1,11 @@
+galaxy_info:
+  author: Ladislav Smola
+  description: Role for changing EC2 VM state
+  company: Red Hat
+  license: Apache
+  min_ansible_version: 2.2
+  galaxy_tags:
+    - cloud
+    - aws
+    - ec2
+dependencies: []
