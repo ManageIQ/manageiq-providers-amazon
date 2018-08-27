@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::Collector < ManagerRefresh::Inventory::Collector
+class ManageIQ::Providers::Amazon::Inventory::Collector < ManageIQ::Providers::Inventory::Collector
   require_nested :CloudManager
   require_nested :NetworkManager
   require_nested :TargetCollection
