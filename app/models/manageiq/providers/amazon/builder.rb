@@ -1,71 +1,54 @@
-class ManageIQ::Providers::Amazon::Builder
+class ManageIQ::Providers::Amazon::Builder < ManageIQ::Providers::Inventory::Builder
   class << self
     def build_inventory(ems, target)
       case target
-      when ManageIQ::Providers::Amazon::CloudManager
-        cloud_manager_inventory(ems, target)
-      when ManageIQ::Providers::Amazon::NetworkManager
-        inventory(
-          ems,
-          target,
-          ManageIQ::Providers::Amazon::Inventory::Collector::NetworkManager,
-          ManageIQ::Providers::Amazon::Inventory::Persister::NetworkManager,
-          [ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager]
-        )
       when ManageIQ::Providers::Amazon::StorageManager::Ebs
-        inventory(
-          ems,
-          target,
-          ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::Ebs,
-          ManageIQ::Providers::Amazon::Inventory::Persister::StorageManager::Ebs,
-          [ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs]
-        )
+        build_storage_ebs_inventory(ems, target)
       when ManageIQ::Providers::Amazon::StorageManager::S3
-        inventory(
-          ems,
-          target,
-          ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::S3,
-          ManageIQ::Providers::Amazon::Inventory::Persister::StorageManager::S3,
-          [ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3]
-        )
+        build_storage_s3_inventory(ems, target)
       when ManagerRefresh::TargetCollection
-        inventory(
-          ems,
-          target,
-          ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection,
-          ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection,
-          [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager,
-           ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager,
-           ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs]
-        )
+        build_target_collection_inventory(ems, target)
       else
-        # Fallback to ems refresh
-        cloud_manager_inventory(ems, target)
+        super
       end
     end
 
     private
 
-    def cloud_manager_inventory(ems, target)
+    def build_storage_ebs_inventory(ems, target)
       inventory(
         ems,
         target,
-        ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager,
-        ManageIQ::Providers::Amazon::Inventory::Persister::CloudManager,
-        [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager]
+        ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::Ebs,
+        ManageIQ::Providers::Amazon::Inventory::Persister::StorageManager::Ebs,
+        [ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs]
       )
     end
 
-    def inventory(manager, raw_target, collector_class, persister_class, parsers_classes)
-      collector = collector_class.new(manager, raw_target)
-      # TODO(lsmola) figure out a way to pass collector info, probably via target
-      persister = persister_class.new(manager, raw_target, collector)
-
-      ::ManageIQ::Providers::Amazon::Inventory.new(
-        persister,
-        collector,
-        parsers_classes.map(&:new)
+    def build_storage_s3_inventory(ems, target)
+      inventory(
+        ems,
+        target,
+        ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::S3,
+        ManageIQ::Providers::Amazon::Inventory::Persister::StorageManager::S3,
+        [ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::S3]
       )
+    end
+
+    def build_target_collection_inventory(ems, target)
+      inventory(
+        ems,
+        target,
+        ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection,
+        ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection,
+        [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager,
+         ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager,
+         ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs]
+      )
+    end
+
+    def allowed_manager_types
+      %w(Cloud Network Storage)
     end
   end
 end
