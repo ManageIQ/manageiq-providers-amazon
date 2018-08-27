@@ -375,11 +375,16 @@ describe Authenticator::Amazon do
           expect(authenticate).to eq(123)
         end
 
-        it "records two successful audit entries" do
+        it "records three successful audit entries" do
           expect(AuditEvent).to receive(:success).with(
             :event   => 'authenticate_amazon',
             :userid  => username,
             :message => "User #{username} successfully validated by Amazon IAM",
+          )
+          expect(AuditEvent).to receive(:success).with(
+            :event   => 'authorize',
+            :userid  => username,
+            :message => "User creation successful for User: userNameType with ID: #{username}",
           )
           expect(AuditEvent).to receive(:success).with(
             :event   => 'authenticate_amazon',
@@ -410,7 +415,7 @@ describe Authenticator::Amazon do
             expect(authenticate).to eq(123)
           end
 
-          it "records two successful audit entries plus one failure" do
+          it "records three successful audit entries plus one failure" do
             expect(AuditEvent).to receive(:success).with(
               :event   => 'authenticate_amazon',
               :userid  => username,
@@ -420,6 +425,11 @@ describe Authenticator::Amazon do
               :event   => 'authenticate_amazon',
               :userid  => username,
               :message => "Authentication successful for user #{username}",
+            )
+            expect(AuditEvent).to receive(:success).with(
+              :event   => 'authorize',
+              :userid  => username,
+              :message => "User creation successful for User: userNameType with ID: #{username}",
             )
             expect(AuditEvent).to receive(:failure).with(
               :event   => 'authorize',
