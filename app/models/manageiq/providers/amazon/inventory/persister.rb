@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::Inventory::Persister < ManagerRefresh::Inventory::Persister
+class ManageIQ::Providers::Amazon::Inventory::Persister < ManageIQ::Providers::Inventory::Persister
   require_nested :CloudManager
   require_nested :NetworkManager
   require_nested :TargetCollection
@@ -10,7 +10,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister < ManagerRefresh::Invent
 
   # @param manager [ManageIQ::Providers::BaseManager] A manager object
   # @param target [Object] A refresh Target object
-  # @param collector [ManagerRefresh::Inventory::Collector] A Collector object
+  # @param collector [ManageIQ::Providers::Inventory::Collector] A Collector object
   def initialize(manager, target = nil, collector = nil)
     @manager   = manager
     @target    = target
