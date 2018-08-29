@@ -39,7 +39,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
       persister.network_routers.find_or_build(uid).assign_attributes(
         :status           => network_router['routes'].all? { |x| x['state'] == 'active' } ? 'active' : 'inactive',
-        :name             => get_from_tags(network_router, "Name").presence || uid,
+        :name             => get_from_tags(network_router, "Name") || uid,
         :extra_attributes => {
           :main_route_table => main_route_table,
           :routes           => network_router['routes'],
@@ -54,7 +54,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
   def cloud_networks
     collector.cloud_networks.each do |vpc|
       persister.cloud_networks.find_or_build(vpc['vpc_id']).assign_attributes(
-        :name                => get_from_tags(vpc, 'name').presence || vpc['vpc_id'],
+        :name                => get_from_tags(vpc, 'name') || vpc['vpc_id'],
         :cidr                => vpc['cidr_block'],
         :status              => vpc['state'] == "available" ? "active" : "inactive",
         :enabled             => true,
@@ -68,7 +68,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
   def cloud_subnets
     collector.cloud_subnets.each do |subnet|
       persister_cloud_subnet = persister.cloud_subnets.find_or_build(subnet['subnet_id']).assign_attributes(
-        :name              => get_from_tags(subnet, 'name').presence || subnet['subnet_id'],
+        :name              => get_from_tags(subnet, 'name') || subnet['subnet_id'],
         :cidr              => subnet['cidr_block'],
         :status            => subnet['state'].try(:to_s),
         :availability_zone => persister.availability_zones.lazy_find(subnet['availability_zone']),
@@ -322,7 +322,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
       next unless instance['network_interfaces'].blank?
 
       persister_network_port = persister.network_ports.find_or_build(instance['instance_id']).assign_attributes(
-        :name            => get_from_tags(instance, 'name').presence || instance['instance_id'],
+        :name            => get_from_tags(instance, 'name') || instance['instance_id'],
         :status          => nil,
         :mac_address     => nil,
         :device_owner    => nil,

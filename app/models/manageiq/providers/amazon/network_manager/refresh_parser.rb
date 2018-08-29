@@ -207,7 +207,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
 
   def parse_cloud_network(vpc)
     uid  = vpc.vpc_id
-    name = get_from_tags(vpc, :name).presence || uid
+    name = get_from_tags(vpc, :name) || uid
 
     status = (vpc.state == "available") ? "active" : "inactive"
 
@@ -226,7 +226,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
 
   def parse_cloud_subnet(subnet)
     uid  = subnet.subnet_id
-    name = get_from_tags(subnet, :name).presence || uid
+    name = get_from_tags(subnet, :name) || uid
 
     new_result = {
       :type              => self.class.cloud_subnet_type,
@@ -469,7 +469,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     cloud_subnet_network_ports = [parse_cloud_subnet_network_port(instance, nil)]
 
     uid  = instance.id
-    name = get_from_tags(instance, :name).presence || uid
+    name = get_from_tags(instance, :name) || uid
 
     device = parent_manager_fetch_path(:vms, uid)
 

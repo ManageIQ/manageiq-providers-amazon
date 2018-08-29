@@ -202,8 +202,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       flavor = persister.flavors.find(instance['instance_type']) || persister.flavors.find("unknown")
 
       uid  = instance['instance_id']
-      name = get_from_tags(instance, :name)
-      name = name.blank? ? uid : name
+      name = get_from_tags(instance, :name) || uid
 
       lazy_vm = persister.vms.lazy_find(uid)
 
