@@ -13,7 +13,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
   def volumes
     collector.cloud_volumes.each do |volume|
       persister_volume = persister.cloud_volumes.find_or_build(volume['volume_id']).assign_attributes(
-        :name              => get_from_tags(volume, :name) || volume['volume_id'],
+        :name              => get_from_tags(volume, :name).presence || volume['volume_id'],
         :status            => volume['state'],
         :creation_time     => volume['create_time'],
         :volume_type       => volume['volume_type'],
@@ -31,7 +31,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs < Mana
   def snapshots
     collector.cloud_volume_snapshots.each do |snap|
       persister.cloud_volume_snapshots.find_or_build(snap['snapshot_id']).assign_attributes(
-        :name          => get_from_tags(snap, :name) || snap['snapshot_id'],
+        :name          => get_from_tags(snap, :name).presence || snap['snapshot_id'],
         :status        => snap['state'],
         :creation_time => snap['start_time'],
         :description   => snap['description'],

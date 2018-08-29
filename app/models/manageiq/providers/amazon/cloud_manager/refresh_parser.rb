@@ -303,7 +303,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     new_result = {
       :type                   => ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack.name,
       :ems_ref                => uid,
-      :name                   => stack.name,
+      :name                   => stack.name.presence || uid,
       :description            => stack.description,
       :status                 => stack.stack_status,
       :status_reason          => stack.stack_status_reason,
@@ -361,7 +361,7 @@ class ManageIQ::Providers::Amazon::CloudManager::RefreshParser < ManageIQ::Provi
     uid = stack.stack_id
     new_result = {
       :type        => "ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate",
-      :name        => stack.name,
+      :name        => stack.name.presence || uid,
       :description => stack.description,
       :content     => stack.client.get_template(:stack_name => stack.name).template_body,
       :orderable   => false
