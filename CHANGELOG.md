@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 93 ending 2018-08-27
+
+### Added
+- AWS instance types data refactoring and update [(#449)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/449)
+
+### Fixed
+- Add in missing user creation audit event. [(#479)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/479)
+- remove bare metal instance [(#476)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/476)
+
 ## Unreleased as of Sprint 90 ending 2018-07-16
 
 ### Added
