@@ -363,7 +363,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def service_parameters_set(persister_service_offering)
-    service_parameters_set = collector.service_parameters_set(persister_service_offering)
+    service_parameters_set = collector.service_parameters_set(persister_service_offering.ems_ref)
     return unless service_parameters_set
 
     persister.service_parameters_sets.build(
@@ -379,18 +379,27 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def service_instances
+    # TODO(lsmola) a link to orchestration stack is in last_record_outputs
+
     collector.service_instances.each do |service_instance|
+      described_record         = collector.describe_record(service_instance.last_record_id)
+      described_record_detail  = described_record&.record_detail
+      described_record_outputs = described_record&.record_outputs
+
       persister.service_instances.build(
-        :name    => service_instance.name,
-        :ems_ref => service_instance.id,
-        :extra   => {
-          :arn               => service_instance.arn,
-          :type              => service_instance.type,
-          :status            => service_instance.status,
-          :status_message    => service_instance.status_message,
-          :created_time      => service_instance.created_time,
-          :idempotency_token => service_instance.idempotency_token,
-          :last_record_id    => service_instance.last_record_id,
+        :name             => service_instance.name,
+        :ems_ref          => service_instance.id,
+        :service_offering => persister.service_offerings.lazy_find(described_record_detail&.product_id),
+        :extra            => {
+          :arn                 => service_instance.arn,
+          :type                => service_instance.type,
+          :status              => service_instance.status,
+          :status_message      => service_instance.status_message,
+          :created_time        => service_instance.created_time,
+          :idempotency_token   => service_instance.idempotency_token,
+          :last_record_id      => service_instance.last_record_id,
+          :last_record_detail  => described_record_detail,
+          :last_record_outputs => described_record_outputs,
         }
       )
     end

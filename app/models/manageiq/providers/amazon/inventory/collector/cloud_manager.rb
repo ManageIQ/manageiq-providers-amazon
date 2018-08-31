@@ -82,10 +82,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
     []
   end
 
-  def service_parameters_set(persister_service_offering)
+  def service_parameters_set(product_id)
     # TODO(lsmola) too many API calls, we need to do it in multiple threads
 
-    product_id = persister_service_offering.ems_ref
     # TODO(lsmola) can there be more artifacts and launch paths?
     artifact    = aws_service_catalog.client.list_provisioning_artifacts(:product_id => product_id).provisioning_artifact_details.first
     launch_path = aws_service_catalog.client.list_launch_paths(:product_id => product_id).launch_path_summaries.first
@@ -97,6 +96,13 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
     )
   rescue => e
     _log.warn("Couldn't fetch 'describe_provisioning_parameters' of service catalog, message: #{e.message}")
+    nil
+  end
+
+  def describe_record(record_id)
+    aws_service_catalog.client.describe_record(:id => record_id)
+  rescue => e
+    _log.warn("Couldn't fetch 'describe_record' of service catalog, message: #{e.message}")
     nil
   end
 
