@@ -12,14 +12,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
       X-Amz-Date:
-      - 20170503T121322Z
+      - 20180904T080220Z
       X-Amz-Content-Sha256:
       - ee7457b505a85bcdc54c00cc7e1428239c8d49174f88965bdf64f2a7c3baa103
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170503/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1f9b7852c58834380cd98c38273c523d97e9f924adba90a0cb6b9308160fba9e
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180904/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=7ec586eabfba27d1b1c19632f764de952f2b3dd98e0e14587649e12b10540583
       Content-Length:
       - '173'
       Accept:
@@ -30,15 +30,15 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - e72ae676-2ff9-11e7-b5bc-c13618c4d942
+      - d99d5379-b018-11e8-842e-2925a6fb6b81
       Content-Type:
       - text/xml
       Content-Length:
-      - '2483'
+      - '2703'
       Vary:
       - Accept-Encoding
       Date:
-      - Wed, 03 May 2017 12:13:23 GMT
+      - Tue, 04 Sep 2018 08:02:20 GMT
     body:
       encoding: UTF-8
       string: |
@@ -73,6 +73,11 @@ http_interactions:
                     <Key>EmsRefreshSpecStack-key1</Key>
                   </member>
                 </Tags>
+                <RollbackConfiguration/>
+                <DriftInformation>
+                  <StackDriftStatus>NOT_CHECKED</StackDriftStatus>
+                </DriftInformation>
+                <EnableTerminationProtection>false</EnableTerminationProtection>
                 <Parameters>
                   <member>
                     <ParameterKey>KeyName</ParameterKey>
@@ -95,11 +100,11 @@ http_interactions:
             </Stacks>
           </DescribeStacksResult>
           <ResponseMetadata>
-            <RequestId>e72ae676-2ff9-11e7-b5bc-c13618c4d942</RequestId>
+            <RequestId>d99d5379-b018-11e8-842e-2925a6fb6b81</RequestId>
           </ResponseMetadata>
         </DescribeStacksResponse>
     http_version: 
-  recorded_at: Wed, 03 May 2017 12:13:23 GMT
+  recorded_at: Tue, 04 Sep 2018 08:02:21 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -112,14 +117,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
       X-Amz-Date:
-      - 20170503T121323Z
+      - 20180904T080221Z
       X-Amz-Content-Sha256:
       - 757f116d419bd4d4b28f0f2066e5d8ebd0130dccf7e5ddc04269a9836899e0bd
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170503/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=0d197d928e028005104f4c0d2f62eac20ea1fe9d4afeb3631b7f75ff826aae72
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180904/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=faed03eb5224ae0bf2a0f09a5af18390dca6a44c7989f295c48938c91709a284
       Content-Length:
       - '205'
       Accept:
@@ -130,15 +135,15 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - e7770b04-2ff9-11e7-9364-9f6d0da3defe
+      - d9e4953d-b018-11e8-9cdb-69236bc4bef1
       Content-Type:
       - text/xml
       Content-Length:
-      - '2731'
+      - '3223'
       Vary:
       - Accept-Encoding
       Date:
-      - Wed, 03 May 2017 12:13:23 GMT
+      - Tue, 04 Sep 2018 08:02:20 GMT
     body:
       encoding: UTF-8
       string: |
@@ -157,12 +162,14 @@ http_interactions:
                   <member>CAPABILITY_NAMED_IAM</member>
                 </Capabilities>
                 <CreationTime>2017-05-03T10:46:56.780Z</CreationTime>
+                <RootId>arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack/b4e06950-2fed-11e7-bd93-500c286374d1</RootId>
                 <NotificationARNs/>
                 <StackId>arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance-1CTHQS2P5WJ7S/d3bb46b0-2fed-11e7-a3d9-503f23fb55fe</StackId>
                 <StackName>EmsRefreshSpecStack-WebServerInstance-1CTHQS2P5WJ7S</StackName>
                 <Description>AWS CloudFormation Sample Template VPC_Single_Instance_In_Subnet: Sample template showing how to create a VPC and add an EC2 instance with an Elastic IP address and a security group. **WARNING** This template creates an Amazon EC2 instance. You will be billed for the AWS resources used if you create a stack from this template.</Description>
                 <StackStatus>CREATE_COMPLETE</StackStatus>
                 <DisableRollback>true</DisableRollback>
+                <ParentId>arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack/b4e06950-2fed-11e7-bd93-500c286374d1</ParentId>
                 <Tags>
                   <member>
                     <Value>EmsRefreshSpecStack-value2</Value>
@@ -173,6 +180,11 @@ http_interactions:
                     <Key>EmsRefreshSpecStack-key1</Key>
                   </member>
                 </Tags>
+                <RollbackConfiguration/>
+                <DriftInformation>
+                  <StackDriftStatus>NOT_CHECKED</StackDriftStatus>
+                </DriftInformation>
+                <EnableTerminationProtection>false</EnableTerminationProtection>
                 <Parameters>
                   <member>
                     <ParameterKey>KeyName</ParameterKey>
@@ -203,11 +215,11 @@ http_interactions:
             </Stacks>
           </DescribeStacksResult>
           <ResponseMetadata>
-            <RequestId>e7770b04-2ff9-11e7-9364-9f6d0da3defe</RequestId>
+            <RequestId>d9e4953d-b018-11e8-9cdb-69236bc4bef1</RequestId>
           </ResponseMetadata>
         </DescribeStacksResponse>
     http_version: 
-  recorded_at: Wed, 03 May 2017 12:13:23 GMT
+  recorded_at: Tue, 04 Sep 2018 08:02:21 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -220,14 +232,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
       X-Amz-Date:
-      - 20170503T121323Z
+      - 20180904T080221Z
       X-Amz-Content-Sha256:
       - 4dc6d77a6dbb5ed8a7f7ff3b24280515d1c3b34596643cdface7d23473f3237f
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170503/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=9f6ab158af863aae7975eb96d567329cb6f1e63953a011ecccba593a743be8bb
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180904/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ddef38249cc596997ba230b6c823ceaf52216afb5cea15be119fa6c0420520cc
       Content-Length:
       - '67'
       Accept:
@@ -238,7 +250,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - e7c1f622-2ff9-11e7-9a1c-ddb8f8e2f413
+      - da2c4c8c-b018-11e8-9c4f-3f2efac56926
       Content-Type:
       - text/xml
       Content-Length:
@@ -246,7 +258,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Wed, 03 May 2017 12:13:23 GMT
+      - Tue, 04 Sep 2018 08:02:22 GMT
     body:
       encoding: UTF-8
       string: "<GetTemplateResponse xmlns=\"http://cloudformation.amazonaws.com/doc/2010-05-15/\">\n
@@ -385,10 +397,10 @@ http_interactions:
         : &quot;IP Address of the host&quot;,\n      &quot;Value&quot; :  { &quot;Ref&quot;
         : &quot;WebServerInstance&quot; }\n    }\n  }\n}\n</TemplateBody>\n    <StagesAvailable>\n
         \     <member>Original</member>\n      <member>Processed</member>\n    </StagesAvailable>\n
-        \ </GetTemplateResult>\n  <ResponseMetadata>\n    <RequestId>e7c1f622-2ff9-11e7-9a1c-ddb8f8e2f413</RequestId>\n
+        \ </GetTemplateResult>\n  <ResponseMetadata>\n    <RequestId>da2c4c8c-b018-11e8-9c4f-3f2efac56926</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
     http_version: 
-  recorded_at: Wed, 03 May 2017 12:13:24 GMT
+  recorded_at: Tue, 04 Sep 2018 08:02:22 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -401,14 +413,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
       X-Amz-Date:
-      - 20170503T121324Z
+      - 20180904T080222Z
       X-Amz-Content-Sha256:
       - 5129d3e8ebb78afbee802141b221fa01c75c48ea0420549a3a199f5af6b9849c
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170503/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=161e724a091f4a36a910c22e712cf19eaee78880b74e8ea928196386da21d01f
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180904/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=e4647ca98fe6eab0a13032b932b404c4d51cb497b0da557037ac904165b955bf
       Content-Length:
       - '74'
       Accept:
@@ -419,15 +431,15 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - e81b39fb-2ff9-11e7-af69-f94eab766ea4
+      - dad3890e-b018-11e8-b13f-cbc83acd995e
       Content-Type:
       - text/xml
       Content-Length:
-      - '6667'
+      - '8877'
       Vary:
       - Accept-Encoding
       Date:
-      - Wed, 03 May 2017 12:13:24 GMT
+      - Tue, 04 Sep 2018 08:02:22 GMT
     body:
       encoding: UTF-8
       string: |
@@ -438,6 +450,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:51.634Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>EmsRe-Attac-18IYH2NXW163I</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>AttachGateway</LogicalResourceId>
                 <ResourceType>AWS::EC2::VPCGatewayAttachment</ResourceType>
               </member>
@@ -445,6 +460,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:59.572Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>EmsRe-Inbou-1M80E3XJX5ZG6</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>InboundHTTPNetworkAclEntry</LogicalResourceId>
                 <ResourceType>AWS::EC2::NetworkAclEntry</ResourceType>
               </member>
@@ -452,6 +470,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:56.467Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>EmsRe-Inbou-E8UR0I5STC4V</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>InboundResponsePortsNetworkAclEntry</LogicalResourceId>
                 <ResourceType>AWS::EC2::NetworkAclEntry</ResourceType>
               </member>
@@ -459,6 +480,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:55.099Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>EmsRe-Inbou-1E29UZ91J3L0R</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>InboundSSHNetworkAclEntry</LogicalResourceId>
                 <ResourceType>AWS::EC2::NetworkAclEntry</ResourceType>
               </member>
@@ -466,6 +490,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:51.481Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>sg-76c10f08</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>InstanceSecurityGroup</LogicalResourceId>
                 <ResourceType>AWS::EC2::SecurityGroup</ResourceType>
               </member>
@@ -473,6 +500,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:29.550Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>igw-64924d02</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>InternetGateway</LogicalResourceId>
                 <ResourceType>AWS::EC2::InternetGateway</ResourceType>
               </member>
@@ -480,6 +510,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:34.869Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>acl-e616ad9f</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>NetworkAcl</LogicalResourceId>
                 <ResourceType>AWS::EC2::NetworkAcl</ResourceType>
               </member>
@@ -487,6 +520,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:56.226Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>EmsRe-OutBo-1NZIAZJB04JPV</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>OutBoundHTTPNetworkAclEntry</LogicalResourceId>
                 <ResourceType>AWS::EC2::NetworkAclEntry</ResourceType>
               </member>
@@ -494,6 +530,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:56.162Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>EmsRe-OutBo-11CPJOERKOC1S</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>OutBoundHTTPSNetworkAclEntry</LogicalResourceId>
                 <ResourceType>AWS::EC2::NetworkAclEntry</ResourceType>
               </member>
@@ -501,6 +540,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:57.712Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>EmsRe-OutBo-1VCOFXN25WKE2</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>OutBoundResponsePortsNetworkAclEntry</LogicalResourceId>
                 <ResourceType>AWS::EC2::NetworkAclEntry</ResourceType>
               </member>
@@ -508,6 +550,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:47:11.450Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>EmsRe-Route-CE90KA6C89YL</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>Route</LogicalResourceId>
                 <ResourceType>AWS::EC2::Route</ResourceType>
               </member>
@@ -515,6 +560,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:35.945Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>rtb-d37690ab</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>RouteTable</LogicalResourceId>
                 <ResourceType>AWS::EC2::RouteTable</ResourceType>
               </member>
@@ -522,6 +570,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:51.908Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>subnet-2190b144</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>Subnet</LogicalResourceId>
                 <ResourceType>AWS::EC2::Subnet</ResourceType>
               </member>
@@ -529,6 +580,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:47:12.194Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>aclassoc-5960cf29</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>SubnetNetworkAclAssociation</LogicalResourceId>
                 <ResourceType>AWS::EC2::SubnetNetworkAclAssociation</ResourceType>
               </member>
@@ -536,6 +590,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:47:11.882Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>rtbassoc-d35ff3a8</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>SubnetRouteTableAssociation</LogicalResourceId>
                 <ResourceType>AWS::EC2::SubnetRouteTableAssociation</ResourceType>
               </member>
@@ -543,6 +600,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:46:30.347Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>vpc-8cf117f5</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>VPC</LogicalResourceId>
                 <ResourceType>AWS::EC2::VPC</ResourceType>
               </member>
@@ -550,17 +610,20 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:49:38.256Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-WebServerInstance-1CTHQS2P5WJ7S/d3bb46b0-2fed-11e7-a3d9-503f23fb55fe</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>WebServerInstance</LogicalResourceId>
                 <ResourceType>AWS::CloudFormation::Stack</ResourceType>
               </member>
             </StackResourceSummaries>
           </ListStackResourcesResult>
           <ResponseMetadata>
-            <RequestId>e81b39fb-2ff9-11e7-af69-f94eab766ea4</RequestId>
+            <RequestId>dad3890e-b018-11e8-b13f-cbc83acd995e</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
     http_version: 
-  recorded_at: Wed, 03 May 2017 12:13:24 GMT
+  recorded_at: Tue, 04 Sep 2018 08:02:23 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -573,14 +636,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
       X-Amz-Date:
-      - 20170503T121324Z
+      - 20180904T080223Z
       X-Amz-Content-Sha256:
       - f005060b494874c71d174f59905bab23a022e5b3da296b5735783b2d2b59db30
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170503/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=46de7e6d91f3dcdda5caf888bbdd27d7548dbb4570bccdb5076ca3dc6c876d66
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180904/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=9fc9bd6ba12b7411098130713b7cae150974ab49b046c5bf294179affdef739f
       Content-Length:
       - '99'
       Accept:
@@ -591,7 +654,7 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - e86f26c6-2ff9-11e7-9364-9f6d0da3defe
+      - db5f4e32-b018-11e8-931d-1523b47f4c7e
       Content-Type:
       - text/xml
       Content-Length:
@@ -599,7 +662,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Date:
-      - Wed, 03 May 2017 12:13:25 GMT
+      - Tue, 04 Sep 2018 08:02:23 GMT
     body:
       encoding: UTF-8
       string: "<GetTemplateResponse xmlns=\"http://cloudformation.amazonaws.com/doc/2010-05-15/\">\n
@@ -873,10 +936,10 @@ http_interactions:
         &quot;PublicIp&quot;] }]]},\n      &quot;Description&quot; : &quot;Newly created
         application URL&quot;\n    }\n  }\n}\n\n</TemplateBody>\n    <StagesAvailable>\n
         \     <member>Original</member>\n      <member>Processed</member>\n    </StagesAvailable>\n
-        \ </GetTemplateResult>\n  <ResponseMetadata>\n    <RequestId>e86f26c6-2ff9-11e7-9364-9f6d0da3defe</RequestId>\n
+        \ </GetTemplateResult>\n  <ResponseMetadata>\n    <RequestId>db5f4e32-b018-11e8-931d-1523b47f4c7e</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
     http_version: 
-  recorded_at: Wed, 03 May 2017 12:13:25 GMT
+  recorded_at: Tue, 04 Sep 2018 08:02:24 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -889,14 +952,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.8.14 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
       X-Amz-Date:
-      - 20170503T121325Z
+      - 20180904T080224Z
       X-Amz-Content-Sha256:
       - e1551a75591c27367c42f68080eafefed1acf68b0640eb3eb946c2c3d1007a07
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170503/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=d71c772b9d8c25ce748118a96fe789679152d75bee374653327af75b5f194fca
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180904/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=973e441dad6fe940bd0dafe5f0347c34357e306a60d6e699ac4b3aa1e081997b
       Content-Length:
       - '106'
       Accept:
@@ -907,13 +970,13 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - e8daba16-2ff9-11e7-a7ba-bdb34b9efcc2
+      - dc05ef16-b018-11e8-91bb-c335d2bc6566
       Content-Type:
       - text/xml
       Content-Length:
-      - '1037'
+      - '1297'
       Date:
-      - Wed, 03 May 2017 12:13:25 GMT
+      - Tue, 04 Sep 2018 08:02:24 GMT
     body:
       encoding: UTF-8
       string: |
@@ -924,6 +987,9 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:49:32.560Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>34.202.178.10</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>IPAddress</LogicalResourceId>
                 <ResourceType>AWS::EC2::EIP</ResourceType>
               </member>
@@ -931,15 +997,18 @@ http_interactions:
                 <LastUpdatedTimestamp>2017-05-03T10:48:56.988Z</LastUpdatedTimestamp>
                 <PhysicalResourceId>i-0bca58e6e540ddc39</PhysicalResourceId>
                 <ResourceStatus>CREATE_COMPLETE</ResourceStatus>
+                <DriftInformation>
+                  <StackResourceDriftStatus>NOT_CHECKED</StackResourceDriftStatus>
+                </DriftInformation>
                 <LogicalResourceId>WebServerInstance</LogicalResourceId>
                 <ResourceType>AWS::EC2::Instance</ResourceType>
               </member>
             </StackResourceSummaries>
           </ListStackResourcesResult>
           <ResponseMetadata>
-            <RequestId>e8daba16-2ff9-11e7-a7ba-bdb34b9efcc2</RequestId>
+            <RequestId>dc05ef16-b018-11e8-91bb-c335d2bc6566</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
     http_version: 
-  recorded_at: Wed, 03 May 2017 12:13:25 GMT
+  recorded_at: Tue, 04 Sep 2018 08:02:25 GMT
 recorded_with: VCR 3.0.3
