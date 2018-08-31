@@ -68,6 +68,10 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManageIQ::Providers::I
     @aws_cloud_formation ||= manager.connect(:service => :CloudFormation)
   end
 
+  def aws_service_catalog
+    @aws_service_catalog = manager.connect(:service => :ServiceCatalog)
+  end
+
   def aws_elb
     @aws_elb ||= manager.connect(:service => :ElasticLoadBalancing)
   end

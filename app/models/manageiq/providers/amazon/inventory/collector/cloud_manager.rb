@@ -68,6 +68,38 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
     aws_cloud_formation.client.get_template(:stack_name => stack_name).template_body
   end
 
+  def service_offerings
+    aws_service_catalog.client.search_products_as_admin.product_view_details
+  rescue => e
+    _log.warn("Couldn't fetch 'search_products_as_admin' of service catalog, message: #{e.message}")
+    []
+  end
+
+  def service_instances
+    aws_service_catalog.client.scan_provisioned_products.provisioned_products
+  rescue => e
+    _log.warn("Couldn't fetch 'provisioned_products' of service catalog, message: #{e.message}")
+    []
+  end
+
+  def service_parameters_set(persister_service_offering)
+    # TODO(lsmola) too many API calls, we need to do it in multiple threads
+
+    product_id = persister_service_offering.ems_ref
+    # TODO(lsmola) can there be more artifacts and launch paths?
+    artifact    = aws_service_catalog.client.list_provisioning_artifacts(:product_id => product_id).provisioning_artifact_details.first
+    launch_path = aws_service_catalog.client.list_launch_paths(:product_id => product_id).launch_path_summaries.first
+
+    aws_service_catalog.client.describe_provisioning_parameters(
+      :product_id               => product_id,
+      :provisioning_artifact_id => artifact.id,
+      :path_id                  => launch_path.id
+    )
+  rescue => e
+    _log.warn("Couldn't fetch 'describe_provisioning_parameters' of service catalog, message: #{e.message}")
+    nil
+  end
+
   private
 
   def extra_image_references

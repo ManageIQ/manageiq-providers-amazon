@@ -17,6 +17,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     public_images if collector.options.get_public_images
     referenced_images
     instances
+    service_offerings
+    service_instances
 
     $aws_log.info("#{log_header}...Complete")
   end
@@ -339,6 +341,57 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     collector.key_pairs.each do |kp|
       persister.key_pairs.find_or_build(kp['key_name']).assign_attributes(
         :fingerprint => kp['key_fingerprint']
+      )
+    end
+  end
+
+  def service_offerings
+    collector.service_offerings.each do |service_offering|
+      persister_service_offering = persister.service_offerings.build(
+        :name    => service_offering.product_view_summary.name,
+        :ems_ref => service_offering.product_view_summary.product_id,
+        :extra   => {
+          :product_view_summary => service_offering.product_view_summary,
+          :status               => service_offering.status,
+          :product_arn          => service_offering.product_arn,
+          :created_time         => service_offering.created_time,
+        }
+      )
+
+      service_parameters_set(persister_service_offering)
+    end
+  end
+
+  def service_parameters_set(persister_service_offering)
+    service_parameters_set = collector.service_parameters_set(persister_service_offering)
+    return unless service_parameters_set
+
+    persister.service_parameters_sets.build(
+      :name             => persister_service_offering.name,
+      :ems_ref          => persister_service_offering.ems_ref,
+      :service_offering => persister_service_offering,
+      :extra            => {
+        :provisioning_artifact_parameters => service_parameters_set.provisioning_artifact_parameters,
+        :constraint_summaries             => service_parameters_set.constraint_summaries,
+        :usage_instructions               => service_parameters_set.usage_instructions,
+      }
+    )
+  end
+
+  def service_instances
+    collector.service_instances.each do |service_instance|
+      persister.service_instances.build(
+        :name    => service_instance.name,
+        :ems_ref => service_instance.id,
+        :extra   => {
+          :arn               => service_instance.arn,
+          :type              => service_instance.type,
+          :status            => service_instance.status,
+          :status_message    => service_instance.status_message,
+          :created_time      => service_instance.created_time,
+          :idempotency_token => service_instance.idempotency_token,
+          :last_record_id    => service_instance.last_record_id,
+        }
       )
     end
   end

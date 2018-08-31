@@ -9,7 +9,10 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
        operating_systems
        vm_and_template_labels
        vm_and_template_taggings
-       vms).each do |name|
+       vms
+       service_instances
+       service_offerings
+       service_parameters_sets).each do |name|
 
       add_collection(cloud, name)
     end
