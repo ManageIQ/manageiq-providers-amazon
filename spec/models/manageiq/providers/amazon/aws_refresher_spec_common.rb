@@ -57,7 +57,7 @@ module AwsRefresherSpecCommon
   end
 
   def assert_common
-    expect(@ems.direct_orchestration_stacks.size).to eql(5)
+    expect(@ems.direct_orchestration_stacks.size).to eql(7)
     assert_specific_flavor
     assert_specific_az
     assert_specific_key_pair
@@ -84,8 +84,11 @@ module AwsRefresherSpecCommon
     assert_network_router
     assert_relationship_tree
     assert_specific_labels_on_vm
-    assert_specific_service_offering
-    assert_specific_service_instance
+
+    if options.inventory_object_refresh
+      assert_specific_service_offering
+      assert_specific_service_instance
+    end
   end
 
   def assert_specific_flavor
@@ -1468,10 +1471,298 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_service_offering
+    @service_offering_with_no_portfolio = ServiceOffering.find_by(:name => "EmsRefreshSpecProductWithNoPortfolio")
+    expect(@service_offering_with_no_portfolio).to(
+      have_attributes(
+        "name"        => "EmsRefreshSpecProductWithNoPortfolio",
+        "ems_ref"     => "prod-4v6rc4hwaiiha",
+        "type"        => "ManageIQ::Providers::Amazon::CloudManager::ServiceOffering",
+        "description" => nil,
+        "ems_id"      => @ems.id,
+        "extra"       => {
+          "status"               => "CREATED",
+          "product_arn"          => "arn:aws:catalog:us-east-1:200278856672:product/prod-4v6rc4hwaiiha",
+          "created_time"         => "2018-09-04T16:27:59.000+02:00",
+          "product_view_summary" => {
+            "id"                  => "prodview-mojlvmp5xax74",
+            "name"                => "EmsRefreshSpecProductWithNoPortfolio",
+            "type"                => "CLOUD_FORMATION_TEMPLATE",
+            "owner"               => "EmsRefreshSpecProductWithNoPortfolioOwner",
+            "product_id"          => "prod-4v6rc4hwaiiha",
+            "distributor"         => "",
+            "support_url"         => nil,
+            "support_email"       => nil,
+            "has_default_path"    => false,
+            "short_description"   => "EmsRefreshSpecProductWithNoPortfolio desc",
+            "support_description" => nil
+          }
+        },
+        "deleted_on"  => nil,
+      )
+    )
+    @service_offering_with_two_portfolios = ServiceOffering.find_by(:name => "EmsRefreshSpecProduct")
+    expect(@service_offering_with_two_portfolios).to(
+      have_attributes(
+        "name"        => "EmsRefreshSpecProduct",
+        "ems_ref"     => "prod-h7p6ruq5qgrga",
+        "type"        => "ManageIQ::Providers::Amazon::CloudManager::ServiceOffering",
+        "description" => nil,
+        "ems_id"      => @ems.id,
+        "extra"       => {
+          "status"               => "CREATED",
+          "product_arn"          => "arn:aws:catalog:us-east-1:200278856672:product/prod-h7p6ruq5qgrga",
+          "created_time"         => "2018-09-04T11:00:13.000+02:00",
+          "product_view_summary" => {
+            "id"                  => "prodview-j3n5gqatjrkk2",
+            "name"                => "EmsRefreshSpecProduct",
+            "type"                => "CLOUD_FORMATION_TEMPLATE",
+            "owner"               => "EmsRefreshSpecOwner",
+            "product_id"          => "prod-h7p6ruq5qgrga",
+            "distributor"         => "EmsRefreshSpecVendor",
+            "support_url"         => "http://EmsRefreshSpec.com",
+            "support_email"       => "EmsRefreshSpec@test.com",
+            "has_default_path"    => false,
+            "short_description"   => "EmsRefreshSpecProduct description",
+            "support_description" => "EmsRefreshSpec desc"
+          }
+        },
+        "deleted_on"  => nil,
+      )
+    )
 
+    @service_offering_with_rules = ServiceOffering.find_by(:name => "EmsRefreshSpecProductWithRules")
+    expect(@service_offering_with_rules).to(
+      have_attributes(
+        "name"        => "EmsRefreshSpecProductWithRules",
+        "ems_ref"     => "prod-cei2spnzu24lq",
+        "type"        => "ManageIQ::Providers::Amazon::CloudManager::ServiceOffering",
+        "description" => nil,
+        "ems_id"      => @ems.id,
+        "extra"       => {
+          "status"               => "CREATED",
+          "product_arn"          => "arn:aws:catalog:us-east-1:200278856672:product/prod-cei2spnzu24lq",
+          "created_time"         => "2018-09-04T15:23:06.000+02:00",
+          "product_view_summary" => {
+            "id"                  => "prodview-as7h736moeyrc",
+            "name"                => "EmsRefreshSpecProductWithRules",
+            "type"                => "CLOUD_FORMATION_TEMPLATE",
+            "owner"               => "EmsRefreshSpecProductWithRulesowner",
+            "product_id"          => "prod-cei2spnzu24lq",
+            "distributor"         => "EmsRefreshSpecProductWithRulesVendor",
+            "support_url"         => nil,
+            "support_email"       => nil,
+            "has_default_path"    => false,
+            "short_description"   => "EmsRefreshSpecProductWithRules desc",
+            "support_description" => nil
+          }
+        },
+        "deleted_on"  => nil,
+      )
+    )
+
+    assert_service_parameters_sets
+  end
+
+  def assert_service_parameters_sets
+    expect(@service_offering_with_no_portfolio.service_parameters_sets.size).to eq 0
+    expect(@service_offering_with_two_portfolios.service_parameters_sets.pluck(:name, :ems_ref)).to(
+      contain_exactly(
+        ["EmsRefreshSpecProduct v2 EmsRefreshSpecPortfolio", "prod-h7p6ruq5qgrga__pa-nr3ua3nz3pgwq__lp-e76ssfhze5jyi"],
+        ["EmsRefreshSpecProduct v3 EmsRefreshSpecPortfolio", "prod-h7p6ruq5qgrga__pa-ysaib55ylta6k__lp-e76ssfhze5jyi"],
+        ["EmsRefreshSpecProduct v2 EmsRefreshSpecPortfolio2", "prod-h7p6ruq5qgrga__pa-nr3ua3nz3pgwq__lp-rb5sy6f5vyrdk"],
+        ["EmsRefreshSpecProduct v3 EmsRefreshSpecPortfolio2", "prod-h7p6ruq5qgrga__pa-ysaib55ylta6k__lp-rb5sy6f5vyrdk"],
+      )
+    )
+
+    expect(@service_offering_with_rules.service_parameters_sets.pluck(:name, :ems_ref)).to(
+      contain_exactly(
+        ["EmsRefreshSpecProductWithRules v1.1 EmsRefreshSpecPortfolio2", "prod-cei2spnzu24lq__pa-ybnrerfyrhm74__lp-jg4ob2tnq4pg2"]
+      )
+    )
   end
 
   def assert_specific_service_instance
+    # There is no admin view, we need to provision the product using the VCR account:
+    # Assign admin rights temporarily and run:
+    # aws_service_catalog.client.provision_product(:product_id => "prod-h7p6ruq5qgrga", :provisioned_product_name => "EmsRefreshSpecServiceInstanceV3", :provisioning_artifact_id => "pa-ysaib55ylta6k", :path_id => "lp-e76ssfhze5jyi",:provisioning_parameters => [{:key => "InstanceType", :value => "t1.micro"}, {:key => "KeyName", :value => "EmsRefreshSpec-KeyPair"}])
+    # aws_service_catalog.client.provision_product(:product_id => "prod-h7p6ruq5qgrga", :provisioned_product_name => "EmsRefreshSpecServiceInstance", :provisioning_artifact_id => "pa-nr3ua3nz3pgwq", :path_id => "lp-rb5sy6f5vyrdk", :provisioning_parameters => [{:key => "InstanceType", :value => "t1.micro"}, {:key => "KeyName", :value => "EmsRefreshSpec-KeyPair"}])
+    # aws_service_catalog.client.provision_product(:product_id => "prod-cei2spnzu24lq", :provisioned_product_name => "EmsRefreshSpecServiceInstanceWithRules", :provisioning_artifact_id => "pa-ybnrerfyrhm74", :path_id => "lp-jg4ob2tnq4pg2", :provisioning_parameters => [{:key => "InstanceType", :value => "t1.micro"}, {:key => "KeyName", :value => "EmsRefreshSpec-KeyPair"}, {:key => "Environment", :value => "test"}])
+    @service_instance_with_rules = ServiceInstance.find_by(:name => "EmsRefreshSpecServiceInstanceWithRules")
+    expect(@service_instance_with_rules).to(
+      have_attributes(
+        "name"                      => "EmsRefreshSpecServiceInstanceWithRules",
+        "ems_ref"                   => "pp-5pyltbgyzheqm",
+        "type"                      => "ManageIQ::Providers::Amazon::CloudManager::ServiceInstance",
+        "ems_id"                    => @ems.id,
+        "service_offering_id"       => @service_offering_with_rules.id,
+        "service_parameters_set_id" => service_parameter_set(@service_instance_with_rules).id,
+        "extra"                     => {
+          "arn"                 => "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceWithRules/pp-5pyltbgyzheqm",
+          "type"                => "CFN_STACK",
+          "status"              => "AVAILABLE",
+          "created_time"        => "2018-09-04T15:38:38.933+02:00",
+          "last_record_id"      => "rec-li62bnn6bnza4",
+          "status_message"      => nil,
+          "idempotency_token"   => "39489a07-f013-4e49-a061-11360db7664c",
+          "last_record_detail"  => {
+            "status"                   => "SUCCEEDED",
+            "path_id"                  => "lp-jg4ob2tnq4pg2",
+            "record_id"                => "rec-li62bnn6bnza4",
+            "product_id"               => "prod-cei2spnzu24lq",
+            "record_tags"              => [
+              {
+                "key"   => "aws:servicecatalog:productArn",
+                "value" => "arn:aws:catalog:us-east-1:200278856672:product/prod-cei2spnzu24lq"
+              }, {
+                "key"   => "aws:servicecatalog:provisioningPrincipalArn",
+                "value" => "arn:aws:iam::200278856672:user/VCR"
+              }, {
+                "key"   => "aws:servicecatalog:portfolioArn",
+                "value" => "arn:aws:catalog:us-east-1:200278856672:portfolio/port-dg3wqzbxza75m"
+              }],
+            "record_type"              => "PROVISION_PRODUCT",
+            "created_time"             => "2018-09-04T15:38:38.937+02:00",
+            "updated_time"             => "2018-09-04T15:41:31.778+02:00",
+            "record_errors"            => [],
+            "provisioned_product_id"   => "pp-5pyltbgyzheqm",
+            "provisioned_product_name" => "EmsRefreshSpecServiceInstanceWithRules",
+            "provisioned_product_type" => "CFN_STACK",
+            "provisioning_artifact_id" => "pa-ybnrerfyrhm74"
+          },
+          "last_record_outputs" => [
+            {
+              "output_key"   => "CloudformationStackARN",
+              "description"  => "The ARN of the launched Cloudformation Stack",
+              "output_value" => "arn:aws:cloudformation:us-east-1:200278856672:stack/SC-200278856672-pp-5pyltbgyzheqm/d51dd9b0-b047-11e8-a5af-500c28709a35"
+            }, {
+              "output_key"   => "URL",
+              "description"  => "URL of the website",
+              "output_value" => "http://SC-200278-ElasticL-FDREQLBTVJ1Z-177825134.us-east-1.elb.amazonaws.com"
+            }
+          ]
+        },
+        "deleted_on"                => nil,
+      )
+    )
 
+    @service_instance_v3 = ServiceInstance.find_by(:name => "EmsRefreshSpecServiceInstanceV3")
+    expect(@service_instance_v3).to(
+      have_attributes(
+        "name"                      => "EmsRefreshSpecServiceInstanceV3",
+        "ems_ref"                   => "pp-u2tepcnttldko",
+        "type"                      => "ManageIQ::Providers::Amazon::CloudManager::ServiceInstance",
+        "ems_id"                    => @ems.id,
+        "service_offering_id"       => @service_offering_with_two_portfolios.id,
+        "service_parameters_set_id" => service_parameter_set(@service_instance_v3).id,
+        "extra"                     => {
+          "arn"                 =>
+            "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceV3/pp-u2tepcnttldko",
+          "type"                => "CFN_STACK",
+          "status"              => "AVAILABLE",
+          "created_time"        => "2018-09-06T10:18:51.782+02:00",
+          "last_record_id"      => "rec-coaoipufhru7e",
+          "status_message"      => nil,
+          "idempotency_token"   => "c4de373d-fc6b-45ac-a7d0-760b6be25756",
+          "last_record_detail"  =>
+            {"status"                   => "SUCCEEDED",
+             "path_id"                  => "lp-e76ssfhze5jyi",
+             "record_id"                => "rec-coaoipufhru7e",
+             "product_id"               => "prod-h7p6ruq5qgrga",
+             "record_tags"              =>
+               [{"key"   => "aws:servicecatalog:productArn",
+                 "value" =>
+                   "arn:aws:catalog:us-east-1:200278856672:product/prod-h7p6ruq5qgrga"},
+                {"key"   => "aws:servicecatalog:provisioningPrincipalArn",
+                 "value" => "arn:aws:iam::200278856672:user/VCR"},
+                {"key"   => "aws:servicecatalog:portfolioArn",
+                 "value" =>
+                   "arn:aws:catalog:us-east-1:200278856672:portfolio/port-4qwgmfklkgosk"}],
+             "record_type"              => "PROVISION_PRODUCT",
+             "created_time"             => "2018-09-06T10:18:51.789+02:00",
+             "updated_time"             => "2018-09-06T10:22:08.309+02:00",
+             "record_errors"            => [],
+             "provisioned_product_id"   => "pp-u2tepcnttldko",
+             "provisioned_product_name" => "EmsRefreshSpecServiceInstanceV3",
+             "provisioned_product_type" => "CFN_STACK",
+             "provisioning_artifact_id" => "pa-ysaib55ylta6k"},
+          "last_record_outputs" =>
+            [{"output_key"   => "CloudformationStackARN",
+              "description"  => "The ARN of the launched Cloudformation Stack",
+              "output_value" =>
+                "arn:aws:cloudformation:us-east-1:200278856672:stack/SC-200278856672-pp-u2tepcnttldko/7db5dfd0-b1ad-11e8-b3ce-500c524294d2"},
+             {"output_key"   => "URL",
+              "description"  => "URL of the website",
+              "output_value" =>
+                "http://SC-200278-ElasticL-OHBTSYAE8C89-342178717.us-east-1.elb.amazonaws.com"
+             }
+            ]
+        },
+        "deleted_on"                => nil,
+      )
+    )
+
+    @service_instance = ServiceInstance.find_by(:name => "EmsRefreshSpecServiceInstance")
+    expect(@service_instance).to(
+      have_attributes(
+        "name"                      => "EmsRefreshSpecServiceInstance",
+        "ems_ref"                   => "pp-gato4drzgerpy",
+        "type"                      => "ManageIQ::Providers::Amazon::CloudManager::ServiceInstance",
+        "ems_id"                    => @ems.id,
+        "service_offering_id"       => @service_offering_with_two_portfolios.id,
+        "service_parameters_set_id" => service_parameter_set(@service_instance).id,
+        "extra"                     => {
+          "arn"                 =>
+            "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstance/pp-gato4drzgerpy",
+          "type"                => "CFN_STACK",
+          "status"              => "AVAILABLE",
+          "created_time"        => "2018-09-06T10:19:14.188+02:00",
+          "last_record_id"      => "rec-txbigs6rk7vlc",
+          "status_message"      => nil,
+          "idempotency_token"   => "bd5ea4d0-de72-45be-a28b-2bfe9ae8e509",
+          "last_record_detail"  =>
+            {"status"                   => "SUCCEEDED",
+             "path_id"                  => "lp-rb5sy6f5vyrdk",
+             "record_id"                => "rec-txbigs6rk7vlc",
+             "product_id"               => "prod-h7p6ruq5qgrga",
+             "record_tags"              =>
+               [{"key"   => "aws:servicecatalog:productArn",
+                 "value" =>
+                   "arn:aws:catalog:us-east-1:200278856672:product/prod-h7p6ruq5qgrga"},
+                {"key"   => "aws:servicecatalog:provisioningPrincipalArn",
+                 "value" => "arn:aws:iam::200278856672:user/VCR"},
+                {"key"   => "aws:servicecatalog:portfolioArn",
+                 "value" =>
+                   "arn:aws:catalog:us-east-1:200278856672:portfolio/port-dg3wqzbxza75m"}],
+             "record_type"              => "PROVISION_PRODUCT",
+             "created_time"             => "2018-09-06T10:19:14.197+02:00",
+             "updated_time"             => "2018-09-06T10:22:54.450+02:00",
+             "record_errors"            => [],
+             "provisioned_product_id"   => "pp-gato4drzgerpy",
+             "provisioned_product_name" => "EmsRefreshSpecServiceInstance",
+             "provisioned_product_type" => "CFN_STACK",
+             "provisioning_artifact_id" => "pa-nr3ua3nz3pgwq"},
+          "last_record_outputs" =>
+            [{"output_key"   => "CloudformationStackARN",
+              "description"  => "The ARN of the launched Cloudformation Stack",
+              "output_value" =>
+                "arn:aws:cloudformation:us-east-1:200278856672:stack/SC-200278856672-pp-gato4drzgerpy/8addcb50-b1ad-11e8-a5af-500c28709a35"},
+             {"output_key"   => "URL",
+              "description"  => "URL of the website",
+              "output_value" =>
+                "http://SC-200278-ElasticL-G69XH7HDIQ0J-169282342.us-east-1.elb.amazonaws.com"
+             }
+            ]
+        },
+        "deleted_on"                => nil,
+      )
+    )
+  end
+
+  def service_parameter_set(record)
+    rec_detail = record.extra["last_record_detail"]
+
+    ServiceParametersSet.find_by(
+      :ems_ref => "#{rec_detail["product_id"]}__#{rec_detail["provisioning_artifact_id"]}__#{rec_detail["path_id"]}"
+    )
   end
 end
