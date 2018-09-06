@@ -69,7 +69,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManageIQ::Providers::I
   end
 
   def aws_service_catalog
-    @aws_service_catalog = manager.connect(:service => :ServiceCatalog)
+    @aws_service_catalog ||= manager.connect(:service => :ServiceCatalog)
   end
 
   def aws_elb
