@@ -8,19 +8,19 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
 
   # Parses all targets that are present in the EmsEvent given in the initializer
   #
-  # @return [Array] Array of ManagerRefresh::Target objects
+  # @return [Array] Array of InventoryRefresh::Target objects
   def parse
     parse_ems_event_targets(ems_event)
   end
 
   private
 
-  # Parses list of ManagerRefresh::Target out of the given EmsEvent
+  # Parses list of InventoryRefresh::Target out of the given EmsEvent
   #
   # @param event [EmsEvent] EmsEvent object
-  # @return [Array] Array of ManagerRefresh::Target objects
+  # @return [Array] Array of InventoryRefresh::Target objects
   def parse_ems_event_targets(event)
-    target_collection = ManagerRefresh::TargetCollection.new(:manager => event.ext_management_system, :event => event)
+    target_collection = InventoryRefresh::TargetCollection.new(:manager => event.ext_management_system, :event => event)
 
     case event.full_data["event_source"]
     when :cloud_watch_api

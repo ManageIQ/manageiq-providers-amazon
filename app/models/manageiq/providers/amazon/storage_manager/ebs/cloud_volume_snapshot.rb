@@ -63,7 +63,7 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot < ::
     with_provider_object(&:delete)
     update!(:status => 'deleting')
     EmsRefresh.queue_refresh(
-      ManagerRefresh::Target.new(
+      InventoryRefresh::Target.new(
         :association => :cloud_volume_snapshots,
         :manager_ref => { :ems_ref => ems_ref },
         :manager_id  => ems_id,

@@ -1,3 +1,5 @@
+require "inventory_refresh"
+
 module AwsRefresherSpecCommon
   extend ActiveSupport::Concern
 
@@ -41,8 +43,8 @@ module AwsRefresherSpecCommon
   def stub_refresh_settings(settings)
     # TODO(lsmola) extract the batch sizes to the settings and stub the settings instead
     # Lower batch sizes to test multiple batches for each collection
-    allow_any_instance_of(ManagerRefresh::InventoryCollection).to receive(:batch_size).and_return(4)
-    allow_any_instance_of(ManagerRefresh::InventoryCollection).to receive(:batch_size_pure_sql).and_return(4)
+    allow_any_instance_of(InventoryRefresh::InventoryCollection).to receive(:batch_size).and_return(4)
+    allow_any_instance_of(InventoryRefresh::InventoryCollection).to receive(:batch_size_pure_sql).and_return(4)
 
     stub_settings_merge(
       :ems_refresh => {
