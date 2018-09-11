@@ -2,7 +2,7 @@ class ManageIQ::Providers::Amazon::CloudManager::Refresher < ManageIQ::Providers
   # Saves the inventory to the DB
   #
   # @param ems [ManageIQ::Providers::BaseManager] Manager owning the refresh
-  # @param target [ManageIQ::Providers::BaseManager or ManagerRefresh::Target or ManagerRefresh::TargetCollection]
+  # @param target [ManageIQ::Providers::BaseManager or InventoryRefresh::Target or InventoryRefresh::TargetCollection]
   #        Target we are refreshing
   # @param _hashes_or_persister [Array<Hash> or ManageIQ::Providers::Inventory::Persister] Used in superclass
   def save_inventory(ems, target, _hashes_or_persister)

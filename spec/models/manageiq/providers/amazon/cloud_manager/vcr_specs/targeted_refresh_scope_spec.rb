@@ -37,10 +37,10 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
       it "will refresh an EC2 classic VM powered on and LB full targeted refresh" do
         assert_targeted_refresh_scope do
-          vm_target = ManagerRefresh::Target.new(:manager     => @ems,
+          vm_target = InventoryRefresh::Target.new(:manager     => @ems,
                                                  :association => :vms,
                                                  :manager_ref => {:ems_ref => "i-680071e9"})
-          lb_target = ManagerRefresh::Target.new(:manager     => @ems,
+          lb_target = InventoryRefresh::Target.new(:manager     => @ems,
                                                  :association => :load_balancers,
                                                  :manager_ref => {:ems_ref => "EmsRefreshSpec-LoadBalancer"})
 
@@ -66,13 +66,13 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
       it "will refresh a VPC VM with floating IP and connected LBs" do
         assert_targeted_refresh_scope do
-          vm_target   = ManagerRefresh::Target.new(:manager_id  => @ems.id,
+          vm_target   = InventoryRefresh::Target.new(:manager_id  => @ems.id,
                                                    :association => :vms,
                                                    :manager_ref => {:ems_ref => "i-8b5739f2"})
-          lb_target_1 = ManagerRefresh::Target.new(:manager_id  => @ems.id,
+          lb_target_1 = InventoryRefresh::Target.new(:manager_id  => @ems.id,
                                                    :association => :load_balancers,
                                                    :manager_ref => {:ems_ref => "EmSRefreshSpecVPCELB"})
-          lb_target_2 = ManagerRefresh::Target.new(:manager_id  => @ems.id,
+          lb_target_2 = InventoryRefresh::Target.new(:manager_id  => @ems.id,
                                                    :association => :load_balancers,
                                                    :manager_ref => {:ems_ref => "EmSRefreshSpecVPCELB2"})
 
@@ -102,7 +102,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
       it "will refresh a VPC VM with public IP" do
         assert_targeted_refresh_scope do
-          vm_target = ManagerRefresh::Target.new(:manager_id  => @ems.id,
+          vm_target = InventoryRefresh::Target.new(:manager_id  => @ems.id,
                                                  :association => :vms,
                                                  :manager_ref => {:ems_ref => "i-c72af2f6"})
 
@@ -129,7 +129,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
       it "will refresh an orchestration stack" do
         assert_targeted_refresh_scope do
-          orchestration_stack_target = ManagerRefresh::Target.new(
+          orchestration_stack_target = InventoryRefresh::Target.new(
             :manager_id  => @ems.id,
             :association => :orchestration_stacks,
             :manager_ref => {
@@ -163,7 +163,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
       it "will refresh a nested orchestration stacks" do
         assert_targeted_refresh_scope do
-          orchestration_stack_target = ManagerRefresh::Target.new(
+          orchestration_stack_target = InventoryRefresh::Target.new(
             :manager_id  => @ems.id,
             :association => :orchestration_stacks,
             :manager_ref => {
@@ -172,7 +172,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             }
           )
 
-          orchestration_stack_target_nested = ManagerRefresh::Target.new(
+          orchestration_stack_target_nested = InventoryRefresh::Target.new(
             :manager_id  => @ems.id,
             :association => :orchestration_stacks,
             :manager_ref => {
@@ -211,13 +211,13 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
       it "will refresh a nested orchestration stacks with Vm" do
         assert_targeted_refresh_scope do
-          vm_target = ManagerRefresh::Target.new(
+          vm_target = InventoryRefresh::Target.new(
             :manager_id  => @ems.id,
             :association => :vms,
             :manager_ref => {:ems_ref => "i-0bca58e6e540ddc39"}
           )
 
-          orchestration_stack_target = ManagerRefresh::Target.new(
+          orchestration_stack_target = InventoryRefresh::Target.new(
             :manager_id  => @ems.id,
             :association => :orchestration_stacks,
             :manager_ref => {
@@ -226,7 +226,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             }
           )
 
-          orchestration_stack_target_nested = ManagerRefresh::Target.new(
+          orchestration_stack_target_nested = InventoryRefresh::Target.new(
             :manager_id  => @ems.id,
             :association => :orchestration_stacks,
             :manager_ref => {
@@ -251,7 +251,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
       it "will refresh a volume with volume_snapshot" do
         assert_targeted_refresh_scope do
-          base_volume = ManagerRefresh::Target.new(
+          base_volume = InventoryRefresh::Target.new(
             :manager_id  => @ems.id,
             :association => :cloud_volumes,
             :manager_ref => {
@@ -259,7 +259,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             }
           )
 
-          volume = ManagerRefresh::Target.new(
+          volume = InventoryRefresh::Target.new(
             :manager_id  => @ems.id,
             :association => :cloud_volumes,
             :manager_ref => {
@@ -267,7 +267,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             }
           )
 
-          snapshot = ManagerRefresh::Target.new(
+          snapshot = InventoryRefresh::Target.new(
             :manager_id  => @ems.id,
             :association => :cloud_volume_snapshots,
             :manager_ref => {
