@@ -1619,7 +1619,8 @@ module AwsRefresherSpecCommon
               }, {
                 "key"   => "aws:servicecatalog:portfolioArn",
                 "value" => "arn:aws:catalog:us-east-1:200278856672:portfolio/port-dg3wqzbxza75m"
-              }],
+              }
+            ],
             "record_type"              => "PROVISION_PRODUCT",
             "created_time"             => "2018-09-04T15:38:38.937+02:00",
             "updated_time"             => "2018-09-04T15:41:31.778+02:00",
@@ -1656,46 +1657,47 @@ module AwsRefresherSpecCommon
         "service_parameters_set_id" => service_parameter_set(@service_instance_v3).id,
         "extra"                     => {
           "arn"                 =>
-            "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceV3/pp-u2tepcnttldko",
+                                   "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceV3/pp-u2tepcnttldko",
           "type"                => "CFN_STACK",
           "status"              => "AVAILABLE",
           "created_time"        => "2018-09-06T10:18:51.782+02:00",
           "last_record_id"      => "rec-coaoipufhru7e",
           "status_message"      => nil,
           "idempotency_token"   => "c4de373d-fc6b-45ac-a7d0-760b6be25756",
-          "last_record_detail"  =>
-            {"status"                   => "SUCCEEDED",
-             "path_id"                  => "lp-e76ssfhze5jyi",
-             "record_id"                => "rec-coaoipufhru7e",
-             "product_id"               => "prod-h7p6ruq5qgrga",
-             "record_tags"              =>
-               [{"key"   => "aws:servicecatalog:productArn",
-                 "value" =>
-                   "arn:aws:catalog:us-east-1:200278856672:product/prod-h7p6ruq5qgrga"},
-                {"key"   => "aws:servicecatalog:provisioningPrincipalArn",
-                 "value" => "arn:aws:iam::200278856672:user/VCR"},
-                {"key"   => "aws:servicecatalog:portfolioArn",
-                 "value" =>
-                   "arn:aws:catalog:us-east-1:200278856672:portfolio/port-4qwgmfklkgosk"}],
-             "record_type"              => "PROVISION_PRODUCT",
-             "created_time"             => "2018-09-06T10:18:51.789+02:00",
-             "updated_time"             => "2018-09-06T10:22:08.309+02:00",
-             "record_errors"            => [],
-             "provisioned_product_id"   => "pp-u2tepcnttldko",
-             "provisioned_product_name" => "EmsRefreshSpecServiceInstanceV3",
-             "provisioned_product_type" => "CFN_STACK",
-             "provisioning_artifact_id" => "pa-ysaib55ylta6k"},
-          "last_record_outputs" =>
-            [{"output_key"   => "CloudformationStackARN",
-              "description"  => "The ARN of the launched Cloudformation Stack",
-              "output_value" =>
-                "arn:aws:cloudformation:us-east-1:200278856672:stack/SC-200278856672-pp-u2tepcnttldko/7db5dfd0-b1ad-11e8-b3ce-500c524294d2"},
-             {"output_key"   => "URL",
-              "description"  => "URL of the website",
-              "output_value" =>
-                "http://SC-200278-ElasticL-OHBTSYAE8C89-342178717.us-east-1.elb.amazonaws.com"
-             }
-            ]
+          "last_record_detail"  => {
+            "status"                   => "SUCCEEDED",
+            "path_id"                  => "lp-e76ssfhze5jyi",
+            "record_id"                => "rec-coaoipufhru7e",
+            "product_id"               => "prod-h7p6ruq5qgrga",
+            "record_tags"              => [
+              {"key"   => "aws:servicecatalog:productArn",
+               "value" =>
+                          "arn:aws:catalog:us-east-1:200278856672:product/prod-h7p6ruq5qgrga"},
+              {"key"   => "aws:servicecatalog:provisioningPrincipalArn",
+               "value" => "arn:aws:iam::200278856672:user/VCR"},
+              {"key"   => "aws:servicecatalog:portfolioArn",
+               "value" =>
+                          "arn:aws:catalog:us-east-1:200278856672:portfolio/port-4qwgmfklkgosk"}
+            ],
+            "record_type"              => "PROVISION_PRODUCT",
+            "created_time"             => "2018-09-06T10:18:51.789+02:00",
+            "updated_time"             => "2018-09-06T10:22:08.309+02:00",
+            "record_errors"            => [],
+            "provisioned_product_id"   => "pp-u2tepcnttldko",
+            "provisioned_product_name" => "EmsRefreshSpecServiceInstanceV3",
+            "provisioned_product_type" => "CFN_STACK",
+            "provisioning_artifact_id" => "pa-ysaib55ylta6k"
+          },
+          "last_record_outputs" => [
+            {"output_key"   => "CloudformationStackARN",
+             "description"  => "The ARN of the launched Cloudformation Stack",
+             "output_value" =>
+                               "arn:aws:cloudformation:us-east-1:200278856672:stack/SC-200278856672-pp-u2tepcnttldko/7db5dfd0-b1ad-11e8-b3ce-500c524294d2"},
+            {"output_key"   => "URL",
+             "description"  => "URL of the website",
+             "output_value" =>
+                               "http://SC-200278-ElasticL-OHBTSYAE8C89-342178717.us-east-1.elb.amazonaws.com"}
+          ]
         },
         "deleted_on"                => nil,
       )
@@ -1712,46 +1714,47 @@ module AwsRefresherSpecCommon
         "service_parameters_set_id" => service_parameter_set(@service_instance).id,
         "extra"                     => {
           "arn"                 =>
-            "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstance/pp-gato4drzgerpy",
+                                   "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstance/pp-gato4drzgerpy",
           "type"                => "CFN_STACK",
           "status"              => "AVAILABLE",
           "created_time"        => "2018-09-06T10:19:14.188+02:00",
           "last_record_id"      => "rec-txbigs6rk7vlc",
           "status_message"      => nil,
           "idempotency_token"   => "bd5ea4d0-de72-45be-a28b-2bfe9ae8e509",
-          "last_record_detail"  =>
-            {"status"                   => "SUCCEEDED",
-             "path_id"                  => "lp-rb5sy6f5vyrdk",
-             "record_id"                => "rec-txbigs6rk7vlc",
-             "product_id"               => "prod-h7p6ruq5qgrga",
-             "record_tags"              =>
-               [{"key"   => "aws:servicecatalog:productArn",
-                 "value" =>
-                   "arn:aws:catalog:us-east-1:200278856672:product/prod-h7p6ruq5qgrga"},
-                {"key"   => "aws:servicecatalog:provisioningPrincipalArn",
-                 "value" => "arn:aws:iam::200278856672:user/VCR"},
-                {"key"   => "aws:servicecatalog:portfolioArn",
-                 "value" =>
-                   "arn:aws:catalog:us-east-1:200278856672:portfolio/port-dg3wqzbxza75m"}],
-             "record_type"              => "PROVISION_PRODUCT",
-             "created_time"             => "2018-09-06T10:19:14.197+02:00",
-             "updated_time"             => "2018-09-06T10:22:54.450+02:00",
-             "record_errors"            => [],
-             "provisioned_product_id"   => "pp-gato4drzgerpy",
-             "provisioned_product_name" => "EmsRefreshSpecServiceInstance",
-             "provisioned_product_type" => "CFN_STACK",
-             "provisioning_artifact_id" => "pa-nr3ua3nz3pgwq"},
-          "last_record_outputs" =>
-            [{"output_key"   => "CloudformationStackARN",
-              "description"  => "The ARN of the launched Cloudformation Stack",
-              "output_value" =>
-                "arn:aws:cloudformation:us-east-1:200278856672:stack/SC-200278856672-pp-gato4drzgerpy/8addcb50-b1ad-11e8-a5af-500c28709a35"},
-             {"output_key"   => "URL",
-              "description"  => "URL of the website",
-              "output_value" =>
-                "http://SC-200278-ElasticL-G69XH7HDIQ0J-169282342.us-east-1.elb.amazonaws.com"
-             }
-            ]
+          "last_record_detail"  => {
+            "status"                   => "SUCCEEDED",
+            "path_id"                  => "lp-rb5sy6f5vyrdk",
+            "record_id"                => "rec-txbigs6rk7vlc",
+            "product_id"               => "prod-h7p6ruq5qgrga",
+            "record_tags"              => [
+              {"key"   => "aws:servicecatalog:productArn",
+               "value" =>
+                          "arn:aws:catalog:us-east-1:200278856672:product/prod-h7p6ruq5qgrga"},
+              {"key"   => "aws:servicecatalog:provisioningPrincipalArn",
+               "value" => "arn:aws:iam::200278856672:user/VCR"},
+              {"key"   => "aws:servicecatalog:portfolioArn",
+               "value" =>
+                          "arn:aws:catalog:us-east-1:200278856672:portfolio/port-dg3wqzbxza75m"}
+            ],
+            "record_type"              => "PROVISION_PRODUCT",
+            "created_time"             => "2018-09-06T10:19:14.197+02:00",
+            "updated_time"             => "2018-09-06T10:22:54.450+02:00",
+            "record_errors"            => [],
+            "provisioned_product_id"   => "pp-gato4drzgerpy",
+            "provisioned_product_name" => "EmsRefreshSpecServiceInstance",
+            "provisioned_product_type" => "CFN_STACK",
+            "provisioning_artifact_id" => "pa-nr3ua3nz3pgwq"
+          },
+          "last_record_outputs" => [
+            {"output_key"   => "CloudformationStackARN",
+             "description"  => "The ARN of the launched Cloudformation Stack",
+             "output_value" =>
+                               "arn:aws:cloudformation:us-east-1:200278856672:stack/SC-200278856672-pp-gato4drzgerpy/8addcb50-b1ad-11e8-a5af-500c28709a35"},
+            {"output_key"   => "URL",
+             "description"  => "URL of the website",
+             "output_value" =>
+                               "http://SC-200278-ElasticL-G69XH7HDIQ0J-169282342.us-east-1.elb.amazonaws.com"}
+          ]
         },
         "deleted_on"                => nil,
       )
