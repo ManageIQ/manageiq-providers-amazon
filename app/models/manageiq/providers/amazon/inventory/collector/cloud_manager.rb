@@ -70,15 +70,17 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
 
   def service_offerings
     aws_service_catalog.client.search_products_as_admin.product_view_details
-  rescue => e
-    _log.warn("Couldn't fetch 'search_products_as_admin' of service catalog, message: #{e.message}")
+  rescue => _e
+    # TODO(lsmola) do not pollute log for now, since ServiceCatalog is not officially supported
+    # _log.warn("Couldn't fetch 'search_products_as_admin' of service catalog, message: #{e.message}")
     []
   end
 
   def service_instances
     aws_service_catalog.client.scan_provisioned_products.provisioned_products
-  rescue => e
-    _log.warn("Couldn't fetch 'provisioned_products' of service catalog, message: #{e.message}")
+  rescue => _e
+    # TODO(lsmola) do not pollute log for now, since ServiceCatalog is not officially supported
+    # _log.warn("Couldn't fetch 'provisioned_products' of service catalog, message: #{e.message}")
     []
   end
 
