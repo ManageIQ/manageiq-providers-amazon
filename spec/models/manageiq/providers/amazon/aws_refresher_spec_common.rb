@@ -1482,7 +1482,7 @@ module AwsRefresherSpecCommon
         "extra"       => {
           "status"               => "CREATED",
           "product_arn"          => "arn:aws:catalog:us-east-1:200278856672:product/prod-4v6rc4hwaiiha",
-          "created_time"         => "2018-09-04T16:27:59.000+02:00",
+          "created_time"         => format_time("2018-09-04T16:27:59.000+02:00"),
           "product_view_summary" => {
             "id"                  => "prodview-mojlvmp5xax74",
             "name"                => "EmsRefreshSpecProductWithNoPortfolio",
@@ -1511,7 +1511,7 @@ module AwsRefresherSpecCommon
         "extra"       => {
           "status"               => "CREATED",
           "product_arn"          => "arn:aws:catalog:us-east-1:200278856672:product/prod-h7p6ruq5qgrga",
-          "created_time"         => "2018-09-04T11:00:13.000+02:00",
+          "created_time"         => format_time("2018-09-04T11:00:13.000+02:00"),
           "product_view_summary" => {
             "id"                  => "prodview-j3n5gqatjrkk2",
             "name"                => "EmsRefreshSpecProduct",
@@ -1541,7 +1541,7 @@ module AwsRefresherSpecCommon
         "extra"       => {
           "status"               => "CREATED",
           "product_arn"          => "arn:aws:catalog:us-east-1:200278856672:product/prod-cei2spnzu24lq",
-          "created_time"         => "2018-09-04T15:23:06.000+02:00",
+          "created_time"         => format_time("2018-09-04T15:23:06.000+02:00"),
           "product_view_summary" => {
             "id"                  => "prodview-as7h736moeyrc",
             "name"                => "EmsRefreshSpecProductWithRules",
@@ -1600,7 +1600,7 @@ module AwsRefresherSpecCommon
           "arn"                 => "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceWithRules/pp-5pyltbgyzheqm",
           "type"                => "CFN_STACK",
           "status"              => "AVAILABLE",
-          "created_time"        => "2018-09-04T15:38:38.933+02:00",
+          "created_time"        => format_time("2018-09-04T15:38:38.933+02:00"),
           "last_record_id"      => "rec-li62bnn6bnza4",
           "status_message"      => nil,
           "idempotency_token"   => "39489a07-f013-4e49-a061-11360db7664c",
@@ -1622,8 +1622,8 @@ module AwsRefresherSpecCommon
               }
             ],
             "record_type"              => "PROVISION_PRODUCT",
-            "created_time"             => "2018-09-04T15:38:38.937+02:00",
-            "updated_time"             => "2018-09-04T15:41:31.778+02:00",
+            "created_time"             => format_time("2018-09-04T15:38:38.937+02:00"),
+            "updated_time"             => format_time("2018-09-04T15:41:31.778+02:00"),
             "record_errors"            => [],
             "provisioned_product_id"   => "pp-5pyltbgyzheqm",
             "provisioned_product_name" => "EmsRefreshSpecServiceInstanceWithRules",
@@ -1660,7 +1660,7 @@ module AwsRefresherSpecCommon
                                    "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceV3/pp-u2tepcnttldko",
           "type"                => "CFN_STACK",
           "status"              => "AVAILABLE",
-          "created_time"        => "2018-09-06T10:18:51.782+02:00",
+          "created_time"        => format_time("2018-09-06T10:18:51.782+02:00"),
           "last_record_id"      => "rec-coaoipufhru7e",
           "status_message"      => nil,
           "idempotency_token"   => "c4de373d-fc6b-45ac-a7d0-760b6be25756",
@@ -1680,8 +1680,8 @@ module AwsRefresherSpecCommon
                           "arn:aws:catalog:us-east-1:200278856672:portfolio/port-4qwgmfklkgosk"}
             ],
             "record_type"              => "PROVISION_PRODUCT",
-            "created_time"             => "2018-09-06T10:18:51.789+02:00",
-            "updated_time"             => "2018-09-06T10:22:08.309+02:00",
+            "created_time"             => format_time("2018-09-06T10:18:51.789+02:00"),
+            "updated_time"             => format_time("2018-09-06T10:22:08.309+02:00"),
             "record_errors"            => [],
             "provisioned_product_id"   => "pp-u2tepcnttldko",
             "provisioned_product_name" => "EmsRefreshSpecServiceInstanceV3",
@@ -1717,7 +1717,7 @@ module AwsRefresherSpecCommon
                                    "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstance/pp-gato4drzgerpy",
           "type"                => "CFN_STACK",
           "status"              => "AVAILABLE",
-          "created_time"        => "2018-09-06T10:19:14.188+02:00",
+          "created_time"        => format_time("2018-09-06T10:19:14.188+02:00"),
           "last_record_id"      => "rec-txbigs6rk7vlc",
           "status_message"      => nil,
           "idempotency_token"   => "bd5ea4d0-de72-45be-a28b-2bfe9ae8e509",
@@ -1737,8 +1737,8 @@ module AwsRefresherSpecCommon
                           "arn:aws:catalog:us-east-1:200278856672:portfolio/port-dg3wqzbxza75m"}
             ],
             "record_type"              => "PROVISION_PRODUCT",
-            "created_time"             => "2018-09-06T10:19:14.197+02:00",
-            "updated_time"             => "2018-09-06T10:22:54.450+02:00",
+            "created_time"             => format_time("2018-09-06T10:19:14.197+02:00"),
+            "updated_time"             => format_time("2018-09-06T10:22:54.450+02:00"),
             "record_errors"            => [],
             "provisioned_product_id"   => "pp-gato4drzgerpy",
             "provisioned_product_name" => "EmsRefreshSpecServiceInstance",
@@ -1767,5 +1767,9 @@ module AwsRefresherSpecCommon
     ServiceParametersSet.find_by(
       :ems_ref => "#{rec_detail["product_id"]}__#{rec_detail["provisioning_artifact_id"]}__#{rec_detail["path_id"]}"
     )
+  end
+
+  def format_time(time)
+    Time.parse(time).localtime.iso8601(3)
   end
 end
