@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "70f7613f-b58c-5302-ba97-352a2214eaa0",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"a6f45934-58d6-8441-db77-6b5c19421826\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.servicecatalog\",\"account\":\"200278856672\",\"time\":\"2018-09-14T11:02:19Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAS5IMM2PQIGY2QQ7C\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2018-09-14T08:05:49Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2018-09-14T11:02:19Z\",\"eventSource\":\"servicecatalog.amazonaws.com\",\"eventName\":\"DeleteProduct\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"id\":\"prod-q65gfich7xv6e\"},\"responseElements\":null,\"requestID\":\"a6191faf-b80d-11e8-9cba-93655f149ff3\",\"eventID\":\"d83ec806-b4f2-4d53-9cfd-d07392dd7dec\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2018-09-14T11:02:48.069Z",
+  "SignatureVersion" : "1",
+  "Signature" : "bTSi/X3OywEmfDmvY665KI9FmSi0ssmySSnGk2HaRz+WyDqrAK8590EukEM0vFDwbOr5uSV1yProF2i5Yi+q9bj92FLZ9jjdQzm4sgmSuJg5tp17RJfd9aqpuOSA2MGwVazWw9QyPuiR8KDbU0qIHzDffbnLdkV7SIqlpS7OLH+QeC+fDhBqxiGb0DnzL0P2e04iSHTgljc07fRps45c9px8C1e5h93bIDT4vCR0FFHnqMC5Iy65yDzoa6AensA5k04NDoFCxc7sfJgvk7x7pB2HCaGLaSbN4gevv0ARsMVEjI9g7jK6hUadnfPLQe/S0+uNbb2O2GkQKRuaXphgCg==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-ac565b8b1a6c5d002d285f9598aa1d9b.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:25411282-5f1f-4379-b2c8-aff6d18dfdea"
+}

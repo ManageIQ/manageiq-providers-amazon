@@ -1,0 +1,11 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "b486b061-9b12-578a-925a-e4740c3e86a1",
+  "TopicArn" : "arn:aws:sns:us-east-1:200278856672:AWSConfig_topic",
+  "Message" : "{\"version\":\"0\",\"id\":\"6d5f7e3c-fbb0-292d-49ec-493e916255b1\",\"detail-type\":\"AWS API Call via CloudTrail\",\"source\":\"aws.servicecatalog\",\"account\":\"200278856672\",\"time\":\"2018-09-14T11:00:15Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventVersion\":\"1.05\",\"userIdentity\":{\"type\":\"IAMUser\",\"principalId\":\"AIDAI37PIOA5B6VMIJRUU\",\"arn\":\"arn:aws:iam::200278856672:user/ladas\",\"accountId\":\"200278856672\",\"accessKeyId\":\"ASIAS5IMM2PQIGY2QQ7C\",\"userName\":\"ladas\",\"sessionContext\":{\"attributes\":{\"mfaAuthenticated\":\"false\",\"creationDate\":\"2018-09-14T08:05:49Z\"}},\"invokedBy\":\"signin.amazonaws.com\"},\"eventTime\":\"2018-09-14T11:00:15Z\",\"eventSource\":\"servicecatalog.amazonaws.com\",\"eventName\":\"CopyProduct\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"213.175.37.10\",\"userAgent\":\"signin.amazonaws.com\",\"requestParameters\":{\"idempotencyToken\":\"k24opnl6pn-jehy1hulx6n\",\"sourceProductArn\":\"arn:aws:catalog:us-east-1:200278856672:product/prod-7eznvu5zer2ye\",\"copyOptions\":[]},\"responseElements\":{\"copyProductToken\":\"copyproduct-sgr4qxwgtgapm\"},\"requestID\":\"5c2c900e-b80d-11e8-b007-07c4793f0b9d\",\"eventID\":\"d2c91c8b-fc42-41dc-8519-7f0e9075a6ea\",\"eventType\":\"AwsApiCall\"}}",
+  "Timestamp" : "2018-09-14T11:01:00.491Z",
+  "SignatureVersion" : "1",
+  "Signature" : "jud7RhhnTrl1ri1+SsiYYWtOIfPgZ90ea2vpfr8uolARkQoUG586IKfBrDJz93h/VV7TX8pHsKshWnwYARYiNDw3YS1TFNV66gKjvYRYVc3DALopRqXh6jhr5NLuEprxTTs4gqCNzJVOKmbhg6YTyebni0wNvqYihGNwQ7FrJwI/bL+et1h/hNF3zVbuQS/eXifW4wYnxSPhMoNolbw/zgDxWK6m2Wkf0NimNRxuxGIZXdeaufccyhCZQdsVWuETE345kxTomuyLDCymfe4tudpe11rB/1vmhPWI1nT14qgbCL2koHSh8U9fLGucwQ0ejWm196P8g1rlNSunUT1ANA==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-ac565b8b1a6c5d002d285f9598aa1d9b.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:200278856672:AWSConfig_topic:25411282-5f1f-4379-b2c8-aff6d18dfdea"
+}
