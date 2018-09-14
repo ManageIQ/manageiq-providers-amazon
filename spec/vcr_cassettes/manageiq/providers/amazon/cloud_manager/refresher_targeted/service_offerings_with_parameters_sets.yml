@@ -1,0 +1,465 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"Id":"prod-4v6rc4hwaiiha"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeProductAsAdmin
+      X-Amz-Date:
+      - 20180914T145823Z
+      X-Amz-Content-Sha256:
+      - 4fd4c0934d67d7934496d0b085a62a5d0f2875d67559eef17602900b1781dbf0
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=6d1a4a6b60d90a0e13e9ee1ab1e24edbb0af350bd23651bf0a898dc15b9540c9
+      Content-Length:
+      - '27'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - a1044d49-b82e-11e8-ac74-a390c0bbbfc3
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '702'
+      Date:
+      - Fri, 14 Sep 2018 14:58:24 GMT
+    body:
+      encoding: UTF-8
+      string: '{"ProductViewDetail":{"CreatedTime":1.536071279E9,"ProductARN":"arn:aws:catalog:us-east-1:200278856672:product/prod-4v6rc4hwaiiha","ProductViewSummary":{"Distributor":"","HasDefaultPath":false,"Id":"prodview-mojlvmp5xax74","Name":"EmsRefreshSpecProductWithNoPortfolio","Owner":"EmsRefreshSpecProductWithNoPortfolioOwner","ProductId":"prod-4v6rc4hwaiiha","ShortDescription":"EmsRefreshSpecProductWithNoPortfolio
+        desc","Type":"CLOUD_FORMATION_TEMPLATE"},"Status":"CREATED"},"ProvisioningArtifactSummaries":[{"CreatedTime":1.536071279E9,"Description":"","Id":"pa-ujhgfquqip5h6","Name":"v1.1.1","ProvisioningArtifactMetadata":{"SourceProvisioningArtifactId":"pa-ujhgfquqip5h6"}}],"TagOptions":[],"Tags":[]}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 14:58:24 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"Id":"prod-h7p6ruq5qgrga"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeProductAsAdmin
+      X-Amz-Date:
+      - 20180914T145824Z
+      X-Amz-Content-Sha256:
+      - a465015663724755eebd6b373782eaa954b557e98fc89644a6ac4c050e402ea3
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=c235d63c69bb40025fb8b4bace89422b0e74c964dab11f076c0cafda5727d443
+      Content-Length:
+      - '27'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - a163ab5e-b82e-11e8-9685-4f3416af0df2
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '1233'
+      Date:
+      - Fri, 14 Sep 2018 14:58:25 GMT
+    body:
+      encoding: UTF-8
+      string: '{"ProductViewDetail":{"CreatedTime":1.536051613E9,"ProductARN":"arn:aws:catalog:us-east-1:200278856672:product/prod-h7p6ruq5qgrga","ProductViewSummary":{"Distributor":"EmsRefreshSpecVendor","HasDefaultPath":false,"Id":"prodview-j3n5gqatjrkk2","Name":"EmsRefreshSpecProduct","Owner":"EmsRefreshSpecOwner","ProductId":"prod-h7p6ruq5qgrga","ShortDescription":"EmsRefreshSpecProduct
+        description","SupportDescription":"EmsRefreshSpec desc","SupportEmail":"EmsRefreshSpec@test.com","SupportUrl":"http://EmsRefreshSpec.com","Type":"CLOUD_FORMATION_TEMPLATE"},"Status":"CREATED"},"ProvisioningArtifactSummaries":[{"CreatedTime":1.536051613E9,"Description":"desc","Id":"pa-nr3ua3nz3pgwq","Name":"v2","ProvisioningArtifactMetadata":{"SourceProvisioningArtifactId":"pa-nr3ua3nz3pgwq"}},{"CreatedTime":1.53605307E9,"Description":"new
+        version","Id":"pa-ysaib55ylta6k","Name":"v3","ProvisioningArtifactMetadata":{"SourceProductId":"prod-h7p6ruq5qgrga","SourceProvisioningArtifactId":"pa-ysaib55ylta6k"}},{"CreatedTime":1.536063943E9,"Description":"deactivated","Id":"pa-ci43v4i7myz7g","Name":"v1","ProvisioningArtifactMetadata":{"SourceProductId":"prod-h7p6ruq5qgrga","SourceProvisioningArtifactId":"pa-ci43v4i7myz7g"}}],"TagOptions":[],"Tags":[]}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 14:58:25 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"Id":"prod-4v6rc4hwaiiha"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeProduct
+      X-Amz-Date:
+      - 20180914T145825Z
+      X-Amz-Content-Sha256:
+      - 4fd4c0934d67d7934496d0b085a62a5d0f2875d67559eef17602900b1781dbf0
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=d8d47c19d8ceb6872bc1067f73cf5720e0b83e1158d55efc2a79a6a7cce3b45f
+      Content-Length:
+      - '27'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      X-Amzn-Requestid:
+      - a1bbdd82-b82e-11e8-ac74-a390c0bbbfc3
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '106'
+      Date:
+      - Fri, 14 Sep 2018 14:58:25 GMT
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"__type":"ResourceNotFoundException","Message":"prod-4v6rc4hwaiiha
+        does not exist or access was denied."}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 14:58:25 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"Id":"prod-h7p6ruq5qgrga"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeProduct
+      X-Amz-Date:
+      - 20180914T145825Z
+      X-Amz-Content-Sha256:
+      - a465015663724755eebd6b373782eaa954b557e98fc89644a6ac4c050e402ea3
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=0a37315e440e3a56461aaa422e6f97535869874c0c28024846ee4fbbf43e4fca
+      Content-Length:
+      - '27'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - a2098839-b82e-11e8-8ae1-3f38219f3131
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '628'
+      Date:
+      - Fri, 14 Sep 2018 14:58:26 GMT
+    body:
+      encoding: UTF-8
+      string: '{"ProductViewSummary":{"Distributor":"EmsRefreshSpecVendor","HasDefaultPath":false,"Id":"prodview-j3n5gqatjrkk2","Name":"EmsRefreshSpecProduct","Owner":"EmsRefreshSpecOwner","ProductId":"prod-h7p6ruq5qgrga","ShortDescription":"EmsRefreshSpecProduct
+        description","SupportDescription":"EmsRefreshSpec desc","SupportEmail":"EmsRefreshSpec@test.com","SupportUrl":"http://EmsRefreshSpec.com","Type":"CLOUD_FORMATION_TEMPLATE"},"ProvisioningArtifacts":[{"CreatedTime":1.536051613E9,"Description":"desc","Id":"pa-nr3ua3nz3pgwq","Name":"v2"},{"CreatedTime":1.53605307E9,"Description":"new
+        version","Id":"pa-ysaib55ylta6k","Name":"v3"}]}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 14:58:26 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"ProductId":"prod-h7p6ruq5qgrga"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.ListLaunchPaths
+      X-Amz-Date:
+      - 20180914T145826Z
+      X-Amz-Content-Sha256:
+      - 33f8e66d5c7ae5d987387680c7c927c886ef0b9b336fd9ad3198b3e3bae26f2a
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=ca1a25179f8b82530b135af66271f8e083e8945d6824e556695920b6072e1a69
+      Content-Length:
+      - '34'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - a259a40b-b82e-11e8-8ae1-3f38219f3131
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '307'
+      Date:
+      - Fri, 14 Sep 2018 14:58:26 GMT
+    body:
+      encoding: UTF-8
+      string: '{"LaunchPathSummaries":[{"ConstraintSummaries":[{"Description":"Enforcing
+        instance type to be either t1.micro or m1.small","Type":"TEMPLATE"}],"Id":"lp-e76ssfhze5jyi","Name":"EmsRefreshSpecPortfolio","Tags":[]},{"ConstraintSummaries":[],"Id":"lp-rb5sy6f5vyrdk","Name":"EmsRefreshSpecPortfolio2","Tags":[]}]}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 14:58:26 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"ProductId":"prod-h7p6ruq5qgrga","ProvisioningArtifactId":"pa-nr3ua3nz3pgwq","PathId":"lp-e76ssfhze5jyi"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeProvisioningParameters
+      X-Amz-Date:
+      - 20180914T145826Z
+      X-Amz-Content-Sha256:
+      - 44e7ca0f12a55eb2b1295e205bf3b50718e6453e209e2280595e8456bb6e7a9c
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=6bdcf784ce3d31c57f577cae2a45de82a857a178e56f72fb82b1a8355106f2ba
+      Content-Length:
+      - '106'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - a2ac5803-b82e-11e8-9685-4f3416af0df2
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '3335'
+      Date:
+      - Fri, 14 Sep 2018 14:58:27 GMT
+    body:
+      encoding: UTF-8
+      string: '{"ConstraintSummaries":[{"Description":"Enforcing instance type to
+        be either t1.micro or m1.small","Type":"TEMPLATE"}],"ProvisioningArtifactParameters":[{"Description":"Name
+        of an existing EC2 KeyPair to enable SSH access to the instances","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":[]},"ParameterKey":"KeyName","ParameterType":"AWS::EC2::KeyPair::KeyName"},{"DefaultValue":"0.0.0.0/0","Description":"The
+        IP address range that can be used to SSH to the EC2 instances","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":[]},"ParameterKey":"SSHLocation","ParameterType":"String"},{"DefaultValue":"t2.small","Description":"WebServer
+        EC2 instance type","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":["t1.micro","t2.nano","t2.micro","t2.small","t2.medium","t2.large","m1.small","m1.medium","m1.large","m1.xlarge","m2.xlarge","m2.2xlarge","m2.4xlarge","m3.medium","m3.large","m3.xlarge","m3.2xlarge","m4.large","m4.xlarge","m4.2xlarge","m4.4xlarge","m4.10xlarge","c1.medium","c1.xlarge","c3.large","c3.xlarge","c3.2xlarge","c3.4xlarge","c3.8xlarge","c4.large","c4.xlarge","c4.2xlarge","c4.4xlarge","c4.8xlarge","g2.2xlarge","g2.8xlarge","r3.large","r3.xlarge","r3.2xlarge","r3.4xlarge","r3.8xlarge","i2.xlarge","i2.2xlarge","i2.4xlarge","i2.8xlarge","d2.xlarge","d2.2xlarge","d2.4xlarge","d2.8xlarge","hi1.4xlarge","hs1.8xlarge","cr1.8xlarge","cc2.8xlarge","cg1.4xlarge"]},"ParameterKey":"InstanceType","ParameterType":"String"}],"TagOptions":[],"UsageInstructions":[{"Type":"rules","Value":"{\"Rule1\":{\"Assertions\":[{\"Assert\":{\"Fn::Contains\":[[\"t1.micro\",\"m1.small\"],{\"Ref\":\"InstanceType\"}]},\"AssertDescription\":\"Instance
+        type should be either t1.micro or m1.small\"}]}}"},{"Type":"version","Value":"2010-09-09"},{"Type":"description","Value":"AWS
+        CloudFormation Sample Template ELBWithLockedDownAutoScaledInstances: Create
+        a load balanced, Auto Scaled sample website where the instances are locked
+        down to only accept traffic from the load balancer. This example creates an
+        Auto Scaling group behind a load balancer with a simple health check. The
+        web site is available on port 80, however, the instances can be configured
+        to listen on any port (8888 by default). **WARNING** This template creates
+        one or more Amazon EC2 instances and an Elastic Load Balancer. You will be
+        billed for the AWS resources used if you create a stack from this template."},{"Type":"metadata","Value":"{\"AWS::CloudFormation::Designer\":{\"d734fbb5-46b9-46e6-8905-e95d19b8e184\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"z\":\"1\",\"position\":{\"x\":\"60\",\"y\":\"90\"},\"embeds\":[]},\"6356820a-2472-4818-b70f-acfca47ee542\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"isassociatedwith\":[\"65fa704f-2abf-4c89-b3d4-7d9c54272872\"],\"z\":\"1\",\"position\":{\"x\":\"180\",\"y\":\"210\"},\"embeds\":[],\"isconnectedto\":[\"d734fbb5-46b9-46e6-8905-e95d19b8e184\"]},\"65fa704f-2abf-4c89-b3d4-7d9c54272872\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"z\":\"1\",\"position\":{\"x\":\"60\",\"y\":\"210\"},\"ismemberof\":[\"02d7e550-1606-4cab-854b-8e875e8781c4\"],\"embeds\":[]},\"02d7e550-1606-4cab-854b-8e875e8781c4\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"isrelatedto\":[\"d734fbb5-46b9-46e6-8905-e95d19b8e184\"],\"z\":\"1\",\"position\":{\"x\":\"180\",\"y\":\"90\"},\"embeds\":[]}}}"}]}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 14:58:28 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"ProductId":"prod-h7p6ruq5qgrga","ProvisioningArtifactId":"pa-ysaib55ylta6k","PathId":"lp-e76ssfhze5jyi"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeProvisioningParameters
+      X-Amz-Date:
+      - 20180914T145828Z
+      X-Amz-Content-Sha256:
+      - b53b4781584343a9051fab2873ac2067d149ebfb033a51befd9f6885176e9490
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=db1675eea7f1694c1b6b7af7dc721002e44238725cd3a73276ed2099fc9a6092
+      Content-Length:
+      - '106'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - a364ab8b-b82e-11e8-9685-4f3416af0df2
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '3335'
+      Date:
+      - Fri, 14 Sep 2018 14:58:29 GMT
+    body:
+      encoding: UTF-8
+      string: '{"ConstraintSummaries":[{"Description":"Enforcing instance type to
+        be either t1.micro or m1.small","Type":"TEMPLATE"}],"ProvisioningArtifactParameters":[{"Description":"Name
+        of an existing EC2 KeyPair to enable SSH access to the instances","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":[]},"ParameterKey":"KeyName","ParameterType":"AWS::EC2::KeyPair::KeyName"},{"DefaultValue":"0.0.0.0/0","Description":"The
+        IP address range that can be used to SSH to the EC2 instances","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":[]},"ParameterKey":"SSHLocation","ParameterType":"String"},{"DefaultValue":"t2.small","Description":"WebServer
+        EC2 instance type","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":["t1.micro","t2.nano","t2.micro","t2.small","t2.medium","t2.large","m1.small","m1.medium","m1.large","m1.xlarge","m2.xlarge","m2.2xlarge","m2.4xlarge","m3.medium","m3.large","m3.xlarge","m3.2xlarge","m4.large","m4.xlarge","m4.2xlarge","m4.4xlarge","m4.10xlarge","c1.medium","c1.xlarge","c3.large","c3.xlarge","c3.2xlarge","c3.4xlarge","c3.8xlarge","c4.large","c4.xlarge","c4.2xlarge","c4.4xlarge","c4.8xlarge","g2.2xlarge","g2.8xlarge","r3.large","r3.xlarge","r3.2xlarge","r3.4xlarge","r3.8xlarge","i2.xlarge","i2.2xlarge","i2.4xlarge","i2.8xlarge","d2.xlarge","d2.2xlarge","d2.4xlarge","d2.8xlarge","hi1.4xlarge","hs1.8xlarge","cr1.8xlarge","cc2.8xlarge","cg1.4xlarge"]},"ParameterKey":"InstanceType","ParameterType":"String"}],"TagOptions":[],"UsageInstructions":[{"Type":"rules","Value":"{\"Rule1\":{\"Assertions\":[{\"Assert\":{\"Fn::Contains\":[[\"t1.micro\",\"m1.small\"],{\"Ref\":\"InstanceType\"}]},\"AssertDescription\":\"Instance
+        type should be either t1.micro or m1.small\"}]}}"},{"Type":"version","Value":"2010-09-09"},{"Type":"description","Value":"AWS
+        CloudFormation Sample Template ELBWithLockedDownAutoScaledInstances: Create
+        a load balanced, Auto Scaled sample website where the instances are locked
+        down to only accept traffic from the load balancer. This example creates an
+        Auto Scaling group behind a load balancer with a simple health check. The
+        web site is available on port 80, however, the instances can be configured
+        to listen on any port (8888 by default). **WARNING** This template creates
+        one or more Amazon EC2 instances and an Elastic Load Balancer. You will be
+        billed for the AWS resources used if you create a stack from this template."},{"Type":"metadata","Value":"{\"AWS::CloudFormation::Designer\":{\"d734fbb5-46b9-46e6-8905-e95d19b8e184\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"z\":\"1\",\"position\":{\"x\":\"60\",\"y\":\"90\"},\"embeds\":[]},\"6356820a-2472-4818-b70f-acfca47ee542\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"isassociatedwith\":[\"65fa704f-2abf-4c89-b3d4-7d9c54272872\"],\"z\":\"1\",\"position\":{\"x\":\"180\",\"y\":\"210\"},\"embeds\":[],\"isconnectedto\":[\"d734fbb5-46b9-46e6-8905-e95d19b8e184\"]},\"65fa704f-2abf-4c89-b3d4-7d9c54272872\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"z\":\"1\",\"position\":{\"x\":\"60\",\"y\":\"210\"},\"ismemberof\":[\"02d7e550-1606-4cab-854b-8e875e8781c4\"],\"embeds\":[]},\"02d7e550-1606-4cab-854b-8e875e8781c4\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"isrelatedto\":[\"d734fbb5-46b9-46e6-8905-e95d19b8e184\"],\"z\":\"1\",\"position\":{\"x\":\"180\",\"y\":\"90\"},\"embeds\":[]}}}"}]}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 14:58:29 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"ProductId":"prod-h7p6ruq5qgrga","ProvisioningArtifactId":"pa-nr3ua3nz3pgwq","PathId":"lp-rb5sy6f5vyrdk"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeProvisioningParameters
+      X-Amz-Date:
+      - 20180914T145829Z
+      X-Amz-Content-Sha256:
+      - 63d0932ef4b8047df184335dc88921f694ea095f6644fc19b1b93f5a9776d14f
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=b70da6d4f6c53446f5303cabe4ac7cf65755434663a3a3489cd73ac347f8ce73
+      Content-Length:
+      - '106'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - a419f1c9-b82e-11e8-ac74-a390c0bbbfc3
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '3047'
+      Date:
+      - Fri, 14 Sep 2018 14:58:30 GMT
+    body:
+      encoding: UTF-8
+      string: '{"ConstraintSummaries":[],"ProvisioningArtifactParameters":[{"Description":"Name
+        of an existing EC2 KeyPair to enable SSH access to the instances","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":[]},"ParameterKey":"KeyName","ParameterType":"AWS::EC2::KeyPair::KeyName"},{"DefaultValue":"0.0.0.0/0","Description":"The
+        IP address range that can be used to SSH to the EC2 instances","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":[]},"ParameterKey":"SSHLocation","ParameterType":"String"},{"DefaultValue":"t2.small","Description":"WebServer
+        EC2 instance type","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":["t1.micro","t2.nano","t2.micro","t2.small","t2.medium","t2.large","m1.small","m1.medium","m1.large","m1.xlarge","m2.xlarge","m2.2xlarge","m2.4xlarge","m3.medium","m3.large","m3.xlarge","m3.2xlarge","m4.large","m4.xlarge","m4.2xlarge","m4.4xlarge","m4.10xlarge","c1.medium","c1.xlarge","c3.large","c3.xlarge","c3.2xlarge","c3.4xlarge","c3.8xlarge","c4.large","c4.xlarge","c4.2xlarge","c4.4xlarge","c4.8xlarge","g2.2xlarge","g2.8xlarge","r3.large","r3.xlarge","r3.2xlarge","r3.4xlarge","r3.8xlarge","i2.xlarge","i2.2xlarge","i2.4xlarge","i2.8xlarge","d2.xlarge","d2.2xlarge","d2.4xlarge","d2.8xlarge","hi1.4xlarge","hs1.8xlarge","cr1.8xlarge","cc2.8xlarge","cg1.4xlarge"]},"ParameterKey":"InstanceType","ParameterType":"String"}],"TagOptions":[],"UsageInstructions":[{"Type":"rules","Value":"{}"},{"Type":"version","Value":"2010-09-09"},{"Type":"description","Value":"AWS
+        CloudFormation Sample Template ELBWithLockedDownAutoScaledInstances: Create
+        a load balanced, Auto Scaled sample website where the instances are locked
+        down to only accept traffic from the load balancer. This example creates an
+        Auto Scaling group behind a load balancer with a simple health check. The
+        web site is available on port 80, however, the instances can be configured
+        to listen on any port (8888 by default). **WARNING** This template creates
+        one or more Amazon EC2 instances and an Elastic Load Balancer. You will be
+        billed for the AWS resources used if you create a stack from this template."},{"Type":"metadata","Value":"{\"AWS::CloudFormation::Designer\":{\"d734fbb5-46b9-46e6-8905-e95d19b8e184\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"z\":\"1\",\"position\":{\"x\":\"60\",\"y\":\"90\"},\"embeds\":[]},\"6356820a-2472-4818-b70f-acfca47ee542\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"isassociatedwith\":[\"65fa704f-2abf-4c89-b3d4-7d9c54272872\"],\"z\":\"1\",\"position\":{\"x\":\"180\",\"y\":\"210\"},\"embeds\":[],\"isconnectedto\":[\"d734fbb5-46b9-46e6-8905-e95d19b8e184\"]},\"65fa704f-2abf-4c89-b3d4-7d9c54272872\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"z\":\"1\",\"position\":{\"x\":\"60\",\"y\":\"210\"},\"ismemberof\":[\"02d7e550-1606-4cab-854b-8e875e8781c4\"],\"embeds\":[]},\"02d7e550-1606-4cab-854b-8e875e8781c4\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"isrelatedto\":[\"d734fbb5-46b9-46e6-8905-e95d19b8e184\"],\"z\":\"1\",\"position\":{\"x\":\"180\",\"y\":\"90\"},\"embeds\":[]}}}"}]}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 14:58:30 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"ProductId":"prod-h7p6ruq5qgrga","ProvisioningArtifactId":"pa-ysaib55ylta6k","PathId":"lp-rb5sy6f5vyrdk"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeProvisioningParameters
+      X-Amz-Date:
+      - 20180914T145830Z
+      X-Amz-Content-Sha256:
+      - 4c42ce70c37e003289d77366a37276134116ab19fde0d251805321a66cad1e54
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=709b5b2331bad84dbab980a8cf502b38cbfc0c7c09888d39122d7941e614f95d
+      Content-Length:
+      - '106'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - a4c83310-b82e-11e8-8ae1-3f38219f3131
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '3047'
+      Date:
+      - Fri, 14 Sep 2018 14:58:30 GMT
+    body:
+      encoding: UTF-8
+      string: '{"ConstraintSummaries":[],"ProvisioningArtifactParameters":[{"Description":"Name
+        of an existing EC2 KeyPair to enable SSH access to the instances","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":[]},"ParameterKey":"KeyName","ParameterType":"AWS::EC2::KeyPair::KeyName"},{"DefaultValue":"0.0.0.0/0","Description":"The
+        IP address range that can be used to SSH to the EC2 instances","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":[]},"ParameterKey":"SSHLocation","ParameterType":"String"},{"DefaultValue":"t2.small","Description":"WebServer
+        EC2 instance type","IsNoEcho":false,"ParameterConstraints":{"AllowedValues":["t1.micro","t2.nano","t2.micro","t2.small","t2.medium","t2.large","m1.small","m1.medium","m1.large","m1.xlarge","m2.xlarge","m2.2xlarge","m2.4xlarge","m3.medium","m3.large","m3.xlarge","m3.2xlarge","m4.large","m4.xlarge","m4.2xlarge","m4.4xlarge","m4.10xlarge","c1.medium","c1.xlarge","c3.large","c3.xlarge","c3.2xlarge","c3.4xlarge","c3.8xlarge","c4.large","c4.xlarge","c4.2xlarge","c4.4xlarge","c4.8xlarge","g2.2xlarge","g2.8xlarge","r3.large","r3.xlarge","r3.2xlarge","r3.4xlarge","r3.8xlarge","i2.xlarge","i2.2xlarge","i2.4xlarge","i2.8xlarge","d2.xlarge","d2.2xlarge","d2.4xlarge","d2.8xlarge","hi1.4xlarge","hs1.8xlarge","cr1.8xlarge","cc2.8xlarge","cg1.4xlarge"]},"ParameterKey":"InstanceType","ParameterType":"String"}],"TagOptions":[],"UsageInstructions":[{"Type":"rules","Value":"{}"},{"Type":"version","Value":"2010-09-09"},{"Type":"description","Value":"AWS
+        CloudFormation Sample Template ELBWithLockedDownAutoScaledInstances: Create
+        a load balanced, Auto Scaled sample website where the instances are locked
+        down to only accept traffic from the load balancer. This example creates an
+        Auto Scaling group behind a load balancer with a simple health check. The
+        web site is available on port 80, however, the instances can be configured
+        to listen on any port (8888 by default). **WARNING** This template creates
+        one or more Amazon EC2 instances and an Elastic Load Balancer. You will be
+        billed for the AWS resources used if you create a stack from this template."},{"Type":"metadata","Value":"{\"AWS::CloudFormation::Designer\":{\"d734fbb5-46b9-46e6-8905-e95d19b8e184\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"z\":\"1\",\"position\":{\"x\":\"60\",\"y\":\"90\"},\"embeds\":[]},\"6356820a-2472-4818-b70f-acfca47ee542\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"isassociatedwith\":[\"65fa704f-2abf-4c89-b3d4-7d9c54272872\"],\"z\":\"1\",\"position\":{\"x\":\"180\",\"y\":\"210\"},\"embeds\":[],\"isconnectedto\":[\"d734fbb5-46b9-46e6-8905-e95d19b8e184\"]},\"65fa704f-2abf-4c89-b3d4-7d9c54272872\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"z\":\"1\",\"position\":{\"x\":\"60\",\"y\":\"210\"},\"ismemberof\":[\"02d7e550-1606-4cab-854b-8e875e8781c4\"],\"embeds\":[]},\"02d7e550-1606-4cab-854b-8e875e8781c4\":{\"size\":{\"width\":\"60\",\"height\":\"60\"},\"isrelatedto\":[\"d734fbb5-46b9-46e6-8905-e95d19b8e184\"],\"z\":\"1\",\"position\":{\"x\":\"180\",\"y\":\"90\"},\"embeds\":[]}}}"}]}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 14:58:31 GMT
+recorded_with: VCR 3.0.3
