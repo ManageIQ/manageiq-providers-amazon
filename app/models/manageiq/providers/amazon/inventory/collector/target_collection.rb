@@ -203,13 +203,31 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   end
 
   def service_offerings
-    # TODO(lsmola) targeted refresh for service catalog items
-    []
+    return [] if references(:service_offerings).blank?
+
+    references(:service_offerings).map { |product_id| service_offering(product_id) }.compact
+  end
+
+  def service_offering(product_id)
+    aws_service_catalog.client.describe_product_as_admin(:id => product_id).product_view_detail
+  rescue => _e
+    # TODO(lsmola) do not pollute log for now, since ServiceCatalog is not officially supported
+    # _log.warn("Couldn't fetch 'service_offering' with product_id #{product_id} of service catalog, message: #{e.message}")
+    nil
   end
 
   def service_instances
-    # TODO(lsmola) targeted refresh for service catalog items
-    []
+    return [] if references(:service_instances).blank?
+
+    references(:service_instances).map { |x| service_instance(x) }.compact
+  end
+
+  def service_instance(provisioned_product_id)
+    aws_service_catalog.client.describe_provisioned_product(:id => provisioned_product_id).provisioned_product_detail
+  rescue => _e
+    # TODO(lsmola) do not pollute log for now, since ServiceCatalog is not officially supported
+    # _log.warn("Couldn't fetch 'service_instance' with provisioned_product_id #{product_id} of service catalog, message: #{e.message}")
+    nil
   end
 
   private
