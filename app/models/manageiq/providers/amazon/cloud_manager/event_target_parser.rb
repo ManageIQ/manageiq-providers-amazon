@@ -111,6 +111,9 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
     # Block Storage
     add_target(target_collection, :cloud_volumes, event_data["volumeId"]) if event_data["volumeId"]
     add_target(target_collection, :cloud_volume_snapshots, event_data["snapshotId"]) if event_data["snapshotId"]
+    # Service Catalog
+    add_target(target_collection, :service_offerings, event_data["productId"]) if event_data["productId"]
+    add_target(target_collection, :service_instances, event_data["provisionedProductId"]) if event_data["provisionedProductId"]
 
     # TODO(lsmola) how to handle tagging? Tagging affects e.g. a name of any resource, but contains only a generic
     # resourceID
@@ -123,6 +126,7 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
 
     # Collect nested references
     collect_cloudwatch_api_references!(target_collection, event_data["networkInterface"], depth + 1) if event_data["networkInterface"]
+    collect_cloudwatch_api_references!(target_collection, event_data["recordDetail"], depth + 1) if event_data["recordDetail"]
 
     (event_data.fetch_path("groupSet", "items") || []).each do |x|
       collect_cloudwatch_api_references!(target_collection, x, depth + 1)
