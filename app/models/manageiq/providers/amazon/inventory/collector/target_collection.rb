@@ -202,6 +202,16 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     ""
   end
 
+  def service_offerings
+    # TODO(lsmola) targeted refresh for service catalog items
+    []
+  end
+
+  def service_instances
+    # TODO(lsmola) targeted refresh for service catalog items
+    []
+  end
+
   private
 
   def parse_targets!

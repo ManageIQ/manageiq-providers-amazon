@@ -66,13 +66,13 @@ module AwsRefresherSpecCounts
       ContainerLabelTagMapping.where(:labeled_resource_type => "Vm")
     ).pluck(:label_name)
     # Correct count of mapped tags for Vms
-    vms_tags_count = vms_tags.select { |x| vms_mappings.include?(x["key"]) }.count
+    vms_tags_count = vms_tags.select { |x| vms_mappings.include?(x["key"]) && x["value"].present? }.count
 
     images_mappings = ContainerLabelTagMapping.where(:labeled_resource_type => nil).or(
       ContainerLabelTagMapping.where(:labeled_resource_type => "Image")
     ).pluck(:label_name)
     # Correct count of mapped tags for Images
-    images_tags_count = images_tags.select { |x| images_mappings.include?(x["key"]) }.count
+    images_tags_count = images_tags.select { |x| images_mappings.include?(x["key"]) && x["value"].present? }.count
 
     # Networks for all Vms is a list of private and public addresses of a 1 interface of a Vm
     networks_count             = instance_hashes.map { |x| [x['public_ip_address'], x['private_ip_address']] }.flatten.compact.size
@@ -137,6 +137,9 @@ module AwsRefresherSpecCounts
     orchestration_stack_outputs_count    = orchestration_stack_hashes.map { |x| x["outputs"] }.flatten.compact.size
     orchestration_stack_resources_count  = stacks_resources.size
 
+    orchestration_templates_count = orchestration_stacks_count - (OrchestrationStack.pluck(:orchestration_template_id).count -
+      OrchestrationStack.pluck(:orchestration_template_id).uniq.count)
+
     base_inventory_counts.merge(
       :auth_private_key              => key_pairs.size,
       :availability_zone             => availability_zones.size,
@@ -159,7 +162,7 @@ module AwsRefresherSpecCounts
       :orchestration_stack_output    => orchestration_stack_outputs_count,
       :orchestration_stack_parameter => orchestration_stack_parameters_count,
       :orchestration_stack_resource  => orchestration_stack_resources_count,
-      :orchestration_template        => orchestration_stacks_count,
+      :orchestration_template        => orchestration_templates_count,
       :security_group                => security_groups_count,
       :tagging                       => vms_tags_count + images_tags_count,
       :vm                            => instances_count,
