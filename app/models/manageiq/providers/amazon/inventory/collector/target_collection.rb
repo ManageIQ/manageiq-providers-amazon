@@ -254,6 +254,10 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       infer_related_vm_ems_refs_db!
       infer_related_vm_ems_refs_api!
     end
+
+    unless references(:service_offerings).blank?
+      infer_related_service_offering_ems_refs_db!
+    end
   end
 
   def infer_related_vm_ems_refs_db!
@@ -273,6 +277,16 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       vm.key_pairs.collect(&:name).compact.each do |name|
         target.add_target(:association => :key_pairs, :manager_ref => {:name => name})
       end
+    end
+  end
+
+  def infer_related_service_offering_ems_refs_db!
+    # service_parameters_sets are nested to offerings, lets always fetch all, so we can disconnect non existent
+    changed_service_offerings = manager.service_offerings
+                                  .where(:ems_ref => references(:service_offerings))
+                                  .includes(:service_parameters_sets)
+    changed_service_offerings.each do |service_offering|
+      service_offering.service_parameters_sets.each { |x| add_simple_target!(:service_parameters_sets, x.ems_ref) }
     end
   end
 

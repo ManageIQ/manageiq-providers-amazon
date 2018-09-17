@@ -434,6 +434,12 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
             :service_offerings       => 2,
             :service_parameters_sets => 4,
           )
+
+          # Lets create service parameter set, that should be disconected next refresh
+          FactoryGirl.create(:service_parameters_set_amazon,
+                             :ems_ref               => "mock",
+                             :ext_management_system => @ems,
+                             :service_offering      => ServiceOffering.first)
         end
       end
 
