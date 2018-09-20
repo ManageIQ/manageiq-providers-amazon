@@ -1547,7 +1547,7 @@ module AwsRefresherSpecCommon
         ["EmsRefreshSpecProduct v3 EmsRefreshSpecPortfolio", "prod-h7p6ruq5qgrga__pa-ysaib55ylta6k__lp-e76ssfhze5jyi"],
         ["EmsRefreshSpecProduct v2 EmsRefreshSpecPortfolio2", "prod-h7p6ruq5qgrga__pa-nr3ua3nz3pgwq__lp-rb5sy6f5vyrdk"],
         ["EmsRefreshSpecProduct v3 EmsRefreshSpecPortfolio2", "prod-h7p6ruq5qgrga__pa-ysaib55ylta6k__lp-rb5sy6f5vyrdk"],
-        )
+      )
     )
   end
 

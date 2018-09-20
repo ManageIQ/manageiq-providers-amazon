@@ -250,12 +250,12 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     # ems_refs of every related object. Now this is not very nice fro ma design point of view, but we really want
     # to see changes in VM's associated objects, so the VM view is always consistent and have fresh data. The partial
     # reason for this is, that AWS doesn't send all the objects state change,
-    unless references(:vms).blank?
+    if references(:vms).present?
       infer_related_vm_ems_refs_db!
       infer_related_vm_ems_refs_api!
     end
 
-    unless references(:service_offerings).blank?
+    if references(:service_offerings).present?
       infer_related_service_offering_ems_refs_db!
     end
   end
@@ -283,8 +283,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   def infer_related_service_offering_ems_refs_db!
     # service_parameters_sets are nested to offerings, lets always fetch all, so we can disconnect non existent
     changed_service_offerings = manager.service_offerings
-                                  .where(:ems_ref => references(:service_offerings))
-                                  .includes(:service_parameters_sets)
+                                       .where(:ems_ref => references(:service_offerings))
+                                       .includes(:service_parameters_sets)
     changed_service_offerings.each do |service_offering|
       service_offering.service_parameters_sets.each { |x| add_simple_target!(:service_parameters_sets, x.ems_ref) }
     end
