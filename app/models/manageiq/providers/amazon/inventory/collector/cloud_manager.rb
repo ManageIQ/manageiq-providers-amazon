@@ -84,40 +84,6 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
     []
   end
 
-  def service_parameters_sets(product_id)
-    # TODO(lsmola) too many API calls, we need to do it in multiple threads
-
-    # Taking provisioning_artifacts of described product returns only active artifacts, doing list_provisioning_artifacts
-    # we are not able to recognize the active ones. Same with describe_product_as_admin, status is missing. Status is
-    # in the describe_provisioning_artifact, but it is wrong (always ACTIVE)
-    artifacts    = aws_service_catalog.client.describe_product(:id => product_id).provisioning_artifacts
-    launch_paths = aws_service_catalog.client.list_launch_paths(:product_id => product_id).launch_path_summaries
-    parameters_sets = []
-
-    launch_paths.each do |launch_path|
-      artifacts.each do |artifact|
-        parameter_set                           = {:artifact => artifact, :launch_path => launch_path}
-        parameter_set[:provisioning_parameters] = aws_service_catalog.client.describe_provisioning_parameters(
-          :product_id               => product_id,
-          :provisioning_artifact_id => artifact.id,
-          :path_id                  => launch_path.id
-        )
-        parameters_sets << parameter_set
-      end
-    end
-    parameters_sets
-  rescue => e
-    _log.warn("Couldn't fetch 'describe_provisioning_parameters' of service catalog, message: #{e.message}")
-    []
-  end
-
-  def describe_record(record_id)
-    aws_service_catalog.client.describe_record(:id => record_id)
-  rescue => e
-    _log.warn("Couldn't fetch 'describe_record' of service catalog, message: #{e.message}")
-    nil
-  end
-
   private
 
   def extra_image_references

@@ -32,6 +32,21 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       )
     end
 
+    it "parses AWS_CloudFormation_Stack_UPDATE event" do
+      ems_event = create_ems_event("config/AWS_CloudFormation_Stack_UPDATE.json")
+
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:orchestration_stacks, {:ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/SC-200278856672-pp-hoqwtij7q34ie/a2cbf760-b80a-11e8-be36-500c20fefad2"}]
+          ]
+        )
+      )
+    end
+
     it "parses AWS_CloudFormation_Stack_DELETE.json event" do
       ems_event = create_ems_event("config/AWS_CloudFormation_Stack_DELETE.json")
 
@@ -549,6 +564,20 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       )
     end
 
+    it "parses AWS_API_CALL_AssociateProductWithPortfolio" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_AssociateProductWithPortfolio.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:service_offerings, {:ems_ref=>"prod-7eznvu5zer2ye"}],
+          ]
+        )
+      )
+    end
+
     it "parses AWS_API_CALL_AssociateRouteTable" do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_AssociateRouteTable.json")
       parsed_targets = described_class.new(ems_event).parse
@@ -631,6 +660,18 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
           [
             [:load_balancers, {:ems_ref => "ladas-tes-ElasticL-1TF5KASVJA6TN"}]
           ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_CopyProduct" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_CopyProduct.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          []
         )
       )
     end
@@ -730,6 +771,32 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
             [:cloud_subnets, {:ems_ref => "subnet-16c70477"}],
             [:network_ports, {:ems_ref => "eni-f2397458"}],
             [:security_groups, {:ems_ref => "sg-0d2cd677"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_CreateProduct" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_CreateProduct.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          []
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_CreateProvisioningArtifact" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_CreateProvisioningArtifact.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:service_offerings, {:ems_ref => "prod-h7p6ruq5qgrga"}]
           ]
         )
       )
@@ -901,6 +968,32 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
         match_array(
           [
             [:network_ports, {:ems_ref=>"eni-3f67fd15"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_DeleteProduct" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DeleteProduct.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(0)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          []
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_DeleteProvisioningArtifact" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DeleteProvisioningArtifact.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:service_offerings, {:ems_ref=>"prod-h7p6ruq5qgrga"}]
           ]
         )
       )
@@ -1101,6 +1194,20 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       )
     end
 
+    it "parses AWS_API_CALL_DisassociateProductFromPortfolio" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DisassociateProductFromPortfolio.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:service_offerings, {:ems_ref => "prod-7eznvu5zer2ye"}],
+          ]
+        )
+      )
+    end
+
     it "parses AWS_API_CALL_DisassociateRouteTable.json" do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_DisassociateRouteTable.json")
       parsed_targets = described_class.new(ems_event).parse
@@ -1195,6 +1302,21 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
         match_array(
           [
             [:cloud_networks, {:ems_ref=>"vpc-d87ff0a0"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_ProvisionProduct" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_ProvisionProduct.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(3)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:service_offerings, {:ems_ref => "prod-h7p6ruq5qgrga"}],
+            [:service_instances, {:ems_ref => "pp-hoqwtij7q34ie"}]
           ]
         )
       )
@@ -1386,6 +1508,21 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       )
     end
 
+    it "parses AWS_API_CALL_TerminateProvisionedProduct" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_TerminateProvisionedProduct.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(2)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:service_offerings, {:ems_ref=>"prod-h7p6ruq5qgrga"}],
+            [:service_instances, {:ems_ref=>"pp-7mzs6atzwhjxe"}]
+          ]
+        )
+      )
+    end
+
     it "parses AWS_API_CALL_UnassignPrivateIpAddresses" do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_UnassignPrivateIpAddresses.json")
       parsed_targets = described_class.new(ems_event).parse
@@ -1395,6 +1532,49 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
         match_array(
           [
             [:network_ports, {:ems_ref => "eni-6933e6c9"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_UpdateProvisionedProduct" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_UpdateProvisionedProduct.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(3)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:service_offerings, {:ems_ref=>"prod-h7p6ruq5qgrga"}],
+            [:service_instances, {:ems_ref=>"pp-hoqwtij7q34ie"}]
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_UpdateProvisioningArtifact" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_UpdateProvisioningArtifact.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:service_offerings, {:ems_ref=>"prod-h7p6ruq5qgrga"}],
+          ]
+        )
+      )
+    end
+
+    it "parses AWS_API_CALL_UpdateStack" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_UpdateStack.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(2)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:orchestration_stacks, {:ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/SC-200278856672-pp-hoqwtij7q34ie/a2cbf760-b80a-11e8-be36-500c20fefad2"}]
           ]
         )
       )

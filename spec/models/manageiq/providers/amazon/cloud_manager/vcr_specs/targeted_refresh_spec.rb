@@ -405,6 +405,73 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           )
         end
       end
+
+      it "will refresh service_offerings with parameters sets" do
+        service_offering_target1 = InventoryRefresh::Target.new(
+          :manager_id  => @ems.id,
+          :association => :service_offerings,
+          :manager_ref => {:ems_ref => "prod-4v6rc4hwaiiha"}
+        )
+        service_offering_target2 = InventoryRefresh::Target.new(
+          :manager_id  => @ems.id,
+          :association => :service_offerings,
+          :manager_ref => {:ems_ref => "prod-h7p6ruq5qgrga"}
+        )
+
+        2.times do # Run twice to verify that a second run with existing data does not change anything
+          @ems.reload
+
+          VCR.use_cassette(described_class.name.underscore + "_targeted/service_offerings_with_parameters_sets") do
+            EmsRefresh.refresh([service_offering_target1, service_offering_target2])
+          end
+          @ems.reload
+
+          assert_specific_service_offering_with_no_portfolio
+          assert_specific_service_offering_with_two_portfolios
+
+          assert_counts(
+            :flavor                  => 3,
+            :service_offerings       => 2,
+            :service_parameters_sets => 4,
+          )
+
+          # Lets create service parameter set, that should be disconected next refresh
+          FactoryGirl.create(:service_parameters_set_amazon,
+                             :ems_ref               => "mock",
+                             :ext_management_system => @ems,
+                             :service_offering      => ServiceOffering.first)
+        end
+      end
+
+      it "will refresh service_instances" do
+        service_offering_target1 = InventoryRefresh::Target.new(
+          :manager_id  => @ems.id,
+          :association => :service_instances,
+          :manager_ref => {:ems_ref => "pp-u2tepcnttldko"}
+        )
+        service_offering_target2 = InventoryRefresh::Target.new(
+          :manager_id  => @ems.id,
+          :association => :service_instances,
+          :manager_ref => {:ems_ref => "pp-5pyltbgyzheqm"}
+        )
+
+        2.times do # Run twice to verify that a second run with existing data does not change anything
+          @ems.reload
+
+          VCR.use_cassette(described_class.name.underscore + "_targeted/service_instances") do
+            EmsRefresh.refresh([service_offering_target1, service_offering_target2])
+          end
+          @ems.reload
+
+          assert_specific_service_instance_with_rules
+          assert_specific_service_instance_v3
+
+          assert_counts(
+            :flavor            => 3,
+            :service_instances => 2,
+          )
+        end
+      end
     end
   end
 

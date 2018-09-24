@@ -86,8 +86,8 @@ module AwsRefresherSpecCommon
     assert_specific_labels_on_vm
 
     if options.inventory_object_refresh
-      assert_specific_service_offering
-      assert_specific_service_instance
+      assert_specific_service_offerings
+      assert_specific_service_instances
     end
   end
 
@@ -1470,7 +1470,13 @@ module AwsRefresherSpecCommon
     expect(template.tags.first.classification.description).to eq("suse-11-server-64")
   end
 
-  def assert_specific_service_offering
+  def assert_specific_service_offerings
+    assert_specific_service_offering_with_no_portfolio
+    assert_specific_service_offering_with_two_portfolios
+    assert_specific_service_offering_with_rules
+  end
+
+  def assert_specific_service_offering_with_no_portfolio
     @service_offering_with_no_portfolio = ServiceOffering.find_by(:name => "EmsRefreshSpecProductWithNoPortfolio")
     expect(@service_offering_with_no_portfolio).to(
       have_attributes(
@@ -1500,6 +1506,11 @@ module AwsRefresherSpecCommon
         "deleted_on"  => nil,
       )
     )
+
+    expect(@service_offering_with_no_portfolio.service_parameters_sets.size).to eq 0
+  end
+
+  def assert_specific_service_offering_with_two_portfolios
     @service_offering_with_two_portfolios = ServiceOffering.find_by(:name => "EmsRefreshSpecProduct")
     expect(@service_offering_with_two_portfolios).to(
       have_attributes(
@@ -1530,6 +1541,17 @@ module AwsRefresherSpecCommon
       )
     )
 
+    expect(@service_offering_with_two_portfolios.service_parameters_sets.pluck(:name, :ems_ref)).to(
+      contain_exactly(
+        ["EmsRefreshSpecProduct v2 EmsRefreshSpecPortfolio", "prod-h7p6ruq5qgrga__pa-nr3ua3nz3pgwq__lp-e76ssfhze5jyi"],
+        ["EmsRefreshSpecProduct v3 EmsRefreshSpecPortfolio", "prod-h7p6ruq5qgrga__pa-ysaib55ylta6k__lp-e76ssfhze5jyi"],
+        ["EmsRefreshSpecProduct v2 EmsRefreshSpecPortfolio2", "prod-h7p6ruq5qgrga__pa-nr3ua3nz3pgwq__lp-rb5sy6f5vyrdk"],
+        ["EmsRefreshSpecProduct v3 EmsRefreshSpecPortfolio2", "prod-h7p6ruq5qgrga__pa-ysaib55ylta6k__lp-rb5sy6f5vyrdk"],
+      )
+    )
+  end
+
+  def assert_specific_service_offering_with_rules
     @service_offering_with_rules = ServiceOffering.find_by(:name => "EmsRefreshSpecProductWithRules")
     expect(@service_offering_with_rules).to(
       have_attributes(
@@ -1560,20 +1582,6 @@ module AwsRefresherSpecCommon
       )
     )
 
-    assert_service_parameters_sets
-  end
-
-  def assert_service_parameters_sets
-    expect(@service_offering_with_no_portfolio.service_parameters_sets.size).to eq 0
-    expect(@service_offering_with_two_portfolios.service_parameters_sets.pluck(:name, :ems_ref)).to(
-      contain_exactly(
-        ["EmsRefreshSpecProduct v2 EmsRefreshSpecPortfolio", "prod-h7p6ruq5qgrga__pa-nr3ua3nz3pgwq__lp-e76ssfhze5jyi"],
-        ["EmsRefreshSpecProduct v3 EmsRefreshSpecPortfolio", "prod-h7p6ruq5qgrga__pa-ysaib55ylta6k__lp-e76ssfhze5jyi"],
-        ["EmsRefreshSpecProduct v2 EmsRefreshSpecPortfolio2", "prod-h7p6ruq5qgrga__pa-nr3ua3nz3pgwq__lp-rb5sy6f5vyrdk"],
-        ["EmsRefreshSpecProduct v3 EmsRefreshSpecPortfolio2", "prod-h7p6ruq5qgrga__pa-ysaib55ylta6k__lp-rb5sy6f5vyrdk"],
-      )
-    )
-
     expect(@service_offering_with_rules.service_parameters_sets.pluck(:name, :ems_ref)).to(
       contain_exactly(
         ["EmsRefreshSpecProductWithRules v1.1 EmsRefreshSpecPortfolio2", "prod-cei2spnzu24lq__pa-ybnrerfyrhm74__lp-jg4ob2tnq4pg2"]
@@ -1581,12 +1589,18 @@ module AwsRefresherSpecCommon
     )
   end
 
-  def assert_specific_service_instance
+  def assert_specific_service_instances
     # There is no admin view, we need to provision the product using the VCR account:
     # Assign admin rights temporarily and run:
     # aws_service_catalog.client.provision_product(:product_id => "prod-h7p6ruq5qgrga", :provisioned_product_name => "EmsRefreshSpecServiceInstanceV3", :provisioning_artifact_id => "pa-ysaib55ylta6k", :path_id => "lp-e76ssfhze5jyi",:provisioning_parameters => [{:key => "InstanceType", :value => "t1.micro"}, {:key => "KeyName", :value => "EmsRefreshSpec-KeyPair"}])
     # aws_service_catalog.client.provision_product(:product_id => "prod-h7p6ruq5qgrga", :provisioned_product_name => "EmsRefreshSpecServiceInstance", :provisioning_artifact_id => "pa-nr3ua3nz3pgwq", :path_id => "lp-rb5sy6f5vyrdk", :provisioning_parameters => [{:key => "InstanceType", :value => "t1.micro"}, {:key => "KeyName", :value => "EmsRefreshSpec-KeyPair"}])
     # aws_service_catalog.client.provision_product(:product_id => "prod-cei2spnzu24lq", :provisioned_product_name => "EmsRefreshSpecServiceInstanceWithRules", :provisioning_artifact_id => "pa-ybnrerfyrhm74", :path_id => "lp-jg4ob2tnq4pg2", :provisioning_parameters => [{:key => "InstanceType", :value => "t1.micro"}, {:key => "KeyName", :value => "EmsRefreshSpec-KeyPair"}, {:key => "Environment", :value => "test"}])
+    assert_specific_service_instance_with_rules
+    assert_specific_service_instance_v3
+    assert_specific_service_instance
+  end
+
+  def assert_specific_service_instance_with_rules
     @service_instance_with_rules = ServiceInstance.find_by(:name => "EmsRefreshSpecServiceInstanceWithRules")
     expect(@service_instance_with_rules).to(
       have_attributes(
@@ -1594,8 +1608,8 @@ module AwsRefresherSpecCommon
         "ems_ref"                   => "pp-5pyltbgyzheqm",
         "type"                      => "ManageIQ::Providers::Amazon::CloudManager::ServiceInstance",
         "ems_id"                    => @ems.id,
-        "service_offering_id"       => @service_offering_with_rules.id,
-        "service_parameters_set_id" => service_parameter_set(@service_instance_with_rules).id,
+        "service_offering_id"       => @service_offering_with_rules.try(:id),
+        "service_parameters_set_id" => service_parameter_set(@service_instance_with_rules).try(:id),
         "extra"                     => {
           "arn"                 => "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceWithRules/pp-5pyltbgyzheqm",
           "type"                => "CFN_STACK",
@@ -1645,7 +1659,9 @@ module AwsRefresherSpecCommon
         "deleted_on"                => nil,
       )
     )
+  end
 
+  def assert_specific_service_instance_v3
     @service_instance_v3 = ServiceInstance.find_by(:name => "EmsRefreshSpecServiceInstanceV3")
     expect(@service_instance_v3).to(
       have_attributes(
@@ -1653,8 +1669,8 @@ module AwsRefresherSpecCommon
         "ems_ref"                   => "pp-u2tepcnttldko",
         "type"                      => "ManageIQ::Providers::Amazon::CloudManager::ServiceInstance",
         "ems_id"                    => @ems.id,
-        "service_offering_id"       => @service_offering_with_two_portfolios.id,
-        "service_parameters_set_id" => service_parameter_set(@service_instance_v3).id,
+        "service_offering_id"       => @service_offering_with_two_portfolios.try(:id),
+        "service_parameters_set_id" => service_parameter_set(@service_instance_v3).try(:id),
         "extra"                     => {
           "arn"                 =>
                                    "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceV3/pp-u2tepcnttldko",
@@ -1702,7 +1718,9 @@ module AwsRefresherSpecCommon
         "deleted_on"                => nil,
       )
     )
+  end
 
+  def assert_specific_service_instance
     @service_instance = ServiceInstance.find_by(:name => "EmsRefreshSpecServiceInstance")
     expect(@service_instance).to(
       have_attributes(
@@ -1710,8 +1728,8 @@ module AwsRefresherSpecCommon
         "ems_ref"                   => "pp-gato4drzgerpy",
         "type"                      => "ManageIQ::Providers::Amazon::CloudManager::ServiceInstance",
         "ems_id"                    => @ems.id,
-        "service_offering_id"       => @service_offering_with_two_portfolios.id,
-        "service_parameters_set_id" => service_parameter_set(@service_instance).id,
+        "service_offering_id"       => @service_offering_with_two_portfolios.try(:id),
+        "service_parameters_set_id" => service_parameter_set(@service_instance).try(:id),
         "extra"                     => {
           "arn"                 =>
                                    "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstance/pp-gato4drzgerpy",

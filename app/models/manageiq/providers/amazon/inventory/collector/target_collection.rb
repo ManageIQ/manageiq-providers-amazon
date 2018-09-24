@@ -203,13 +203,31 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   end
 
   def service_offerings
-    # TODO(lsmola) targeted refresh for service catalog items
-    []
+    return [] if references(:service_offerings).blank?
+
+    references(:service_offerings).map { |product_id| service_offering(product_id) }.compact
+  end
+
+  def service_offering(product_id)
+    aws_service_catalog.client.describe_product_as_admin(:id => product_id).product_view_detail
+  rescue => _e
+    # TODO(lsmola) do not pollute log for now, since ServiceCatalog is not officially supported
+    # _log.warn("Couldn't fetch 'service_offering' with product_id #{product_id} of service catalog, message: #{e.message}")
+    nil
   end
 
   def service_instances
-    # TODO(lsmola) targeted refresh for service catalog items
-    []
+    return [] if references(:service_instances).blank?
+
+    references(:service_instances).map { |x| service_instance(x) }.compact
+  end
+
+  def service_instance(provisioned_product_id)
+    aws_service_catalog.client.describe_provisioned_product(:id => provisioned_product_id).provisioned_product_detail
+  rescue => _e
+    # TODO(lsmola) do not pollute log for now, since ServiceCatalog is not officially supported
+    # _log.warn("Couldn't fetch 'service_instance' with provisioned_product_id #{product_id} of service catalog, message: #{e.message}")
+    nil
   end
 
   private
@@ -232,9 +250,13 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     # ems_refs of every related object. Now this is not very nice fro ma design point of view, but we really want
     # to see changes in VM's associated objects, so the VM view is always consistent and have fresh data. The partial
     # reason for this is, that AWS doesn't send all the objects state change,
-    unless references(:vms).blank?
+    if references(:vms).present?
       infer_related_vm_ems_refs_db!
       infer_related_vm_ems_refs_api!
+    end
+
+    if references(:service_offerings).present?
+      infer_related_service_offering_ems_refs_db!
     end
   end
 
@@ -255,6 +277,16 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       vm.key_pairs.collect(&:name).compact.each do |name|
         target.add_target(:association => :key_pairs, :manager_ref => {:name => name})
       end
+    end
+  end
+
+  def infer_related_service_offering_ems_refs_db!
+    # service_parameters_sets are nested to offerings, lets always fetch all, so we can disconnect non existent
+    changed_service_offerings = manager.service_offerings
+                                       .where(:ems_ref => references(:service_offerings))
+                                       .includes(:service_parameters_sets)
+    changed_service_offerings.each do |service_offering|
+      service_offering.service_parameters_sets.each { |x| add_simple_target!(:service_parameters_sets, x.ems_ref) }
     end
   end
 

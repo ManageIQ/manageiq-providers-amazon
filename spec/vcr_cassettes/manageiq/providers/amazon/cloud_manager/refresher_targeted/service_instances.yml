@@ -1,0 +1,187 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"Id":"pp-u2tepcnttldko"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeProvisionedProduct
+      X-Amz-Date:
+      - 20180914T152844Z
+      X-Amz-Content-Sha256:
+      - 6ade39146d3bfd560fa95bc81259fca6e23130a4fed6df9789927d61676dbb39
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=2ece506693a8a2d0f929452b351964be927d014dc041521d68d88920eaf03e5f
+      Content-Length:
+      - '25'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - de5fdcb5-b832-11e8-9685-4f3416af0df2
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '471'
+      Date:
+      - Fri, 14 Sep 2018 15:28:45 GMT
+    body:
+      encoding: UTF-8
+      string: '{"CloudWatchDashboards":[],"ProvisionedProductDetail":{"Arn":"arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceV3/pp-u2tepcnttldko","CreatedTime":1.536221931782E9,"Id":"pp-u2tepcnttldko","IdempotencyToken":"c4de373d-fc6b-45ac-a7d0-760b6be25756","LastRecordId":"rec-coaoipufhru7e","Name":"EmsRefreshSpecServiceInstanceV3","ProductId":"prod-h7p6ruq5qgrga","ProvisioningArtifactId":"pa-ysaib55ylta6k","Status":"AVAILABLE","Type":"CFN_STACK"}}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 15:28:45 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"Id":"pp-5pyltbgyzheqm"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeProvisionedProduct
+      X-Amz-Date:
+      - 20180914T152845Z
+      X-Amz-Content-Sha256:
+      - 0735f4ee5efe18887851c0d2acffd3a16f045f6044d7f78d303a2ed3449d2f5c
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=21aad15be76cd7cf184fc74a16d60dda5f49052f1a6e625e73fce32c49554fce
+      Content-Length:
+      - '25'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - debb4380-b832-11e8-8ae1-3f38219f3131
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '485'
+      Date:
+      - Fri, 14 Sep 2018 15:28:45 GMT
+    body:
+      encoding: UTF-8
+      string: '{"CloudWatchDashboards":[],"ProvisionedProductDetail":{"Arn":"arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceWithRules/pp-5pyltbgyzheqm","CreatedTime":1.536068318933E9,"Id":"pp-5pyltbgyzheqm","IdempotencyToken":"39489a07-f013-4e49-a061-11360db7664c","LastRecordId":"rec-li62bnn6bnza4","Name":"EmsRefreshSpecServiceInstanceWithRules","ProductId":"prod-cei2spnzu24lq","ProvisioningArtifactId":"pa-ybnrerfyrhm74","Status":"AVAILABLE","Type":"CFN_STACK"}}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 15:28:46 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"Id":"rec-coaoipufhru7e"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeRecord
+      X-Amz-Date:
+      - 20180914T152846Z
+      X-Amz-Content-Sha256:
+      - 240507e055a8a624f379c3952038fd777a6fb2ddc5eb34db4e73a6a93ce671f0
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=b4d9f26ed6fa01b37669bad3403f4b3b554889169431a1e4441765d27b0230bf
+      Content-Length:
+      - '26'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - df21f46e-b832-11e8-ac74-a390c0bbbfc3
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '1178'
+      Date:
+      - Fri, 14 Sep 2018 15:28:45 GMT
+    body:
+      encoding: UTF-8
+      string: '{"RecordDetail":{"CreatedTime":1.53622193179E9,"PathId":"lp-e76ssfhze5jyi","ProductId":"prod-h7p6ruq5qgrga","ProvisionedProductId":"pp-u2tepcnttldko","ProvisionedProductName":"EmsRefreshSpecServiceInstanceV3","ProvisionedProductType":"CFN_STACK","ProvisioningArtifactId":"pa-ysaib55ylta6k","RecordErrors":[],"RecordId":"rec-coaoipufhru7e","RecordTags":[{"Key":"aws:servicecatalog:productArn","Value":"arn:aws:catalog:us-east-1:200278856672:product/prod-h7p6ruq5qgrga"},{"Key":"aws:servicecatalog:provisioningPrincipalArn","Value":"arn:aws:iam::200278856672:user/VCR"},{"Key":"aws:servicecatalog:portfolioArn","Value":"arn:aws:catalog:us-east-1:200278856672:portfolio/port-4qwgmfklkgosk"}],"RecordType":"PROVISION_PRODUCT","Status":"SUCCEEDED","UpdatedTime":1.53622212831E9},"RecordOutputs":[{"Description":"The
+        ARN of the launched Cloudformation Stack","OutputKey":"CloudformationStackARN","OutputValue":"arn:aws:cloudformation:us-east-1:200278856672:stack/SC-200278856672-pp-u2tepcnttldko/7db5dfd0-b1ad-11e8-b3ce-500c524294d2"},{"Description":"URL
+        of the website","OutputKey":"URL","OutputValue":"http://SC-200278-ElasticL-OHBTSYAE8C89-342178717.us-east-1.elb.amazonaws.com"}]}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 15:28:46 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"Id":"rec-li62bnn6bnza4"}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.DescribeRecord
+      X-Amz-Date:
+      - 20180914T152846Z
+      X-Amz-Content-Sha256:
+      - 269fa7191c95b8738d1677a5db0688a5465cb5ca55436075ec8ba6868b87adc4
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180914/us-east-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=35778a5ce99f4f6d5b97a6f4627bb2e8b2f459e77ad8f826776c061028f7964f
+      Content-Length:
+      - '26'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - df745a08-b832-11e8-9685-4f3416af0df2
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '1187'
+      Date:
+      - Fri, 14 Sep 2018 15:28:46 GMT
+    body:
+      encoding: UTF-8
+      string: '{"RecordDetail":{"CreatedTime":1.536068318938E9,"PathId":"lp-jg4ob2tnq4pg2","ProductId":"prod-cei2spnzu24lq","ProvisionedProductId":"pp-5pyltbgyzheqm","ProvisionedProductName":"EmsRefreshSpecServiceInstanceWithRules","ProvisionedProductType":"CFN_STACK","ProvisioningArtifactId":"pa-ybnrerfyrhm74","RecordErrors":[],"RecordId":"rec-li62bnn6bnza4","RecordTags":[{"Key":"aws:servicecatalog:productArn","Value":"arn:aws:catalog:us-east-1:200278856672:product/prod-cei2spnzu24lq"},{"Key":"aws:servicecatalog:provisioningPrincipalArn","Value":"arn:aws:iam::200278856672:user/VCR"},{"Key":"aws:servicecatalog:portfolioArn","Value":"arn:aws:catalog:us-east-1:200278856672:portfolio/port-dg3wqzbxza75m"}],"RecordType":"PROVISION_PRODUCT","Status":"SUCCEEDED","UpdatedTime":1.536068491778E9},"RecordOutputs":[{"Description":"The
+        ARN of the launched Cloudformation Stack","OutputKey":"CloudformationStackARN","OutputValue":"arn:aws:cloudformation:us-east-1:200278856672:stack/SC-200278856672-pp-5pyltbgyzheqm/d51dd9b0-b047-11e8-a5af-500c28709a35"},{"Description":"URL
+        of the website","OutputKey":"URL","OutputValue":"http://SC-200278-ElasticL-FDREQLBTVJ1Z-177825134.us-east-1.elb.amazonaws.com"}]}'
+    http_version: 
+  recorded_at: Fri, 14 Sep 2018 15:28:47 GMT
+recorded_with: VCR 3.0.3
