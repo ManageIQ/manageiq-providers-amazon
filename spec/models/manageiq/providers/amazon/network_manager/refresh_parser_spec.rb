@@ -39,4 +39,27 @@ describe ManageIQ::Providers::Amazon::NetworkManager::RefreshParser do
       it { expect(subject.collect { |i| i[:source_ip_range] }).to eq(ip_ranges) }
     end
   end
+
+  describe 'empty names replaced with ids' do
+    let(:ec2_resource) { Aws::EC2::Resource.new(:stub_responses => true) }
+    let(:vpc) do
+      Aws::EC2::Vpc.new(
+        'asd',
+        :client => ec2_resource.client,
+        :name   => " \t \n ",
+        :data   => { :tags => [], :vpc_id => 'sdf' },
+      )
+    end
+
+    before do
+      parser.instance_variable_set(:@aws_ec2, ec2_resource)
+      allow(ec2_resource.client).to receive(:describe_vpcs).and_return(:vpcs => [vpc])
+      parser.send(:get_cloud_networks)
+    end
+
+    let(:parser_data) { parser.instance_variable_get(:@data) }
+    subject { parser_data[:cloud_networks].first[:name] }
+
+    it { is_expected.to eq('sdf') }
+  end
 end

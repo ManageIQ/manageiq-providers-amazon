@@ -113,12 +113,17 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     end
   end
 
+  def get_stack_name(stack)
+    stack['stack_name'].to_s.presence || stack['stack_id'].to_s.presence
+  end
+
   def stacks
     collector.stacks.each do |stack|
       uid = stack['stack_id'].to_s
+      stack_name = get_stack_name(stack)
 
       persister_orchestration_stack = persister.orchestration_stacks.find_or_build(uid).assign_attributes(
-        :name                   => stack['stack_name'],
+        :name                   => stack_name,
         :description            => stack['description'],
         :status                 => stack['stack_status'],
         :status_reason          => stack['stack_status_reason'],
@@ -126,14 +131,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :orchestration_template => stack_template(stack)
       )
 
-      stack_resources(persister_orchestration_stack, stack)
+      stack_resources(persister_orchestration_stack, stack_name)
       stack_outputs(persister_orchestration_stack, stack)
       stack_parameters(persister_orchestration_stack, stack)
     end
   end
 
-  def stack_resources(persister_orchestration_stack, stack)
-    collector.stack_resources(stack['stack_name']).each do |resource|
+  def stack_resources(persister_orchestration_stack, stack_name)
+    collector.stack_resources(stack_name).each do |resource|
       uid = resource['physical_resource_id']
       # physical_resource_id can be empty if the resource was not successfully created; ignore such
       return nil if uid.nil?
@@ -181,10 +186,11 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def stack_template(stack)
+    stack_name = get_stack_name(stack)
     persister.orchestration_templates.find_or_build(stack['stack_id']).assign_attributes(
-      :name        => stack['stack_name'],
+      :name        => stack_name,
       :description => stack['description'],
-      :content     => collector.stack_template(stack['stack_name']),
+      :content     => collector.stack_template(stack_name),
       :orderable   => false
     )
   end
@@ -198,8 +204,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       flavor = persister.flavors.find(instance['instance_type']) || persister.flavors.find("unknown")
 
       uid  = instance['instance_id']
-      name = get_from_tags(instance, :name)
-      name = name.blank? ? uid : name
+      name = get_from_tags(instance, :name) || uid
 
       lazy_vm = persister.vms.lazy_find(uid)
 

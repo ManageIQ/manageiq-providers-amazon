@@ -33,8 +33,9 @@ module ManageIQ::Providers::Amazon::RefreshHelperMethods
     end
   end
 
-  def get_from_tags(resource, item)
-    resource.tags.detect { |tag, _| tag.key.downcase == item.to_s.downcase }.try(:value)
+  def get_from_tags(resource, tag_name)
+    tag_name = tag_name.to_s.downcase
+    resource.tags.detect { |tag, _| tag.key.downcase == tag_name }.try(:value).presence
   end
 
   def add_instance_disk(disks, size, name, location)
