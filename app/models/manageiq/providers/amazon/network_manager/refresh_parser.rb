@@ -206,10 +206,8 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
   end
 
   def parse_cloud_network(vpc)
-    uid    = vpc.vpc_id
-
-    name   = get_from_tags(vpc, :name)
-    name ||= uid
+    uid  = vpc.vpc_id
+    name = get_from_tags(vpc, :name) || uid
 
     status = (vpc.state == "available") ? "active" : "inactive"
 
@@ -227,10 +225,8 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
   end
 
   def parse_cloud_subnet(subnet)
-    uid    = subnet.subnet_id
-
-    name   = get_from_tags(subnet, :name)
-    name ||= uid
+    uid  = subnet.subnet_id
+    name = get_from_tags(subnet, :name) || uid
 
     new_result = {
       :type              => self.class.cloud_subnet_type,
@@ -251,7 +247,7 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     new_result = {
       :type                => self.class.security_group_type,
       :ems_ref             => uid,
-      :name                => sg.group_name,
+      :name                => sg.group_name.presence || uid,
       :description         => sg.description.try(:truncate, 255),
       :cloud_network       => @data_index.fetch_path(:cloud_networks, sg.vpc_id),
       :orchestration_stack => parent_manager_fetch_path(:orchestration_stacks,
@@ -472,9 +468,8 @@ class ManageIQ::Providers::Amazon::NetworkManager::RefreshParser
     # Create network_port placeholder for old EC2 instances, those do not have interface nor subnet nor VPC
     cloud_subnet_network_ports = [parse_cloud_subnet_network_port(instance, nil)]
 
-    uid    = instance.id
-    name   = get_from_tags(instance, :name)
-    name ||= uid
+    uid  = instance.id
+    name = get_from_tags(instance, :name) || uid
 
     device = parent_manager_fetch_path(:vms, uid)
 

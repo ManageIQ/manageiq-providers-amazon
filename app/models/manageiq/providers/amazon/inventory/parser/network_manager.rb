@@ -83,7 +83,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
   def security_groups
     collector.security_groups.each do |sg|
       persister_security_group = persister.security_groups.find_or_build(sg['group_id']).assign_attributes(
-        :name                => sg['group_name'] || sg['group_id'],
+        :name                => sg['group_name'].presence || sg['group_id'],
         :description         => sg['description'].try(:truncate, 255),
         :cloud_network       => persister.cloud_networks.lazy_find(sg['vpc_id']),
         :orchestration_stack => persister.orchestration_stacks.lazy_find(

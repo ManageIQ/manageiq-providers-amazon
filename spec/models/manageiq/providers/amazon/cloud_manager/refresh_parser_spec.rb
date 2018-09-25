@@ -27,4 +27,26 @@ describe ManageIQ::Providers::Amazon::CloudManager::RefreshParser do
       end
     end
   end
+
+  describe 'empty names replaced with ids' do
+    let(:cf_resource) { Aws::CloudFormation::Resource.new(:stub_responses => true) }
+    let(:cf_stack) do
+      Aws::CloudFormation::Stack.new(
+        :client => cf_resource.client,
+        :name   => " \t ",
+        :data   => { :outputs => [], :parameters => [], :stack_id => 'abc' },
+      )
+    end
+
+    before do
+      parser.instance_variable_set(:@aws_cloud_formation, cf_resource)
+      allow(cf_resource).to receive(:stacks).and_return([cf_stack])
+      parser.send(:get_stacks)
+    end
+
+    let(:parser_data) { parser.instance_variable_get(:@data) }
+    subject { parser_data[:orchestration_stacks].first[:name] }
+
+    it { is_expected.to eq('abc') }
+  end
 end

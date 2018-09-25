@@ -341,7 +341,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     target.add_target(:association => association, :manager_ref => {:ems_ref => ems_ref})
   end
 
-  def get_from_tags(resource, item)
-    (resource['tags'] || []).detect { |tag, _| tag['key'].downcase == item.to_s.downcase }.try(:[], 'value')
+  def get_from_tags(resource, tag_name)
+    tag_name = tag_name.to_s.downcase
+    Array.wrap(resource['tags']).detect { |tag, _| tag['key'].downcase == tag_name }.try(:[], 'value').presence
   end
 end
