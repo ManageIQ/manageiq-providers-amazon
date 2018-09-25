@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 95 ending 2018-09-24
+
+### Added
+- Service catalog targeted refresh [(#486)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/486)
+- Collect AWS service catalog items [(#483)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/483)
+- Add plugin display name [(#477)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/477)
+
 ## Unreleased as of Sprint 93 ending 2018-08-27
 
 ### Added
