@@ -1,20 +1,20 @@
-# Chinese translations for ManageIQ_Providers_Amazon package.
-# Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
+# Portuguese translations for ManageIQ_Providers_Amazon package.
+# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the ManageIQ_Providers_Amazon package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ManageIQ_Providers_Amazon 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-08-30 14:51+0200\n"
+"PO-Revision-Date: 2018-10-03 13:59+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Chinese\n"
-"Language: zh_CN\n"
+"Language-Team: Portuguese\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 
 msgid "Access key %{number} belongs to IAM user, not to the AWS account holder."
