@@ -78,8 +78,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
 
     def raw_connect(access_key_id, secret_access_key, service, region,
                     proxy_uri = nil, validate = false, uri = nil, assume_role: nil)
-
-      require 'aws-sdk'
+      require "aws-sdk-#{service.to_s.downcase}"
 
       log_formatter_pattern = Aws::Log::Formatter.default.pattern.chomp
       secret_access_key     = ManageIQ::Password.try_decrypt(secret_access_key)
