@@ -1005,6 +1005,35 @@ f1.2xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: true
+f1.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: F1 FPGA Instances 4XL
+  :ebs_only: false
+  :ebs_optimized_available: 
+  :enhanced_networking: true
+  :family: FPGA Instances
+  :instance_store_size: 1009317314560
+  :instance_store_size_gb: 940.0
+  :instance_store_type: 
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 261993005056
+  :memory_gb: 244.0
+  :name: f1.4xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
+  :processor_clock_speed: 
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: true
 g2.2xlarge:
   :architecture:
   - :x86_64
@@ -3594,6 +3623,209 @@ t2.xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: true
+t3.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: T3 General purpose 2XL
+  :ebs_only: true
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: t3.2xlarge
+  :network_performance: :moderate
+  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
+  :processor_clock_speed: 
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+t3.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: T3 General purpose Large
+  :ebs_only: true
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: t3.large
+  :network_performance: :low_to_moderate
+  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
+  :processor_clock_speed: 
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+t3.medium:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: T3 General purpose Medium
+  :ebs_only: true
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 4294967296
+  :memory_gb: 4.0
+  :name: t3.medium
+  :network_performance: :low_to_moderate
+  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
+  :processor_clock_speed: 
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+t3.micro:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: T3 General purpose Micro
+  :ebs_only: true
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 1073741824
+  :memory_gb: 1.0
+  :name: t3.micro
+  :network_performance: :low_to_moderate
+  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
+  :processor_clock_speed: 
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+t3.nano:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: T3 General purpose Nano
+  :ebs_only: true
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 536870912
+  :memory_gb: 0.5
+  :name: t3.nano
+  :network_performance: :low
+  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
+  :processor_clock_speed: 
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+t3.small:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: T3 General purpose Small
+  :ebs_only: true
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 2147483648
+  :memory_gb: 2.0
+  :name: t3.small
+  :network_performance: :low_to_moderate
+  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
+  :processor_clock_speed: 
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+t3.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: T3 General purpose XL
+  :ebs_only: true
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: t3.xlarge
+  :network_performance: :moderate
+  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
+  :processor_clock_speed: 
+  :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
 unknown:
   :architecture: []
   :cluster_networking: 
