@@ -2,6 +2,8 @@ require_relative '../aws_helper'
 require_relative '../aws_stubs'
 require_relative '../aws_refresher_spec_common'
 
+require 'aws-sdk-cloudformation'
+
 describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   include AwsRefresherSpecCommon
   include AwsStubs
@@ -29,9 +31,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
 
         context "OrchestrationStack refresh" do
           context "with all empty relations" do
-            let(:mocked_stack_parameters) { nil }
-            let(:mocked_stack_resources) { nil }
-            let(:mocked_stack_outputs) { nil }
+            let(:mocked_stack_parameters) { [] }
+            let(:mocked_stack_resources) { [] }
+            let(:mocked_stack_outputs) { [] }
 
             it "tests refresh passes" do
               with_aws_stubbed(stub_responses) do
@@ -47,7 +49,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
           end
 
           context "with empty parameters relation" do
-            let(:mocked_stack_parameters) { nil }
+            let(:mocked_stack_parameters) { [] }
 
             it "tests refresh passes" do
               with_aws_stubbed(stub_responses) do
@@ -62,7 +64,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
           end
 
           context "with empty outputs relation" do
-            let(:mocked_stack_outputs) { nil }
+            let(:mocked_stack_outputs) { [] }
 
             it "tests refresh passes" do
               with_aws_stubbed(stub_responses) do
@@ -77,7 +79,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
           end
 
           context "with empty resources relation" do
-            let(:mocked_stack_resources) { nil }
+            let(:mocked_stack_resources) { [] }
 
             it "tests refresh passes" do
               with_aws_stubbed(stub_responses) do
