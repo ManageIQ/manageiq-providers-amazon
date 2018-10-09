@@ -17,7 +17,125 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 
-msgid "Timeline is not available for %{model}"
+msgid "Access key %{number} belongs to IAM user, not to the AWS account holder."
+msgstr ""
+
+msgid "Access key %{number} does not match an IAM user for aws account holder."
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Amazon Provider"
+msgstr ""
+
+msgid "Authentication failed"
+msgstr ""
+
+msgid "Cloud Network (Amazon)"
+msgid_plural "Cloud Networks (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Cloud Provider (Amazon)"
+msgid_plural "Cloud Providers (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Cloud Subnet (Amazon)"
+msgid_plural "Cloud Subnets (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "CloudFormation Template"
+msgid_plural "CloudFormation Templates"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Flavor (Amazon)"
+msgid_plural "Flavors (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Floating IP (Amazon)"
+msgid_plural "Floating IPs (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Image (Amazon)"
+msgid_plural "Images (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Instance (Amazon)"
+msgid_plural "Instances (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Load Balancer (Amazon)"
+msgid_plural "Load Balancers (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Login failed due to a bad username or password."
+msgstr ""
+
+msgid "Network Port (Amazon)"
+msgid_plural "Network Ports (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Network Provider (Amazon)"
+msgid_plural "Network Providers (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Network Router (Amazon)"
+msgid_plural "Network Routers (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Orchestration Stack (Amazon)"
+msgid_plural "Orchestration Stacks (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Security Group (Amazon)"
+msgid_plural "Security Groups (Amazon)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "SignatureMismatch - check your AWS Secret Access Key and signing method"
+msgstr ""
+
+msgid "The Keypair is not connected to an active %{table}"
+msgstr ""
+
+msgid "The Storage Container is already empty"
+msgstr ""
+
+msgid "The Storage Container is not connected to an active %{table}"
+msgstr ""
+
+msgid "The Storage Object is not connected to an active %{table}"
+msgstr ""
+
+msgid "The VM is not powered on"
+msgstr ""
+
+msgid "Unable to process data for job with id %{job_id}"
+msgstr ""
+
+msgid "Unable to sync data for job with id %{job_id}"
+msgstr ""
+
+msgid "Unexpected response returned from system, see log for details"
+msgstr ""
+
+msgid "cloud_volume cannot be nil"
+msgstr ""
+
+msgid "ext_management_system cannot be nil"
 msgstr ""
 
 msgid "not connected to ems"
