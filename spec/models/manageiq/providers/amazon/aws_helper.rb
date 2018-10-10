@@ -1,10 +1,13 @@
-require 'aws-sdk'
+# frozen_string_literal: true
 
 def with_aws_stubbed(stub_responses_per_service)
   stub_responses_per_service.each do |service, stub_responses|
-    raise "Aws.config[#{service}][:stub_responses] already set" if Aws.config.fetch(service, {})[:stub_responses]
-    Aws.config[service] ||= {}
-    Aws.config[service][:stub_responses] = stub_responses
+    if Aws.config.dig(service, :stub_responses).present?
+      raise "Aws.config[#{service}][:stub_responses] already set"
+    else
+      require "aws-sdk-#{service.to_s.downcase}"
+      (Aws.config[service] ||= {})[:stub_responses] = stub_responses
+    end
   end
   yield
 ensure
