@@ -2,6 +2,8 @@ require_relative '../aws_helper'
 require_relative '../aws_stubs'
 require_relative '../aws_refresher_spec_common'
 
+require 'aws-sdk-elasticloadbalancing'
+
 describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
   include AwsRefresherSpecCommon
   include AwsStubs
