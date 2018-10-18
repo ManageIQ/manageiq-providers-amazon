@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 96 ending 2018-10-08
+
+### Added
+- new AWS EC2 instance types [(#493)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/493)
+
+### Fixed
+- avoid blank names by using uids [(#482)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/482)
+
 ## Unreleased as of Sprint 95 ending 2018-09-24
 
 ### Added
