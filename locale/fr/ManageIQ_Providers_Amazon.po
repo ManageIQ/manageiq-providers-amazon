@@ -1,142 +1,192 @@
-# French translations for ManageIQ_Providers_Amazon package.
-# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the ManageIQ_Providers_Amazon package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
-#
+# Laurence Ganseman <laurence.ganseman@stoquart.com>, 2017. #zanata
+# Nathalie Stoquart <nateltrad@gmail.com>, 2017. #zanata
+# croe <croe@redhat.com>, 2017. #zanata
+# Marie Robert <marie.robert@stoquart.com>, 2018. #zanata
+# croe <croe@redhat.com>, 2018. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: ManageIQ_Providers_Amazon 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2018-10-03 13:59+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2018-10-03 13:59+0200\n"
+"PO-Revision-Date: 2018-10-29 02:26+0000\n"
+"Last-Translator: croe <croe@redhat.com>\n"
 "Language-Team: French\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1;\n"
-"\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Zanata 4.6.2\n"
 
-msgid "Access key %{number} belongs to IAM user, not to the AWS account holder."
+#: ../app/models/authenticator/amazon.rb:42
+msgid ""
+"Access key %{number} belongs to IAM user, not to the AWS account holder."
 msgstr ""
+"La clé d'accés %{number} appartient à l'utilisateur IAM, pas au propriétaire"
+" du compte AWS."
 
-msgid "Access key %{number} does not match an IAM user for aws account holder."
+#: ../app/models/authenticator/amazon.rb:96
+msgid ""
+"Access key %{number} does not match an IAM user for aws account holder."
 msgstr ""
+"La clé d'accès %{number} ne correspond pas à un utilisateur IAM pour le "
+"propriétaire du compte AWS."
 
+#: ../app/models/manageiq/providers/amazon/inventory/parser/network_manager.rb:104
+#: ../app/models/manageiq/providers/amazon/network_manager/refresh_parser.rb:266
 msgid "All"
-msgstr ""
+msgstr "Tout"
 
+#: ../lib/manageiq/providers/amazon/engine.rb:8
 msgid "Amazon Provider"
-msgstr ""
+msgstr "Fournisseur Amazon"
 
+#: ../app/models/authenticator/amazon.rb:26
 msgid "Authentication failed"
-msgstr ""
+msgstr "Échec d'authentification"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/cloud_network.rb:3
 msgid "Cloud Network (Amazon)"
 msgid_plural "Cloud Networks (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Réseau cloud (Amazon)"
+msgstr[1] "Réseaux cloud (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager.rb:177
 msgid "Cloud Provider (Amazon)"
 msgid_plural "Cloud Providers (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fournisseur cloud (Amazon)"
+msgstr[1] "Fournisseurs cloud (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/cloud_subnet.rb:3
 msgid "Cloud Subnet (Amazon)"
 msgid_plural "Cloud Subnets (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Sous-réseau cloud (Amazon)"
+msgstr[1] "Sous-réseaux cloud (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/orchestration_template.rb:66
 msgid "CloudFormation Template"
 msgid_plural "CloudFormation Templates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Modèle CloudFormation"
+msgstr[1] "Modèles CloudFormation"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/flavor.rb:14
 msgid "Flavor (Amazon)"
 msgid_plural "Flavors (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Gabarit (Amazon)"
+msgstr[1] "Gabarits (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/floating_ip.rb:3
 msgid "Floating IP (Amazon)"
 msgid_plural "Floating IPs (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "IP flottante (Amazon)"
+msgstr[1] "IP flottantes (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/template.rb:25
 msgid "Image (Amazon)"
 msgid_plural "Images (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Image (Amazon)"
+msgstr[1] "Images (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/vm.rb:68
 msgid "Instance (Amazon)"
 msgid_plural "Instances (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Instance (Amazon)"
+msgstr[1] "Instances (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/load_balancer.rb:3
 msgid "Load Balancer (Amazon)"
 msgid_plural "Load Balancers (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Équilibreur de charge (Amazon)"
+msgstr[1] "Équilibreurs de charge (Amazon)"
 
+#: ../app/models/authenticator/amazon.rb:117
 msgid "Login failed due to a bad username or password."
 msgstr ""
+"Échec de la connexion en raison d'un nom d'utilisateur ou d'un mot de passe "
+"incorrect."
 
+#: ../app/models/manageiq/providers/amazon/network_manager/network_port.rb:3
 msgid "Network Port (Amazon)"
 msgid_plural "Network Ports (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Port réseau (Amazon)"
+msgstr[1] "Ports réseau (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager.rb:60
 msgid "Network Provider (Amazon)"
 msgid_plural "Network Providers (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fournisseur réseau (Amazon)"
+msgstr[1] "Fournisseurs réseau (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/network_router.rb:3
 msgid "Network Router (Amazon)"
 msgid_plural "Network Routers (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Routeur réseau (Amazon)"
+msgstr[1] "Routeurs réseau (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/orchestration_stack.rb:58
 msgid "Orchestration Stack (Amazon)"
 msgid_plural "Orchestration Stacks (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Pile d'orchestration (Amazon)"
+msgstr[1] "Piles d'orchestration (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/security_group.rb:3
 msgid "Security Group (Amazon)"
 msgid_plural "Security Groups (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Groupe de sécurité (Amazon)"
+msgstr[1] "Groupes de sécurité (Amazon)"
 
-msgid "SignatureMismatch - check your AWS Secret Access Key and signing method"
+#: ../app/models/authenticator/amazon.rb:115
+msgid ""
+"SignatureMismatch - check your AWS Secret Access Key and signing method"
 msgstr ""
+"Discordance de signature. Vérifiez votre clé d'accès secrète AWS et le mode "
+"de signature"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/auth_key_pair.rb:23
 msgid "The Keypair is not connected to an active %{table}"
-msgstr ""
+msgstr "La paire de clés n'est pas associée à une %{table} active"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:21
 msgid "The Storage Container is already empty"
-msgstr ""
+msgstr "Le domaine de stockage est déjà vide"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:4
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:14
 msgid "The Storage Container is not connected to an active %{table}"
-msgstr ""
+msgstr "Le domaine de stockage n'est pas connecté à une %{table} active"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_object.rb:4
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_object.rb:10
 msgid "The Storage Object is not connected to an active %{table}"
-msgstr ""
+msgstr "L'objet de stockage n'est pas connecté à une %{table} active"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/vm/operations/guest.rb:7
 msgid "The VM is not powered on"
-msgstr ""
+msgstr "La VM n'est pas activée"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/vm_or_template_shared/scanning.rb:51
 msgid "Unable to process data for job with id %{job_id}"
-msgstr ""
+msgstr "Impossible de traiter les données de la tâche avec l'ID %{job_id}"
 
+#: ../app/models/manageiq/providers/amazon/agent_coordinator_worker/runner/response_thread.rb:66
 msgid "Unable to sync data for job with id %{job_id}"
 msgstr ""
+"Impossible de synchroniser les données de la tâche avec l'ID %{job_id}"
 
+#: ../app/models/authenticator/amazon.rb:123
 msgid "Unexpected response returned from system, see log for details"
 msgstr ""
+"Réponse inattendue reçue du système, consultez le journal pour obtenir plus "
+"de détails"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/ebs/cloud_volume_snapshot.rb:27
 msgid "cloud_volume cannot be nil"
-msgstr ""
+msgstr "cloud_volume ne peut pas être nul"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/ebs/cloud_volume_snapshot.rb:29
 msgid "ext_management_system cannot be nil"
-msgstr ""
+msgstr "ext_management_system ne peut pas être nul"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/template.rb:8
 msgid "not connected to ems"
-msgstr ""
+msgstr "non connecté à EMS"

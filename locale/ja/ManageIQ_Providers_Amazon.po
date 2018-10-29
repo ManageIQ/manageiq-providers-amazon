@@ -1,142 +1,164 @@
-# Japanese translations for ManageIQ_Providers_Amazon package.
-# Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the ManageIQ_Providers_Amazon package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-#
+# asasaki <asasaki@redhat.com>, 2017. #zanata
+# kmoriguc <kmoriguc@redhat.com>, 2018. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: ManageIQ_Providers_Amazon 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-08-30 14:51+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2018-10-03 13:59+0200\n"
+"PO-Revision-Date: 2018-10-25 02:58+0000\n"
+"Last-Translator: kmoriguc <kmoriguc@redhat.com>\n"
 "Language-Team: Japanese\n"
-"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Zanata 4.6.2\n"
 
-msgid "Access key %{number} belongs to IAM user, not to the AWS account holder."
-msgstr ""
+#: ../app/models/authenticator/amazon.rb:42
+msgid ""
+"Access key %{number} belongs to IAM user, not to the AWS account holder."
+msgstr "アクセスキー %{number} はAWS アカウントの所有者ではなく IAM ユーザーに属しています。"
 
-msgid "Access key %{number} does not match an IAM user for aws account holder."
-msgstr ""
+#: ../app/models/authenticator/amazon.rb:96
+msgid ""
+"Access key %{number} does not match an IAM user for aws account holder."
+msgstr "アクセスキー %{number} が AWS アカウント所有者用の IAM ユーザーと一致しません。"
 
+#: ../app/models/manageiq/providers/amazon/inventory/parser/network_manager.rb:104
+#: ../app/models/manageiq/providers/amazon/network_manager/refresh_parser.rb:266
 msgid "All"
-msgstr ""
+msgstr "すべて"
 
+#: ../lib/manageiq/providers/amazon/engine.rb:8
 msgid "Amazon Provider"
-msgstr ""
+msgstr "Amazon プロバイダー"
 
+#: ../app/models/authenticator/amazon.rb:26
 msgid "Authentication failed"
-msgstr ""
+msgstr "認証に失敗しました"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/cloud_network.rb:3
 msgid "Cloud Network (Amazon)"
 msgid_plural "Cloud Networks (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "クラウドネットワーク (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager.rb:177
 msgid "Cloud Provider (Amazon)"
 msgid_plural "Cloud Providers (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "クラウドプロバイダー (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/cloud_subnet.rb:3
 msgid "Cloud Subnet (Amazon)"
 msgid_plural "Cloud Subnets (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "クラウドサブネット (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/orchestration_template.rb:66
 msgid "CloudFormation Template"
 msgid_plural "CloudFormation Templates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "CloudFormation テンプレート"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/flavor.rb:14
 msgid "Flavor (Amazon)"
 msgid_plural "Flavors (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "フレーバー (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/floating_ip.rb:3
 msgid "Floating IP (Amazon)"
 msgid_plural "Floating IPs (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Floating IP (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/template.rb:25
 msgid "Image (Amazon)"
 msgid_plural "Images (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "イメージ (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/vm.rb:68
 msgid "Instance (Amazon)"
 msgid_plural "Instances (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "インスタンス (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/load_balancer.rb:3
 msgid "Load Balancer (Amazon)"
 msgid_plural "Load Balancers (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ロードバランサー (Amazon)"
 
+#: ../app/models/authenticator/amazon.rb:117
 msgid "Login failed due to a bad username or password."
-msgstr ""
+msgstr "ユーザー名またはパスワードが正しくないため、ログインに失敗しました。"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/network_port.rb:3
 msgid "Network Port (Amazon)"
 msgid_plural "Network Ports (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ネットワークポート (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager.rb:60
 msgid "Network Provider (Amazon)"
 msgid_plural "Network Providers (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ネットワークプロバイダー (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/network_router.rb:3
 msgid "Network Router (Amazon)"
 msgid_plural "Network Routers (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ネットワークルーター (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/orchestration_stack.rb:58
 msgid "Orchestration Stack (Amazon)"
 msgid_plural "Orchestration Stacks (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "オーケストレーションスタック (Amazon)"
 
+#: ../app/models/manageiq/providers/amazon/network_manager/security_group.rb:3
 msgid "Security Group (Amazon)"
 msgid_plural "Security Groups (Amazon)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "セキュリティーグループ (Amazon)"
 
-msgid "SignatureMismatch - check your AWS Secret Access Key and signing method"
-msgstr ""
+#: ../app/models/authenticator/amazon.rb:115
+msgid ""
+"SignatureMismatch - check your AWS Secret Access Key and signing method"
+msgstr "SignatureMismatch - AWS シークレットアクセスキーと署名方法をチェックします"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/auth_key_pair.rb:23
 msgid "The Keypair is not connected to an active %{table}"
-msgstr ""
+msgstr "Keypair はアクティブな %{table} に接続されません"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:21
 msgid "The Storage Container is already empty"
-msgstr ""
+msgstr "ストレージコンテナーはすでに空になっています"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:4
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_container.rb:14
 msgid "The Storage Container is not connected to an active %{table}"
-msgstr ""
+msgstr "ストレージコンテナーはアクティブな %{table} に接続されていません"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_object.rb:4
+#: ../app/models/manageiq/providers/amazon/storage_manager/s3/cloud_object_store_object.rb:10
 msgid "The Storage Object is not connected to an active %{table}"
-msgstr ""
+msgstr "ストレージオブジェクトはアクティブな %{table} に接続されていません"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/vm/operations/guest.rb:7
 msgid "The VM is not powered on"
-msgstr ""
+msgstr "VM の電源がオンになっていません"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/vm_or_template_shared/scanning.rb:51
 msgid "Unable to process data for job with id %{job_id}"
-msgstr ""
+msgstr "ID %{job_id} のジョブのデータを処理できません"
 
+#: ../app/models/manageiq/providers/amazon/agent_coordinator_worker/runner/response_thread.rb:66
 msgid "Unable to sync data for job with id %{job_id}"
-msgstr ""
+msgstr "ID %{job_id} のジョブのデータを同期できません"
 
+#: ../app/models/authenticator/amazon.rb:123
 msgid "Unexpected response returned from system, see log for details"
-msgstr ""
+msgstr "予期しない応答がシステムから返されました。詳細についてはログを参照してください"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/ebs/cloud_volume_snapshot.rb:27
 msgid "cloud_volume cannot be nil"
-msgstr ""
+msgstr "cloud_volume を nil にすることはできません"
 
+#: ../app/models/manageiq/providers/amazon/storage_manager/ebs/cloud_volume_snapshot.rb:29
 msgid "ext_management_system cannot be nil"
-msgstr ""
+msgstr "ext_management_system を nil にすることはできません"
 
+#: ../app/models/manageiq/providers/amazon/cloud_manager/template.rb:8
 msgid "not connected to ems"
-msgstr ""
+msgstr "EMS に接続されていません"
