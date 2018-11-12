@@ -25,7 +25,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   [
     :inventory_object_refresh => true,
     :inventory_collections    => {
-      :saver_strategy => :batch,
+      :saver_strategy => "batch",
       :use_ar_object  => false,
     },
   ].each do |settings|
