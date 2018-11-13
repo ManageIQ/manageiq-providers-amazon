@@ -14,18 +14,18 @@ module AwsRefresherSpecCommon
     {
       :inventory_object_refresh => true,
       :inventory_collections    => {
-        :saver_strategy => :default,
+        :saver_strategy => "default",
       },
     }, {
       :inventory_object_refresh => true,
       :inventory_collections    => {
-        :saver_strategy => :batch,
+        :saver_strategy => "batch",
         :use_ar_object  => true,
       },
     }, {
       :inventory_object_refresh => true,
       :inventory_collections    => {
-        :saver_strategy => :batch,
+        :saver_strategy => "batch",
         :use_ar_object  => false,
       },
     }, {
