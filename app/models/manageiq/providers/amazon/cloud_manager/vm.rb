@@ -33,14 +33,6 @@ class ManageIQ::Providers::Amazon::CloudManager::Vm < ManageIQ::Providers::Cloud
     save
   end
 
-  def disconnected
-    false
-  end
-
-  def disconnected?
-    false
-  end
-
   #
   # EC2 interactions
   #
