@@ -18,19 +18,17 @@ describe "OrchestrationTemplateServiceDialog for Amazon" do
     )
 
     fields = group.dialog_fields
-    expect(fields.size).to eq(10)
+    expect(fields.size).to eq(9)
 
-    expect(fields[0].resource_action.fqname).to eq('/Cloud/Orchestration/Operations/Methods/Available_Tenants')
-    assert_field(fields[0], DialogFieldDropDownList, :name => 'tenant_name',          :dynamic => true)
-    assert_field(fields[1], DialogFieldTextBox,      :name => 'stack_name',           :validator_rule => '^[A-Za-z][A-Za-z0-9\-]*$')
-    assert_field(fields[2], DialogFieldDropDownList, :name => 'stack_onfailure',      :values => [%w(DELETE Delete\ stack), %w(DO_NOTHING Do\ nothing), %w(ROLLBACK Rollback)])
-    assert_field(fields[3], DialogFieldTextBox,      :name => 'stack_timeout',        :data_type => 'integer')
-    assert_field(fields[4], DialogFieldTextAreaBox,  :name => 'stack_notifications',  :data_type => 'string')
-    assert_field(fields[5], DialogFieldDropDownList, :name => 'stack_capabilities',   :values => [[nil, '<None>'], ['CAPABILITY_IAM'] * 2, ['CAPABILITY_NAMED_IAM'] * 2])
-    assert_field(fields[6], DialogFieldTextBox,      :name => 'stack_resource_types', :data_type => 'string')
-    assert_field(fields[7], DialogFieldTextBox,      :name => 'stack_role',           :data_type => 'string')
-    assert_field(fields[8], DialogFieldTextBox,      :name => 'stack_tags',           :data_type => 'string')
-    assert_field(fields[9], DialogFieldTextBox,      :name => 'stack_policy',         :data_type => 'string')
+    assert_field(fields[0], DialogFieldTextBox,      :name => 'stack_name',           :validator_rule => '^[A-Za-z][A-Za-z0-9\-]*$')
+    assert_field(fields[1], DialogFieldDropDownList, :name => 'stack_onfailure',      :values => [%w(DELETE Delete\ stack), %w(DO_NOTHING Do\ nothing), %w(ROLLBACK Rollback)])
+    assert_field(fields[2], DialogFieldTextBox,      :name => 'stack_timeout',        :data_type => 'integer')
+    assert_field(fields[3], DialogFieldTextAreaBox,  :name => 'stack_notifications',  :data_type => 'string')
+    assert_field(fields[4], DialogFieldDropDownList, :name => 'stack_capabilities',   :values => [[nil, '<None>'], ['CAPABILITY_IAM'] * 2, ['CAPABILITY_NAMED_IAM'] * 2])
+    assert_field(fields[5], DialogFieldTextBox,      :name => 'stack_resource_types', :data_type => 'string')
+    assert_field(fields[6], DialogFieldTextBox,      :name => 'stack_role',           :data_type => 'string')
+    assert_field(fields[7], DialogFieldTextBox,      :name => 'stack_tags',           :data_type => 'string')
+    assert_field(fields[8], DialogFieldTextBox,      :name => 'stack_policy',         :data_type => 'string')
   end
 
   def assert_field(field, clss, attributes)

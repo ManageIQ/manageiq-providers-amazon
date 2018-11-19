@@ -184,16 +184,15 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate do
   describe '#deployment_options' do
     it 'generates deployment options for AWS' do
       options = subject.deployment_options('ManageIQ::Providers::Amazon::CloudManager')
-      assert_deployment_option(options[0], "tenant_name", :OrchestrationParameterAllowedDynamic, true)
-      assert_deployment_option(options[1], "stack_name", :OrchestrationParameterPattern, true)
-      assert_deployment_option(options[2], "stack_onfailure", :OrchestrationParameterAllowed, true, :reconfigurable => false)
-      assert_deployment_option(options[3], "stack_timeout", nil, false, :reconfigurable => false, :data_type => 'integer')
-      assert_deployment_option(options[4], "stack_notifications", nil, false)
-      assert_deployment_option(options[5], "stack_capabilities", :OrchestrationParameterAllowed, false)
-      assert_deployment_option(options[6], "stack_resource_types", nil, false)
-      assert_deployment_option(options[7], "stack_role", nil, false)
-      assert_deployment_option(options[8], "stack_tags", nil, false)
-      assert_deployment_option(options[9], "stack_policy", nil, false)
+      assert_deployment_option(options[0], "stack_name", :OrchestrationParameterPattern, true)
+      assert_deployment_option(options[1], "stack_onfailure", :OrchestrationParameterAllowed, true, :reconfigurable => false)
+      assert_deployment_option(options[2], "stack_timeout", nil, false, :reconfigurable => false, :data_type => 'integer')
+      assert_deployment_option(options[3], "stack_notifications", nil, false)
+      assert_deployment_option(options[4], "stack_capabilities", :OrchestrationParameterAllowed, false)
+      assert_deployment_option(options[5], "stack_resource_types", nil, false)
+      assert_deployment_option(options[6], "stack_role", nil, false)
+      assert_deployment_option(options[7], "stack_tags", nil, false)
+      assert_deployment_option(options[8], "stack_policy", nil, false)
     end
   end
 
