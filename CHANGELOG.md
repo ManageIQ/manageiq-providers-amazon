@@ -5,7 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Hammer Beta-2
+## Hammer RC-2
+
+### Fixed
+- Change saver_strategy value to String [(#498)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/498)
+
+## Hammer Beta-2 - Released 2018-10-29
 
 ### Added
 - new AWS EC2 instance types [(#493)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/493)
