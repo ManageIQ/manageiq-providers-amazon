@@ -3,17 +3,17 @@ require_relative "../aws_helper"
 describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
   let(:vm_name) { 'amazon-perf-vm' }
 
-  let(:ems) { FactoryGirl.create(:ems_amazon_with_authentication) }
-  let(:vm)  { FactoryGirl.build(:vm_amazon, :ems_ref => vm_name, :ext_management_system => ems) }
+  let(:ems) { FactoryBot.create(:ems_amazon_with_authentication) }
+  let(:vm)  { FactoryBot.build(:vm_amazon, :ems_ref => vm_name, :ext_management_system => ems) }
 
   context "#perf_collect_metrics" do
     it "raises an error when no EMS is defined" do
-      vm = FactoryGirl.build(:vm_amazon, :ext_management_system => nil)
+      vm = FactoryBot.build(:vm_amazon, :ext_management_system => nil)
       expect { vm.perf_collect_metrics('interval_name') }.to raise_error(RuntimeError, /No EMS defined/)
     end
 
     it "raises an error with no EMS credentials defined" do
-      vm = FactoryGirl.build(:vm_amazon, :ext_management_system => FactoryGirl.create(:ems_amazon))
+      vm = FactoryBot.build(:vm_amazon, :ext_management_system => FactoryBot.create(:ems_amazon))
       expect { vm.perf_collect_metrics('interval_name') }.to raise_error(RuntimeError, /no credentials defined/)
     end
 
@@ -59,7 +59,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
 
   context 'counters present' do
     let(:vm_name) { 'i-091369dd8a8d470ab' }
-    let(:ems) { FactoryGirl.create(:ems_amazon_with_vcr_authentication, :provider_region => 'eu-central-1') }
+    let(:ems) { FactoryBot.create(:ems_amazon_with_vcr_authentication, :provider_region => 'eu-central-1') }
 
     subject do
       with_vcr_data { vm.perf_collect_metrics('realtime').last.first.last.first.last }
@@ -69,7 +69,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
     it { is_expected.to have_key('mem_swapped_absolute_average') }
 
     context 'and stored in the database' do
-      let(:vm) { FactoryGirl.create(:vm_amazon, :ext_management_system => ems, :name => vm_name) }
+      let(:vm) { FactoryBot.create(:vm_amazon, :ext_management_system => ems, :name => vm_name) }
 
       subject do
         with_vcr_data { vm.perf_capture('realtime') }

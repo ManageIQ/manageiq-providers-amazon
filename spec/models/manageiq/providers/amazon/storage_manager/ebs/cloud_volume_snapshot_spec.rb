@@ -2,9 +2,9 @@ require_relative "../../aws_helper"
 
 describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot do
   before { NotificationType.seed }
-  let(:amazon) { FactoryGirl.create(:ems_amazon_with_authentication) }
-  let(:ems) { FactoryGirl.create(:ems_amazon_ebs, :parent_ems_id => amazon.id) }
-  let(:cloud_volume_snapshot) { FactoryGirl.create(:cloud_volume_snapshot_amazon, :ext_management_system => ems, :ems_ref => "snapshot_1") }
+  let(:amazon) { FactoryBot.create(:ems_amazon_with_authentication) }
+  let(:ems) { FactoryBot.create(:ems_amazon_ebs, :parent_ems_id => amazon.id) }
+  let(:cloud_volume_snapshot) { FactoryBot.create(:cloud_volume_snapshot_amazon, :ext_management_system => ems, :ems_ref => "snapshot_1") }
 
   describe "cloud volume operations" do
     context "#delete_snapshot" do

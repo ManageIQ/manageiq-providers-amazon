@@ -1,10 +1,10 @@
 require_relative "../../aws_helper"
 
 describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
-  let(:ems_cloud) { FactoryGirl.create(:ems_amazon_with_authentication) }
-  let(:ebs) { FactoryGirl.create(:ems_amazon_ebs, :parent_ems_id => ems_cloud.id) }
-  let(:availability_zone) { FactoryGirl.create(:availability_zone_amazon) }
-  let(:cloud_volume) { FactoryGirl.create(:cloud_volume_amazon_gp2, :ext_management_system => ebs, :ems_ref => "vol_1", :availability_zone => availability_zone) }
+  let(:ems_cloud) { FactoryBot.create(:ems_amazon_with_authentication) }
+  let(:ebs) { FactoryBot.create(:ems_amazon_ebs, :parent_ems_id => ems_cloud.id) }
+  let(:availability_zone) { FactoryBot.create(:availability_zone_amazon) }
+  let(:cloud_volume) { FactoryBot.create(:cloud_volume_amazon_gp2, :ext_management_system => ebs, :ems_ref => "vol_1", :availability_zone => availability_zone) }
 
   describe "cloud volume operations" do
     context ".raw_create_volume" do
@@ -81,7 +81,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
       end
 
       context "when modifying" do
-        let(:volume) { FactoryGirl.create(:cloud_volume_amazon_gp2, :ext_management_system => ebs, :ems_ref => "vol_1", :availability_zone => availability_zone) }
+        let(:volume) { FactoryBot.create(:cloud_volume_amazon_gp2, :ext_management_system => ebs, :ems_ref => "vol_1", :availability_zone => availability_zone) }
         let(:raw_client) { double }
 
         before do
@@ -112,7 +112,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
 
         context "standard volume" do
           let(:options) { { :volume_type => "gp2", :iops => 200, :size => 4 } }
-          let(:volume) { FactoryGirl.create(:cloud_volume_amazon_standard, :ext_management_system => ebs, :ems_ref => "vol_1", :availability_zone => availability_zone) }
+          let(:volume) { FactoryBot.create(:cloud_volume_amazon_standard, :ext_management_system => ebs, :ems_ref => "vol_1", :availability_zone => availability_zone) }
 
           include_examples "#modify_volume is not allowed"
         end
@@ -153,7 +153,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
         end
 
         context "iops of an 'io1' volume type" do
-          let(:volume) { FactoryGirl.create(:cloud_volume_amazon_io1, :ext_management_system => ebs, :ems_ref => "vol_1", :availability_zone => availability_zone) }
+          let(:volume) { FactoryBot.create(:cloud_volume_amazon_io1, :ext_management_system => ebs, :ems_ref => "vol_1", :availability_zone => availability_zone) }
           let(:options) { { :iops => 200 } }
           let(:modify_volume_options) { { :volume_id => "vol_1", :iops => 200 } }
 
@@ -221,7 +221,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
     end
 
     context "#attach_volume" do
-      let(:instance) { FactoryGirl.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_0") }
+      let(:instance) { FactoryBot.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_0") }
 
       it "attaches the cloud volume" do
         stubbed_responses = {
@@ -242,9 +242,9 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
 
     context "#detach_volume" do
       # Register the attachment of the volume to an instance.
-      let(:disk) { FactoryGirl.create(:disk, :controller_type => "amazon", :device_type => "disk", :device_name => "sda1", :location => "sda1", :backing_id => cloud_volume.id) }
-      let(:hardware) { FactoryGirl.create(:hardware, :disks => [disk]) }
-      let(:instance) { FactoryGirl.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_0", :hardware => hardware) }
+      let(:disk) { FactoryBot.create(:disk, :controller_type => "amazon", :device_type => "disk", :device_name => "sda1", :location => "sda1", :backing_id => cloud_volume.id) }
+      let(:hardware) { FactoryBot.create(:hardware, :disks => [disk]) }
+      let(:instance) { FactoryBot.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_0", :hardware => hardware) }
 
       it "detaches the cloud volume" do
         stubbed_responses = {
@@ -261,10 +261,10 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
   end
 
   describe "instance listing for attaching volumes" do
-    let(:first_instance) { FactoryGirl.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_0", :availability_zone => availability_zone) }
-    let(:second_instance) { FactoryGirl.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_1", :availability_zone => availability_zone) }
-    let(:other_availability_zone) { FactoryGirl.create(:availability_zone_amazon) }
-    let(:other_instance) { FactoryGirl.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_2", :availability_zone => other_availability_zone) }
+    let(:first_instance) { FactoryBot.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_0", :availability_zone => availability_zone) }
+    let(:second_instance) { FactoryBot.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_1", :availability_zone => availability_zone) }
+    let(:other_availability_zone) { FactoryBot.create(:availability_zone_amazon) }
+    let(:other_instance) { FactoryBot.create(:vm_amazon, :ext_management_system => ems_cloud, :ems_ref => "instance_2", :availability_zone => other_availability_zone) }
 
     it "supports attachment to only those instances that are in the same availability zone" do
       expect(cloud_volume.availability_zone).to eq(availability_zone)

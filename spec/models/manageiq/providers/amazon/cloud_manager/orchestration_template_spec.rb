@@ -7,8 +7,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate do
     end
   end
 
-  let(:json_template) { FactoryGirl.create(:orchestration_template_amazon_in_json) }
-  let(:yaml_template) { FactoryGirl.create(:orchestration_template_amazon_in_yaml) }
+  let(:json_template) { FactoryBot.create(:orchestration_template_amazon_in_json) }
+  let(:yaml_template) { FactoryBot.create(:orchestration_template_amazon_in_yaml) }
 
   shared_examples_for "a template with content" do
     it "parses parameters from a template" do

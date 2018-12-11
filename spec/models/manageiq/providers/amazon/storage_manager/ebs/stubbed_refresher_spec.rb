@@ -9,13 +9,13 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
   describe "refresh" do
     before do
       _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
-      @ems                 = FactoryGirl.create(:ems_amazon, :zone => zone)
+      @ems                 = FactoryBot.create(:ems_amazon, :zone => zone)
       @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
       EvmSpecHelper.local_miq_server(:zone => Zone.seed)
 
-      @disk = FactoryGirl.create(:disk, :controller_type => "amazon", :device_type => "disk", :device_name => "sda1", :location => "sda1")
-      hardware = FactoryGirl.create(:hardware, :disks => [@disk])
-      FactoryGirl.create(:vm_amazon, :ext_management_system => @ems, :ems_ref => "instance_0", :hardware => hardware)
+      @disk = FactoryBot.create(:disk, :controller_type => "amazon", :device_type => "disk", :device_name => "sda1", :location => "sda1")
+      hardware = FactoryBot.create(:hardware, :disks => [@disk])
+      FactoryBot.create(:vm_amazon, :ext_management_system => @ems, :ems_ref => "instance_0", :hardware => hardware)
     end
 
     (AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS + AwsRefresherSpecCommon::ALL_OLD_REFRESH_SETTINGS

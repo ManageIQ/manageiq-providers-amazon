@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :cloud_volume_amazon, :parent => :cloud_volume,
                                 :class  => "ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume"
   factory :cloud_volume_amazon_standard,

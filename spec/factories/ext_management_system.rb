@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :ems_amazon_ebs,
           :aliases => ["manageiq/providers/amazon/storage_manager/ebs"],
           :class   => "ManageIQ::Providers::Amazon::StorageManager::Ebs",
@@ -20,7 +20,7 @@ FactoryGirl.define do
         :password => client_key
       }
 
-      ems.authentications << FactoryGirl.create(:authentication, cred)
+      ems.authentications << FactoryBot.create(:authentication, cred)
     end
   end
 end

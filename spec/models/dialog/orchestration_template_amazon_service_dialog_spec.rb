@@ -1,6 +1,6 @@
 describe "OrchestrationTemplateServiceDialog for Amazon" do
   let(:dialog_service)  { Dialog::OrchestrationTemplateServiceDialog.new }
-  let(:template_amazon) { FactoryGirl.create(:orchestration_template_amazon_in_json) }
+  let(:template_amazon) { FactoryBot.create(:orchestration_template_amazon_in_json) }
 
   describe "#create_dialog" do
     it "creates a dialog from CloudFormation template with stack basic info and parameters" do

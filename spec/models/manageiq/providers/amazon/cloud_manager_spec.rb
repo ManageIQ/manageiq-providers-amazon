@@ -34,12 +34,12 @@ describe ManageIQ::Providers::Amazon::CloudManager do
   end
 
   it "#supported_catalog_types" do
-    ems = FactoryGirl.create(:ems_amazon)
+    ems = FactoryBot.create(:ems_amazon)
     expect(ems.supported_catalog_types).to eq(%w(amazon))
   end
 
   it "does not create orphaned network_manager" do
-    ems = FactoryGirl.create(:ems_amazon)
+    ems = FactoryBot.create(:ems_amazon)
     same_ems = ExtManagementSystem.find(ems.id)
 
     ems.destroy
@@ -50,10 +50,10 @@ describe ManageIQ::Providers::Amazon::CloudManager do
   end
 
   it "moves the network_manager to the same zone and provider region as the cloud_manager" do
-    zone1 = FactoryGirl.create(:zone)
-    zone2 = FactoryGirl.create(:zone)
+    zone1 = FactoryBot.create(:zone)
+    zone2 = FactoryBot.create(:zone)
 
-    ems = FactoryGirl.create(:ems_amazon, :zone => zone1, :provider_region => "us-east-1")
+    ems = FactoryBot.create(:ems_amazon, :zone => zone1, :provider_region => "us-east-1")
     expect(ems.network_manager.zone).to eq zone1
     expect(ems.network_manager.zone_id).to eq zone1.id
     expect(ems.network_manager.provider_region).to eq "us-east-1"
@@ -97,37 +97,37 @@ describe ManageIQ::Providers::Amazon::CloudManager do
 
   it "#description" do
     aggregate_failures do
-      ems = FactoryGirl.build(:ems_amazon, :provider_region => "us-east-1")
+      ems = FactoryBot.build(:ems_amazon, :provider_region => "us-east-1")
       expect(ems.description).to eq("US East (N. Virginia)")
 
-      ems = FactoryGirl.build(:ems_amazon, :provider_region => "us-west-1")
+      ems = FactoryBot.build(:ems_amazon, :provider_region => "us-west-1")
       expect(ems.description).to eq("US West (N. California)")
     end
   end
 
   context "validates_uniqueness_of" do
     it "name" do
-      expect { FactoryGirl.create(:ems_amazon, :name => "ems_1", :provider_region => "us-east-1") }.to_not raise_error
-      expect { FactoryGirl.create(:ems_amazon, :name => "ems_1", :provider_region => "us-east-1") }.to     raise_error(ActiveRecord::RecordInvalid)
+      expect { FactoryBot.create(:ems_amazon, :name => "ems_1", :provider_region => "us-east-1") }.to_not raise_error
+      expect { FactoryBot.create(:ems_amazon, :name => "ems_1", :provider_region => "us-east-1") }.to     raise_error(ActiveRecord::RecordInvalid)
     end
 
     it "blank region" do
-      expect { FactoryGirl.create(:ems_amazon, :name => "ems_1", :provider_region => "") }.to raise_error(ActiveRecord::RecordInvalid)
+      expect { FactoryBot.create(:ems_amazon, :name => "ems_1", :provider_region => "") }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
     it "nil region" do
-      expect { FactoryGirl.create(:ems_amazon, :name => "ems_1", :provider_region => nil) }.to raise_error(ActiveRecord::RecordInvalid)
+      expect { FactoryBot.create(:ems_amazon, :name => "ems_1", :provider_region => nil) }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
     it "duplicate provider_region" do
-      expect { FactoryGirl.create(:ems_amazon, :name => "ems_1", :provider_region => "us-east-1") }.to_not raise_error
-      expect { FactoryGirl.create(:ems_amazon, :name => "ems_2", :provider_region => "us-east-1") }.to_not raise_error
+      expect { FactoryBot.create(:ems_amazon, :name => "ems_1", :provider_region => "us-east-1") }.to_not raise_error
+      expect { FactoryBot.create(:ems_amazon, :name => "ems_2", :provider_region => "us-east-1") }.to_not raise_error
     end
   end
 
   context "translate_exception" do
     before :each do
-      @ems = FactoryGirl.build(:ems_amazon, :provider_region => "us-east-1")
+      @ems = FactoryBot.build(:ems_amazon, :provider_region => "us-east-1")
 
       creds = {:default => {:userid => "fake_user", :password => "fake_password"}}
       @ems.update_authentication(creds, :save => false)
@@ -159,19 +159,19 @@ describe ManageIQ::Providers::Amazon::CloudManager do
 
   context "#orchestration_template_validate" do
     it "validates a correct template" do
-      template = FactoryGirl.create(:orchestration_template_amazon_in_json)
+      template = FactoryBot.create(:orchestration_template_amazon_in_json)
       stubbed_aws = {:validate_template => {}}
       with_aws_stubbed(:cloudformation => stubbed_aws) do
-        ems = FactoryGirl.create(:ems_amazon_with_authentication)
+        ems = FactoryBot.create(:ems_amazon_with_authentication)
         expect(ems.orchestration_template_validate(template)).to be_nil
       end
     end
 
     it "returns an error string for an incorrect template" do
-      template      = FactoryGirl.create(:orchestration_template_amazon_in_json)
+      template      = FactoryBot.create(:orchestration_template_amazon_in_json)
       stubbed_aws   = {:validate_template => 'ValidationError'}
       with_aws_stubbed(:cloudformation => stubbed_aws) do
-        ems = FactoryGirl.create(:ems_amazon_with_authentication)
+        ems = FactoryBot.create(:ems_amazon_with_authentication)
         expect(ems.orchestration_template_validate(template)).to eq('stubbed-response-error-message')
       end
     end

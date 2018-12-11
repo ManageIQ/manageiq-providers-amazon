@@ -15,7 +15,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
 
   let :ems do
     _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
-    ems = FactoryGirl.create(:ems_amazon, :zone => zone)
+    ems = FactoryBot.create(:ems_amazon, :zone => zone)
     ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
     ems
   end
@@ -80,7 +80,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
 
   describe "destructive operations (bucket)" do
     before do
-      ems.cloud_object_store_containers << FactoryGirl.create_list(
+      ems.cloud_object_store_containers << FactoryBot.create_list(
         :aws_bucket_with_objects,
         5,
         :ext_management_system => ems.s3_storage_manager
@@ -186,7 +186,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
 
   describe "destructive operations (objects)" do
     before do
-      ems.cloud_object_store_containers << FactoryGirl.create_list(
+      ems.cloud_object_store_containers << FactoryBot.create_list(
         :aws_bucket_with_objects,
         5,
         :ext_management_system => ems.s3_storage_manager

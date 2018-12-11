@@ -15,7 +15,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
         stub_refresh_settings(settings)
         create_tag_mapping
 
-        @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication)
+        @ems = FactoryBot.create(:ems_amazon_with_vcr_authentication)
       end
 
       it "will perform a full refresh" do
@@ -73,6 +73,6 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   end
 
   def new_amazon_ems
-    FactoryGirl.create(:ems_amazon_with_vcr_authentication, :provider_region => 'eu-central-1')
+    FactoryBot.create(:ems_amazon_with_vcr_authentication, :provider_region => 'eu-central-1')
   end
 end

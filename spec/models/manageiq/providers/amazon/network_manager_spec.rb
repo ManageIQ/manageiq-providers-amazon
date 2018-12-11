@@ -3,7 +3,7 @@ require_relative 'aws_helper'
 describe ManageIQ::Providers::Amazon::NetworkManager do
   context "ems" do
     it "does not support network creation" do
-      ems = FactoryGirl.create(:ems_amazon)
+      ems = FactoryBot.create(:ems_amazon)
       expect(ems.supports_ems_network_new?).to eq(false)
     end
   end
