@@ -5,7 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Gaprindshavili-3
+## Gaprindshavili-7
+
+### Fixed
+- Deal with amazon filter limit [(#472)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/472)
+
+## Gaprindshavili-3 - Released 2018-05-15
 
 ### Added
 - AWS memory usage collection [(#393)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/393)
