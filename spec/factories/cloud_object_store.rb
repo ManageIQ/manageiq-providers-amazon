@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :aws_object, :class => ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject.name do |object|
     object.sequence(:key) { |n| "object-key-#{n}" }
   end
@@ -9,7 +9,7 @@ FactoryGirl.define do
     bucket.sequence(:ems_ref) { |n| "stubbed-ems-ref-#{n}" }
 
     after(:create) do |bucket|
-      bucket.cloud_object_store_objects = FactoryGirl.create_list(
+      bucket.cloud_object_store_objects = FactoryBot.create_list(
         :aws_object, 5, :ext_management_system => bucket.ext_management_system
       )
     end

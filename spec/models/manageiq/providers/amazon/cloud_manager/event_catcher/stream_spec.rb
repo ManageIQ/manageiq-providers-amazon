@@ -2,7 +2,7 @@ require_relative "../../aws_helper"
 
 describe ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream do
   subject do
-    ems = FactoryGirl.create(:ems_amazon_with_authentication)
+    ems = FactoryBot.create(:ems_amazon_with_authentication)
     described_class.new(ems)
   end
   let(:queue_url) { "https://sqs.eu-central-1.amazonaws.com/995412904407/the_queue_name" }

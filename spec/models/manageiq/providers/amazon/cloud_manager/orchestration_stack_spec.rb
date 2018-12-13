@@ -1,10 +1,10 @@
 require_relative "../aws_helper"
 
 describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack do
-  let(:ems) { FactoryGirl.create(:ems_amazon_with_authentication) }
-  let(:template) { FactoryGirl.create(:orchestration_template) }
+  let(:ems) { FactoryBot.create(:ems_amazon_with_authentication) }
+  let(:template) { FactoryBot.create(:orchestration_template) }
   let(:orchestration_stack) do
-    FactoryGirl.create(:orchestration_stack_amazon, :ext_management_system => ems, :name => 'test')
+    FactoryBot.create(:orchestration_stack_amazon, :ext_management_system => ems, :name => 'test')
   end
   let(:describe_stacks_repsonse) do
     {
@@ -169,14 +169,14 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack do
   end
 
   context '#tenant_identity' do
-    let(:admin)  { FactoryGirl.create(:user_with_group, :userid => "admin") }
-    let(:tenant) { FactoryGirl.create(:tenant) }
+    let(:admin)  { FactoryBot.create(:user_with_group, :userid => "admin") }
+    let(:tenant) { FactoryBot.create(:tenant) }
     before       { admin }
 
     subject      { @stack.tenant_identity }
 
     it "has tenant from provider" do
-      @stack = FactoryGirl.create(:orchestration_stack_amazon, :ems_id => ems.id)
+      @stack = FactoryBot.create(:orchestration_stack_amazon, :ems_id => ems.id)
 
       expect(subject).to                eq(admin)
       expect(subject.current_group).to  eq(ems.tenant.default_miq_group)
@@ -184,7 +184,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack do
     end
 
     it "without a provider, has tenant from root tenant" do
-      @stack = FactoryGirl.create(:orchestration_stack_amazon)
+      @stack = FactoryBot.create(:orchestration_stack_amazon)
 
       expect(subject).to                eq(admin)
       expect(subject.current_group).to  eq(Tenant.root_tenant.default_miq_group)

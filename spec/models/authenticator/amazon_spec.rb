@@ -6,7 +6,7 @@ describe Authenticator::Amazon do
 
   subject { Authenticator::Amazon.new(config) }
 
-  let(:local_user) { FactoryGirl.create(:user, :userid => username) }
+  let(:local_user) { FactoryBot.create(:user, :userid => username) }
   let(:username) { 'some_user' }
   let(:config) do
     {
@@ -72,7 +72,7 @@ describe Authenticator::Amazon do
     # Authenticator#uses_stored_password? whether it's allowed to do anything.
     allow(User).to receive(:authenticator).and_return(subject)
 
-    miq_group = FactoryGirl.create(:miq_group, :description => miq_group_name)
+    miq_group = FactoryBot.create(:miq_group, :description => miq_group_name)
     allow(MiqLdap).to receive(:using_ldap?) { false }
 
     allow_any_instance_of(described_class).to receive(:aws_connect) do |_instance, access_key_id, _secret_access_key, service|
@@ -172,7 +172,7 @@ describe Authenticator::Amazon do
     end
 
     context "with correct password" do
-      let!(:local_user) { FactoryGirl.create(:user, :userid => username) }
+      let!(:local_user) { FactoryBot.create(:user, :userid => username) }
 
       context "using local authorization" do
         it "succeeds" do
@@ -473,7 +473,7 @@ describe Authenticator::Amazon do
     it 'stores passwords encrypted' do
       password  = "pa$$word"
       encrypted = MiqPassword.encrypt(password)
-      miq_server = FactoryGirl.create(:miq_server)
+      miq_server = FactoryBot.create(:miq_server)
 
       Vmdb::Settings.save!(miq_server,
                            :authentication => {

@@ -1,5 +1,5 @@
 describe ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser do
-  let(:ems)    { FactoryGirl.create(:ems_amazon_with_authentication) }
+  let(:ems)    { FactoryBot.create(:ems_amazon_with_authentication) }
   let(:parser) { described_class.new(ems.ebs_storage_manager, Settings.ems_refresh.ec2) }
 
   let(:ec2_resource) { Aws::EC2::Resource.new(:stub_responses => true) }

@@ -1,5 +1,5 @@
 describe ManageIQ::Providers::Amazon::CloudManager::RefreshParser do
-  let(:ems) { FactoryGirl.create(:ems_amazon_with_authentication) }
+  let(:ems) { FactoryBot.create(:ems_amazon_with_authentication) }
   let(:parser) { described_class.new(ems, Settings.ems_refresh.ec2) }
   let(:client) { parser.instance_variable_get(:@aws_ec2).client }
 

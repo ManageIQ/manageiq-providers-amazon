@@ -6,7 +6,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   include AwsRefresherSpecCounts
 
   before(:each) do
-    @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication)
+    @ems = FactoryBot.create(:ems_amazon_with_vcr_authentication)
   end
 
   it ".ems_type" do

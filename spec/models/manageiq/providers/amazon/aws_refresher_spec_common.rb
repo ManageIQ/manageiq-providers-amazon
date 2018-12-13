@@ -1438,11 +1438,11 @@ module AwsRefresherSpecCommon
   end
 
   def create_tag_mapping
-    @all_tag_mapping = FactoryGirl.create(:tag_mapping_with_category,
+    @all_tag_mapping = FactoryBot.create(:tag_mapping_with_category,
                                           :label_name => "owner")
     @all_tag_mapping_category = @all_tag_mapping.tag.classification
 
-    @image_tag_mapping = FactoryGirl.create(:tag_mapping_with_category,
+    @image_tag_mapping = FactoryBot.create(:tag_mapping_with_category,
                                             :label_name => "Name", :labeled_resource_type => "Image")
     @image_tag_mapping_category = @image_tag_mapping.tag.classification
   end

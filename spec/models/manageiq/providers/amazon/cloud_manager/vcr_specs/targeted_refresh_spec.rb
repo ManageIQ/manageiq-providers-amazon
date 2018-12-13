@@ -6,7 +6,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   include AwsRefresherSpecCounts
 
   before(:each) do
-    @ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication)
+    @ems = FactoryBot.create(:ems_amazon_with_vcr_authentication)
   end
 
   AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS.each do |settings|
@@ -436,7 +436,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           )
 
           # Lets create service parameter set, that should be disconected next refresh
-          FactoryGirl.create(:service_parameters_set_amazon,
+          FactoryBot.create(:service_parameters_set_amazon,
                              :ems_ref               => "mock",
                              :ext_management_system => @ems,
                              :service_offering      => ServiceOffering.first)
@@ -476,7 +476,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   end
 
   def create_flavors
-    FactoryGirl.create(:flavor_amazon,
+    FactoryBot.create(:flavor_amazon,
                        :ext_management_system    => @ems,
                        :name                     => "t1.micro",
                        :ems_ref                  => "t1.micro",
@@ -493,7 +493,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
                        :ephemeral_disk_size      => 0,
                        :ephemeral_disk_count     => 0)
 
-    FactoryGirl.create(:flavor_amazon,
+    FactoryBot.create(:flavor_amazon,
                        :ext_management_system    => @ems,
                        :name                     => "t2.micro",
                        :ems_ref                  => "t2.micro",
@@ -510,7 +510,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
                        :ephemeral_disk_size      => 0,
                        :ephemeral_disk_count     => 0)
 
-    FactoryGirl.create(:flavor_amazon,
+    FactoryBot.create(:flavor_amazon,
                        :ext_management_system    => @ems,
                        :name                     => "t2.nano",
                        :ems_ref                  => "t2.nano",

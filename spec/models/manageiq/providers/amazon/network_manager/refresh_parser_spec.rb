@@ -1,6 +1,6 @@
 describe ManageIQ::Providers::Amazon::NetworkManager::RefreshParser do
   require 'aws-sdk'
-  let(:ems) { FactoryGirl.create(:ems_amazon_with_authentication) }
+  let(:ems) { FactoryBot.create(:ems_amazon_with_authentication) }
   let(:parser) { described_class.new(ems.network_manager, Settings.ems_refresh.ec2_network) }
 
   describe "#parse_firewall_rule" do

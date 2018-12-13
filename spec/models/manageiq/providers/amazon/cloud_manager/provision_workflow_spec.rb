@@ -1,10 +1,10 @@
 describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
   include Spec::Support::WorkflowHelper
 
-  let(:admin) { FactoryGirl.create(:user_with_group) }
+  let(:admin) { FactoryBot.create(:user_with_group) }
 
-  let(:ems) { FactoryGirl.create(:ems_amazon) }
-  let(:template) { FactoryGirl.create(:template_amazon, :name => "template", :ext_management_system => ems) }
+  let(:ems) { FactoryBot.create(:ems_amazon) }
+  let(:template) { FactoryBot.create(:template_amazon, :name => "template", :ext_management_system => ems) }
   let(:workflow) do
     stub_dialog
     allow_any_instance_of(User).to receive(:get_timezone).and_return(Time.zone)
@@ -36,7 +36,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
 
   context "with valid relationships" do
     it "#allowed_availability_zones" do
-      az = FactoryGirl.create(:availability_zone_amazon)
+      az = FactoryBot.create(:availability_zone_amazon)
       ems.availability_zones << az
       expect(workflow.allowed_availability_zones).to eq(az.id => az.name)
     end
@@ -48,7 +48,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
     end
 
     it "#allowed_security_groups" do
-      sg = FactoryGirl.create(:security_group_amazon, :name => "sq_1")
+      sg = FactoryBot.create(:security_group_amazon, :name => "sq_1")
       ems.network_manager.security_groups << sg
       expect(workflow.allowed_security_groups).to eq(sg.id => sg.name)
     end
@@ -57,7 +57,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
   context "without applied tags" do
     context "availability_zones" do
       it "#get_targets_for_ems" do
-        az = FactoryGirl.create(:availability_zone_amazon)
+        az = FactoryBot.create(:availability_zone_amazon)
         ems.availability_zones << az
         filtered = workflow.send(:get_targets_for_ems, ems, :cloud_filter, AvailabilityZone,
                                  'availability_zones.available')
@@ -75,7 +75,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
     context "security_groups" do
       context "non cloud network" do
         it "#get_targets_for_ems" do
-          sg = FactoryGirl.create(:security_group_amazon,
+          sg = FactoryBot.create(:security_group_amazon,
                                   :name                  => "sg_1",
                                   :ext_management_system => ems.network_manager)
           filtered = workflow.send(:get_targets_for_ems, ems, :cloud_filter, SecurityGroup,
@@ -87,8 +87,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
 
       context "cloud network" do
         it "#get_targets_for_ems" do
-          cn1 = FactoryGirl.create(:cloud_network, :ext_management_system => ems.network_manager)
-          sg_cn = FactoryGirl.create(:security_group_amazon,
+          cn1 = FactoryBot.create(:cloud_network, :ext_management_system => ems.network_manager)
+          sg_cn = FactoryBot.create(:security_group_amazon,
                                      :name                  => "sg_2",
                                      :ext_management_system => ems.network_manager,
                                      :cloud_network         => cn1)
@@ -101,7 +101,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
 
     context "Instance Type (Flavor)" do
       it "#get_targets_for_ems" do
-        flavor = FactoryGirl.create(:flavor, :name => "t1.micro", :supports_32_bit => true, :supports_64_bit => true)
+        flavor = FactoryBot.create(:flavor, :name => "t1.micro", :supports_32_bit => true, :supports_64_bit => true)
         ems.flavors << flavor
         filtered = workflow.send(:get_targets_for_ems, ems, :cloud_filter, Flavor, 'flavors')
         expect(filtered.size).to eq(1)
@@ -112,18 +112,18 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
 
   context "with applied tags" do
     before do
-      FactoryGirl.create(:classification_cost_center_with_tags)
+      FactoryBot.create(:classification_cost_center_with_tags)
       admin.current_group.entitlement = Entitlement.create!(:filters => {'managed'   => [['/managed/cc/001']],
                                                                          'belongsto' => []})
 
-      2.times { FactoryGirl.create(:availability_zone_amazon, :ems_id => ems.id) }
+      2.times { FactoryBot.create(:availability_zone_amazon, :ems_id => ems.id) }
       2.times do
-        FactoryGirl.create(:security_group_amazon, :name                  => "sgb_1",
+        FactoryBot.create(:security_group_amazon, :name                  => "sgb_1",
                                                    :ext_management_system => ems.network_manager)
       end
-      ems.flavors << FactoryGirl.create(:flavor, :name => "t1.micro", :supports_32_bit => true,
+      ems.flavors << FactoryBot.create(:flavor, :name => "t1.micro", :supports_32_bit => true,
                                         :supports_64_bit => true)
-      ems.flavors << FactoryGirl.create(:flavor, :name => "m1.large", :supports_32_bit => false,
+      ems.flavors << FactoryBot.create(:flavor, :name => "m1.large", :supports_32_bit => false,
                                         :supports_64_bit => true)
 
       tagged_zone = ems.availability_zones.first
@@ -169,27 +169,27 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
 
   context "tenant filtering" do
     before do
-      @ct1 = FactoryGirl.create(:cloud_tenant)
-      @ct2 = FactoryGirl.create(:cloud_tenant)
+      @ct1 = FactoryBot.create(:cloud_tenant)
+      @ct2 = FactoryBot.create(:cloud_tenant)
     end
 
     context "cloud networks" do
       before do
-        @az1 = FactoryGirl.create(:availability_zone, :ext_management_system => ems)
-        @cn1 = FactoryGirl.create(:cloud_network_amazon,
+        @az1 = FactoryBot.create(:availability_zone, :ext_management_system => ems)
+        @cn1 = FactoryBot.create(:cloud_network_amazon,
                                   :cloud_tenant          => @ct1,
                                   :ext_management_system => ems.network_manager)
-        @cn2 = FactoryGirl.create(:cloud_network_amazon,
+        @cn2 = FactoryBot.create(:cloud_network_amazon,
                                   :cloud_tenant          => @ct2,
                                   :ext_management_system => ems.network_manager)
-        @cn3 = FactoryGirl.create(:cloud_network_amazon,
+        @cn3 = FactoryBot.create(:cloud_network_amazon,
                                   :cloud_tenant          => @ct2,
                                   :ext_management_system => ems.network_manager)
-        @cs1 = FactoryGirl.create(:cloud_subnet_amazon,
+        @cs1 = FactoryBot.create(:cloud_subnet_amazon,
                                   :cloud_network         => @cn2,
                                   :availability_zone     => @az1,
                                   :ext_management_system => ems.network_manager)
-        @cs2 = FactoryGirl.create(:cloud_subnet_amazon,
+        @cs2 = FactoryBot.create(:cloud_subnet_amazon,
                                   :cloud_network         => @cn3,
                                   :availability_zone     => @az1,
                                   :ext_management_system => ems.network_manager)
@@ -218,19 +218,19 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
 
     context "with valid relationships" do
       before do
-        ems.flavors << FactoryGirl.create(:flavor, :name => "t1.micro", :supports_32_bit => true,
+        ems.flavors << FactoryBot.create(:flavor, :name => "t1.micro", :supports_32_bit => true,
                                           :supports_64_bit => true)
-        ems.flavors << FactoryGirl.create(:flavor, :name => "m1.large", :supports_32_bit => false,
+        ems.flavors << FactoryBot.create(:flavor, :name => "m1.large", :supports_32_bit => false,
                                           :supports_64_bit => true)
       end
 
       it "#allowed_instance_types with 32-bit image" do
-        template.hardware = FactoryGirl.create(:hardware, :bitness => 32)
+        template.hardware = FactoryBot.create(:hardware, :bitness => 32)
         expect(workflow.allowed_instance_types.length).to eq(1)
       end
 
       it "#allowed_instance_types with 64-bit image" do
-        template.hardware = FactoryGirl.create(:hardware, :bitness => 64)
+        template.hardware = FactoryBot.create(:hardware, :bitness => 64)
         expect(workflow.allowed_instance_types.length).to eq(2)
       end
     end
@@ -238,28 +238,28 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
 
   context "with VPC relationships" do
     before do
-      @az1 = FactoryGirl.create(:availability_zone_amazon, :ext_management_system => ems)
-      @az2 = FactoryGirl.create(:availability_zone_amazon, :ext_management_system => ems)
-      @az3 = FactoryGirl.create(:availability_zone_amazon, :ext_management_system => ems)
+      @az1 = FactoryBot.create(:availability_zone_amazon, :ext_management_system => ems)
+      @az2 = FactoryBot.create(:availability_zone_amazon, :ext_management_system => ems)
+      @az3 = FactoryBot.create(:availability_zone_amazon, :ext_management_system => ems)
 
-      @cn1 = FactoryGirl.create(:cloud_network, :ext_management_system => ems.network_manager)
+      @cn1 = FactoryBot.create(:cloud_network, :ext_management_system => ems.network_manager)
 
-      @cs1 = FactoryGirl.create(:cloud_subnet, :cloud_network         => @cn1,
+      @cs1 = FactoryBot.create(:cloud_subnet, :cloud_network         => @cn1,
                                                :availability_zone     => @az1,
                                                :ext_management_system => ems.network_manager)
-      @cs2 = FactoryGirl.create(:cloud_subnet, :cloud_network         => @cn1,
+      @cs2 = FactoryBot.create(:cloud_subnet, :cloud_network         => @cn1,
                                                :availability_zone     => @az2,
                                                :ext_management_system => ems.network_manager)
 
-      @ip1 = FactoryGirl.create(:floating_ip, :cloud_network_only    => true,
+      @ip1 = FactoryBot.create(:floating_ip, :cloud_network_only    => true,
                                               :ext_management_system => ems.network_manager)
-      @ip2 = FactoryGirl.create(:floating_ip, :cloud_network_only    => false,
+      @ip2 = FactoryBot.create(:floating_ip, :cloud_network_only    => false,
                                               :ext_management_system => ems.network_manager)
 
-      @sg1 = FactoryGirl.create(:security_group_amazon, :name                  => "sgn_1",
+      @sg1 = FactoryBot.create(:security_group_amazon, :name                  => "sgn_1",
                                                         :ext_management_system => ems.network_manager,
                                                         :cloud_network         => @cn1)
-      @sg2 = FactoryGirl.create(:security_group_amazon, :name => "sgn_2", :ext_management_system => ems.network_manager)
+      @sg2 = FactoryBot.create(:security_group_amazon, :name => "sgn_2", :ext_management_system => ems.network_manager)
     end
 
     it "#allowed_cloud_networks" do
@@ -328,7 +328,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
   end
 
   context "#display_name_for_name_description" do
-    let(:flavor) { FactoryGirl.create(:flavor_amazon, :name => "test_flavor") }
+    let(:flavor) { FactoryBot.create(:flavor_amazon, :name => "test_flavor") }
 
     it "with name only" do
       expect(workflow.display_name_for_name_description(flavor)).to eq("test_flavor")
@@ -344,19 +344,19 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
     before do
       @instance_types_32 = ['t2.micro']
       @instance_types_64 = ['m1.medium', 'm1.large']
-      ems.flavors << FactoryGirl.create(:flavor_amazon,
+      ems.flavors << FactoryBot.create(:flavor_amazon,
                                         :name                 => "t2.micro",
                                         :supports_32_bit      => true,
                                         :supports_64_bit      => true,
                                         :supports_paravirtual => false,
                                         :supports_hvm         => true)
-      ems.flavors << FactoryGirl.create(:flavor_amazon,
+      ems.flavors << FactoryBot.create(:flavor_amazon,
                                         :name                 => "m1.large",
                                         :supports_32_bit      => false,
                                         :supports_64_bit      => true,
                                         :supports_paravirtual => true,
                                         :supports_hvm         => false)
-      ems.flavors << FactoryGirl.create(:flavor_amazon,
+      ems.flavors << FactoryBot.create(:flavor_amazon,
                                         :name                 => "m1.medium",
                                         :supports_32_bit      => true,
                                         :supports_64_bit      => true,
@@ -365,12 +365,12 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
     end
 
     it "#allowed_instance_types with 32-bit and hvm image" do
-      template.hardware = FactoryGirl.create(:hardware, :bitness => 32, :virtualization_type => 'hvm')
+      template.hardware = FactoryBot.create(:hardware, :bitness => 32, :virtualization_type => 'hvm')
       expect(workflow.allowed_instance_types.collect { |_, v| v }).to match_array(@instance_types_32)
     end
 
     it "#allowed_instance_types with 64-bit and pv image" do
-      template.hardware = FactoryGirl.create(:hardware, :bitness => 64, :virtualization_type => 'paravirtual')
+      template.hardware = FactoryBot.create(:hardware, :bitness => 64, :virtualization_type => 'paravirtual')
       expect(workflow.allowed_instance_types.collect { |_, v| v }).to match_array(@instance_types_64)
     end
   end
@@ -378,21 +378,21 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
   context "with root device type" do
     before do
       @instance_types_64 = ['t1.micro', 'm1.large']
-      ems.flavors << FactoryGirl.create(:flavor_amazon,
+      ems.flavors << FactoryBot.create(:flavor_amazon,
                                         :name                     => "t1.micro",
                                         :supports_32_bit          => true,
                                         :supports_64_bit          => true,
                                         :supports_paravirtual     => true,
                                         :supports_hvm             => false,
                                         :block_storage_based_only => true)
-      ems.flavors << FactoryGirl.create(:flavor_amazon,
+      ems.flavors << FactoryBot.create(:flavor_amazon,
                                         :name                     => "m1.large",
                                         :supports_32_bit          => false,
                                         :supports_64_bit          => true,
                                         :supports_paravirtual     => true,
                                         :supports_hvm             => false,
                                         :block_storage_based_only => false)
-      ems.flavors << FactoryGirl.create(:flavor_amazon,
+      ems.flavors << FactoryBot.create(:flavor_amazon,
                                         :name                     => "t2.medium",
                                         :supports_32_bit          => false,
                                         :supports_64_bit          => true,
@@ -402,7 +402,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
     end
 
     it "#allowed_instance_types with 32-bit, pv and instance_store" do
-      template.hardware = FactoryGirl.create(:hardware,
+      template.hardware = FactoryBot.create(:hardware,
                                              :bitness             => 32,
                                              :virtualization_type => 'paravirtual',
                                              :root_device_type    => 'instance_store')
@@ -410,7 +410,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
     end
 
     it "#allowed_instance_types with 64-bit, pv and ebs" do
-      template.hardware = FactoryGirl.create(:hardware,
+      template.hardware = FactoryBot.create(:hardware,
                                              :bitness             => 64,
                                              :virtualization_type => 'paravirtual',
                                              :root_device_type    => 'ebs')
@@ -419,7 +419,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
   end
 
   describe "#make_request" do
-    let(:alt_user) { FactoryGirl.create(:user_with_group) }
+    let(:alt_user) { FactoryBot.create(:user_with_group) }
     it "creates and update a request" do
       stub_dialog(:get_pre_dialogs)
       stub_dialog(:get_dialogs)

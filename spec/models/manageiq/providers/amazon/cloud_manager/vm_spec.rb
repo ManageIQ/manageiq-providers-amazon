@@ -1,8 +1,8 @@
 require_relative '../aws_helper'
 
 describe ManageIQ::Providers::Amazon::CloudManager::Vm do
-  let(:ems) { FactoryGirl.create(:ems_amazon_with_authentication) }
-  let(:vm)  { FactoryGirl.create(:vm_amazon, :ems_ref => "amazon-perf-vm", :ext_management_system => ems) }
+  let(:ems) { FactoryBot.create(:ems_amazon_with_authentication) }
+  let(:vm)  { FactoryBot.create(:vm_amazon, :ems_ref => "amazon-perf-vm", :ext_management_system => ems) }
 
   context "#active_proxy?" do
     it "returns true" do

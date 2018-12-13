@@ -7,12 +7,12 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
   describe "refresh" do
     before(:each) do
       _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
-      @ems                 = FactoryGirl.create(:ems_amazon, :zone => zone, :name => ems_name)
+      @ems                 = FactoryBot.create(:ems_amazon, :zone => zone, :name => ems_name)
       @ems.update_authentication(:default => {:userid => "0123456789", :password => "ABCDEFGHIJKL345678efghijklmno"})
     end
 
-    let(:ec2_user) { FactoryGirl.build(:authentication).userid }
-    let(:ec2_pass) { FactoryGirl.build(:authentication).password }
+    let(:ec2_user) { FactoryBot.build(:authentication).userid }
+    let(:ec2_pass) { FactoryBot.build(:authentication).password }
     let(:ec2_user_other) { 'user_other' }
     let(:ec2_pass_other) { 'pass_other' }
     subject { described_class.discover(ec2_user, ec2_pass) }

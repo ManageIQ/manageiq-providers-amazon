@@ -3,7 +3,7 @@ describe ManageIQ::Providers::Amazon::Regions do
   let(:default_regions_regexp) { /^(us|eu|ap|sa|ca)\-\w+\-\d+$/ }
 
   it "has all the regions" do
-    ems = FactoryGirl.create(:ems_amazon_with_vcr_authentication)
+    ems = FactoryBot.create(:ems_amazon_with_vcr_authentication)
 
     VCR.use_cassette(described_class.name.underscore) do
       current_regions = described_class.regions.map do |_name, config|
