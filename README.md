@@ -1,7 +1,7 @@
 # manageiq-providers-amazon
 
 [![Gem Version](https://badge.fury.io/rb/manageiq-providers-amazon.svg)](http://badge.fury.io/rb/manageiq-providers-amazon)
-[![Build Status](https://travis-ci.org/ManageIQ/manageiq-providers-amazon.svg)](https://travis-ci.org/ManageIQ/manageiq-providers-amazon)
+[![Build Status](https://travis-ci.org/ManageIQ/manageiq-providers-amazon.svg?branch=master)](https://travis-ci.org/ManageIQ/manageiq-providers-amazon)
 [![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon)
 [![Test Coverage](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/badges/coverage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/coverage)
 [![Dependency Status](https://gemnasium.com/ManageIQ/manageiq-providers-amazon.svg)](https://gemnasium.com/ManageIQ/manageiq-providers-amazon)
