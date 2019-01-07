@@ -29,20 +29,4 @@ class ManageIQ::Providers::Amazon::Inventory::Persister < ManageIQ::Providers::I
     @tag_mapper = ContainerLabelTagMapping.mapper
     collections[:tags_to_resolve] = @tag_mapper.tags_to_resolve_collection
   end
-
-  def strategy
-    nil
-  end
-
-  def parent
-    manager.presence
-  end
-
-  def shared_options
-    {
-      :strategy => strategy,
-      :targeted => targeted?,
-      :parent   => parent
-    }
-  end
 end
