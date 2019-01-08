@@ -5,67 +5,55 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Hammer-1
+
+### Added
+- new AWS EC2 instance types [(#493)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/493)
+- Service catalog targeted refresh [(#486)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/486)
+- Collect AWS service catalog items [(#483)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/483)
+- Add plugin display name [(#477)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/477)
+- AWS instance types data refactoring and update [(#449)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/449)
+- Don't use #{} inside a gettext string [(#458)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/458)
+- Persister: optimized InventoryCollection definitions [(#456)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/456)
+- Add display name for flavor [(#454)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/454)
+- handle volume snapshot status changes [(#439)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/439)
+- Explicitly disable ems_network_new creation [(#448)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/448)
+- Add endpoint support to raw_connect [(#444)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/444)
+- load regions list from aws-sdk gem's source [(#436)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/436) 
+- Add display_name() for Network Router model [(#406)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/406)
+- Use proper nested references in parser [(#383)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/383)
+- Migrate model display names from locale/en.yml to plugin [(#398)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/398)
+- Added Paris (EU) region [(#392)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/392)
+- Turn on batch saving by default [(#292)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/292)
+- Amazon SSA Response Handling Thread [(#319)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/319)
+- Add agent coordinator for smartstate support [(#318)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/318)
+
+### Changed
+- Renamed method for consistency reasons [(#419)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/419)
+
+### Fixed
+- Change saver_strategy value to String [(#498)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/498)
+- avoid blank names by using uids [(#482)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/482)
+- Add in missing user creation audit event. [(#479)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/479)
+- remove bare metal instance [(#476)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/476)
+- Added allow_delete method on AuthKeyPairs [(#457)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/457)
+- disable special regions [(#443)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/443)
+- Return created topic [(#409)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/409)
+- Raise exceptions if SSH command fail [(#405)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/405)
+- Fix network_parser after the indexes refactoring [(#375)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/375)
+- Add cleanup logic to remove zombie instance in unexpected cases [(#367)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/367)
+- Use Concern for ResponseThread include [(#343)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/343)
+- Add ssa_queue public method to the coordinator [(#340)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/340)
+- Unpriveleged user can't docker login [(#337)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/337)
+- Login is for the docker_registry not the image [(#333)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/333)
+- Add wait_until_exists on instance_profile creation [(#332)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/332)
+- Raise the intended message [(#326)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/326)
+- Include ResponseThread in Runner [(#325)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/325)
+
 ## Unreleased as of Sprint 100 ending 2018-12-03
 
 ### Fixed
 - Always set vm_or_template.connection_state [(#500)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/500)
-
-## Unreleased as of Sprint 99 ending 2018-11-19
-
-### Fixed
-- Change saver_strategy value to String [(#498)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/498)
-
-## Unreleased as of Sprint 96 ending 2018-10-08
-
-### Added
-- new AWS EC2 instance types [(#493)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/493)
-
-### Fixed
-- avoid blank names by using uids [(#482)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/482)
-
-## Unreleased as of Sprint 95 ending 2018-09-24
-
-### Added
-- Service catalog targeted refresh [(#486)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/486)
-- Collect AWS service catalog items [(#483)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/483)
-- Add plugin display name [(#477)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/477)
-
-## Unreleased as of Sprint 93 ending 2018-08-27
-
-### Added
-- AWS instance types data refactoring and update [(#449)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/449)
-
-### Fixed
-- Add in missing user creation audit event. [(#479)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/479)
-- remove bare metal instance [(#476)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/476)
-
-## Unreleased as of Sprint 90 ending 2018-07-16
-
-### Added
-- Don't use #{} inside a gettext string [(#458)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/458)
-- Persister: optimized InventoryCollection definitions [(#456)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/456)
-
-## Unreleased as of Sprint 89 ending 2018-07-02
-
-### Fixed
-- Added allow_delete method on AuthKeyPairs [(#457)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/457)
-
-## Unreleased as of Sprint 88 ending 2018-06-18
-
-### Added
-- Add display name for flavor [(#454)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/454)
-- handle volume snapshot status changes [(#439)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/439)
-
-## Unreleased as of Sprint 87 ending 2018-06-04
-
-### Added
-- Explicitly disable ems_network_new creation [(#448)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/448)
-- Add endpoint support to raw_connect [(#444)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/444)
-
-## Unreleased as of Sprint 86 ending 2018-05-21
-
-### Fixed
-- disable special regions [(#443)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/443)
 
 ## Gaprindshavili-3 released 2018-05-15
 
@@ -82,32 +70,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Fix default filter for public images [(#425)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/425)
 - Add patch to aws-sdk-core to fix auth bug [(#432)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/432)
 
-## Unreleased as of Sprint 85 ending 2018-05-07
-
-### Added
-- load regions list from aws-sdk gem's source [(#436)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/436) 
-
-### Changed
-- Renamed method for consistency reasons [(#419)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/419)
-
 ## Gaprindshavili-2 released 2018-03-06
 
 ### Fixed
 - Fix refresh for stack without parameters [(#410)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/410)
-
-## Unreleased as of Sprint 80 ending 2018-02-26
-
-### Fixed
-- Return created topic [(#409)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/409)
-
-## Unreleased as of Sprint 79 ending 2018-02-12
-
-### Added 
-- Add display_name() for Network Router model [(#406)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/406)
-- Use proper nested references in parser [(#383)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/383)
-
-### Fixed
-- Raise exceptions if SSH command fail [(#405)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/405)
 
 ## Gaprindshavili-1 - Released 2018-01-31
 
@@ -170,40 +136,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Removed
 - Remove Amazon provider discovery [(#306)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/306)
-
-## Unreleased as of Sprint 78 ending 2018-01-29
-
-### Added
-- Migrate model display names from locale/en.yml to plugin [(#398)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/398)
-- Added Paris (EU) region [(#392)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/392)
-
-### Fixed
-- Fix network_parser after the indexes refactoring [(#375)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/375)
-
-## Unreleased as of Sprint 76 ending 2018-01-01
-
-### Fixed
-- Add cleanup logic to remove zombie instance in unexpected cases [(#367)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/367)
-
-## Unreleased as of Sprint 73 ending 2017-11-13
-
-### Added
-- Turn on batch saving by default [(#292)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/292)
-
-## Unreleased as of Sprint 72 ending 2017-10-30
-
-### Added
-- Amazon SSA Response Handling Thread [(#319)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/319)
-- Add agent coordinator for smartstate support [(#318)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/318)
-
-### Fixed
-- Use Concern for ResponseThread include [(#343)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/343)
-- Add ssa_queue public method to the coordinator [(#340)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/340)
-- Unpriveleged user can't docker login [(#337)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/337)
-- Login is for the docker_registry not the image [(#333)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/333)
-- Add wait_until_exists on instance_profile creation [(#332)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/332)
-- Raise the intended message [(#326)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/326)
-- Include ResponseThread in Runner [(#325)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/325)
 
 ## Fine-3
 
