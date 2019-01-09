@@ -5,19 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Hammer RC-2
-
-### Fixed
-- Change saver_strategy value to String [(#498)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/498)
-
-## Hammer Beta-2 - Released 2018-10-29
+## Hammer-1
 
 ### Added
 - new AWS EC2 instance types [(#493)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/493)
-
-## Hammer Beta-1 - Released 2018-10-12
-
-### Added
 - Service catalog targeted refresh [(#486)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/486)
 - Collect AWS service catalog items [(#483)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/483)
 - Add plugin display name [(#477)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/477)
@@ -41,6 +32,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Renamed method for consistency reasons [(#419)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/419)
 
 ### Fixed
+- Change saver_strategy value to String [(#498)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/498)
 - avoid blank names by using uids [(#482)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/482)
 - Add in missing user creation audit event. [(#479)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/479)
 - remove bare metal instance [(#476)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/476)
