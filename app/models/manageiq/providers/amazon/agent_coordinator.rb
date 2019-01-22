@@ -352,7 +352,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
   def get_subnet_from_vpc_zone
     vpcs = validated_vpcs
-    raise "Smartstate analysis needs a VPC whose enableDnsSupport/enableDnsHostnames settings are true!" if vpcs.empty?
+    raise "Smartstate analysis needs a VPC whose enableDnsSupport/enableDnsHostnames are true and valid gateway/route setting!" if vpcs.empty?
 
     ec2.client.describe_availability_zones.availability_zones.each do |availability_zone|
       vpcs.each do |vpc|
@@ -396,7 +396,11 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
         # Now the gateway is proved to have associated route and subnet
         return true if subnets.any?
       end
+
+      _log.error("No route is configured on gateway [#{igw_ids.first}]")
+      return false
     end
+    _log.error("No gateway is configured on VPC [#{vpc.id}]")
 
     false
   end
