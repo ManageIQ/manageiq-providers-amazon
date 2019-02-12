@@ -3,7 +3,7 @@ FactoryBot.define do
           :aliases => ["manageiq/providers/amazon/storage_manager/ebs"],
           :class   => "ManageIQ::Providers::Amazon::StorageManager::Ebs",
           :parent  => :ems_storage do
-    provider_region "us-east-1"
+    provider_region { "us-east-1" }
   end
 
   factory :ems_amazon_with_vcr_authentication, :parent => :ems_amazon do
