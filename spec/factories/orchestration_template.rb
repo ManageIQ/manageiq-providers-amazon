@@ -10,10 +10,10 @@ FactoryBot.define do
   end
 
   factory :orchestration_template_amazon_in_json, :parent => :orchestration_template_amazon do
-    content File.read(ManageIQ::Providers::Amazon::Engine.root.join(*%w(spec fixtures orchestration_templates cfn_parameters.json)))
+    content { File.read(ManageIQ::Providers::Amazon::Engine.root.join(*%w(spec fixtures orchestration_templates cfn_parameters.json))) }
   end
 
   factory :orchestration_template_amazon_in_yaml, :parent => :orchestration_template_amazon do
-    content File.read(ManageIQ::Providers::Amazon::Engine.root.join(*%w(spec fixtures orchestration_templates cfn_parameters.yaml)))
+    content { File.read(ManageIQ::Providers::Amazon::Engine.root.join(*%w(spec fixtures orchestration_templates cfn_parameters.yaml))) }
   end
 end
