@@ -12,14 +12,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.3 x86_64-darwin16 resources
+      - aws-sdk-ruby2/2.9.44 ruby/2.3.6 x86_64-linux resources
       X-Amz-Date:
-      - 20180122T145930Z
+      - 20190212T210701Z
       X-Amz-Content-Sha256:
       - 903451d1f3cda66f6ac7101b5810af53eb3ce6b47c5162b0b2238ce9086b6a0d
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AKIAJYLIZQSFQG2BMPTQ/20180122/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=9234f41336c5679624bf868b2c9afd82c1cf813fb3e1b9f35e1ccaf59d4c9b78
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20190212/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b62e51303ac3b19ddbac7ad3b7ac1c9a3e36a8d87ec8d84a28d6f156faf1bd97
       Content-Length:
       - '41'
       Accept:
@@ -32,20 +32,24 @@ http_interactions:
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '2559'
+      - '2711'
       Vary:
       - Accept-Encoding
       Date:
-      - Mon, 22 Jan 2018 14:59:30 GMT
+      - Tue, 12 Feb 2019 21:07:06 GMT
       Server:
       - AmazonEC2
     body:
       encoding: UTF-8
-      string: |
+      string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeRegionsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>77e4f320-9663-4ee4-bf31-2a879d92caf1</requestId>
+            <requestId>3ab3e530-4179-4594-8878-3ea2defba58c</requestId>
             <regionInfo>
+                <item>
+                    <regionName>eu-north-1</regionName>
+                    <regionEndpoint>ec2.eu-north-1.amazonaws.com</regionEndpoint>
+                </item>
                 <item>
                     <regionName>ap-south-1</regionName>
                     <regionEndpoint>ec2.ap-south-1.amazonaws.com</regionEndpoint>
@@ -109,5 +113,5 @@ http_interactions:
             </regionInfo>
         </DescribeRegionsResponse>
     http_version: 
-  recorded_at: Mon, 22 Jan 2018 14:59:30 GMT
+  recorded_at: Tue, 12 Feb 2019 21:07:06 GMT
 recorded_with: VCR 3.0.3

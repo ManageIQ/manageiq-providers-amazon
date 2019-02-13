@@ -14,8 +14,10 @@ describe ManageIQ::Providers::Amazon::Regions do
       online_regions = ems.connect.client.describe_regions.to_h[:regions]
 
       # sort for better diff
-      current_regions.sort_by! { |r| r[:region_name] }
-      online_regions.sort_by! { |r| r[:region_name] }
+      [current_regions, online_regions].each do |regions|
+        regions.map!     { |r| r.sort.to_h     }
+        regions.sort_by! { |r| r[:region_name] }
+      end
 
       expect(online_regions).to eq(current_regions)
     end
