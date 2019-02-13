@@ -27,6 +27,10 @@ eu-central-1:
   :name: eu-central-1
   :hostname: ec2.eu-central-1.amazonaws.com
   :description: EU (Frankfurt)
+eu-north-1:
+  :name: eu-north-1
+  :hostname: ec2.eu-north-1.amazonaws.com
+  :description: EU (Stockholm)
 eu-west-1:
   :name: eu-west-1
   :hostname: ec2.eu-west-1.amazonaws.com
@@ -67,6 +71,10 @@ cn-northwest-1:
   :name: cn-northwest-1
   :hostname: ec2.cn-northwest-1.amazonaws.com.cn
   :description: China (Ningxia)
+us-gov-east-1:
+  :name: us-gov-east-1
+  :hostname: ec2.us-gov-east-1.amazonaws.com
+  :description: AWS GovCloud (US-East)
 us-gov-west-1:
   :name: us-gov-west-1
   :hostname: ec2.us-gov-west-1.amazonaws.com
