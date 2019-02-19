@@ -1,5 +1,5 @@
 module ManageIQ::Providers
-  class Amazon::StorageManager::S3::Refresher < ManageIQ::Providers::BaseManager::ManagerRefresher
+  class Amazon::StorageManager::S3::Refresher < ManageIQ::Providers::BaseManager::Refresher
     # Legacy parse
     #
     # @param ems [ManageIQ::Providers::BaseManager]

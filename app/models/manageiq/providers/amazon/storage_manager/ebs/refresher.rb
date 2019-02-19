@@ -1,5 +1,5 @@
 module ManageIQ::Providers
-  class Amazon::StorageManager::Ebs::Refresher < ManageIQ::Providers::BaseManager::ManagerRefresher
+  class Amazon::StorageManager::Ebs::Refresher < ManageIQ::Providers::BaseManager::Refresher
     def parse_legacy_inventory(ems)
       ::ManageIQ::Providers::Amazon::StorageManager::Ebs::RefreshParser.ems_inv_to_hashes(ems)
     end

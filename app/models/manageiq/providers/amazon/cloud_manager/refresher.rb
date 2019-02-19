@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Amazon::CloudManager::Refresher < ManageIQ::Providers::BaseManager::ManagerRefresher
+class ManageIQ::Providers::Amazon::CloudManager::Refresher < ManageIQ::Providers::BaseManager::Refresher
   # Saves the inventory to the DB
   #
   # @param ems [ManageIQ::Providers::BaseManager] Manager owning the refresh
