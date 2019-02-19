@@ -386,7 +386,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
       # Make sure gateway has vaild route
       route_tables = vpc.route_tables.select do |route_table|
-        route_table.routes.any? { |route| route.gateway_id == igw_ids.first }
+        route_table.routes.any? { |route| route&.gateway_id == igw_ids.first }
       end
 
       unless route_tables.empty?
