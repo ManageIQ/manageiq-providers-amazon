@@ -21,6 +21,10 @@ class ManageIQ::Providers::Amazon::CloudManager::Vm < ManageIQ::Providers::Cloud
     connection.instance(ems_ref)
   end
 
+  def memory_mb_available?
+    true
+  end
+
   #
   # Relationship methods
   #
