@@ -3,7 +3,7 @@ require_relative 'aws_helper'
 describe ManageIQ::Providers::Amazon::CloudManager do
   context ".raw_connect" do
     it "decrypts the secret access key" do
-      expect(MiqPassword).to receive(:try_decrypt).with('secret_access_key')
+      expect(ManageIQ::Password).to receive(:try_decrypt).with('secret_access_key')
 
       described_class.raw_connect('access_key', 'secret_access_key', :EC2, 'region')
     end

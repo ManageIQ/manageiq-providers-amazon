@@ -54,7 +54,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
 
       options = {
         :access_key_id     => access_key_id,
-        :secret_access_key => MiqPassword.try_decrypt(secret_access_key),
+        :secret_access_key => ManageIQ::Password.try_decrypt(secret_access_key),
         :region            => region,
         :http_proxy        => proxy_uri,
         :logger            => $aws_log,
