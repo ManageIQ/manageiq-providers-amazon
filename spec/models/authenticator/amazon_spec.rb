@@ -472,7 +472,7 @@ describe Authenticator::Amazon do
   context 'Settings' do
     it 'stores passwords encrypted' do
       password  = "pa$$word"
-      encrypted = MiqPassword.encrypt(password)
+      encrypted = ManageIQ::Password.encrypt(password)
       miq_server = FactoryBot.create(:miq_server)
 
       Vmdb::Settings.save!(miq_server,
