@@ -20,12 +20,18 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
       :vim_style_counter_key => "net_usage_rate_average",
     }.freeze,
     {
-      :amazon_counters       => %w[MemoryUtilization].freeze,
+      :amazon_counters       => [
+        'MemoryUtilization', 'mem_used_percent', # Linux
+        'Memory % Committed Bytes In Use',       # Windows
+      ].freeze,
       :calculation           => ->(stat, _) { stat },
       :vim_style_counter_key => "mem_usage_absolute_average",
     }.freeze,
     {
-      :amazon_counters       => %w[SwapUtilization].freeze,
+      :amazon_counters       => [
+        'SwapUtilization', 'swap_used_percent', # Linux
+        'Paging File % Usage',                  # Windows
+      ].freeze,
       :calculation           => ->(stat, _) { stat },
       :vim_style_counter_key => "mem_swapped_absolute_average",
     }.freeze,
