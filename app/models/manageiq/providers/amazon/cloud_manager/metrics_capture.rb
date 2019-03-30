@@ -136,7 +136,6 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
 
   def counter_values_by_timestamp(metrics_by_counter_name)
     counter_values_by_ts = {}
-
     COUNTER_INFO.each do |i|
       timestamps = i[:amazon_counters].collect do |c|
         metrics_by_counter_name[c].keys unless metrics_by_counter_name[c].nil?
@@ -145,7 +144,6 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
       # If we are unable to determine if a datapoint is a 1-minute (detailed)
       #   or 5-minute (basic) interval, we will throw it away.  This includes
       #   the very first interval.
-
       timestamps.each_cons(2) do |last_ts, ts|
         interval = ts - last_ts
         next unless interval.in?(INTERVALS)
@@ -154,13 +152,11 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
         value   = i[:calculation].call(*metrics, interval)
 
         # For (temporary) symmetry with VIM API we create 20-second intervals.
-
         (last_ts + 20.seconds..ts).step_value(20.seconds).each do |inner_ts|
           counter_values_by_ts.store_path(inner_ts.iso8601, i[:vim_style_counter_key], value)
         end
       end
     end
-
     counter_values_by_ts
   end
 
