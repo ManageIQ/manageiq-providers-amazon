@@ -20,13 +20,19 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
       :vim_style_counter_key => "net_usage_rate_average",
     }.freeze,
     {
-      :amazon_counters       => %w[MemoryUtilization].freeze,
-      :calculation           => ->(stat, _) { stat },
+      :amazon_counters       => [
+        'MemoryUtilization', 'mem_used_percent', # Linux
+        'Memory % Committed Bytes In Use',       # Windows
+      ].freeze,
+      :calculation           => ->(*stats, _) { stats.compact.mean },
       :vim_style_counter_key => "mem_usage_absolute_average",
     }.freeze,
     {
-      :amazon_counters       => %w[SwapUtilization].freeze,
-      :calculation           => ->(stat, _) { stat },
+      :amazon_counters       => [
+        'SwapUtilization', 'swap_used_percent', # Linux
+        'Paging File % Usage',                  # Windows TODO: calc is wrong for more than one paging file (AZ)
+      ].freeze,
+      :calculation           => ->(*stats, _) { stats.compact.mean },
       :vim_style_counter_key => "mem_swapped_absolute_average",
     }.freeze,
   ].freeze
@@ -124,6 +130,7 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
 
     counters_by_id              = {target.ems_ref => VIM_STYLE_COUNTERS}
     counter_values_by_id_and_ts = {target.ems_ref => counter_values_by_ts}
+
     return counters_by_id, counter_values_by_id_and_ts
   end
 
@@ -155,28 +162,35 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
 
   def metrics_by_counter_name(cloud_watch, counters, start_time, end_time)
     metrics_by_counter_name = {}
+
     counters.each do |c|
-      metrics = metrics_by_counter_name[c.metric_name] = {}
+      metrics = metrics_by_counter_name[c.metric_name] ||= {}
+      options = c.to_hash.merge(:statistics => %w[Average].freeze, :period => 60).freeze
 
       # Only ask for 1 day at a time, since there is a limitation on the number
       #   of datapoints you are allowed to ask for from Amazon Cloudwatch.
       #   http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html
+
       (start_time..end_time).step_value(1.day).each_cons(2) do |st, et|
+        opts = options.merge(:start_time => st, :end_time => et).freeze
+
         statistics, = Benchmark.realtime_block(:capture_counter_values) do
-          options = {:start_time => st, :end_time => et, :statistics => ["Average"], :period => 60}
-          cloud_watch.client.get_metric_statistics(c.to_hash.merge(options)).datapoints
+          data = cloud_watch.client.get_metric_statistics(opts)
+          data.datapoints
         end
 
         statistics.each { |s| metrics[s.timestamp.utc] = s.average }
       end
     end
+
     metrics_by_counter_name
   end
 
   def get_counters(cloud_watch)
     counters, = Benchmark.realtime_block(:capture_counters) do
-      filter = [{:name => "InstanceId", :value => target.ems_ref}]
-      cloud_watch.client.list_metrics(:dimensions => filter).metrics.select { |m| m.metric_name.in?(COUNTER_NAMES) }
+      filter = [{ :name => "InstanceId", :value => target.ems_ref }]
+      data = cloud_watch.client.list_metrics(:dimensions => filter)
+      data.metrics.select { |m| m.metric_name.in?(COUNTER_NAMES) }
     end
     counters
   end
