@@ -1,0 +1,936 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://monitoring.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=ListMetrics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-0a538d08cefe2f83f&Version=2010-08-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.5 x86_64-linux resources
+      X-Amz-Date:
+      - 20190329T110129Z
+      X-Amz-Content-Sha256:
+      - e0b938f042be700fe69c78468fd4bd04db45b8a5d183bf8ddc663f7e8606d19a
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AKIAI6GCRPLB7GH24DBQ/20190329/eu-central-1/monitoring/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b4ea3ea62805f04490e1fff3c4a92027be28409a016eeea0da180972c6cb6df7
+      Content-Length:
+      - '119'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - '01020818-5212-11e9-bcb8-c17f792b8196'
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '7061'
+      Vary:
+      - accept-encoding
+      Date:
+      - Fri, 29 Mar 2019 11:01:28 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <ListMetricsResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">
+          <ListMetricsResult>
+            <Metrics>
+              <member>
+                <Namespace>CWAgent</Namespace>
+                <MetricName>Memory % Committed Bytes In Use</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                  <member>
+                    <Name>objectname</Name>
+                    <Value>Memory</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>DiskReadOps</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>NetworkPacketsOut</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>DiskWriteOps</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>NetworkOut</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>NetworkPacketsIn</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>CPUUtilization</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>NetworkIn</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>DiskReadBytes</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>DiskWriteBytes</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>CPUCreditUsage</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>CPUSurplusCreditBalance</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>CPUSurplusCreditsCharged</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>CPUCreditBalance</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>StatusCheckFailed</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>StatusCheckFailed_System</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>AWS/EC2</Namespace>
+                <MetricName>StatusCheckFailed_Instance</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>CWAgent</Namespace>
+                <MetricName>Paging File % Usage</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>instance</Name>
+                    <Value>\??\C:\pagefile.sys</Value>
+                  </member>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                  <member>
+                    <Name>objectname</Name>
+                    <Value>Paging File</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>CWAgent</Namespace>
+                <MetricName>Memory % Committed Bytes In Use</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                  <member>
+                    <Name>ImageId</Name>
+                    <Value>ami-04c3cf8dfea7d36eb</Value>
+                  </member>
+                  <member>
+                    <Name>objectname</Name>
+                    <Value>Memory</Value>
+                  </member>
+                  <member>
+                    <Name>InstanceType</Name>
+                    <Value>t2.medium</Value>
+                  </member>
+                </Dimensions>
+              </member>
+              <member>
+                <Namespace>CWAgent</Namespace>
+                <MetricName>System Context Switches/sec</MetricName>
+                <Dimensions>
+                  <member>
+                    <Name>InstanceId</Name>
+                    <Value>i-0a538d08cefe2f83f</Value>
+                  </member>
+                  <member>
+                    <Name>ImageId</Name>
+                    <Value>ami-04c3cf8dfea7d36eb</Value>
+                  </member>
+                  <member>
+                    <Name>objectname</Name>
+                    <Value>System</Value>
+                  </member>
+                  <member>
+                    <Name>InstanceType</Name>
+                    <Value>t2.medium</Value>
+                  </member>
+                </Dimensions>
+              </member>
+            </Metrics>
+          </ListMetricsResult>
+          <ResponseMetadata>
+            <RequestId>01020818-5212-11e9-bcb8-c17f792b8196</RequestId>
+          </ResponseMetadata>
+        </ListMetricsResponse>
+    http_version: 
+  recorded_at: Fri, 29 Mar 2019 11:01:29 GMT
+- request:
+    method: post
+    uri: https://monitoring.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-0a538d08cefe2f83f&Dimensions.member.2.Name=objectname&Dimensions.member.2.Value=Memory&EndTime=2019-03-29T11%3A01%3A29Z&MetricName=Memory%20%25%20Committed%20Bytes%20In%20Use&Namespace=CWAgent&Period=60&StartTime=2019-03-29T06%3A56%3A29Z&Statistics.member.1=Average&Version=2010-08-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.5 x86_64-linux resources
+      X-Amz-Date:
+      - 20190329T110129Z
+      X-Amz-Content-Sha256:
+      - e8a732e46c7d14619817c055f702127fbae14a53b5546bfd1c16e1c2e4b0c6a5
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AKIAI6GCRPLB7GH24DBQ/20190329/eu-central-1/monitoring/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=7cf7ce311ea067151cfc3cf3a1bb0b7780083f156703d65732fab32b2322b56d
+      Content-Length:
+      - '375'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 011b3514-5212-11e9-ba35-db6b470977c8
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '2676'
+      Vary:
+      - accept-encoding
+      Date:
+      - Fri, 29 Mar 2019 11:01:29 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <GetMetricStatisticsResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">
+          <GetMetricStatisticsResult>
+            <Datapoints>
+              <member>
+                <Average>12.931539535522461</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T11:00:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>91.24837493896484</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:51:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>79.2523422241211</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:50:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>12.974312782287598</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:59:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>79.35550689697266</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:49:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>91.5844955444336</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:58:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>90.99342346191406</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:57:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>84.14453125</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:48:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>91.01107025146484</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:56:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>20.031740188598633</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:47:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>90.55136108398438</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:55:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>13.347064971923828</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:46:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>90.49250793457031</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:54:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>90.5364761352539</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:53:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>90.57102966308594</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:52:00Z</Timestamp>
+              </member>
+            </Datapoints>
+            <Label>Memory % Committed Bytes In Use</Label>
+          </GetMetricStatisticsResult>
+          <ResponseMetadata>
+            <RequestId>011b3514-5212-11e9-ba35-db6b470977c8</RequestId>
+          </ResponseMetadata>
+        </GetMetricStatisticsResponse>
+    http_version: 
+  recorded_at: Fri, 29 Mar 2019 11:01:29 GMT
+- request:
+    method: post
+    uri: https://monitoring.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-0a538d08cefe2f83f&EndTime=2019-03-29T11%3A01%3A29Z&MetricName=NetworkOut&Namespace=AWS%2FEC2&Period=60&StartTime=2019-03-29T06%3A56%3A29Z&Statistics.member.1=Average&Version=2010-08-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.5 x86_64-linux resources
+      X-Amz-Date:
+      - 20190329T110129Z
+      X-Amz-Content-Sha256:
+      - 524144aca91dd27beeb8ba9fc03635fd38fa4589d78c846ff6a75e285c458b0d
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AKIAI6GCRPLB7GH24DBQ/20190329/eu-central-1/monitoring/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=42b2be8219b4152a927aed3ccefd71fdff7960490e45b0a2d77a003b0ccd26a0
+      Content-Length:
+      - '275'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 012dd2dd-5212-11e9-82b5-d5e7a604e736
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '787'
+      Date:
+      - Fri, 29 Mar 2019 11:01:28 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <GetMetricStatisticsResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">
+          <GetMetricStatisticsResult>
+            <Datapoints>
+              <member>
+                <Average>96268.0</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:50:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>266772.0</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:55:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>354960.0</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:45:00Z</Timestamp>
+              </member>
+            </Datapoints>
+            <Label>NetworkOut</Label>
+          </GetMetricStatisticsResult>
+          <ResponseMetadata>
+            <RequestId>012dd2dd-5212-11e9-82b5-d5e7a604e736</RequestId>
+          </ResponseMetadata>
+        </GetMetricStatisticsResponse>
+    http_version: 
+  recorded_at: Fri, 29 Mar 2019 11:01:29 GMT
+- request:
+    method: post
+    uri: https://monitoring.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-0a538d08cefe2f83f&EndTime=2019-03-29T11%3A01%3A29Z&MetricName=CPUUtilization&Namespace=AWS%2FEC2&Period=60&StartTime=2019-03-29T06%3A56%3A29Z&Statistics.member.1=Average&Version=2010-08-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.5 x86_64-linux resources
+      X-Amz-Date:
+      - 20190329T110129Z
+      X-Amz-Content-Sha256:
+      - f868dd069271ebf30c1b05fcc93239e1e895706d8b7f6467a6945f43a8ad5053
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AKIAI6GCRPLB7GH24DBQ/20190329/eu-central-1/monitoring/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=209cc8065a4f26a7513454bf05258002dcb9b618276ad0ad634d53608d0884be
+      Content-Length:
+      - '279'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - '01430894-5212-11e9-a2a3-09df3229c3d3'
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '826'
+      Date:
+      - Fri, 29 Mar 2019 11:01:28 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <GetMetricStatisticsResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">
+          <GetMetricStatisticsResult>
+            <Datapoints>
+              <member>
+                <Average>8.764301060202689</Average>
+                <Unit>Percent</Unit>
+                <Timestamp>2019-03-29T10:55:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>5.9133879781420715</Average>
+                <Unit>Percent</Unit>
+                <Timestamp>2019-03-29T10:50:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>19.21130835728865</Average>
+                <Unit>Percent</Unit>
+                <Timestamp>2019-03-29T10:45:00Z</Timestamp>
+              </member>
+            </Datapoints>
+            <Label>CPUUtilization</Label>
+          </GetMetricStatisticsResult>
+          <ResponseMetadata>
+            <RequestId>01430894-5212-11e9-a2a3-09df3229c3d3</RequestId>
+          </ResponseMetadata>
+        </GetMetricStatisticsResponse>
+    http_version: 
+  recorded_at: Fri, 29 Mar 2019 11:01:29 GMT
+- request:
+    method: post
+    uri: https://monitoring.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-0a538d08cefe2f83f&EndTime=2019-03-29T11%3A01%3A29Z&MetricName=NetworkIn&Namespace=AWS%2FEC2&Period=60&StartTime=2019-03-29T06%3A56%3A29Z&Statistics.member.1=Average&Version=2010-08-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.5 x86_64-linux resources
+      X-Amz-Date:
+      - 20190329T110129Z
+      X-Amz-Content-Sha256:
+      - 80e2e3f7aa7f5194ee130fe153744fd0e14d43c90d4f2d238a9dfaa0945bb591
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AKIAI6GCRPLB7GH24DBQ/20190329/eu-central-1/monitoring/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=f9d20de388100463540d10291fa01e49eb2676ad8916131f4a0f5d9194912ef7
+      Content-Length:
+      - '274'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 015753fc-5212-11e9-822c-273c05c32dff
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '787'
+      Date:
+      - Fri, 29 Mar 2019 11:01:29 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <GetMetricStatisticsResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">
+          <GetMetricStatisticsResult>
+            <Datapoints>
+              <member>
+                <Average>55114.0</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:50:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>3681861.6</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:55:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>150696.0</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:45:00Z</Timestamp>
+              </member>
+            </Datapoints>
+            <Label>NetworkIn</Label>
+          </GetMetricStatisticsResult>
+          <ResponseMetadata>
+            <RequestId>015753fc-5212-11e9-822c-273c05c32dff</RequestId>
+          </ResponseMetadata>
+        </GetMetricStatisticsResponse>
+    http_version: 
+  recorded_at: Fri, 29 Mar 2019 11:01:29 GMT
+- request:
+    method: post
+    uri: https://monitoring.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-0a538d08cefe2f83f&EndTime=2019-03-29T11%3A01%3A29Z&MetricName=DiskReadBytes&Namespace=AWS%2FEC2&Period=60&StartTime=2019-03-29T06%3A56%3A29Z&Statistics.member.1=Average&Version=2010-08-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.5 x86_64-linux resources
+      X-Amz-Date:
+      - 20190329T110129Z
+      X-Amz-Content-Sha256:
+      - 1586be0d91beb4ce02eea6bf46454fe4da05fbd57935b6f016ffbd8684b6e5c5
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AKIAI6GCRPLB7GH24DBQ/20190329/eu-central-1/monitoring/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1dd1034887cb1fa75a98ac92bb39108a74f5b151ba5ea7a2c65b5c98e8183e99
+      Content-Length:
+      - '278'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 016cb0f3-5212-11e9-a2a3-09df3229c3d3
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '776'
+      Date:
+      - Fri, 29 Mar 2019 11:01:29 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <GetMetricStatisticsResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">
+          <GetMetricStatisticsResult>
+            <Datapoints>
+              <member>
+                <Average>0.0</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:50:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>0.0</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:55:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>0.0</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:45:00Z</Timestamp>
+              </member>
+            </Datapoints>
+            <Label>DiskReadBytes</Label>
+          </GetMetricStatisticsResult>
+          <ResponseMetadata>
+            <RequestId>016cb0f3-5212-11e9-a2a3-09df3229c3d3</RequestId>
+          </ResponseMetadata>
+        </GetMetricStatisticsResponse>
+    http_version: 
+  recorded_at: Fri, 29 Mar 2019 11:01:29 GMT
+- request:
+    method: post
+    uri: https://monitoring.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-0a538d08cefe2f83f&EndTime=2019-03-29T11%3A01%3A29Z&MetricName=DiskWriteBytes&Namespace=AWS%2FEC2&Period=60&StartTime=2019-03-29T06%3A56%3A29Z&Statistics.member.1=Average&Version=2010-08-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.5 x86_64-linux resources
+      X-Amz-Date:
+      - 20190329T110129Z
+      X-Amz-Content-Sha256:
+      - 4734d419de76a29098b61395e8f7c3553d7fe2b5485cb80053dce3356a6eb32a
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AKIAI6GCRPLB7GH24DBQ/20190329/eu-central-1/monitoring/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=18d5bd20a5458ff76574b37a0d25204d8f4bca1bda39c0af59f676f83477f39a
+      Content-Length:
+      - '279'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 017e15d4-5212-11e9-91ca-f91a4a323bcb
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '777'
+      Date:
+      - Fri, 29 Mar 2019 11:01:29 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <GetMetricStatisticsResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">
+          <GetMetricStatisticsResult>
+            <Datapoints>
+              <member>
+                <Average>0.0</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:50:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>0.0</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:55:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>0.0</Average>
+                <Unit>Bytes</Unit>
+                <Timestamp>2019-03-29T10:45:00Z</Timestamp>
+              </member>
+            </Datapoints>
+            <Label>DiskWriteBytes</Label>
+          </GetMetricStatisticsResult>
+          <ResponseMetadata>
+            <RequestId>017e15d4-5212-11e9-91ca-f91a4a323bcb</RequestId>
+          </ResponseMetadata>
+        </GetMetricStatisticsResponse>
+    http_version: 
+  recorded_at: Fri, 29 Mar 2019 11:01:29 GMT
+- request:
+    method: post
+    uri: https://monitoring.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=instance&Dimensions.member.1.Value=%5C%3F%3F%5CC%3A%5Cpagefile.sys&Dimensions.member.2.Name=InstanceId&Dimensions.member.2.Value=i-0a538d08cefe2f83f&Dimensions.member.3.Name=objectname&Dimensions.member.3.Value=Paging%20File&EndTime=2019-03-29T11%3A01%3A29Z&MetricName=Paging%20File%20%25%20Usage&Namespace=CWAgent&Period=60&StartTime=2019-03-29T06%3A56%3A29Z&Statistics.member.1=Average&Version=2010-08-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.5 x86_64-linux resources
+      X-Amz-Date:
+      - 20190329T110129Z
+      X-Amz-Content-Sha256:
+      - b7d0d5cec7e1ca1a4fd7a6e9e1160eea278f7c06ced182e4e08ddb2adcd0d80d
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AKIAI6GCRPLB7GH24DBQ/20190329/eu-central-1/monitoring/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=dc0788ea813ca851256b437e8eda41af3f0c821f341e777eedb35a04c1873261
+      Content-Length:
+      - '458'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - '019176fb-5212-11e9-9f15-4f81eeaca04b'
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '2640'
+      Vary:
+      - accept-encoding
+      Date:
+      - Fri, 29 Mar 2019 11:01:29 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <GetMetricStatisticsResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">
+          <GetMetricStatisticsResult>
+            <Datapoints>
+              <member>
+                <Average>7.983460903167725</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T11:00:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>73.10266876220703</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:51:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>99.99967193603516</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:50:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>7.985955715179443</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:59:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>99.99933624267578</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:49:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>99.99979400634766</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:58:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>99.99979400634766</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:57:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>99.95207214355469</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:48:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>99.99979400634766</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:56:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>0.0</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:47:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>99.99979400634766</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:55:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>0.0</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:46:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>99.99979400634766</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:54:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>99.99979400634766</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:53:00Z</Timestamp>
+              </member>
+              <member>
+                <Average>99.9993896484375</Average>
+                <Unit>None</Unit>
+                <Timestamp>2019-03-29T10:52:00Z</Timestamp>
+              </member>
+            </Datapoints>
+            <Label>Paging File % Usage</Label>
+          </GetMetricStatisticsResult>
+          <ResponseMetadata>
+            <RequestId>019176fb-5212-11e9-9f15-4f81eeaca04b</RequestId>
+          </ResponseMetadata>
+        </GetMetricStatisticsResponse>
+    http_version: 
+  recorded_at: Fri, 29 Mar 2019 11:01:30 GMT
+- request:
+    method: post
+    uri: https://monitoring.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-0a538d08cefe2f83f&Dimensions.member.2.Name=ImageId&Dimensions.member.2.Value=ami-04c3cf8dfea7d36eb&Dimensions.member.3.Name=objectname&Dimensions.member.3.Value=Memory&Dimensions.member.4.Name=InstanceType&Dimensions.member.4.Value=t2.medium&EndTime=2019-03-29T11%3A01%3A29Z&MetricName=Memory%20%25%20Committed%20Bytes%20In%20Use&Namespace=CWAgent&Period=60&StartTime=2019-03-29T06%3A56%3A29Z&Statistics.member.1=Average&Version=2010-08-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.5 x86_64-linux resources
+      X-Amz-Date:
+      - 20190329T110130Z
+      X-Amz-Content-Sha256:
+      - 8211dd37c0cd4f7012c4903810a8726d0e0bc8ac680c856de960ea43db4bcec9
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AKIAI6GCRPLB7GH24DBQ/20190329/eu-central-1/monitoring/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b88eac86637067ca42e0867a50688797f93cb3f5624e7cb8f1899c17eea6b2d6
+      Content-Length:
+      - '530'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 01a721c3-5212-11e9-8794-4936b74e37ab
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '354'
+      Date:
+      - Fri, 29 Mar 2019 11:01:29 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <GetMetricStatisticsResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">
+          <GetMetricStatisticsResult>
+            <Datapoints/>
+            <Label>Memory % Committed Bytes In Use</Label>
+          </GetMetricStatisticsResult>
+          <ResponseMetadata>
+            <RequestId>01a721c3-5212-11e9-8794-4936b74e37ab</RequestId>
+          </ResponseMetadata>
+        </GetMetricStatisticsResponse>
+    http_version: 
+  recorded_at: Fri, 29 Mar 2019 11:01:30 GMT
+recorded_with: VCR 3.0.3

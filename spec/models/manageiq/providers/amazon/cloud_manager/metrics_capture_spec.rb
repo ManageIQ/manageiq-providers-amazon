@@ -58,18 +58,26 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
   end
 
   context 'counters present' do
-    let(:vm_name) { 'i-091369dd8a8d470ab' }
     let(:ems) { FactoryBot.create(:ems_amazon_with_vcr_authentication, :provider_region => 'eu-central-1') }
+    let(:data) { vm.perf_collect_metrics('realtime').last.first.last }
 
-    subject do
-      with_vcr_data { vm.perf_collect_metrics('realtime').last.first.last.first.last }
+    shared_examples 'available' do
+      it { is_expected.to have_key('mem_usage_absolute_average') }
+      it { is_expected.to have_key('mem_swapped_absolute_average') }
     end
 
-    it { is_expected.to have_key('mem_usage_absolute_average') }
-    it { is_expected.to have_key('mem_swapped_absolute_average') }
+    context 'from linux old way' do
+      subject { with_vcr_data { data.first.last } }
+      it_behaves_like('available')
+    end
+
+    context 'from windows with agent' do
+      subject { with_vcr_data('win2016') { data['2019-03-29T10:50:20Z'] } }
+      it_behaves_like('available')
+    end
 
     context 'and stored in the database' do
-      let(:vm) { FactoryBot.create(:vm_amazon, :ext_management_system => ems, :name => vm_name) }
+      let(:vm) { FactoryBot.create(:vm_amazon, :ext_management_system => ems) }
 
       subject do
         with_vcr_data { vm.perf_capture('realtime') }
@@ -83,7 +91,9 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
 
   private
 
-  def with_vcr_data
-    VCR.use_cassette(described_class.name.underscore, :allow_unused_http_interactions => true) { yield }
+  def with_vcr_data(suffix = nil)
+    casette_name = described_class.name.underscore
+    casette_name = "#{casette_name}-#{suffix}" if suffix
+    VCR.use_cassette(casette_name, :allow_unused_http_interactions => true) { yield }
   end
 end
