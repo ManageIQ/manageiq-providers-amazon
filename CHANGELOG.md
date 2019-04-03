@@ -5,7 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Hammer-4
+## Unreleased as of Sprint 108 ending 2019-04-01
+
+### Fixed
+- collect metrics from CloudWatch Agent [(#522)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/522)
+
+## Hammer-4 - Released 2019-03-29
 
 ### Fixed
 - - Return true for memory_mb_available? [(#517)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/517)
@@ -15,7 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ### Fixed
 - Add checking on route before retrieving its gateway_id [(#515)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/515)
 
-## Hammer-1
+## Hammer-1 - Released 2019-01-14
 
 ### Added
 - new AWS EC2 instance types [(#493)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/493)
