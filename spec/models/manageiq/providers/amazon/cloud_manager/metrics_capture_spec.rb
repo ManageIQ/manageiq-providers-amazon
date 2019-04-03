@@ -91,6 +91,18 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
       it { should include expected_metrics }
     end
 
+    context 'from linux with agent' do
+      let(:cassette_suffix) { 'ami2' }
+      let(:sample_datetime) { '2019-04-02T13:58:40Z' }
+      let(:expected_metrics) do
+        {
+          'mem_usage_absolute_average'   => 91.47303753181924,  # 'mem_used_percent'
+          'mem_swapped_absolute_average' => 23.339932784777773, # 'swap_used_percent'
+        }
+      end
+      it { should include expected_metrics }
+    end
+
     context 'and stored in the database' do
       let(:vm) { FactoryBot.create(:vm_amazon, :ext_management_system => ems) }
 
