@@ -57,23 +57,50 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
     end
   end
 
-  context 'counters present' do
+  context 'counters gathered' do
     let(:ems) { FactoryBot.create(:ems_amazon_with_vcr_authentication, :provider_region => 'eu-central-1') }
-    let(:data) { vm.perf_collect_metrics('realtime').last.first.last }
 
-    shared_examples 'available' do
-      it { is_expected.to have_key('mem_usage_absolute_average') }
-      it { is_expected.to have_key('mem_swapped_absolute_average') }
+    subject do
+      with_vcr_data(cassette_suffix) do
+        _vim_counters, aws_counters = vm.perf_collect_metrics('realtime')
+        aws_counters.dig(vm_name, sample_datetime)
+      end
     end
 
     context 'from linux old way' do
-      subject { with_vcr_data { data.first.last } }
-      it_behaves_like('available')
+      let(:cassette_suffix) { nil }
+      let(:sample_datetime) { '2018-01-18T08:10:20Z' }
+      let(:expected_metrics) do
+        {
+          'mem_usage_absolute_average'   => 8.91695700387728, # 'MemoryUtilization'
+          'mem_swapped_absolute_average' => 0.0,              # 'SwapUtilization'
+        }
+      end
+      it { should include expected_metrics }
     end
 
     context 'from windows with agent' do
-      subject { with_vcr_data('win2016') { data['2019-03-29T10:50:20Z'] } }
-      it_behaves_like('available')
+      let(:cassette_suffix) { 'win2016' }
+      let(:sample_datetime) { '2019-03-29T10:50:20Z' }
+      let(:expected_metrics) do
+        {
+          'mem_usage_absolute_average'   => 91.24837493896484, # 'Memory % Committed Bytes In Use'
+          'mem_swapped_absolute_average' => 73.10266876220703, # 'Paging File % Usage'
+        }
+      end
+      it { should include expected_metrics }
+    end
+
+    context 'from linux with agent' do
+      let(:cassette_suffix) { 'ami2' }
+      let(:sample_datetime) { '2019-04-02T13:58:40Z' }
+      let(:expected_metrics) do
+        {
+          'mem_usage_absolute_average'   => 91.47303753181924,  # 'mem_used_percent'
+          'mem_swapped_absolute_average' => 23.339932784777773, # 'swap_used_percent'
+        }
+      end
+      it { should include expected_metrics }
     end
 
     context 'and stored in the database' do
