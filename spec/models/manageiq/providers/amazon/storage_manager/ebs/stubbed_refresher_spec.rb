@@ -141,7 +141,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::Refresher do
 
   def assert_table_counts
     actual = {
-      :auth_private_key                  => AuthPrivateKey.count,
+      :auth_private_key                  => ManageIQ::Providers::CloudManager::AuthKeyPair.count,
       :ext_management_system             => ExtManagementSystem.count,
       :flavor                            => Flavor.count,
       :availability_zone                 => AvailabilityZone.count,

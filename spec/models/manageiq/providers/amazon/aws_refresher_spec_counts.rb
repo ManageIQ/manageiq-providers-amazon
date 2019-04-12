@@ -178,7 +178,7 @@ module AwsRefresherSpecCounts
 
   def assert_table_counts(expected_table_counts)
     actual = {
-      :auth_private_key              => AuthPrivateKey.count,
+      :auth_private_key              => ManageIQ::Providers::CloudManager::AuthKeyPair.count,
       :cloud_volume                  => CloudVolume.count,
       :cloud_volume_backup           => CloudVolumeBackup.count,
       :cloud_volume_snapshot         => CloudVolumeSnapshot.count,

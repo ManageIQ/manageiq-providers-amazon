@@ -42,7 +42,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow do
     end
 
     it "#allowed_guest_access_key_pairs" do
-      kp = AuthPrivateKey.create(:name => "auth_1")
+      kp = ManageIQ::Providers::CloudManager::AuthKeyPair.create(:name => "auth_1")
       ems.key_pairs << kp
       expect(workflow.allowed_guest_access_key_pairs).to eq(kp.id => kp.name)
     end
