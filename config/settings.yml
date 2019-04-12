@@ -38,6 +38,7 @@
     :disabled_regions:
       - cn-north-1
       - cn-northwest-1
+      - us-gov-east-1
       - us-gov-west-1
 
     # add additional regions as found in app/models/manageiq/providers/amazon/regions.rb
