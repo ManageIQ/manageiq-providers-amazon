@@ -3,13 +3,13 @@ class ManageIQ::Providers::Amazon::CloudManager::OrchestrationServiceOptionConve
   private_constant :REGEX_TAGS, :REGEX_TAGS
 
   def stack_create_options
-    timeout = @dialog_options['dialog_stack_timeout']
+    timeout = @dialog_options['dialog_stack_timeout'].to_i
     policy_body, policy_url = parse_policy(@dialog_options['dialog_stack_policy'])
 
     stack_options = {
       :parameters         => stack_parameters,
       :on_failure         => @dialog_options['dialog_stack_onfailure'],
-      :timeout_in_minutes => timeout.blank? ? nil : timeout.to_i,
+      :timeout_in_minutes => timeout.positive? ? timeout : nil,
       :notification_arns  => parse_multiple_lines(@dialog_options['dialog_stack_notifications']),
       :capabilities       => parse_capacities(@dialog_options['dialog_stack_capabilities']),
       :resource_types     => parse_multiple_lines(@dialog_options['dialog_stack_resource_types']),

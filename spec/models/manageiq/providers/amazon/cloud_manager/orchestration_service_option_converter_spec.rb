@@ -33,7 +33,14 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationServiceOptionCo
   context 'timeout option' do
     let(:options) { {'dialog_stack_timeout' => '30'} }
 
-    it { expect(subject.stack_create_options[:timeout_in_minutes]).to eq(30) }
+    it 'returns timeout when timeout > 0' do
+      expect(subject.stack_create_options[:timeout_in_minutes]).to eq(30)
+    end
+
+    it 'returns nil when timeout = 0' do
+      options['dialog_stack_timeout'] = 0
+      expect(subject.stack_create_options[:timeout_in_minutes]).to be_nil
+    end
   end
 
   context 'on_failure option' do
