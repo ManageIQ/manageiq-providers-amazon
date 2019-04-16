@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 109 ending 2019-04-15
+
+### Fixed
+- disable new us-gov region by default [(#527)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/527)
+
 ## Unreleased as of Sprint 108 ending 2019-04-01
 
 ### Fixed
