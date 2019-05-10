@@ -12,14 +12,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.6 x86_64-linux resources
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.5 x86_64-linux resources
       X-Amz-Date:
-      - 20190212T210701Z
+      - 20190509T231013Z
       X-Amz-Content-Sha256:
       - 903451d1f3cda66f6ac7101b5810af53eb3ce6b47c5162b0b2238ce9086b6a0d
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20190212/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b62e51303ac3b19ddbac7ad3b7ac1c9a3e36a8d87ec8d84a28d6f156faf1bd97
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20190509/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=fe4dafecc2e13539f2af9f3cc25f17b8b1c266cd60a242d2632ab8c6ee5eec11
       Content-Length:
       - '41'
       Accept:
@@ -34,9 +34,9 @@ http_interactions:
       Content-Length:
       - '2711'
       Vary:
-      - Accept-Encoding
+      - accept-encoding
       Date:
-      - Tue, 12 Feb 2019 21:07:06 GMT
+      - Thu, 09 May 2019 23:10:14 GMT
       Server:
       - AmazonEC2
     body:
@@ -44,7 +44,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeRegionsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>3ab3e530-4179-4594-8878-3ea2defba58c</requestId>
+            <requestId>a85db9b9-485d-4e18-ae70-c00d846119f4</requestId>
             <regionInfo>
                 <item>
                     <regionName>eu-north-1</regionName>
@@ -113,5 +113,5 @@ http_interactions:
             </regionInfo>
         </DescribeRegionsResponse>
     http_version: 
-  recorded_at: Tue, 12 Feb 2019 21:07:06 GMT
+  recorded_at: Thu, 09 May 2019 23:10:14 GMT
 recorded_with: VCR 3.0.3
