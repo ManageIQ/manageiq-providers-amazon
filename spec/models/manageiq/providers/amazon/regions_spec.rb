@@ -1,26 +1,25 @@
 describe ManageIQ::Providers::Amazon::Regions do
-  # https://github.com/aws/aws-sdk-ruby/blob/5fe5795e8910bb667996dfc75e4f16b7e69e3980/gems/aws-partitions/partitions.json#L11
-  let(:default_regions_regexp) { /^(us|eu|ap|sa|ca)\-\w+\-\d+$/ }
-
   it "has all the regions" do
     ems = FactoryBot.create(:ems_amazon_with_vcr_authentication)
 
-    VCR.use_cassette(described_class.name.underscore) do
-      current_regions = described_class.regions.map do |_name, config|
-        {:region_name => config[:name], :endpoint => config[:hostname]}
-      end
-      current_regions.select! { |r| r[:region_name] =~ default_regions_regexp }
-
-      online_regions = ems.connect.client.describe_regions.to_h[:regions]
-
-      # sort for better diff
-      [current_regions, online_regions].each do |regions|
-        regions.map!     { |r| r.sort.to_h     }
-        regions.sort_by! { |r| r[:region_name] }
-      end
-
-      expect(online_regions).to eq(current_regions)
+    # TODO: use `slice` on 2.5
+    current_regions = described_class.regions.select do |name, _config|
+      !described_class::SPECIAL_REGIONS.include?(name)
+    end.map do |_name, config|
+      { :region_name => config[:name], :endpoint => config[:hostname] }
     end
+
+    online_regions = VCR.use_cassette(described_class.name.underscore) do
+      ems.connect.client.describe_regions.to_h[:regions]
+    end
+
+    # sort for better diff
+    [current_regions, online_regions].each do |regions|
+      regions.map!     { |r| r.sort.to_h     }
+      regions.sort_by! { |r| r[:region_name] }
+    end
+
+    expect(online_regions).to eq(current_regions)
   end
 
   context "disable regions via Settings" do
