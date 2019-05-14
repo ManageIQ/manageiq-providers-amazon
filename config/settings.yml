@@ -35,13 +35,7 @@
 
     # disable regions by their keys found in app/models/manageiq/providers/amazon/regions.rb e.g.
     # - us-gov-west-1
-    :disabled_regions:
-      - cn-north-1
-      - cn-northwest-1
-      - us-gov-east-1
-      - us-gov-west-1
-      - ap-northeast-3
-      - ap-east-1
+    :disabled_regions: []
 
     # add additional regions as found in app/models/manageiq/providers/amazon/regions.rb
     # :spec-region-1:
