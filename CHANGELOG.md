@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Hammer-5
+## Hammer-6
+
+### Fixed
+- Add checking on route before retrieving its gateway_id [(#515)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/515)
+- Return not set timeout in dialog as nil instead of 0. [(#529)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/529)
+- update instance types and regions [(#514)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/514)
+- disable new us-gov region by default [(#527)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/527)
+
+## Hammer-5 - Released 2019-04-23
 
 ### Fixed
 - collect metrics from CloudWatch Agent [(#522)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/522)
@@ -15,7 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ### Fixed
 - - Return true for memory_mb_available? [(#517)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/517)
 
-## Hammer-1
+## Hammer-1 - Released 2019-01-14
 
 ### Added
 - new AWS EC2 instance types [(#493)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/493)
