@@ -18,15 +18,18 @@ module ManageIQ::Providers::Amazon::ManagerMixin
   end
 
   def connect(options = {})
-    raise "no credentials defined" if missing_credentials?(options[:auth_type])
+    auth_type = options[:auth_type]
+    raise "no credentials defined" if missing_credentials?(auth_type)
 
-    username = options[:user] || authentication_userid(options[:auth_type])
-    password = options[:pass] || authentication_password(options[:auth_type])
-    service  = options[:service] || :EC2
-    proxy    = options[:proxy_uri] || http_proxy_uri
-    region   = options[:region] || provider_region
+    username    = options[:user] || authentication_userid(auth_type)
+    password    = options[:pass] || authentication_password(auth_type)
+    service     = options[:service] || :EC2
+    proxy       = options[:proxy_uri] || http_proxy_uri
+    region      = options[:region] || provider_region
+    assume_role = options[:assume_role] || authentication_service_account(auth_type)
 
-    self.class.raw_connect(username, password, service, region, proxy)
+    self.class.raw_connect(username, password, service, region, proxy,
+                           :assume_role => assume_role)
   end
 
   def verify_credentials(auth_type = nil, options = {})
@@ -48,21 +51,33 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     # Connections
     #
 
-    def raw_connect(access_key_id, secret_access_key, service, region, proxy_uri = nil, validate = false, uri = nil)
+    def raw_connect(access_key_id, secret_access_key, service, region,
+                    proxy_uri = nil, validate = false, uri = nil, assume_role: nil)
+
       require 'aws-sdk'
       require 'patches/aws-sdk-core/seahorse_client_net_http_pool_patch'
 
+      log_formatter_pattern = Aws::Log::Formatter.default.pattern.chomp
+      secret_access_key     = ManageIQ::Password.try_decrypt(secret_access_key)
+
       options = {
-        :access_key_id     => access_key_id,
-        :secret_access_key => ManageIQ::Password.try_decrypt(secret_access_key),
-        :region            => region,
-        :http_proxy        => proxy_uri,
-        :logger            => $aws_log,
-        :log_level         => :debug,
-        :log_formatter     => Aws::Log::Formatter.new(Aws::Log::Formatter.default.pattern.chomp)
+        :credentials   => Aws::Credentials.new(access_key_id, secret_access_key),
+        :region        => region,
+        :http_proxy    => proxy_uri,
+        :logger        => $aws_log,
+        :log_level     => :debug,
+        :log_formatter => Aws::Log::Formatter.new(log_formatter_pattern),
       }
 
       options[:endpoint] = uri.to_s if uri.to_s.present?
+
+      if assume_role
+        options[:credentials] = Aws::AssumeRoleCredentials.new(
+          :client            => Aws::STS::Client.new(options),
+          :role_arn          => assume_role,
+          :role_session_name => "ManageIQ-#{service}",
+        )
+      end
 
       connection = Aws.const_get(service)::Resource.new(options)
 
