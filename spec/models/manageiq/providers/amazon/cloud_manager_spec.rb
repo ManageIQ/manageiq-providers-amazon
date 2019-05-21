@@ -1,6 +1,22 @@
 require_relative 'aws_helper'
 
 describe ManageIQ::Providers::Amazon::CloudManager do
+  context ".connect with assume_role" do
+    subject { FactoryBot.create(:ems_amazon_with_authentication) }
+
+    it 'tries to assume role when given' do
+      subject.default_authentication.service_account = "service_account_arn"
+      expect(Aws::AssumeRoleCredentials).to receive(:new)
+      subject.connect
+    end
+
+    it 'tries to not assume role when not given' do
+      subject.default_authentication.service_account = nil
+      expect(Aws::AssumeRoleCredentials).to_not receive(:new)
+      subject.connect
+    end
+  end
+
   context ".raw_connect" do
     it "decrypts the secret access key" do
       expect(ManageIQ::Password).to receive(:try_decrypt).with('secret_access_key')
