@@ -30,7 +30,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
         }
 
         with_aws_stubbed(stubbed_responses) do
-          expect(CloudVolume.create_volume(ebs, options)).to be_truthy
+          expect(CloudVolume.create_volume(ebs.id, options)).to be_truthy
         end
       end
     end
