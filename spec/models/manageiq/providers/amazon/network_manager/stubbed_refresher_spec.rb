@@ -15,8 +15,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
     end
 
     # Test all kinds of refreshes, DTO refresh, DTO with batch saving and the original refresh
-    (AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS + AwsRefresherSpecCommon::ALL_OLD_REFRESH_SETTINGS
-    ).each do |settings|
+    AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
         before :each do
           stub_refresh_settings(settings)

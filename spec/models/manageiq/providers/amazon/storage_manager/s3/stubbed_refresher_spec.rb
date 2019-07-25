@@ -21,8 +21,7 @@ describe ManageIQ::Providers::Amazon::StorageManager::S3::Refresher do
   end
 
   describe "refresh" do
-    (AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS + AwsRefresherSpecCommon::ALL_OLD_REFRESH_SETTINGS
-    ).each do |settings|
+    AwsRefresherSpecCommon::ALL_GRAPH_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
         before :each do
           stub_refresh_settings(settings)

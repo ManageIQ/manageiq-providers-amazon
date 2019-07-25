@@ -11,7 +11,6 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   require_nested :OrchestrationTemplate
   require_nested :Provision
   require_nested :ProvisionWorkflow
-  require_nested :RefreshParser
   require_nested :RefreshWorker
   require_nested :Refresher
   require_nested :Template
@@ -129,6 +128,14 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
 
   def supported_catalog_types
     %w(amazon).freeze
+  end
+
+  def inventory_object_refresh?
+    true
+  end
+
+  def allow_targeted_refresh?
+    true
   end
 
   #

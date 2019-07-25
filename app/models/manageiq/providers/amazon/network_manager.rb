@@ -9,7 +9,6 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
   require_nested :LoadBalancerPoolMember
   require_nested :NetworkPort
   require_nested :NetworkRouter
-  require_nested :RefreshParser
   require_nested :RefreshWorker
   require_nested :Refresher
   require_nested :SecurityGroup
@@ -58,5 +57,9 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
 
   def self.display_name(number = 1)
     n_('Network Provider (Amazon)', 'Network Providers (Amazon)', number)
+  end
+
+  def inventory_object_refresh?
+    true
   end
 end
