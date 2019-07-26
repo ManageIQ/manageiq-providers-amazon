@@ -1,7 +1,6 @@
 class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::StorageManager
   require_nested :CloudVolume
   require_nested :CloudVolumeSnapshot
-  require_nested :RefreshParser
   require_nested :RefreshWorker
   require_nested :Refresher
 
@@ -35,5 +34,9 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::St
 
   def self.hostname_required?
     false
+  end
+
+  def inventory_object_refresh?
+    true
   end
 end

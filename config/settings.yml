@@ -82,20 +82,15 @@
           - machine
 
     :ignore_terminated_instances: true
-    :inventory_object_refresh: true
-    :allow_targeted_refresh: true
     :inventory_collections:
       :saver_strategy: batch
   :ec2_network:
-    :inventory_object_refresh: true
     :inventory_collections:
       :saver_strategy: batch
   :s3:
-    :inventory_object_refresh: true
     :inventory_collections:
       :saver_strategy: batch
   :ec2_ebs_storage:
-    :inventory_object_refresh: true
     :inventory_collections:
       :saver_strategy: batch
 :http_proxy:
