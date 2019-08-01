@@ -69,6 +69,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
 
   supports :provisioning
   supports :regions
+  supports :assume_role
 
   def ensure_managers
     build_network_manager unless network_manager
