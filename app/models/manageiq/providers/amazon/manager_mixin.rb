@@ -51,6 +51,23 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     # Connections
     #
 
+    # Validate Credentials
+    # args:
+    # {
+    #   "region" => "",
+    #   "endpoints" => {
+    #     "ec2" => {
+    #       "access_key" => "",
+    #       "secret_access_key" => "",
+    #     }
+    #   }
+    # }
+    def validate_credentials(args)
+      region = args["region"]
+      ec2_endpoint = args.dig("endpoints", "ec2")
+      raw_connect(ec2_endpoint["access_key"], ec2_endpoint["secret_access_key"], "ec2", region)
+    end
+
     def raw_connect(access_key_id, secret_access_key, service, region,
                     proxy_uri = nil, validate = false, uri = nil, assume_role: nil)
 
