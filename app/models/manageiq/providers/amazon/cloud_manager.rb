@@ -119,6 +119,18 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     Settings.ems.ems_amazon.blacklisted_event_names
   end
 
+  def self.params_for_create
+    {
+      :title  => "Configure AWS",
+      :fields => [
+        {:component => "text-field", :name => "role",         :type => "hidden", :initialValue => "ec2"},
+        {:component => "text-field", :name => "region",       :label => "Region"},
+        {:component => "text-field", :name => "ec2_username", :label => "Access Key"},
+        {:component => "text-field", :name => "ec2_password", :label => "Secret Key", :type => "password"}
+      ]
+    }
+  end
+
   def supported_auth_types
     %w(default smartstate_docker)
   end
