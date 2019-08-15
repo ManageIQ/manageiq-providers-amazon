@@ -123,10 +123,10 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     {
       :title  => "Configure AWS",
       :fields => [
-        {:component => "text-field", :name => "role",                   :type => "hidden", :initialValue => "ec2"},
-        {:component => "text-field", :name => "region",                 :label => "Region"},
-        {:component => "text-field", :name => "endpoints.ec2.username", :label => "Access Key"},
-        {:component => "text-field", :name => "endpoints.ec2.password", :label => "Secret Key", :type => "password"}
+        {:component => "text-field", :name => "role",              :type => "hidden", :initialValue => "ec2"},
+        {:component => "text-field", :name => "region",            :label => "Region"},
+        {:component => "text-field", :name => "access_key",        :label => "Access Key"},
+        {:component => "text-field", :name => "secret_access_key", :label => "Secret Key", :type => "password"}
       ]
     }
   end

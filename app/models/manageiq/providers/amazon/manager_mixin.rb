@@ -55,19 +55,11 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     # args:
     # {
     #   "region" => "",
-    #   "endpoints" => {
-    #     "ec2" => {
-    #       "access_key" => "",
-    #       "secret_access_key" => "",
-    #     }
-    #   }
+    #   "access_key" => "",
+    #   "secret_access_key" => ""
     # }
     def validate_credentials(args)
-      region = args["region"]
-      ec2_endpoint = args.dig("endpoints", "ec2")
-      raise MiqException::MiqInvalidCredentialsError, _("Provided credentials are invalid") if ec2_endpoint.nil?
-
-      raw_connect(ec2_endpoint["access_key"], ec2_endpoint["secret_access_key"], "ec2", region)
+      raw_connect(args["access_key"], args["secret_access_key"], "ec2", args["region"])
     end
 
     def raw_connect(access_key_id, secret_access_key, service, region,
