@@ -124,42 +124,42 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
       :title  => "Configure AWS",
       :fields => [
         {
-          :component => "text-field",
-          :name => "role",
-          :type => "hidden",
+          :component    => "text-field",
+          :name         => "role",
+          :type         => "hidden",
           :initialValue => "ec2"
         },
         {
-          :component => "text-field",
-          :name => "region",
-          :label => "Region",
+          :component  => "text-field",
+          :name       => "region",
+          :label      => "Region",
           :isRequired => true,
-          :validate => [{:type => "required-validator"}]
+          :validate   => [{:type => "required-validator"}]
         },
         {
-          :component => "text-field",
-          :name => "access_key",
-          :label => "Access Key",
+          :component  => "text-field",
+          :name       => "access_key",
+          :label      => "Access Key",
           :isRequired => true,
-          :validate => [{:type => "required-validator"}]
+          :validate   => [{:type => "required-validator"}]
         },
         {
-          :component => "text-field",
-          :name => "secret_access_key",
-          :label => "Secret Key",
-          :type => "password",
+          :component  => "text-field",
+          :name       => "secret_access_key",
+          :label      => "Secret Key",
+          :type       => "password",
           :isRequired => true,
-          :validate => [{:type => "required-validator"}]
+          :validate   => [{:type => "required-validator"}]
         },
         {
           :component => "text-field",
-          :name => "proxy_uri",
-          :label => "Proxy URI"
+          :name      => "proxy_uri",
+          :label     => "Proxy URI"
         },
         {
           :component => "text-field",
-          :name => "assume_role",
-          :label => "Assume Role"
+          :name      => "assume_role",
+          :label     => "Assume Role"
         }
       ]
     }
