@@ -54,15 +54,26 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     # Validate Credentials
     # args:
     # {
-    #   "access_key" => "",
-    #   "secret_access_key" => "",
     #   "region" => "",
-    #   "proxy_uri => "",
-    #   "assume_role" => ""
+    #   "endpoints" => {
+    #     "default" => {
+    #       "access_key" => "",
+    #       "secret_access_key" => "",
+    #       "proxy_uri => "",
+    #       "assume_role" => ""
+    #     }
+    #   }
     # }
     def validate_credentials(args)
-      raw_connect(args["access_key"], args["secret_access_key"], "ec2",
-                  args["region"], args["proxy_uri"], :assume_role => args["assume_role"])
+      region           = args["region"]
+      default_endpoint = args.dig("endpoints", "default")
+
+      access_key        = default_endpoint&.dig("access_key")
+      secret_access_key = default_endpoint&.dig("secret_access_key")
+      proxy_uri         = default_endpoint&.dig("proxy_uri")
+      assume_role       = default_endpoint&.dig("assume_role")
+
+      raw_connect(access_key, secret_access_key, "ec2", region, proxy_uri, :assume_role => assume_role)
     end
 
     def raw_connect(access_key_id, secret_access_key, service, region,

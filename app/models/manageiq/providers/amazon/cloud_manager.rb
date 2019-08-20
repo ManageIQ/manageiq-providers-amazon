@@ -124,12 +124,6 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
       :title  => "Configure AWS",
       :fields => [
         {
-          :component    => "text-field",
-          :name         => "role",
-          :type         => "hidden",
-          :initialValue => "ec2"
-        },
-        {
           :component  => "text-field",
           :name       => "region",
           :label      => "Region",
@@ -138,14 +132,14 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
         },
         {
           :component  => "text-field",
-          :name       => "access_key",
+          :name       => "endpoints.default.access_key",
           :label      => "Access Key",
           :isRequired => true,
           :validate   => [{:type => "required-validator"}]
         },
         {
           :component  => "text-field",
-          :name       => "secret_access_key",
+          :name       => "endpoints.default.secret_access_key",
           :label      => "Secret Key",
           :type       => "password",
           :isRequired => true,
@@ -153,12 +147,12 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
         },
         {
           :component => "text-field",
-          :name      => "proxy_uri",
+          :name      => "endpoints.default.proxy_uri",
           :label     => "Proxy URI"
         },
         {
           :component => "text-field",
-          :name      => "assume_role",
+          :name      => "endpoints.default.assume_role",
           :label     => "Assume Role"
         }
       ]
