@@ -51,6 +51,10 @@ eu-west-3:
   :name: eu-west-3
   :hostname: ec2.eu-west-3.amazonaws.com
   :description: EU (Paris)
+me-south-1:
+  :name: me-south-1
+  :hostname: ec2.me-south-1.amazonaws.com
+  :description: Middle East (Bahrain)
 sa-east-1:
   :name: sa-east-1
   :hostname: ec2.sa-east-1.amazonaws.com
