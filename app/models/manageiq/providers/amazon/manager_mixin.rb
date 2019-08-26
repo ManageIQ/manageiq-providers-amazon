@@ -68,10 +68,9 @@ module ManageIQ::Providers::Amazon::ManagerMixin
       region           = args["region"]
       default_endpoint = args.dig("endpoints", "default")
 
-      access_key        = default_endpoint&.dig("access_key")
-      secret_access_key = default_endpoint&.dig("secret_access_key")
-      proxy_uri         = default_endpoint&.dig("proxy_uri")
-      assume_role       = default_endpoint&.dig("assume_role")
+      access_key, secret_access_key, proxy_uri, assume_role = default_endpoint&.values_at(
+        "access_key", "secret_access_key", "proxy_uri", "assume_role"
+      )
 
       raw_connect(access_key, secret_access_key, "ec2", region, proxy_uri, :assume_role => assume_role)
     end
