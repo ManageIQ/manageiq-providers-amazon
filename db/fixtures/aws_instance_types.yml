@@ -506,35 +506,6 @@ c4.xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: true
-c5.metal:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: C5 Compute optimized
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Compute optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: true
-  :intel_avx2: true
-  :intel_turbo: true
-  :memory: 0
-  :memory_gb: 0.0
-  :name: c5.metal
-  :network_performance: :na
-  :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
-  :vcpu: 72
-  :virtualization_type:
-  - :hvm
-  :vpc_only: true
 c5.12xlarge:
   :architecture:
   - :x86_64
@@ -2144,32 +2115,6 @@ i3.large:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
-  :vpc_only: true
-i3.metal:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :description: I3 High I/O Metal
-  :disabled: true
-  :discontinued: true
-  :ebs_only: true
-  :ebs_optimized_available: true
-  :enhanced_networking: true
-  :family: Unknown
-  :instance_store_size: 0
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 549755813888.0
-  :name: i3.metal
-  :network_performance: :very_high
-  :physical_processor: ''
-  :processor_clock_speed: ''
-  :vcpu: 72
   :virtualization_type:
   - :hvm
   :vpc_only: true
