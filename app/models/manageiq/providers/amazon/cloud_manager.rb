@@ -119,6 +119,48 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     Settings.ems.ems_amazon.blacklisted_event_names
   end
 
+  PARAMS_FOR_CREATE = {
+    :title  => "Configure AWS",
+    :fields => [
+      {
+        :component  => "text-field",
+        :name       => "region",
+        :label      => "Region",
+        :isRequired => true,
+        :validate   => [{:type => "required-validator"}]
+      },
+      {
+        :component  => "text-field",
+        :name       => "endpoints.default.access_key",
+        :label      => "Access Key",
+        :isRequired => true,
+        :validate   => [{:type => "required-validator"}]
+      },
+      {
+        :component  => "text-field",
+        :name       => "endpoints.default.secret_access_key",
+        :label      => "Secret Key",
+        :type       => "password",
+        :isRequired => true,
+        :validate   => [{:type => "required-validator"}]
+      },
+      {
+        :component => "text-field",
+        :name      => "endpoints.default.proxy_uri",
+        :label     => "Proxy URI"
+      },
+      {
+        :component => "text-field",
+        :name      => "endpoints.default.assume_role",
+        :label     => "Assume Role"
+      }
+    ]
+  }.freeze
+
+  def self.params_for_create
+    PARAMS_FOR_CREATE
+  end
+
   def supported_auth_types
     %w(default smartstate_docker)
   end
