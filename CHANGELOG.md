@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Hammer-6
+## Unreleased as of Sprint 120 ending 2019-09-16
+
+### Added
+- Added data-driven-forms for AWS creation [(#551)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/551)
+
+### Fixed
+- add metal to names and remove dedicated [(#554)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/554)
+
+## Hammer-6 - Released 2019-05-22
 
 ### Fixed
 - Add checking on route before retrieving its gateway_id [(#515)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/515)
