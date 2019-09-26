@@ -237,7 +237,7 @@ describe Authenticator::Amazon do
         it "immediately completes the task" do
           task_id = authenticate
           task = MiqTask.find(task_id)
-          expect(User.find_by_userid(task.userid)).to eq(local_user)
+          expect(User.lookup_by_userid(task.userid)).to eq(local_user)
         end
 
         context "with no corresponding Amazon IAM user" do
@@ -398,7 +398,7 @@ describe Authenticator::Amazon do
         it "immediately completes the task" do
           task_id = authenticate
           task = MiqTask.find(task_id)
-          user = User.find_by_userid(task.userid)
+          user = User.lookup_by_userid(task.userid)
           expect(user.userid).to eq(username)
           expect(user.email).to be_nil
         end
