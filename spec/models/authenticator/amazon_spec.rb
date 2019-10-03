@@ -162,7 +162,7 @@ describe Authenticator::Amazon do
       let(:config) { super().merge(:amazon_key => AWS_IAM_USER_KEY) }
 
       it "fails" do
-        expect(-> { authenticate }).to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
+        expect { authenticate }.to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
       end
 
       it "logs why we failed" do
@@ -195,13 +195,13 @@ describe Authenticator::Amazon do
         end
 
         it "updates lastlogon" do
-          expect(-> { authenticate }).to change { local_user.reload.lastlogon }
+          expect { authenticate }.to change { local_user.reload.lastlogon }
         end
 
         context "with no corresponding Amazon IAM user" do
           let(:username) { 'some_key_not_on_IAM' }
           it "fails" do
-            expect(-> { authenticate }).to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
+            expect { authenticate }.to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
           end
         end
       end
@@ -231,7 +231,7 @@ describe Authenticator::Amazon do
         end
 
         it "updates lastlogon" do
-          expect(-> { authenticate }).to change { local_user.reload.lastlogon }
+          expect { authenticate }.to change { local_user.reload.lastlogon }
         end
 
         it "immediately completes the task" do
@@ -243,7 +243,7 @@ describe Authenticator::Amazon do
         context "with no corresponding Amazon IAM user" do
           let(:username) { 'some_key_not_on_IAM' }
           it "fails" do
-            expect(-> { authenticate }).to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
+            expect { authenticate }.to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
           end
         end
       end
@@ -266,7 +266,7 @@ describe Authenticator::Amazon do
         let(:describe_regions_response) { 'SignatureDoesNotMatch' }
         it "fails" do
           # Aws::EC2::Errors::SignatureDoesNotMatch
-          expect(-> { authenticate }).to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
+          expect { authenticate }.to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
         end
       end
 
@@ -274,7 +274,7 @@ describe Authenticator::Amazon do
         let(:username) { AWS_ROOT_USER_KEY }
 
         it "fails" do
-          expect(-> { authenticate }).to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
+          expect { authenticate }.to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
         end
 
         it "logs why we failed" do
@@ -288,7 +288,7 @@ describe Authenticator::Amazon do
       let(:username) { 'not_able_to_auth_on_aws' }
 
       it "fails" do
-        expect(-> { authenticate }).to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
+        expect { authenticate }.to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
       end
 
       it "records one failing audit entry" do
@@ -308,7 +308,7 @@ describe Authenticator::Amazon do
       end
 
       it "doesn't change lastlogon" do
-        expect(-> { authenticate rescue nil }).not_to change { local_user.reload.lastlogon }
+        expect { authenticate rescue nil }.not_to change { local_user.reload.lastlogon }
       end
     end
 
@@ -320,7 +320,7 @@ describe Authenticator::Amazon do
         let(:describe_regions_response) { 'AuthFailure' }
 
         it "fails" do
-          expect(-> { authenticate }).to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
+          expect { authenticate }.to raise_error(MiqException::MiqEVMLoginError, "Authentication failed")
         end
 
         it "records one failing audit entry" do
@@ -342,7 +342,7 @@ describe Authenticator::Amazon do
 
       context "using local authorization" do
         it "fails" do
-          expect(-> { authenticate }).to raise_error(MiqException::MiqEVMLoginError)
+          expect { authenticate }.to raise_error(MiqException::MiqEVMLoginError)
         end
 
         it "records one successful and one failing audit entry" do
@@ -404,7 +404,7 @@ describe Authenticator::Amazon do
         end
 
         it "creates a new User" do
-          expect(-> { authenticate }).to change { User.where(:userid => username).count }.from(0).to(1)
+          expect { authenticate }.to change { User.where(:userid => username).count }.from(0).to(1)
         end
 
         context "with no matching groups" do
@@ -440,7 +440,7 @@ describe Authenticator::Amazon do
           end
 
           it "doesn't create a new User" do
-            expect(-> { authenticate }).not_to change { User.where(:userid => username).count }.from(0)
+            expect { authenticate }.not_to change { User.where(:userid => username).count }.from(0)
           end
 
           it "immediately marks the task as errored" do
