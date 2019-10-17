@@ -128,6 +128,7 @@ module Authenticator
     def aws_connect(access_key_id, secret_access_key, service = :IAM, proxy_uri = nil)
       service   ||= :EC2
       proxy_uri ||= VMDB::Util.http_proxy_uri
+
       require "aws-sdk-#{service.to_s.downcase}"
 
       Aws.const_get(service)::Resource.new(

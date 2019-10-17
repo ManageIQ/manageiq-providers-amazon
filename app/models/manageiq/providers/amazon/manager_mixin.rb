@@ -126,7 +126,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     end
 
     def translate_exception(err)
-      require 'aws-sdk'
+      require 'aws-sdk-ec2'
       case err
       when Aws::EC2::Errors::SignatureDoesNotMatch
         MiqException::MiqHostError.new "SignatureMismatch - check your AWS Secret Access Key and signing method"

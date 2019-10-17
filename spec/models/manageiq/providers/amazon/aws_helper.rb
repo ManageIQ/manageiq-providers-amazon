@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 def with_aws_stubbed(stub_responses_per_service)
   stub_responses_per_service.each do |service, stub_responses|
     if Aws.config.dig(service, :stub_responses).present?
