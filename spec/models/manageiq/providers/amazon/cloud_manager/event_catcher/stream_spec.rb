@@ -1,5 +1,7 @@
 require_relative "../../aws_helper"
 
+require 'aws-sdk-sns'
+
 describe ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream do
   subject do
     ems = FactoryBot.create(:ems_amazon_with_authentication)

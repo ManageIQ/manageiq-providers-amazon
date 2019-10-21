@@ -78,9 +78,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
 
     def raw_connect(access_key_id, secret_access_key, service, region,
                     proxy_uri = nil, validate = false, uri = nil, assume_role: nil)
-
-      require 'aws-sdk'
-      require 'patches/aws-sdk-core/seahorse_client_net_http_pool_patch'
+      require "aws-sdk-#{service.to_s.downcase}"
 
       log_formatter_pattern = Aws::Log::Formatter.default.pattern.chomp
       secret_access_key     = ManageIQ::Password.try_decrypt(secret_access_key)
@@ -128,8 +126,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     end
 
     def translate_exception(err)
-      require 'aws-sdk'
-      require 'patches/aws-sdk-core/seahorse_client_net_http_pool_patch'
+      require 'aws-sdk-ec2'
       case err
       when Aws::EC2::Errors::SignatureDoesNotMatch
         MiqException::MiqHostError.new "SignatureMismatch - check your AWS Secret Access Key and signing method"

@@ -1,4 +1,5 @@
-require 'aws-sdk'
+require 'aws-sdk-iam'
+require 'aws-sdk-ec2'
 
 describe Authenticator::Amazon do
   AWS_ROOT_USER_KEY = 'aws_root_key'.freeze
