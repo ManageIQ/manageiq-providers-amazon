@@ -179,34 +179,6 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     true
   end
 
-  #
-  # Operations
-  #
-
-  def vm_start(vm, _options = {})
-    vm.start
-  rescue => err
-    _log.error "vm=[#{vm.name}], error: #{err}"
-  end
-
-  def vm_stop(vm, _options = {})
-    vm.stop
-  rescue => err
-    _log.error "vm=[#{vm.name}], error: #{err}"
-  end
-
-  def vm_destroy(vm, _options = {})
-    vm.vm_destroy
-  rescue => err
-    _log.error "vm=[#{vm.name}], error: #{err}"
-  end
-
-  def vm_reboot_guest(vm, _options = {})
-    vm.reboot_guest
-  rescue => err
-    _log.error "vm=[#{vm.name}], error: #{err}"
-  end
-
   # @param [ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate] template
   # @return [nil] if the template is valid
   # @return [String] if the template is invalid this is the error message
