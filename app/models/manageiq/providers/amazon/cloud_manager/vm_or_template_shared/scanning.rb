@@ -13,6 +13,10 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
     end
   end
 
+  def require_snapshot_for_scan?
+    false
+  end
+
   def scan_via_ems?
     true
   end
