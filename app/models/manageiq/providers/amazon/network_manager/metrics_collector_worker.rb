@@ -6,10 +6,6 @@ class ManageIQ::Providers::Amazon::NetworkManager::MetricsCollectorWorker < ::Mi
     @friendly_name ||= "C&U Metrics Collector for Amazon Network"
   end
 
-  def self.ems_class
-    ManageIQ::Providers::Amazon::NetworkManager
-  end
-
   def self.settings_name
     :ems_metrics_collector_worker_amazon_network
   end
