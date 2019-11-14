@@ -250,7 +250,6 @@ module AwsRefresherSpecCommon
     expect(@template).to have_attributes(
       :template              => true,
       :ems_ref               => "ami-5769193e",
-      :ems_ref_obj           => nil,
       :uid_ems               => "ami-5769193e",
       :vendor                => "amazon",
       :power_state           => "never",
@@ -316,7 +315,6 @@ module AwsRefresherSpecCommon
       have_attributes(
         :template              => true,
         :ems_ref               => "ami-2051294a",
-        :ems_ref_obj           => nil,
         :uid_ems               => "ami-2051294a",
         :vendor                => "amazon",
         :power_state           => "never",
@@ -489,7 +487,6 @@ module AwsRefresherSpecCommon
     expect(v).to have_attributes(
       :template              => false,
       :ems_ref               => "i-680071e9",
-      :ems_ref_obj           => nil,
       :uid_ems               => "i-680071e9",
       :vendor                => "amazon",
       :power_state           => "on",
@@ -593,7 +590,6 @@ module AwsRefresherSpecCommon
     expect(v).to have_attributes(
       :template              => false,
       :ems_ref               => "i-0e1752ff841801f65",
-      :ems_ref_obj           => nil,
       :uid_ems               => "i-0e1752ff841801f65",
       :vendor                => "amazon",
       :power_state           => "off",
@@ -687,7 +683,6 @@ module AwsRefresherSpecCommon
       have_attributes(
         :template              => false,
         :ems_ref               => "i-8b5739f2",
-        :ems_ref_obj           => nil,
         :uid_ems               => "i-8b5739f2",
         :vendor                => "amazon",
         :power_state           => "on",
@@ -852,7 +847,6 @@ module AwsRefresherSpecCommon
       have_attributes(
         :template              => false,
         :ems_ref               => "i-c72af2f6",
-        :ems_ref_obj           => nil,
         :uid_ems               => "i-c72af2f6",
         :vendor                => "amazon",
         :power_state           => "on",
