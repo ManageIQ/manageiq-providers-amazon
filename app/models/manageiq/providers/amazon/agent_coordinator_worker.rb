@@ -13,4 +13,8 @@ class ManageIQ::Providers::Amazon::AgentCoordinatorWorker < MiqWorker
     # All cloud managers will share the same agent coordinator
     super.any? ? ["ems_agent_coordinator"] : []
   end
+
+  def self.kill_priority
+    MiqWorkerType::KILL_PRIORITY_REFRESH_WORKERS
+  end
 end
