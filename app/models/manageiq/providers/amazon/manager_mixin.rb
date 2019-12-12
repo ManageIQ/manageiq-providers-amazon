@@ -65,11 +65,11 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     #   }
     # }
     def verify_credentials(args)
-      region           = args["region"]
+      region           = args["provider_region"]
       default_endpoint = args.dig("endpoints", "default")
 
       access_key, secret_access_key, proxy_uri, assume_role = default_endpoint&.values_at(
-        "access_key", "secret_access_key", "proxy_uri", "assume_role"
+        "userid", "password", "proxy_uri", "assume_role"
       )
       secret_access_key = MiqPassword.try_decrypt(secret_access_key)
 

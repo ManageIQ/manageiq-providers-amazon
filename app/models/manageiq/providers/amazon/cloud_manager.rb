@@ -125,21 +125,35 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
       :fields => [
         {
           :component  => "text-field",
-          :name       => "region",
+          :name       => "name",
+          :label      => "Name",
+          :isRequired => true,
+          :validate   => [{:type => "required-validator"}]
+        },
+        {
+          :component  => "text-field",
+          :name       => "zone_name",
+          :label      => "Zone",
+          :isRequired => true,
+          :validate   => [{:type => "required-validator"}]
+        },
+        {
+          :component  => "text-field",
+          :name       => "provider_region",
           :label      => "Region",
           :isRequired => true,
           :validate   => [{:type => "required-validator"}]
         },
         {
           :component  => "text-field",
-          :name       => "endpoints.default.access_key",
+          :name       => "endpoints.default.userid",
           :label      => "Access Key",
           :isRequired => true,
           :validate   => [{:type => "required-validator"}]
         },
         {
           :component  => "text-field",
-          :name       => "endpoints.default.secret_access_key",
+          :name       => "endpoints.default.password",
           :label      => "Secret Key",
           :type       => "password",
           :isRequired => true,
@@ -152,11 +166,24 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
         },
         {
           :component => "text-field",
-          :name      => "endpoints.default.assume_role",
+          :name      => "endpoints.default.service_account",
           :label     => "Assume Role"
         }
       ]
     }.freeze
+  end
+
+  def self.create_from_params(params)
+    endpoints = params.delete("endpoints")
+
+    params[:zone] = Zone.find_by(:name => params.delete("zone_name"))
+    new(params).tap do |ems|
+      endpoints.each do |authtype, endpoint|
+        ems.authentications.new(endpoint)
+      end
+
+      ems.save!
+    end
   end
 
   def supported_auth_types
