@@ -317,21 +317,22 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def flavors
     collector.flavors.each do |flavor|
-      persister.flavors.find_or_build(flavor[:name]).assign_attributes(
-        :name                     => flavor[:name],
-        :description              => flavor[:description],
-        :enabled                  => !flavor[:disabled],
-        :cpus                     => flavor[:vcpu],
-        :cpu_cores                => 1,
-        :memory                   => flavor[:memory],
-        :supports_32_bit          => flavor[:architecture].include?(:i386),
-        :supports_64_bit          => flavor[:architecture].include?(:x86_64),
-        :supports_hvm             => flavor[:virtualization_type].include?(:hvm),
-        :supports_paravirtual     => flavor[:virtualization_type].include?(:paravirtual),
-        :block_storage_based_only => flavor[:ebs_only],
-        :cloud_subnet_required    => flavor[:vpc_only],
-        :ephemeral_disk_size      => flavor[:instance_store_size],
-        :ephemeral_disk_count     => flavor[:instance_store_volumes]
+      cpu_info = flavor.fetch('v_cpu_info', {})
+      memory_info = flavor.fetch('memory_info', {})
+      processor_info = flavor.fetch('processor_info', {})
+      supported_architectures = processor_info.fetch('supported_architectures', [])
+      instance_storage_info = flavor.fetch('instance_storage_info', {})
+
+      persister.flavors.find_or_build(flavor['instance_type']).assign_attributes(
+        :name                 => flavor['instance_type'],
+        :description          => flavor['instance_type'],
+        :cpus                 => cpu_info['default_v_cpus'],
+        :cpu_cores            => cpu_info['default_cores'],
+        :memory               => memory_info['size_in_mi_b'],
+        :supports_32_bit      => supported_architectures.include?("i386"),
+        :supports_64_bit      => supported_architectures.include?("x86_64"),
+        :ephemeral_disk_size  => instance_storage_info['total_size_in_gb'],
+        :ephemeral_disk_count => instance_storage_info['disks']&.count
       )
     end
   end
