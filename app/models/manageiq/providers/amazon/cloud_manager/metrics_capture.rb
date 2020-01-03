@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Providers::BaseManager::MetricsCapture
+class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Providers::CloudManager::MetricsCapture
   INTERVALS = [5.minutes.freeze, 1.minute.freeze].freeze
 
   COUNTER_INFO = [
