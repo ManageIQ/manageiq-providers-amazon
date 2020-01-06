@@ -13,6 +13,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   require_nested :ProvisionWorkflow
   require_nested :RefreshWorker
   require_nested :Refresher
+  require_nested :Scanning
   require_nested :Template
   require_nested :Vm
 

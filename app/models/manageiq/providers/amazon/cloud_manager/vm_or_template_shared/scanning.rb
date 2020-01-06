@@ -13,6 +13,10 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
     end
   end
 
+  def scan_job_class
+    ManageIQ::Providers::Amazon::CloudManager::Scanning::Job
+  end
+
   def require_snapshot_for_scan?
     false
   end
