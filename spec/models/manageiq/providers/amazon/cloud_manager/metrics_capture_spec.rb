@@ -6,6 +6,12 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
   let(:ems) { FactoryBot.create(:ems_amazon_with_authentication) }
   let(:vm)  { FactoryBot.build(:vm_amazon, :ems_ref => vm_name, :ext_management_system => ems) }
 
+  context "#perf_capture_object" do
+    it "returns the correct class" do
+      expect(vm.perf_capture_object.class).to eq(described_class)
+    end
+  end
+
   context "#perf_collect_metrics" do
     it "raises an error when no EMS is defined" do
       vm = FactoryBot.build(:vm_amazon, :ext_management_system => nil)
