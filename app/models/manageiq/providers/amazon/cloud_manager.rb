@@ -122,55 +122,61 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
 
   def self.params_for_create
     @params_for_create ||= {
-      :title  => "Configure AWS",
       :fields => [
         {
-          :component  => "text-field",
-          :name       => "name",
-          :label      => "Name",
-          :isRequired => true,
-          :validate   => [{:type => "required-validator"}]
-        },
-        {
-          :component  => "text-field",
-          :name       => "zone_name",
-          :label      => "Zone",
-          :isRequired => true,
-          :validate   => [{:type => "required-validator"}]
-        },
-        {
-          :component  => "text-field",
+          :component  => "select-field",
           :name       => "provider_region",
-          :label      => "Region",
+          :label      => _("Region"),
           :isRequired => true,
-          :validate   => [{:type => "required-validator"}]
+          :validate   => [{:type => "required-validator"}],
+          :options    => ManageIQ::Providers::Amazon::Regions.all.sort_by { |r| r[:description] }.map do |region|
+            {
+              :label => region[:description],
+              :value => region[:name]
+            }
+          end
         },
         {
-          :component  => "text-field",
-          :name       => "endpoints.default.userid",
-          :label      => "Access Key",
-          :isRequired => true,
-          :validate   => [{:type => "required-validator"}]
+          :component => 'sub-form',
+          :name      => 'endpoints',
+          :title     => _("Endpoint"),
+          :fields    => [
+            {
+              :component              => 'validate-provider-credentials',
+              :name                   => 'aws-endpoint-valid',
+              :validationDependencies => %w[zone_name provider_region],
+              :fields                 => [
+                {
+                  :component => "text-field",
+                  :name      => "endpoints.default.url",
+                  :label     => _("Endpoint URL"),
+                },
+                {
+                  :component => "text-field",
+                  :name      => "endpoints.default.service_account",
+                  :label     => _("Assume role ARN"),
+                },
+                {
+                  :component  => "text-field",
+                  :name       => "endpoints.default.userid",
+                  :label      => _("Access Key ID"),
+                  :helperText => _("Should have privileged access, such as root or administrator."),
+                  :isRequired => true,
+                  :validate   => [{:type => "required-validator"}]
+                },
+                {
+                  :component  => "text-field",
+                  :name       => "endpoints.default.password",
+                  :label      => _("Secret Access Key"),
+                  :type       => "password",
+                  :isRequired => true,
+                  :validate   => [{:type => "required-validator"}]
+                },
+              ],
+            },
+          ],
         },
-        {
-          :component  => "text-field",
-          :name       => "endpoints.default.password",
-          :label      => "Secret Key",
-          :type       => "password",
-          :isRequired => true,
-          :validate   => [{:type => "required-validator"}]
-        },
-        {
-          :component => "text-field",
-          :name      => "endpoints.default.proxy_uri",
-          :label     => "Proxy URI"
-        },
-        {
-          :component => "text-field",
-          :name      => "endpoints.default.service_account",
-          :label     => "Assume Role"
-        }
-      ]
+      ],
     }.freeze
   end
 
