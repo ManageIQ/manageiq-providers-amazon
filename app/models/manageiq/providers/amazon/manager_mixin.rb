@@ -73,7 +73,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
       )
       secret_access_key = MiqPassword.try_decrypt(secret_access_key)
 
-      !!raw_connect(access_key, secret_access_key, :EC2, region, proxy_uri, :assume_role => assume_role)
+      !!raw_connect(access_key, secret_access_key, :EC2, region, proxy_uri, validate = true, :assume_role => assume_role)
     end
 
     def raw_connect(access_key_id, secret_access_key, service, region,
