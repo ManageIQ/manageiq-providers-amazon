@@ -1,6 +1,5 @@
 module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
   extend ActiveSupport::Concern
-  require 'amazon_ssa_support'
   require 'xml/xml_utils'
   require 'scanning_operations_mixin'
 
@@ -26,6 +25,7 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
   end
 
   def perform_metadata_scan(ost)
+    require 'amazon_ssa_support'
     connect_args           = {}
     connect_args[:service] = :SQS
     @sqs = ext_management_system.connect(connect_args)
@@ -61,6 +61,7 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
   end
 
   def perform_metadata_sync(ost)
+    require 'amazon_ssa_support'
     sync_stashed_metadata(ost)
   end
 
