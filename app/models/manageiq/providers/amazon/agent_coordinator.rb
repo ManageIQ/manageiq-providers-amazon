@@ -4,7 +4,6 @@ require 'net/scp'
 require 'tempfile'
 require 'linux_admin'
 require 'awesome_spawn'
-require 'amazon_ssa_support'
 
 class ManageIQ::Providers::Amazon::AgentCoordinator
   include Vmdb::Logging
@@ -15,6 +14,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   WORK_DIR  = "/opt/ssa_container".freeze
 
   def initialize(ems)
+    require 'amazon_ssa_support'
     @ems = ems
 
     # List of active agent ids
