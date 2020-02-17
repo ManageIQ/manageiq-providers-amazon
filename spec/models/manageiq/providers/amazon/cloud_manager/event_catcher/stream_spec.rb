@@ -1,6 +1,7 @@
 require_relative "../../aws_helper"
 
 require 'aws-sdk-sns'
+require 'aws-sdk-sqs'
 
 describe ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream do
   subject do
