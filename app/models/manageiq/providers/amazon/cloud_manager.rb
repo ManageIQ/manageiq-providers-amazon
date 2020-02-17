@@ -186,6 +186,8 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     params[:zone] = Zone.find_by(:name => params.delete("zone_name"))
     new(params).tap do |ems|
       endpoints.each do |authtype, endpoint|
+        url = endpoint.delete("url")
+        ems.endpoints.new(:role => authtype, :url => url)
         ems.authentications.new(endpoint.merge(:authtype => authtype))
       end
 
