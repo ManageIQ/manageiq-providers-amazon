@@ -55,25 +55,25 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     # args:
     # {
     #   "region" => "",
-    #   "endpoints" => {
+    #   "authentications" => {
     #     "default" => {
     #       "access_key" => "",
     #       "secret_access_key" => "",
     #       "proxy_uri => "",
-    #       "assume_role" => ""
+    #       "service_account" => ""
     #     }
     #   }
     # }
     def verify_credentials(args)
       region           = args["provider_region"]
-      default_endpoint = args.dig("endpoints", "default")
+      default_endpoint = args.dig("authentications", "default")
 
-      access_key, secret_access_key, proxy_uri, assume_role = default_endpoint&.values_at(
-        "userid", "password", "proxy_uri", "assume_role"
+      access_key, secret_access_key, proxy_uri, service_account = default_endpoint&.values_at(
+        "userid", "password", "proxy_uri", "service_account"
       )
       secret_access_key = MiqPassword.try_decrypt(secret_access_key)
 
-      !!raw_connect(access_key, secret_access_key, :EC2, region, proxy_uri, validate = true, :assume_role => assume_role)
+      !!raw_connect(access_key, secret_access_key, :EC2, region, proxy_uri, validate = true, :assume_role => service_account)
     end
 
     def raw_connect(access_key_id, secret_access_key, service, region,

@@ -153,12 +153,12 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
                 },
                 {
                   :component => "text-field",
-                  :name      => "endpoints.default.service_account",
+                  :name      => "authentications.default.service_account",
                   :label     => _("Assume role ARN"),
                 },
                 {
                   :component  => "text-field",
-                  :name       => "endpoints.default.userid",
+                  :name       => "authentications.default.userid",
                   :label      => _("Access Key ID"),
                   :helperText => _("Should have privileged access, such as root or administrator."),
                   :isRequired => true,
@@ -166,7 +166,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
                 },
                 {
                   :component  => "text-field",
-                  :name       => "endpoints.default.password",
+                  :name       => "authentications.default.password",
                   :label      => _("Secret Access Key"),
                   :type       => "password",
                   :isRequired => true,
@@ -182,13 +182,17 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
 
   def self.create_from_params(params)
     endpoints = params.delete("endpoints")
+    authentications = params.delete("authentications")
 
     params[:zone] = Zone.find_by(:name => params.delete("zone_name"))
     new(params).tap do |ems|
       endpoints.each do |authtype, endpoint|
         url = endpoint.delete("url")
         ems.endpoints.new(:role => authtype, :url => url)
-        ems.authentications.new(endpoint.merge(:authtype => authtype))
+      end
+
+      authentications.each do |authtype, authentication|
+        ems.authentications.new(authentication.merge(:authtype => authtype))
       end
 
       ems.save!
