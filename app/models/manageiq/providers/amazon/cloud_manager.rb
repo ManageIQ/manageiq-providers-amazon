@@ -165,7 +165,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
                   :validate   => [{:type => "required-validator"}]
                 },
                 {
-                  :component  => "text-field",
+                  :component  => "password-field",
                   :name       => "authentications.default.password",
                   :label      => _("Secret Access Key"),
                   :type       => "password",
