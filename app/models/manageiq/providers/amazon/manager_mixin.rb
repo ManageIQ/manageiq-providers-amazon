@@ -71,7 +71,10 @@ module ManageIQ::Providers::Amazon::ManagerMixin
       access_key, secret_access_key, proxy_uri, service_account = default_endpoint&.values_at(
         "userid", "password", "proxy_uri", "service_account"
       )
+
       secret_access_key = MiqPassword.try_decrypt(secret_access_key)
+      # Pull out the password from the database if a provider ID is available
+      secret_access_key ||= find(args["id"]).authentication_password('default')
 
       !!raw_connect(access_key, secret_access_key, :EC2, region, proxy_uri, validate = true, :assume_role => service_account)
     end
