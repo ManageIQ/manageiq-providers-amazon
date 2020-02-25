@@ -199,6 +199,20 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     end
   end
 
+  def edit_with_params(params)
+    default_endpoint = params.delete("endpoints").dig("default")
+    default_authentication = params.delete("authentications").dig("default")
+
+    tap do |ems|
+      ems.default_authentication.assign_attributes(default_authentication)
+      ems.default_endpoint.assign_attributes(default_endpoint)
+
+      ems.assign_attributes(params)
+
+      ems.save!
+    end
+  end
+
   def supported_auth_types
     %w(default smartstate_docker)
   end
