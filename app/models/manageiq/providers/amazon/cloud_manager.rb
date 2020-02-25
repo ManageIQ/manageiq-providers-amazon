@@ -143,7 +143,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
           :fields    => [
             {
               :component              => 'validate-provider-credentials',
-              :name                   => 'endpoints.default.valid',
+              :name                   => 'authentications.default.valid',
               :validationDependencies => %w[type zone_name provider_region],
               :fields                 => [
                 {
