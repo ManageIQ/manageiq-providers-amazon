@@ -142,6 +142,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack do
       end
 
       it 'parses error message to determine stack not exist' do
+        require "aws-sdk-cloudformation"
         message = "Stack with id stack_id does not exist"
         stubbed_responses = {
           :cloudformation => {
