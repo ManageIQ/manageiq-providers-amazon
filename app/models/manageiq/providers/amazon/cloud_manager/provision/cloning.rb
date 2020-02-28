@@ -2,9 +2,13 @@ module ManageIQ::Providers::Amazon::CloudManager::Provision::Cloning
   def do_clone_task_check(clone_task_ref)
     source.with_provider_connection(:sdk_v2 => true) do |ec2|
       instance = ec2.instance(clone_task_ref)
-      status   = instance.state.name.to_sym
-      return true if status == :running
-      return false, status
+      if instance.exists?
+        status   = instance.state.name.to_sym
+        return true if status == :running
+        return false, status
+      else
+        return false, :pending
+      end
     end
   end
 
