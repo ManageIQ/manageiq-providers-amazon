@@ -113,7 +113,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
       let(:vm) { FactoryBot.create(:vm_amazon, :ext_management_system => ems) }
 
       subject do
-        with_vcr_data { vm.perf_capture('realtime') }
+        with_vcr_data { vm.perf_capture('realtime', 4.hours.ago) }
         vm.metrics.reload.last
       end
 
