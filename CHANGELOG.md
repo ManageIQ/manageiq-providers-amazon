@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## Ivanchuk-2
+
+### Added
+- Use 'supports?' feature for assume role field [(#550)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/550)
+- Added Middle East Bahrain region [(#552)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/552)
+
+### Fixed
+- Test ruby 2.5.5 [(#572)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/572)
+
+## Ivanchuk-1
+
+### Added
+- Add metal to names and remove dedicated [(#554)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/554)
+
+### Fixed
+- Fix AWS flavor counts in specs [(#557)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/557)
+- Change travis.yml to use the only supported ruby, 2.5.3 [(#549)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/549)
 
 ## Hammer-6
 
