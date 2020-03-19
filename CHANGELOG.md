@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Unreleased as of Sprint 120 ending 2019-09-16
+## Jansa-1 Alpha-1
 
 ### Added
 - Added data-driven-forms for AWS creation [(#551)](https://github.com/ManageIQ/manageiq-providers-amazon/pull/551)
