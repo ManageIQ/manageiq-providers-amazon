@@ -58,7 +58,6 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
   def add_key_pairs(extra_properties = {})
     add_collection(cloud, :key_pairs, extra_properties) do |builder|
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair)
-      builder.add_properties(:manager_uuids => name_references(:key_pairs)) if targeted?
     end
   end
 end
