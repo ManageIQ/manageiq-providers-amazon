@@ -35,10 +35,6 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::St
     false
   end
 
-  def inventory_object_refresh?
-    true
-  end
-
   def self.display_name(number = 1)
     n_('Elastic Block Storage Manager (Amazon)', 'Elastic Block Storage Managers (Amazon)', number)
   end
