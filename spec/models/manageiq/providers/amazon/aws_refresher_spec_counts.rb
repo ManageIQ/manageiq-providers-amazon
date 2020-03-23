@@ -54,9 +54,8 @@ module AwsRefresherSpecCounts
     all_instance_hashes        = instances
     instance_hashes            = all_instance_hashes.select { |x| x["state"]["name"] != "terminated" }
     image_hashes               = private_images + shared_images + public_images
-    # Only new refresh can collect a referenced images
-    image_hashes += referenced_images(instance_hashes, image_hashes) if options.inventory_object_refresh
     instances_count            = instance_hashes.size
+    image_hashes += referenced_images(instance_hashes, image_hashes)
     images_count               = image_hashes.size
     instances_and_images_count = instances_count + images_count
 

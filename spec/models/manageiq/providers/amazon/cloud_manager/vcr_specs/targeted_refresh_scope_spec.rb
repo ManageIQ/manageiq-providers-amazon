@@ -23,7 +23,6 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
 
   # Lets test only the fastest setting, since we test all settings elsewhere
   [
-    :inventory_object_refresh => true,
     :inventory_collections    => {
       :saver_strategy => "batch",
       :use_ar_object  => false,

@@ -12,25 +12,21 @@ module AwsRefresherSpecCommon
 
   ALL_GRAPH_REFRESH_SETTINGS = [
     {
-      :inventory_object_refresh => true,
       :inventory_collections    => {
         :saver_strategy => "default",
       },
     }, {
-      :inventory_object_refresh => true,
       :inventory_collections    => {
         :saver_strategy => "batch",
         :use_ar_object  => true,
       },
     }, {
-      :inventory_object_refresh => true,
       :inventory_collections    => {
         :saver_strategy => "batch",
         :use_ar_object  => false,
       },
     }, {
       :inventory_object_saving_strategy => :recursive,
-      :inventory_object_refresh         => true
     }
   ].freeze
 
@@ -78,11 +74,8 @@ module AwsRefresherSpecCommon
     assert_network_router
     assert_relationship_tree
     assert_specific_labels_on_vm
-
-    if options.inventory_object_refresh
-      assert_specific_service_offerings
-      assert_specific_service_instances
-    end
+    assert_specific_service_offerings
+    assert_specific_service_instances
   end
 
   def assert_specific_flavor
@@ -304,12 +297,6 @@ module AwsRefresherSpecCommon
     @template2 = ManageIQ::Providers::Amazon::CloudManager::Template.where(
       :name => "RHEL-7.2_HVM_GA-20151112-x86_64-1-Hourly2-GP2"
     ).first
-
-    # Only graph refresh is able to collect this public template
-    unless options.inventory_object_refresh
-      expect(@template2).to be_nil
-      return
-    end
 
     expect(@template2).to(
       have_attributes(
@@ -880,18 +867,7 @@ module AwsRefresherSpecCommon
     expect(v.network_ports.first.fixed_ip_addresses).to match_array([@ip2.fixed_ip_address])
     expect(v.network_ports.first.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
     expect(v.ipaddresses).to match_array([@ip2.fixed_ip_address, @ip2.address])
-
-    if options.inventory_object_refresh
-      expect(v.operating_system).to(
-        have_attributes(
-          :product_name => "linux_redhat",
-        )
-      )
-    else
-      # Old refresh can't fetch the public image and there fore also operating_system
-      expect(v.operating_system).to be_nil
-    end
-
+    expect(v.operating_system).to(have_attributes(:product_name => "linux_redhat"))
     expect(v.custom_attributes.size).to eq(2)
     expect(v.custom_attributes.find_by(:name => "Name").value).to eq("EmsRefreshSpec-PoweredOn-VPC1")
     expect(v.custom_attributes.find_by(:name => "owner").value).to eq("UNKNOWN")
@@ -902,7 +878,7 @@ module AwsRefresherSpecCommon
       have_attributes(
         :config_version       => nil,
         :virtual_hw_version   => nil,
-        :guest_os             => options.inventory_object_refresh ? "linux_redhat" : nil,
+        :guest_os             => "linux_redhat",
         :cpu_sockets          => 1,
         :bios                 => nil,
         :bios_location        => nil,

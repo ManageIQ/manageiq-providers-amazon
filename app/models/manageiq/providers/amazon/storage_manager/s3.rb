@@ -35,10 +35,6 @@ class ManageIQ::Providers::Amazon::StorageManager::S3 < ManageIQ::Providers::Sto
     false
   end
 
-  def inventory_object_refresh?
-    true
-  end
-
   def connect(options = {})
     options[:service] = :S3
     parent_manager.connect options
