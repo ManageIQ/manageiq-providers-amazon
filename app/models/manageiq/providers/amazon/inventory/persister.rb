@@ -8,19 +8,6 @@ class ManageIQ::Providers::Amazon::Inventory::Persister < ManageIQ::Providers::I
   # Accessed by cloud parser.
   attr_reader :tag_mapper
 
-  # @param manager [ManageIQ::Providers::BaseManager] A manager object
-  # @param target [Object] A refresh Target object
-  # @param collector [ManageIQ::Providers::Inventory::Collector] A Collector object
-  def initialize(manager, target = nil, collector = nil)
-    @manager   = manager
-    @target    = target
-    @collector = collector
-
-    @collections = {}
-
-    initialize_inventory_collections
-  end
-
   protected
 
   # TODO: this reads whole table ContainerLabelTagMapping.all.
