@@ -34,7 +34,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       hash_collection.new(
         aws_ec2.client.describe_availability_zones(
           :filters => [{:name => 'zone-name', :values => refs}]
-        ).availability_zones
+        ).flat_map(&:availability_zones)
       ).all
     end
   end
@@ -46,7 +46,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       hash_collection.new(
         aws_ec2.client.describe_key_pairs(
           :filters => [{:name => 'key-name', :values => refs}]
-        ).key_pairs
+        ).flat_map(&:key_pairs)
       ).all
     end
   end
@@ -56,7 +56,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
     multi_query(references(:miq_templates)) do |refs|
       hash_collection.new(
-        aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => refs}]).images
+        aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => refs}]).flat_map(&:images)
       ).all
     end
   end
@@ -68,7 +68,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     # CLoudFormations API doesn't support a standard filter
     result = references(:orchestration_stacks).map do |stack_ref|
       begin
-        aws_cloud_formation.client.describe_stacks(:stack_name => stack_ref)[:stacks]
+        aws_cloud_formation.client.describe_stacks(:stack_name => stack_ref).flat_map(&:stacks)
       rescue Aws::CloudFormation::Errors::ValidationError => _e
         # A missing stack throws and exception like this, we want to ignore it and just don't list it
       end
@@ -82,7 +82,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
     multi_query(references(:cloud_networks)) do |refs|
       hash_collection.new(
-        aws_ec2.client.describe_vpcs(:filters => [{:name => 'vpc-id', :values => refs}]).vpcs
+        aws_ec2.client.describe_vpcs(:filters => [{:name => 'vpc-id', :values => refs}]).flat_map(&:vpcs)
       ).all
     end
   end
@@ -92,7 +92,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
     multi_query(references(:cloud_subnets)) do |refs|
       hash_collection.new(
-        aws_ec2.client.describe_subnets(:filters => [{:name => 'subnet-id', :values => refs}]).subnets
+        aws_ec2.client.describe_subnets(:filters => [{:name => 'subnet-id', :values => refs}]).flat_map(&:subnets)
       ).all
     end
   end
@@ -114,7 +114,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     @network_ports_hashes = multi_query(references(:network_ports)) do |refs|
       hash_collection.new(aws_ec2.client.describe_network_interfaces(
         :filters => [{:name => 'network-interface-id', :values => refs}]
-      ).network_interfaces).all
+      ).flat_map(&:network_interfaces)).all
     end
   end
 
@@ -126,7 +126,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       begin
         result += aws_elb.client.describe_load_balancers(
           :load_balancer_names => [load_balancers_ref]
-        ).load_balancer_descriptions
+        ).flat_map(&:load_balancer_descriptions)
       rescue ::Aws::ElasticLoadBalancing::Errors::LoadBalancerNotFound => _e
         # TODO(lsmola) maybe it will be faster to fetch all LBs and filter them?
         # Ignore LB that was not found, it will be deleted from our DB
@@ -141,7 +141,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
     multi_query(references(:floating_ips)) do |refs|
       hash_collection.new(
-        aws_ec2.client.describe_addresses(:filters => [{:name => 'allocation-id', :values => refs}]).addresses
+        aws_ec2.client.describe_addresses(:filters => [{:name => 'allocation-id', :values => refs}]).flat_map(&:addresses)
       ).all
     end
   end
@@ -151,7 +151,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
     multi_query(references(:cloud_volumes)) do |refs|
       hash_collection.new(
-        aws_ec2.client.describe_volumes(:filters => [{:name => 'volume-id', :values => refs}]).volumes
+        aws_ec2.client.describe_volumes(:filters => [{:name => 'volume-id', :values => refs}]).flat_map(&:volumes)
       ).all
     end
   end
@@ -163,7 +163,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       hash_collection.new(
         aws_ec2.client.describe_snapshots(
           :filters => [{:name => 'snapshot-id', :values => refs}]
-        ).snapshots
+        ).flat_map(&:snapshots)
       ).all
     end
   end
@@ -192,7 +192,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   def health_check_members(load_balancer_name)
     hash_collection.new(aws_elb.client.describe_instance_health(
       :load_balancer_name => load_balancer_name
-    ).instance_states)
+    ).flat_map(&:instance_states))
   end
 
   def stack_template(stack_name)
