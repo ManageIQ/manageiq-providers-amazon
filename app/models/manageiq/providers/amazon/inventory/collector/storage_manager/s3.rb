@@ -2,7 +2,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::StorageManager::S3 <
   ManageIQ::Providers::Amazon::Inventory::Collector
 
   def cloud_object_store_containers
-    hash_collection.new(aws_s3.client.list_buckets.buckets)
+    hash_collection.new(aws_s3.client.list_buckets.flat_map(&:buckets))
   end
 
   def cloud_object_store_objects(options = {})
