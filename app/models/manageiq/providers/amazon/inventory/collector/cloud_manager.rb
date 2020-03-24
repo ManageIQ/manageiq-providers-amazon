@@ -8,11 +8,11 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
   end
 
   def availability_zones
-    hash_collection.new(aws_ec2.client.describe_availability_zones[:availability_zones])
+    hash_collection.new(aws_ec2.client.describe_availability_zones.flat_map(&:availability_zones))
   end
 
   def key_pairs
-    hash_collection.new(aws_ec2.client.describe_key_pairs[:key_pairs])
+    hash_collection.new(aws_ec2.client.describe_key_pairs.flat_map(&:key_pairs))
   end
 
   def private_images
@@ -21,7 +21,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
     @private_images_hashes ||= hash_collection.new(
       aws_ec2.client.describe_images(:owners  => [:self],
                                      :filters => [{:name   => "image-type",
-                                                   :values => ["machine"]}]).images
+                                                   :values => ["machine"]}]).flat_map(&:images)
     ).all
   end
 
@@ -31,7 +31,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
     @shared_images_hashes ||= hash_collection.new(
       aws_ec2.client.describe_images(:executable_users => [:self],
                                      :filters          => [{:name   => "image-type",
-                                                            :values => ["machine"]}]).images
+                                                            :values => ["machine"]}]).flat_map(&:images)
     ).all
   end
 
@@ -40,7 +40,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
 
     @public_images_hashes ||= hash_collection.new(
       aws_ec2.client.describe_images(:executable_users => [:all],
-                                     :filters          => options.to_hash[:public_images_filters]).images
+                                     :filters          => options.to_hash[:public_images_filters]).flat_map(&:images)
     ).all
   end
 
@@ -49,13 +49,13 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
 
     multi_query(extra_image_references) do |refs|
       hash_collection.new(
-        aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => refs}]).images
+        aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => refs}]).flat_map(&:images)
       ).all
     end
   end
 
   def stacks
-    hash_collection.new(aws_cloud_formation.client.describe_stacks[:stacks])
+    hash_collection.new(aws_cloud_formation.client.describe_stacks.flat_map(&:stacks))
   end
 
   def stack_resources(stack_name)
