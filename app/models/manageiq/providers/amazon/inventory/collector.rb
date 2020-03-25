@@ -119,8 +119,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManageIQ::Providers::I
     # Taking provisioning_artifacts of described product returns only active artifacts, doing list_provisioning_artifacts
     # we are not able to recognize the active ones. Same with describe_product_as_admin, status is missing. Status is
     # in the describe_provisioning_artifact, but it is wrong (always ACTIVE)
-    artifacts    = aws_service_catalog.client.describe_product(:id => product_id).provisioning_artifacts
-    launch_paths = aws_service_catalog.client.list_launch_paths(:product_id => product_id).launch_path_summaries
+    artifacts    = aws_service_catalog.client.describe_product(:id => product_id).flat_map(&:provisioning_artifacts)
+    launch_paths = aws_service_catalog.client.list_launch_paths(:product_id => product_id).flat_map(&:launch_path_summaries)
     parameters_sets = []
 
     launch_paths.each do |launch_path|

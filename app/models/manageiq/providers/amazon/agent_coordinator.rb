@@ -354,7 +354,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     vpcs = validated_vpcs
     raise "Smartstate analysis needs a VPC whose enableDnsSupport/enableDnsHostnames are true and valid gateway/route setting!" if vpcs.empty?
 
-    ec2.client.describe_availability_zones.availability_zones.each do |availability_zone|
+    ec2.client.describe_availability_zones.flat_map(&:availability_zones).each do |availability_zone|
       vpcs.each do |vpc|
         subnet = get_subnets(availability_zone.zone_name, vpc.vpc_id).try(:first)
         return subnet if subnet
@@ -470,7 +470,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
         :name   => "group-name",
         :values => [group_name]
       }]
-    ).security_groups.first
+    ).flat_map(&:security_groups).first
     return security_group.group_id unless security_group.nil?
 
     # create security group if not exist
@@ -528,7 +528,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
           :values => [vpc_id]
         }
       ]
-    ).subnets
+    ).flat_map(&:subnets)
   end
 
   # possible RHEL image name: values: [ "RHEL-7.3_HVM_GA*" ]
@@ -538,7 +538,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
         :name   => "name",
         :values => [image_name]
       }]
-    ).images.first
+    ).flat_map(&:images).first
     raise("Unable to find AMI Image #{image_name} to launch Smartstate agent") if image.nil?
 
     _log.info("AMI Image: #{image_name} [#{image.image_id}] is used to launch smartstate agent.")

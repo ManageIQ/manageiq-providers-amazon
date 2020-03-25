@@ -1,10 +1,10 @@
 class ManageIQ::Providers::Amazon::Inventory::Collector::NetworkManager < ManageIQ::Providers::Amazon::Inventory::Collector
   def cloud_networks
-    hash_collection.new(aws_ec2.client.describe_vpcs[:vpcs])
+    hash_collection.new(aws_ec2.client.describe_vpcs.flat_map(&:vpcs))
   end
 
   def cloud_subnets
-    hash_collection.new(aws_ec2.client.describe_subnets[:subnets])
+    hash_collection.new(aws_ec2.client.describe_subnets.flat_map(&:subnets))
   end
 
   def security_groups
@@ -12,21 +12,21 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::NetworkManager < Manage
   end
 
   def network_ports
-    hash_collection.new(aws_ec2.client.describe_network_interfaces.network_interfaces)
+    hash_collection.new(aws_ec2.client.describe_network_interfaces.flat_map(&:network_interfaces))
   end
 
   def load_balancers
-    hash_collection.new(aws_elb.client.describe_load_balancers.load_balancer_descriptions)
+    hash_collection.new(aws_elb.client.describe_load_balancers.flat_map(&:load_balancer_descriptions))
   end
 
   def health_check_members(load_balancer_name)
     hash_collection.new(aws_elb.client.describe_instance_health(
       :load_balancer_name => load_balancer_name
-    ).instance_states)
+    ).flat_map(&:instance_states))
   end
 
   def floating_ips
-    hash_collection.new(aws_ec2.client.describe_addresses.addresses)
+    hash_collection.new(aws_ec2.client.describe_addresses.flat_map(&:addresses))
   end
 
   def instances
