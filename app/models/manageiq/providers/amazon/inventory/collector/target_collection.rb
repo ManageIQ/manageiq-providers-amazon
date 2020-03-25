@@ -181,7 +181,12 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   # Nested API calls, we want all of them for our filtered list of LBs and Stacks
   def stack_resources(stack_name)
     begin
-      stack_resources = aws_cloud_formation.client.list_stack_resources(:stack_name => stack_name).try(:stack_resource_summaries)
+      stack_resources = aws_cloud_formation.client.list_stack_resources(:stack_name => stack_name)
+      if stack_resources.respond_to?(:stack_resource_summaries)
+        stack_resources.flat_map(&:stack_resource_summaries)
+      else
+        stack_resources = nil
+      end
     rescue Aws::CloudFormation::Errors::ValidationError => _e
       # When Stack was deleted we want to return empty list of resources
     end
