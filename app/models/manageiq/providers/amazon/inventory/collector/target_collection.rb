@@ -183,7 +183,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     begin
       stack_resources = aws_cloud_formation.client.list_stack_resources(:stack_name => stack_name)
       if stack_resources.respond_to?(:stack_resource_summaries)
-        stack_resources.flat_map(&:stack_resource_summaries)
+        stack_resources = stack_resources.flat_map(&:stack_resource_summaries)
       else
         stack_resources = nil
       end

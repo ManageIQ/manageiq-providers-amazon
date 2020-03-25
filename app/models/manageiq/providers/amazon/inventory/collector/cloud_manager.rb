@@ -59,7 +59,13 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
   end
 
   def stack_resources(stack_name)
-    stack_resources = aws_cloud_formation.client.list_stack_resources(:stack_name => stack_name).try(:stack_resource_summaries)
+    stack_resources = aws_cloud_formation.client.list_stack_resources(:stack_name => stack_name)
+
+    if stack_resources.respond_to?(:stack_resource_summaries)
+      stack_resources = stack_resources.flat_map(&:stack_resource_summaries)
+    else
+      stack_resources = nil
+    end
 
     hash_collection.new(stack_resources || [])
   end
