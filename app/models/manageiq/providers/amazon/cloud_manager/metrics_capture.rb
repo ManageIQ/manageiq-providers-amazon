@@ -190,7 +190,7 @@ class ManageIQ::Providers::Amazon::CloudManager::MetricsCapture < ManageIQ::Prov
     counters, = Benchmark.realtime_block(:capture_counters) do
       filter = [{ :name => "InstanceId", :value => target.ems_ref }]
       data = cloud_watch.client.list_metrics(:dimensions => filter)
-      data.metrics.select { |m| m.metric_name.in?(COUNTER_NAMES) }
+      data.flat_map(&:metrics).select { |m| m.metric_name.in?(COUNTER_NAMES) }
     end
     counters
   end
