@@ -56,10 +56,4 @@ module ManageIQ::Providers::Amazon::ParserHelperMethods
   def compose_ems_ref(*keys)
     keys.join('_')
   end
-
-  module ClassMethods
-    def ems_inv_to_hashes(ems, options = nil)
-      new(ems, options).ems_inv_to_hashes
-    end
-  end
 end
