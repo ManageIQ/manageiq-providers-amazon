@@ -476,4 +476,14 @@ module AwsStubs
 
     { :snapshots => mocked_cloud_volume_snapshots }
   end
+
+  def mocked_instance_types
+    instance_types = []
+
+    instance_types << {
+      :instance_type => 'm3.medium',
+    }
+
+    { :instance_types => instance_types }
+  end
 end

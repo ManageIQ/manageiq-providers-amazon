@@ -318,22 +318,32 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def flavors
     collector.flavors.each do |flavor|
       persister.flavors.find_or_build(flavor[:name]).assign_attributes(
-        :name                     => flavor[:name],
-        :description              => flavor[:description],
-        :enabled                  => !flavor[:disabled],
-        :cpus                     => flavor[:vcpu],
-        :cpu_cores                => 1,
-        :memory                   => flavor[:memory],
-        :supports_32_bit          => flavor[:architecture].include?(:i386),
-        :supports_64_bit          => flavor[:architecture].include?(:x86_64),
-        :supports_hvm             => flavor[:virtualization_type].include?(:hvm),
-        :supports_paravirtual     => flavor[:virtualization_type].include?(:paravirtual),
-        :block_storage_based_only => flavor[:ebs_only],
-        :cloud_subnet_required    => flavor[:vpc_only],
-        :ephemeral_disk_size      => flavor[:instance_store_size],
-        :ephemeral_disk_count     => flavor[:instance_store_volumes]
+        :name                     => flavor[:instance_type],
+        :description              => flavor[:instance_type],
+        :enabled                  => true,
+        :cpus                     => flavor[:v_cpu_info][:default_v_cpus],
+        :cpu_cores                => flavor[:v_cpu_info][:default_cores],
+        :memory                   => flavor[:memory_info][:size_in_mi_b].megabytes,
+        :supports_32_bit          => flavor[:processor_info][:supported_architectures].include?(:i386),
+        :supports_64_bit          => flavor[:processor_info][:supported_architectures].include?(:x86_64),
+        :supports_hvm             => true,
+        :supports_paravirtual     => supports_paravirtual?(flavor),
+        :block_storage_based_only => flavor[:supported_root_device_types].any?{ |device| device != 'ebs' }
+        :ephemeral_disk_size      => flavor[:instance_storage_info][:disks].first.gigabytes
+        :ephemeral_disk_count     => flavor[:instance_storage_info][:disks].first[:count]
+        #:cloud_subnet_required    => flavor[:vpc_only], # TODO: Can we determine this?
       )
     end
+  end
+
+  # From the Amazon online documentation: "The following previous generation instance types
+  # support PV AMIs: C1, C3, HS1, M1, M3, M2, and T1. Current generation instance types
+  # do not support PV AMIs."
+  #
+  def supports_paravirtual?(flavor)
+    return false if flavor[:current_generation]
+    return false unless %w[c1 c3 hs1 m1 m3 m2 t1].include?(flavor[:instance_type].split('.').first.downcase)
+    true
   end
 
   def availability_zones
