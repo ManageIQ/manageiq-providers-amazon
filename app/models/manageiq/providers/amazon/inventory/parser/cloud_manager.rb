@@ -317,7 +317,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def flavors
     collector.flavors.each do |flavor|
-      persister.flavors.find_or_build(flavor[:name]).assign_attributes(
+      persister.flavors.find_or_build(flavor[:instance_type]).assign_attributes(
         :name                     => flavor[:instance_type],
         :description              => flavor[:instance_type],
         :enabled                  => true,
