@@ -480,8 +480,41 @@ module AwsStubs
   def mocked_instance_types
     instance_types = []
 
-    instance_types << {
-      :instance_type => 'm3.medium',
+    instance_types <<
+    {
+      "instance_type" => "m3.medium",
+      "current_generation" => false,
+      "supported_root_device_types" => ["ebs", "instance-store"],
+      "processor_info" => {
+        "supported_architectures" => ["x86_64"],
+      },
+      "v_cpu_info" => {
+        "default_v_cpus" => 1,
+        "default_cores" => 1,
+      },
+      "memory_info" => { "size_in_mi_b" => 3840 },
+      "instance_storage_info" => {
+        "total_size_in_gb" => 4,
+        "disks" => [{
+          "size_in_gb" => 4,
+          "count" => 1,
+          "type" => "ssd"
+        }]
+      },
+    },
+    {
+      "instance_type" => "t1.micro",
+      "current_generation" => false,
+      "supported_root_device_types" => ["ebs"],
+      "processor_info" => {
+        "supported_architectures" => ["i386", "x86_64"]
+      },
+      "v_cpu_info" => {
+        "default_v_cpus" => 1,
+        "default_cores" => 1,
+      },
+      "memory_info" => { "size_in_mi_b" => 627 },
+      "instance_storage_supported" => false
     }
 
     { :instance_types => instance_types }
