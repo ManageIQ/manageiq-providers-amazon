@@ -329,8 +329,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :supports_hvm             => true,
         :supports_paravirtual     => supports_paravirtual?(flavor),
         :block_storage_based_only => flavor.supported_root_device_types.any?{ |device| device != 'ebs' },
-        :ephemeral_disk_size      => flavor.instance_storage_info&.total_size_in_gb,
-        :ephemeral_disk_count     => flavor.instance_storage_info&.disks&.size,
+        :ephemeral_disk_size      => flavor.instance_storage_info&.total_size_in_gb || 0,
+        :ephemeral_disk_count     => flavor.instance_storage_info&.disks&.size || 0,
         :publicly_available       => true
       )
     end
