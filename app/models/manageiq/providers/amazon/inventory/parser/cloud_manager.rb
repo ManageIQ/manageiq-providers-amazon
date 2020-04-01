@@ -322,7 +322,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :description              => flavor.instance_type,
         :enabled                  => true,
         :cpus                     => flavor.v_cpu_info.default_v_cpus,
-        :cpu_cores                => flavor.v_cpu_info.default_cores,
+        :cpu_cores                => flavor.v_cpu_info&.default_cores || 1,
         :memory                   => flavor.memory_info.size_in_mi_b.megabytes,
         :supports_32_bit          => flavor.processor_info.supported_architectures.include?('i386'),
         :supports_64_bit          => flavor.processor_info.supported_architectures.include?('x86_64'),
