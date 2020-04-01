@@ -4,7 +4,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
   end
 
   def flavors
-    hash_collection.new(aws_ec2.client.describe_instance_types.flat_map(&:instance_types)).all
+    aws_ec2.client.describe_instance_types.flat_map(&:instance_types)
   end
 
   def availability_zones
