@@ -58,7 +58,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :connection_state   => "connected",
         :raw_power_state    => "never",
         :template           => true,
-        :publicly_available => image['public'],
+        :publicly_available => image['public']
       )
 
       image_hardware(persister_image, image)
@@ -79,7 +79,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :guest_os            => guest_os,
       :bitness             => architecture_to_bitness(image['architecture']),
       :virtualization_type => image['virtualization_type'],
-      :root_device_type    => image['root_device_type'],
+      :root_device_type    => image['root_device_type']
     )
   end
 
@@ -230,7 +230,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
                                                              }),
         :orchestration_stack => persister.orchestration_stacks.lazy_find(
           get_from_tags(instance, "aws:cloudformation:stack-id")
-        ),
+        )
       )
 
       instance_hardware(persister_instance, instance, flavor)
@@ -250,7 +250,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :cpu_total_cores      => flavor[:cpus],
       :memory_mb            => flavor[:memory] / 1.megabyte,
       :disk_capacity        => flavor[:ephemeral_disk_size],
-      :guest_os             => persister.hardwares.lazy_find(persister.miq_templates.lazy_find(instance['image_id']), :key => :guest_os),
+      :guest_os             => persister.hardwares.lazy_find(persister.miq_templates.lazy_find(instance['image_id']), :key => :guest_os)
     )
 
     hardware_networks(persister_hardware, instance)
@@ -277,13 +277,13 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   end
 
   def hardware_network(persister_hardware, ip_address, hostname, description)
-    unless ip_address.blank?
+    if ip_address.present?
       persister.networks.find_or_build_by(
         :hardware    => persister_hardware,
         :description => description
       ).assign_attributes(
         :ipaddress => ip_address,
-        :hostname  => hostname,
+        :hostname  => hostname
       )
     end
   end
@@ -328,14 +328,13 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :supports_64_bit          => flavor.processor_info.supported_architectures.include?('x86_64'),
         :supports_hvm             => true,
         :supports_paravirtual     => supports_paravirtual?(flavor),
-        :block_storage_based_only => flavor.supported_root_device_types.any?{ |device| device != 'ebs' },
+        :block_storage_based_only => flavor.supported_root_device_types.any? { |device| device != 'ebs' },
         :ephemeral_disk_size      => flavor.instance_storage_info&.total_size_in_gb || 0,
         :ephemeral_disk_count     => flavor.instance_storage_info&.disks&.size || 0,
         :publicly_available       => true
       )
     end
   end
-
 
   # From the Amazon online documentation: "The following previous generation instance types
   # support PV AMIs: C1, C3, HS1, M1, M3, M2, and T1. Current generation instance types
@@ -344,13 +343,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def supports_paravirtual?(flavor)
     return false if flavor.current_generation
     return false unless %w[c1 c3 hs1 m1 m3 m2 t1].include?(flavor.instance_type.split('.').first.downcase)
+
     true
   end
 
   def availability_zones
     collector.availability_zones.each do |az|
       persister.availability_zones.find_or_build(az['zone_name']).assign_attributes(
-        :name => az['zone_name'],
+        :name => az['zone_name']
       )
     end
   end

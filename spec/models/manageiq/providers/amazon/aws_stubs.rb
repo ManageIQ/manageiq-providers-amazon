@@ -241,7 +241,7 @@ module AwsStubs
         :stack_id      => "stack_id_#{i}",
         :description   => "stack_dec_#{i}",
         :stack_status  => 'CREATE_COMPLETE',
-        :creation_time => Time.now,
+        :creation_time => Time.zone.now,
         :parameters    => mocked_stack_parameters,
         :outputs       => mocked_stack_outputs
       }
@@ -259,7 +259,7 @@ module AwsStubs
           :physical_resource_id   => ":stack/stack_name_#{stack_index}-stack_id_#{stack_index}/stack_physical_resource_id_#{i}",
           :logical_resource_id    => "logical_resource_id_#{i}",
           :resource_type          => "AWS::EC2::InternetGateway",
-          :last_updated_timestamp => Time.now,
+          :last_updated_timestamp => Time.zone.now,
           :resource_status        => 'CREATE_COMPLETE'
         }
       end
@@ -382,7 +382,7 @@ module AwsStubs
       lb.health_check                  = health_check.to_h
       lb.source_security_group         = source_security_group.to_h
       lb.security_groups               = ["sg-0d2cd677"]
-      lb.created_time                  = Time.parse("2016-08-10 14:17:09 UTC")
+      lb.created_time                  = Time.zone.parse("2016-08-10 14:17:09 UTC")
       lb.scheme                        = "internet-facing"
       mocked_lbs << lb.to_h
     end
@@ -431,19 +431,19 @@ module AwsStubs
     test_counts[:cloud_volume_count].times do |i|
       mocked_cloud_volumes << {
         :availability_zone => "us-east-1e",
-        :create_time       => Time.now,
+        :create_time       => Time.zone.now,
         :size              => 1,
         :state             => "in-use",
         :volume_id         => "volume_id_#{i}",
         :volume_type       => "standard",
         :snapshot_id       => "snapshot_id_#{i}",
-        :tags              => [{ :key => "name", :value => "volume_#{i}" }],
+        :tags              => [{:key => "name", :value => "volume_#{i}"}],
         :iops              => (i == 0 ? 100 : nil),
-        :encrypted         => (i == 0 ? true : false),
+        :encrypted         => (i == 0),
       }
     end
 
-    unless mocked_cloud_volumes.blank?
+    if mocked_cloud_volumes.present?
       # Attach the first cloud volume to a specific instance.
       volume_with_attachment = mocked_cloud_volumes[0]
       volume_with_attachment[:attachments] = [{
@@ -451,12 +451,12 @@ module AwsStubs
         :instance_id           => "instance_0",
         :device                => "/dev/sda1",
         :state                 => "attached",
-        :attach_time           => Time.now,
+        :attach_time           => Time.zone.now,
         :delete_on_termination => true
       }]
     end
 
-    { :volumes => mocked_cloud_volumes }
+    {:volumes => mocked_cloud_volumes}
   end
 
   def mocked_cloud_volume_snapshots
@@ -465,58 +465,58 @@ module AwsStubs
       mocked_cloud_volume_snapshots << {
         :snapshot_id => "snapshot_id_#{i}",
         :description => "snapshot_desc_#{i}",
-        :start_time  => Time.now,
+        :start_time  => Time.zone.now,
         :volume_size => 1,
         :state       => "completed",
         :volume_id   => "volume_id_#{i}",
-        :tags        => [{ :key => "name", :value => "snapshot_#{i}" }],
-        :encrypted   => (i == 0 ? true : false),
+        :tags        => [{:key => "name", :value => "snapshot_#{i}"}],
+        :encrypted   => (i == 0),
       }
     end
 
-    { :snapshots => mocked_cloud_volume_snapshots }
+    {:snapshots => mocked_cloud_volume_snapshots}
   end
 
   def mocked_instance_types
     mocked_instance_types = []
 
     mocked_instance_types << {
-      "instance_type" => "m3.medium",
-      "current_generation" => false,
+      "instance_type"               => "m3.medium",
+      "current_generation"          => false,
       "supported_root_device_types" => ["ebs", "instance-store"],
-      "processor_info" => {
+      "processor_info"              => {
         "supported_architectures" => ["x86_64"]
       },
-      "v_cpu_info" => {
+      "v_cpu_info"                  => {
         "default_v_cpus" => 1,
-        "default_cores" => 1,
+        "default_cores"  => 1,
       },
-      "memory_info" => { "size_in_mi_b" => 3840 },
-      "instance_storage_info" => {
+      "memory_info"                 => {"size_in_mi_b" => 3840},
+      "instance_storage_info"       => {
         "total_size_in_gb" => 4,
-        "disks" => [{
+        "disks"            => [{
           "size_in_gb" => 4,
-          "count" => 1,
-          "type" => "ssd"
+          "count"      => 1,
+          "type"       => "ssd"
         }]
       }
     }
 
     mocked_instance_types << {
-      "instance_type" => "t1.micro",
-      "current_generation" => false,
+      "instance_type"               => "t1.micro",
+      "current_generation"          => false,
       "supported_root_device_types" => ["ebs"],
-      "processor_info" => {
+      "processor_info"              => {
         "supported_architectures" => ["i386", "x86_64"]
       },
-      "v_cpu_info" => {
+      "v_cpu_info"                  => {
         "default_v_cpus" => 1,
-        "default_cores" => 1,
+        "default_cores"  => 1,
       },
-      "memory_info" => { "size_in_mi_b" => 627 },
-      "instance_storage_supported" => false
+      "memory_info"                 => {"size_in_mi_b" => 627},
+      "instance_storage_supported"  => false
     }
 
-    { :instance_types => mocked_instance_types }
+    {:instance_types => mocked_instance_types}
   end
 end
