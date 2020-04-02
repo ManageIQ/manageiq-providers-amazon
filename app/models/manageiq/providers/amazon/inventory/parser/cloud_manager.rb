@@ -317,20 +317,20 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
   def flavors
     collector.flavors.each do |flavor|
-      persister.flavors.find_or_build(flavor.instance_type).assign_attributes(
-        :name                     => flavor.instance_type,
-        :description              => flavor.instance_type,
+      persister.flavors.find_or_build(flavor['instance_type']).assign_attributes(
+        :name                     => flavor['instance_type'],
+        :description              => flavor['instance_type'],
         :enabled                  => true,
-        :cpus                     => flavor.v_cpu_info.default_v_cpus,
-        :cpu_cores                => flavor.v_cpu_info&.default_cores || 1,
-        :memory                   => flavor.memory_info.size_in_mi_b.megabytes,
-        :supports_32_bit          => flavor.processor_info.supported_architectures.include?('i386'),
-        :supports_64_bit          => flavor.processor_info.supported_architectures.include?('x86_64'),
+        :cpus                     => flavor.dig('v_cpu_info', 'default_v_cpus'),
+        :cpu_cores                => flavor.dig('v_cpu_info', 'default_cores') || 1,
+        :memory                   => flavor.dig('memory_info', 'size_in_mi_b')&.megabytes,
+        :supports_32_bit          => flavor.dig('processor_info', 'supported_architectures').include?('i386'),
+        :supports_64_bit          => flavor.dig('processor_info', 'supported_architectures').include?('x86_64'),
         :supports_hvm             => true,
         :supports_paravirtual     => supports_paravirtual?(flavor),
-        :block_storage_based_only => flavor.supported_root_device_types.any? { |device| device != 'ebs' },
-        :ephemeral_disk_size      => flavor.instance_storage_info&.total_size_in_gb || 0,
-        :ephemeral_disk_count     => flavor.instance_storage_info&.disks&.size || 0,
+        :block_storage_based_only => flavor.dig('supported_root_device_types').any? { |device| device != 'ebs' },
+        :ephemeral_disk_size      => flavor.dig('instance_storage_info', 'total_size_in_gb')&.gigabytes || 0,
+        :ephemeral_disk_count     => flavor.dig('instance_storage_info', 'disks')&.size || 0,
         :publicly_available       => true
       )
     end
@@ -341,8 +341,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   # do not support PV AMIs."
   #
   def supports_paravirtual?(flavor)
-    return false if flavor.current_generation
-    return false unless %w[c1 c3 hs1 m1 m3 m2 t1].include?(flavor.instance_type.split('.').first.downcase)
+    return false if flavor['current_generation']
+    return false unless %w[c1 c3 hs1 m1 m3 m2 t1].include?(flavor['instance_type'].split('.').first.downcase)
 
     true
   end
