@@ -170,6 +170,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
         :describe_regions            => mocked_regions,
         :describe_availability_zones => mocked_availability_zones,
         :describe_instances          => mocked_instances,
+        :describe_instance_types     => mocked_instances_types,
         :describe_key_pairs          => mocked_key_pairs,
         :describe_images             => mocked_images,
       },
