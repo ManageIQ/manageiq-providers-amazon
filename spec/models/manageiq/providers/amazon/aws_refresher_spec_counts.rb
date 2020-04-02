@@ -270,7 +270,7 @@ module AwsRefresherSpecCounts
   end
 
   def flavors
-    ManageIQ::Providers::Amazon::InstanceTypes.all
+    aws_ec2.client.describe_instance_types.flat_map(&:instance_types)
   end
 
   def availability_zones
