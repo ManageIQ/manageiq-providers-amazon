@@ -91,6 +91,7 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
           ]
         },
         :describe_instances          => mocked_instances,
+        :describe_instance_types     => mocked_instance_types,
         :describe_vpcs               => mocked_vpcs,
         :describe_subnets            => mocked_subnets,
         :describe_security_groups    => mocked_security_groups,
