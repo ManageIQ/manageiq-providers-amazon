@@ -144,7 +144,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
             {
               :component              => 'validate-provider-credentials',
               :name                   => 'authentications.default.valid',
-              :validationDependencies => %w[type zone_name provider_region],
+              :validationDependencies => %w[type zone_id provider_region],
               :fields                 => [
                 {
                   :component => "text-field",
@@ -184,7 +184,6 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     endpoints = params.delete("endpoints") || {'default' => {}} # Fall back to an empty default endpoint
     authentications = params.delete("authentications")
 
-    params[:zone] = Zone.find_by(:name => params.delete("zone_name"))
     new(params).tap do |ems|
       endpoints.each do |authtype, endpoint|
         ems.endpoints.new(endpoint.merge(:role => authtype))
