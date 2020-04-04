@@ -331,7 +331,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :block_storage_based_only => flavor.dig('supported_root_device_types').any? { |device| device != 'ebs' },
         :ephemeral_disk_size      => flavor.dig('instance_storage_info', 'total_size_in_gb')&.gigabytes || 0,
         :ephemeral_disk_count     => flavor.dig('instance_storage_info', 'disks')&.size || 0,
-        :publicly_available       => true
+        :publicly_available       => true,
+        :vpc_only                 => vpc_only?(flavor)
       )
     end
   end
@@ -344,6 +345,16 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     return false if flavor['current_generation']
     return false unless %w[c1 c3 hs1 m1 m3 m2 t1].include?(flavor['instance_type'].split('.').first.downcase)
 
+    true
+  end
+
+  # This logic is cobbled together from various online sources. The V3 API does not include
+  # such information, but most current flavors are vpc-only from what I can gather.
+  #
+  def vpc_only?(flavor)
+    if %w[a1 c1 c3 r3].include?(flavor['instance_type'].split('.').first.downcase)
+      return false
+    end
     true
   end
 
