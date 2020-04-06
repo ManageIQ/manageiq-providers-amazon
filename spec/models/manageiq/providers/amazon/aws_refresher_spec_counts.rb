@@ -270,7 +270,7 @@ module AwsRefresherSpecCounts
   end
 
   def flavors
-    hash_collection(aws_ec2.client.describe_instance_types.flat_map(&:instance_types)).all
+    hash_collection.new(aws_ec2.client.describe_instance_types.flat_map(&:instance_types)).all
   end
 
   def availability_zones
