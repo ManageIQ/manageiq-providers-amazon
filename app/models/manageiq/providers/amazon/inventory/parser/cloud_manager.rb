@@ -332,7 +332,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :ephemeral_disk_size      => flavor.dig('instance_storage_info', 'total_size_in_gb')&.gigabytes || 0,
         :ephemeral_disk_count     => flavor.dig('instance_storage_info', 'disks')&.size || 0,
         :publicly_available       => true,
-        :vpc_only                 => vpc_only?(flavor)
+        :cloud_subnet_required    => vpc_only?(flavor)
       )
     end
   end
