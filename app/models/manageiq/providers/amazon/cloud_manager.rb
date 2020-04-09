@@ -220,8 +220,8 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     supported_auth_types.include?(authtype.to_s)
   end
 
-  def supported_catalog_types
-    %w(amazon).freeze
+  def self.catalog_types
+    {"amazon" => N_("Amazon")}
   end
 
   def inventory_object_refresh?

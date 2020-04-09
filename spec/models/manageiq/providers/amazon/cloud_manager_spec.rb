@@ -49,9 +49,9 @@ describe ManageIQ::Providers::Amazon::CloudManager do
     expect(described_class.description).to eq('Amazon EC2')
   end
 
-  it "#supported_catalog_types" do
+  it "#catalog_types" do
     ems = FactoryBot.create(:ems_amazon)
-    expect(ems.supported_catalog_types).to eq(%w(amazon))
+    expect(ems.catalog_types).to include("amazon")
   end
 
   it "does not create orphaned network_manager" do
