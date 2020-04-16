@@ -343,7 +343,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   #
   def supports_paravirtual?(flavor)
     return false if flavor['current_generation']
-    return false unless %w[c1 c3 hs1 m1 m3 m2 t1].include?(flavor['instance_type'].split('.').first.downcase)
+    return false unless %w[c1 c3 hs1 m1 m3 m2 t1].include?(instance_family(flavor['instance_type']))
 
     true
   end
@@ -352,10 +352,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   # such information, but most current flavors are vpc-only from what I can gather.
   #
   def vpc_only?(flavor)
-    if %w[a1 c1 c3 r3].include?(flavor['instance_type'].split('.').first.downcase)
-      return false
-    end
-    true
+    %w[a1 c1 c3 r3].exclude?(instance_familiy(flavor['instance_type']))
   end
 
   def availability_zones
@@ -440,5 +437,11 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         }
       )
     end
+  end
+
+  # Given a string like 't2.micro', just return 't2', and downcase it.
+  #
+  def instance_family(flavor)
+    flavor.split('.').first.downcase
   end
 end
