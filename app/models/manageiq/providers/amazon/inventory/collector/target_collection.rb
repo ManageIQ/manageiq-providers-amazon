@@ -140,9 +140,11 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     return [] if references(:floating_ips).blank?
 
     multi_query(references(:floating_ips)) do |refs|
-      hash_collection.new(
-        aws_ec2.client.describe_addresses(:filters => [{:name => 'public-ip', :values => refs}]).flat_map(&:addresses)
-      ).all
+      results = aws_ec2.client.describe_addresses.flat_map(&:addresses).select { |addr|
+        refs.include?(addr.allocation_id) || refs.include?(addr.public_ip)
+      }
+
+      hash_collection.new(results).all
     end
   end
 
