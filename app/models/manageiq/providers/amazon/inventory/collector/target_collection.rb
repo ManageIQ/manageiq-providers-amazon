@@ -139,12 +139,12 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   def floating_ips
     return [] if references(:floating_ips).blank?
 
-    multi_query(references(:floating_ips)) do |refs|
-      results = aws_ec2.client.describe_addresses.flat_map(&:addresses).select { |addr|
-        refs.include?(addr.allocation_id) || refs.include?(addr.public_ip)
-      }
 
-      hash_collection.new(results).all
+    multi_query(references(:floating_ips)) do |refs|
+      hash_collection.new(
+        aws_ec2.client.describe_addresses(:filters => [{:name => 'allocation-id', :values => refs}]).flat_map(&:addresses) +
+        aws_ec2.client.describe_addresses(:filters => [{:name => 'public-ip', :values => refs}]).flat_map(&:addresses)
+      ).all
     end
   end
 
