@@ -107,6 +107,7 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
     add_target(target_collection, :network_ports, event_data["networkInterfaceId"]) if event_data["networkInterfaceId"]
     add_target(target_collection, :security_groups, event_data["groupId"]) if event_data["groupId"]
     add_target(target_collection, :floating_ips, event_data["allocationId"]) if event_data["allocationId"]
+    add_target(target_collection, :floating_ips, event_data["publicIp"]) if event_data["publicIp"]
     add_target(target_collection, :load_balancers, event_data["loadBalancerName"]) if event_data["loadBalancerName"]
     # Block Storage
     add_target(target_collection, :cloud_volumes, event_data["volumeId"]) if event_data["volumeId"]
