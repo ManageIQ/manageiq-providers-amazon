@@ -190,7 +190,7 @@ http_interactions:
                 </item>
             </reservationSet>
         </DescribeInstancesResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:47 GMT
 - request:
     method: post
@@ -293,7 +293,7 @@ http_interactions:
                 </item>
             </networkInterfaceSet>
         </DescribeNetworkInterfacesResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:48 GMT
 - request:
     method: post
@@ -349,7 +349,7 @@ http_interactions:
                 </item>
             </availabilityZoneInfo>
         </DescribeAvailabilityZonesResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:49 GMT
 - request:
     method: post
@@ -401,7 +401,7 @@ http_interactions:
                 </item>
             </keySet>
         </DescribeKeyPairsResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:49 GMT
 - request:
     method: post
@@ -506,7 +506,7 @@ http_interactions:
             <RequestId>5a040aa8-af87-11e8-9cdb-69236bc4bef1</RequestId>
           </ResponseMetadata>
         </DescribeStacksResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:50 GMT
 - request:
     method: post
@@ -621,7 +621,7 @@ http_interactions:
             <RequestId>5a514001-af87-11e8-b531-b71a59d88ca6</RequestId>
           </ResponseMetadata>
         </DescribeStacksResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:50 GMT
 - request:
     method: post
@@ -802,7 +802,7 @@ http_interactions:
         \     <member>Original</member>\n      <member>Processed</member>\n    </StagesAvailable>\n
         \ </GetTemplateResult>\n  <ResponseMetadata>\n    <RequestId>5a9f38c5-af87-11e8-842e-2925a6fb6b81</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:51 GMT
 - request:
     method: post
@@ -1025,7 +1025,7 @@ http_interactions:
             <RequestId>5b567b5b-af87-11e8-b13f-cbc83acd995e</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:52 GMT
 - request:
     method: post
@@ -1341,7 +1341,7 @@ http_interactions:
         \     <member>Original</member>\n      <member>Processed</member>\n    </StagesAvailable>\n
         \ </GetTemplateResult>\n  <ResponseMetadata>\n    <RequestId>5ba92f1d-af87-11e8-87ad-afa8a3af4a81</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:53 GMT
 - request:
     method: post
@@ -1412,7 +1412,7 @@ http_interactions:
             <RequestId>5c6e05ee-af87-11e8-87ad-afa8a3af4a81</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:54 GMT
 - request:
     method: post
@@ -1491,7 +1491,7 @@ http_interactions:
                 </item>
             </imagesSet>
         </DescribeImagesResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:55 GMT
 - request:
     method: post
@@ -1584,7 +1584,7 @@ http_interactions:
                 </item>
             </vpcSet>
         </DescribeVpcsResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:56 GMT
 - request:
     method: post
@@ -1672,7 +1672,7 @@ http_interactions:
                 </item>
             </subnetSet>
         </DescribeSubnetsResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:56 GMT
 - request:
     method: post
@@ -1792,7 +1792,7 @@ http_interactions:
                 </item>
             </securityGroupInfo>
         </DescribeSecurityGroupsResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:57 GMT
 - request:
     method: post
@@ -1852,7 +1852,67 @@ http_interactions:
                 </item>
             </addressesSet>
         </DescribeAddressesResponse>
-    http_version: 
+    http_version:
+  recorded_at: Mon, 03 Sep 2018 14:40:57 GMT
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeAddresses&Filter.1.Name=public-ip&Filter.1.Value.1=34.202.178.10&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Date:
+      - 20180903T144057Z
+      X-Amz-Content-Sha256:
+      - 221864a389b351f654f1fcc20f3f5102ef53dec1a9a58c912d80615ad8df829d
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180903/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=9de685a0c8e32aecf9e031278eefd89b37e415bc4583bc3bbddc2b2a8f572a05
+      Content-Length:
+      - '106'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 03 Sep 2018 14:40:57 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeAddressesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>e4cd826c-a135-4e83-86b0-dedc0eea00a8</requestId>
+            <addressesSet>
+                <item>
+                    <publicIp>34.202.178.10</publicIp>
+                    <allocationId>eipalloc-9a4472ab</allocationId>
+                    <domain>vpc</domain>
+                    <instanceId>i-0bca58e6e540ddc39</instanceId>
+                    <associationId>eipassoc-13766e23</associationId>
+                    <networkInterfaceId>eni-8fefae9b</networkInterfaceId>
+                    <networkInterfaceOwnerId>200278856672</networkInterfaceOwnerId>
+                    <privateIpAddress>10.2.0.239</privateIpAddress>
+                </item>
+            </addressesSet>
+        </DescribeAddressesResponse>
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:57 GMT
 - request:
     method: post
@@ -1923,6 +1983,6 @@ http_interactions:
                 </item>
             </volumeSet>
         </DescribeVolumesResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:40:58 GMT
 recorded_with: VCR 3.0.3

@@ -134,7 +134,7 @@ http_interactions:
                 </item>
             </reservationSet>
         </DescribeInstancesResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:27:22 GMT
 - request:
     method: post
@@ -190,7 +190,7 @@ http_interactions:
                 </item>
             </availabilityZoneInfo>
         </DescribeAvailabilityZonesResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:27:25 GMT
 - request:
     method: post
@@ -242,7 +242,7 @@ http_interactions:
                 </item>
             </keySet>
         </DescribeKeyPairsResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:27:25 GMT
 - request:
     method: post
@@ -325,7 +325,7 @@ http_interactions:
                 </item>
             </imagesSet>
         </DescribeImagesResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:27:27 GMT
 - request:
     method: post
@@ -542,7 +542,7 @@ http_interactions:
                 </item>
             </securityGroupInfo>
         </DescribeSecurityGroupsResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:27:27 GMT
 - request:
     method: post
@@ -642,7 +642,7 @@ http_interactions:
             <RequestId>7c3e0343-af85-11e8-97ac-bbd8964c9d05</RequestId>
           </ResponseMetadata>
         </DescribeLoadBalancersResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:27:28 GMT
 - request:
     method: post
@@ -699,7 +699,7 @@ http_interactions:
             <RequestId>7c8bae38-af85-11e8-97ac-bbd8964c9d05</RequestId>
           </ResponseMetadata>
         </DescribeInstanceHealthResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:27:29 GMT
 - request:
     method: post
@@ -748,7 +748,56 @@ http_interactions:
             <requestId>302a0993-a8eb-4c29-99c9-2c00b9a9d19c</requestId>
             <addressesSet/>
         </DescribeAddressesResponse>
-    http_version: 
+    http_version:
+  recorded_at: Mon, 03 Sep 2018 14:27:29 GMT
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeAddresses&Filter.1.Name=public-ip&Filter.1.Value.1=54.221.202.53&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      X-Amz-Date:
+      - 20180903T142729Z
+      X-Amz-Content-Sha256:
+      - 2c78f1ad1dfa1273041e2e2ca1ebe682d22be25a3e4ca677f9efe3364177dd87
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180903/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=f86c0be0510b033c47feb3b0a3196d78f24b0d55ab1ccdfb11e74e48934a40ce
+      Content-Length:
+      - '102'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 03 Sep 2018 14:27:29 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeAddressesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>302a0993-a8eb-4c29-99c9-2c00b9a9d19c</requestId>
+            <addressesSet/>
+        </DescribeAddressesResponse>
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:27:29 GMT
 - request:
     method: post
@@ -824,6 +873,6 @@ http_interactions:
                 </item>
             </volumeSet>
         </DescribeVolumesResponse>
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Sep 2018 14:27:30 GMT
 recorded_with: VCR 3.0.3

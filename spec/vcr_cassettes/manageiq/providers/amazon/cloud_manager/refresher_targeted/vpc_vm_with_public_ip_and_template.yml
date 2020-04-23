@@ -170,7 +170,7 @@ http_interactions:
                 </item>
             </reservationSet>
         </DescribeInstancesResponse>
-    http_version: 
+    http_version:
   recorded_at: Tue, 26 Sep 2017 08:18:20 GMT
 - request:
     method: post
@@ -269,7 +269,7 @@ http_interactions:
                 </item>
             </networkInterfaceSet>
         </DescribeNetworkInterfacesResponse>
-    http_version: 
+    http_version:
   recorded_at: Tue, 26 Sep 2017 08:18:21 GMT
 - request:
     method: post
@@ -325,7 +325,7 @@ http_interactions:
                 </item>
             </availabilityZoneInfo>
         </DescribeAvailabilityZonesResponse>
-    http_version: 
+    http_version:
   recorded_at: Tue, 26 Sep 2017 08:18:22 GMT
 - request:
     method: post
@@ -379,7 +379,7 @@ http_interactions:
                 </item>
             </keySet>
         </DescribeKeyPairsResponse>
-    http_version: 
+    http_version:
   recorded_at: Tue, 26 Sep 2017 08:18:23 GMT
 - request:
     method: post
@@ -458,7 +458,7 @@ http_interactions:
                 </item>
             </imagesSet>
         </DescribeImagesResponse>
-    http_version: 
+    http_version:
   recorded_at: Tue, 26 Sep 2017 08:18:25 GMT
 - request:
     method: post
@@ -531,7 +531,7 @@ http_interactions:
                 </item>
             </vpcSet>
         </DescribeVpcsResponse>
-    http_version: 
+    http_version:
   recorded_at: Tue, 26 Sep 2017 08:18:26 GMT
 - request:
     method: post
@@ -599,7 +599,7 @@ http_interactions:
                 </item>
             </subnetSet>
         </DescribeSubnetsResponse>
-    http_version: 
+    http_version:
   recorded_at: Tue, 26 Sep 2017 08:18:27 GMT
 - request:
     method: post
@@ -697,7 +697,7 @@ http_interactions:
                 </item>
             </securityGroupInfo>
         </DescribeSecurityGroupsResponse>
-    http_version: 
+    http_version:
   recorded_at: Tue, 26 Sep 2017 08:18:28 GMT
 - request:
     method: post
@@ -746,7 +746,56 @@ http_interactions:
             <requestId>4382a8eb-1089-4895-8af7-64fcc39807f7</requestId>
             <addressesSet/>
         </DescribeAddressesResponse>
-    http_version: 
+    http_version:
+  recorded_at: Tue, 26 Sep 2017 08:18:28 GMT
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeAddresses&Filter.1.Name=public-ip&Filter.1.Value.1=54.208.71.4&Version=2016-11-15
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      X-Amz-Date:
+      - 20170926T081828Z
+      X-Amz-Content-Sha256:
+      - a31fd8e566b655ae84a1a9ef853231b894fc12a5d9c9fc35d245e559a1bc6a91
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=34a7c01efc134411d521eba3dfbfed7fb75e7571fd0142da88bd91cdf9db6a7c
+      Content-Length:
+      - '100'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Tue, 26 Sep 2017 08:18:22 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeAddressesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+            <requestId>4382a8eb-1089-4895-8af7-64fcc39807f7</requestId>
+            <addressesSet/>
+        </DescribeAddressesResponse>
+    http_version:
   recorded_at: Tue, 26 Sep 2017 08:18:28 GMT
 - request:
     method: post
@@ -851,6 +900,6 @@ http_interactions:
                 </item>
             </volumeSet>
         </DescribeVolumesResponse>
-    http_version: 
+    http_version:
   recorded_at: Tue, 26 Sep 2017 08:18:30 GMT
 recorded_with: VCR 3.0.3
