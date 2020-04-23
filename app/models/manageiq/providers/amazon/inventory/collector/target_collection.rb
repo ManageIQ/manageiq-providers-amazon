@@ -141,7 +141,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
 
     multi_query(references(:floating_ips)) do |refs|
       hash_collection.new(
-        aws_ec2.client.describe_addresses(:filters => [{:name => 'allocation-id', :values => refs}]).addresses
+        aws_ec2.client.describe_addresses(:filters => [{:name => 'allocation-id', :values => refs}]).addresses +
+        aws_ec2.client.describe_addresses(:filters => [{:name => 'public-ip', :values => refs}]).addresses
       ).all
     end
   end
