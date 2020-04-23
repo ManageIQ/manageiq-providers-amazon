@@ -497,12 +497,10 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_AllocateAddress.json")
       parsed_targets = described_class.new(ems_event).parse
 
-      # TODO(lsmola) we get just \"publicIp\":\"23.23.209.146\" for domain standard, we have to test also VPC and see
-      # what targets we can parse there
-      expect(parsed_targets.size).to eq(0)
+      expect(parsed_targets.size).to eq(1)
       expect(target_references(parsed_targets)).to(
         match_array(
-          []
+          [[:floating_ips, {:ems_ref=>"23.23.209.146"}]]
         )
       )
     end
@@ -1369,11 +1367,10 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_ReleaseAddress.json")
       parsed_targets = described_class.new(ems_event).parse
 
-      # TODO(lsmola) again only {\"publicIp\":\"23.21.100.183\"} mentioned, not sure what domain
-      expect(parsed_targets.size).to eq(0)
+      expect(parsed_targets.size).to eq(1)
       expect(target_references(parsed_targets)).to(
         match_array(
-          []
+          [[:floating_ips, {:ems_ref=>"23.21.100.183"}]]
         )
       )
     end
