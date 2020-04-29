@@ -27,6 +27,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
     collector.network_routers.each do |network_router|
       uid              = network_router['route_table_id']
       main_route_table = false
+
       network_router['associations'].each do |association|
         network_router_lazy = persister.network_routers.lazy_find(uid)
         if association['main']
@@ -38,6 +39,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
       end
 
       persister.network_routers.find_or_build(uid).assign_attributes(
+        :cloud_network    => persister.cloud_networks.lazy_find(network_router['vpc_id']),
         :status           => network_router['routes'].all? { |x| x['state'] == 'active' } ? 'active' : 'inactive',
         :name             => get_from_tags(network_router, "Name") || uid,
         :extra_attributes => {
