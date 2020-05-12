@@ -138,12 +138,13 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
         },
         {
           :component => 'sub-form',
-          :name      => 'endpoints',
+          :name      => 'endpoints-subform',
           :title     => _("Endpoint"),
           :fields    => [
             {
               :component              => 'validate-provider-credentials',
               :name                   => 'authentications.default.valid',
+              :skipSubmit             => true,
               :validationDependencies => %w[type zone_id provider_region],
               :fields                 => [
                 {
@@ -178,37 +179,6 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
         },
       ],
     }.freeze
-  end
-
-  def self.create_from_params(params)
-    endpoints = params.delete("endpoints") || {'default' => {}} # Fall back to an empty default endpoint
-    authentications = params.delete("authentications")
-
-    new(params).tap do |ems|
-      endpoints.each do |authtype, endpoint|
-        ems.endpoints.new(endpoint.merge(:role => authtype))
-      end
-
-      authentications.each do |authtype, authentication|
-        ems.authentications.new(authentication.merge(:authtype => authtype))
-      end
-
-      ems.save!
-    end
-  end
-
-  def edit_with_params(params)
-    default_endpoint = params.delete("endpoints").dig("default")
-    default_authentication = params.delete("authentications").dig("default")
-
-    tap do |ems|
-      ems.default_authentication.assign_attributes(default_authentication)
-      ems.default_endpoint.assign_attributes(default_endpoint)
-
-      ems.assign_attributes(params)
-
-      ems.save!
-    end
   end
 
   def supported_auth_types
