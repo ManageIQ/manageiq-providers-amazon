@@ -1344,8 +1344,6 @@ module AwsRefresherSpecCommon
   end
 
   def assert_network_router
-    return unless options.inventory_object_refresh # we collect NetworkRouter only in new refresh
-
     @network_router = ManageIQ::Providers::Amazon::NetworkManager::NetworkRouter.find_by(
       :name => "EmsRefreshSpecRouter"
     )
