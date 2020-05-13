@@ -148,7 +148,8 @@ module AwsRefresherSpecCommon
   end
 
   def assert_vpc
-    @cn = ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork.where(:name => "EmsRefreshSpec-VPC").first
+    @cn = ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork.find_by(:name => "EmsRefreshSpec-VPC")
+
     expect(@cn).to(
       have_attributes(
         :name    => "EmsRefreshSpec-VPC",
@@ -158,6 +159,9 @@ module AwsRefresherSpecCommon
         :enabled => true
       )
     )
+
+    network_router = ManageIQ::Providers::Amazon::NetworkManager::NetworkRouter.find_by(:name => "EmsRefreshSpecRouter")
+    expect(@cn.network_routers).to include(network_router)
   end
 
   def assert_vpc_subnet_1
@@ -1348,11 +1352,14 @@ module AwsRefresherSpecCommon
       :name => "EmsRefreshSpecRouter"
     )
 
+    cloud_network = ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork.find_by(:name => "EmsRefreshSpec-VPC")
+
     expect(@network_router).to(
       have_attributes(
         :propagating_vgws => [],
         :main_route_table => false,
-        :status           => "active"
+        :status           => "active",
+        :cloud_network    => cloud_network
       )
     )
 
