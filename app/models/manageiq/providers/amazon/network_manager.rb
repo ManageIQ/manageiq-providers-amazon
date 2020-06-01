@@ -12,6 +12,7 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
   require_nested :Refresher
   require_nested :SecurityGroup
 
+  include BelongsToParentManagerMixin
   include ManageIQ::Providers::Amazon::ManagerMixin
 
   # Auth and endpoints delegations, editing of this type of manager must be disabled
