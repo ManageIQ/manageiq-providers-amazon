@@ -159,9 +159,6 @@ module AwsRefresherSpecCommon
         :enabled => true
       )
     )
-
-    network_router = ManageIQ::Providers::Amazon::NetworkManager::NetworkRouter.find_by(:name => "EmsRefreshSpecRouter")
-    expect(@cn.network_routers).to include(network_router)
   end
 
   def assert_vpc_subnet_1
@@ -1384,6 +1381,7 @@ module AwsRefresherSpecCommon
     expect(@network_router.cloud_subnets.pluck(:name)).to include("EmsRefreshSpec-Subnet1")
     expect(@network_router.vms.pluck(:name)).to include("EmsRefreshSpec-PoweredOn-VPC")
     expect(@network_router.vms.pluck(:name)).to include("EmsRefreshSpec-PoweredOn-VPC1")
+    expect(cloud_network.network_routers).to include(@network_router)
   end
 
   def assert_specific_vm_in_other_region
