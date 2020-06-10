@@ -148,7 +148,8 @@ module AwsRefresherSpecCommon
   end
 
   def assert_vpc
-    @cn = ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork.where(:name => "EmsRefreshSpec-VPC").first
+    @cn = ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork.find_by(:name => "EmsRefreshSpec-VPC")
+
     expect(@cn).to(
       have_attributes(
         :name    => "EmsRefreshSpec-VPC",
@@ -1344,17 +1345,18 @@ module AwsRefresherSpecCommon
   end
 
   def assert_network_router
-    return unless options.inventory_object_refresh # we collect NetworkRouter only in new refresh
-
     @network_router = ManageIQ::Providers::Amazon::NetworkManager::NetworkRouter.find_by(
       :name => "EmsRefreshSpecRouter"
     )
+
+    cloud_network = ManageIQ::Providers::Amazon::NetworkManager::CloudNetwork.find_by(:name => "EmsRefreshSpec-VPC")
 
     expect(@network_router).to(
       have_attributes(
         :propagating_vgws => [],
         :main_route_table => false,
-        :status           => "active"
+        :status           => "active",
+        :cloud_network    => cloud_network
       )
     )
 
@@ -1379,6 +1381,7 @@ module AwsRefresherSpecCommon
     expect(@network_router.cloud_subnets.pluck(:name)).to include("EmsRefreshSpec-Subnet1")
     expect(@network_router.vms.pluck(:name)).to include("EmsRefreshSpec-PoweredOn-VPC")
     expect(@network_router.vms.pluck(:name)).to include("EmsRefreshSpec-PoweredOn-VPC1")
+    expect(cloud_network.network_routers).to include(@network_router)
   end
 
   def assert_specific_vm_in_other_region
