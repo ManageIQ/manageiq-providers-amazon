@@ -39,10 +39,6 @@ eu-north-1:
   :name: eu-north-1
   :hostname: ec2.eu-north-1.amazonaws.com
   :description: EU (Stockholm)
-eu-south-1:
-  :name: eu-south-1
-  :hostname: ec2.eu-south-1.amazonaws.com
-  :description: EU (Milan)
 eu-west-1:
   :name: eu-west-1
   :hostname: ec2.eu-west-1.amazonaws.com
