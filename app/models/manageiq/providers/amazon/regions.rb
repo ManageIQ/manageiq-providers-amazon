@@ -19,6 +19,7 @@ module ManageIQ
         atypical_regions = [
           'ap-northeast-3', # "To request access to the Asia Pacific (Osaka-Local) Region, contact..."
           'ap-east-1',      # "you must manually enable before you can use..."
+          'eu-south-1',
         ].freeze
         REGIONS.keys.select { |name| atypical_regions.include?(name) || name !~ ORDINARY_REGIONS_REGEXP }
       end.freeze
