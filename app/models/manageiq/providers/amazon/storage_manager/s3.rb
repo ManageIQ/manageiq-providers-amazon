@@ -20,8 +20,13 @@ class ManageIQ::Providers::Amazon::StorageManager::S3 < ManageIQ::Providers::Sto
            :hostname,
            :default_endpoint,
            :endpoints,
+           :cloud_tenants,
+           :volume_availability_zones,
            :to        => :parent_manager,
            :allow_nil => true
+
+  virtual_delegate :cloud_tenants, :to => :parent_manager, :allow_nil => true
+  virtual_delegate :volume_availability_zones, :to => :parent_manager, :allow_nil => true
 
   def self.ems_type
     @ems_type ||= "s3".freeze
