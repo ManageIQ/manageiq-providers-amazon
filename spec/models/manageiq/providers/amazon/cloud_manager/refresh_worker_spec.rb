@@ -14,8 +14,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::RefreshWorker do
 
     it ".queue_name_for_ems" do
       queue_name = described_class.queue_name_for_ems(ems)
-      expect(queue_name.count).to eq(1)
-      expect(queue_name.first).to eq(ems.queue_name)
+      expect(queue_name).to eq(ems.queue_name)
     end
   end
 end
