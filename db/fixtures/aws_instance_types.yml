@@ -115,6 +115,37 @@ a1.medium:
   :virtualization_type:
   - :hvm
   :vpc_only: false
+a1.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: A1 General purpose Metal
+  :disabled: true
+  :discontinued: true
+  :ebs_only: true
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: a1.metal
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton Processor
+  :processor_clock_speed: 
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
 a1.xlarge:
   :architecture:
   - :x86_64
@@ -159,7 +190,7 @@ c1.medium:
   :family: Compute optimized
   :instance_store_size: 375809638400
   :instance_store_size_gb: 350.0
-  :instance_store_type: 
+  :instance_store_type: SSD
   :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: 
@@ -189,7 +220,7 @@ c1.xlarge:
   :family: Compute optimized
   :instance_store_size: 1803886264320
   :instance_store_size_gb: 1680.0
-  :instance_store_type: 
+  :instance_store_type: SSD
   :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: 
@@ -530,7 +561,7 @@ c5.12xlarge:
   :name: c5.12xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275L
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 48
   :virtualization_type:
   - :hvm
@@ -559,7 +590,7 @@ c5.18xlarge:
   :name: c5.18xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 72
   :virtualization_type:
   - :hvm
@@ -588,7 +619,7 @@ c5.24xlarge:
   :name: c5.24xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275L
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 96
   :virtualization_type:
   - :hvm
@@ -617,7 +648,7 @@ c5.2xlarge:
   :name: c5.2xlarge
   :network_performance: :up_to_10_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 8
   :virtualization_type:
   - :hvm
@@ -646,7 +677,7 @@ c5.4xlarge:
   :name: c5.4xlarge
   :network_performance: :up_to_10_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 16
   :virtualization_type:
   - :hvm
@@ -675,7 +706,7 @@ c5.9xlarge:
   :name: c5.9xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 36
   :virtualization_type:
   - :hvm
@@ -704,7 +735,7 @@ c5.large:
   :name: c5.large
   :network_performance: :up_to_10_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 2
   :virtualization_type:
   - :hvm
@@ -714,8 +745,10 @@ c5.metal:
   - :x86_64
   :cluster_networking: 
   :current_generation: true
-  :current_version: true
+  :current_version: false
   :description: C5 Compute optimized Metal
+  :disabled: true
+  :discontinued: true
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
@@ -762,11 +795,280 @@ c5.xlarge:
   :name: c5.xlarge
   :network_performance: :up_to_10_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm
   :vpc_only: true
+c5a.12xlarge:
+  :architecture:
+  - :i386
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C5A Compute optimized 12XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 103079215104
+  :memory_gb: 96.0
+  :name: c5a.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R32
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c5a.16xlarge:
+  :architecture:
+  - :i386
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C5A Compute optimized 16XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: c5a.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R32
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c5a.24xlarge:
+  :architecture:
+  - :i386
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C5A Compute optimized 24XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: c5a.24xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R32
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c5a.2xlarge:
+  :architecture:
+  - :i386
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C5A Compute optimized 2XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: c5a.2xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AMD EPYC 7R32
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c5a.4xlarge:
+  :architecture:
+  - :i386
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C5A Compute optimized 4XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: c5a.4xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AMD EPYC 7R32
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c5a.8xlarge:
+  :architecture:
+  - :i386
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C5A Compute optimized 8XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: c5a.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R32
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c5a.large:
+  :architecture:
+  - :i386
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C5A Compute optimized Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 4294967296
+  :memory_gb: 4.0
+  :name: c5a.large
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AMD EPYC 7R32
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c5a.xlarge:
+  :architecture:
+  - :i386
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C5A Compute optimized XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: c5a.xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AMD EPYC 7R32
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c5d.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C5D Compute optimized 12XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 1932735283200
+  :instance_store_size_gb: 1800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 103079215104
+  :memory_gb: 96.0
+  :name: c5d.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8275L
+  :processor_clock_speed: 3 GHz
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
 c5d.18xlarge:
   :architecture:
   - :x86_64
@@ -791,8 +1093,37 @@ c5d.18xlarge:
   :name: c5d.18xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 72
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c5d.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C5D Compute optimized 24XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 3865470566400
+  :instance_store_size_gb: 3600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: c5d.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8275L
+  :processor_clock_speed: 3 GHz
+  :vcpu: 96
   :virtualization_type:
   - :hvm
   :vpc_only: false
@@ -820,7 +1151,7 @@ c5d.2xlarge:
   :name: c5d.2xlarge
   :network_performance: :up_to_10_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 8
   :virtualization_type:
   - :hvm
@@ -849,7 +1180,7 @@ c5d.4xlarge:
   :name: c5d.4xlarge
   :network_performance: :up_to_10_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 16
   :virtualization_type:
   - :hvm
@@ -878,7 +1209,7 @@ c5d.9xlarge:
   :name: c5d.9xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 36
   :virtualization_type:
   - :hvm
@@ -907,8 +1238,39 @@ c5d.large:
   :name: c5d.large
   :network_performance: :up_to_10_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c5d.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: C5D Compute optimized Metal
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 3865470566400
+  :instance_store_size_gb: 3600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: c5d.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8275L
+  :processor_clock_speed: 3.0 Ghz
+  :vcpu: 96
   :virtualization_type:
   - :hvm
   :vpc_only: false
@@ -936,37 +1298,8 @@ c5d.xlarge:
   :name: c5d.xlarge
   :network_performance: :up_to_10_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-c5n.metal:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: C5N Compute optimized
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Compute optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: true
-  :intel_avx2: true
-  :intel_turbo: true
-  :memory: 0
-  :memory_gb: 0.0
-  :name: c5n.metal
-  :network_performance: :na
-  :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
-  :vcpu: 72
   :virtualization_type:
   - :hvm
   :vpc_only: false
@@ -994,7 +1327,7 @@ c5n.18xlarge:
   :name: c5n.18xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 72
   :virtualization_type:
   - :hvm
@@ -1023,7 +1356,7 @@ c5n.2xlarge:
   :name: c5n.2xlarge
   :network_performance: :up_to_25_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 8
   :virtualization_type:
   - :hvm
@@ -1052,7 +1385,7 @@ c5n.4xlarge:
   :name: c5n.4xlarge
   :network_performance: :up_to_25_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 16
   :virtualization_type:
   - :hvm
@@ -1081,7 +1414,7 @@ c5n.9xlarge:
   :name: c5n.9xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 36
   :virtualization_type:
   - :hvm
@@ -1110,8 +1443,39 @@ c5n.large:
   :name: c5n.large
   :network_performance: :up_to_25_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
   :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c5n.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: C5N Compute optimized Metal
+  :disabled: true
+  :discontinued: true
+  :ebs_only: true
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: c5n.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8124M
+  :processor_clock_speed: 
+  :vcpu: 72
   :virtualization_type:
   - :hvm
   :vpc_only: false
@@ -1139,7 +1503,239 @@ c5n.xlarge:
   :name: c5n.xlarge
   :network_performance: :up_to_25_gigabit
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3.0 Ghz
+  :processor_clock_speed: 3 GHz
+  :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c6g.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6G Compute optimized 12XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 103079215104
+  :memory_gb: 96.0
+  :name: c6g.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c6g.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6G Compute optimized 16XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: c6g.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c6g.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6G Compute optimized 2XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: c6g.2xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c6g.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6G Compute optimized 4XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: c6g.4xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c6g.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6G Compute optimized 8XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: c6g.8xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c6g.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6G Compute optimized Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 4294967296
+  :memory_gb: 4.0
+  :name: c6g.large
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c6g.medium:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6G Compute optimized Medium
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 2147483648
+  :memory_gb: 2.0
+  :name: c6g.medium
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 1
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+c6g.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6G Compute optimized XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: c6g.xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -1189,7 +1785,7 @@ cc2.8xlarge:
   :family: Compute optimized
   :instance_store_size: 3607772528640
   :instance_store_size_gb: 3360.0
-  :instance_store_type: 
+  :instance_store_type: SSD
   :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
@@ -1289,7 +1885,7 @@ d2.2xlarge:
   :memory_gb: 61.0
   :name: d2.2xlarge
   :network_performance: :high
-  :physical_processor: Intel Xeon E5-2676v3 (Haswell)
+  :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 8
   :virtualization_type:
@@ -1318,7 +1914,7 @@ d2.4xlarge:
   :memory_gb: 122.0
   :name: d2.4xlarge
   :network_performance: :high
-  :physical_processor: Intel Xeon E5-2676v3 (Haswell)
+  :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 16
   :virtualization_type:
@@ -1347,7 +1943,7 @@ d2.8xlarge:
   :memory_gb: 244.0
   :name: d2.8xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon E5-2676v3 (Haswell)
+  :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 36
   :virtualization_type:
@@ -1376,7 +1972,7 @@ d2.xlarge:
   :memory_gb: 30.5
   :name: d2.xlarge
   :network_performance: :moderate
-  :physical_processor: Intel Xeon E5-2676v3 (Haswell)
+  :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 4
   :virtualization_type:
@@ -1389,14 +1985,14 @@ f1.16xlarge:
   :current_generation: true
   :current_version: true
   :description: F1 FPGA Instances 16XL
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: FPGA Instances
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 4037269258240
+  :instance_store_size_gb: 3760.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -1406,7 +2002,7 @@ f1.16xlarge:
   :name: f1.16xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
-  :processor_clock_speed: 
+  :processor_clock_speed: 2.3 GHz
   :vcpu: 64
   :virtualization_type:
   - :hvm
@@ -1418,14 +2014,14 @@ f1.2xlarge:
   :current_generation: true
   :current_version: true
   :description: F1 FPGA Instances 2XL
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: FPGA Instances
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 504658657280
+  :instance_store_size_gb: 470.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -1435,7 +2031,7 @@ f1.2xlarge:
   :name: f1.2xlarge
   :network_performance: :up_to_10_gigabit
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
-  :processor_clock_speed: 
+  :processor_clock_speed: 2.3 GHz
   :vcpu: 8
   :virtualization_type:
   - :hvm
@@ -1448,12 +2044,12 @@ f1.4xlarge:
   :current_version: true
   :description: F1 FPGA Instances 4XL
   :ebs_only: false
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: FPGA Instances
   :instance_store_size: 1009317314560
   :instance_store_size_gb: 940.0
-  :instance_store_type: 
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
@@ -1464,7 +2060,7 @@ f1.4xlarge:
   :name: f1.4xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
-  :processor_clock_speed: 
+  :processor_clock_speed: 2.3 GHz
   :vcpu: 16
   :virtualization_type:
   - :hvm
@@ -1492,7 +2088,7 @@ g2.2xlarge:
   :memory: 16106127360
   :memory_gb: 15.0
   :name: g2.2xlarge
-  :network_performance: :high
+  :network_performance: :moderate
   :physical_processor: Intel Xeon E5-2670 (Sandy Bridge)
   :processor_clock_speed: 2.6 GHz
   :vcpu: 8
@@ -1522,7 +2118,7 @@ g2.8xlarge:
   :memory: 64424509440
   :memory_gb: 60.0
   :name: g2.8xlarge
-  :network_performance: :very_high
+  :network_performance: :high
   :physical_processor: Intel Xeon E5-2670 (Sandy Bridge)
   :processor_clock_speed: 2.6 GHz
   :vcpu: 32
@@ -1624,8 +2220,8 @@ g3s.xlarge:
   :current_version: true
   :description: G3S GPU instance XL
   :ebs_only: true
-  :ebs_optimized_available: 
-  :enhanced_networking: 
+  :ebs_optimized_available: true
+  :enhanced_networking: true
   :family: GPU instance
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
@@ -1640,7 +2236,212 @@ g3s.xlarge:
   :name: g3s.xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
+  :processor_clock_speed: 2.3 GHz
+  :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+g4dn.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G4DN GPU instance 12XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: g4dn.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Family
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+g4dn.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G4DN GPU instance 16XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: g4dn.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Family
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+g4dn.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G4DN GPU instance 2XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: g4dn.2xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Family
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+g4dn.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G4DN GPU instance 4XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: g4dn.4xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Family
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+g4dn.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G4DN GPU instance 8XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: g4dn.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Family
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+g4dn.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: G4DN GPU instance Metal
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: GPU instance
+  :instance_store_size: 1932735283200
+  :instance_store_size_gb: 1800.0
+  :instance_store_type: " NVMe SSD"
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: g4dn.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Family
   :processor_clock_speed: 
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+g4dn.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G4DN GPU instance XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: g4dn.xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Family
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -1807,7 +2608,7 @@ hs1.8xlarge:
   :family: Storage optimized
   :instance_store_size: 51539607552000
   :instance_store_size_gb: 48000.0
-  :instance_store_type: 
+  :instance_store_type: HDD
   :instance_store_volumes: 24
   :intel_aes_ni: true
   :intel_avx: 
@@ -1818,8 +2619,8 @@ hs1.8xlarge:
   :name: hs1.8xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon E5-2650
-  :processor_clock_speed: 2 GHz
-  :vcpu: 17
+  :processor_clock_speed: 2.0 GHz
+  :vcpu: 16
   :virtualization_type:
   - :hvm
   - :paravirtual
@@ -1893,7 +2694,7 @@ i2.8xlarge:
   :deprecated: true
   :description: I2 Storage optimized 8XL
   :ebs_only: false
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Storage optimized
   :instance_store_size: 6871947673600
@@ -1944,35 +2745,6 @@ i2.xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: false
-i3.metal:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: I3 Storage optimized
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Storage optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: true
-  :intel_avx2: true
-  :intel_turbo: true
-  :memory: 0
-  :memory_gb: 0.0
-  :name: i3.metal
-  :network_performance: :na
-  :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
-  :processor_clock_speed: 2.3 GHz
-  :vcpu: 64
-  :virtualization_type:
-  - :hvm
-  :vpc_only: true
 i3.16xlarge:
   :architecture:
   - :x86_64
@@ -2118,6 +2890,37 @@ i3.large:
   :virtualization_type:
   - :hvm
   :vpc_only: true
+i3.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I3 Storage optimized
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: Storage optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 0
+  :memory_gb: 0.0
+  :name: i3.metal
+  :network_performance: :na
+  :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
+  :processor_clock_speed: 2.3 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: true
 i3.xlarge:
   :architecture:
   - :x86_64
@@ -2147,35 +2950,6 @@ i3.xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: true
-i3en.metal:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: I3EN Storage optimized
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Storage optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: true
-  :intel_avx2: true
-  :intel_turbo: true
-  :memory: 0
-  :memory_gb: 0.0
-  :name: i3en.metal
-  :network_performance: :na
-  :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
-  :processor_clock_speed: 3.1 GHz
-  :vcpu: 64
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
 i3en.12xlarge:
   :architecture:
   - :x86_64
@@ -2199,7 +2973,7 @@ i3en.12xlarge:
   :memory_gb: 384.0
   :name: i3en.12xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
   :processor_clock_speed: 3.1 GHz
   :vcpu: 48
   :virtualization_type:
@@ -2228,7 +3002,7 @@ i3en.24xlarge:
   :memory_gb: 768.0
   :name: i3en.24xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
   :processor_clock_speed: 3.1 GHz
   :vcpu: 96
   :virtualization_type:
@@ -2257,7 +3031,7 @@ i3en.2xlarge:
   :memory_gb: 64.0
   :name: i3en.2xlarge
   :network_performance: :up_to_25_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
   :processor_clock_speed: 3.1 GHz
   :vcpu: 8
   :virtualization_type:
@@ -2286,7 +3060,7 @@ i3en.3xlarge:
   :memory_gb: 96.0
   :name: i3en.3xlarge
   :network_performance: :up_to_25_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
   :processor_clock_speed: 3.1 GHz
   :vcpu: 12
   :virtualization_type:
@@ -2315,7 +3089,7 @@ i3en.6xlarge:
   :memory_gb: 192.0
   :name: i3en.6xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
   :processor_clock_speed: 3.1 GHz
   :vcpu: 24
   :virtualization_type:
@@ -2344,9 +3118,71 @@ i3en.large:
   :memory_gb: 16.0
   :name: i3en.large
   :network_performance: :up_to_25_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
   :processor_clock_speed: 3.1 GHz
   :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+i3en.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I3EN Storage optimized
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: Storage optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 0
+  :memory_gb: 0.0
+  :name: i3en.metal
+  :network_performance: :na
+  :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+i3en.metal-2tb:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: I3EN Storage optimized Metal-2tb
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 68719476736000
+  :instance_store_size_gb: 64000.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 32
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: i3en.metal-2tb
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 96
   :virtualization_type:
   - :hvm
   :vpc_only: false
@@ -2373,8 +3209,153 @@ i3en.xlarge:
   :memory_gb: 32.0
   :name: i3en.xlarge
   :network_performance: :up_to_25_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
   :processor_clock_speed: 3.1 GHz
+  :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+i3p.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I3P Storage optimized 16XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 523986010112
+  :memory_gb: 488.0
+  :name: i3p.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
+  :processor_clock_speed: 2.3 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+inf1.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: INF1 Machine Learning ASIC Instances 24XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: inf1.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8275CL (Cascade Lake)
+  :processor_clock_speed: 
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+inf1.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: INF1 Machine Learning ASIC Instances 2XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: inf1.2xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8275CL (Cascade Lake)
+  :processor_clock_speed: 
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+inf1.6xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: INF1 Machine Learning ASIC Instances 6XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 51539607552
+  :memory_gb: 48.0
+  :name: inf1.6xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8275CL (Cascade Lake)
+  :processor_clock_speed: 
+  :vcpu: 24
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+inf1.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: INF1 Machine Learning ASIC Instances XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: inf1.xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8275CL (Cascade Lake)
+  :processor_clock_speed: 
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -2393,7 +3374,7 @@ m1.large:
   :family: General purpose
   :instance_store_size: 901943132160
   :instance_store_size_gb: 840.0
-  :instance_store_type: 
+  :instance_store_type: SSD
   :instance_store_volumes: 2
   :intel_aes_ni: 
   :intel_avx: 
@@ -2424,7 +3405,7 @@ m1.medium:
   :family: General purpose
   :instance_store_size: 440234147840
   :instance_store_size_gb: 410.0
-  :instance_store_type: 
+  :instance_store_type: SSD
   :instance_store_volumes: 1
   :intel_aes_ni: 
   :intel_avx: 
@@ -2455,7 +3436,7 @@ m1.small:
   :family: General purpose
   :instance_store_size: 171798691840
   :instance_store_size_gb: 160.0
-  :instance_store_type: 
+  :instance_store_type: SSD
   :instance_store_volumes: 1
   :intel_aes_ni: 
   :intel_avx: 
@@ -2485,7 +3466,7 @@ m1.xlarge:
   :family: General purpose
   :instance_store_size: 1803886264320
   :instance_store_size_gb: 1680.0
-  :instance_store_type: 
+  :instance_store_type: SSD
   :instance_store_volumes: 4
   :intel_aes_ni: 
   :intel_avx: 
@@ -2515,7 +3496,7 @@ m2.2xlarge:
   :family: Memory optimized
   :instance_store_size: 912680550400
   :instance_store_size_gb: 850.0
-  :instance_store_type: 
+  :instance_store_type: SSD
   :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: 
@@ -2545,7 +3526,7 @@ m2.4xlarge:
   :family: Memory optimized
   :instance_store_size: 1803886264320
   :instance_store_size_gb: 1680.0
-  :instance_store_type: 
+  :instance_store_type: SSD
   :instance_store_volumes: 2
   :intel_aes_ni: true
   :intel_avx: 
@@ -2575,7 +3556,7 @@ m2.xlarge:
   :family: Memory optimized
   :instance_store_size: 450971566080
   :instance_store_size_gb: 420.0
-  :instance_store_type: 
+  :instance_store_type: SSD
   :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: 
@@ -2768,7 +3749,7 @@ m4.16xlarge:
   :name: m4.16xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
-  :processor_clock_speed: 2.3 GHz
+  :processor_clock_speed: 2.4 GHz
   :vcpu: 64
   :virtualization_type:
   - :hvm
@@ -2884,7 +3865,7 @@ m4.xlarge:
   :name: m4.xlarge
   :network_performance: :high
   :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
-  :processor_clock_speed: 2.4  GHz
+  :processor_clock_speed: 2.4 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -2912,8 +3893,8 @@ m5.12xlarge:
   :memory_gb: 192.0
   :name: m5.12xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 48
   :virtualization_type:
   - :hvm
@@ -2941,8 +3922,8 @@ m5.16xlarge:
   :memory_gb: 256.0
   :name: m5.16xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 64
   :virtualization_type:
   - :hvm
@@ -2970,8 +3951,8 @@ m5.24xlarge:
   :memory_gb: 384.0
   :name: m5.24xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 96
   :virtualization_type:
   - :hvm
@@ -2999,8 +3980,8 @@ m5.2xlarge:
   :memory_gb: 32.0
   :name: m5.2xlarge
   :network_performance: :up_to_10_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 8
   :virtualization_type:
   - :hvm
@@ -3028,8 +4009,8 @@ m5.4xlarge:
   :memory_gb: 64.0
   :name: m5.4xlarge
   :network_performance: :up_to_10_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 16
   :virtualization_type:
   - :hvm
@@ -3057,8 +4038,8 @@ m5.8xlarge:
   :memory_gb: 128.0
   :name: m5.8xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 32
   :virtualization_type:
   - :hvm
@@ -3086,8 +4067,8 @@ m5.large:
   :memory_gb: 8.0
   :name: m5.large
   :network_performance: :up_to_10_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 2
   :virtualization_type:
   - :hvm
@@ -3097,8 +4078,10 @@ m5.metal:
   - :x86_64
   :cluster_networking: 
   :current_generation: true
-  :current_version: true
+  :current_version: false
   :description: M5 General purpose Metal
+  :disabled: true
+  :discontinued: true
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
@@ -3144,8 +4127,8 @@ m5.xlarge:
   :memory_gb: 16.0
   :name: m5.xlarge
   :network_performance: :up_to_10_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -3411,6 +4394,35 @@ m5ad.12xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: false
+m5ad.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5AD General purpose 16XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 2576980377600
+  :instance_store_size_gb: 2400.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: m5ad.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7571
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
 m5ad.24xlarge:
   :architecture:
   - :x86_64
@@ -3498,6 +4510,35 @@ m5ad.4xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: false
+m5ad.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5AD General purpose 8XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 1288490188800
+  :instance_store_size_gb: 1200.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: m5ad.8xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AMD EPYC 7571
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
 m5ad.large:
   :architecture:
   - :x86_64
@@ -3579,8 +4620,8 @@ m5d.12xlarge:
   :memory_gb: 192.0
   :name: m5d.12xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 48
   :virtualization_type:
   - :hvm
@@ -3608,8 +4649,8 @@ m5d.16xlarge:
   :memory_gb: 256.0
   :name: m5d.16xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 64
   :virtualization_type:
   - :hvm
@@ -3637,8 +4678,8 @@ m5d.24xlarge:
   :memory_gb: 384.0
   :name: m5d.24xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 96
   :virtualization_type:
   - :hvm
@@ -3666,8 +4707,8 @@ m5d.2xlarge:
   :memory_gb: 32.0
   :name: m5d.2xlarge
   :network_performance: :up_to_10_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 8
   :virtualization_type:
   - :hvm
@@ -3695,8 +4736,8 @@ m5d.4xlarge:
   :memory_gb: 64.0
   :name: m5d.4xlarge
   :network_performance: :up_to_10_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 16
   :virtualization_type:
   - :hvm
@@ -3724,8 +4765,8 @@ m5d.8xlarge:
   :memory_gb: 128.0
   :name: m5d.8xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 32
   :virtualization_type:
   - :hvm
@@ -3753,8 +4794,8 @@ m5d.large:
   :memory_gb: 8.0
   :name: m5d.large
   :network_performance: :up_to_10_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 2
   :virtualization_type:
   - :hvm
@@ -3764,8 +4805,10 @@ m5d.metal:
   - :x86_64
   :cluster_networking: 
   :current_generation: true
-  :current_version: true
+  :current_version: false
   :description: M5D General purpose Metal
+  :disabled: true
+  :discontinued: true
   :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
@@ -3811,8 +4854,766 @@ m5d.xlarge:
   :memory_gb: 16.0
   :name: m5d.xlarge
   :network_performance: :up_to_10_gigabit
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 2.5 GHz
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5dn.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5DN General purpose 12XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 1932735283200
+  :instance_store_size_gb: 1800.0
+  :instance_store_type: " NVMe SSD"
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: m5dn.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5dn.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5DN General purpose 16XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 2576980377600
+  :instance_store_size_gb: 2400.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: m5dn.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5dn.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5DN General purpose 24XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 3865470566400
+  :instance_store_size_gb: 3600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: m5dn.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5dn.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5DN General purpose 2XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 322122547200
+  :instance_store_size_gb: 300.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: m5dn.2xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5dn.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5DN General purpose 4XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 644245094400
+  :instance_store_size_gb: 600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: m5dn.4xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5dn.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5DN General purpose 8XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 1288490188800
+  :instance_store_size_gb: 1200.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: m5dn.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5dn.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5DN General purpose Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 80530636800
+  :instance_store_size_gb: 75.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: m5dn.large
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5dn.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: M5DN General purpose Metal
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 3865470566400
+  :instance_store_size_gb: 3600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: m5dn.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5dn.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5DN General purpose XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 161061273600
+  :instance_store_size_gb: 150.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: m5dn.xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5n.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5N General purpose 12XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: m5n.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5n.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5N General purpose 16XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: m5n.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5n.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5N General purpose 24XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: m5n.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5n.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5N General purpose 2XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: m5n.2xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5n.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5N General purpose 4XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: m5n.4xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5n.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5N General purpose 8XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: m5n.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5n.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5N General purpose Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: m5n.large
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5n.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: M5N General purpose Metal
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: m5n.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m5n.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M5N General purpose XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: m5n.xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m6g.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6G General purpose 12XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: m6g.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m6g.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6G General purpose 16XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: m6g.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m6g.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6G General purpose 2XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: m6g.2xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m6g.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6G General purpose 4XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: m6g.4xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m6g.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6G General purpose 8XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: m6g.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m6g.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6G General purpose Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: m6g.large
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m6g.medium:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6G General purpose Medium
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 4294967296
+  :memory_gb: 4.0
+  :name: m6g.medium
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 
+  :vcpu: 1
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+m6g.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6G General purpose XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: m6g.xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -3836,8 +5637,8 @@ p2.16xlarge:
   :intel_avx: true
   :intel_avx2: true
   :intel_turbo: true
-  :memory: 824633720832
-  :memory_gb: 768.0
+  :memory: 785979015168
+  :memory_gb: 732.0
   :name: p2.16xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
@@ -3991,6 +5792,37 @@ p3.8xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: true
+p3dn:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: " GPU instance P3dn"
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 1932735283200
+  :instance_store_size_gb: 1800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: p3dn
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
 p3dn.24xlarge:
   :architecture:
   - :x86_64
@@ -4344,6 +6176,209 @@ r4.xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: true
+r5.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5 Memory optimized 12XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: r5.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5 Memory optimized 16XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: r5.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5 Memory optimized 24XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: r5.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5 Memory optimized 2XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: r5.2xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5 Memory optimized 4XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: r5.4xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5 Memory optimized 8XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: r5.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5 Memory optimized Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: r5.large
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
 r5.metal:
   :architecture:
   - :x86_64
@@ -4351,6 +6386,8 @@ r5.metal:
   :current_generation: true
   :current_version: true
   :description: R5 Memory optimized
+  :disabled: true
+  :discontinued: true
   :ebs_only: false
   :ebs_optimized_available: 
   :enhanced_networking: 
@@ -4373,209 +6410,6 @@ r5.metal:
   :virtualization_type:
   - :hvm
   :vpc_only: false
-r5.12xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: R5 Memory optimized 12XL
-  :ebs_only: true
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 412316860416
-  :memory_gb: 384.0
-  :name: r5.12xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
-  :vcpu: 48
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-r5.16xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: R5 Memory optimized 16XL
-  :ebs_only: true
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 549755813888
-  :memory_gb: 512.0
-  :name: r5.16xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
-  :vcpu: 64
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-r5.24xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: R5 Memory optimized 24XL
-  :ebs_only: true
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 824633720832
-  :memory_gb: 768.0
-  :name: r5.24xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
-  :vcpu: 96
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-r5.2xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: R5 Memory optimized 2XL
-  :ebs_only: true
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 68719476736
-  :memory_gb: 64.0
-  :name: r5.2xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
-  :vcpu: 8
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-r5.4xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: R5 Memory optimized 4XL
-  :ebs_only: true
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 137438953472
-  :memory_gb: 128.0
-  :name: r5.4xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
-  :vcpu: 16
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-r5.8xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: R5 Memory optimized 8XL
-  :ebs_only: true
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 274877906944
-  :memory_gb: 256.0
-  :name: r5.8xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
-  :vcpu: 32
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-r5.large:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: R5 Memory optimized Large
-  :ebs_only: true
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 17179869184
-  :memory_gb: 16.0
-  :name: r5.large
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 3.1 GHz
-  :vcpu: 2
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
 r5.xlarge:
   :architecture:
   - :x86_64
@@ -4584,23 +6418,23 @@ r5.xlarge:
   :current_version: true
   :description: R5 Memory optimized XL
   :ebs_only: true
-  :ebs_optimized_available: 
-  :enhanced_networking: 
+  :ebs_optimized_available: true
+  :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 34359738368
   :memory_gb: 32.0
   :name: r5.xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -4866,6 +6700,35 @@ r5ad.12xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: false
+r5ad.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5AD Memory optimized 16XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 2576980377600
+  :instance_store_size_gb: 2400.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: r5ad.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7571
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
 r5ad.24xlarge:
   :architecture:
   - :x86_64
@@ -4953,6 +6816,35 @@ r5ad.4xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: false
+r5ad.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5AD Memory optimized 8XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 1288490188800
+  :instance_store_size_gb: 1200.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: r5ad.8xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AMD EPYC 7571
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
 r5ad.large:
   :architecture:
   - :x86_64
@@ -5011,6 +6903,240 @@ r5ad.xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: false
+r5d:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: " Memory optimized R5d"
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 0
+  :memory_gb: 0.0
+  :name: r5d
+  :network_performance: :na
+  :physical_processor: Intel Xeon Platinum 8175
+  :processor_clock_speed: 
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5d.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5D Memory optimized 12XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 1932735283200
+  :instance_store_size_gb: 1800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: r5d.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5d.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5D Memory optimized 16XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 2576980377600
+  :instance_store_size_gb: 2400.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: r5d.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5d.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5D Memory optimized 24XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 3865470566400
+  :instance_store_size_gb: 3600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: r5d.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5d.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5D Memory optimized 2XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 322122547200
+  :instance_store_size_gb: 300.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: r5d.2xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5d.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5D Memory optimized 4XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 644245094400
+  :instance_store_size_gb: 600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: r5d.4xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5d.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5D Memory optimized 8XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 1288490188800
+  :instance_store_size_gb: 1200.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: r5d.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5d.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5D Memory optimized Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 80530636800
+  :instance_store_size_gb: 75.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: r5d.large
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
 r5d.metal:
   :architecture:
   - :x86_64
@@ -5018,6 +7144,8 @@ r5d.metal:
   :current_generation: true
   :current_version: true
   :description: R5D Memory optimized
+  :disabled: true
+  :discontinued: true
   :ebs_only: false
   :ebs_optimized_available: 
   :enhanced_networking: 
@@ -5040,20 +7168,49 @@ r5d.metal:
   :virtualization_type:
   - :hvm
   :vpc_only: false
-r5d.12xlarge:
+r5d.xlarge:
   :architecture:
   - :x86_64
   :cluster_networking: 
   :current_generation: true
   :current_version: true
-  :description: R5D Memory optimized 12XL
+  :description: R5D Memory optimized XL
   :ebs_only: false
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 161061273600
+  :instance_store_size_gb: 150.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: r5d.xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5dn.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5DN Memory optimized 12XL
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 1932735283200
   :instance_store_size_gb: 1800.0
-  :instance_store_type: NVMe SSD
+  :instance_store_type: " NVMe SSD"
   :instance_store_volumes: 2
   :intel_aes_ni: true
   :intel_avx: 
@@ -5061,23 +7218,23 @@ r5d.12xlarge:
   :intel_turbo: 
   :memory: 412316860416
   :memory_gb: 384.0
-  :name: r5d.12xlarge
+  :name: r5dn.12xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 48
   :virtualization_type:
   - :hvm
   :vpc_only: false
-r5d.16xlarge:
+r5dn.16xlarge:
   :architecture:
   - :x86_64
   :cluster_networking: 
   :current_generation: true
   :current_version: true
-  :description: R5D Memory optimized 16XL
+  :description: R5DN Memory optimized 16XL
   :ebs_only: false
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 2576980377600
@@ -5090,21 +7247,168 @@ r5d.16xlarge:
   :intel_turbo: 
   :memory: 549755813888
   :memory_gb: 512.0
-  :name: r5d.16xlarge
+  :name: r5dn.16xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 64
   :virtualization_type:
   - :hvm
   :vpc_only: false
-r5d.24xlarge:
+r5dn.24xlarge:
   :architecture:
   - :x86_64
   :cluster_networking: 
   :current_generation: true
   :current_version: true
-  :description: R5D Memory optimized 24XL
+  :description: R5DN Memory optimized 24XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 3865470566400
+  :instance_store_size_gb: 3600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: r5dn.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5dn.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5DN Memory optimized 2XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 322122547200
+  :instance_store_size_gb: 300.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: r5dn.2xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5dn.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5DN Memory optimized 4XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 644245094400
+  :instance_store_size_gb: 600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: r5dn.4xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5dn.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5DN Memory optimized 8XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 1288490188800
+  :instance_store_size_gb: 1200.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: r5dn.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5dn.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5DN Memory optimized Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 80530636800
+  :instance_store_size_gb: 75.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: r5dn.large
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5dn.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: R5DN Memory optimized Metal
+  :disabled: true
+  :discontinued: true
   :ebs_only: false
   :ebs_optimized_available: 
   :enhanced_networking: 
@@ -5119,139 +7423,23 @@ r5d.24xlarge:
   :intel_turbo: 
   :memory: 824633720832
   :memory_gb: 768.0
-  :name: r5d.24xlarge
+  :name: r5dn.metal
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
   :processor_clock_speed: 
   :vcpu: 96
   :virtualization_type:
   - :hvm
   :vpc_only: false
-r5d.2xlarge:
+r5dn.xlarge:
   :architecture:
   - :x86_64
   :cluster_networking: 
   :current_generation: true
   :current_version: true
-  :description: R5D Memory optimized 2XL
+  :description: R5DN Memory optimized XL
   :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 322122547200
-  :instance_store_size_gb: 300.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 1
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 68719476736
-  :memory_gb: 64.0
-  :name: r5d.2xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
-  :vcpu: 8
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-r5d.4xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: R5D Memory optimized 4XL
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 644245094400
-  :instance_store_size_gb: 600.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 2
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 137438953472
-  :memory_gb: 128.0
-  :name: r5d.4xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
-  :vcpu: 16
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-r5d.8xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: R5D Memory optimized 8XL
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 1288490188800
-  :instance_store_size_gb: 1200.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 2
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 274877906944
-  :memory_gb: 256.0
-  :name: r5d.8xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
-  :vcpu: 32
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-r5d.large:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: R5D Memory optimized Large
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 80530636800
-  :instance_store_size_gb: 75.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 1
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 17179869184
-  :memory_gb: 16.0
-  :name: r5d.large
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
-  :processor_clock_speed: 
-  :vcpu: 2
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-r5d.xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: R5D Memory optimized XL
-  :ebs_only: false
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 161061273600
@@ -5264,10 +7452,505 @@ r5d.xlarge:
   :intel_turbo: 
   :memory: 34359738368
   :memory_gb: 32.0
-  :name: r5d.xlarge
+  :name: r5dn.xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 3.1 GHz
+  :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5n.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5N Memory optimized 12XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: r5n.12xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5n.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5N Memory optimized 16XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: r5n.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5n.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5N Memory optimized 24XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: r5n.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5n.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5N Memory optimized 2XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: r5n.2xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5n.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5N Memory optimized 4XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: r5n.4xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5n.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5N Memory optimized 8XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: r5n.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5n.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5N Memory optimized Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: r5n.large
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5n.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: R5N Memory optimized Metal
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: r5n.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
   :processor_clock_speed: 
+  :vcpu: 96
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r5n.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R5N Memory optimized XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: r5n.xlarge
+  :network_performance: :up_to_25_gigabit
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r6g.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6G Memory optimized 12XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: r6g.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r6g.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6G Memory optimized 16XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: r6g.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 64
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r6g.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6G Memory optimized 2XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: r6g.2xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r6g.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6G Memory optimized 4XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: r6g.4xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 16
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r6g.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6G Memory optimized 8XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: r6g.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 32
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r6g.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6G Memory optimized Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: r6g.large
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r6g.medium:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6G Memory optimized Medium
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: r6g.medium
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 1
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+r6g.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6G Memory optimized XL
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: r6g.xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -5327,7 +8010,7 @@ t2.2xlarge:
   :name: t2.2xlarge
   :network_performance: :moderate
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed: Up to 3.0 GHz
+  :processor_clock_speed: Up to 3.3 GHz
   :vcpu: 8
   :virtualization_type:
   - :hvm
@@ -5356,7 +8039,7 @@ t2.large:
   :name: t2.large
   :network_performance: :low_to_moderate
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed: Up to 3.0 GHz
+  :processor_clock_speed: Up to 3.3 GHz
   :vcpu: 2
   :virtualization_type:
   - :hvm
@@ -5506,7 +8189,7 @@ t2.xlarge:
   :name: t2.xlarge
   :network_performance: :moderate
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed: Up to 3.0 GHz
+  :processor_clock_speed: Up to 3.3 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -5519,7 +8202,7 @@ t3.2xlarge:
   :current_version: true
   :description: T3 General purpose 2XL
   :ebs_only: true
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 0
@@ -5527,15 +8210,15 @@ t3.2xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 34359738368
   :memory_gb: 32.0
   :name: t3.2xlarge
-  :network_performance: :moderate
-  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
-  :processor_clock_speed: 
+  :network_performance: :up_to_5_gigabit
+  :physical_processor: Intel Skylake E5 2686 v5
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 8
   :virtualization_type:
   - :hvm
@@ -5548,7 +8231,7 @@ t3.large:
   :current_version: true
   :description: T3 General purpose Large
   :ebs_only: true
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 0
@@ -5556,15 +8239,15 @@ t3.large:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 8589934592
   :memory_gb: 8.0
   :name: t3.large
-  :network_performance: :low_to_moderate
-  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
-  :processor_clock_speed: 
+  :network_performance: :up_to_5_gigabit
+  :physical_processor: Intel Skylake E5 2686 v5
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 2
   :virtualization_type:
   - :hvm
@@ -5577,7 +8260,7 @@ t3.medium:
   :current_version: true
   :description: T3 General purpose Medium
   :ebs_only: true
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 0
@@ -5585,15 +8268,15 @@ t3.medium:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 4294967296
   :memory_gb: 4.0
   :name: t3.medium
-  :network_performance: :low_to_moderate
-  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
-  :processor_clock_speed: 
+  :network_performance: :up_to_5_gigabit
+  :physical_processor: Intel Skylake E5 2686 v5
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 2
   :virtualization_type:
   - :hvm
@@ -5606,7 +8289,7 @@ t3.micro:
   :current_version: true
   :description: T3 General purpose Micro
   :ebs_only: true
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 0
@@ -5614,15 +8297,15 @@ t3.micro:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 1073741824
   :memory_gb: 1.0
   :name: t3.micro
-  :network_performance: :low_to_moderate
-  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
-  :processor_clock_speed: 
+  :network_performance: :up_to_5_gigabit
+  :physical_processor: Intel Skylake E5 2686 v5
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 2
   :virtualization_type:
   - :hvm
@@ -5635,7 +8318,7 @@ t3.nano:
   :current_version: true
   :description: T3 General purpose Nano
   :ebs_only: true
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 0
@@ -5643,15 +8326,15 @@ t3.nano:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 536870912
   :memory_gb: 0.5
   :name: t3.nano
-  :network_performance: :low
-  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
-  :processor_clock_speed: 
+  :network_performance: :up_to_5_gigabit
+  :physical_processor: Intel Skylake E5 2686 v5
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 2
   :virtualization_type:
   - :hvm
@@ -5664,7 +8347,7 @@ t3.small:
   :current_version: true
   :description: T3 General purpose Small
   :ebs_only: true
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 0
@@ -5672,15 +8355,15 @@ t3.small:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 2147483648
   :memory_gb: 2.0
   :name: t3.small
-  :network_performance: :low_to_moderate
-  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
-  :processor_clock_speed: 
+  :network_performance: :up_to_5_gigabit
+  :physical_processor: Intel Skylake E5 2686 v5
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 2
   :virtualization_type:
   - :hvm
@@ -5693,7 +8376,7 @@ t3.xlarge:
   :current_version: true
   :description: T3 General purpose XL
   :ebs_only: true
-  :ebs_optimized_available: 
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 0
@@ -5701,15 +8384,15 @@ t3.xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 17179869184
   :memory_gb: 16.0
   :name: t3.xlarge
-  :network_performance: :moderate
-  :physical_processor: Intel Skylake E5 2686 v5 (2.5 GHz)
-  :processor_clock_speed: 
+  :network_performance: :up_to_5_gigabit
+  :physical_processor: Intel Skylake E5 2686 v5
+  :processor_clock_speed: 3.1 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -5736,7 +8419,7 @@ t3a.2xlarge:
   :memory: 34359738368
   :memory_gb: 32.0
   :name: t3a.2xlarge
-  :network_performance: :moderate
+  :network_performance: :up_to_5_gigabit
   :physical_processor: AMD EPYC 7571
   :processor_clock_speed: 2.5 GHz
   :vcpu: 8
@@ -5765,7 +8448,7 @@ t3a.large:
   :memory: 8589934592
   :memory_gb: 8.0
   :name: t3a.large
-  :network_performance: :low_to_moderate
+  :network_performance: :up_to_5_gigabit
   :physical_processor: AMD EPYC 7571
   :processor_clock_speed: 2.5 GHz
   :vcpu: 2
@@ -5794,7 +8477,7 @@ t3a.medium:
   :memory: 4294967296
   :memory_gb: 4.0
   :name: t3a.medium
-  :network_performance: :low_to_moderate
+  :network_performance: :up_to_5_gigabit
   :physical_processor: AMD EPYC 7571
   :processor_clock_speed: 2.5 GHz
   :vcpu: 2
@@ -5823,7 +8506,7 @@ t3a.micro:
   :memory: 1073741824
   :memory_gb: 1.0
   :name: t3a.micro
-  :network_performance: :low_to_moderate
+  :network_performance: :up_to_5_gigabit
   :physical_processor: AMD EPYC 7571
   :processor_clock_speed: 2.5 GHz
   :vcpu: 2
@@ -5852,7 +8535,7 @@ t3a.nano:
   :memory: 536870912
   :memory_gb: 0.5
   :name: t3a.nano
-  :network_performance: :low
+  :network_performance: :up_to_5_gigabit
   :physical_processor: AMD EPYC 7571
   :processor_clock_speed: 2.5 GHz
   :vcpu: 2
@@ -5881,7 +8564,7 @@ t3a.small:
   :memory: 2147483648
   :memory_gb: 2.0
   :name: t3a.small
-  :network_performance: :low_to_moderate
+  :network_performance: :up_to_5_gigabit
   :physical_processor: AMD EPYC 7571
   :processor_clock_speed: 2.5 GHz
   :vcpu: 2
@@ -5910,10 +8593,72 @@ t3a.xlarge:
   :memory: 17179869184
   :memory_gb: 16.0
   :name: t3a.xlarge
-  :network_performance: :moderate
+  :network_performance: :up_to_5_gigabit
   :physical_processor: AMD EPYC 7571
   :processor_clock_speed: 2.5 GHz
   :vcpu: 4
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+u-18tb1.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: U-18TB1 Memory optimized Metal
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 19791209299968
+  :memory_gb: 18432.0
+  :name: u-18tb1.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8280L (Cascade Lake)
+  :processor_clock_speed: 
+  :vcpu: 448
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+u-24tb1.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: false
+  :description: U-24TB1 Memory optimized Metal
+  :disabled: true
+  :discontinued: true
+  :ebs_only: false
+  :ebs_optimized_available: 
+  :enhanced_networking: 
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 26388279066624
+  :memory_gb: 24576.0
+  :name: u-24tb1.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8280L (Cascade Lake)
+  :processor_clock_speed: 
+  :vcpu: 448
   :virtualization_type:
   - :hvm
   :vpc_only: false
@@ -6017,7 +8762,7 @@ x1e.16xlarge:
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
-  :intel_turbo: true
+  :intel_turbo: 
   :memory: 2095944040448
   :memory_gb: 1952.0
   :name: x1e.16xlarge
@@ -6075,7 +8820,7 @@ x1e.32xlarge:
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
-  :intel_turbo: true
+  :intel_turbo: 
   :memory: 4191888080896
   :memory_gb: 3904.0
   :name: x1e.32xlarge
@@ -6133,7 +8878,7 @@ x1e.8xlarge:
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
-  :intel_turbo: true
+  :intel_turbo: 
   :memory: 1047972020224
   :memory_gb: 976.0
   :name: x1e.8xlarge
@@ -6173,6 +8918,151 @@ x1e.xlarge:
   :virtualization_type:
   - :hvm
   :vpc_only: false
+z1d.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: Z1D Memory optimized 12XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 1932735283200
+  :instance_store_size_gb: 1800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: z1d.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8151
+  :processor_clock_speed: 4 GHz
+  :vcpu: 48
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+z1d.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: Z1D Memory optimized 2XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 322122547200
+  :instance_store_size_gb: 300.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: z1d.2xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: Intel Xeon Platinum 8151
+  :processor_clock_speed: 4 GHz
+  :vcpu: 8
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+z1d.3xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: Z1D Memory optimized 3XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 483183820800
+  :instance_store_size_gb: 450.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 103079215104
+  :memory_gb: 96.0
+  :name: z1d.3xlarge
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: Intel Xeon Platinum 8151
+  :processor_clock_speed: 4 GHz
+  :vcpu: 12
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+z1d.6xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: Z1D Memory optimized 6XL
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 966367641600
+  :instance_store_size_gb: 900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: z1d.6xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8151
+  :processor_clock_speed: 4 GHz
+  :vcpu: 24
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
+z1d.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: Z1D Memory optimized Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 80530636800
+  :instance_store_size_gb: 75.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: z1d.large
+  :network_performance: :up_to_10_gigabit
+  :physical_processor: Intel Xeon Platinum 8151
+  :processor_clock_speed: 4 GHz
+  :vcpu: 2
+  :virtualization_type:
+  - :hvm
+  :vpc_only: false
 z1d.metal:
   :architecture:
   - :x86_64
@@ -6180,6 +9070,8 @@ z1d.metal:
   :current_generation: true
   :current_version: true
   :description: Z1D Memory optimized
+  :disabled: true
+  :discontinued: true
   :ebs_only: false
   :ebs_optimized_available: 
   :enhanced_networking: 
@@ -6202,151 +9094,6 @@ z1d.metal:
   :virtualization_type:
   - :hvm
   :vpc_only: false
-z1d.12xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: Z1D Memory optimized 12XL
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 1932735283200
-  :instance_store_size_gb: 1800.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 2
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 412316860416
-  :memory_gb: 384.0
-  :name: z1d.12xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8151
-  :processor_clock_speed: 
-  :vcpu: 48
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-z1d.2xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: Z1D Memory optimized 2XL
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 322122547200
-  :instance_store_size_gb: 300.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 1
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 68719476736
-  :memory_gb: 64.0
-  :name: z1d.2xlarge
-  :network_performance: :up_to_10_gigabit
-  :physical_processor: Intel Xeon Platinum 8151
-  :processor_clock_speed: 
-  :vcpu: 8
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-z1d.3xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: Z1D Memory optimized 3XL
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 483183820800
-  :instance_store_size_gb: 450.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 1
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 103079215104
-  :memory_gb: 96.0
-  :name: z1d.3xlarge
-  :network_performance: :up_to_10_gigabit
-  :physical_processor: Intel Xeon Platinum 8151
-  :processor_clock_speed: 
-  :vcpu: 12
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-z1d.6xlarge:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: Z1D Memory optimized 6XL
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 966367641600
-  :instance_store_size_gb: 900.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 1
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 206158430208
-  :memory_gb: 192.0
-  :name: z1d.6xlarge
-  :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8151
-  :processor_clock_speed: 
-  :vcpu: 24
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
-z1d.large:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: Z1D Memory optimized Large
-  :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
-  :family: Memory optimized
-  :instance_store_size: 80530636800
-  :instance_store_size_gb: 75.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 1
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 17179869184
-  :memory_gb: 16.0
-  :name: z1d.large
-  :network_performance: :up_to_10_gigabit
-  :physical_processor: Intel Xeon Platinum 8151
-  :processor_clock_speed: 4.0 GHz
-  :vcpu: 2
-  :virtualization_type:
-  - :hvm
-  :vpc_only: false
 z1d.xlarge:
   :architecture:
   - :x86_64
@@ -6355,23 +9102,23 @@ z1d.xlarge:
   :current_version: true
   :description: Z1D Memory optimized XL
   :ebs_only: false
-  :ebs_optimized_available: 
-  :enhanced_networking: 
+  :ebs_optimized_available: true
+  :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 161061273600
   :instance_store_size_gb: 150.0
   :instance_store_type: NVMe SSD
   :instance_store_volumes: 1
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 34359738368
   :memory_gb: 32.0
   :name: z1d.xlarge
   :network_performance: :up_to_10_gigabit
   :physical_processor: Intel Xeon Platinum 8151
-  :processor_clock_speed: 
+  :processor_clock_speed: 4 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm

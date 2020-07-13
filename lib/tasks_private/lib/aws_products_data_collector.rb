@@ -6,17 +6,12 @@ class AwsProductsDataCollector
   OFFERS_HOSTNAME = 'https://pricing.us-east-1.amazonaws.com'
 
   cattr_accessor :cache, :instance_writer => false do
-    cache_dir = Rails.root.join(*%w(tmp aws_cache products_data))
+    cache_dir = Rails.root.join('tmp', 'aws_cache', 'products_data')
     ActiveSupport::Cache::FileStore.new(cache_dir)
   end
 
-  attr_reader *%i(
-    service_name
-    product_families
-    product_attributes
-    folding_attributes
-    mutable_attributes
-  )
+  attr_reader :service_name, :product_families, :product_attributes,
+              :folding_attributes, :mutable_attributes
 
   def initialize(service_name:,
                  product_families:,
@@ -53,8 +48,8 @@ class AwsProductsDataCollector
   def parse!
     @parsed_data_cache_key ||= begin
       key_values = product_families + product_attributes + folding_attributes + mutable_attributes
-      digest = key_values.reduce(Digest::SHA1.new) { |digest, value| digest << value }.hexdigest
-      "#{digest}.#{service_name}.parsed_data.#{offer_versions_digest}"
+      hexdigest = key_values.reduce(Digest::SHA1.new) { |digest, value| digest << value }.hexdigest
+      "#{hexdigest}.#{service_name}.parsed_data.#{offer_versions_digest}"
     end
 
     result, warnings = cache.fetch(@parsed_data_cache_key) do
@@ -119,7 +114,7 @@ class AwsProductsDataCollector
           is_current = current_version == version_name
           data.each do |product|
             attributes = product['attributes']
-            attributes['currentVersion'] = is_current unless attributes.has_key?('currentVersion')
+            attributes['currentVersion'] = is_current unless attributes.key?('currentVersion')
           end
         end.reduce(&:+)
       end
