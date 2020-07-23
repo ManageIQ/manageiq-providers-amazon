@@ -85,7 +85,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
   def security_groups
     collector.security_groups.each do |sg|
       persister_security_group = persister.security_groups.find_or_build(sg['group_id']).assign_attributes(
-        :name                => get_from_tags(sg, 'Name') || sg['group_name'].presence || sg['group_id'],
+        :name                => get_from_tags(sg, 'name') || sg['group_name'].presence || sg['group_id'],
         :description         => sg['description'].try(:truncate, 255),
         :cloud_network       => persister.cloud_networks.lazy_find(sg['vpc_id']),
         :orchestration_stack => persister.orchestration_stacks.lazy_find(
@@ -280,7 +280,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
       end
 
       persister_network_port = persister.network_ports.find_or_build(uid).assign_attributes(
-        :name            => get_from_tags(network_port, 'Name') || uid,
+        :name            => get_from_tags(network_port, 'name') || uid,
         :status          => network_port['status'],
         :mac_address     => network_port['mac_address'],
         :device_owner    => network_port.fetch_path('attachment', 'instance_owner_id'),
