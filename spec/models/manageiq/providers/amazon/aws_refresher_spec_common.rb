@@ -52,6 +52,7 @@ module AwsRefresherSpecCommon
     assert_specific_az
     assert_specific_key_pair
     assert_specific_cloud_network
+    assert_specific_network_port
     assert_specific_security_group
     assert_specific_security_group_on_cloud_network
     assert_specific_template
@@ -194,6 +195,16 @@ module AwsRefresherSpecCommon
     expect(@cn.cloud_subnets.size).to eq(3)
     assert_vpc_subnet_1
     assert_vpc_subnet_2
+  end
+
+  def assert_specific_network_port
+    network_port = ManageIQ::Providers::Amazon::NetworkManager::NetworkPort.find_by(:ems_ref => 'i-0e1752ff841801f65')
+
+    expect(network_port).to have_attributes(
+      "type"    => "ManageIQ::Providers::Amazon::NetworkManager::NetworkPort",
+      "ems_ref" => "i-0e1752ff841801f65",
+      "name"    => "EmsRefreshSpec-PoweredOff"
+    )
   end
 
   def assert_specific_security_group
