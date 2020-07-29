@@ -1291,6 +1291,20 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
       )
     end
 
+    it "parses AWS_API_CALL_ModifyVolume" do
+      ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_ModifyVolume.json")
+      parsed_targets = described_class.new(ems_event).parse
+
+      expect(parsed_targets.size).to eq(1)
+      expect(target_references(parsed_targets)).to(
+        match_array(
+          [
+            [:cloud_volumes, {:ems_ref=>"vol-0395fe9f0370fabdf"}]
+          ]
+        )
+      )
+    end
+
     it "parses AWS_API_CALL_ModifyVpcAttribute" do
       ems_event      = create_ems_event("cloud_watch/AWS_API_CALL_ModifyVpcAttribute.json")
       parsed_targets = described_class.new(ems_event).parse
