@@ -110,8 +110,12 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
     add_target(target_collection, :floating_ips, event_data["publicIp"]) if event_data["publicIp"]
     add_target(target_collection, :load_balancers, event_data["loadBalancerName"]) if event_data["loadBalancerName"]
     # Block Storage
-    add_target(target_collection, :cloud_volumes, event_data["volumeId"]) if event_data["volumeId"]
+
+    volume_id = event_data["volumeId"] || event_data.dig("ModifyVolumeResponse", "volumeModification", "volumeId")
+    add_target(target_collection, :cloud_volumes, volume_id) if volume_id
+
     add_target(target_collection, :cloud_volume_snapshots, event_data["snapshotId"]) if event_data["snapshotId"]
+
     # Service Catalog
     add_target(target_collection, :service_offerings, event_data["productId"]) if event_data["productId"]
     add_target(target_collection, :service_instances, event_data["provisionedProductId"]) if event_data["provisionedProductId"]
