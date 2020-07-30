@@ -10,7 +10,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
 
     # The order of the below methods doesn't matter since they refer to each other using only lazy links
     availability_zones
-    key_pairs
+    auth_key_pairs
     stacks
     private_images if collector.options.get_private_images
     shared_images if collector.options.get_shared_images
@@ -219,7 +219,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :availability_zone   => persister.availability_zones.lazy_find(instance.fetch_path('placement', 'availability_zone')),
         :flavor              => flavor,
         :genealogy_parent    => persister.miq_templates.lazy_find(instance['image_id']),
-        :key_pairs           => [persister.key_pairs.lazy_find(instance['key_name'])].compact,
+        :key_pairs           => [persister.auth_key_pairs.lazy_find(instance['key_name'])].compact,
         :location            => persister.networks.lazy_find({
                                                                :hardware    => persister.hardwares.lazy_find(:vm_or_template => lazy_vm),
                                                                :description => "public"
@@ -344,9 +344,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     end
   end
 
-  def key_pairs
+  def auth_key_pairs
     collector.key_pairs.each do |kp|
-      persister.key_pairs.find_or_build(kp['key_name']).assign_attributes(
+      persister.auth_key_pairs.find_or_build(kp['key_name']).assign_attributes(
         :fingerprint => kp['key_fingerprint']
       )
     end
