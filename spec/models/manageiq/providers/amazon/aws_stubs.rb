@@ -27,6 +27,7 @@ module AwsStubs
       :stack_parameter_count                           => scaling * 6,
       :stack_output_count                              => scaling * 6,
       :load_balancer_instances_count                   => scaling * 7,
+      :db_instance_count                               => scaling * 5,
       :vpc_count                                       => scaling * 6,
       :subnet_count                                    => scaling * 6,
       :network_port_count                              => scaling * 6,
@@ -291,6 +292,30 @@ module AwsStubs
     end
 
     mocked_stack_outputs
+  end
+
+  def mocked_db_instances
+    {
+      :db_instances => Array.new(test_counts[:db_instance_count]) do |i|
+        {
+          :db_instance_identifier => "test-instance-#{i}",
+          :db_instance_class      => "db.r5.large",
+          :engine                 => "aurora-postgresql",
+          :db_instance_status     => "available",
+          :master_username        => "postgres",
+          :allocated_storage      => 1,
+          :instance_create_time   => Time.now.utc,
+          :availability_zone      => "us-east-1b",
+          :engine_version         => "10.7",
+          :publicly_accessible    => true,
+          :storage_type           => "aurora",
+          :db_cluster_identifier  => "test",
+          :storage_encrypted      => true,
+          :dbi_resource_id        => "db-#{i}",
+          :db_instance_arn        => "arn:aws:rds:us-east-1:200278856672:db:test-instance-#{i}",
+        }
+      end
+    }
   end
 
   def mocked_regions

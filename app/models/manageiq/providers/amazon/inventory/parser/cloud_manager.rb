@@ -12,6 +12,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     availability_zones
     auth_key_pairs
     stacks
+    cloud_database_flavors
+    cloud_databases
     private_images if collector.options.get_private_images
     shared_images if collector.options.get_shared_images
     public_images if collector.options.get_public_images
@@ -194,6 +196,32 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :content     => collector.stack_template(stack_name),
       :orderable   => false
     )
+  end
+
+  def cloud_database_flavors
+    collector.cloud_database_flavors.each do |flavor|
+      persister.cloud_database_flavors.build(
+        :ems_ref => flavor[:name],
+        :name    => flavor[:name],
+        :enabled => true,
+        :cpus    => flavor[:vcpu],
+        :memory  => flavor[:memory]
+      )
+    end
+  end
+
+  def cloud_databases
+    collector.cloud_databases.each do |cloud_database|
+      persister.cloud_databases.build(
+        :ems_ref               => cloud_database["dbi_resource_id"],
+        :name                  => cloud_database["db_instance_identifier"],
+        :status                => cloud_database["db_instance_status"],
+        :db_engine             => "#{cloud_database["engine"]} #{cloud_database["engine_version"]}",
+        :used_storage          => cloud_database["allocated_storage"]&.gigabytes,
+        :max_storage           => cloud_database["max_allocated_storage"]&.gigabytes,
+        :cloud_database_flavor => persister.cloud_database_flavors.lazy_find(cloud_database["db_instance_class"])
+      )
+    end
   end
 
   def instances

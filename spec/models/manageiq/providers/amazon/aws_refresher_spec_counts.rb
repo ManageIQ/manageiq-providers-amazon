@@ -40,7 +40,8 @@ module AwsRefresherSpecCounts
       :system_service                => 0,
       :vm                            => 0,
       :vm_or_template                => 0,
-      :tagging                       => 0
+      :tagging                       => 0,
+      :cloud_database                => 0,
     }
   end
 
@@ -142,6 +143,9 @@ module AwsRefresherSpecCounts
     orchestration_templates_count = orchestration_stacks_count - (OrchestrationStack.pluck(:orchestration_template_id).count -
       OrchestrationStack.pluck(:orchestration_template_id).uniq.count)
 
+    cloud_database_hashes = db_instances.all
+    cloud_databases_count = cloud_database_hashes.size
+
     base_inventory_counts.merge(
       :auth_private_key              => key_pairs.size,
       :availability_zone             => availability_zones.size,
@@ -171,7 +175,8 @@ module AwsRefresherSpecCounts
       :service_parameters_sets       => 0,
       :tagging                       => vms_tags_count + images_tags_count,
       :vm                            => instances_count,
-      :vm_or_template                => instances_and_images_count
+      :vm_or_template                => instances_and_images_count,
+      :cloud_database                => cloud_databases_count
     )
   end
 
@@ -211,6 +216,7 @@ module AwsRefresherSpecCounts
       :cloud_subnet                  => CloudSubnet.count,
       :custom_attribute              => CustomAttribute.count,
       :tagging                       => Tagging.count,
+      :cloud_database                => CloudDatabase.count,
     }
     expect(actual).to eq expected_table_counts
   end
@@ -254,6 +260,10 @@ module AwsRefresherSpecCounts
 
   def aws_s3
     @aws_s3 ||= manager.connect(:service => :S3)
+  end
+
+  def aws_rds
+    @aws_rds ||= manager.connect(:service => :RDS)
   end
 
   def options
@@ -316,6 +326,10 @@ module AwsRefresherSpecCounts
     hash_collection.new(
       aws_ec2.client.describe_images(:filters => [{:name => 'image-id', :values => refs}]).images
     ).all
+  end
+
+  def db_instances
+    hash_collection.new(aws_rds.client.describe_db_instances[:db_instances])
   end
 
   def stacks

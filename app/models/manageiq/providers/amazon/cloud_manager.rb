@@ -1,6 +1,8 @@
 class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudManager
   require_nested :AuthKeyPair
   require_nested :AvailabilityZone
+  require_nested :CloudDatabase
+  require_nested :CloudDatabaseFlavor
   require_nested :EventCatcher
   require_nested :EventParser
   require_nested :Flavor

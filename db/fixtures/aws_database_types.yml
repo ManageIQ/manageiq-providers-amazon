@@ -1,0 +1,201 @@
+---
+db.t1.micro:
+  :name: db.t1.micro
+  :family: Micro Instances
+  :vcpu: 1
+  :ecu: 1
+  :memory: 660351221.76
+  :ebs_optimized:
+  :network_performance: :very_low
+db.m1.small:
+  :name: db.m1.small
+  :family: Micro Instances
+  :vcpu: 1
+  :ecu: 1
+  :memory: 1825361100.8
+  :ebs_optimized:
+  :network_performance: :very_low
+db.m4.large:
+  :name: db.m4.large
+  :family: Standard
+  :vcpu: 2
+  :ecu: 6.5
+  :memory: 8589934592
+  :ebs_optimized: 450
+  :network_performance: :moderate
+db.m4.xlarge:
+  :name: db.m4.xlarge
+  :family: Standard
+  :vcpu: 4
+  :ecu: 13
+  :memory: 17179869184
+  :ebs_optimized: 750
+  :network_performance: :high
+db.m4.2xlarge:
+  :name: db.m4.2xlarge
+  :family: Standard
+  :vcpu: 8
+  :ecu: 25.5
+  :memory: 34359738368
+  :ebs_optimized: 1000
+  :network_performance: :high
+db.m4.4xlarge:
+  :name: db.m4.4xlarge
+  :family: Standard
+  :vcpu: 16
+  :ecu: 53.5
+  :memory: 68719476736
+  :ebs_optimized: 2000
+  :network_performance: :high
+db.m4.10xlarge:
+  :name: db.m4.10xlarge
+  :family: Standard
+  :vcpu: 40
+  :ecu: 124.5
+  :memory: 171798691840
+  :ebs_optimized: 4000
+  :network_performance: :very_high
+db.r3.large:
+  :name: db.r3.large
+  :family: Memory Optimized
+  :vcpu: 2
+  :ecu: 6.5
+  :memory: 16106127360
+  :ebs_optimized:
+  :network_performance: :moderate
+db.r3.xlarge:
+  :name: db.r3.xlarge
+  :family: Memory Optimized
+  :vcpu: 4
+  :ecu: 13
+  :memory: 32749125632.0
+  :ebs_optimized: 500
+  :network_performance: :moderate
+db.r3.2xlarge:
+  :name: db.r3.2xlarge
+  :family: Memory Optimized
+  :vcpu: 8
+  :ecu: 26
+  :memory: 65498251264
+  :ebs_optimized: 1000
+  :network_performance: :high
+db.r3.4xlarge:
+  :name: db.r3.4xlarge
+  :family: Memory Optimized
+  :vcpu: 16
+  :ecu: 52
+  :memory: 130996502528
+  :ebs_optimized: 2000
+  :network_performance: :high
+db.r3.8xlarge:
+  :name: db.r3.8xlarge
+  :family: Memory Optimized
+  :vcpu: 32
+  :ecu: 104
+  :memory: 261993005056
+  :ebs_optimized:
+  :network_performance: :very_high
+db.t2.micro:
+  :name: db.t2.micro
+  :family: Burst Capable
+  :vcpu: 1
+  :ecu: 1
+  :memory: 1073741824
+  :ebs_optimized:
+  :network_performance: :low
+db.t2.small:
+  :name: db.t2.small
+  :family: Burst Capable
+  :vcpu: 1
+  :ecu: 1
+  :memory: 2147483648
+  :ebs_optimized:
+  :network_performance: :low
+db.t2.medium:
+  :name: db.t2.medium
+  :family: Burst Capable
+  :vcpu: 2
+  :ecu: 2
+  :memory: 4294967296
+  :ebs_optimized:
+  :network_performance: :moderate
+db.t2.large:
+  :name: db.t2.large
+  :family: Burst Capable
+  :vcpu: 2
+  :ecu: 2
+  :memory: 8589934592
+  :ebs_optimized:
+  :network_performance: :moderate
+db.m3.medium:
+  :name: db.m3.medium
+  :family: Standard
+  :vcpu: 1
+  :ecu: 3
+  :memory: 4026531840.0
+  :ebs_optimized:
+  :network_performance: :moderate
+  :deprecated: true
+db.m3.large:
+  :name: db.m3.large
+  :family: Standard
+  :vcpu: 2
+  :ecu: 6.5
+  :memory: 8053063680.0
+  :ebs_optimized:
+  :network_performance: :moderate
+  :deprecated: true
+db.m3.xlarge:
+  :name: db.m3.xlarge
+  :family: Standard
+  :vcpu: 4
+  :ecu: 13
+  :memory: 16106127360
+  :ebs_optimized: 500
+  :network_performance: :high
+  :deprecated: true
+db.m3.2xlarge:
+  :name: db.m3.2xlarge
+  :family: Standard
+  :vcpu: 8
+  :ecu: 26
+  :memory: 32212254720
+  :ebs_optimized: 1000
+  :network_performance: :high
+  :deprecated: true
+db.m2.xlarge:
+  :name: db.m2.xlarge
+  :family: Memory Optimized
+  :vcpu: 2
+  :ecu: 6.5
+  :memory: 18360985190.4
+  :ebs_optimized:
+  :network_performance: :moderate
+  :deprecated: true
+db.m2.2xlarge:
+  :name: db.m2.2xlarge
+  :family: Memory Optimized
+  :vcpu: 4
+  :ecu: 23
+  :memory: 36721970380.8
+  :ebs_optimized: 500
+  :network_performance: :moderate
+  :deprecated: true
+db.m2.4xlarge:
+  :name: db.m2.4xlarge
+  :family: Memory Optimized
+  :vcpu: 8
+  :ecu: 26
+  :memory: 73443940761.6
+  :ebs_optimized: 1000
+  :network_performance: :high
+  :deprecated: true
+db.cr1.8xlarge:
+  :name: db.cr1.8xlarge
+  :family: Memory Optimized
+  :vcpu: 32
+  :ecu: 88
+  :memory: 261993005056
+  :ebs_optimized:
+  :network_performance: :ver_high
+  :deprecated: true

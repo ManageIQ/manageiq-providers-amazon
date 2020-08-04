@@ -18,6 +18,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManageIQ::Providers::I
   attr_reader :network_routers
   attr_reader :load_balancers
   attr_reader :stacks
+  attr_reader :cloud_databases
+  attr_reader :cloud_database_flavors
   attr_reader :cloud_volumes
   attr_reader :cloud_volume_snapshots
   attr_reader :cloud_objects_store_containers
@@ -45,6 +47,8 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManageIQ::Providers::I
     @network_routers             = []
     @load_balancers              = []
     @stacks                      = []
+    @cloud_databases             = []
+    @cloud_database_flavors      = []
     @cloud_volumes               = []
     @cloud_volume_snapshots      = []
     # Nested resources
@@ -78,6 +82,10 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManageIQ::Providers::I
 
   def aws_s3
     @aws_s3 ||= manager.connect(:service => :S3)
+  end
+
+  def aws_rds
+    @aws_rds ||= manager.connect(:service => :RDS)
   end
 
   def stack_resources(stack_name)

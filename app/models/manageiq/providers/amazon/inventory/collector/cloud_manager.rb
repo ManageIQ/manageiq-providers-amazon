@@ -15,6 +15,14 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
     hash_collection.new(aws_ec2.client.describe_key_pairs.flat_map(&:key_pairs))
   end
 
+  def cloud_database_flavors
+    ManageIQ::Providers::Amazon::DatabaseTypes.all
+  end
+
+  def cloud_databases
+    hash_collection.new(aws_rds.client.describe_db_instances.flat_map(&:db_instances))
+  end
+
   def private_images
     return [] unless options.get_private_images
 

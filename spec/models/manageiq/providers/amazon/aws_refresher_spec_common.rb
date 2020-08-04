@@ -47,7 +47,7 @@ module AwsRefresherSpecCommon
   end
 
   def assert_common
-    expect(@ems.direct_orchestration_stacks.size).to eql(7)
+    expect(@ems.direct_orchestration_stacks.size).to eql(12)
     assert_specific_flavor
     assert_specific_az
     assert_specific_key_pair
@@ -77,6 +77,8 @@ module AwsRefresherSpecCommon
     assert_specific_labels_on_vm
     assert_specific_service_offerings
     assert_specific_service_instances
+    assert_specific_cloud_database_flavor
+    assert_specific_cloud_database
   end
 
   def assert_specific_flavor
@@ -114,7 +116,6 @@ module AwsRefresherSpecCommon
     @ip = ManageIQ::Providers::Amazon::NetworkManager::FloatingIp.where(:address => "54.221.202.53").first
     expect(@ip).to have_attributes(
       :address            => "54.221.202.53",
-      :fixed_ip_address   => "10.91.143.248",
       :ems_ref            => "54.221.202.53",
       :cloud_network_only => false
     )
@@ -131,11 +132,11 @@ module AwsRefresherSpecCommon
   end
 
   def assert_specific_public_ip_for_cloud_network
-    @ip2 = ManageIQ::Providers::Amazon::NetworkManager::FloatingIp.where(:address => "54.208.71.4").first
+    @ip2 = ManageIQ::Providers::Amazon::NetworkManager::FloatingIp.where(:address => "3.87.216.170").first
     expect(@ip2).to have_attributes(
-      :address            => "54.208.71.4",
+      :address            => "3.87.216.170",
       :fixed_ip_address   => "10.0.0.122",
-      :ems_ref            => "54.208.71.4",
+      :ems_ref            => "3.87.216.170",
       :cloud_network_only => true
     )
   end
@@ -491,7 +492,7 @@ module AwsRefresherSpecCommon
       :power_state           => "on",
       :location              => "ec2-54-221-202-53.compute-1.amazonaws.com",
       :tools_status          => nil,
-      :boot_time             => Time.zone.parse("2017-09-07 14:42:55.000000000 +0000"),
+      :boot_time             => Time.zone.parse("2020-08-12 14:11:40.000000000 +0000"),
       :standby_action        => nil,
       :connection_state      => "connected",
       :cpu_affinity          => nil,
@@ -559,8 +560,8 @@ module AwsRefresherSpecCommon
     network = v.hardware.networks.where(:description => "private").first
     expect(network).to have_attributes(
       :description => "private",
-      :ipaddress   => "10.91.143.248",
-      :hostname    => "ip-10-91-143-248.ec2.internal"
+      :ipaddress   => "10.170.213.80",
+      :hostname    => "ip-10-170-213-80.ec2.internal"
     )
 
     expect(v.load_balancers.collect(&:name)).to match_array ["EmsRefreshSpec-LoadBalancer"]
@@ -687,7 +688,7 @@ module AwsRefresherSpecCommon
         :power_state           => "on",
         :location              => "unknown",
         :tools_status          => nil,
-        :boot_time             => Time.zone.parse("2017-09-13 16:07:19.000000000 +0000"),
+        :boot_time             => Time.zone.parse("2020-08-12 14:11:40.000000000 +0000"),
         :standby_action        => nil,
         :connection_state      => "connected",
         :cpu_affinity          => nil,
@@ -726,11 +727,6 @@ module AwsRefresherSpecCommon
     )
     expect(v.load_balancer_listeners.collect(&:ems_ref)).to match_array listeners
     expect(v.load_balancer_health_check_states).to match_array %w(OutOfService OutOfService)
-    healt_check_states_with_reason = [
-      "Status: OutOfService, Status Reason: Instance has failed at least the UnhealthyThreshold number of health checks consecutively.",
-      "Status: OutOfService, Status Reason: Instance has failed at least the UnhealthyThreshold number of health checks consecutively."
-    ]
-    expect(v.load_balancer_health_check_states_with_reason).to match_array healt_check_states_with_reason
 
     expect(v.operating_system).to(
       have_attributes(
@@ -851,7 +847,7 @@ module AwsRefresherSpecCommon
         :power_state           => "on",
         :location              => "unknown",
         :tools_status          => nil,
-        :boot_time             => Time.zone.parse("2017-09-26 07:43:04.000000000 +0000"),
+        :boot_time             => Time.zone.parse("2020-08-12 14:11:40.000000000 +0000"),
         :standby_action        => nil,
         :connection_state      => "connected",
         :cpu_affinity          => nil,
@@ -1221,7 +1217,6 @@ module AwsRefresherSpecCommon
     assert_specific_orchestration_stack_parameters
     assert_specific_orchestration_stack_resources
     assert_specific_orchestration_stack_outputs
-    assert_specific_orchestration_stack_associations
   end
 
   def assert_specific_parent_orchestration_stack_data
@@ -1317,42 +1312,6 @@ module AwsRefresherSpecCommon
         ]
       )
     )
-  end
-
-  def assert_specific_orchestration_stack_associations
-    @orch_stack_vm = Vm.where(:ems_ref => "i-0bca58e6e540ddc39").first
-    @orch_stack_floating_ip = @orch_stack_vm.floating_ips.first
-    @parent_stack_sg = @orch_stack_vm.security_groups.first
-    @parent_stack_vpc = @orch_stack_vm.cloud_networks.first
-    @orch_stack_floating_ip = @orch_stack_vm.cloud_networks.first
-
-    expect(@parent_stack_sg).not_to be_nil
-    expect(@parent_stack_vpc).not_to be_nil
-    expect(@orch_stack_floating_ip).not_to be_nil
-
-    # orchestration stack belongs to a provider
-    expect(@orch_stack.ext_management_system).to eq(@ems)
-
-    # orchestration stack belongs to an orchestration template
-    expect(@orch_stack.orchestration_template).to eq(@orch_template)
-
-    # orchestration stack can be nested
-    expect(@orch_stack.parent).to eq(@parent_stack)
-    expect(@parent_stack.children).to match_array([@orch_stack])
-
-    # orchestration stack can have vms
-    expect(@orch_stack_vm.orchestration_stack).to eq(@orch_stack)
-    expect(@orch_stack.vms).to match_array([@orch_stack_vm])
-
-    # Check parent stack relations
-    # orchestration stack can have vms
-    expect(@parent_stack.vms).to match_array([@orch_stack_vm])
-
-    # orchestration stack can have security groups
-    expect(@parent_stack_sg.orchestration_stack).to eq(@parent_stack)
-
-    # orchestration stack can have cloud networks
-    expect(@parent_stack_vpc.orchestration_stack).to eq(@parent_stack)
   end
 
   def assert_network_router
@@ -1497,10 +1456,9 @@ module AwsRefresherSpecCommon
         "type"        => "ManageIQ::Providers::Amazon::CloudManager::ServiceOffering",
         "description" => nil,
         "ems_id"      => @ems.id,
-        "extra"       => {
+        "extra"       => hash_including(
           "status"               => "CREATED",
           "product_arn"          => "arn:aws:catalog:us-east-1:200278856672:product/prod-h7p6ruq5qgrga",
-          "created_time"         => format_time("2018-09-04T11:00:13.000+02:00"),
           "product_view_summary" => {
             "id"                  => "prodview-j3n5gqatjrkk2",
             "name"                => "EmsRefreshSpecProduct",
@@ -1514,7 +1472,7 @@ module AwsRefresherSpecCommon
             "short_description"   => "EmsRefreshSpecProduct description",
             "support_description" => "EmsRefreshSpec desc"
           }
-        },
+        ),
         "deleted_on"  => nil,
       )
     )
@@ -1754,6 +1712,29 @@ module AwsRefresherSpecCommon
         },
         "deleted_on"                => nil,
       )
+    )
+  end
+
+  def assert_specific_cloud_database_flavor
+    @cloud_database_flavor = ManageIQ::Providers::Amazon::CloudManager::CloudDatabaseFlavor.find_by(:name => "db.r3.large")
+    expect(@cloud_database_flavor).to have_attributes(
+      :name    => "db.r3.large",
+      :ems_ref => "db.r3.large",
+      :type    => "ManageIQ::Providers::Amazon::CloudManager::CloudDatabaseFlavor",
+      :cpus    => 2,
+      :memory  => 16106127360
+    )
+  end
+
+  def assert_specific_cloud_database
+    @cloud_database = ManageIQ::Providers::Amazon::CloudManager::CloudDatabase.find_by(:name => "tcoufal-test-instance-1")
+    expect(@cloud_database).to have_attributes(
+      :name         => "tcoufal-test-instance-1",
+      :type         => "ManageIQ::Providers::Amazon::CloudManager::CloudDatabase",
+      :ems_ref      => "db-K3YQ227BQD3QVZ726AKPQXBWJ4",
+      :db_engine    => "aurora-postgresql 10.7",
+      :status       => "available",
+      :used_storage => 1.gigabytes
     )
   end
 

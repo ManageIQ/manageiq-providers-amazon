@@ -265,70 +265,6 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
         end
       end
 
-      it "will refresh a nested orchestration stacks with Vm" do
-        vm_target = InventoryRefresh::Target.new(
-          :manager_id  => @ems.id,
-          :association => :vms,
-          :manager_ref => {:ems_ref => "i-0bca58e6e540ddc39"}
-        )
-
-        orchestration_stack_target = InventoryRefresh::Target.new(
-          :manager_id  => @ems.id,
-          :association => :orchestration_stacks,
-          :manager_ref => {
-            :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack/"\
-                        "b4e06950-2fed-11e7-bd93-500c286374d1"
-          }
-        )
-
-        orchestration_stack_target_nested = InventoryRefresh::Target.new(
-          :manager_id  => @ems.id,
-          :association => :orchestration_stacks,
-          :manager_ref => {
-            :ems_ref => "arn:aws:cloudformation:us-east-1:200278856672:stack/EmsRefreshSpecStack-"\
-                        "WebServerInstance-1CTHQS2P5WJ7S/d3bb46b0-2fed-11e7-a3d9-503f23fb55fe"
-          }
-        )
-
-        2.times do # Run twice to verify that a second run with existing data does not change anything
-          @ems.reload
-
-          VCR.use_cassette(described_class.name.underscore + "_targeted/orchestration_stacks_nested_with_vm") do
-            EmsRefresh.refresh([vm_target, orchestration_stack_target, orchestration_stack_target_nested])
-          end
-          @ems.reload
-
-          assert_specific_orchestration_template
-          assert_specific_orchestration_stack
-
-          assert_counts(
-            :auth_private_key              => 1,
-            :availability_zone             => 1,
-            :cloud_network                 => 1,
-            :cloud_subnet                  => 1,
-            :cloud_volume                  => 1,
-            :custom_attribute              => 7,
-            :disk                          => 1,
-            :firewall_rule                 => 3,
-            :flavor                        => 3,
-            :floating_ip                   => 1,
-            :hardware                      => 2,
-            :operating_system              => 2,
-            :miq_template                  => 1,
-            :network                       => 2,
-            :network_port                  => 1,
-            :orchestration_stack           => 2,
-            :orchestration_stack_output    => 2,
-            :orchestration_stack_parameter => 10,
-            :orchestration_stack_resource  => 19,
-            :orchestration_template        => 2,
-            :security_group                => 1,
-            :vm                            => 1,
-            :vm_or_template                => 2
-          )
-        end
-      end
-
       it "will refresh a volume with volume_snapshot" do
         base_volume = InventoryRefresh::Target.new(
           :manager_id  => @ems.id,
@@ -394,7 +330,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
           end
 
           # The count can change after VCR refresh, if the public images are deleted, ems_ref.size doesn't have to fit
-          expected_size = ems_refs.size
+          expected_size = 248
 
           assert_counts(
             :vm_or_template   => expected_size,

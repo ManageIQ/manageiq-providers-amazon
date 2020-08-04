@@ -11,6 +11,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
        vm_and_template_labels
        vm_and_template_taggings
        vms
+       cloud_databases
        service_instances
        service_offerings
        service_parameters_sets).each do |name|
@@ -21,6 +22,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
     add_miq_templates
 
     add_flavors
+    add_cloud_database_flavors
 
     %i(orchestration_stacks
        orchestration_stacks_resources
@@ -49,6 +51,13 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
 
   def add_flavors(extra_properties = {})
     add_collection(cloud, :flavors, extra_properties) do |builder|
+      # Model we take just from a DB, there is no flavors API
+      builder.add_properties(:strategy => :local_db_find_references) if targeted?
+    end
+  end
+
+  def add_cloud_database_flavors(extra_properties = {})
+    add_collection(cloud, :cloud_database_flavors, extra_properties) do |builder|
       # Model we take just from a DB, there is no flavors API
       builder.add_properties(:strategy => :local_db_find_references) if targeted?
     end

@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "aws-sdk-ec2",                  "~> 1.0"
   s.add_dependency "aws-sdk-elasticloadbalancing", "~> 1.0"
   s.add_dependency "aws-sdk-iam",                  "~> 1.0"
+  s.add_dependency "aws-sdk-rds",                  "~> 1.0"
   s.add_dependency "aws-sdk-s3",                   "~> 1.0"
   s.add_dependency "aws-sdk-servicecatalog",       "~> 1.0"
   s.add_dependency "aws-sdk-sns",                  "~> 1.0"
