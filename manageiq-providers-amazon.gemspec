@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,lib}/**/*"]
 
+  s.add_dependency "aws-sdk-core",                 ">= 3.104.3"
   s.add_dependency "aws-sdk-cloudformation",       "~> 1.0"
   s.add_dependency "aws-sdk-cloudwatch",           "~> 1.0"
   s.add_dependency "aws-sdk-ec2",                  "~> 1.0"
