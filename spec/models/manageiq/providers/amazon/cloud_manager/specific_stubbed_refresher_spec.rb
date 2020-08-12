@@ -107,6 +107,9 @@ describe ManageIQ::Providers::Amazon::NetworkManager::Refresher do
       :cloudformation => {
         :describe_stacks      => mocked_stacks,
         :list_stack_resources => mocked_stack_resources
+      },
+      :rds            => {
+        :describe_db_instances => mocked_db_instances
       }
     }
   end

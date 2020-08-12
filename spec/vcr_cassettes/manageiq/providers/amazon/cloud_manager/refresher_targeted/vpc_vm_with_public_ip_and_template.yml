@@ -12,14 +12,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20170926T081819Z
+      - 20200812T141518Z
       X-Amz-Content-Sha256:
       - beeb9f3c3d9596e8d8d16108091fe5ee7ca3119c49776de86ca8415515eaed7e
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=f000dd9a0444e5066de710a811b3980a2c011949162d2493e44cdcf846310f25
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=553817b03a3f5701757c817e90ee098abc9f1f42cea1d5002ab1f64b9467676f
       Content-Length:
       - '97'
       Accept:
@@ -29,14 +29,16 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 35d38d76-2fa8-4720-94de-31888efed2b6
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '7433'
       Vary:
-      - Accept-Encoding
+      - accept-encoding
       Date:
-      - Tue, 26 Sep 2017 08:18:15 GMT
+      - Wed, 12 Aug 2020 14:15:18 GMT
       Server:
       - AmazonEC2
     body:
@@ -44,7 +46,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>149e0b49-af7b-448e-b984-40f06857d3c1</requestId>
+            <requestId>35d38d76-2fa8-4720-94de-31888efed2b6</requestId>
             <reservationSet>
                 <item>
                     <reservationId>r-e08e325e</reservationId>
@@ -65,7 +67,7 @@ http_interactions:
                             <amiLaunchIndex>0</amiLaunchIndex>
                             <productCodes/>
                             <instanceType>t2.micro</instanceType>
-                            <launchTime>2017-09-26T07:43:04.000Z</launchTime>
+                            <launchTime>2020-08-12T14:11:40.000Z</launchTime>
                             <placement>
                                 <availabilityZone>us-east-1e</availabilityZone>
                                 <groupName/>
@@ -77,7 +79,7 @@ http_interactions:
                             <subnetId>subnet-f849ff96</subnetId>
                             <vpcId>vpc-ff49ff91</vpcId>
                             <privateIpAddress>10.0.0.122</privateIpAddress>
-                            <ipAddress>54.208.71.4</ipAddress>
+                            <ipAddress>3.87.216.170</ipAddress>
                             <sourceDestCheck>true</sourceDestCheck>
                             <groupSet>
                                 <item>
@@ -146,7 +148,7 @@ http_interactions:
                                         <deleteOnTermination>true</deleteOnTermination>
                                     </attachment>
                                     <association>
-                                        <publicIp>54.208.71.4</publicIp>
+                                        <publicIp>3.87.216.170</publicIp>
                                         <publicDnsName/>
                                         <ipOwnerId>amazon</ipOwnerId>
                                     </association>
@@ -155,23 +157,43 @@ http_interactions:
                                             <privateIpAddress>10.0.0.122</privateIpAddress>
                                             <primary>true</primary>
                                             <association>
-                                            <publicIp>54.208.71.4</publicIp>
+                                            <publicIp>3.87.216.170</publicIp>
                                             <publicDnsName/>
                                             <ipOwnerId>amazon</ipOwnerId>
                                             </association>
                                         </item>
                                     </privateIpAddressesSet>
                                     <ipv6AddressesSet/>
+                                    <interfaceType>interface</interfaceType>
                                 </item>
                             </networkInterfaceSet>
                             <ebsOptimized>false</ebsOptimized>
+                            <cpuOptions>
+                                <coreCount>1</coreCount>
+                                <threadsPerCore>1</threadsPerCore>
+                            </cpuOptions>
+                            <capacityReservationSpecification>
+                                <capacityReservationPreference>open</capacityReservationPreference>
+                            </capacityReservationSpecification>
+                            <hibernationOptions>
+                                <configured>false</configured>
+                            </hibernationOptions>
+                            <enclaveOptions>
+                                <enabled>false</enabled>
+                            </enclaveOptions>
+                            <metadataOptions>
+                                <state>applied</state>
+                                <httpTokens>optional</httpTokens>
+                                <httpPutResponseHopLimit>1</httpPutResponseHopLimit>
+                                <httpEndpoint>enabled</httpEndpoint>
+                            </metadataOptions>
                         </item>
                     </instancesSet>
                 </item>
             </reservationSet>
         </DescribeInstancesResponse>
     http_version:
-  recorded_at: Tue, 26 Sep 2017 08:18:20 GMT
+  recorded_at: Wed, 12 Aug 2020 14:15:19 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -184,14 +206,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20170926T081821Z
+      - 20200812T141519Z
       X-Amz-Content-Sha256:
       - 96f2b77608d5e6646c25ad6c234ff63a9a49d8c20af1a20dbaa1016ae19ee1e6
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=c6af68ccd0deb238631e2675802129799b0d1f5edfd2fdb052cdc5a39ff2a51a
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=62d6df4dc515a6c0caa656a1b1e5a2d1016efd028e53ecb79498415581b6d870
       Content-Length:
       - '116'
       Accept:
@@ -201,14 +223,16 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 92c56aa0-39e3-4358-ae54-73dd2022742b
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '2403'
       Vary:
-      - Accept-Encoding
+      - accept-encoding
       Date:
-      - Tue, 26 Sep 2017 08:18:15 GMT
+      - Wed, 12 Aug 2020 14:15:18 GMT
       Server:
       - AmazonEC2
     body:
@@ -216,7 +240,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeNetworkInterfacesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>a1a4effd-0285-46aa-84a5-603177ade57e</requestId>
+            <requestId>92c56aa0-39e3-4358-ae54-73dd2022742b</requestId>
             <networkInterfaceSet>
                 <item>
                     <networkInterfaceId>eni-2b986f38</networkInterfaceId>
@@ -246,7 +270,7 @@ http_interactions:
                         <deleteOnTermination>true</deleteOnTermination>
                     </attachment>
                     <association>
-                        <publicIp>54.208.71.4</publicIp>
+                        <publicIp>3.87.216.170</publicIp>
                         <publicDnsName/>
                         <ipOwnerId>amazon</ipOwnerId>
                         <natEnabled>true</natEnabled>
@@ -257,7 +281,7 @@ http_interactions:
                             <privateIpAddress>10.0.0.122</privateIpAddress>
                             <primary>true</primary>
                             <association>
-                                <publicIp>54.208.71.4</publicIp>
+                                <publicIp>3.87.216.170</publicIp>
                                 <publicDnsName/>
                                 <ipOwnerId>amazon</ipOwnerId>
                                 <natEnabled>true</natEnabled>
@@ -270,7 +294,7 @@ http_interactions:
             </networkInterfaceSet>
         </DescribeNetworkInterfacesResponse>
     http_version:
-  recorded_at: Tue, 26 Sep 2017 08:18:21 GMT
+  recorded_at: Wed, 12 Aug 2020 14:15:19 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -283,14 +307,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20170926T081821Z
+      - 20200812T141519Z
       X-Amz-Content-Sha256:
       - 3687d6dd1f231b3240bd52e8c7cf959c498b8b7312ba6b8a4e9c1e83e973d0b5
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=4871ef134059214df2ae53c9699191f373a4f8235a6159d9cd42839ad0c971cf
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=093c0c9e948dff1a0621a1651ffa22aef85d958eb8bce45e651ac0acee6897a4
       Content-Length:
       - '103'
       Accept:
@@ -300,14 +324,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 2bd565a1-8b5f-4693-97f5-5e944a03a799
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
+      Content-Length:
+      - '728'
       Date:
-      - Tue, 26 Sep 2017 08:18:16 GMT
+      - Wed, 12 Aug 2020 14:15:19 GMT
       Server:
       - AmazonEC2
     body:
@@ -315,18 +339,23 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeAvailabilityZonesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>d905eba1-51a0-40aa-81f3-08e673f966bf</requestId>
+            <requestId>2bd565a1-8b5f-4693-97f5-5e944a03a799</requestId>
             <availabilityZoneInfo>
                 <item>
                     <zoneName>us-east-1e</zoneName>
+                    <zoneId>use1-az2</zoneId>
                     <zoneState>available</zoneState>
                     <regionName>us-east-1</regionName>
+                    <groupName>us-east-1</groupName>
+                    <optInStatus>opt-in-not-required</optInStatus>
+                    <networkBorderGroup>us-east-1</networkBorderGroup>
+                    <zoneType>availability-zone</zoneType>
                     <messageSet/>
                 </item>
             </availabilityZoneInfo>
         </DescribeAvailabilityZonesResponse>
     http_version:
-  recorded_at: Tue, 26 Sep 2017 08:18:22 GMT
+  recorded_at: Wed, 12 Aug 2020 14:15:19 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -339,14 +368,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20170926T081822Z
+      - 20200812T141519Z
       X-Amz-Content-Sha256:
       - 8b897801bc6737ad27423b50d05f4c5a3cb37aff5adc92042c314bf391679416
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=a0b736caf934adb91ff15f0c64918b945b79286298b033fd01516c942a68ad67
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=f732b769649fb31991c1c0b7d8c83631d67668805bc9dd23f617e1c63d3d9117
       Content-Length:
       - '105'
       Accept:
@@ -356,31 +385,33 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 2e7f91a0-3934-408c-a59f-b441737d4779
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
+      Content-Length:
+      - '503'
       Date:
-      - Tue, 26 Sep 2017 08:18:17 GMT
+      - Wed, 12 Aug 2020 14:15:19 GMT
       Server:
       - AmazonEC2
     body:
       encoding: UTF-8
-      string: |-
+      string: |
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeKeyPairsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>02a08959-beb7-4c6f-8497-ba0fc2fa0330</requestId>
+            <requestId>2e7f91a0-3934-408c-a59f-b441737d4779</requestId>
             <keySet>
                 <item>
                     <keyName>EmsRefreshSpec-KeyPair</keyName>
+                    <keyPairId>key-08235bc4add1b8538</keyPairId>
                     <keyFingerprint>49:9f:3f:a4:26:48:39:94:26:06:dd:25:73:e5:da:9b:4b:1b:6c:93</keyFingerprint>
+                    <tagSet/>
                 </item>
             </keySet>
         </DescribeKeyPairsResponse>
     http_version:
-  recorded_at: Tue, 26 Sep 2017 08:18:23 GMT
+  recorded_at: Wed, 12 Aug 2020 14:15:19 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -393,14 +424,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20170926T081823Z
+      - 20200812T141519Z
       X-Amz-Content-Sha256:
       - 1dba40e3cae389560839f1c6f175562e3a67b47998b64a9b971a6de60d71df67
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ded791faa2340f342037f37665c0c937b3c4cf410c9653e41df00e6a0dc87144
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=3ff24897d0c051e873db43e117b4607845b9313c09e3ccb32475e8541d944c19
       Content-Length:
       - '93'
       Accept:
@@ -410,14 +441,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 4a0a81dd-3bdd-4346-ad0d-27c7b1db351f
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
+      Content-Length:
+      - '1750'
       Date:
-      - Tue, 26 Sep 2017 08:18:18 GMT
+      - Wed, 12 Aug 2020 14:15:19 GMT
       Server:
       - AmazonEC2
     body:
@@ -425,7 +456,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>beb78963-3a94-4326-9f9c-5c16d5c82344</requestId>
+            <requestId>4a0a81dd-3bdd-4346-ad0d-27c7b1db351f</requestId>
             <imagesSet>
                 <item>
                     <imageId>ami-2051294a</imageId>
@@ -455,11 +486,13 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat Enterprise Linux</platformDetails>
+                    <usageOperation>RunInstances:0010</usageOperation>
                 </item>
             </imagesSet>
         </DescribeImagesResponse>
     http_version:
-  recorded_at: Tue, 26 Sep 2017 08:18:25 GMT
+  recorded_at: Wed, 12 Aug 2020 14:15:19 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -472,14 +505,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20170926T081825Z
+      - 20200812T141519Z
       X-Amz-Content-Sha256:
       - c4845e8b461f14be4b886767ca0310a99c2f2a0a26fe026926e9bc17f4f79be7
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b825375f1bebf73bbe0a07233f0cdaba17fe797354a2b71f7d141168407b24f4
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=9eed4e5aab45462a307e3d70436f3c9f040739f18af12b1606daffd431999fbb
       Content-Length:
       - '89'
       Accept:
@@ -489,14 +522,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 885f27bd-7d97-4696-9aa4-18e88caa5e50
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
+      Content-Length:
+      - '1136'
       Date:
-      - Tue, 26 Sep 2017 08:18:20 GMT
+      - Wed, 12 Aug 2020 14:15:19 GMT
       Server:
       - AmazonEC2
     body:
@@ -504,10 +537,11 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeVpcsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>49ad789f-e372-4743-af6b-0671c95ba0c0</requestId>
+            <requestId>885f27bd-7d97-4696-9aa4-18e88caa5e50</requestId>
             <vpcSet>
                 <item>
                     <vpcId>vpc-ff49ff91</vpcId>
+                    <ownerId>200278856672</ownerId>
                     <state>available</state>
                     <cidrBlock>10.0.0.0/16</cidrBlock>
                     <cidrBlockAssociationSet>
@@ -532,7 +566,7 @@ http_interactions:
             </vpcSet>
         </DescribeVpcsResponse>
     http_version:
-  recorded_at: Tue, 26 Sep 2017 08:18:26 GMT
+  recorded_at: Wed, 12 Aug 2020 14:15:20 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -545,14 +579,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20170926T081826Z
+      - 20200812T141520Z
       X-Amz-Content-Sha256:
       - 665a0a620bb43c6e0ff2e3a10d7af509aa161bd637a25c8edb365d505947be5b
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=a7df2ff3051edf311e55045a82012dcef8d083bf191f316a02325e21d19be59c
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ff81510abb5e6f691d0cffc1fe40e0081900932a2a2311ec0d43430bb1934a6e
       Content-Length:
       - '98'
       Accept:
@@ -562,14 +596,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 318f7615-1954-459a-b22c-0c9a688f7476
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
+      Content-Length:
+      - '1253'
       Date:
-      - Tue, 26 Sep 2017 08:18:20 GMT
+      - Wed, 12 Aug 2020 14:15:19 GMT
       Server:
       - AmazonEC2
     body:
@@ -577,16 +611,19 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeSubnetsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>1e4dfd6f-e49c-4c8d-b060-f704c2410a79</requestId>
+            <requestId>318f7615-1954-459a-b22c-0c9a688f7476</requestId>
             <subnetSet>
                 <item>
                     <subnetId>subnet-f849ff96</subnetId>
+                    <subnetArn>arn:aws:ec2:us-east-1:200278856672:subnet/subnet-f849ff96</subnetArn>
                     <state>available</state>
+                    <ownerId>200278856672</ownerId>
                     <vpcId>vpc-ff49ff91</vpcId>
                     <cidrBlock>10.0.0.0/24</cidrBlock>
                     <ipv6CidrBlockAssociationSet/>
-                    <availableIpAddressCount>237</availableIpAddressCount>
+                    <availableIpAddressCount>242</availableIpAddressCount>
                     <availabilityZone>us-east-1e</availabilityZone>
+                    <availabilityZoneId>use1-az2</availabilityZoneId>
                     <defaultForAz>false</defaultForAz>
                     <mapPublicIpOnLaunch>true</mapPublicIpOnLaunch>
                     <tagSet>
@@ -596,11 +633,12 @@ http_interactions:
                         </item>
                     </tagSet>
                     <assignIpv6AddressOnCreation>false</assignIpv6AddressOnCreation>
+                    <mapCustomerOwnedIpOnLaunch>false</mapCustomerOwnedIpOnLaunch>
                 </item>
             </subnetSet>
         </DescribeSubnetsResponse>
     http_version:
-  recorded_at: Tue, 26 Sep 2017 08:18:27 GMT
+  recorded_at: Wed, 12 Aug 2020 14:15:20 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -613,14 +651,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20170926T081827Z
+      - 20200812T141520Z
       X-Amz-Content-Sha256:
       - 0556b7007cebc8027a9ce2b5915968f2b1c7c6ffe1a378f347ce5af51819c62b
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=8fddfeebdcdd534528761a19cedd91893902b8904df290cb51c1b7f4556ec42b
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=76bf6e1d6035218302096ddba696f41d818d29aa01db48a21f6bb406a86e430a
       Content-Length:
       - '100'
       Accept:
@@ -630,14 +668,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 421e6d1a-2533-4396-9c30-cfadef18e66b
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
+      Content-Length:
+      - '2003'
       Date:
-      - Tue, 26 Sep 2017 08:18:21 GMT
+      - Wed, 12 Aug 2020 14:15:19 GMT
       Server:
       - AmazonEC2
     body:
@@ -645,7 +683,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeSecurityGroupsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>d2091d38-6f83-4a26-b09d-72889c0d2924</requestId>
+            <requestId>421e6d1a-2533-4396-9c30-cfadef18e66b</requestId>
             <securityGroupInfo>
                 <item>
                     <ownerId>200278856672</ownerId>
@@ -698,29 +736,29 @@ http_interactions:
             </securityGroupInfo>
         </DescribeSecurityGroupsResponse>
     http_version:
-  recorded_at: Tue, 26 Sep 2017 08:18:28 GMT
+  recorded_at: Wed, 12 Aug 2020 14:15:20 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=DescribeAddresses&Filter.1.Name=allocation-id&Filter.1.Value.1=54.208.71.4&Version=2016-11-15
+      string: Action=DescribeAddresses&Filter.1.Name=allocation-id&Filter.1.Value.1=3.87.216.170&Version=2016-11-15
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20170926T081828Z
+      - 20200812T141520Z
       X-Amz-Content-Sha256:
-      - a31fd8e566b655ae84a1a9ef853231b894fc12a5d9c9fc35d245e559a1bc6a91
+      - e4ba2b24355e84bf582da7eb8a4c724e4ebbe584456d06cb9fe6e2ee6174e94d
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=34a7c01efc134411d521eba3dfbfed7fb75e7571fd0142da88bd91cdf9db6a7c
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=8aebc601a5a1e6c0056503cb3eb61f0eed1a89e044d7236f11c9346305e8431b
       Content-Length:
-      - '100'
+      - '101'
       Accept:
       - "*/*"
   response:
@@ -728,14 +766,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 9e337022-48e3-40a2-9aa0-879951c89f6d
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
+      Content-Length:
+      - '228'
       Date:
-      - Tue, 26 Sep 2017 08:18:22 GMT
+      - Wed, 12 Aug 2020 14:15:19 GMT
       Server:
       - AmazonEC2
     body:
@@ -743,33 +781,33 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeAddressesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>4382a8eb-1089-4895-8af7-64fcc39807f7</requestId>
+            <requestId>9e337022-48e3-40a2-9aa0-879951c89f6d</requestId>
             <addressesSet/>
         </DescribeAddressesResponse>
     http_version:
-  recorded_at: Tue, 26 Sep 2017 08:18:28 GMT
+  recorded_at: Wed, 12 Aug 2020 14:15:20 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=DescribeAddresses&Filter.1.Name=public-ip&Filter.1.Value.1=54.208.71.4&Version=2016-11-15
+      string: Action=DescribeAddresses&Filter.1.Name=public-ip&Filter.1.Value.1=3.87.216.170&Version=2016-11-15
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20170926T081828Z
+      - 20200812T141520Z
       X-Amz-Content-Sha256:
-      - a31fd8e566b655ae84a1a9ef853231b894fc12a5d9c9fc35d245e559a1bc6a91
+      - 1239d685c398cfeedda9dd643947455b6eb589b1a1cb07382587e56d62bc44ca
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=34a7c01efc134411d521eba3dfbfed7fb75e7571fd0142da88bd91cdf9db6a7c
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=bb9786f7b927d09957e4cb869bd8b49e41108249996c71fc3115d6f8dbfd7de5
       Content-Length:
-      - '100'
+      - '97'
       Accept:
       - "*/*"
   response:
@@ -777,14 +815,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 9de8f03d-79cd-46cf-b1bc-19c7051b025e
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
+      Content-Length:
+      - '228'
       Date:
-      - Tue, 26 Sep 2017 08:18:22 GMT
+      - Wed, 12 Aug 2020 14:15:20 GMT
       Server:
       - AmazonEC2
     body:
@@ -792,11 +830,11 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeAddressesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>4382a8eb-1089-4895-8af7-64fcc39807f7</requestId>
+            <requestId>9de8f03d-79cd-46cf-b1bc-19c7051b025e</requestId>
             <addressesSet/>
         </DescribeAddressesResponse>
     http_version:
-  recorded_at: Tue, 26 Sep 2017 08:18:28 GMT
+  recorded_at: Wed, 12 Aug 2020 14:15:21 GMT
 - request:
     method: post
     uri: https://ec2.us-east-1.amazonaws.com/
@@ -809,14 +847,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.3.0 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20170926T081828Z
+      - 20200812T141521Z
       X-Amz-Content-Sha256:
       - 81e0ab76e6f32fc7d5784b60ab90638422e455f892dc1bed2eba4d8c0094104e
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20170926/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=517e7a94ee2c965f150bff008ae5f9f33768a0d39aac265c096f6a30c6a1f384
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=55efe14f5e4bc52ce85490b8b04569b780077a6eb7948967392b47e7440cbae7
       Content-Length:
       - '134'
       Accept:
@@ -826,14 +864,16 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 7aee983d-118d-4384-ac1f-2fdf2506e895
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '2574'
       Vary:
-      - Accept-Encoding
+      - accept-encoding
       Date:
-      - Tue, 26 Sep 2017 08:18:24 GMT
+      - Wed, 12 Aug 2020 14:15:20 GMT
       Server:
       - AmazonEC2
     body:
@@ -841,7 +881,7 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeVolumesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>95c8af0b-528f-48d1-9f14-dcc987bd1ccc</requestId>
+            <requestId>7aee983d-118d-4384-ac1f-2fdf2506e895</requestId>
             <volumeSet>
                 <item>
                     <volumeId>vol-da190f08</volumeId>
@@ -869,6 +909,7 @@ http_interactions:
                     <volumeType>gp2</volumeType>
                     <iops>100</iops>
                     <encrypted>false</encrypted>
+                    <multiAttachEnabled>false</multiAttachEnabled>
                 </item>
                 <item>
                     <volumeId>vol-0acad09812d803c09</volumeId>
@@ -897,9 +938,10 @@ http_interactions:
                     <iops>100</iops>
                     <encrypted>true</encrypted>
                     <kmsKeyId>arn:aws:kms:us-east-1:200278856672:key/1b84f037-3b25-4985-90e1-8b5cd6cc098e</kmsKeyId>
+                    <multiAttachEnabled>false</multiAttachEnabled>
                 </item>
             </volumeSet>
         </DescribeVolumesResponse>
     http_version:
-  recorded_at: Tue, 26 Sep 2017 08:18:30 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Wed, 12 Aug 2020 14:15:21 GMT
+recorded_with: VCR 5.1.0

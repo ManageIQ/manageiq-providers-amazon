@@ -12,14 +12,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-cloudformation/1.41.0
       X-Amz-Date:
-      - 20180904T080215Z
+      - 20200812T141521Z
       X-Amz-Content-Sha256:
       - 757f116d419bd4d4b28f0f2066e5d8ebd0130dccf7e5ddc04269a9836899e0bd
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180904/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=c1e5f64dc4f06c62ef9050f78f642c42e691fd69712e2d1f38e78a97f5773e60
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=6d4d1f74ca9fe4c082bbc44fde8cfb420d2805afb11b1929e32bf156c0dcf741
       Content-Length:
       - '205'
       Accept:
@@ -30,15 +30,15 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - d6624cc4-b018-11e8-8787-630333594af1
+      - 0cbf7a6a-79b3-4e8c-ab67-e787428e122b
       Content-Type:
       - text/xml
       Content-Length:
       - '3223'
       Vary:
-      - Accept-Encoding
+      - accept-encoding
       Date:
-      - Tue, 04 Sep 2018 08:02:15 GMT
+      - Wed, 12 Aug 2020 14:15:21 GMT
     body:
       encoding: UTF-8
       string: |
@@ -110,11 +110,11 @@ http_interactions:
             </Stacks>
           </DescribeStacksResult>
           <ResponseMetadata>
-            <RequestId>d6624cc4-b018-11e8-8787-630333594af1</RequestId>
+            <RequestId>0cbf7a6a-79b3-4e8c-ab67-e787428e122b</RequestId>
           </ResponseMetadata>
         </DescribeStacksResponse>
-    http_version: 
-  recorded_at: Tue, 04 Sep 2018 08:02:15 GMT
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:15:21 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -127,14 +127,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-cloudformation/1.41.0
       X-Amz-Date:
-      - 20180904T080215Z
+      - 20200812T141521Z
       X-Amz-Content-Sha256:
       - f005060b494874c71d174f59905bab23a022e5b3da296b5735783b2d2b59db30
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180904/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=7a2007004d329cf9bc6136ab1696244f02738592e1fd9d9646acfcd0f67bc3e3
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=b5fa21094ce38fe415ce09a1e8c712d92cfe7d6783cc0d8e9275e47a8bafc74d
       Content-Length:
       - '99'
       Accept:
@@ -145,15 +145,15 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - d6acc357-b018-11e8-9325-51e5e4971742
+      - 8d747233-0c98-4299-a858-e1f99835ec09
       Content-Type:
       - text/xml
       Content-Length:
       - '23157'
       Vary:
-      - Accept-Encoding
+      - accept-encoding
       Date:
-      - Tue, 04 Sep 2018 08:02:16 GMT
+      - Wed, 12 Aug 2020 14:15:21 GMT
     body:
       encoding: UTF-8
       string: "<GetTemplateResponse xmlns=\"http://cloudformation.amazonaws.com/doc/2010-05-15/\">\n
@@ -427,10 +427,10 @@ http_interactions:
         &quot;PublicIp&quot;] }]]},\n      &quot;Description&quot; : &quot;Newly created
         application URL&quot;\n    }\n  }\n}\n\n</TemplateBody>\n    <StagesAvailable>\n
         \     <member>Original</member>\n      <member>Processed</member>\n    </StagesAvailable>\n
-        \ </GetTemplateResult>\n  <ResponseMetadata>\n    <RequestId>d6acc357-b018-11e8-9325-51e5e4971742</RequestId>\n
+        \ </GetTemplateResult>\n  <ResponseMetadata>\n    <RequestId>8d747233-0c98-4299-a858-e1f99835ec09</RequestId>\n
         \ </ResponseMetadata>\n</GetTemplateResponse>\n"
-    http_version: 
-  recorded_at: Tue, 04 Sep 2018 08:02:16 GMT
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:15:21 GMT
 - request:
     method: post
     uri: https://cloudformation.us-east-1.amazonaws.com/
@@ -443,14 +443,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-cloudformation/1.41.0
       X-Amz-Date:
-      - 20180904T080216Z
+      - 20200812T141521Z
       X-Amz-Content-Sha256:
       - e1551a75591c27367c42f68080eafefed1acf68b0640eb3eb946c2c3d1007a07
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180904/us-east-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=af5e5e21f503837ca1f9d62f38190d03b37df522dd7326d6cda83543f23fb953
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/us-east-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=2ff2aa0ec8b03a5b04c45304ecebf5a86945128a62a4f0ecb66a818deb3d56bb
       Content-Length:
       - '106'
       Accept:
@@ -461,13 +461,13 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - d7597dc8-b018-11e8-8d3d-9f690cf0f1f1
+      - b62cd5c5-2edd-46d2-a066-f6a480a3912f
       Content-Type:
       - text/xml
       Content-Length:
       - '1297'
       Date:
-      - Tue, 04 Sep 2018 08:02:17 GMT
+      - Wed, 12 Aug 2020 14:15:21 GMT
     body:
       encoding: UTF-8
       string: |
@@ -497,9 +497,9 @@ http_interactions:
             </StackResourceSummaries>
           </ListStackResourcesResult>
           <ResponseMetadata>
-            <RequestId>d7597dc8-b018-11e8-8d3d-9f690cf0f1f1</RequestId>
+            <RequestId>b62cd5c5-2edd-46d2-a066-f6a480a3912f</RequestId>
           </ResponseMetadata>
         </ListStackResourcesResponse>
-    http_version: 
-  recorded_at: Tue, 04 Sep 2018 08:02:17 GMT
-recorded_with: VCR 3.0.3
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:15:21 GMT
+recorded_with: VCR 5.1.0

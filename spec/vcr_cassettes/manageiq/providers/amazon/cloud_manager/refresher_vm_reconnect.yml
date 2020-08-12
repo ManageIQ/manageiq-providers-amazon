@@ -12,14 +12,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20180828T140620Z
+      - 20200812T141620Z
       X-Amz-Content-Sha256:
       - 2bd59c58bf8c2bcc1c39ea3a5a38bb7cd5a643758cbd1b78a746d3a3aa5c1580
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180828/eu-central-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=56cf432ede5f94602be3b05b080e111f62b1b57d9e3f4427eda7de46f0c7a735
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=39ba573658fb5d96832d16b5b2f5d670503934fafb552edd0f17bd3231337285
       Content-Length:
       - '51'
       Accept:
@@ -29,12 +29,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 9e3dfe6a-3d10-4c6b-ab0f-7060e1d078a0
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '876'
+      - '1662'
       Date:
-      - Tue, 28 Aug 2018 14:06:15 GMT
+      - Wed, 12 Aug 2020 14:16:20 GMT
       Server:
       - AmazonEC2
     body:
@@ -42,30 +44,45 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeAvailabilityZonesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>74af9614-a731-45de-86c0-ad951b8e8ccc</requestId>
+            <requestId>9e3dfe6a-3d10-4c6b-ab0f-7060e1d078a0</requestId>
             <availabilityZoneInfo>
                 <item>
                     <zoneName>eu-central-1a</zoneName>
+                    <zoneId>euc1-az2</zoneId>
                     <zoneState>available</zoneState>
                     <regionName>eu-central-1</regionName>
+                    <groupName>eu-central-1</groupName>
+                    <optInStatus>opt-in-not-required</optInStatus>
+                    <networkBorderGroup>eu-central-1</networkBorderGroup>
+                    <zoneType>availability-zone</zoneType>
                     <messageSet/>
                 </item>
                 <item>
                     <zoneName>eu-central-1b</zoneName>
+                    <zoneId>euc1-az3</zoneId>
                     <zoneState>available</zoneState>
                     <regionName>eu-central-1</regionName>
+                    <groupName>eu-central-1</groupName>
+                    <optInStatus>opt-in-not-required</optInStatus>
+                    <networkBorderGroup>eu-central-1</networkBorderGroup>
+                    <zoneType>availability-zone</zoneType>
                     <messageSet/>
                 </item>
                 <item>
                     <zoneName>eu-central-1c</zoneName>
+                    <zoneId>euc1-az1</zoneId>
                     <zoneState>available</zoneState>
                     <regionName>eu-central-1</regionName>
+                    <groupName>eu-central-1</groupName>
+                    <optInStatus>opt-in-not-required</optInStatus>
+                    <networkBorderGroup>eu-central-1</networkBorderGroup>
+                    <zoneType>availability-zone</zoneType>
                     <messageSet/>
                 </item>
             </availabilityZoneInfo>
         </DescribeAvailabilityZonesResponse>
-    http_version: 
-  recorded_at: Tue, 28 Aug 2018 14:06:20 GMT
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:16:21 GMT
 - request:
     method: post
     uri: https://ec2.eu-central-1.amazonaws.com/
@@ -78,14 +95,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20180828T140621Z
+      - 20200812T141621Z
       X-Amz-Content-Sha256:
       - e7326d4766918579e6d040a9c8d2243cefc0ab1aaa37cd7a9dab76d8c3538b59
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180828/eu-central-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=aa7b8e6cf67f3e2082ebfb028db3a0f74f641f69539ba8b5757cb90ed26a9745
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=bcae6d571a2f325355f2e19029f19cb2ac6b80f8482db79966ce641dc002ad5c
       Content-Length:
       - '42'
       Accept:
@@ -95,12 +112,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 57c2fad8-7174-4b04-9cf7-92239c76800a
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '586'
+      - '732'
       Date:
-      - Tue, 28 Aug 2018 14:06:15 GMT
+      - Wed, 12 Aug 2020 14:16:21 GMT
       Server:
       - AmazonEC2
     body:
@@ -108,20 +127,24 @@ http_interactions:
       string: |
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeKeyPairsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>4151063c-5676-48a1-91be-dae50f32f16e</requestId>
+            <requestId>57c2fad8-7174-4b04-9cf7-92239c76800a</requestId>
             <keySet>
                 <item>
                     <keyName>azagayno</keyName>
-                    <keyFingerprint>ba:e4:ba:6e:80:7e:0d:1d:36:60:79:87:e9:35:44:9a:55:87:1b:35</keyFingerprint>
+                    <keyPairId>key-07e4f71c395990fd0</keyPairId>
+                    <keyFingerprint>de:65:b3:29:40:69:81:a2:df:14:24:52:36:48:e7:77</keyFingerprint>
+                    <tagSet/>
                 </item>
                 <item>
                     <keyName>mpovolny</keyName>
+                    <keyPairId>key-07ab6d0b925383c2d</keyPairId>
                     <keyFingerprint>3e:20:56:54:4c:33:f6:e1:bd:cc:41:a9:a8:01:e6:9c:53:8b:1d:44</keyFingerprint>
+                    <tagSet/>
                 </item>
             </keySet>
         </DescribeKeyPairsResponse>
-    http_version: 
-  recorded_at: Tue, 28 Aug 2018 14:06:21 GMT
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:16:21 GMT
 - request:
     method: post
     uri: https://cloudformation.eu-central-1.amazonaws.com/
@@ -134,14 +157,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-cloudformation/1.41.0
       X-Amz-Date:
-      - 20180828T140621Z
+      - 20200812T141621Z
       X-Amz-Content-Sha256:
       - 1c0d327d16f37b15838ca07a3964664f2dcff8d7051d9f1d87552e7df79be01f
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180828/eu-central-1/cloudformation/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=3a580db94e825aaa52dabfa50896e124583c1de3c2224808af491ff8e27684ea
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/eu-central-1/cloudformation/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=6d2e7db8752ff527209c027788ec0b498306a900a3ef282eb536811a1de42ac8
       Content-Length:
       - '40'
       Accept:
@@ -152,13 +175,13 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 87c1d45f-aacb-11e8-9910-2f990e37d6f1
+      - 2258efb6-5a13-4996-8ed2-f7c1511d2a4e
       Content-Type:
       - text/xml
       Content-Length:
       - '283'
       Date:
-      - Tue, 28 Aug 2018 14:06:16 GMT
+      - Wed, 12 Aug 2020 14:16:21 GMT
     body:
       encoding: UTF-8
       string: |
@@ -167,11 +190,61 @@ http_interactions:
             <Stacks/>
           </DescribeStacksResult>
           <ResponseMetadata>
-            <RequestId>87c1d45f-aacb-11e8-9910-2f990e37d6f1</RequestId>
+            <RequestId>2258efb6-5a13-4996-8ed2-f7c1511d2a4e</RequestId>
           </ResponseMetadata>
         </DescribeStacksResponse>
-    http_version: 
-  recorded_at: Tue, 28 Aug 2018 14:06:21 GMT
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:16:22 GMT
+- request:
+    method: post
+    uri: https://rds.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeDBInstances&Version=2014-10-31
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-rds/1.95.0
+      X-Amz-Date:
+      - 20200812T141622Z
+      X-Amz-Content-Sha256:
+      - e6281fe3d540e3e1ccd6bf0cca945a0e0af993d4dd5a6b31ca021f6fc7982b0b
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/eu-central-1/rds/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=92a441125c7e3fb7de5ad9473d066a1de2bdca4cbdfb58b269aa0fe9febb7a86
+      Content-Length:
+      - '45'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 2d41fc2f-f6d1-45f2-b304-720152352162
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '297'
+      Date:
+      - Wed, 12 Aug 2020 14:16:21 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <DescribeDBInstancesResponse xmlns="http://rds.amazonaws.com/doc/2014-10-31/">
+          <DescribeDBInstancesResult>
+            <DBInstances/>
+          </DescribeDBInstancesResult>
+          <ResponseMetadata>
+            <RequestId>2d41fc2f-f6d1-45f2-b304-720152352162</RequestId>
+          </ResponseMetadata>
+        </DescribeDBInstancesResponse>
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:16:22 GMT
 - request:
     method: post
     uri: https://ec2.eu-central-1.amazonaws.com/
@@ -184,14 +257,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20180828T140621Z
+      - 20200812T141622Z
       X-Amz-Content-Sha256:
       - 353f42a6b4f35502116ce0f2e997ba13b57b156b7a2d476afc85d222902f4415
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180828/eu-central-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=64a8bc32849bb5f2878779751f03aac3fa8be6eaaa10a9c7ea5143a01ceb9d0a
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=bd73f806c1b0e1de878c6198cf68d09718c9200dd3834d3e77bc86ba71b2b981
       Content-Length:
       - '103'
       Accept:
@@ -201,12 +274,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 57c83ef8-fa63-4f44-b732-3510fc404883
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
       - '219'
       Date:
-      - Tue, 28 Aug 2018 14:06:16 GMT
+      - Wed, 12 Aug 2020 14:16:22 GMT
       Server:
       - AmazonEC2
     body:
@@ -214,11 +289,11 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>523012a8-d51f-447a-8095-163463fef10e</requestId>
+            <requestId>57c83ef8-fa63-4f44-b732-3510fc404883</requestId>
             <imagesSet/>
         </DescribeImagesResponse>
-    http_version: 
-  recorded_at: Tue, 28 Aug 2018 14:06:22 GMT
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:16:23 GMT
 - request:
     method: post
     uri: https://ec2.eu-central-1.amazonaws.com/
@@ -231,14 +306,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20180828T140622Z
+      - 20200812T141623Z
       X-Amz-Content-Sha256:
       - 13559d63912d4017a9523f9e8bda64c2a6870c83adb807d3bccff29a4065cdfc
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180828/eu-central-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ef03dfee9360078560e3b47dc2afc70fbc9eb6eb1ca3aab6f9248587c60f2d3f
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=6c9858bd9f174fef7cb2ae9a35d40d14a50f987409416b9523a3ec87d9a68f04
       Content-Length:
       - '110'
       Accept:
@@ -248,14 +323,16 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 07c5d53a-4aac-4e8b-aeeb-53aab2a8dea8
       Content-Type:
       - text/xml;charset=UTF-8
       Transfer-Encoding:
       - chunked
       Vary:
-      - Accept-Encoding
+      - accept-encoding
       Date:
-      - Tue, 28 Aug 2018 14:06:18 GMT
+      - Wed, 12 Aug 2020 14:16:23 GMT
       Server:
       - AmazonEC2
     body:
@@ -263,8 +340,40 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>209e3616-3d4e-4ec0-89a2-c2cb8483ce64</requestId>
+            <requestId>07c5d53a-4aac-4e8b-aeeb-53aab2a8dea8</requestId>
             <imagesSet>
+                <item>
+                    <imageId>ami-000845546e57a02c6</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.7_HVM_GA-20190923-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-09-23T18:34:30.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.7_HVM_GA-20190923-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-03349eafff23d322f</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
                 <item>
                     <imageId>ami-00859d26dc671201b</imageId>
                     <imageLocation>309956199498/RHEL-7.6_HVM_BETA-20180814-x86_64-0-Access2-GP2</imageLocation>
@@ -294,6 +403,392 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-00d3b950efe6c34cd</imageId>
+                    <imageLocation>309956199498/RHEL-8.0_HVM-20190920-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-09-23T19:35:26.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.0_HVM-20190920-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0109e342aa43d45cf</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-00f23ee39fe24a48a</imageId>
+                    <imageLocation>309956199498/RHEL-8.1.0_HVM_BETA-20190701-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-07-21T19:36:47.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.1.0_HVM_BETA-20190701-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-01192d2c5c6cb5a63</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-00f52589158b4e06b</imageId>
+                    <imageLocation>309956199498/RHEL-8.2.0_HVM-20200423-arm64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-04-23T16:16:37.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>arm64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.2.0_HVM-20200423-arm64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-020665df291c217ca</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-012838bc227c83b03</imageId>
+                    <imageLocation>309956199498/RHEL-7.6_HVM-20190618-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-06-18T20:00:15.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.6_HVM-20190618-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0cb64739313a71ec4</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-02348b46d2d3c878a</imageId>
+                    <imageLocation>309956199498/RHEL-8.2.1_HVM_BETA-20200803-arm64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-08-04T15:32:45.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>arm64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.2.1_HVM_BETA-20200803-arm64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-03283ff6753ebfdec</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-027607bc9f545bfa2</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.7_HVM_GA-20191119-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-11-22T17:25:59.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.7_HVM_GA-20191119-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0e98e1ced9703e119</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-02fb9436f51800335</imageId>
+                    <imageLocation>309956199498/RHEL-8.2_HVM-20200803-arm64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-08-06T13:00:33.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>arm64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.2_HVM-20200803-arm64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-04c5859669a04e313</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-030f83540c1a25d7f</imageId>
+                    <imageLocation>309956199498/RHEL-8.0.0_HVM-20190520-x86_64-1-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-05-20T22:08:29.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.0.0_HVM-20190520-x86_64-1-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-01fc8bcc7bdbd84e0</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-034d80f0f2d3e285f</imageId>
+                    <imageLocation>309956199498/RHEL-8.2.1_HVM-20200803-arm64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-08-03T19:47:30.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>arm64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.2.1_HVM-20200803-arm64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0fcf13e83098b2c78</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-037f78a13bd94a8a9</imageId>
+                    <imageLocation>309956199498/RHEL-8.2_HVM-20200803-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-08-06T12:44:20.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.2_HVM-20200803-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-01627ed236d9bbb8e</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-039d9e11707502442</imageId>
+                    <imageLocation>309956199498/RHEL-6.10_HVM-20190524-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-05-29T15:29:40.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-6.10_HVM-20190524-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0685a92413942a9e4</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>false</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-03c423b9c551c24d0</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.6_HVM_GA-20190531-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-06-07T09:19:55.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.6_HVM_GA-20190531-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0722b721bcb921fad</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-043f926b</imageId>
@@ -323,6 +818,72 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-04a404842b13c6d1b</imageId>
+                    <imageLocation>309956199498/RHEL-7.7_HVM-20191119-x86_64-2-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-11-19T15:23:10.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.7_HVM-20191119-x86_64-2-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0f7588a45e1b5bd32</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-04de3522b6d37f496</imageId>
+                    <imageLocation>309956199498/RHEL-7.8_HVM_GA-20200225-x86_64-1-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-02-26T17:01:11.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.8_HVM_GA-20200225-x86_64-1-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-003a0b8db6ded9c52</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-04ecda19</imageId>
@@ -352,6 +913,104 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0505d13fe40f347c1</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.6_HVM_GA-20190423-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-04-25T18:47:11.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.6_HVM_GA-20190423-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0722b96c81dff6325</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>false</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0574a60924b72ca6b</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.8_HVM_GA-20200805-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-08-06T19:35:11.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.8_HVM_GA-20200805-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0339006e4ab60d414</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-05e1e008717f4e198</imageId>
+                    <imageLocation>309956199498/RHEL-7.8_HVM_BETA-20191009-x86_64-6-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-10-21T11:48:53.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.8_HVM_BETA-20191009-x86_64-6-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-09353fcddb4f9512b</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-064ede69</imageId>
@@ -381,6 +1040,279 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0666abfb5b8252e8b</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.6_HVM_GA-20190306-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-03-13T13:09:44.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.6_HVM_GA-20190306-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0f2556fa92f3edd72</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>false</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-069c6833c442cfe27</imageId>
+                    <imageLocation>309956199498/RHEL-8.0_HVM_BETA-20181113-x86_64-1-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2018-11-13T21:14:25.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.0_HVM_BETA-20181113-x86_64-1-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-024ec2e36f93bfd57</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-06b9f44feb04e40be</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.8_HVM_GA-20200623-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-06-24T17:42:39.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.8_HVM_GA-20200623-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-086aeaacdce94a704</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-06ee1a2e4a18b0a15</imageId>
+                    <imageLocation>309956199498/RHEL-7.7_HVM-20191028-x86_64-1-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-10-29T13:10:41.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.7_HVM-20191028-x86_64-1-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-04c6adf29dc6a52cd</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0736261c40f6fdc1e</imageId>
+                    <imageLocation>309956199498/RHEL-7.6_HVM-20190515-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-05-15T16:57:13.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.6_HVM-20190515-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-00629582771182488</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0742262bea494db3c</imageId>
+                    <imageLocation>aws-marketplace/ubuntu/images-testing/hvm-ssd/ubuntu-trusty-daily-amd64-server-2019-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-0aff53e0fecbea778.4</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>679593333241</imageOwnerId>
+                    <creationDate>2019-05-17T06:56:54.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <productCodes>
+                        <item>
+                            <productCode>b3dl4415quatdndl4qa6kcu45</productCode>
+                            <type>marketplace</type>
+                        </item>
+                    </productCodes>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <imageOwnerAlias>aws-marketplace</imageOwnerAlias>
+                    <name>ubuntu/images-testing/hvm-ssd/ubuntu-trusty-daily-amd64-server-2019-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-0aff53e0fecbea778.4</name>
+                    <description>Canonical, Ubuntu, 14.04 LTS, UNSUPPORTED daily amd64 trusty image build on 2019-05-14</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-01ee6ec52f438bf41</snapshotId>
+                                <volumeSize>8</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdb</deviceName>
+                            <virtualName>ephemeral0</virtualName>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdc</deviceName>
+                            <virtualName>ephemeral1</virtualName>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-076e1fb81652dc5de</imageId>
+                    <imageLocation>309956199498/RHEL-8.2.0_HVM_BETA-20191219-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-01-14T22:14:59.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.2.0_HVM_BETA-20191219-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-03aafe892aec3b19c</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-07837b698e11dd38e</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.7_HVM_GA-20190802-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-08-05T09:04:22.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.7_HVM_GA-20190802-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-09249e8a22dd7ee47</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-07d3f0705bebac978</imageId>
@@ -411,6 +1343,343 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0806c3830224a5a54</imageId>
+                    <imageLocation>aws-marketplace/ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20180818-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-0c54494f920b19106.4</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>679593333241</imageOwnerId>
+                    <creationDate>2018-08-22T13:29:53.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <productCodes>
+                        <item>
+                            <productCode>b3dl4415quatdndl4qa6kcu45</productCode>
+                            <type>marketplace</type>
+                        </item>
+                    </productCodes>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <imageOwnerAlias>aws-marketplace</imageOwnerAlias>
+                    <name>ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20180818-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-0c54494f920b19106.4</name>
+                    <description>Canonical, Ubuntu, 14.04 LTS, amd64 trusty image build on 2018-08-18</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0e57e8a2dc8cc038f</snapshotId>
+                                <volumeSize>8</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdb</deviceName>
+                            <virtualName>ephemeral0</virtualName>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdc</deviceName>
+                            <virtualName>ephemeral1</virtualName>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-08093a8d716390c86</imageId>
+                    <imageLocation>309956199498/RHEL-8.0.0_HVM-20190426-x86_64-1-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-04-26T19:48:14.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.0.0_HVM-20190426-x86_64-1-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0a51447f4da422554</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-08306f59b9e908dc6</imageId>
+                    <imageLocation>309956199498/RHEL-7.7_HVM_BETA-20190530-x86_64-1-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-06-05T08:45:53.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.7_HVM_BETA-20190530-x86_64-1-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-09016986b6fc25e0a</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-084f1e64b376d873d</imageId>
+                    <imageLocation>309956199498/RHEL-8.2.1_HVM_BETA-20200803-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-08-04T15:18:09.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.2.1_HVM_BETA-20200803-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0773d7c57daf06522</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-08c04369895785ac4</imageId>
+                    <imageLocation>309956199498/RHEL-8.1.0_HVM-20191029-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-10-30T10:43:13.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.1.0_HVM-20191029-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0e34646f03fd509d2</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0909688f3f479fd85</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.7_HVM_GA-20190903-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-09-03T15:47:37.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.7_HVM_GA-20190903-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-03136f7a89bba83f3</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-09651dac5e4d8e4cb</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.7_HVM_GA-20200110-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-01-10T17:07:39.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.7_HVM_GA-20200110-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-02e8e4b99c240cca2</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-097f7db7c0b5fe642</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.6_HVM_GA-20190724-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-07-29T17:43:02.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.6_HVM_GA-20190724-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-03fedb8b2618f8d46</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0a03eccad1a29b099</imageId>
+                    <imageLocation>309956199498/RHEL-7.7_HVM-20190923-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-09-23T13:26:52.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.7_HVM-20190923-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0b527d28b4d4f4fda</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0a41687ac0dc5140a</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.8_HVM_GA-20200616-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-06-23T10:36:15.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.8_HVM_GA-20200616-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0b6f3f206942185be</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-0a4636971b3b327f7</imageId>
@@ -441,6 +1710,40 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>false</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0a87dd915f3e5acdf</imageId>
+                    <imageLocation>309956199498/RHEL-8.3.0_HVM_BETA-20200701-x86_64-2-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-07-22T16:12:01.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.3.0_HVM_BETA-20200701-x86_64-2-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0a9d644eaf72925ba</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-0a8ebf17</imageId>
@@ -469,6 +1772,742 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0aeaaaf3425e35912</imageId>
+                    <imageLocation>309956199498/RHEL-7.9_HVM_BETA-20200422-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-05-13T09:46:54.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.9_HVM_BETA-20200422-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0c71f67f4f69b2b5c</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0af1378dc29c40afb</imageId>
+                    <imageLocation>309956199498/RHEL-7.6_HVM_GA-20190128-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-02-06T00:07:55.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.6_HVM_GA-20190128-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-00ecea5ccdde21b59</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0b35f4e3422513561</imageId>
+                    <imageLocation>309956199498/RHEL-6.10_HVM-20190923-x86_64-1-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-09-23T17:44:43.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-6.10_HVM-20190923-x86_64-1-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-084c3e5dccfd1575a</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>false</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0b84f6d2e5198bcd2</imageId>
+                    <imageLocation>aws-marketplace/ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20190122.1-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-08b8af1c94b41235d.4</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>679593333241</imageOwnerId>
+                    <creationDate>2019-01-28T09:41:04.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <productCodes>
+                        <item>
+                            <productCode>b3dl4415quatdndl4qa6kcu45</productCode>
+                            <type>marketplace</type>
+                        </item>
+                    </productCodes>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <imageOwnerAlias>aws-marketplace</imageOwnerAlias>
+                    <name>ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20190122.1-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-08b8af1c94b41235d.4</name>
+                    <description>Canonical, Ubuntu, 14.04 LTS, amd64 trusty image build on 2019-01-22</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0b7f3e96760a017c4</snapshotId>
+                                <volumeSize>8</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdb</deviceName>
+                            <virtualName>ephemeral0</virtualName>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdc</deviceName>
+                            <virtualName>ephemeral1</virtualName>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0b9f31c78c1ab8fb5</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.6_HVM_GA-20190517-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-05-18T13:45:53.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.6_HVM_GA-20190517-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0726786e166fc7057</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0be83fa8236957d52</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.8_HVM_GA-20200327-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-03-27T22:29:36.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.8_HVM_GA-20200327-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0904d2661f386d739</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0bfd4a50345397d9f</imageId>
+                    <imageLocation>aws-marketplace/ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20190429-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-0bc0814ce7c141032.4</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>679593333241</imageOwnerId>
+                    <creationDate>2019-05-03T13:55:19.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <productCodes>
+                        <item>
+                            <productCode>b3dl4415quatdndl4qa6kcu45</productCode>
+                            <type>marketplace</type>
+                        </item>
+                    </productCodes>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <imageOwnerAlias>aws-marketplace</imageOwnerAlias>
+                    <name>ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20190429-bb634ce9-ed92-47ac-a3dc-66e8ab3aaf75-ami-0bc0814ce7c141032.4</name>
+                    <description>Canonical, Ubuntu, 14.04 LTS, amd64 trusty image build on 2019-04-29</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-06fb45553bbf1c00d</snapshotId>
+                                <volumeSize>8</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdb</deviceName>
+                            <virtualName>ephemeral0</virtualName>
+                        </item>
+                        <item>
+                            <deviceName>/dev/sdc</deviceName>
+                            <virtualName>ephemeral1</virtualName>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0c4472b568a8894e5</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.7_HVM_GA-20200128-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-01-28T16:56:30.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.7_HVM_GA-20200128-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0859913116be13323</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0c976d0ee33016e25</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.6_HVM_GA-20190418-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-04-24T20:13:01.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.6_HVM_GA-20190418-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0e84d4fa3ee5d1318</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>false</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0ceb3ed6b4a60f946</imageId>
+                    <imageLocation>309956199498/RHEL-6.10_HVM-20190621-x86_64-2-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-06-26T16:08:49.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-6.10_HVM-20190621-x86_64-2-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-04a99c0271c739ea1</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>false</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0cfdfa00b0bf7f1f5</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.7_HVM_GA-20191029-x86_64-3-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-10-29T18:41:20.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.7_HVM_GA-20191029-x86_64-3-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0775691d99e4e18c3</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0d2fc567ccebe16e4</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.6_HVM_GA-20190619-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-06-21T15:13:43.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.6_HVM_GA-20190619-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-02c35cd624e2f30fd</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0d5d36ccf1cea9068</imageId>
+                    <imageLocation>309956199498/RHEL-8.2.1_HVM-20200803-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-08-03T19:19:23.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.2.1_HVM-20200803-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-082bb5548b96ba05b</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0d9b29db8ea2d6c48</imageId>
+                    <imageLocation>309956199498/RHEL-7.7_HVM_GA-20190723-x86_64-1-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-07-24T08:58:39.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.7_HVM_GA-20190723-x86_64-1-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0d2b58b6d64287f46</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0dbf334725957f216</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.7_HVM_GA-20200310-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-03-17T12:43:23.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.7_HVM_GA-20200310-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0c35cd47e01a4e782</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0e02f0379a96c1edd</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.6_HVM_GA-20190129-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-01-30T14:47:51.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.6_HVM_GA-20190129-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-05328ed24163906b1</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>false</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0e141e3c3c45456b0</imageId>
+                    <imageLocation>309956199498/RHEL-7.6_HVM_GA-20181017-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2018-10-17T14:13:57.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.6_HVM_GA-20181017-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-04548a5e5b5a545ce</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0e68dd16b23abf707</imageId>
+                    <imageLocation>309956199498/RHEL-7.8_HVM-20200803-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-08-03T18:01:31.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-7.8_HVM-20200803-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-09ba9d0dcb0ffaccd</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0f1d695146af04183</imageId>
+                    <imageLocation>309956199498/RHEL-8.0.0_HVM-20190618-x86_64-1-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2019-06-19T19:34:27.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.0.0_HVM-20190618-x86_64-1-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-0510e179645830b1b</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0f22474e194bf96fc</imageId>
+                    <imageLocation>309956199498/RHEL-8.2.0_HVM-20200423-x86_64-0-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-04-23T17:22:33.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.2.0_HVM-20200423-x86_64-0-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-07fae9628fc8be7c7</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0f387ed70a4960190</imageId>
+                    <imageLocation>309956199498/RHEL-8.3.0_HVM_BETA-20200701-arm64-2-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-07-23T16:04:00.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>arm64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-8.3.0_HVM_BETA-20200701-arm64-2-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-066bcee03c88d530e</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
+                </item>
+                <item>
+                    <imageId>ami-0f8ad1b8c4740881e</imageId>
+                    <imageLocation>309956199498/RHEL-Atomic_7.8_HVM_GA-20200511-x86_64-1-Access2-GP2</imageLocation>
+                    <imageState>available</imageState>
+                    <imageOwnerId>309956199498</imageOwnerId>
+                    <creationDate>2020-05-14T17:10:18.000Z</creationDate>
+                    <isPublic>false</isPublic>
+                    <architecture>x86_64</architecture>
+                    <imageType>machine</imageType>
+                    <sriovNetSupport>simple</sriovNetSupport>
+                    <name>RHEL-Atomic_7.8_HVM_GA-20200511-x86_64-1-Access2-GP2</name>
+                    <description>Provided by Red Hat, Inc.</description>
+                    <rootDeviceType>ebs</rootDeviceType>
+                    <rootDeviceName>/dev/sda1</rootDeviceName>
+                    <blockDeviceMapping>
+                        <item>
+                            <deviceName>/dev/sda1</deviceName>
+                            <ebs>
+                                <snapshotId>snap-08d7578428faa8850</snapshotId>
+                                <volumeSize>10</volumeSize>
+                                <deleteOnTermination>true</deleteOnTermination>
+                                <volumeType>gp2</volumeType>
+                                <encrypted>false</encrypted>
+                            </ebs>
+                        </item>
+                    </blockDeviceMapping>
+                    <virtualizationType>hvm</virtualizationType>
+                    <hypervisor>xen</hypervisor>
+                    <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-132aa67c</imageId>
@@ -499,6 +2538,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-168ebf0b</imageId>
@@ -527,6 +2568,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-16f0c30b</imageId>
@@ -555,6 +2598,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-1a041676</imageId>
@@ -584,6 +2629,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-1b66aa74</imageId>
@@ -613,6 +2660,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-1eecda03</imageId>
@@ -642,6 +2691,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-1f7ec770</imageId>
@@ -672,6 +2723,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-1ff10170</imageId>
@@ -701,6 +2754,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-21312b4d</imageId>
@@ -730,6 +2785,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-284cdc47</imageId>
@@ -760,6 +2817,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-2eccfa33</imageId>
@@ -788,6 +2847,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-329e982f</imageId>
@@ -817,6 +2878,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-337be65c</imageId>
@@ -853,6 +2916,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>false</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-35a4785a</imageId>
@@ -883,6 +2948,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-368ebf2b</imageId>
@@ -911,6 +2978,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-36d9e02b</imageId>
@@ -940,6 +3009,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-36da6159</imageId>
@@ -969,6 +3040,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-390c9c56</imageId>
@@ -999,6 +3072,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-396bf456</imageId>
@@ -1028,6 +3103,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-3e8ebf23</imageId>
@@ -1056,6 +3133,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-3ed2d623</imageId>
@@ -1085,6 +3164,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-40dc532f</imageId>
@@ -1130,6 +3211,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-41dc532e</imageId>
@@ -1170,6 +3253,8 @@ http_interactions:
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>false</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-44fbd3af</imageId>
@@ -1199,6 +3284,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-488cbf55</imageId>
@@ -1228,6 +3315,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-491edc26</imageId>
@@ -1257,6 +3346,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-49be6226</imageId>
@@ -1287,6 +3378,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-4a9f6525</imageId>
@@ -1316,6 +3409,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-4b1bb524</imageId>
@@ -1356,6 +3451,8 @@ http_interactions:
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>false</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-4cecda51</imageId>
@@ -1385,6 +3482,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-4ded1522</imageId>
@@ -1414,6 +3513,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-4fb35620</imageId>
@@ -1443,6 +3544,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-526d3eb9</imageId>
@@ -1473,6 +3576,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-55e8313a</imageId>
@@ -1502,6 +3607,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-58eddb45</imageId>
@@ -1531,6 +3638,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-5cc53d33</imageId>
@@ -1560,6 +3669,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-60a7cb0f</imageId>
@@ -1589,6 +3700,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-62deee7f</imageId>
@@ -1617,6 +3730,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-64e3d58f</imageId>
@@ -1646,6 +3761,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-68fec275</imageId>
@@ -1675,6 +3792,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-69e2ca82</imageId>
@@ -1705,6 +3824,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-6c1ffb03</imageId>
@@ -1734,6 +3855,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-6e278301</imageId>
@@ -1763,6 +3886,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-6eecda73</imageId>
@@ -1792,6 +3917,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-76ba869d</imageId>
@@ -1822,6 +3949,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-76eddb6b</imageId>
@@ -1851,6 +3980,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-7849e717</imageId>
@@ -1881,6 +4012,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-788a5217</imageId>
@@ -1911,6 +4044,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-7e7d8211</imageId>
@@ -1940,6 +4075,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-81311c6a</imageId>
@@ -1985,6 +4122,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-82ce36ed</imageId>
@@ -2014,6 +4153,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-82ecda9f</imageId>
@@ -2043,6 +4184,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-84f7c199</imageId>
@@ -2078,6 +4221,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-88e9db95</imageId>
@@ -2106,6 +4251,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-88ee38e7</imageId>
@@ -2136,6 +4283,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-8bf029e4</imageId>
@@ -2165,6 +4314,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-8c96ac91</imageId>
@@ -2194,6 +4345,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-916c417a</imageId>
@@ -2224,6 +4377,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-93a835fc</imageId>
@@ -2269,6 +4424,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-94ecda89</imageId>
@@ -2298,6 +4455,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-971a327c</imageId>
@@ -2328,6 +4487,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-a1138ace</imageId>
@@ -2357,6 +4518,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-a2eb72cd</imageId>
@@ -2387,6 +4550,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-a58e15ca</imageId>
@@ -2432,6 +4597,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-a9d3f642</imageId>
@@ -2461,6 +4628,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-aa8cbfb7</imageId>
@@ -2490,6 +4659,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-aacff9b7</imageId>
@@ -2518,6 +4689,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-afcd2dc0</imageId>
@@ -2547,6 +4720,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-b05f015b</imageId>
@@ -2577,6 +4752,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-b3d841dc</imageId>
@@ -2607,6 +4784,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-b51bb5da</imageId>
@@ -2652,6 +4831,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-b55bffda</imageId>
@@ -2681,6 +4862,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-bc8835d3</imageId>
@@ -2711,6 +4894,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-bedb6fd1</imageId>
@@ -2741,6 +4926,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-c2d7e1df</imageId>
@@ -2770,6 +4957,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-c4d9efd9</imageId>
@@ -2799,6 +4988,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-cc688da3</imageId>
@@ -2828,6 +5019,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-cd2339a1</imageId>
@@ -2857,6 +5050,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-cf6a8fa0</imageId>
@@ -2886,6 +5081,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-d8d7e1c5</imageId>
@@ -2915,6 +5112,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-defdcfc3</imageId>
@@ -2943,6 +5142,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-e2361b09</imageId>
@@ -2983,6 +5184,8 @@ http_interactions:
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>false</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-e283ef8d</imageId>
@@ -3028,6 +5231,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-e45e6cf9</imageId>
@@ -3056,6 +5261,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-e583ef8a</imageId>
@@ -3096,6 +5303,8 @@ http_interactions:
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>false</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-eccff9f1</imageId>
@@ -3124,6 +5333,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-f22a15ef</imageId>
@@ -3153,6 +5364,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-f4ab369b</imageId>
@@ -3193,6 +5406,8 @@ http_interactions:
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>false</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-f6efd9eb</imageId>
@@ -3222,6 +5437,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-f7192d1c</imageId>
@@ -3267,6 +5484,8 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-f80538e5</imageId>
@@ -3296,6 +5515,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-f88f1497</imageId>
@@ -3336,6 +5557,8 @@ http_interactions:
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>false</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-fbbb1494</imageId>
@@ -3365,6 +5588,8 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-fe192d15</imageId>
@@ -3405,6 +5630,8 @@ http_interactions:
                     <virtualizationType>paravirtual</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>false</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
                 <item>
                     <imageId>ami-ff11f390</imageId>
@@ -3434,11 +5661,13 @@ http_interactions:
                     </blockDeviceMapping>
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
+                    <platformDetails>Red Hat BYOL Linux</platformDetails>
+                    <usageOperation>RunInstances:00g0</usageOperation>
                 </item>
             </imagesSet>
         </DescribeImagesResponse>
-    http_version: 
-  recorded_at: Tue, 28 Aug 2018 14:06:24 GMT
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:16:24 GMT
 - request:
     method: post
     uri: https://ec2.eu-central-1.amazonaws.com/
@@ -3451,14 +5680,14 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20180828T140624Z
+      - 20200812T141624Z
       X-Amz-Content-Sha256:
       - 6171eb09865e32b0602af0f7957e26573a51f53caaedff02ff88883cb0275885
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180828/eu-central-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=10dfd417688af6ba5d6c1ebf9936450bf89d61e34606c083096416329b183d43
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=53f24bb04b603742c902d195513d4ea99523ba832db40380e1f3d27b29071df0
       Content-Length:
       - '43'
       Accept:
@@ -3468,14 +5697,16 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - e8c138d5-001b-4ba7-ba1a-6d550b3916c7
       Content-Type:
       - text/xml;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '6903'
       Vary:
-      - Accept-Encoding
+      - accept-encoding
       Date:
-      - Tue, 28 Aug 2018 14:06:19 GMT
+      - Wed, 12 Aug 2020 14:16:24 GMT
       Server:
       - AmazonEC2
     body:
@@ -3483,28 +5714,28 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>cdff31b5-c0d0-4e27-ab33-f01375be0bf6</requestId>
+            <requestId>e8c138d5-001b-4ba7-ba1a-6d550b3916c7</requestId>
             <reservationSet>
                 <item>
-                    <reservationId>r-056692f6dc68b8043</reservationId>
+                    <reservationId>r-03727e9d0aa8a6c18</reservationId>
                     <ownerId>200278856672</ownerId>
                     <groupSet/>
                     <instancesSet>
                         <item>
-                            <instanceId>i-091369dd8a8d470ab</instanceId>
-                            <imageId>ami-0fc85a60</imageId>
+                            <instanceId>i-0a57ceb9adb46abab</instanceId>
+                            <imageId>ami-09def150731bdbcc2</imageId>
                             <instanceState>
                                 <code>80</code>
                                 <name>stopped</name>
                             </instanceState>
-                            <privateDnsName>ip-172-31-9-14.eu-central-1.compute.internal</privateDnsName>
+                            <privateDnsName>ip-172-31-0-42.eu-central-1.compute.internal</privateDnsName>
                             <dnsName/>
-                            <reason>User initiated (2018-05-03 13:54:51 GMT)</reason>
+                            <reason>User initiated (2019-05-21 14:45:00 GMT)</reason>
                             <keyName>azagayno</keyName>
                             <amiLaunchIndex>0</amiLaunchIndex>
                             <productCodes/>
                             <instanceType>t2.micro</instanceType>
-                            <launchTime>2018-05-03T13:18:29.000Z</launchTime>
+                            <launchTime>2019-05-21T14:43:21.000Z</launchTime>
                             <placement>
                                 <availabilityZone>eu-central-1b</availabilityZone>
                                 <groupName/>
@@ -3515,7 +5746,7 @@ http_interactions:
                             </monitoring>
                             <subnetId>subnet-95b0b1ed</subnetId>
                             <vpcId>vpc-d78f69be</vpcId>
-                            <privateIpAddress>172.31.9.14</privateIpAddress>
+                            <privateIpAddress>172.31.0.42</privateIpAddress>
                             <sourceDestCheck>true</sourceDestCheck>
                             <groupSet>
                                 <item>
@@ -3534,9 +5765,9 @@ http_interactions:
                                 <item>
                                     <deviceName>/dev/xvda</deviceName>
                                     <ebs>
-                                        <volumeId>vol-006e52cf74d8f3e7c</volumeId>
+                                        <volumeId>vol-0f0c778f8e8c24516</volumeId>
                                         <status>attached</status>
-                                        <attachTime>2018-01-15T10:28:27.000Z</attachTime>
+                                        <attachTime>2019-04-18T15:29:38.000Z</attachTime>
                                         <deleteOnTermination>true</deleteOnTermination>
                                     </ebs>
                                 </item>
@@ -3545,26 +5776,22 @@ http_interactions:
                             <clientToken/>
                             <tagSet>
                                 <item>
-                                    <key>redhat</key>
-                                    <value>brno</value>
-                                </item>
-                                <item>
-                                    <key>some_tag</key>
-                                    <value>some_tag_value</value>
+                                    <key>Name</key>
+                                    <value>AZ-test</value>
                                 </item>
                             </tagSet>
                             <hypervisor>xen</hypervisor>
                             <networkInterfaceSet>
                                 <item>
-                                    <networkInterfaceId>eni-b023519b</networkInterfaceId>
+                                    <networkInterfaceId>eni-08a42849031f56dc3</networkInterfaceId>
                                     <subnetId>subnet-95b0b1ed</subnetId>
                                     <vpcId>vpc-d78f69be</vpcId>
                                     <description/>
                                     <ownerId>200278856672</ownerId>
                                     <status>in-use</status>
-                                    <macAddress>06:c4:1b:46:94:1a</macAddress>
-                                    <privateIpAddress>172.31.9.14</privateIpAddress>
-                                    <privateDnsName>ip-172-31-9-14.eu-central-1.compute.internal</privateDnsName>
+                                    <macAddress>06:f1:54:16:9d:46</macAddress>
+                                    <privateIpAddress>172.31.0.42</privateIpAddress>
+                                    <privateDnsName>ip-172-31-0-42.eu-central-1.compute.internal</privateDnsName>
                                     <sourceDestCheck>true</sourceDestCheck>
                                     <groupSet>
                                         <item>
@@ -3573,57 +5800,77 @@ http_interactions:
                                         </item>
                                     </groupSet>
                                     <attachment>
-                                        <attachmentId>eni-attach-b165785a</attachmentId>
+                                        <attachmentId>eni-attach-0dd7582b10a7bf9c8</attachmentId>
                                         <deviceIndex>0</deviceIndex>
                                         <status>attached</status>
-                                        <attachTime>2018-01-15T10:28:27.000Z</attachTime>
+                                        <attachTime>2019-04-18T15:29:38.000Z</attachTime>
                                         <deleteOnTermination>true</deleteOnTermination>
                                     </attachment>
                                     <privateIpAddressesSet>
                                         <item>
-                                            <privateIpAddress>172.31.9.14</privateIpAddress>
-                                            <privateDnsName>ip-172-31-9-14.eu-central-1.compute.internal</privateDnsName>
+                                            <privateIpAddress>172.31.0.42</privateIpAddress>
+                                            <privateDnsName>ip-172-31-0-42.eu-central-1.compute.internal</privateDnsName>
                                             <primary>true</primary>
                                         </item>
                                     </privateIpAddressesSet>
                                     <ipv6AddressesSet/>
+                                    <interfaceType>interface</interfaceType>
                                 </item>
                             </networkInterfaceSet>
+                            <iamInstanceProfile>
+                                <arn>arn:aws:iam::200278856672:instance-profile/CloudWatchAgent</arn>
+                                <id>AIPAIMJJIAC6LRULT66VM</id>
+                            </iamInstanceProfile>
                             <ebsOptimized>false</ebsOptimized>
                             <enaSupport>true</enaSupport>
                             <cpuOptions>
                                 <coreCount>1</coreCount>
                                 <threadsPerCore>1</threadsPerCore>
                             </cpuOptions>
+                            <capacityReservationSpecification>
+                                <capacityReservationPreference>open</capacityReservationPreference>
+                            </capacityReservationSpecification>
+                            <hibernationOptions>
+                                <configured>false</configured>
+                            </hibernationOptions>
+                            <enclaveOptions>
+                                <enabled>false</enabled>
+                            </enclaveOptions>
+                            <metadataOptions>
+                                <state>applied</state>
+                                <httpTokens>optional</httpTokens>
+                                <httpPutResponseHopLimit>1</httpPutResponseHopLimit>
+                                <httpEndpoint>enabled</httpEndpoint>
+                            </metadataOptions>
                         </item>
                     </instancesSet>
                 </item>
             </reservationSet>
         </DescribeInstancesResponse>
-    http_version: 
-  recorded_at: Tue, 28 Aug 2018 14:06:24 GMT
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:16:25 GMT
 - request:
     method: post
     uri: https://ec2.eu-central-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=DescribeImages&Filter.1.Name=image-id&Filter.1.Value.1=ami-0fc85a60&Version=2016-11-15
+      string: Action=DescribeImages&Filter.1.Name=image-id&Filter.1.Value.1=ami-09def150731bdbcc2&Version=2016-11-15
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-ec2/1.183.0
       X-Amz-Date:
-      - 20180828T140624Z
+      - 20200812T141625Z
       X-Amz-Content-Sha256:
-      - 97b5c640c4d026cb78b56efe042e22b5f5ea52221096f5e0d89000943ebdd37c
+      - 626a8956a7e3f73a930818f8b50a219fcc56d49feec5988232630dedfea83e60
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180828/eu-central-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=4551e0e958fccbb1310467ac179cea8e3e796e2a65fc185d3e1efe8a37bb5459
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/eu-central-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=1f49022ad5b4cc594f44cc026d940e35c2ab3e284d147ee8055dd9b83e60d337
       Content-Length:
-      - '93'
+      - '102'
       Accept:
       - "*/*"
   response:
@@ -3631,12 +5878,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - 8d08da1f-9114-4733-ba78-c6e5f0e607fc
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '1732'
+      - '1843'
       Date:
-      - Tue, 28 Aug 2018 14:06:19 GMT
+      - Wed, 12 Aug 2020 14:16:24 GMT
       Server:
       - AmazonEC2
     body:
@@ -3644,28 +5893,28 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>57a73b5d-f758-45bc-925e-ebb4952ccabc</requestId>
+            <requestId>8d08da1f-9114-4733-ba78-c6e5f0e607fc</requestId>
             <imagesSet>
                 <item>
-                    <imageId>ami-0fc85a60</imageId>
-                    <imageLocation>amazon/amzn-ami-hvm-2017.09.1.20180108-x86_64-gp2</imageLocation>
+                    <imageId>ami-09def150731bdbcc2</imageId>
+                    <imageLocation>amazon/amzn2-ami-hvm-2.0.20190313-x86_64-gp2</imageLocation>
                     <imageState>available</imageState>
                     <imageOwnerId>137112412989</imageOwnerId>
-                    <creationDate>2018-01-08T18:43:51.000Z</creationDate>
+                    <creationDate>2019-03-08T20:44:47.000Z</creationDate>
                     <isPublic>true</isPublic>
                     <architecture>x86_64</architecture>
                     <imageType>machine</imageType>
                     <sriovNetSupport>simple</sriovNetSupport>
                     <imageOwnerAlias>amazon</imageOwnerAlias>
-                    <name>amzn-ami-hvm-2017.09.1.20180108-x86_64-gp2</name>
-                    <description>Amazon Linux AMI 2017.09.1.20180108 x86_64 HVM GP2</description>
+                    <name>amzn2-ami-hvm-2.0.20190313-x86_64-gp2</name>
+                    <description>Amazon Linux 2 AMI 2.0.20190313 x86_64 HVM gp2</description>
                     <rootDeviceType>ebs</rootDeviceType>
                     <rootDeviceName>/dev/xvda</rootDeviceName>
                     <blockDeviceMapping>
                         <item>
                             <deviceName>/dev/xvda</deviceName>
                             <ebs>
-                                <snapshotId>snap-0a7717f070e33a371</snapshotId>
+                                <snapshotId>snap-035c3ad135a71e983</snapshotId>
                                 <volumeSize>8</volumeSize>
                                 <deleteOnTermination>true</deleteOnTermination>
                                 <volumeType>gp2</volumeType>
@@ -3676,11 +5925,13 @@ http_interactions:
                     <virtualizationType>hvm</virtualizationType>
                     <hypervisor>xen</hypervisor>
                     <enaSupport>true</enaSupport>
+                    <platformDetails>Linux/UNIX</platformDetails>
+                    <usageOperation>RunInstances</usageOperation>
                 </item>
             </imagesSet>
         </DescribeImagesResponse>
-    http_version: 
-  recorded_at: Tue, 28 Aug 2018 14:06:25 GMT
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:16:25 GMT
 - request:
     method: post
     uri: https://servicecatalog.eu-central-1.amazonaws.com/
@@ -3693,17 +5944,17 @@ http_interactions:
       Accept-Encoding:
       - ''
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.2 x86_64-linux resources
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-servicecatalog/1.44.0
       X-Amz-Target:
       - AWS242ServiceCatalogService.SearchProductsAsAdmin
       X-Amz-Date:
-      - 20180828T140625Z
+      - 20200812T141625Z
       X-Amz-Content-Sha256:
       - 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20180828/eu-central-1/servicecatalog/aws4_request,
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/eu-central-1/servicecatalog/aws4_request,
         SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
-        Signature=43866469829b66c25c887f189446941f997e7bb820b4f7f50fee09d64d3b05ec
+        Signature=93e176a83cc06b692d860bc60ff60b97536773a9b95a494ddc4988ce57dbd335
       Content-Length:
       - '2'
       Accept:
@@ -3714,16 +5965,61 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 8a0e35ef-aacb-11e8-af65-390ddfe274ea
+      - a0d70f75-fb7f-45ae-bb2c-2c1d9ad406c9
       Content-Type:
       - application/x-amz-json-1.1
       Content-Length:
       - '25'
       Date:
-      - Tue, 28 Aug 2018 14:06:20 GMT
+      - Wed, 12 Aug 2020 14:16:25 GMT
     body:
       encoding: UTF-8
       string: '{"ProductViewDetails":[]}'
-    http_version: 
-  recorded_at: Tue, 28 Aug 2018 14:06:25 GMT
-recorded_with: VCR 3.0.3
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:16:25 GMT
+- request:
+    method: post
+    uri: https://servicecatalog.eu-central-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.104.3 ruby/2.7.1 x86_64-linux-gnu aws-sdk-servicecatalog/1.44.0
+      X-Amz-Target:
+      - AWS242ServiceCatalogService.ScanProvisionedProducts
+      X-Amz-Date:
+      - 20200812T141626Z
+      X-Amz-Content-Sha256:
+      - 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20200812/eu-central-1/servicecatalog/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=3ec9c56d0ae9c35b6f3dd8b0d9208045f71b52ce563d45ead562db39675a0a41
+      Content-Length:
+      - '2'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 6b368765-3e24-4c19-ac18-57e36ec71abd
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '26'
+      Date:
+      - Wed, 12 Aug 2020 14:16:25 GMT
+    body:
+      encoding: UTF-8
+      string: '{"ProvisionedProducts":[]}'
+    http_version:
+  recorded_at: Wed, 12 Aug 2020 14:16:26 GMT
+recorded_with: VCR 5.1.0

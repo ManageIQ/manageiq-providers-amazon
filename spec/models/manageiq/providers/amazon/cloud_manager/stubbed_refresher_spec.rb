@@ -112,6 +112,9 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :cloudformation => {
         :describe_stacks      => mocked_stacks,
         :list_stack_resources => mocked_stack_resources
+      },
+      :rds            => {
+        :describe_db_instances => mocked_db_instances
       }
     }
   end
@@ -174,6 +177,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :load_balancer_health_check_member => 0,
       :cloud_volume                      => 0,
       :cloud_volume_snapshot             => 0,
+      :cloud_database                    => test_counts[:db_instance_count]
     }
   end
 
@@ -218,6 +222,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :load_balancer_health_check_member => LoadBalancerHealthCheckMember.count,
       :cloud_volume                      => CloudVolume.count,
       :cloud_volume_snapshot             => CloudVolumeSnapshot.count,
+      :cloud_database                    => CloudDatabase.count,
     }
 
     expect(actual).to eq expected_table_counts
