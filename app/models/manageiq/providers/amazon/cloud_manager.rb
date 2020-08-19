@@ -126,11 +126,11 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     @params_for_create ||= {
       :fields => [
         {
-          :component  => "select-field",
+          :component  => "select",
           :name       => "provider_region",
           :label      => _("Region"),
           :isRequired => true,
-          :validate   => [{:type => "required-validator"}],
+          :validate   => [{:type => "required"}],
           :options    => ManageIQ::Providers::Amazon::Regions.all.sort_by { |r| r[:description] }.map do |region|
             {
               :label => region[:description],
@@ -165,7 +165,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
                   :label      => _("Access Key ID"),
                   :helperText => _("Should have privileged access, such as root or administrator."),
                   :isRequired => true,
-                  :validate   => [{:type => "required-validator"}]
+                  :validate   => [{:type => "required"}]
                 },
                 {
                   :component  => "password-field",
@@ -173,7 +173,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
                   :label      => _("Secret Access Key"),
                   :type       => "password",
                   :isRequired => true,
-                  :validate   => [{:type => "required-validator"}]
+                  :validate   => [{:type => "required"}]
                 },
               ],
             },
