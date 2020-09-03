@@ -127,6 +127,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
       :fields => [
         {
           :component  => "select",
+          :id         => "provider_region",
           :name       => "provider_region",
           :label      => _("Region"),
           :isRequired => true,
@@ -141,26 +142,31 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
         {
           :component => 'sub-form',
           :name      => 'endpoints-subform',
+          :id        => 'endpoints-subform',
           :title     => _("Endpoint"),
           :fields    => [
             {
               :component              => 'validate-provider-credentials',
+              :id                     => 'authentications.default.valid',
               :name                   => 'authentications.default.valid',
               :skipSubmit             => true,
               :validationDependencies => %w[type zone_id provider_region],
               :fields                 => [
                 {
                   :component => "text-field",
+                  :id        => "endpoints.default.url",
                   :name      => "endpoints.default.url",
                   :label     => _("Endpoint URL"),
                 },
                 {
                   :component => "text-field",
+                  :id        => "authentications.default.service_account",
                   :name      => "authentications.default.service_account",
                   :label     => _("Assume role ARN"),
                 },
                 {
                   :component  => "text-field",
+                  :id         => "authentications.default.userid",
                   :name       => "authentications.default.userid",
                   :label      => _("Access Key ID"),
                   :helperText => _("Should have privileged access, such as root or administrator."),
@@ -169,6 +175,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
                 },
                 {
                   :component  => "password-field",
+                  :id         => "authentications.default.password",
                   :name       => "authentications.default.password",
                   :label      => _("Secret Access Key"),
                   :type       => "password",
