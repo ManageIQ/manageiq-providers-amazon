@@ -63,17 +63,17 @@ describe ManageIQ::Providers::Amazon::CloudManager do
       r2 = {'us-east-1' => r2_data}
 
       expect(ManageIQ::Providers::Amazon::Regions).to receive(:regions).and_return({})
-      options = described_class.params_for_create[:fields].detect { |f| f[:id] == "provider_region" }[:options]
+      options = DDF.find_field(described_class.params_for_create, "provider_region")[:options]
       expect(options).to be_empty
 
       expect(ManageIQ::Providers::Amazon::Regions).to receive(:regions).and_return(r1)
-      options = described_class.params_for_create[:fields].detect { |f| f[:id] == "provider_region" }[:options]
+      options = DDF.find_field(described_class.params_for_create, "provider_region")[:options]
       expect(options).to eq [
         {:label => r1_data[:description], :value => r1_data[:name]}
       ]
 
       expect(ManageIQ::Providers::Amazon::Regions).to receive(:regions).and_return(r1.merge(r2))
-      options = described_class.params_for_create[:fields].detect { |f| f[:id] == "provider_region" }[:options]
+      options = DDF.find_field(described_class.params_for_create, "provider_region")[:options]
       expect(options).to eq [
         # Note that this also tests that the providers are returned properly sorted
         {:label => r2_data[:description], :value => r2_data[:name]},
