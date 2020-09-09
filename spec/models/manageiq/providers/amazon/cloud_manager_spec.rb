@@ -49,6 +49,39 @@ describe ManageIQ::Providers::Amazon::CloudManager do
     expect(described_class.description).to eq('Amazon EC2')
   end
 
+  describe ".params_for_create" do
+    it "dynamically adjusts to new regions" do
+      r1_data = {
+        :name        => "us-west-1",
+        :description => "US West (N. California)"
+      }
+      r1 = {'us-west-1' => r1_data}
+      r2_data = {
+        :name        => "us-east-1",
+        :description => "US East (N. Virginia)"
+      }
+      r2 = {'us-east-1' => r2_data}
+
+      expect(ManageIQ::Providers::Amazon::Regions).to receive(:regions).and_return({})
+      options = described_class.params_for_create[:fields].detect { |f| f[:id] == "provider_region" }[:options]
+      expect(options).to be_empty
+
+      expect(ManageIQ::Providers::Amazon::Regions).to receive(:regions).and_return(r1)
+      options = described_class.params_for_create[:fields].detect { |f| f[:id] == "provider_region" }[:options]
+      expect(options).to eq [
+        {:label => r1_data[:description], :value => r1_data[:name]}
+      ]
+
+      expect(ManageIQ::Providers::Amazon::Regions).to receive(:regions).and_return(r1.merge(r2))
+      options = described_class.params_for_create[:fields].detect { |f| f[:id] == "provider_region" }[:options]
+      expect(options).to eq [
+        # Note that this also tests that the providers are returned properly sorted
+        {:label => r2_data[:description], :value => r2_data[:name]},
+        {:label => r1_data[:description], :value => r1_data[:name]}
+      ]
+    end
+  end
+
   it "#catalog_types" do
     ems = FactoryBot.create(:ems_amazon)
     expect(ems.catalog_types).to include("amazon")

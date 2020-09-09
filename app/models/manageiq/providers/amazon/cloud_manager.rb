@@ -123,7 +123,25 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   end
 
   def self.params_for_create
-    @params_for_create ||= {
+    static_params_for_create.deep_clone.tap do |params|
+      params[:fields].detect { |f| f[:id] == 'provider_region' }[:options] = provider_region_options
+    end
+  end
+
+  private_class_method def self.provider_region_options
+    ManageIQ::Providers::Amazon::Regions
+      .all
+      .sort_by { |r| r[:description].downcase }
+      .map do |r|
+        {
+          :label => r[:description],
+          :value => r[:name]
+        }
+      end
+  end
+
+  private_class_method def self.static_params_for_create
+    @static_params_for_create ||= {
       :fields => [
         {
           :component  => "select",
@@ -131,13 +149,8 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
           :name       => "provider_region",
           :label      => _("Region"),
           :isRequired => true,
-          :validate   => [{:type => "required"}],
-          :options    => ManageIQ::Providers::Amazon::Regions.all.sort_by { |r| r[:description] }.map do |region|
-            {
-              :label => region[:description],
-              :value => region[:name]
-            }
-          end
+          :validate   => [{:type => "required"}]
+          # options is a dynamic field
         },
         {
           :component => 'sub-form',
