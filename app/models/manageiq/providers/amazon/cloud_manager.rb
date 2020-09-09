@@ -122,12 +122,6 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     Settings.ems.ems_amazon.blacklisted_event_names
   end
 
-  def self.params_for_create
-    static_params_for_create.deep_clone.tap do |params|
-      params[:fields].detect { |f| f[:id] == 'provider_region' }[:options] = provider_region_options
-    end
-  end
-
   private_class_method def self.provider_region_options
     ManageIQ::Providers::Amazon::Regions
       .all
@@ -140,8 +134,8 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
       end
   end
 
-  private_class_method def self.static_params_for_create
-    @static_params_for_create ||= {
+  def self.params_for_create
+    {
       :fields => [
         {
           :component  => "select",
@@ -149,8 +143,8 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
           :name       => "provider_region",
           :label      => _("Region"),
           :isRequired => true,
-          :validate   => [{:type => "required"}]
-          # options is a dynamic field
+          :validate   => [{:type => "required"}],
+          :options    => provider_region_options
         },
         {
           :component => 'sub-form',
@@ -200,7 +194,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
           ],
         },
       ],
-    }.freeze
+    }
   end
 
   def supported_auth_types
