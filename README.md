@@ -1,9 +1,8 @@
-# manageiq-providers-amazon
+# ManageIQ::Providers::Amazon
 
-[![Gem Version](https://badge.fury.io/rb/manageiq-providers-amazon.svg)](http://badge.fury.io/rb/manageiq-providers-amazon)
 [![Build Status](https://travis-ci.com/ManageIQ/manageiq-providers-amazon.svg?branch=master)](https://travis-ci.com/ManageIQ/manageiq-providers-amazon)
-[![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon)
-[![Test Coverage](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/badges/coverage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/61cfeaf47807735b8bd8/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/61cfeaf47807735b8bd8/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/test_coverage)
 [![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-amazon/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-amazon/master)
 
 [![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/manageiq-providers-amazon?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -12,7 +11,7 @@ ManageIQ plugin for the Amazon provider.
 
 ## Development
 
-See the section on pluggable providers in the [ManageIQ Developer Setup](http://manageiq.org/docs/guides/developer_setup)
+See the section on plugins in the [ManageIQ Developer Setup](http://manageiq.org/docs/guides/developer_setup/plugins)
 
 For quick local setup run `bin/setup`, which will clone the core ManageIQ repository under the *spec* directory and setup necessary config files. If you have already cloned it, you can run `bin/update` to bring the core ManageIQ code up to date.
 
