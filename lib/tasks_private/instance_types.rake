@@ -24,7 +24,9 @@ namespace 'aws:extract' do
 
     def log_data(header, data, level: :warn)
       return if data.empty?
+
       severity = Logger.const_get(level.to_s.upcase)
+
       LOGGER.log(severity) do
         lines = []
         lines << header
@@ -40,7 +42,7 @@ namespace 'aws:extract' do
       :product_families   => 'Compute Instance', # 'Dedicated Host' == bare metal: "m5", "p3", etc.
       :product_attributes => AwsInstanceDataParser::REQUIRED_ATTRIBUTES,
       :folding_attributes => 'instanceType',
-      :mutable_attributes => %w(currentVersion currentGeneration).freeze,
+      :mutable_attributes => %w[currentVersion currentGeneration].freeze
     ).result
 
     parsing_warnings = {}
