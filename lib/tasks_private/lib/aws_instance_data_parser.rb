@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AwsInstanceDataParser
-  REQUIRED_ATTRIBUTES = %w(
+  REQUIRED_ATTRIBUTES = %w[
     currentVersion
     currentGeneration
     clockSpeed
@@ -20,63 +20,63 @@ class AwsInstanceDataParser
     processorFeatures
     storage
     vcpu
-  ).freeze
+  ].freeze
 
-  TYPE_REGEXP    = /^(?:(.*)\.)?(\d+)?(.*)/
-  MEMORY_REGEXP  = /^\s*((?:\d+,?)+\.?\d*)\s+GiB\s*$/i
-  STORAGE_REGEXP = /^(?:(\d+)\s+x\s+)((?:\d+[.,])?\d+)(?:\s+(.+))?$/
-  NETWORK_REGEXP = /^\d+\sGigabit$/i
+  TYPE_REGEXP    = /^(?:(.*)\.)?(\d+)?(.*)/.freeze
+  MEMORY_REGEXP  = /^\s*((?:\d+,?)+\.?\d*)\s+GiB\s*$/i.freeze
+  STORAGE_REGEXP = /^(?:(\d+)\s+x\s+)((?:\d+[.,])?\d+)(?:\s+(.+))?$/.freeze
+  NETWORK_REGEXP = /^\d+\sGigabit$/i.freeze
 
-  INTEL_AVX_REGEXP   = /\bIntel AVX\b/
-  INTEL_AVX2_REGEXP  = /\bIntel AVX2\b/
-  INTEL_TURBO_REGEXP = /\bIntel Turbo\b/
+  INTEL_AVX_REGEXP   = /\bIntel AVX\b/.freeze
+  INTEL_AVX2_REGEXP  = /\bIntel AVX2\b/.freeze
+  INTEL_TURBO_REGEXP = /\bIntel Turbo\b/.freeze
 
   CPU_ARCHES = {
-    '32-bit or 64-bit' => %i(i386 x86_64).freeze,
-    '64-bit'           => %i(x86_64).freeze,
+    '32-bit or 64-bit' => %i[i386 x86_64].freeze,
+    '64-bit'           => %i[x86_64].freeze,
   }.freeze
 
   # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/
   #   virtualization_types.html
-  VIRT_TYPES = Hash.new(%i(hvm).freeze).tap do |virt_types|
+  VIRT_TYPES = Hash.new(%i[hvm].freeze).tap do |virt_types|
     {
-      %w(t1 m1 m2 c1)   => %i(paravirtual).freeze,
-      %w(m3 c3 hs1 hi1) => %i(paravirtual hvm).freeze,
+      %w[t1 m1 m2 c1]   => %i[paravirtual].freeze,
+      %w[m3 c3 hs1 hi1] => %i[paravirtual hvm].freeze,
     }.each do |type_names, types_set|
       type_names.each { |type_name| virt_types[type_name] = types_set }
     end
   end.freeze
 
   # for :description
-  POPULAR_TYPES = %w(t1 t2).freeze
+  POPULAR_TYPES = %w[t1 t2].freeze
 
   # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/
   #   using-vpc.html#vpc-only-instance-types
-  VPC_ONLY_TYPES = %w(m4 m5 t2 c4 c5 r4 x1 h1 i3 f1 g3 p2 p3).freeze
+  VPC_ONLY_TYPES = %w[m4 m5 t2 c4 c5 r4 x1 h1 i3 f1 g3 p2 p3].freeze
 
   # https://github.com/ManageIQ/manageiq-providers-amazon/
   #   blob/933a3d08e0adb012c7cbefbaeaa262a81c855fe1/
   #   lib/tasks_private/instance_types.rake#L49
-  CLUSTERABLE_TYPES = %w(m4 c3 c4 cr1 r4 x1 hs1 i2 g2 p2 d2).freeze
+  CLUSTERABLE_TYPES = %w[m4 c3 c4 cr1 r4 x1 hs1 i2 g2 p2 d2].freeze
 
   # some types data missing this
-  EBS_OPTIMIZED_TYPES = %w(x1).freeze
+  EBS_OPTIMIZED_TYPES = %w[x1].freeze
 
   # some types data missing 'intel' features info
   CPU_FEATURES = {
-    'Intel Xeon E5-2670'                              => %i(avx turbo).freeze,
-    'Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)' => %i(avx turbo).freeze,
-    'Intel Xeon E5-2666 v3 (Haswell)'                 => %i(avx avx2 turbo).freeze,
-    'Intel Xeon E5-2686 v4 (Broadwell)'               => %i(avx avx2 turbo).freeze,
+    'Intel Xeon E5-2670'                              => %i[avx turbo].freeze,
+    'Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)' => %i[avx turbo].freeze,
+    'Intel Xeon E5-2666 v3 (Haswell)'                 => %i[avx avx2 turbo].freeze,
+    'Intel Xeon E5-2686 v4 (Broadwell)'               => %i[avx avx2 turbo].freeze,
   }.freeze
 
   # considering all types have it except of legacy ones
-  NON_AES_NI_TYPES = %w(t1 m1).freeze
+  NON_AES_NI_TYPES = %w[t1 m1].freeze
 
   # some types data missing this (here is only those who missing)
   # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/
   #   enhanced-networking.html#supported_instances
-  ENHANCED_NETWORKING_TYPES = %w(f1).freeze
+  ENHANCED_NETWORKING_TYPES = %w[f1].freeze
 
   ParsedName = Struct.new(:base_type, :size_factor, :size_name)
   ParsedStorage = Struct.new(:volumes, :size, :type)
@@ -229,7 +229,7 @@ class AwsInstanceDataParser
 
   def network_performance
     net_perf = product_data['networkPerformance']
-    net_perf =~ NETWORK_REGEXP ? :very_high : net_perf.downcase.gsub(/\s/, '_').to_sym
+    NETWORK_REGEXP.match?(net_perf) ? :very_high : net_perf.downcase.gsub(/\s/, '_').to_sym
   end
 
   def enhanced_networking?
