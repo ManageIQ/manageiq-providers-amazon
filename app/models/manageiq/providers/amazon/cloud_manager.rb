@@ -91,16 +91,19 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     if network_manager
       network_manager.zone_id         = zone_id
       network_manager.provider_region = provider_region
+      network_manager.tenant_id       = tenant_id
     end
 
     if ebs_storage_manager
       ebs_storage_manager.zone_id         = zone_id
       ebs_storage_manager.provider_region = provider_region
+      ebs_storage_manager.tenant_id       = tenant_id
     end
 
     if s3_storage_manager
       s3_storage_manager.zone_id         = zone_id
       s3_storage_manager.provider_region = provider_region
+      s3_storage_manager.tenant_id       = tenant_id
     end
   end
 
