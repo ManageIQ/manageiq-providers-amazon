@@ -72,7 +72,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
         "userid", "password", "proxy_uri", "service_account"
       )
 
-      secret_access_key = MiqPassword.try_decrypt(secret_access_key)
+      secret_access_key = ManageIQ::Password.try_decrypt(secret_access_key)
       # Pull out the password from the database if a provider ID is available
       secret_access_key ||= find(args["id"]).authentication_password('default')
 
