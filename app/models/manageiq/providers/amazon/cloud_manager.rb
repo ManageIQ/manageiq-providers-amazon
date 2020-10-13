@@ -153,45 +153,96 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
           :component => 'sub-form',
           :name      => 'endpoints-subform',
           :id        => 'endpoints-subform',
-          :title     => _("Endpoint"),
+          :title     => _("Endpoints"),
           :fields    => [
             {
-              :component              => 'validate-provider-credentials',
-              :id                     => 'authentications.default.valid',
-              :name                   => 'authentications.default.valid',
-              :skipSubmit             => true,
-              :isRequired             => true,
-              :validationDependencies => %w[type zone_id provider_region],
-              :fields                 => [
+              :component => 'tabs',
+              :name      => 'tabs',
+              :fields    => [
                 {
-                  :component => "text-field",
-                  :id        => "endpoints.default.url",
-                  :name      => "endpoints.default.url",
-                  :label     => _("Endpoint URL"),
+                  :component => 'tab-item',
+                  :name      => 'default-tab',
+                  :id        => 'default-tab',
+                  :title     => _('Default'),
+                  :fields    => [
+                    {
+                      :component              => 'validate-provider-credentials',
+                      :id                     => 'authentications.default.valid',
+                      :name                   => 'authentications.default.valid',
+                      :skipSubmit             => true,
+                      :isRequired             => true,
+                      :validationDependencies => %w[type zone_id provider_region],
+                      :fields                 => [
+                        {
+                          :component => "text-field",
+                          :id        => "endpoints.default.url",
+                          :name      => "endpoints.default.url",
+                          :label     => _("Endpoint URL"),
+                        },
+                        {
+                          :component => "text-field",
+                          :id        => "authentications.default.service_account",
+                          :name      => "authentications.default.service_account",
+                          :label     => _("Assume role ARN"),
+                        },
+                        {
+                          :component  => "text-field",
+                          :id         => "authentications.default.userid",
+                          :name       => "authentications.default.userid",
+                          :label      => _("Access Key ID"),
+                          :helperText => _("Should have privileged access, such as root or administrator."),
+                          :isRequired => true,
+                          :validate   => [{:type => "required"}]
+                        },
+                        {
+                          :component  => "password-field",
+                          :id         => "authentications.default.password",
+                          :name       => "authentications.default.password",
+                          :label      => _("Secret Access Key"),
+                          :type       => "password",
+                          :isRequired => true,
+                          :validate   => [{:type => "required"}]
+                        },
+                      ],
+                    },
+                  ],
                 },
                 {
-                  :component => "text-field",
-                  :id        => "authentications.default.service_account",
-                  :name      => "authentications.default.service_account",
-                  :label     => _("Assume role ARN"),
-                },
-                {
-                  :component  => "text-field",
-                  :id         => "authentications.default.userid",
-                  :name       => "authentications.default.userid",
-                  :label      => _("Access Key ID"),
-                  :helperText => _("Should have privileged access, such as root or administrator."),
-                  :isRequired => true,
-                  :validate   => [{:type => "required"}]
-                },
-                {
-                  :component  => "password-field",
-                  :id         => "authentications.default.password",
-                  :name       => "authentications.default.password",
-                  :label      => _("Secret Access Key"),
-                  :type       => "password",
-                  :isRequired => true,
-                  :validate   => [{:type => "required"}]
+                  :component => 'tab-item',
+                  :name      => 'smartstate_docker-tab',
+                  :id        => 'smartstate_docker-tab',
+                  :title     => _('SmartState Docker'),
+                  :fields    => [
+                    {
+                      :component              => 'provider-credentials',
+                      :name                   => 'endpoints.smartstate_docker.valid',
+                      :id                     => 'endpoints.smartstate_docker.valid',
+                      :validationDependencies => %i[type zone_id provider_region],
+                      :skipSubmit             => true,
+                      :fields                 => [
+                        {
+                          :component    => 'text-field',
+                          :name         => 'endpoints.smartstate_docker',
+                          :id           => 'endpoints.smartstate_docker',
+                          :type         => 'hidden',
+                          :initialValue => {},
+                        },
+                        {
+                          :component  => "text-field",
+                          :id         => "authentications.smartstate_docker.userid",
+                          :name       => "authentications.smartstate_docker.userid",
+                          :label      => _("Username"),
+                          :helperText => _('Used for Docker Registry credentials required to perform SmartState Analysis on AWS.'),
+                        },
+                        {
+                          :component => 'password-field',
+                          :id        => "authentications.smartstate_docker.password",
+                          :name      => "authentications.smartstate_docker.password",
+                          :label     => _("Password"),
+                        },
+                      ],
+                    },
+                  ],
                 },
               ],
             },
