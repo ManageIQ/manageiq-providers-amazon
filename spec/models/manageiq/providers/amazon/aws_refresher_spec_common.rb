@@ -1546,7 +1546,7 @@ module AwsRefresherSpecCommon
         "ems_id"                    => @ems.id,
         "service_offering_id"       => @service_offering_with_rules.try(:id),
         "service_parameters_set_id" => service_parameter_set(@service_instance_with_rules).try(:id),
-        "extra"                     => {
+        "extra"                     => hash_including(
           "arn"                 => "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceWithRules/pp-5pyltbgyzheqm",
           "type"                => "CFN_STACK",
           "status"              => "AVAILABLE",
@@ -1554,7 +1554,7 @@ module AwsRefresherSpecCommon
           "last_record_id"      => "rec-li62bnn6bnza4",
           "status_message"      => nil,
           "idempotency_token"   => "39489a07-f013-4e49-a061-11360db7664c",
-          "last_record_detail"  => {
+          "last_record_detail"  => hash_including(
             "status"                   => "SUCCEEDED",
             "path_id"                  => "lp-jg4ob2tnq4pg2",
             "record_id"                => "rec-li62bnn6bnza4",
@@ -1579,7 +1579,7 @@ module AwsRefresherSpecCommon
             "provisioned_product_name" => "EmsRefreshSpecServiceInstanceWithRules",
             "provisioned_product_type" => "CFN_STACK",
             "provisioning_artifact_id" => "pa-ybnrerfyrhm74"
-          },
+          ),
           "last_record_outputs" => [
             {
               "output_key"   => "CloudformationStackARN",
@@ -1591,7 +1591,7 @@ module AwsRefresherSpecCommon
               "output_value" => "http://SC-200278-ElasticL-FDREQLBTVJ1Z-177825134.us-east-1.elb.amazonaws.com"
             }
           ]
-        },
+        ),
         "deleted_on"                => nil,
       )
     )
@@ -1607,7 +1607,7 @@ module AwsRefresherSpecCommon
         "ems_id"                    => @ems.id,
         "service_offering_id"       => @service_offering_with_two_portfolios.try(:id),
         "service_parameters_set_id" => service_parameter_set(@service_instance_v3).try(:id),
-        "extra"                     => {
+        "extra"                     => hash_including(
           "arn"                 =>
                                    "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstanceV3/pp-u2tepcnttldko",
           "type"                => "CFN_STACK",
@@ -1616,7 +1616,7 @@ module AwsRefresherSpecCommon
           "last_record_id"      => "rec-coaoipufhru7e",
           "status_message"      => nil,
           "idempotency_token"   => "c4de373d-fc6b-45ac-a7d0-760b6be25756",
-          "last_record_detail"  => {
+          "last_record_detail"  => hash_including(
             "status"                   => "SUCCEEDED",
             "path_id"                  => "lp-e76ssfhze5jyi",
             "record_id"                => "rec-coaoipufhru7e",
@@ -1639,7 +1639,7 @@ module AwsRefresherSpecCommon
             "provisioned_product_name" => "EmsRefreshSpecServiceInstanceV3",
             "provisioned_product_type" => "CFN_STACK",
             "provisioning_artifact_id" => "pa-ysaib55ylta6k"
-          },
+          ),
           "last_record_outputs" => [
             {"output_key"   => "CloudformationStackARN",
              "description"  => "The ARN of the launched Cloudformation Stack",
@@ -1650,7 +1650,7 @@ module AwsRefresherSpecCommon
              "output_value" =>
                                "http://SC-200278-ElasticL-OHBTSYAE8C89-342178717.us-east-1.elb.amazonaws.com"}
           ]
-        },
+        ),
         "deleted_on"                => nil,
       )
     )
@@ -1666,7 +1666,7 @@ module AwsRefresherSpecCommon
         "ems_id"                    => @ems.id,
         "service_offering_id"       => @service_offering_with_two_portfolios.try(:id),
         "service_parameters_set_id" => service_parameter_set(@service_instance).try(:id),
-        "extra"                     => {
+        "extra"                     => hash_including(
           "arn"                 =>
                                    "arn:aws:servicecatalog:us-east-1:200278856672:stack/EmsRefreshSpecServiceInstance/pp-gato4drzgerpy",
           "type"                => "CFN_STACK",
@@ -1675,7 +1675,7 @@ module AwsRefresherSpecCommon
           "last_record_id"      => "rec-txbigs6rk7vlc",
           "status_message"      => nil,
           "idempotency_token"   => "bd5ea4d0-de72-45be-a28b-2bfe9ae8e509",
-          "last_record_detail"  => {
+          "last_record_detail"  => hash_including(
             "status"                   => "SUCCEEDED",
             "path_id"                  => "lp-rb5sy6f5vyrdk",
             "record_id"                => "rec-txbigs6rk7vlc",
@@ -1698,7 +1698,7 @@ module AwsRefresherSpecCommon
             "provisioned_product_name" => "EmsRefreshSpecServiceInstance",
             "provisioned_product_type" => "CFN_STACK",
             "provisioning_artifact_id" => "pa-nr3ua3nz3pgwq"
-          },
+          ),
           "last_record_outputs" => [
             {"output_key"   => "CloudformationStackARN",
              "description"  => "The ARN of the launched Cloudformation Stack",
@@ -1709,7 +1709,7 @@ module AwsRefresherSpecCommon
              "output_value" =>
                                "http://SC-200278-ElasticL-G69XH7HDIQ0J-169282342.us-east-1.elb.amazonaws.com"}
           ]
-        },
+        ),
         "deleted_on"                => nil,
       )
     )
