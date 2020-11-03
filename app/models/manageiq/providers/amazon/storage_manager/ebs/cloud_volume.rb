@@ -113,7 +113,7 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
           :id         => 'size',
           :label      => _('Size (in bytes)'),
           :type       => 'number',
-          :step       => 1024 * 1024 * 1024,
+          :step       => 1.gigabytes,
           :isRequired => true,
           :validate   => [{:type => 'required'}],
           :condition  => {
