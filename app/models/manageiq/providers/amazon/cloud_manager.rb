@@ -74,6 +74,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   supports :regions
   supports :assume_role
   supports :auth_key_pair_create
+  supports :label_mapping
 
   def ensure_managers
     build_network_manager unless network_manager
@@ -285,5 +286,18 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
 
   def self.display_name(number = 1)
     n_('Cloud Provider (Amazon)', 'Cloud Providers (Amazon)', number)
+  end
+
+  LABEL_MAPPING_ENTITIES = {
+    "Vm"    => "ManageIQ::Providers::Amazon::CloudManager::Vm",
+    "Image" => "ManageIQ::Providers::Amazon::CloudManager::Template"
+  }.freeze
+
+  def self.entities_for_label_mapping
+    LABEL_MAPPING_ENTITIES
+  end
+
+  def self.label_mapping_prefix
+    "amazon"
   end
 end
