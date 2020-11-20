@@ -2,6 +2,14 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
   supports :create
   supports :snapshot_create
 
+  CLOUD_VOLUME_TYPES = {
+    :gp2      => N_('General Purpose SSD (GP2)'),
+    :io1      => N_('Provisioned IOPS SSD (IO1)'),
+    :st1      => N_('Throughput Optimized HDD (ST1)'),
+    :sc1      => N_('Cold HDD (SC1)'),
+    :standard => N_('Magnetic'),
+  }.freeze
+
   def available_vms
     availability_zone.vms
   end
@@ -94,6 +102,131 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
   def provider_object(connection = nil)
     connection ||= ext_management_system.connect
     connection.volume(ems_ref)
+  end
+
+  def self.params_for_create(ems)
+    {
+      :fields => [
+        {
+          :component  => 'text-field',
+          :name       => 'size',
+          :id         => 'size',
+          :label      => _('Size (in bytes)'),
+          :type       => 'number',
+          :step       => 1.gigabytes,
+          :isRequired => true,
+          :validate   => [{:type => 'required'}],
+          :condition  => {
+            :or => [
+              {
+                :not => {
+                  :when => 'volume_type',
+                  :is   => 'standard',
+                },
+              },
+              {
+                :when => 'edit',
+                :is   => false,
+              },
+            ],
+          },
+        },
+        {
+          :component  => 'select',
+          :name       => 'availability_zone_id',
+          :id         => 'availability_zone_id',
+          :label      => _('Availability Zone'),
+          :options    => ems.availability_zones.map do |az|
+            {
+              :label => az.name,
+              :value => az.id,
+            }
+          end,
+          :isRequired => true,
+          :validate   => [{:type => 'required'}],
+          :condition  => {
+            :when => 'edit',
+            :is   => false,
+          },
+        },
+        {
+          :component    => 'select',
+          :name         => 'volume_type',
+          :id           => 'volume_type',
+          :label        => _('Cloud Volume Type'),
+          :options      => CLOUD_VOLUME_TYPES.map do |value, label|
+            option = {
+              :label => _(label),
+              :value => value,
+            }
+
+            # The standard (magnetic) volume_type is a special case. I can only be set upon creation
+            # or when editing an entity that has its volume_type set to standard. Conditional options
+            # are not supported by DDF, but resolveProps allows us to overwrite these options before
+            # rendering.
+            if value == :standard
+              option[:condition] = {
+                :or => [
+                  {
+                    :when => 'edit',
+                    :is   => false,
+                  },
+                  {
+                    :when => 'volume_type',
+                    :is   => 'standard',
+                  }
+                ]
+              }
+            end
+
+            option
+          end,
+          :isRequired   => true,
+          :validate     => [{:type => 'required'}],
+          :initialValue => 'gp2',
+        },
+        {
+          :component => 'text-field',
+          :name      => 'iops',
+          :id        => 'iops',
+          :label     => _('IOPS'),
+          :type      => 'number',
+          :condition => {
+            :when => 'volume_type',
+            :is   => 'io1',
+          }
+        },
+        {
+          :component => 'select',
+          :name      => 'cloud_volume_snapshot_id',
+          :id        => 'cloud_volume_snapshot_id',
+          :label     => _('Base Snapshot'),
+          :condition => {
+            :when => 'edit',
+            :is   => false,
+          },
+          :options   => ems.cloud_volume_snapshots.map do |cvs|
+            {
+              :value => cvs.id,
+              :label => cvs.name,
+            }
+          end
+        },
+        {
+          :component  => 'switch',
+          :name       => 'encrypted',
+          :id         => 'encrypted',
+          :label      => _('Encrypted'),
+          :onText     => _('Yes'),
+          :offText    => _('No'),
+          :isRequired => true,
+          :condition  => {
+            :when => 'edit',
+            :is   => false,
+          },
+        }
+      ]
+    }
   end
 
   private
