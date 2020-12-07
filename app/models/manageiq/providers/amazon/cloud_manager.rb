@@ -289,8 +289,8 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   end
 
   LABEL_MAPPING_ENTITIES = {
-    "Vm"    => "ManageIQ::Providers::Amazon::CloudManager::Vm",
-    "Image" => "ManageIQ::Providers::Amazon::CloudManager::Template"
+    "VmAmazon"    => "ManageIQ::Providers::Amazon::CloudManager::Vm",
+    "ImageAmazon" => "ManageIQ::Providers::Amazon::CloudManager::Template"
   }.freeze
 
   def self.entities_for_label_mapping
