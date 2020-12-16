@@ -76,6 +76,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
       # Pull out the password from the database if a provider ID is available
       secret_access_key ||= find(args["id"]).authentication_password('default')
 
+      # rubocop:disable Lint/UselessAssignment (see #588)
       !!raw_connect(access_key, secret_access_key, :EC2, region, proxy_uri, validate = true, :assume_role => service_account)
     end
 
