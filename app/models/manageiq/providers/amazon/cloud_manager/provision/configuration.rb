@@ -11,7 +11,8 @@ module ManageIQ::Providers::Amazon::CloudManager::Provision::Configuration
   end
 
   def userdata_payload
-    return unless raw_script = super
+    raw_script = super
+    return unless raw_script
     Base64.encode64(raw_script)
   end
 end

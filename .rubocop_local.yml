@@ -3,3 +3,5 @@ Style/GlobalVars:
   # Loggers
   - $aws_log
   - $log
+Lint/RescueException:
+  Enabled: false

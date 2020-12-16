@@ -43,7 +43,7 @@ class ManageIQ::Providers::Amazon::CloudManager::Vm < ManageIQ::Providers::Cloud
 
   def set_custom_field(key, value)
     with_provider_object do |instance|
-      tags = instance.create_tags ({
+      tags = instance.create_tags({
         tags: [
                 {
                   key: key,

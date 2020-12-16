@@ -47,14 +47,14 @@ class ManageIQ::Providers::Amazon::CloudManager::ProvisionWorkflow < ManageIQ::P
     allowed_ci(:availability_zones, [:cloud_network, :cloud_subnet, :security_group], targets.map(&:id))
   end
 
+  def self.provider_model
+    ManageIQ::Providers::Amazon::CloudManager
+  end
+
   private
 
   def dialog_name_from_automate(message = 'get_dialog_name')
     super(message, {'platform' => 'amazon'})
-  end
-
-  def self.provider_model
-    ManageIQ::Providers::Amazon::CloudManager
   end
 
   def security_group_to_availability_zones(src)
