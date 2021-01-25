@@ -152,7 +152,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
       :operating_system                  => vm_count_plus_disconnect_inv + image_count_plus_disconnect_inv,
       :snapshot                          => 0,
       :system_service                    => 0,
-      :relationship                      => vm_count_plus_disconnect_inv + image_count_plus_disconnect_inv,
+      :relationship                      => 0,
       # :miq_queue                         => 2,
       :orchestration_template            => 1,
       :orchestration_stack               => test_counts[:stack_count],
