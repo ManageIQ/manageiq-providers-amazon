@@ -87,6 +87,12 @@
   :ec2_network:
     :inventory_collections:
       :saver_strategy: batch
+  :eks:
+    :refresh_interval: 15.minutes
+    :streaming_refresh: false
+    :chunk_size: 1_000
+    :inventory_collections:
+      :saver_strategy: batch
   :s3:
     :inventory_collections:
       :saver_strategy: batch
@@ -109,11 +115,14 @@
     :event_catcher:
       :event_catcher_amazon:
         :poll: 15.seconds
+      :event_catcher_amazon_eks:
+        :poll: 1.seconds
     :queue_worker_base:
       :ems_metrics_collector_worker:
         :ems_metrics_collector_worker_amazon: {}
       :ems_refresh_worker:
         :ems_refresh_worker_amazon: {}
+        :ems_refresh_worker_amazon_eks: {}
         :ems_refresh_worker_amazon_s3: {}
 :prototype:
   :amazon:

@@ -1,5 +1,6 @@
 class ManageIQ::Providers::Amazon::Inventory::Parser < ManageIQ::Providers::Inventory::Parser
   require_nested :CloudManager
+  require_nested :ContainerManager
   require_nested :NetworkManager
 
   include ManageIQ::Providers::Amazon::ParserHelperMethods
