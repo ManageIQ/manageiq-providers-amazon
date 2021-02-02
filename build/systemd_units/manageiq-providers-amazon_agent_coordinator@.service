@@ -8,4 +8,4 @@ Environment=BUNDLER_GROUPS=manageiq_default,ui_dependencies
 ExecStart=/bin/bash -lc 'exec ruby lib/workers/bin/run_single_worker.rb ManageIQ::Providers::Amazon::AgentCoordinatorWorker --heartbeat --guid=%i'
 Restart=no
 Type=notify
-Slice=miq-amazon_agent_coordinator.slice
+Slice=manageiq-providers-amazon_agent_coordinator.slice

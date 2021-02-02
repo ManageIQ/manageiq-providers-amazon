@@ -8,4 +8,4 @@ Environment=BUNDLER_GROUPS=manageiq_default,ui_dependencies
 ExecStart=/bin/bash -lc 'exec ruby lib/workers/bin/run_single_worker.rb ManageIQ::Providers::Amazon::StorageManager::S3::RefreshWorker --heartbeat --guid=%i'
 Restart=no
 Type=notify
-Slice=miq-amazon_storage_manager_s3_refresh.slice
+Slice=manageiq-providers-amazon_storage_manager_s3_refresh.slice
