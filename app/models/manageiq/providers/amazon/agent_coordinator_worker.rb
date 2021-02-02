@@ -18,4 +18,8 @@ class ManageIQ::Providers::Amazon::AgentCoordinatorWorker < MiqWorker
   def self.kill_priority
     MiqWorkerType::KILL_PRIORITY_REFRESH_WORKERS
   end
+
+  def self.service_base_name
+    "manageiq-providers-#{minimal_class_name.underscore.tr("/", "_")}"
+  end
 end
