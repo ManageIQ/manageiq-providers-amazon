@@ -44,6 +44,55 @@ class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kuber
   end
   private_class_method :sts_presigned_url
 
+  def self.verify_credentials(args)
+    # If we are editing an existing EMS we won't be given the existing passwords
+    # if they aren't going to be changed
+    ext_management_system = find(args["id"]) if args["id"]
+
+    region_name  = args["provider_region"]
+    cluster_name = args["uid_ems"]
+
+    endpoint_name = args.dig("endpoints").keys.first
+    endpoint      = args.dig("endpoints", endpoint_name)
+
+    hostname, port, security_protocol, certificate_authority, _proxy_uri, _service_account = endpoint&.values_at(
+      "hostname", "port", "security_protocol", "certificate_authority", "proxy_uri", "service_account"
+    )
+
+    verify_ssl = security_protocol == 'ssl-without-validation' ? OpenSSL::SSL::VERIFY_NONE : OpenSSL::SSL::VERIFY_PEER
+
+    authentication = args.dig("authentications", "bearer")
+
+    token, access_key, secret_access_key = authentication&.values_at(
+      "auth_key", "userid", "password"
+    )
+
+    token = ManageIQ::Password.try_decrypt(token)
+    token ||= ext_management_system.authentication_token("bearer") if ext_management_system
+
+    secret_access_key = ManageIQ::Password.try_decrypt(secret_access_key)
+    secret_access_key ||= ext_management_system.authentication_password("bearer") if ext_management_system
+
+    options = {
+      :username     => access_key,
+      :password     => secret_access_key,
+      :bearer       => token,
+      :region_name  => region_name,
+      :cluster_name => cluster_name,
+      :ssl_options  => {
+        :verify_ssl => verify_ssl,
+        :ca_file    => certificate_authority
+      }
+    }
+
+    case endpoint_name
+    when 'default'
+      !!raw_connect(hostname, port, options)
+    else
+      raise MiqException::MiqInvalidCredentialsError, _("Unsupported endpoint")
+    end
+  end
+
   def connect_options(options = {})
     super.merge(
       :region_name  => provider_region,
