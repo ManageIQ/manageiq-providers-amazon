@@ -43,4 +43,11 @@ class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kuber
     )
   end
   private_class_method :sts_presigned_url
+
+  def connect_options(options = {})
+    super.merge(
+      :region_name  => provider_region,
+      :cluster_name => uid_ems
+    )
+  end
 end
