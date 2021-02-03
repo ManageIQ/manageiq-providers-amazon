@@ -1,4 +1,7 @@
 class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kubernetes::ContainerManager
+  require_nested :Container
+  require_nested :ContainerGroup
+  require_nested :ContainerNode
   require_nested :EventCatcher
   require_nested :EventParser
   require_nested :Refresher

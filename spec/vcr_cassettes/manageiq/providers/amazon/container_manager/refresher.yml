@@ -1,0 +1,412 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://hostname/api/v1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.2p137
+      Authorization:
+      - Bearer k8s-aws-v1.aHR0cHM6Ly9zdHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vP0FjdGlvbj1HZXRDYWxsZXJJZGVudGl0eSZWZXJzaW9uPTIwMTEtMDYtMTUmWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBUzVJTU0yUFFMTkQ1SVZNQSUyRjIwMjEwMjAzJTJGdXMtZWFzdC0xJTJGc3RzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyMTAyMDNUMjExMTE4WiZYLUFtei1FeHBpcmVzPTkwMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTBmZGM3OTczOTUyNmM1NDY5MzdjMGQzZDU0NjhiM2M2NGMzMGIzMjg0M2FmODljMjRkYjgwODYyYmI4ODYxOWM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Audit-Id:
+      - b19e7d87-55d7-4c0d-9520-2d08133cbb45
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Feb 2021 21:11:18 GMT
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"kind":"APIResourceList","groupVersion":"v1","resources":[{"name":"bindings","singularName":"","namespaced":true,"kind":"Binding","verbs":["create"]},{"name":"componentstatuses","singularName":"","namespaced":false,"kind":"ComponentStatus","verbs":["get","list"],"shortNames":["cs"]},{"name":"configmaps","singularName":"","namespaced":true,"kind":"ConfigMap","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["cm"],"storageVersionHash":"qFsyl6wFWjQ="},{"name":"endpoints","singularName":"","namespaced":true,"kind":"Endpoints","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["ep"],"storageVersionHash":"fWeeMqaN/OA="},{"name":"events","singularName":"","namespaced":true,"kind":"Event","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["ev"],"storageVersionHash":"r2yiGXH7wu8="},{"name":"limitranges","singularName":"","namespaced":true,"kind":"LimitRange","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["limits"],"storageVersionHash":"EBKMFVe6cwo="},{"name":"namespaces","singularName":"","namespaced":false,"kind":"Namespace","verbs":["create","delete","get","list","patch","update","watch"],"shortNames":["ns"],"storageVersionHash":"Q3oi5N2YM8M="},{"name":"namespaces/finalize","singularName":"","namespaced":false,"kind":"Namespace","verbs":["update"]},{"name":"namespaces/status","singularName":"","namespaced":false,"kind":"Namespace","verbs":["get","patch","update"]},{"name":"nodes","singularName":"","namespaced":false,"kind":"Node","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["no"],"storageVersionHash":"XwShjMxG9Fs="},{"name":"nodes/proxy","singularName":"","namespaced":false,"kind":"NodeProxyOptions","verbs":["create","delete","get","patch","update"]},{"name":"nodes/status","singularName":"","namespaced":false,"kind":"Node","verbs":["get","patch","update"]},{"name":"persistentvolumeclaims","singularName":"","namespaced":true,"kind":"PersistentVolumeClaim","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["pvc"],"storageVersionHash":"QWTyNDq0dC4="},{"name":"persistentvolumeclaims/status","singularName":"","namespaced":true,"kind":"PersistentVolumeClaim","verbs":["get","patch","update"]},{"name":"persistentvolumes","singularName":"","namespaced":false,"kind":"PersistentVolume","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["pv"],"storageVersionHash":"HN/zwEC+JgM="},{"name":"persistentvolumes/status","singularName":"","namespaced":false,"kind":"PersistentVolume","verbs":["get","patch","update"]},{"name":"pods","singularName":"","namespaced":true,"kind":"Pod","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["po"],"categories":["all"],"storageVersionHash":"xPOwRZ+Yhw8="},{"name":"pods/attach","singularName":"","namespaced":true,"kind":"PodAttachOptions","verbs":["create","get"]},{"name":"pods/binding","singularName":"","namespaced":true,"kind":"Binding","verbs":["create"]},{"name":"pods/eviction","singularName":"","namespaced":true,"group":"policy","version":"v1beta1","kind":"Eviction","verbs":["create"]},{"name":"pods/exec","singularName":"","namespaced":true,"kind":"PodExecOptions","verbs":["create","get"]},{"name":"pods/log","singularName":"","namespaced":true,"kind":"Pod","verbs":["get"]},{"name":"pods/portforward","singularName":"","namespaced":true,"kind":"PodPortForwardOptions","verbs":["create","get"]},{"name":"pods/proxy","singularName":"","namespaced":true,"kind":"PodProxyOptions","verbs":["create","delete","get","patch","update"]},{"name":"pods/status","singularName":"","namespaced":true,"kind":"Pod","verbs":["get","patch","update"]},{"name":"podtemplates","singularName":"","namespaced":true,"kind":"PodTemplate","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"storageVersionHash":"LIXB2x4IFpk="},{"name":"replicationcontrollers","singularName":"","namespaced":true,"kind":"ReplicationController","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["rc"],"categories":["all"],"storageVersionHash":"Jond2If31h0="},{"name":"replicationcontrollers/scale","singularName":"","namespaced":true,"group":"autoscaling","version":"v1","kind":"Scale","verbs":["get","patch","update"]},{"name":"replicationcontrollers/status","singularName":"","namespaced":true,"kind":"ReplicationController","verbs":["get","patch","update"]},{"name":"resourcequotas","singularName":"","namespaced":true,"kind":"ResourceQuota","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["quota"],"storageVersionHash":"8uhSgffRX6w="},{"name":"resourcequotas/status","singularName":"","namespaced":true,"kind":"ResourceQuota","verbs":["get","patch","update"]},{"name":"secrets","singularName":"","namespaced":true,"kind":"Secret","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"storageVersionHash":"S6u1pOWzb84="},{"name":"serviceaccounts","singularName":"","namespaced":true,"kind":"ServiceAccount","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["sa"],"storageVersionHash":"pbx9ZvyFpBE="},{"name":"serviceaccounts/token","singularName":"","namespaced":true,"group":"authentication.k8s.io","version":"v1","kind":"TokenRequest","verbs":["create"]},{"name":"services","singularName":"","namespaced":true,"kind":"Service","verbs":["create","delete","get","list","patch","update","watch"],"shortNames":["svc"],"categories":["all"],"storageVersionHash":"0/CO1lhkEBI="},{"name":"services/proxy","singularName":"","namespaced":true,"kind":"ServiceProxyOptions","verbs":["create","delete","get","patch","update"]},{"name":"services/status","singularName":"","namespaced":true,"kind":"Service","verbs":["get","patch","update"]}]}
+
+        '
+    http_version:
+  recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
+- request:
+    method: get
+    uri: https://hostname/api/v1/nodes?limit=1000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.2p137
+      Authorization:
+      - Bearer k8s-aws-v1.aHR0cHM6Ly9zdHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vP0FjdGlvbj1HZXRDYWxsZXJJZGVudGl0eSZWZXJzaW9uPTIwMTEtMDYtMTUmWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBUzVJTU0yUFFMTkQ1SVZNQSUyRjIwMjEwMjAzJTJGdXMtZWFzdC0xJTJGc3RzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyMTAyMDNUMjExMTE4WiZYLUFtei1FeHBpcmVzPTkwMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTBmZGM3OTczOTUyNmM1NDY5MzdjMGQzZDU0NjhiM2M2NGMzMGIzMjg0M2FmODljMjRkYjgwODYyYmI4ODYxOWM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Audit-Id:
+      - 5d56045b-405e-489a-9df9-e30330de238f
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Feb 2021 21:11:18 GMT
+      Content-Length:
+      - '117'
+    body:
+      encoding: UTF-8
+      string: '{"kind":"NodeList","apiVersion":"v1","metadata":{"selfLink":"/api/v1/nodes","resourceVersion":"1115364"},"items":[]}
+
+        '
+    http_version:
+  recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
+- request:
+    method: get
+    uri: https://hostname/api/v1/namespaces?limit=1000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.2p137
+      Authorization:
+      - Bearer k8s-aws-v1.aHR0cHM6Ly9zdHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vP0FjdGlvbj1HZXRDYWxsZXJJZGVudGl0eSZWZXJzaW9uPTIwMTEtMDYtMTUmWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBUzVJTU0yUFFMTkQ1SVZNQSUyRjIwMjEwMjAzJTJGdXMtZWFzdC0xJTJGc3RzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyMTAyMDNUMjExMTE4WiZYLUFtei1FeHBpcmVzPTkwMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTBmZGM3OTczOTUyNmM1NDY5MzdjMGQzZDU0NjhiM2M2NGMzMGIzMjg0M2FmODljMjRkYjgwODYyYmI4ODYxOWM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Audit-Id:
+      - 20be22bc-4cf1-410a-9f5d-de33d8e849ea
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Feb 2021 21:11:18 GMT
+      Content-Length:
+      - '1864'
+    body:
+      encoding: UTF-8
+      string: '{"kind":"NamespaceList","apiVersion":"v1","metadata":{"selfLink":"/api/v1/namespaces","resourceVersion":"1115364"},"items":[{"metadata":{"name":"default","selfLink":"/api/v1/namespaces/default","uid":"c078e08f-2950-41a6-a12d-7d4d5ac85210","resourceVersion":"151","creationTimestamp":"2021-01-29T21:12:32Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"v1","time":"2021-01-29T21:12:32Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:phase":{}}}}]},"spec":{"finalizers":["kubernetes"]},"status":{"phase":"Active"}},{"metadata":{"name":"kube-node-lease","selfLink":"/api/v1/namespaces/kube-node-lease","uid":"df93f79b-bb67-4fbb-bd63-483cd49a6b9f","resourceVersion":"7","creationTimestamp":"2021-01-29T21:12:30Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"v1","time":"2021-01-29T21:12:30Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:phase":{}}}}]},"spec":{"finalizers":["kubernetes"]},"status":{"phase":"Active"}},{"metadata":{"name":"kube-public","selfLink":"/api/v1/namespaces/kube-public","uid":"b3639ca2-1d15-4e0e-b48c-bf354c8c54b9","resourceVersion":"5","creationTimestamp":"2021-01-29T21:12:30Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"v1","time":"2021-01-29T21:12:30Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:phase":{}}}}]},"spec":{"finalizers":["kubernetes"]},"status":{"phase":"Active"}},{"metadata":{"name":"kube-system","selfLink":"/api/v1/namespaces/kube-system","uid":"c90a2929-b75c-4142-9feb-8b386f231aa7","resourceVersion":"4","creationTimestamp":"2021-01-29T21:12:30Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"v1","time":"2021-01-29T21:12:30Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:phase":{}}}}]},"spec":{"finalizers":["kubernetes"]},"status":{"phase":"Active"}}]}
+
+        '
+    http_version:
+  recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
+- request:
+    method: get
+    uri: https://hostname/api/v1/resourcequotas?limit=1000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.2p137
+      Authorization:
+      - Bearer k8s-aws-v1.aHR0cHM6Ly9zdHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vP0FjdGlvbj1HZXRDYWxsZXJJZGVudGl0eSZWZXJzaW9uPTIwMTEtMDYtMTUmWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBUzVJTU0yUFFMTkQ1SVZNQSUyRjIwMjEwMjAzJTJGdXMtZWFzdC0xJTJGc3RzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyMTAyMDNUMjExMTE4WiZYLUFtei1FeHBpcmVzPTkwMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTBmZGM3OTczOTUyNmM1NDY5MzdjMGQzZDU0NjhiM2M2NGMzMGIzMjg0M2FmODljMjRkYjgwODYyYmI4ODYxOWM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Audit-Id:
+      - ca4cf12b-5b02-400c-bf06-0ed53389ff11
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Feb 2021 21:11:18 GMT
+      Content-Length:
+      - '135'
+    body:
+      encoding: UTF-8
+      string: '{"kind":"ResourceQuotaList","apiVersion":"v1","metadata":{"selfLink":"/api/v1/resourcequotas","resourceVersion":"1115364"},"items":[]}
+
+        '
+    http_version:
+  recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
+- request:
+    method: get
+    uri: https://hostname/api/v1/limitranges?limit=1000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.2p137
+      Authorization:
+      - Bearer k8s-aws-v1.aHR0cHM6Ly9zdHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vP0FjdGlvbj1HZXRDYWxsZXJJZGVudGl0eSZWZXJzaW9uPTIwMTEtMDYtMTUmWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBUzVJTU0yUFFMTkQ1SVZNQSUyRjIwMjEwMjAzJTJGdXMtZWFzdC0xJTJGc3RzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyMTAyMDNUMjExMTE4WiZYLUFtei1FeHBpcmVzPTkwMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTBmZGM3OTczOTUyNmM1NDY5MzdjMGQzZDU0NjhiM2M2NGMzMGIzMjg0M2FmODljMjRkYjgwODYyYmI4ODYxOWM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Audit-Id:
+      - d690a14a-1385-4fdb-af84-e953fbbd71f0
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Feb 2021 21:11:18 GMT
+      Content-Length:
+      - '129'
+    body:
+      encoding: UTF-8
+      string: '{"kind":"LimitRangeList","apiVersion":"v1","metadata":{"selfLink":"/api/v1/limitranges","resourceVersion":"1115364"},"items":[]}
+
+        '
+    http_version:
+  recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
+- request:
+    method: get
+    uri: https://hostname/api/v1/replicationcontrollers?limit=1000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.2p137
+      Authorization:
+      - Bearer k8s-aws-v1.aHR0cHM6Ly9zdHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vP0FjdGlvbj1HZXRDYWxsZXJJZGVudGl0eSZWZXJzaW9uPTIwMTEtMDYtMTUmWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBUzVJTU0yUFFMTkQ1SVZNQSUyRjIwMjEwMjAzJTJGdXMtZWFzdC0xJTJGc3RzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyMTAyMDNUMjExMTE4WiZYLUFtei1FeHBpcmVzPTkwMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTBmZGM3OTczOTUyNmM1NDY5MzdjMGQzZDU0NjhiM2M2NGMzMGIzMjg0M2FmODljMjRkYjgwODYyYmI4ODYxOWM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Audit-Id:
+      - 4d7b7c11-c6cb-46ac-bf4a-84d6f1810f13
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Feb 2021 21:11:18 GMT
+      Content-Length:
+      - '151'
+    body:
+      encoding: UTF-8
+      string: '{"kind":"ReplicationControllerList","apiVersion":"v1","metadata":{"selfLink":"/api/v1/replicationcontrollers","resourceVersion":"1115364"},"items":[]}
+
+        '
+    http_version:
+  recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
+- request:
+    method: get
+    uri: https://hostname/api/v1/persistentvolumeclaims?limit=1000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.2p137
+      Authorization:
+      - Bearer k8s-aws-v1.aHR0cHM6Ly9zdHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vP0FjdGlvbj1HZXRDYWxsZXJJZGVudGl0eSZWZXJzaW9uPTIwMTEtMDYtMTUmWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBUzVJTU0yUFFMTkQ1SVZNQSUyRjIwMjEwMjAzJTJGdXMtZWFzdC0xJTJGc3RzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyMTAyMDNUMjExMTE4WiZYLUFtei1FeHBpcmVzPTkwMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTBmZGM3OTczOTUyNmM1NDY5MzdjMGQzZDU0NjhiM2M2NGMzMGIzMjg0M2FmODljMjRkYjgwODYyYmI4ODYxOWM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Audit-Id:
+      - fc8cff3a-c013-4039-8b42-5f91690618c8
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Feb 2021 21:11:18 GMT
+      Content-Length:
+      - '151'
+    body:
+      encoding: UTF-8
+      string: '{"kind":"PersistentVolumeClaimList","apiVersion":"v1","metadata":{"selfLink":"/api/v1/persistentvolumeclaims","resourceVersion":"1115364"},"items":[]}
+
+        '
+    http_version:
+  recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
+- request:
+    method: get
+    uri: https://hostname/api/v1/persistentvolumes?limit=1000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.2p137
+      Authorization:
+      - Bearer k8s-aws-v1.aHR0cHM6Ly9zdHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vP0FjdGlvbj1HZXRDYWxsZXJJZGVudGl0eSZWZXJzaW9uPTIwMTEtMDYtMTUmWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBUzVJTU0yUFFMTkQ1SVZNQSUyRjIwMjEwMjAzJTJGdXMtZWFzdC0xJTJGc3RzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyMTAyMDNUMjExMTE4WiZYLUFtei1FeHBpcmVzPTkwMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTBmZGM3OTczOTUyNmM1NDY5MzdjMGQzZDU0NjhiM2M2NGMzMGIzMjg0M2FmODljMjRkYjgwODYyYmI4ODYxOWM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Audit-Id:
+      - 50c0b585-9f13-4752-96a1-a3a7042a850c
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Feb 2021 21:11:18 GMT
+      Content-Length:
+      - '141'
+    body:
+      encoding: UTF-8
+      string: '{"kind":"PersistentVolumeList","apiVersion":"v1","metadata":{"selfLink":"/api/v1/persistentvolumes","resourceVersion":"1115364"},"items":[]}
+
+        '
+    http_version:
+  recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
+- request:
+    method: get
+    uri: https://hostname/api/v1/pods?limit=1000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.2p137
+      Authorization:
+      - Bearer k8s-aws-v1.aHR0cHM6Ly9zdHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vP0FjdGlvbj1HZXRDYWxsZXJJZGVudGl0eSZWZXJzaW9uPTIwMTEtMDYtMTUmWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBUzVJTU0yUFFMTkQ1SVZNQSUyRjIwMjEwMjAzJTJGdXMtZWFzdC0xJTJGc3RzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyMTAyMDNUMjExMTE4WiZYLUFtei1FeHBpcmVzPTkwMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTBmZGM3OTczOTUyNmM1NDY5MzdjMGQzZDU0NjhiM2M2NGMzMGIzMjg0M2FmODljMjRkYjgwODYyYmI4ODYxOWM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Audit-Id:
+      - e361f5b6-b58f-41fb-b568-31075bd7d0ca
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Feb 2021 21:11:18 GMT
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"kind":"PodList","apiVersion":"v1","metadata":{"selfLink":"/api/v1/pods","resourceVersion":"1115366"},"items":[{"metadata":{"name":"coredns-c79dcb98c-v6chb","generateName":"coredns-c79dcb98c-","namespace":"kube-system","selfLink":"/api/v1/namespaces/kube-system/pods/coredns-c79dcb98c-v6chb","uid":"8bca6c7d-b5a0-48f1-a8a7-984586bd80a6","resourceVersion":"1066525","creationTimestamp":"2021-02-03T15:56:28Z","labels":{"eks.amazonaws.com/component":"coredns","k8s-app":"kube-dns","pod-template-hash":"c79dcb98c"},"annotations":{"eks.amazonaws.com/compute-type":"ec2","kubernetes.io/psp":"eks.privileged"},"ownerReferences":[{"apiVersion":"apps/v1","kind":"ReplicaSet","name":"coredns-c79dcb98c","uid":"aeb52bf9-4d02-4bcf-9565-7fcfec073323","controller":true,"blockOwnerDeletion":true}],"managedFields":[{"manager":"kube-controller-manager","operation":"Update","apiVersion":"v1","time":"2021-02-03T15:56:28Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{".":{},"f:eks.amazonaws.com/compute-type":{}},"f:generateName":{},"f:labels":{".":{},"f:eks.amazonaws.com/component":{},"f:k8s-app":{},"f:pod-template-hash":{}},"f:ownerReferences":{".":{},"k:{\"uid\":\"aeb52bf9-4d02-4bcf-9565-7fcfec073323\"}":{".":{},"f:apiVersion":{},"f:blockOwnerDeletion":{},"f:controller":{},"f:kind":{},"f:name":{},"f:uid":{}}}},"f:spec":{"f:affinity":{".":{},"f:nodeAffinity":{".":{},"f:requiredDuringSchedulingIgnoredDuringExecution":{".":{},"f:nodeSelectorTerms":{}}},"f:podAntiAffinity":{".":{},"f:preferredDuringSchedulingIgnoredDuringExecution":{}}},"f:containers":{"k:{\"name\":\"coredns\"}":{".":{},"f:args":{},"f:image":{},"f:imagePullPolicy":{},"f:livenessProbe":{".":{},"f:failureThreshold":{},"f:httpGet":{".":{},"f:path":{},"f:port":{},"f:scheme":{}},"f:initialDelaySeconds":{},"f:periodSeconds":{},"f:successThreshold":{},"f:timeoutSeconds":{}},"f:name":{},"f:ports":{".":{},"k:{\"containerPort\":53,\"protocol\":\"TCP\"}":{".":{},"f:containerPort":{},"f:name":{},"f:protocol":{}},"k:{\"containerPort\":53,\"protocol\":\"UDP\"}":{".":{},"f:containerPort":{},"f:name":{},"f:protocol":{}},"k:{\"containerPort\":9153,\"protocol\":\"TCP\"}":{".":{},"f:containerPort":{},"f:name":{},"f:protocol":{}}},"f:readinessProbe":{".":{},"f:failureThreshold":{},"f:httpGet":{".":{},"f:path":{},"f:port":{},"f:scheme":{}},"f:periodSeconds":{},"f:successThreshold":{},"f:timeoutSeconds":{}},"f:resources":{".":{},"f:limits":{".":{},"f:memory":{}},"f:requests":{".":{},"f:cpu":{},"f:memory":{}}},"f:securityContext":{".":{},"f:allowPrivilegeEscalation":{},"f:capabilities":{".":{},"f:add":{},"f:drop":{}},"f:readOnlyRootFilesystem":{}},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/etc/coredns\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/tmp\"}":{".":{},"f:mountPath":{},"f:name":{}}}}},"f:dnsPolicy":{},"f:enableServiceLinks":{},"f:priorityClassName":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:serviceAccount":{},"f:serviceAccountName":{},"f:terminationGracePeriodSeconds":{},"f:tolerations":{},"f:volumes":{".":{},"k:{\"name\":\"config-volume\"}":{".":{},"f:configMap":{".":{},"f:defaultMode":{},"f:items":{},"f:name":{}},"f:name":{}},"k:{\"name\":\"tmp\"}":{".":{},"f:emptyDir":{},"f:name":{}}}}}},{"manager":"kube-scheduler","operation":"Update","apiVersion":"v1","time":"2021-02-03T15:56:28Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:conditions":{".":{},"k:{\"type\":\"PodScheduled\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}}}}}]},"spec":{"volumes":[{"name":"tmp","emptyDir":{}},{"name":"config-volume","configMap":{"name":"coredns","items":[{"key":"Corefile","path":"Corefile"}],"defaultMode":420}},{"name":"coredns-token-mjrmf","secret":{"secretName":"coredns-token-mjrmf","defaultMode":420}}],"containers":[{"name":"coredns","image":"602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/coredns:v1.7.0-eksbuild.1","args":["-conf","/etc/coredns/Corefile"],"ports":[{"name":"dns","containerPort":53,"protocol":"UDP"},{"name":"dns-tcp","containerPort":53,"protocol":"TCP"},{"name":"metrics","containerPort":9153,"protocol":"TCP"}],"resources":{"limits":{"memory":"170Mi"},"requests":{"cpu":"100m","memory":"70Mi"}},"volumeMounts":[{"name":"config-volume","readOnly":true,"mountPath":"/etc/coredns"},{"name":"tmp","mountPath":"/tmp"},{"name":"coredns-token-mjrmf","readOnly":true,"mountPath":"/var/run/secrets/kubernetes.io/serviceaccount"}],"livenessProbe":{"httpGet":{"path":"/health","port":8080,"scheme":"HTTP"},"initialDelaySeconds":60,"timeoutSeconds":5,"periodSeconds":10,"successThreshold":1,"failureThreshold":5},"readinessProbe":{"httpGet":{"path":"/health","port":8080,"scheme":"HTTP"},"timeoutSeconds":1,"periodSeconds":10,"successThreshold":1,"failureThreshold":3},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"IfNotPresent","securityContext":{"capabilities":{"add":["NET_BIND_SERVICE"],"drop":["all"]},"readOnlyRootFilesystem":true,"allowPrivilegeEscalation":false}}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"Default","serviceAccountName":"coredns","serviceAccount":"coredns","securityContext":{},"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"beta.kubernetes.io/os","operator":"In","values":["linux"]},{"key":"beta.kubernetes.io/arch","operator":"In","values":["amd64","arm64"]}]}]}},"podAntiAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"weight":100,"podAffinityTerm":{"labelSelector":{"matchExpressions":[{"key":"k8s-app","operator":"In","values":["kube-dns"]}]},"topologyKey":"kubernetes.io/hostname"}}]}},"schedulerName":"default-scheduler","tolerations":[{"key":"node-role.kubernetes.io/master","effect":"NoSchedule"},{"key":"CriticalAddonsOnly","operator":"Exists"},{"key":"node.kubernetes.io/not-ready","operator":"Exists","effect":"NoExecute","tolerationSeconds":300},{"key":"node.kubernetes.io/unreachable","operator":"Exists","effect":"NoExecute","tolerationSeconds":300}],"priorityClassName":"system-cluster-critical","priority":2000000000,"enableServiceLinks":true},"status":{"phase":"Pending","conditions":[{"type":"PodScheduled","status":"False","lastProbeTime":null,"lastTransitionTime":"2021-02-03T15:56:28Z","reason":"Unschedulable","message":"no
+        nodes available to schedule pods"}],"qosClass":"Burstable"}},{"metadata":{"name":"coredns-c79dcb98c-znpqn","generateName":"coredns-c79dcb98c-","namespace":"kube-system","selfLink":"/api/v1/namespaces/kube-system/pods/coredns-c79dcb98c-znpqn","uid":"0cb64edc-caf7-4641-8af6-97be6777dddc","resourceVersion":"1065413","creationTimestamp":"2021-02-03T15:49:28Z","labels":{"eks.amazonaws.com/component":"coredns","k8s-app":"kube-dns","pod-template-hash":"c79dcb98c"},"annotations":{"eks.amazonaws.com/compute-type":"ec2","kubernetes.io/psp":"eks.privileged"},"ownerReferences":[{"apiVersion":"apps/v1","kind":"ReplicaSet","name":"coredns-c79dcb98c","uid":"aeb52bf9-4d02-4bcf-9565-7fcfec073323","controller":true,"blockOwnerDeletion":true}],"managedFields":[{"manager":"kube-controller-manager","operation":"Update","apiVersion":"v1","time":"2021-02-03T15:49:28Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{".":{},"f:eks.amazonaws.com/compute-type":{}},"f:generateName":{},"f:labels":{".":{},"f:eks.amazonaws.com/component":{},"f:k8s-app":{},"f:pod-template-hash":{}},"f:ownerReferences":{".":{},"k:{\"uid\":\"aeb52bf9-4d02-4bcf-9565-7fcfec073323\"}":{".":{},"f:apiVersion":{},"f:blockOwnerDeletion":{},"f:controller":{},"f:kind":{},"f:name":{},"f:uid":{}}}},"f:spec":{"f:affinity":{".":{},"f:nodeAffinity":{".":{},"f:requiredDuringSchedulingIgnoredDuringExecution":{".":{},"f:nodeSelectorTerms":{}}},"f:podAntiAffinity":{".":{},"f:preferredDuringSchedulingIgnoredDuringExecution":{}}},"f:containers":{"k:{\"name\":\"coredns\"}":{".":{},"f:args":{},"f:image":{},"f:imagePullPolicy":{},"f:livenessProbe":{".":{},"f:failureThreshold":{},"f:httpGet":{".":{},"f:path":{},"f:port":{},"f:scheme":{}},"f:initialDelaySeconds":{},"f:periodSeconds":{},"f:successThreshold":{},"f:timeoutSeconds":{}},"f:name":{},"f:ports":{".":{},"k:{\"containerPort\":53,\"protocol\":\"TCP\"}":{".":{},"f:containerPort":{},"f:name":{},"f:protocol":{}},"k:{\"containerPort\":53,\"protocol\":\"UDP\"}":{".":{},"f:containerPort":{},"f:name":{},"f:protocol":{}},"k:{\"containerPort\":9153,\"protocol\":\"TCP\"}":{".":{},"f:containerPort":{},"f:name":{},"f:protocol":{}}},"f:readinessProbe":{".":{},"f:failureThreshold":{},"f:httpGet":{".":{},"f:path":{},"f:port":{},"f:scheme":{}},"f:periodSeconds":{},"f:successThreshold":{},"f:timeoutSeconds":{}},"f:resources":{".":{},"f:limits":{".":{},"f:memory":{}},"f:requests":{".":{},"f:cpu":{},"f:memory":{}}},"f:securityContext":{".":{},"f:allowPrivilegeEscalation":{},"f:capabilities":{".":{},"f:add":{},"f:drop":{}},"f:readOnlyRootFilesystem":{}},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/etc/coredns\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/tmp\"}":{".":{},"f:mountPath":{},"f:name":{}}}}},"f:dnsPolicy":{},"f:enableServiceLinks":{},"f:priorityClassName":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:serviceAccount":{},"f:serviceAccountName":{},"f:terminationGracePeriodSeconds":{},"f:tolerations":{},"f:volumes":{".":{},"k:{\"name\":\"config-volume\"}":{".":{},"f:configMap":{".":{},"f:defaultMode":{},"f:items":{},"f:name":{}},"f:name":{}},"k:{\"name\":\"tmp\"}":{".":{},"f:emptyDir":{},"f:name":{}}}}}},{"manager":"kube-scheduler","operation":"Update","apiVersion":"v1","time":"2021-02-03T15:49:28Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:conditions":{".":{},"k:{\"type\":\"PodScheduled\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}}}}}]},"spec":{"volumes":[{"name":"tmp","emptyDir":{}},{"name":"config-volume","configMap":{"name":"coredns","items":[{"key":"Corefile","path":"Corefile"}],"defaultMode":420}},{"name":"coredns-token-mjrmf","secret":{"secretName":"coredns-token-mjrmf","defaultMode":420}}],"containers":[{"name":"coredns","image":"602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/coredns:v1.7.0-eksbuild.1","args":["-conf","/etc/coredns/Corefile"],"ports":[{"name":"dns","containerPort":53,"protocol":"UDP"},{"name":"dns-tcp","containerPort":53,"protocol":"TCP"},{"name":"metrics","containerPort":9153,"protocol":"TCP"}],"resources":{"limits":{"memory":"170Mi"},"requests":{"cpu":"100m","memory":"70Mi"}},"volumeMounts":[{"name":"config-volume","readOnly":true,"mountPath":"/etc/coredns"},{"name":"tmp","mountPath":"/tmp"},{"name":"coredns-token-mjrmf","readOnly":true,"mountPath":"/var/run/secrets/kubernetes.io/serviceaccount"}],"livenessProbe":{"httpGet":{"path":"/health","port":8080,"scheme":"HTTP"},"initialDelaySeconds":60,"timeoutSeconds":5,"periodSeconds":10,"successThreshold":1,"failureThreshold":5},"readinessProbe":{"httpGet":{"path":"/health","port":8080,"scheme":"HTTP"},"timeoutSeconds":1,"periodSeconds":10,"successThreshold":1,"failureThreshold":3},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"IfNotPresent","securityContext":{"capabilities":{"add":["NET_BIND_SERVICE"],"drop":["all"]},"readOnlyRootFilesystem":true,"allowPrivilegeEscalation":false}}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"Default","serviceAccountName":"coredns","serviceAccount":"coredns","securityContext":{},"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"beta.kubernetes.io/os","operator":"In","values":["linux"]},{"key":"beta.kubernetes.io/arch","operator":"In","values":["amd64","arm64"]}]}]}},"podAntiAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"weight":100,"podAffinityTerm":{"labelSelector":{"matchExpressions":[{"key":"k8s-app","operator":"In","values":["kube-dns"]}]},"topologyKey":"kubernetes.io/hostname"}}]}},"schedulerName":"default-scheduler","tolerations":[{"key":"node-role.kubernetes.io/master","effect":"NoSchedule"},{"key":"CriticalAddonsOnly","operator":"Exists"},{"key":"node.kubernetes.io/not-ready","operator":"Exists","effect":"NoExecute","tolerationSeconds":300},{"key":"node.kubernetes.io/unreachable","operator":"Exists","effect":"NoExecute","tolerationSeconds":300}],"priorityClassName":"system-cluster-critical","priority":2000000000,"enableServiceLinks":true},"status":{"phase":"Pending","conditions":[{"type":"PodScheduled","status":"False","lastProbeTime":null,"lastTransitionTime":"2021-02-03T15:49:28Z","reason":"Unschedulable","message":"no
+        nodes available to schedule pods"}],"qosClass":"Burstable"}}]}
+
+        '
+    http_version:
+  recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
+- request:
+    method: get
+    uri: https://hostname/api/v1/services?limit=1000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.2p137
+      Authorization:
+      - Bearer k8s-aws-v1.aHR0cHM6Ly9zdHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vP0FjdGlvbj1HZXRDYWxsZXJJZGVudGl0eSZWZXJzaW9uPTIwMTEtMDYtMTUmWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBUzVJTU0yUFFMTkQ1SVZNQSUyRjIwMjEwMjAzJTJGdXMtZWFzdC0xJTJGc3RzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyMTAyMDNUMjExMTE4WiZYLUFtei1FeHBpcmVzPTkwMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTBmZGM3OTczOTUyNmM1NDY5MzdjMGQzZDU0NjhiM2M2NGMzMGIzMjg0M2FmODljMjRkYjgwODYyYmI4ODYxOWM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Audit-Id:
+      - 37556ed6-8ca6-44de-b576-fa9d3f664de4
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Feb 2021 21:11:18 GMT
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"kind":"ServiceList","apiVersion":"v1","metadata":{"selfLink":"/api/v1/services","resourceVersion":"1115366"},"items":[{"metadata":{"name":"kubernetes","namespace":"default","selfLink":"/api/v1/namespaces/default/services/kubernetes","uid":"2f824f67-7521-4a10-b5d1-5e597b87a62e","resourceVersion":"153","creationTimestamp":"2021-01-29T21:12:32Z","labels":{"component":"apiserver","provider":"kubernetes"},"managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"v1","time":"2021-01-29T21:12:32Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:labels":{".":{},"f:component":{},"f:provider":{}}},"f:spec":{"f:clusterIP":{},"f:ports":{".":{},"k:{\"port\":443,\"protocol\":\"TCP\"}":{".":{},"f:name":{},"f:port":{},"f:protocol":{},"f:targetPort":{}}},"f:sessionAffinity":{},"f:type":{}}}}]},"spec":{"ports":[{"name":"https","protocol":"TCP","port":443,"targetPort":443}],"clusterIP":"172.20.0.1","type":"ClusterIP","sessionAffinity":"None"},"status":{"loadBalancer":{}}},{"metadata":{"name":"kube-dns","namespace":"kube-system","selfLink":"/api/v1/namespaces/kube-system/services/kube-dns","uid":"9fbc328d-98b2-4039-8603-30562f4a1079","resourceVersion":"179","creationTimestamp":"2021-01-29T21:12:36Z","labels":{"eks.amazonaws.com/component":"kube-dns","k8s-app":"kube-dns","kubernetes.io/cluster-service":"true","kubernetes.io/name":"CoreDNS"},"annotations":{"kubectl.kubernetes.io/last-applied-configuration":"{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{\"prometheus.io/port\":\"9153\",\"prometheus.io/scrape\":\"true\"},\"labels\":{\"eks.amazonaws.com/component\":\"kube-dns\",\"k8s-app\":\"kube-dns\",\"kubernetes.io/cluster-service\":\"true\",\"kubernetes.io/name\":\"CoreDNS\"},\"name\":\"kube-dns\",\"namespace\":\"kube-system\"},\"spec\":{\"clusterIP\":\"172.20.0.10\",\"ports\":[{\"name\":\"dns\",\"port\":53,\"protocol\":\"UDP\"},{\"name\":\"dns-tcp\",\"port\":53,\"protocol\":\"TCP\"}],\"selector\":{\"k8s-app\":\"kube-dns\"}}}\n","prometheus.io/port":"9153","prometheus.io/scrape":"true"},"managedFields":[{"manager":"kubectl","operation":"Update","apiVersion":"v1","time":"2021-01-29T21:12:36Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{".":{},"f:kubectl.kubernetes.io/last-applied-configuration":{},"f:prometheus.io/port":{},"f:prometheus.io/scrape":{}},"f:labels":{".":{},"f:eks.amazonaws.com/component":{},"f:k8s-app":{},"f:kubernetes.io/cluster-service":{},"f:kubernetes.io/name":{}}},"f:spec":{"f:clusterIP":{},"f:ports":{".":{},"k:{\"port\":53,\"protocol\":\"TCP\"}":{".":{},"f:name":{},"f:port":{},"f:protocol":{},"f:targetPort":{}},"k:{\"port\":53,\"protocol\":\"UDP\"}":{".":{},"f:name":{},"f:port":{},"f:protocol":{},"f:targetPort":{}}},"f:selector":{".":{},"f:k8s-app":{}},"f:sessionAffinity":{},"f:type":{}}}}]},"spec":{"ports":[{"name":"dns","protocol":"UDP","port":53,"targetPort":53},{"name":"dns-tcp","protocol":"TCP","port":53,"targetPort":53}],"selector":{"k8s-app":"kube-dns"},"clusterIP":"172.20.0.10","type":"ClusterIP","sessionAffinity":"None"},"status":{"loadBalancer":{}}}]}
+
+        '
+    http_version:
+  recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
+- request:
+    method: get
+    uri: https://hostname/api/v1/endpoints?limit=1000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.2p137
+      Authorization:
+      - Bearer k8s-aws-v1.aHR0cHM6Ly9zdHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vP0FjdGlvbj1HZXRDYWxsZXJJZGVudGl0eSZWZXJzaW9uPTIwMTEtMDYtMTUmWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBUzVJTU0yUFFMTkQ1SVZNQSUyRjIwMjEwMjAzJTJGdXMtZWFzdC0xJTJGc3RzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyMTAyMDNUMjExMTE4WiZYLUFtei1FeHBpcmVzPTkwMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTBmZGM3OTczOTUyNmM1NDY5MzdjMGQzZDU0NjhiM2M2NGMzMGIzMjg0M2FmODljMjRkYjgwODYyYmI4ODYxOWM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Audit-Id:
+      - 9e85d768-d75f-466a-83e5-bff1165a1013
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Feb 2021 21:11:19 GMT
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"kind":"EndpointsList","apiVersion":"v1","metadata":{"selfLink":"/api/v1/endpoints","resourceVersion":"1115366"},"items":[{"metadata":{"name":"kubernetes","namespace":"default","selfLink":"/api/v1/namespaces/default/endpoints/kubernetes","uid":"5c83cc10-5896-4d88-941b-a35259ad4bd9","resourceVersion":"1152","creationTimestamp":"2021-01-29T21:12:32Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"v1","time":"2021-01-29T21:18:21Z","fieldsType":"FieldsV1","fieldsV1":{"f:subsets":{}}}]},"subsets":[{"addresses":[{"ip":"10.0.0.53"},{"ip":"10.0.1.46"}],"ports":[{"name":"https","port":443,"protocol":"TCP"}]}]},{"metadata":{"name":"kube-controller-manager","namespace":"kube-system","selfLink":"/api/v1/namespaces/kube-system/endpoints/kube-controller-manager","uid":"fab33aa3-e09b-4574-81f3-d1883b9190e9","resourceVersion":"1115363","creationTimestamp":"2021-01-29T21:12:39Z","annotations":{"control-plane.alpha.kubernetes.io/leader":"{\"holderIdentity\":\"ip-172-16-106-133.ec2.internal_220028d7-2717-4a54-84ac-601ffe1a1b6e\",\"leaseDurationSeconds\":15,\"acquireTime\":\"2021-01-29T21:12:39Z\",\"renewTime\":\"2021-02-03T21:11:18Z\",\"leaderTransitions\":0}"},"managedFields":[{"manager":"kube-controller-manager","operation":"Update","apiVersion":"v1","time":"2021-02-03T21:11:18Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{".":{},"f:control-plane.alpha.kubernetes.io/leader":{}}}}}]}},{"metadata":{"name":"kube-dns","namespace":"kube-system","selfLink":"/api/v1/namespaces/kube-system/endpoints/kube-dns","uid":"04122cfb-cce9-4350-8353-a7da4b390539","resourceVersion":"326","creationTimestamp":"2021-01-29T21:12:43Z","labels":{"eks.amazonaws.com/component":"kube-dns","k8s-app":"kube-dns","kubernetes.io/cluster-service":"true","kubernetes.io/name":"CoreDNS"},"annotations":{"endpoints.kubernetes.io/last-change-trigger-time":"2021-01-29T21:12:36Z"},"managedFields":[{"manager":"kube-controller-manager","operation":"Update","apiVersion":"v1","time":"2021-01-29T21:12:43Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{".":{},"f:endpoints.kubernetes.io/last-change-trigger-time":{}},"f:labels":{".":{},"f:eks.amazonaws.com/component":{},"f:k8s-app":{},"f:kubernetes.io/cluster-service":{},"f:kubernetes.io/name":{}}}}}]}},{"metadata":{"name":"kube-scheduler","namespace":"kube-system","selfLink":"/api/v1/namespaces/kube-system/endpoints/kube-scheduler","uid":"01e256b4-0460-4445-9468-cdad4521aaa4","resourceVersion":"1115365","creationTimestamp":"2021-01-29T21:13:30Z","annotations":{"control-plane.alpha.kubernetes.io/leader":"{\"holderIdentity\":\"ip-172-16-106-133.ec2.internal_f2d9a48d-4fd2-4a6a-bf2f-1dbea5166239\",\"leaseDurationSeconds\":15,\"acquireTime\":\"2021-01-29T21:13:30Z\",\"renewTime\":\"2021-02-03T21:11:18Z\",\"leaderTransitions\":0}"},"managedFields":[{"manager":"kube-scheduler","operation":"Update","apiVersion":"v1","time":"2021-02-03T21:11:18Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{".":{},"f:control-plane.alpha.kubernetes.io/leader":{}}}}}]}}]}
+
+        '
+    http_version:
+  recorded_at: Wed, 03 Feb 2021 21:11:19 GMT
+recorded_with: VCR 5.1.0
