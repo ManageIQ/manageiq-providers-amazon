@@ -45,7 +45,7 @@ describe ManageIQ::Providers::Amazon::ContainerManager::Refresher do
       container_project = ems.container_projects.find_by(:name => "kube-system")
       expect(container_project).to have_attributes(
         :name             => "kube-system",
-        :resource_version => "4",
+        :resource_version => "4"
       )
     end
 
@@ -70,9 +70,9 @@ describe ManageIQ::Providers::Amazon::ContainerManager::Refresher do
         :name                 => "coredns",
         :type                 => "ManageIQ::Providers::Amazon::ContainerManager::Container",
         :request_cpu_cores    => 0.1,
-        :request_memory_bytes => 73400320,
+        :request_memory_bytes => 73_400_320,
         :limit_cpu_cores      => nil,
-        :limit_memory_bytes   => 178257920,
+        :limit_memory_bytes   => 178_257_920,
         :image                => "602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/coredns:v1.7.0-eksbuild.1",
         :image_pull_policy    => "IfNotPresent",
         :memory               => nil,

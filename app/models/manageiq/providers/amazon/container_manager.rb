@@ -15,6 +15,14 @@ class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kuber
     @description ||= "Amazon EKS".freeze
   end
 
+  def self.display_name(number = 1)
+    n_('Container Provider (Amazon)', 'Container Providers (Amazon)', number)
+  end
+
+  def self.default_port
+    443
+  end
+
   def self.kubernetes_auth_options(options)
     auth_options = {}
 
@@ -94,6 +102,143 @@ class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kuber
     else
       raise MiqException::MiqInvalidCredentialsError, _("Unsupported endpoint")
     end
+  end
+
+  private_class_method def self.provider_region_options
+    ManageIQ::Providers::Amazon::Regions
+      .all
+      .sort_by { |r| r[:description].downcase }
+      .map do |r|
+        {
+          :label => r[:description],
+          :value => r[:name]
+        }
+      end
+  end
+
+  def self.params_for_create
+    {
+      :fields => [
+        {
+          :component  => "select",
+          :id         => "provider_region",
+          :name       => "provider_region",
+          :label      => _("Region"),
+          :isRequired => true,
+          :validate   => [{:type => "required"}],
+          :options    => provider_region_options
+        },
+        {
+          :component  => "text-field",
+          :id         => "uid_ems",
+          :name       => "uid_ems",
+          :label      => _("Cluster Name"),
+          :isRequired => true,
+          :validate   => [{:type => "required"}]
+        },
+        {
+          :component => 'sub-form',
+          :id        => 'endpoints-subform',
+          :name      => 'endpoints-subform',
+          :title     => _('Endpoints'),
+          :fields    => [
+            :component => 'tabs',
+            :name      => 'tabs',
+            :fields    => [
+              {
+                :component => 'tab-item',
+                :id        => 'default-tab',
+                :name      => 'default-tab',
+                :title     => _('Default'),
+                :fields    => [
+                  {
+                    :component              => 'validate-provider-credentials',
+                    :id                     => 'authentications.default.valid',
+                    :name                   => 'authentications.default.valid',
+                    :skipSubmit             => true,
+                    :isRequired             => true,
+                    :validationDependencies => %w[type zone_id provider_region uid_ems],
+                    :fields                 => [
+                      {
+                        :component  => "select",
+                        :id         => "endpoints.default.security_protocol",
+                        :name       => "endpoints.default.security_protocol",
+                        :label      => _("Security Protocol"),
+                        :isRequired => true,
+                        :validate   => [{:type => "required"}],
+                        :options    => [
+                          {
+                            :label => _("SSL"),
+                            :value => "ssl-with-validation"
+                          },
+                          {
+                            :label => _("SSL trusting custom CA"),
+                            :value => "ssl-with-validation-custom-ca"
+                          },
+                          {
+                            :label => _("SSL without validation"),
+                            :value => "ssl-without-validation",
+                          },
+                        ]
+                      },
+                      {
+                        :component  => "text-field",
+                        :id         => "endpoints.default.hostname",
+                        :name       => "endpoints.default.hostname",
+                        :label      => _("Hostname (or IPv4 or IPv6 address)"),
+                        :isRequired => true,
+                        :validate   => [{:type => "required"}],
+                      },
+                      {
+                        :component    => "text-field",
+                        :id           => "endpoints.default.port",
+                        :name         => "endpoints.default.port",
+                        :label        => _("API Port"),
+                        :type         => "number",
+                        :initialValue => default_port,
+                        :isRequired   => true,
+                        :validate     => [{:type => "required"}],
+                      },
+                      {
+                        :component  => "textarea",
+                        :id         => "endpoints.default.certificate_authority",
+                        :name       => "endpoints.default.certificate_authority",
+                        :label      => _("Trusted CA Certificates"),
+                        :rows       => 10,
+                        :isRequired => true,
+                        :validate   => [{:type => "required"}],
+                        :condition  => {
+                          :when => 'endpoints.default.security_protocol',
+                          :is   => 'ssl-with-validation-custom-ca',
+                        },
+                      },
+                      {
+                        :component  => "text-field",
+                        :id         => "authentications.bearer.userid",
+                        :name       => "authentications.bearer.userid",
+                        :label      => _("Access Key ID"),
+                        :helperText => _("Should have privileged access, such as root or administrator."),
+                        :isRequired => true,
+                        :validate   => [{:type => "required"}]
+                      },
+                      {
+                        :component  => "password-field",
+                        :id         => "authentications.bearer.password",
+                        :name       => "authentications.bearer.password",
+                        :label      => _("Secret Access Key"),
+                        :type       => "password",
+                        :isRequired => true,
+                        :validate   => [{:type => "required"}]
+                      },
+                    ]
+                  }
+                ]
+              }
+            ]
+          ]
+        }
+      ]
+    }
   end
 
   def connect_options(options = {})
