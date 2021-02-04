@@ -23,4 +23,13 @@ FactoryBot.define do
       ems.authentications << FactoryBot.create(:authentication, cred)
     end
   end
+
+  factory :ems_amazon_eks,
+          :aliases => ["manageiq/providers/amazon/container_manager"],
+          :class   => "ManageIQ::Providers::Amazon::ContainerManager",
+          :parent  => :ems_container do
+    provider_region { "us-east-1" }
+    security_protocol { "ssl-without-validation" }
+    port { 443 }
+  end
 end
