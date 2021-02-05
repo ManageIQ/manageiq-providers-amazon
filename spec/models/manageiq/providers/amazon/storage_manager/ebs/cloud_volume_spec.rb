@@ -3,7 +3,7 @@ require_relative "../../aws_helper"
 describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
   let(:ems_cloud) { FactoryBot.create(:ems_amazon_with_authentication) }
   let(:ebs) { FactoryBot.create(:ems_amazon_ebs, :parent_ems_id => ems_cloud.id) }
-  let(:availability_zone) { FactoryBot.create(:availability_zone_amazon) }
+  let(:availability_zone) { FactoryBot.create(:availability_zone_amazon, :ext_management_system => ems_cloud, :ems_ref => 'az_1') }
   let(:cloud_volume) { FactoryBot.create(:cloud_volume_amazon_gp2, :ext_management_system => ebs, :ems_ref => "vol_1", :availability_zone => availability_zone) }
 
   describe "cloud volume operations" do
@@ -23,10 +23,10 @@ describe ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume do
         }
 
         options = {
-          :name              => "volume",
-          :availability_zone => "az1",
-          :size              => 1,
-          :volume_type       => "gp2",
+          :name                 => "volume",
+          :availability_zone_id => availability_zone.id,
+          :size                 => 1,
+          :volume_type          => "gp2",
         }
 
         with_aws_stubbed(stubbed_responses) do
