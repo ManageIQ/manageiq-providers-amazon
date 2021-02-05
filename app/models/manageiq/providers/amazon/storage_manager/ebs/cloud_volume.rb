@@ -19,7 +19,13 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
   end
 
   def self.raw_create_volume(ext_management_system, options)
+    options.symbolize_keys!
+    options.delete(:ems_id)
     volume_name = options.delete(:name)
+
+    availability_zone = ext_management_system.availability_zones.find_by(:id => options.delete(:availability_zone_id))
+    options[:availability_zone] = availability_zone&.ems_ref
+
     volume = nil
 
     ext_management_system.with_provider_connection do |service|
