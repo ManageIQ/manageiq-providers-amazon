@@ -89,7 +89,7 @@
       :saver_strategy: batch
   :eks:
     :refresh_interval: 15.minutes
-    :streaming_refresh: false
+    :streaming_refresh: true
     :chunk_size: 1_000
     :inventory_collections:
       :saver_strategy: batch
