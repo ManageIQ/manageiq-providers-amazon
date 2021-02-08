@@ -17,7 +17,7 @@ describe ManageIQ::Providers::Amazon::ContainerManager::Refresher do
         client_id  = Rails.application.secrets.amazon_eks.try(:[], :client_id) || 'AMAZON_CLIENT_ID'
         client_key = Rails.application.secrets.amazon_eks.try(:[], :client_secret) || 'AMAZON_CLIENT_SECRET'
 
-        ems.update_authentication(:bearer => {:userid => client_id, :password => client_key})
+        ems.update_authentication(:default => {:userid => client_id, :password => client_key})
       end
     end
 
