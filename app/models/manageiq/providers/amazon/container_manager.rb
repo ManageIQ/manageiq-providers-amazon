@@ -72,17 +72,17 @@ class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kuber
 
     verify_ssl = security_protocol == 'ssl-without-validation' ? OpenSSL::SSL::VERIFY_NONE : OpenSSL::SSL::VERIFY_PEER
 
-    authentication = args.dig("authentications", "bearer")
+    authentication = args.dig("authentications", "default")
 
     token, access_key, secret_access_key = authentication&.values_at(
       "auth_key", "userid", "password"
     )
 
     token = ManageIQ::Password.try_decrypt(token)
-    token ||= ext_management_system.authentication_token("bearer") if ext_management_system
+    token ||= ext_management_system.authentication_token("default") if ext_management_system
 
     secret_access_key = ManageIQ::Password.try_decrypt(secret_access_key)
-    secret_access_key ||= ext_management_system.authentication_password("bearer") if ext_management_system
+    secret_access_key ||= ext_management_system.authentication_password("default") if ext_management_system
 
     options = {
       :username     => access_key,
@@ -214,8 +214,8 @@ class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kuber
                       },
                       {
                         :component  => "text-field",
-                        :id         => "authentications.bearer.userid",
-                        :name       => "authentications.bearer.userid",
+                        :id         => "authentications.default.userid",
+                        :name       => "authentications.default.userid",
                         :label      => _("Access Key ID"),
                         :helperText => _("Should have privileged access, such as root or administrator."),
                         :isRequired => true,
@@ -223,8 +223,8 @@ class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kuber
                       },
                       {
                         :component  => "password-field",
-                        :id         => "authentications.bearer.password",
-                        :name       => "authentications.bearer.password",
+                        :id         => "authentications.default.password",
+                        :name       => "authentications.default.password",
                         :label      => _("Secret Access Key"),
                         :type       => "password",
                         :isRequired => true,
@@ -239,6 +239,22 @@ class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kuber
         }
       ]
     }
+  end
+
+  # The kubernetes provider uses the bearer authtype but the primary method
+  # of authenticating to EKS will be with default authtype
+  def default_authentication_type
+    :default
+  end
+
+  # We still want to be able to support bearer authentication if someone does
+  # create a service account token
+  def authentications_to_validate
+    has_authentication_type?(:bearer) ? %i[bearer] : %i[default]
+  end
+
+  def required_credential_fields(type)
+    type == "bearer" ? %i[bearer] : %i[userid password]
   end
 
   def connect_options(options = {})
