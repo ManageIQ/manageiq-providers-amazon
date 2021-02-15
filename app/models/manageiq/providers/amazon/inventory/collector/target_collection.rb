@@ -16,6 +16,20 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     target.manager_refs_by_association.try(:[], collection).try(:[], :name).try(:to_a).try(:compact) || []
   end
 
+  def flavors
+    return @flavors_hashes if @flavors_hashes
+
+    all_instance_types = ManageIQ::Providers::Amazon::InstanceTypes.instance_types
+
+    # Only include flavors which are referenced by the targeted instances
+    targeted_instance_types = instances.collect { |instance| instance["instance_type"] }.uniq.compact
+
+    instance_types = all_instance_types.values_at(*targeted_instance_types)
+    instance_types << all_instance_types["unknown"] if instance_types.any?(nil)
+
+    @flavors_hashes = instance_types.compact
+  end
+
   def instances
     return [] if references(:vms).blank?
     return @instances_hashes if @instances_hashes

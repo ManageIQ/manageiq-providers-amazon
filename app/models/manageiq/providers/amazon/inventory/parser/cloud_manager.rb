@@ -229,8 +229,8 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       status = instance.fetch_path('state', 'name')
       next if collector.options.ignore_terminated_instances && status.to_sym == :terminated
 
-      # TODO(lsmola) we have a non lazy dependency, can we remove that?
-      flavor = persister.flavors.find(instance['instance_type']) || persister.flavors.find("unknown")
+      flavor   = collector.flavors.detect { |f| f[:name] == instance["instance_type"] }
+      flavor ||= collector.flavors.detect { |f| f[:name] == "unknown" }
 
       uid  = instance['instance_id']
       name = get_from_tags(instance, :name) || uid
@@ -245,7 +245,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :raw_power_state     => status,
         :boot_time           => instance['launch_time'],
         :availability_zone   => persister.availability_zones.lazy_find(instance.fetch_path('placement', 'availability_zone')),
-        :flavor              => flavor,
+        :flavor              => persister.flavors.lazy_find(flavor[:name]),
         :genealogy_parent    => persister.miq_templates.lazy_find(instance['image_id']),
         :key_pairs           => [persister.auth_key_pairs.lazy_find(instance['key_name'])].compact,
         :location            => persister.networks.lazy_find({
@@ -273,11 +273,11 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       :bitness              => architecture_to_bitness(instance['architecture']),
       :virtualization_type  => instance['virtualization_type'],
       :root_device_type     => instance['root_device_type'],
-      :cpu_sockets          => flavor[:cpus],
+      :cpu_sockets          => flavor[:vcpu],
       :cpu_cores_per_socket => 1,
-      :cpu_total_cores      => flavor[:cpus],
+      :cpu_total_cores      => flavor[:vcpu],
       :memory_mb            => flavor[:memory] / 1.megabyte,
-      :disk_capacity        => flavor[:ephemeral_disk_size],
+      :disk_capacity        => flavor[:instance_store_size],
       :guest_os             => persister.hardwares.lazy_find(persister.miq_templates.lazy_find(instance['image_id']), :key => :guest_os),
     )
 
@@ -319,9 +319,9 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
   def hardware_disks(persister_hardware, instance, flavor)
     disks = []
 
-    if flavor[:ephemeral_disk_count] > 0
-      single_disk_size = flavor[:ephemeral_disk_size] / flavor[:ephemeral_disk_count]
-      flavor[:ephemeral_disk_count].times do |i|
+    if flavor[:instance_store_volumes] > 0
+      single_disk_size = flavor[:instance_store_size] / flavor[:instance_store_volumes]
+      flavor[:instance_store_volumes].times do |i|
         add_instance_disk(disks, single_disk_size, i, "Disk #{i}")
       end
     end
