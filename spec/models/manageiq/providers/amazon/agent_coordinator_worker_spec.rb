@@ -5,13 +5,13 @@ describe ManageIQ::Providers::Amazon::AgentCoordinatorWorker do
     end
   end
 
-  describe ".desired_queue_names" do
+  describe ".has_required_role?" do
+    before        { ServerRole.seed }
     let!(:server) { EvmSpecHelper.create_guid_miq_server_zone[1] }
-
-    let(:zone) { server.zone }
+    let(:zone)    { server.zone }
 
     it "returns an empty array if no providers are created" do
-      expect(described_class.desired_queue_names).to eq([])
+      expect(described_class.has_required_role?).to be_falsy
     end
 
     context "with an ems" do
@@ -19,16 +19,30 @@ describe ManageIQ::Providers::Amazon::AgentCoordinatorWorker do
         FactoryBot.create(:ems_amazon_with_authentication, :zone => zone)
       end
 
-      it "returns ems_agent_coordinator as the only queue name" do
-        expect(described_class.desired_queue_names).to eq(["ems_agent_coordinator"])
+      context "with smartproxy role disabled" do
+        it "returns false" do
+          expect(described_class.has_required_role?).to be_falsy
+        end
       end
 
-      it "returns a single queue for multiple emss" do
-        FactoryBot.create(:ems_amazon_with_authentication, :zone => zone)
-        FactoryBot.create(:ems_amazon_with_authentication, :zone => zone)
-        FactoryBot.create(:ems_amazon_with_authentication, :zone => zone)
+      context "with smartproxy role enabled" do
+        before do
+          server.update(:has_vix_disk_lib => true)
+          server.role = "smartproxy"
+          server.assigned_server_roles.update(:active => true)
+        end
 
-        expect(described_class.desired_queue_names).to eq(["ems_agent_coordinator"])
+        it "returns true" do
+          expect(described_class.has_required_role?).to be_truthy
+        end
+
+        it "returns true with multiple emss" do
+          FactoryBot.create(:ems_amazon_with_authentication, :zone => zone)
+          FactoryBot.create(:ems_amazon_with_authentication, :zone => zone)
+          FactoryBot.create(:ems_amazon_with_authentication, :zone => zone)
+
+          expect(described_class.has_required_role?).to be_truthy
+        end
       end
     end
   end

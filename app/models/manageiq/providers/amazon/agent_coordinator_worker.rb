@@ -1,17 +1,21 @@
 class ManageIQ::Providers::Amazon::AgentCoordinatorWorker < MiqWorker
+  include MiqWorker::ReplicaPerWorker
+
   require_nested :Runner
 
-  include PerEmsWorkerMixin
-
   self.required_roles = ['smartproxy']
+  self.workers        = 1
+
+  def self.has_required_role?
+    super && all_valid_ems_in_zone.any?
+  end
+
+  def self.all_valid_ems_in_zone
+    ems_class.where(:zone_id => MiqServer.my_server.zone.id).select { |e| e.enabled && e.authentication_status_ok? }
+  end
 
   def self.ems_class
     ManageIQ::Providers::Amazon::CloudManager
-  end
-
-  def self.desired_queue_names
-    # All cloud managers will share the same agent coordinator
-    super.any? ? ["ems_agent_coordinator"] : []
   end
 
   def self.kill_priority
