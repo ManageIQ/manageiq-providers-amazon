@@ -138,19 +138,20 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
           },
         },
         {
-          :component  => 'select',
-          :name       => 'availability_zone_id',
-          :id         => 'availability_zone_id',
-          :label      => _('Availability Zone'),
-          :options    => ems.availability_zones.map do |az|
+          :component    => 'select',
+          :name         => 'availability_zone_id',
+          :id           => 'availability_zone_id',
+          :label        => _('Availability Zone'),
+          :includeEmpty => true,
+          :options      => ems.availability_zones.map do |az|
             {
               :label => az.name,
               :value => az.id,
             }
           end,
-          :isRequired => true,
-          :validate   => [{:type => 'required'}],
-          :condition  => {
+          :isRequired   => true,
+          :validate     => [{:type => 'required'}],
+          :condition    => {
             :when => 'edit',
             :is   => false,
           },
@@ -160,6 +161,7 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
           :name         => 'volume_type',
           :id           => 'volume_type',
           :label        => _('Cloud Volume Type'),
+          :includeEmpty => true,
           :options      => CLOUD_VOLUME_TYPES.map do |value, label|
             option = {
               :label => _(label),
@@ -203,15 +205,16 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
           }
         },
         {
-          :component => 'select',
-          :name      => 'cloud_volume_snapshot_id',
-          :id        => 'cloud_volume_snapshot_id',
-          :label     => _('Base Snapshot'),
-          :condition => {
+          :component    => 'select',
+          :name         => 'cloud_volume_snapshot_id',
+          :id           => 'cloud_volume_snapshot_id',
+          :label        => _('Base Snapshot'),
+          :includeEmpty => true,
+          :condition    => {
             :when => 'edit',
             :is   => false,
           },
-          :options   => ems.cloud_volume_snapshots.map do |cvs|
+          :options      => ems.cloud_volume_snapshots.map do |cvs|
             {
               :value => cvs.id,
               :label => cvs.name,
