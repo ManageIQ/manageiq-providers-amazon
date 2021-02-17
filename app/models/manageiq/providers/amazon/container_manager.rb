@@ -120,13 +120,14 @@ class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kuber
     {
       :fields => [
         {
-          :component  => "select",
-          :id         => "provider_region",
-          :name       => "provider_region",
-          :label      => _("Region"),
-          :isRequired => true,
-          :validate   => [{:type => "required"}],
-          :options    => provider_region_options
+          :component    => "select",
+          :id           => "provider_region",
+          :name         => "provider_region",
+          :label        => _("Region"),
+          :isRequired   => true,
+          :includeEmpty => true,
+          :validate     => [{:type => "required"}],
+          :options      => provider_region_options
         },
         {
           :component  => "text-field",
@@ -160,13 +161,14 @@ class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kuber
                     :validationDependencies => %w[type zone_id provider_region uid_ems],
                     :fields                 => [
                       {
-                        :component  => "select",
-                        :id         => "endpoints.default.security_protocol",
-                        :name       => "endpoints.default.security_protocol",
-                        :label      => _("Security Protocol"),
-                        :isRequired => true,
-                        :validate   => [{:type => "required"}],
-                        :options    => [
+                        :component    => "select",
+                        :id           => "endpoints.default.security_protocol",
+                        :name         => "endpoints.default.security_protocol",
+                        :label        => _("Security Protocol"),
+                        :isRequired   => true,
+                        :validate     => [{:type => "required"}],
+                        :initialValue => 'ssl-with-validation',
+                        :options      => [
                           {
                             :label => _("SSL"),
                             :value => "ssl-with-validation"

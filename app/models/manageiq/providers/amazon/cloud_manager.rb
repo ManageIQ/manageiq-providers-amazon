@@ -143,13 +143,14 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     {
       :fields => [
         {
-          :component  => "select",
-          :id         => "provider_region",
-          :name       => "provider_region",
-          :label      => _("Region"),
-          :isRequired => true,
-          :validate   => [{:type => "required"}],
-          :options    => provider_region_options
+          :component    => "select",
+          :id           => "provider_region",
+          :name         => "provider_region",
+          :label        => _("Region"),
+          :isRequired   => true,
+          :validate     => [{:type => "required"}],
+          :includeEmpty => true,
+          :options      => provider_region_options
         },
         {
           :component => 'sub-form',
