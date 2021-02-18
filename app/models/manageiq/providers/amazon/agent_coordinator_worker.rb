@@ -1,4 +1,5 @@
 class ManageIQ::Providers::Amazon::AgentCoordinatorWorker < MiqWorker
+  include ProviderWorkerMixin
   include MiqWorker::ReplicaPerWorker
 
   require_nested :Runner
@@ -8,10 +9,6 @@ class ManageIQ::Providers::Amazon::AgentCoordinatorWorker < MiqWorker
 
   def self.has_required_role?
     super && all_valid_ems_in_zone.any?
-  end
-
-  def self.all_valid_ems_in_zone
-    ems_class.where(:zone_id => MiqServer.my_server.zone.id).select { |e| e.enabled && e.authentication_status_ok? }
   end
 
   def self.ems_class
