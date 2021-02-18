@@ -88,6 +88,10 @@ class ManageIQ::Providers::Amazon::Inventory::Collector < ManageIQ::Providers::I
     @aws_rds ||= manager.connect(:service => :RDS)
   end
 
+  def flavors_by_name
+    @flavors_by_name ||= flavors.index_by { |flavor| flavor[:name] }
+  end
+
   def stack_resources(stack_name)
     @stack_resources.try(:[], stack_name) || []
   end

@@ -5,6 +5,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
     %i(auth_key_pairs
        availability_zones
        disks
+       flavors
        hardwares
        networks
        operating_systems
@@ -21,7 +22,6 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
 
     add_miq_templates
 
-    add_flavors
     add_cloud_database_flavors
 
     %i(orchestration_stacks
@@ -46,13 +46,6 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
   def add_miq_templates(extra_properties = {})
     add_collection(cloud, :miq_templates, extra_properties) do |builder|
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::CloudManager::Template)
-    end
-  end
-
-  def add_flavors(extra_properties = {})
-    add_collection(cloud, :flavors, extra_properties) do |builder|
-      # Model we take just from a DB, there is no flavors API
-      builder.add_properties(:strategy => :local_db_find_references) if targeted?
     end
   end
 

@@ -21,7 +21,10 @@ module ManageIQ::Providers::Amazon::InstanceTypes
   def self.instance_types
     additional = Hash(Settings.ems.ems_amazon.try!(:additional_instance_types)).stringify_keys
     disabled = Array(Settings.ems.ems_amazon.try!(:disabled_instance_types))
-    ALL_TYPES.merge(additional).except(*disabled)
+
+    instance_types = ALL_TYPES.merge(additional).except(*disabled)
+    instance_types.default = ALL_TYPES["unknown"]
+    instance_types
   end
 
   def self.all
