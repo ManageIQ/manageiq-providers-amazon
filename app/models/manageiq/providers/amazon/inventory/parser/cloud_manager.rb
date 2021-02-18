@@ -229,8 +229,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       status = instance.fetch_path('state', 'name')
       next if collector.options.ignore_terminated_instances && status.to_sym == :terminated
 
-      flavor   = collector.flavors.detect { |f| f[:name] == instance["instance_type"] }
-      flavor ||= collector.flavors.detect { |f| f[:name] == "unknown" }
+      flavor = collector.flavors_by_name[instance["instance_type"]] || collector.flavors_by_name["unknown"]
 
       uid  = instance['instance_id']
       name = get_from_tags(instance, :name) || uid
