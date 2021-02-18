@@ -19,15 +19,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   def flavors
     return @flavors_hashes if @flavors_hashes
 
-    all_instance_types = ManageIQ::Providers::Amazon::InstanceTypes.instance_types
-
     # Only include flavors which are referenced by the targeted instances
-    targeted_instance_types = instances.collect { |instance| instance["instance_type"] }.uniq.compact
-
-    instance_types = all_instance_types.values_at(*targeted_instance_types)
-    instance_types << all_instance_types["unknown"] if instance_types.any?(nil)
-
-    @flavors_hashes = instance_types.compact
+    targeted_instance_types = instances.collect { |instance| instance["instance_type"] }
+    @flavors_hashes = ManageIQ::Providers::Amazon::InstanceTypes.instance_types.values_at(*targeted_instance_types).uniq
   end
 
   def instances
