@@ -1,9 +1,9 @@
 # ManageIQ::Providers::Amazon
 
-[![Build Status](https://travis-ci.com/ManageIQ/manageiq-providers-amazon.svg?branch=master)](https://travis-ci.com/ManageIQ/manageiq-providers-amazon)
+[![Build Status](https://travis-ci.com/ManageIQ/manageiq-providers-amazon.svg?branch=lasker)](https://travis-ci.com/ManageIQ/manageiq-providers-amazon)
 [![Maintainability](https://api.codeclimate.com/v1/badges/61cfeaf47807735b8bd8/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/61cfeaf47807735b8bd8/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/test_coverage)
-[![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-amazon/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-amazon/master)
+[![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-amazon/lasker.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-amazon/lasker)
 
 [![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/manageiq-providers-amazon?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
