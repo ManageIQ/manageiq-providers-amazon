@@ -12,6 +12,7 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
        vm_and_template_labels
        vm_and_template_taggings
        vms
+       miq_templates
        cloud_databases
        service_instances
        service_offerings
@@ -19,8 +20,6 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
 
       add_collection(cloud, name)
     end
-
-    add_miq_templates
 
     add_cloud_database_flavors
 
@@ -42,12 +41,6 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::CloudColl
   end
 
   # ------ IC provider specific definitions -------------------------
-
-  def add_miq_templates(extra_properties = {})
-    add_collection(cloud, :miq_templates, extra_properties) do |builder|
-      builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::CloudManager::Template)
-    end
-  end
 
   def add_cloud_database_flavors(extra_properties = {})
     add_collection(cloud, :cloud_database_flavors, extra_properties) do |builder|
