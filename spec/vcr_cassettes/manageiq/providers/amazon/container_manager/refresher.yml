@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://hostname/api/v1
+    uri: https://amazonhostname/api/v1
     body:
       encoding: US-ASCII
       string: ''
@@ -39,7 +39,7 @@ http_interactions:
   recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
 - request:
     method: get
-    uri: https://hostname/api/v1/nodes?limit=1000
+    uri: https://amazonhostname/api/v1/nodes?limit=1000
     body:
       encoding: US-ASCII
       string: ''
@@ -76,7 +76,7 @@ http_interactions:
   recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
 - request:
     method: get
-    uri: https://hostname/api/v1/namespaces?limit=1000
+    uri: https://amazonhostname/api/v1/namespaces?limit=1000
     body:
       encoding: US-ASCII
       string: ''
@@ -113,7 +113,7 @@ http_interactions:
   recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
 - request:
     method: get
-    uri: https://hostname/api/v1/resourcequotas?limit=1000
+    uri: https://amazonhostname/api/v1/resourcequotas?limit=1000
     body:
       encoding: US-ASCII
       string: ''
@@ -150,7 +150,7 @@ http_interactions:
   recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
 - request:
     method: get
-    uri: https://hostname/api/v1/limitranges?limit=1000
+    uri: https://amazonhostname/api/v1/limitranges?limit=1000
     body:
       encoding: US-ASCII
       string: ''
@@ -187,7 +187,7 @@ http_interactions:
   recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
 - request:
     method: get
-    uri: https://hostname/api/v1/replicationcontrollers?limit=1000
+    uri: https://amazonhostname/api/v1/replicationcontrollers?limit=1000
     body:
       encoding: US-ASCII
       string: ''
@@ -224,7 +224,7 @@ http_interactions:
   recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
 - request:
     method: get
-    uri: https://hostname/api/v1/persistentvolumeclaims?limit=1000
+    uri: https://amazonhostname/api/v1/persistentvolumeclaims?limit=1000
     body:
       encoding: US-ASCII
       string: ''
@@ -261,7 +261,7 @@ http_interactions:
   recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
 - request:
     method: get
-    uri: https://hostname/api/v1/persistentvolumes?limit=1000
+    uri: https://amazonhostname/api/v1/persistentvolumes?limit=1000
     body:
       encoding: US-ASCII
       string: ''
@@ -298,7 +298,7 @@ http_interactions:
   recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
 - request:
     method: get
-    uri: https://hostname/api/v1/pods?limit=1000
+    uri: https://amazonhostname/api/v1/pods?limit=1000
     body:
       encoding: US-ASCII
       string: ''
@@ -337,7 +337,7 @@ http_interactions:
   recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
 - request:
     method: get
-    uri: https://hostname/api/v1/services?limit=1000
+    uri: https://amazonhostname/api/v1/services?limit=1000
     body:
       encoding: US-ASCII
       string: ''
@@ -374,7 +374,7 @@ http_interactions:
   recorded_at: Wed, 03 Feb 2021 21:11:18 GMT
 - request:
     method: get
-    uri: https://hostname/api/v1/endpoints?limit=1000
+    uri: https://amazonhostname/api/v1/endpoints?limit=1000
     body:
       encoding: US-ASCII
       string: ''
