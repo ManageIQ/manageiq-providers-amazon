@@ -12,8 +12,8 @@ FactoryBot.define do
       zone
     end
     after(:create) do |ems|
-      client_id  = Rails.application.secrets.amazon.try(:[], :client_id) || 'AMAZON_CLIENT_ID'
-      client_key = Rails.application.secrets.amazon.try(:[], :client_secret) || 'AMAZON_CLIENT_SECRET'
+      client_id  = Rails.application.secrets.amazon[:client_id]
+      client_key = Rails.application.secrets.amazon[:client_secret]
 
       cred = {
         :userid   => client_id,
