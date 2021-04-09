@@ -5,6 +5,16 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::StorageCo
     # should be defined by concrete persisters
   end
 
+  def initialize_ebs_storage_inventory_collections
+    add_cloud_volumes
+    add_cloud_volume_snapshots
+  end
+
+  def initialize_s3_storage_inventory_collections
+    add_cloud_object_store_containers
+    add_cloud_object_store_objects
+  end
+
   # ------ IC provider specific definitions -------------------------
 
   def add_cloud_volumes(extra_properties = {})

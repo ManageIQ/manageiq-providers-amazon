@@ -12,9 +12,7 @@ class ManageIQ::Providers::Amazon::Inventory < ManageIQ::Providers::Inventory
   def self.parser_classes_for(ems, target)
     case target
     when InventoryRefresh::TargetCollection
-      [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager,
-       ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager,
-       ManageIQ::Providers::Amazon::Inventory::Parser::StorageManager::Ebs]
+      [ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager]
     else
       super
     end
