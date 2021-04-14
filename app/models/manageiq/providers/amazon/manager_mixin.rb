@@ -59,7 +59,6 @@ module ManageIQ::Providers::Amazon::ManagerMixin
     #     "default" => {
     #       "access_key" => "",
     #       "secret_access_key" => "",
-    #       "proxy_uri => "",
     #       "service_account" => ""
     #     }
     #   }
@@ -68,9 +67,11 @@ module ManageIQ::Providers::Amazon::ManagerMixin
       region           = args["provider_region"]
       default_endpoint = args.dig("authentications", "default")
 
-      access_key, secret_access_key, proxy_uri, service_account = default_endpoint&.values_at(
-        "userid", "password", "proxy_uri", "service_account"
+      access_key, secret_access_key, service_account = default_endpoint&.values_at(
+        "userid", "password", "service_account"
       )
+
+      proxy_uri = http_proxy_uri&.to_s
 
       secret_access_key = ManageIQ::Password.try_decrypt(secret_access_key)
       # Pull out the password from the database if a provider ID is available
