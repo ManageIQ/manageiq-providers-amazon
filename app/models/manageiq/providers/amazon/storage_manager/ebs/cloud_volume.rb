@@ -1,6 +1,9 @@
 class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVolume
   supports :create
   supports :snapshot_create
+  supports :update do
+    unsupported_reason_add(:update, _("The Volume is not connected to an active Provider")) unless ext_management_system
+  end
 
   CLOUD_VOLUME_TYPES = {
     :gp2      => N_('General Purpose SSD (GP2)'),
