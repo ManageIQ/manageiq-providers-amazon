@@ -46,10 +46,6 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
     raise MiqException::MiqVolumeCreateError, e.to_s, e.backtrace
   end
 
-  def validate_update_volume
-    validate_volume
-  end
-
   def raw_update_volume(options)
     with_provider_object do |volume|
       # Update the name in case it was provided in the options.
