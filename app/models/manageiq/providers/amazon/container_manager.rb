@@ -1,3 +1,5 @@
+ManageIQ::Providers::Kubernetes::ContainerManager.include(ActsAsStiLeafClass)
+
 class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kubernetes::ContainerManager
   require_nested :Container
   require_nested :ContainerGroup
