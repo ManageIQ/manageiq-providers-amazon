@@ -11,7 +11,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinatorWorker < MiqWorker
   end
 
   def self.all_valid_ems_in_zone
-    ems_class.where(:zone_id => MiqServer.my_server.zone.id).select { |e| e.enabled && e.authentication_status_ok? }
+    ems_class.where(:zone_id => MiqServer.my_server.zone.id).select { |e| e.enabled && e.provider_authentication_status_ok? }
   end
 
   def self.ems_class
