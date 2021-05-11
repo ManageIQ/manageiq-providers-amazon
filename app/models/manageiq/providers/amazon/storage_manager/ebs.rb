@@ -4,7 +4,6 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::St
   require_nested :Refresher
 
   include ManageIQ::Providers::Amazon::ManagerMixin
-  include ManageIQ::Providers::StorageManager::BlockMixin
 
   delegate :availability_zones,
            :authentication_check,
@@ -28,6 +27,7 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::St
   virtual_delegate :cloud_tenants, :to => :parent_manager, :allow_nil => true
   virtual_delegate :volume_availability_zones, :to => :parent_manager, :allow_nil => true
 
+  supports :block_storage
   supports :cloud_volume
   supports :cloud_volume_create
 
