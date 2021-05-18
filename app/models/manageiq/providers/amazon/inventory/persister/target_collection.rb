@@ -7,10 +7,6 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::TargetCollection < Mana
     true
   end
 
-  def strategy
-    :local_db_find_missing_references
-  end
-
   def initialize_inventory_collections
     initialize_tag_mapper
 
