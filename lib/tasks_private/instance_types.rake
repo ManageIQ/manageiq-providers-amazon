@@ -73,8 +73,35 @@ namespace 'aws:extract' do
       result[:deprecated] = true if instance["generation"] == "previous"
 
       [result[:name], result.sort.to_h]
-    end.sort.to_h
+    end.to_h
 
-    File.write(ManageIQ::Providers::Amazon::Engine.root.join("db/fixtures/aws_instance_types.yml"), results.to_yaml)
+    # Include the "unknown" flavor so that every instance is guaranteed to get a flavor
+    results["unknown"] = {
+      :architecture            => [],
+      :cluster_networking      => nil,
+      :description             => "unknown",
+      :disabled                => true,
+      :discontinued            => true,
+      :ebs_only                => true,
+      :ebs_optimized_available => nil,
+      :enhanced_networking     => nil,
+      :family                  => "unknown",
+      :instance_store_size     => 0,
+      :instance_store_volumes  => 0,
+      :intel_aes_ni            => nil,
+      :intel_avx               => nil,
+      :intel_avx2              => nil,
+      :intel_turbo             => nil,
+      :memory                  => 0,
+      :name                    => "unknown",
+      :network_performance     => :low_to_moderate,
+      :physical_processor      => "",
+      :processor_clock_speed   => "",
+      :vcpu                    => 1,
+      :virtualization_type     => [],
+      :vpc_only                => false
+    }
+
+    File.write(ManageIQ::Providers::Amazon::Engine.root.join("db/fixtures/aws_instance_types.yml"), results.sort.to_h.to_yaml)
   end
 end
