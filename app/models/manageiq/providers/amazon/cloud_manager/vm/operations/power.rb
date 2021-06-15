@@ -1,11 +1,8 @@
 module ManageIQ::Providers::Amazon::CloudManager::Vm::Operations::Power
   extend ActiveSupport::Concern
   included do
+    supports_not :pause, :reason => "Pause Operation is not available for Amazon Web Service (AWS) Instances."
     supports_not :suspend
-  end
-
-  def validate_pause
-    validate_unsupported("Pause Operation")
   end
 
   def raw_start
