@@ -10,7 +10,6 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::St
            :authentication_status,
            :authentications,
            :authentication_for_summary,
-           :zone,
            :connect,
            :verify_credentials,
            :with_provider_connection,

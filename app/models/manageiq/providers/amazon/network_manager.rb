@@ -20,7 +20,6 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
            :authentication_status_ok?,
            :authentications,
            :authentication_for_summary,
-           :zone,
            :connect,
            :verify_credentials,
            :with_provider_connection,
