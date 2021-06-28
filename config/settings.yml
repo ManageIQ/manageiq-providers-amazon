@@ -108,22 +108,24 @@
 :log:
   :level_aws: info
 :workers:
-  :worker_base:
-    :agent_coordinator_worker:
-      :heartbeat_timeout: 30.minutes
-      :poll: 30.seconds
-    :event_catcher:
-      :event_catcher_amazon:
-        :poll: 15.seconds
-      :event_catcher_amazon_eks:
-        :poll: 1.seconds
-    :queue_worker_base:
-      :ems_metrics_collector_worker:
-        :ems_metrics_collector_worker_amazon: {}
-      :ems_refresh_worker:
-        :ems_refresh_worker_amazon: {}
-        :ems_refresh_worker_amazon_eks: {}
-        :ems_refresh_worker_amazon_s3: {}
+  :agent_coordinator_worker:
+    :heartbeat_timeout: 30.minutes
+    :inherits_from: worker_base
+    :poll: 30.seconds
+  :ems_metrics_collector_worker_amazon:
+    :inherits_from: ems_metrics_collector_worker
+  :ems_refresh_worker_amazon:
+    :inherits_from: ems_refresh_worker
+  :ems_refresh_worker_amazon_eks:
+    :inherits_from: ems_refresh_worker
+  :ems_refresh_worker_amazon_s3:
+    :inherits_from: ems_refresh_worker
+  :event_catcher_amazon:
+    :inherits_from: event_catcher
+    :poll: 15.seconds
+  :event_catcher_amazon_eks:
+    :inherits_from: event_catcher
+    :poll: 1.seconds
 :prototype:
   :amazon:
     :s3: false
