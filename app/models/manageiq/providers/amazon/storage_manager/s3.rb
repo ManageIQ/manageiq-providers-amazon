@@ -13,7 +13,6 @@ class ManageIQ::Providers::Amazon::StorageManager::S3 < ManageIQ::Providers::Sto
            :authentication_status,
            :authentications,
            :authentication_for_summary,
-           :zone,
            :verify_credentials,
            :address,
            :ip_address,
