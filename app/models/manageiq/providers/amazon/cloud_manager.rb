@@ -230,8 +230,9 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
                           :component    => 'text-field',
                           :name         => 'endpoints.smartstate_docker',
                           :id           => 'endpoints.smartstate_docker',
-                          :type         => 'hidden',
-                          :initialValue => {},
+                          :hideField    => true,
+                          :label        => 'smartstate_docker',
+                          :initialValue => '',
                         },
                         {
                           :component  => "text-field",
