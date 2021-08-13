@@ -75,6 +75,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   supports :assume_role
   supports :auth_key_pair_create
   supports :label_mapping
+  supports :storage_manager
 
   def ensure_managers
     build_network_manager unless network_manager
@@ -269,6 +270,10 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
 
   def allow_targeted_refresh?
     true
+  end
+
+  def block_storage_manager
+    ebs_storage_manager
   end
 
   # @param [ManageIQ::Providers::Amazon::CloudManager::OrchestrationTemplate] template
