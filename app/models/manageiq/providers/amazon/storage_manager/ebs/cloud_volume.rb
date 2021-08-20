@@ -2,7 +2,15 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
   supports :create
   supports :snapshot_create
   supports :update do
-    unsupported_reason_add(:update, _("The Volume is not connected to an active Provider")) unless ext_management_system
+    unsupported_reason_add(:update, _("the volume is not connected to an active provider")) unless ext_management_system
+  end
+  supports :attach_volume do
+    unsupported_reason_add(:attach_volume, _("the volume is not connected to an active provider")) unless ext_management_system
+    unsupported_reason_add(:attach_volume, _("the volume status is '%{status}' but should be 'available'"), {:status => status}) unless status == "available"
+  end
+  supports :detach_volume do
+    unsupported_reason_add(:detach_volume, _("the volume is not connected to an active provider")) unless ext_management_system
+    unsupported_reason_add(:detach_volume, _("the volume status is '%{status}' but should be 'in-use'"), {:status => status}) unless status == "in-use"
   end
 
   CLOUD_VOLUME_TYPES = {
@@ -76,18 +84,10 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
     raise MiqException::MiqVolumeDeleteError, e.to_s, e.backtrace
   end
 
-  def validate_attach_volume
-    validate_volume_available
-  end
-
   def raw_attach_volume(server_ems_ref, device = nil)
     with_provider_object do |vol|
       vol.attach_to_instance(:instance_id => server_ems_ref, :device => device)
     end
-  end
-
-  def validate_detach_volume
-    validate_volume_in_use
   end
 
   def raw_detach_volume(server_ems_ref)
