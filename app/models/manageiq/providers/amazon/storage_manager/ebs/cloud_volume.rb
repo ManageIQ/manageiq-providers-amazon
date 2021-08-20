@@ -1,5 +1,9 @@
 class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVolume
   supports :create
+  supports :delete_volume do
+    unsupported_reason_add(:delete_volume, _("the volume is not connected to an active Provider")) unless ext_management_system
+    unsupported_reason_add(:delete_volume, _("cannot delete volume that is in use.")) if status == "in-use"
+  end
   supports :snapshot_create
   supports :update do
     unsupported_reason_add(:update, _("the volume is not connected to an active provider")) unless ext_management_system
@@ -66,15 +70,6 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
   rescue => e
     _log.error "volume=[#{name}], error: #{e}"
     raise MiqException::MiqVolumeUpdateError, e.to_s, e.backtrace
-  end
-
-  def validate_delete_volume
-    msg = validate_volume
-    return {:available => msg[:available], :message => msg[:message]} unless msg[:available]
-    if with_provider_object(&:state) == "in-use"
-      return validation_failed("Create Volume", "Can't delete volume that is in use.")
-    end
-    {:available => true, :message => nil}
   end
 
   def raw_delete_volume
