@@ -21,6 +21,10 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
 
   def cloud_databases
     hash_collection.new(aws_rds.client.describe_db_instances.flat_map(&:db_instances))
+  rescue
+    # RDS is an optional collection and failures shouldn't prevent the rest of the refresh
+    # from succeeding
+    []
   end
 
   def private_images
@@ -64,6 +68,10 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
 
   def stacks
     hash_collection.new(aws_cloud_formation.client.describe_stacks.flat_map(&:stacks))
+  rescue
+    # CloudFormation is an optional service and failures shouldn't prevent the rest
+    # of the refresh from succeeding
+    []
   end
 
   def stack_resources(stack_name)
@@ -76,10 +84,18 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
     end
 
     hash_collection.new(stack_resources || [])
+  rescue
+    # CloudFormation is an optional service and failures shouldn't prevent the rest
+    # of the refresh from succeeding
+    []
   end
 
   def stack_template(stack_name)
     aws_cloud_formation.client.get_template(:stack_name => stack_name).template_body
+  rescue
+    # CloudFormation is an optional service and failures shouldn't prevent the rest
+    # of the refresh from succeeding
+    []
   end
 
   def service_offerings
