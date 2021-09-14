@@ -215,12 +215,29 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       persister.cloud_databases.build(
         :ems_ref               => cloud_database["dbi_resource_id"],
         :name                  => cloud_database["db_instance_identifier"],
-        :status                => cloud_database["db_instance_status"],
+        :status                => normalize_db_status(cloud_database["db_instance_status"]),
         :db_engine             => "#{cloud_database["engine"]} #{cloud_database["engine_version"]}",
         :used_storage          => cloud_database["allocated_storage"]&.gigabytes,
         :max_storage           => cloud_database["max_allocated_storage"]&.gigabytes,
         :cloud_database_flavor => persister.cloud_database_flavors.lazy_find(cloud_database["db_instance_class"])
       )
+    end
+  end
+
+  def normalize_db_status(raw_status)
+    case raw_status
+    when "available", "backing-up"
+      "available"
+    when "creating", "starting"
+      "initializing"
+    when "deleting", "failed", "stopped", "stopping", "rebooting", "modifying",
+         "upgrading", "maintenance", "renaming", "restore-error", "incompatible-network",
+         "insufficient-capacity", "resetting-master-credentials", "moving-to-vpc"
+      "unavailable"
+    when "storage-full", "incompatible-option-group", "incompatible-parameters"
+      "unhealthy"
+    else
+      "unknown"
     end
   end
 
