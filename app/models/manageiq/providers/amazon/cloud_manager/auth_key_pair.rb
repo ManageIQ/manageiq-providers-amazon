@@ -17,16 +17,6 @@ class ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair < ManageIQ::Provide
     raise MiqException::Error, err.to_s, err.backtrace
   end
 
-  def self.validate_create_key_pair(ext_management_system, _options = {})
-    if ext_management_system
-      {:available => true, :message => nil}
-    else
-      {:available => false,
-       :message   => _("The Keypair is not connected to an active %{table}") %
-         {:table => ui_lookup(:table => "ext_management_system")}}
-    end
-  end
-
   def raw_delete_key_pair
     ec2 = resource.connect
     kp = ec2.key_pair(name)
