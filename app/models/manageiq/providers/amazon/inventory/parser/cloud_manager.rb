@@ -66,7 +66,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       image_hardware(persister_image, image)
       image_operating_system(persister_image, image)
       vm_and_template_labels(persister_image, image["tags"] || [])
-      vm_and_template_taggings(persister_image, map_labels("Image", image["tags"] || []))
+      vm_and_template_taggings(persister_image, map_labels("ImageAmazon", image["tags"] || []))
     end
   end
 
@@ -280,7 +280,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       instance_hardware(persister_instance, instance, flavor)
       instance_operating_system(persister_instance, instance)
       vm_and_template_labels(persister_instance, instance["tags"] || [])
-      vm_and_template_taggings(persister_instance, map_labels("Vm", instance["tags"] || []))
+      vm_and_template_taggings(persister_instance, map_labels("VmAmazon", instance["tags"] || []))
     end
   end
 
