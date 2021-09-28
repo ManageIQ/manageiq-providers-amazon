@@ -65,15 +65,11 @@ module AwsRefresherSpecCounts
     # Custom attributes of all Vms and Images
     custom_attributes_count = (vms_tags + images_tags).size
 
-    vms_mappings = ProviderTagMapping.where(:labeled_resource_type => nil).or(
-      ProviderTagMapping.where(:labeled_resource_type => "Vm")
-    ).pluck(:label_name)
+    vms_mappings = ProviderTagMapping.where(:labeled_resource_type => ["_all_entities_", "VmAmazon"]).pluck(:label_name)
     # Correct count of mapped tags for Vms
     vms_tags_count = vms_tags.select { |x| vms_mappings.include?(x["key"]) && x["value"].present? }.count
 
-    images_mappings = ProviderTagMapping.where(:labeled_resource_type => nil).or(
-      ProviderTagMapping.where(:labeled_resource_type => "Image")
-    ).pluck(:label_name)
+    images_mappings = ProviderTagMapping.where(:labeled_resource_type => ["_all_entities_", "ImageAmazon"]).pluck(:label_name)
     # Correct count of mapped tags for Images
     images_tags_count = images_tags.select { |x| images_mappings.include?(x["key"]) && x["value"].present? }.count
 
