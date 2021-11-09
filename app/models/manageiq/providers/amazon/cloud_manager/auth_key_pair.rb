@@ -1,6 +1,7 @@
 class ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair < ManageIQ::Providers::CloudManager::AuthKeyPair
   AwsKeyPair = Struct.new(:name, :key_name, :fingerprint, :private_key)
 
+  supports :create
   supports :delete
 
   def self.raw_create_key_pair(ext_management_system, create_options)
