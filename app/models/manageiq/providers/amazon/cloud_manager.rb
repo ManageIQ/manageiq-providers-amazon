@@ -77,7 +77,6 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   supports :provisioning
   supports :regions
   supports :assume_role
-  supports :auth_key_pair_create
   supports :label_mapping
   supports :storage_manager
 
