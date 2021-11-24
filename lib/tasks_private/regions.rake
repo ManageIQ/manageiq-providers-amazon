@@ -13,7 +13,7 @@ namespace 'aws:extract' do
 
     # path valid for aws-sdk v3 gem's source
     uri = URI('https://raw.githubusercontent.com/aws/aws-sdk-ruby/master/gems/aws-partitions/partitions.json')
-    out_file = engine_root.join('db/fixtures/aws_regions.yml')
+    out_file = engine_root.join('config/regions.yml')
     service_name = 'ec2'
 
     default_partition_name = 'aws'

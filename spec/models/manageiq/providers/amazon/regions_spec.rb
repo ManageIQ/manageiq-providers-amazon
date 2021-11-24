@@ -24,7 +24,7 @@ describe ManageIQ::Providers::Amazon::Regions do
 
   context "disable regions via Settings" do
     it "contains gov_cloud without it being disabled" do
-      allow(Settings.ems.ems_amazon).to receive(:disabled_regions).and_return([])
+      stub_settings(:ems => {:ems_amazon => {:disabled_regions => []}})
       expect(described_class.names).to include("us-gov-west-1")
     end
 
@@ -34,7 +34,7 @@ describe ManageIQ::Providers::Amazon::Regions do
     end
 
     it "does not contain some regions that are disabled" do
-      allow(Settings.ems.ems_amazon).to receive(:disabled_regions).and_return(['us-gov-west-1'])
+      stub_settings(:ems => {:ems_amazon => {:disabled_regions => ['us-gov-west-1']}})
       expect(described_class.names).not_to include('us-gov-west-1')
     end
   end
@@ -47,7 +47,7 @@ describe ManageIQ::Providers::Amazon::Regions do
 
       it "returns standard regions" do
         stub_settings(settings)
-        expect(described_class.names).to eql(described_class::REGIONS.keys)
+        expect(described_class.names).to eql(described_class.send(:from_file).keys)
       end
     end
 
