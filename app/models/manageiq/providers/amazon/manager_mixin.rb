@@ -6,7 +6,7 @@ module ManageIQ::Providers::Amazon::ManagerMixin
   end
 
   def description
-    ManageIQ::Providers::Amazon::Regions.find_by_name(provider_region)[:description]
+    ManageIQ::Providers::Amazon::Regions.regions.dig(provider_region, :description)
   end
 
   #
