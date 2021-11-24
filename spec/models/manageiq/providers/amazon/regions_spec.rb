@@ -2,11 +2,20 @@ describe ManageIQ::Providers::Amazon::Regions do
   it "has all the regions" do
     ems = FactoryBot.create(:ems_amazon_with_vcr_authentication)
 
-    # TODO: use `slice` on 2.5
-    current_regions = described_class.regions.select do |name, _config|
-      !described_class::SPECIAL_REGIONS.include?(name)
+    # https://github.com/aws/aws-sdk-ruby/blob/5fe5795e8910bb667996dfc75e4f16b7e69e3980/gems/aws-partitions/partitions.json#L11
+    ordinary_regions_regexp = /^(us|eu|ap|sa|ca)\-\w+\-\d+$/
+
+    # https://docs.aws.amazon.com/general/latest/gr/rande.html - see quotes below
+    atypical_regions = [
+      'ap-northeast-3', # "To request access to the Asia Pacific (Osaka-Local) Region, contact..."
+      'ap-east-1',      # "you must manually enable before you can use..."
+      'eu-south-1'
+    ]
+
+    current_regions = described_class.regions.reject do |name, _config|
+      atypical_regions.include?(name) || name !~ ordinary_regions_regexp
     end.map do |_name, config|
-      { :region_name => config[:name], :endpoint => config[:hostname] }
+      {:region_name => config[:name], :endpoint => config[:hostname]}
     end
 
     online_regions = VCR.use_cassette(described_class.name.underscore) do
