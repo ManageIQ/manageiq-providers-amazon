@@ -56,7 +56,7 @@ describe ManageIQ::Providers::Amazon::Regions do
 
       it "returns standard regions" do
         stub_settings(settings)
-        expect(described_class.names).to eql(described_class.send(:from_file).keys)
+        expect(described_class.names).to eql(described_class.send(:from_source).keys)
       end
     end
 
