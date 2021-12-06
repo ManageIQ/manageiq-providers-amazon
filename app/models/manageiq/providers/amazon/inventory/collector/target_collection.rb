@@ -8,14 +8,6 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     target.manager_refs_by_association_reset
   end
 
-  def references(collection)
-    target.manager_refs_by_association.try(:[], collection).try(:[], :ems_ref).try(:to_a).try(:compact) || []
-  end
-
-  def name_references(collection)
-    target.manager_refs_by_association.try(:[], collection).try(:[], :name).try(:to_a).try(:compact) || []
-  end
-
   def flavors
     return @flavors_hashes if @flavors_hashes
 
@@ -48,9 +40,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
   end
 
   def key_pairs
-    return [] if name_references(:key_pairs).blank?
+    return [] if references(:key_pairs, :manager_ref => :name).blank?
 
-    multi_query(name_references(:key_pairs)) do |refs|
+    multi_query(references(:key_pairs, :manager_ref => :name)) do |refs|
       hash_collection.new(
         aws_ec2.client.describe_key_pairs(
           :filters => [{:name => 'key-name', :values => refs}]
@@ -250,13 +242,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     target.targets.each do |t|
       case t
       when Vm
-        parse_vm_target!(t)
+        add_target!(:vms, t.ems_ref)
       end
     end
-  end
-
-  def parse_vm_target!(t)
-    add_simple_target!(:vms, t.ems_ref)
   end
 
   def infer_related_ems_refs!
@@ -281,12 +269,12 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       stack      = vm.orchestration_stack
       all_stacks = ([stack] + (stack.try(:ancestors) || [])).compact
 
-      all_stacks.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:orchestration_stacks, ems_ref) }
-      vm.cloud_subnets.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:cloud_subnets, ems_ref) }
-      vm.floating_ips.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:floating_ips, ems_ref) }
+      all_stacks.collect(&:ems_ref).compact.each { |ems_ref| add_target!(:orchestration_stacks, ems_ref) }
+      vm.cloud_subnets.collect(&:ems_ref).compact.each { |ems_ref| add_target!(:cloud_subnets, ems_ref) }
+      vm.floating_ips.collect(&:ems_ref).compact.each { |ems_ref| add_target!(:floating_ips, ems_ref) }
       vm.network_ports.collect(&:ems_ref).compact.each do |ems_ref|
         # Add only real network ports, starting with "eni-"
-        add_simple_target!(:network_ports, ems_ref) if ems_ref.start_with?("eni-")
+        add_target!(:network_ports, ems_ref) if ems_ref.start_with?("eni-")
       end
       vm.key_pairs.collect(&:name).compact.each do |name|
         target.add_target(:association => :key_pairs, :manager_ref => {:name => name})
@@ -300,7 +288,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
                                        .where(:ems_ref => references(:service_offerings))
                                        .includes(:service_parameters_sets)
     changed_service_offerings.each do |service_offering|
-      service_offering.service_parameters_sets.each { |x| add_simple_target!(:service_parameters_sets, x.ems_ref) }
+      service_offering.service_parameters_sets.each { |x| add_target!(:service_parameters_sets, x.ems_ref) }
     end
   end
 
@@ -308,28 +296,28 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
     # TODO(lsmola) should we filter the VMs by only VMs we want to do full refresh for? Some of them, like FloatingIps
     # need to be scanned for all, due to the fake FloatingIps we create.
     instances.each do |vm|
-      add_simple_target!(:miq_templates, vm["image_id"])
-      add_simple_target!(:availability_zones, vm.fetch_path('placement', 'availability_zone'))
-      add_simple_target!(:orchestration_stacks, get_from_tags(vm, "aws:cloudformation:stack-id"))
+      add_target!(:miq_templates, vm["image_id"])
+      add_target!(:availability_zones, vm.fetch_path('placement', 'availability_zone'))
+      add_target!(:orchestration_stacks, get_from_tags(vm, "aws:cloudformation:stack-id"))
       target.add_target(:association => :key_pairs, :manager_ref => {:name => vm["key_name"]})
 
       vm["network_interfaces"].each do |network_interface|
-        add_simple_target!(:network_ports, network_interface["network_interface_id"])
-        add_simple_target!(:cloud_subnets, network_interface["subnet_id"])
-        add_simple_target!(:cloud_networks, network_interface["vpc_id"])
+        add_target!(:network_ports, network_interface["network_interface_id"])
+        add_target!(:cloud_subnets, network_interface["subnet_id"])
+        add_target!(:cloud_networks, network_interface["vpc_id"])
       end
 
       vm["security_groups"].each do |security_group|
-        add_simple_target!(:security_groups, security_group["group_id"])
+        add_target!(:security_groups, security_group["group_id"])
       end
 
       vm["block_device_mappings"].each do |cloud_volume|
-        add_simple_target!(:cloud_volumes, cloud_volume.fetch_path("ebs", "volume_id"))
+        add_target!(:cloud_volumes, cloud_volume.fetch_path("ebs", "volume_id"))
       end
 
       # EC2 classic floating ips
       if vm["network_interfaces"].blank? && vm['public_ip_address'].present?
-        add_simple_target!(:floating_ips, vm['public_ip_address'])
+        add_target!(:floating_ips, vm['public_ip_address'])
       end
     end
 
@@ -344,15 +332,9 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::TargetCollection < Mana
       network_port['private_ip_addresses'].each do |private_ip_address|
         floating_ip_id = (private_ip_address.fetch_path("association", "allocation_id") ||
           private_ip_address.fetch_path("association", "public_ip"))
-        add_simple_target!(:floating_ips, floating_ip_id)
+        add_target!(:floating_ips, floating_ip_id)
       end
     end
-  end
-
-  def add_simple_target!(association, ems_ref)
-    return if ems_ref.blank?
-
-    target.add_target(:association => association, :manager_ref => {:ems_ref => ems_ref})
   end
 
   def get_from_tags(resource, tag_name)
