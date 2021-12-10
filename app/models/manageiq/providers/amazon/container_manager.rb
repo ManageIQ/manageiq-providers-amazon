@@ -9,6 +9,8 @@ class ManageIQ::Providers::Amazon::ContainerManager < ManageIQ::Providers::Kuber
   require_nested :Refresher
   require_nested :RefreshWorker
 
+  supports :create
+
   def self.ems_type
     @ems_type ||= "eks".freeze
   end
