@@ -73,6 +73,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
   before_update :ensure_managers_zone_and_provider_region
 
   supports :catalog
+  supports :create
   supports :metrics
   supports :provisioning
   supports :regions
