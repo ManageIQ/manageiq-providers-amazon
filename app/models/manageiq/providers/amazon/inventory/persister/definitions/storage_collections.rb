@@ -8,56 +8,48 @@ module ManageIQ::Providers::Amazon::Inventory::Persister::Definitions::StorageCo
   # ------ IC provider specific definitions -------------------------
 
   def add_cloud_volumes(extra_properties = {})
-    add_collection(storage, :cloud_volumes, extra_properties) do |builder|
+    add_ebs_collection(:cloud_volumes, extra_properties) do |builder|
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume)
-      builder.add_properties(:parent => manager.ebs_storage_manager) if targeted?
-
-      builder.add_default_values(
-        :ems_id => block_storage_manager_id
-      )
     end
   end
 
   def add_cloud_volume_snapshots(extra_properties = {})
-    add_collection(storage, :cloud_volume_snapshots, extra_properties) do |builder|
+    add_ebs_collection(:cloud_volume_snapshots, extra_properties) do |builder|
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot)
-      builder.add_properties(:parent => manager.ebs_storage_manager) if targeted?
-
-      builder.add_default_values(
-        :ems_id => block_storage_manager_id
-      )
     end
   end
 
   def add_cloud_object_store_containers(extra_properties = {})
-    add_collection(storage, :cloud_object_store_containers, extra_properties) do |builder|
+    add_s3_collection(:cloud_object_store_containers, extra_properties) do |builder|
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer)
-      builder.add_properties(:parent => manager.s3_storage_manager) if targeted?
-
-      builder.add_default_values(
-        :ems_id => object_storage_manager_id
-      )
     end
   end
 
   def add_cloud_object_store_objects(extra_properties = {})
-    add_collection(storage, :cloud_object_store_objects, extra_properties) do |builder|
+    add_s3_collection(:cloud_object_store_objects, extra_properties) do |builder|
       builder.add_properties(:model_class => ::ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreObject)
-      builder.add_properties(:parent => manager.s3_storage_manager) if targeted?
-
-      builder.add_default_values(
-        :ems_id => object_storage_manager_id
-      )
     end
   end
 
   protected
 
-  def block_storage_manager_id
-    manager.try(:ebs_storage_manager).try(:id) || manager.id
+  def ebs_manager
+    manager.kind_of?(ManageIQ::Providers::Amazon::StorageManager::Ebs) ? manager : manager.ebs_storage_manager
   end
 
-  def object_storage_manager_id
-    manager.try(:s3_storage_manager).try(:id) || manager.id
+  def s3_manager
+    manager.kind_of?(ManageIQ::Providers::Amazon::StorageManager::S3) ? manager : manager.s3_storage_manager
+  end
+
+  def add_ebs_collection(collection_name, extra_properties = {}, settings = {}, &block)
+    settings[:parent] ||= ebs_manager
+
+    add_collection(storage, collection_name, extra_properties, settings, &block)
+  end
+
+  def add_s3_collection(collection_name, extra_properties = {}, settings = {}, &block)
+    settings[:parent] ||= s3_manager
+
+    add_collection(storage, collection_name, extra_properties, settings, &block)
   end
 end

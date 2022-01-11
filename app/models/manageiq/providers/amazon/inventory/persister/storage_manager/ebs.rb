@@ -20,9 +20,7 @@ class ManageIQ::Providers::Amazon::Inventory::Persister::StorageManager::Ebs < M
        vms
        disks).each do |name|
 
-      add_collection(cloud, name) do |builder|
-        builder.add_properties(:parent => manager.parent_manager)
-
+      add_cloud_collection(name) do |builder|
         builder.add_properties(:update_only => true) if name == :disks
         builder.add_properties(:strategy => :local_db_cache_all) unless name == :disks
       end
