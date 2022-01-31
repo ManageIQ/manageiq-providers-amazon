@@ -27,8 +27,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
           :foreign_key => :parent_ems_id,
           :class_name  => "ManageIQ::Providers::Amazon::NetworkManager",
           :autosave    => true,
-          :dependent   => :destroy,
-          :inverse_of  => :parent_manager
+          :dependent   => :destroy
 
   has_many :storage_managers,
            :foreign_key => :parent_ems_id,
