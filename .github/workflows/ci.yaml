@@ -22,9 +22,12 @@ jobs:
         - 5432:5432
     env:
       PGHOST: localhost
+      PGPASSWORD: smartvm
       CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     steps:
     - uses: actions/checkout@v2
+    - name: Set up system
+      run: bin/before_install
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
