@@ -1,12 +1,6 @@
 #!/bin/bash
 
-if [ -n "$CI" ]; then
-  echo "== Installing system packages =="
-  sudo apt-get update
-  sudo apt-get install -y libcurl4-openssl-dev
-  echo
-fi
-
+# Ensure spec/manageiq is set up
 gem_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." &>/dev/null && pwd)"
 spec_manageiq="$gem_root/spec/manageiq"
 
@@ -18,3 +12,7 @@ elif [ ! -d "$spec_manageiq" ]; then
   echo "== Cloning manageiq sample app =="
   git clone https://github.com/ManageIQ/manageiq.git --branch master --depth 1 "$spec_manageiq"
 fi
+echo
+
+# Run core's before_install
+$spec_manageiq/bin/before_install
