@@ -277,18 +277,12 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
           :validate  => [{:type => 'min-number-value', :value => 0, :message => _('Number of IOPS Must be greater than or equal to 0')}],
         },
         {
-          :component    => 'select',
-          :name         => 'cloud_volume_snapshot_id',
-          :id           => 'cloud_volume_snapshot_id',
-          :isDisabled   => !!id,
-          :label        => _('Base Snapshot'),
-          :includeEmpty => true,
-          :options      => ext_management_system.cloud_volume_snapshots.map do |cvs|
-            {
-              :value => cvs.id,
-              :label => cvs.name,
-            }
-          end
+          :component  => 'select',
+          :name       => 'cloud_volume_snapshot_id',
+          :id         => 'cloud_volume_snapshot_id',
+          :isDisabled => !!id,
+          :label      => _('Base Snapshot'),
+          :options    => base_snapshot.present? ? [{:value => base_snapshot.id, :label => base_snapshot.name}] : [{:value => nil, :label => _('Choose')}]
         },
         {
           :component  => 'switch',
