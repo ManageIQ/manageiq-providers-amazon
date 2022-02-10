@@ -113,18 +113,10 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
           :isRequired => true,
           :validate   => [{:type => 'required'}, {:type => 'min-number-value', :value => 0, :message => _('Size must be greater than or equal to 0')}],
           :condition  => {
-            :or => [
-              {
-                :not => {
-                  :when => 'volume_type',
-                  :is   => 'standard',
-                },
-              },
-              {
-                :when => 'edit',
-                :is   => false,
-              },
-            ],
+            :not => {
+              :when => 'volume_type',
+              :is   => 'standard',
+            },
           },
         },
         {
@@ -141,10 +133,6 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
           end,
           :isRequired   => true,
           :validate     => [{:type => 'required'}],
-          :condition    => {
-            :when => 'edit',
-            :is   => false,
-          },
         },
         {
           :component    => 'select',
@@ -163,25 +151,17 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
             # are not supported by DDF, but resolveProps allows us to overwrite these options before
             # rendering.
             if value == :standard
-              option[:condition] = {
-                :or => [
-                  {
-                    :when => 'edit',
-                    :is   => false,
-                  },
-                  {
-                    :when => 'volume_type',
-                    :is   => 'standard',
-                  }
-                ]
-              }
+              option[:condition] =
+                {
+                  :when => 'volume_type',
+                  :is   => 'standard',
+                }
             end
 
             option
           end,
           :isRequired   => true,
           :validate     => [{:type => 'required'}],
-          :initialValue => 'gp2',
         },
         {
           :component => 'text-field',
@@ -201,10 +181,6 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
           :id           => 'cloud_volume_snapshot_id',
           :label        => _('Base Snapshot'),
           :includeEmpty => true,
-          :condition    => {
-            :when => 'edit',
-            :is   => false,
-          },
           :options      => ems.cloud_volume_snapshots.map do |cvs|
             {
               :value => cvs.id,
@@ -220,10 +196,103 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
           :onText     => _('Yes'),
           :offText    => _('No'),
           :isRequired => true,
+        }
+      ]
+    }
+  end
+
+  def params_for_update
+    {
+      :fields => [
+        {
+          :component  => 'text-field',
+          :name       => 'size',
+          :id         => 'size',
+          :label      => _('Size (in bytes)'),
+          :type       => 'number',
+          :step       => 1.gigabytes,
+          :isDisabled => !!id,
+          :isRequired => true,
+          :validate   => [{:type => 'required'}, {:type => 'min-number-value', :value => 0, :message => _('Size must be greater than or equal to 0')}],
           :condition  => {
-            :when => 'edit',
-            :is   => false,
+            :not => {
+              :when => 'volume_type',
+              :is   => 'standard',
+            },
           },
+        },
+        {
+          :component  => 'select',
+          :name       => 'availability_zone_id',
+          :id         => 'availability_zone_id',
+          :label      => _('Availability Zone'),
+          :isDisabled => !!id,
+          :options    => ext_management_system.availability_zones.map do |az|
+            {
+              :label => az.name,
+              :value => az.id,
+            }
+          end,
+          :isRequired => true,
+          :validate   => [{:type => 'required'}],
+        },
+        {
+          :component  => 'select',
+          :name       => 'volume_type',
+          :id         => 'volume_type',
+          :label      => _('Cloud Volume Type'),
+          :isDisabled => !!id,
+          :options    => CLOUD_VOLUME_TYPES.map do |value, label|
+            option = {
+              :label => _(label),
+              :value => value,
+            }
+
+            # The standard (magnetic) volume_type is a special case. I can only be set upon creation
+            # or when editing an entity that has its volume_type set to standard. Conditional options
+            # are not supported by DDF, but resolveProps allows us to overwrite these options before
+            # rendering.
+            if value == :standard
+              option[:condition] =
+                {
+                  :when => 'volume_type',
+                  :is   => 'standard',
+                }
+            end
+            option
+          end,
+          :isRequired => true,
+          :validate   => [{:type => 'required'}],
+        },
+        {
+          :component => 'text-field',
+          :name      => 'iops',
+          :id        => 'iops',
+          :label     => _('IOPS'),
+          :type      => 'number',
+          :condition => {
+            :when => 'volume_type',
+            :is   => 'io1',
+          },
+          :validate  => [{:type => 'min-number-value', :value => 0, :message => _('Number of IOPS Must be greater than or equal to 0')}],
+        },
+        {
+          :component  => 'select',
+          :name       => 'cloud_volume_snapshot_id',
+          :id         => 'cloud_volume_snapshot_id',
+          :isDisabled => !!id,
+          :label      => _('Base Snapshot'),
+          :options    => base_snapshot.present? ? [{:value => base_snapshot.id, :label => base_snapshot.name}] : [{:value => nil, :label => _('Choose')}]
+        },
+        {
+          :component  => 'switch',
+          :name       => 'encrypted',
+          :id         => 'encrypted',
+          :isDisabled => !!id,
+          :label      => _('Encrypted'),
+          :onText     => _('Yes'),
+          :offText    => _('No'),
+          :isRequired => true,
         }
       ]
     }
