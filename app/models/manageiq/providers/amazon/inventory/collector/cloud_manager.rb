@@ -95,7 +95,7 @@ class ManageIQ::Providers::Amazon::Inventory::Collector::CloudManager < ManageIQ
   rescue
     # CloudFormation is an optional service and failures shouldn't prevent the rest
     # of the refresh from succeeding
-    []
+    nil
   end
 
   def service_offerings
