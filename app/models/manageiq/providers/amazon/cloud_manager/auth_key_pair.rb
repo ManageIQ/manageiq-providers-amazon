@@ -1,6 +1,4 @@
 class ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair < ManageIQ::Providers::CloudManager::AuthKeyPair
-  AwsKeyPair = Struct.new(:name, :key_name, :fingerprint, :private_key)
-
   supports :create
   supports :delete
 
@@ -12,7 +10,7 @@ class ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair < ManageIQ::Provide
            ec2.import_key_pair(:key_name => create_options["name"], :public_key_material => create_options["public_key"])
          end
 
-    AwsKeyPair.new(kp.name, kp.name, kp.key_fingerprint, kp.try(:key_material))
+    {:name => kp.name, :fingerprint => kp.key_fingerprint, :auth_key => kp.try(:key_material)}
   rescue => err
     _log.error "keypair=[#{name}], error: #{err}"
     raise MiqException::Error, err.to_s, err.backtrace
