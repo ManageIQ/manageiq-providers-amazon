@@ -4,10 +4,10 @@ class ManageIQ::Providers::Amazon::CloudManager::AuthKeyPair < ManageIQ::Provide
 
   def self.raw_create_key_pair(ext_management_system, create_options)
     ec2 = ext_management_system.connect
-    kp = if create_options[:public_key].blank?
-           ec2.create_key_pair(:key_name => create_options[:name])
+    kp = if create_options["public_key"].blank?
+           ec2.create_key_pair(:key_name => create_options["name"])
          else
-           ec2.import_key_pair(:key_name => create_options[:name], :public_key_material => create_options[:public_key])
+           ec2.import_key_pair(:key_name => create_options["name"], :public_key_material => create_options["public_key"])
          end
 
     {:name => kp.name, :fingerprint => kp.key_fingerprint, :auth_key => kp.try(:key_material)}
