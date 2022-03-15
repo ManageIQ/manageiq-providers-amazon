@@ -63,15 +63,6 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     end
   end
 
-  def table_counts_from_api
-    counts                           = super
-    counts[:flavor]                  = counts[:flavor] + 5 # Graph refresh collect all flavors, not filtering them by known_flavors
-    counts[:service_instances]       = 3
-    counts[:service_offerings]       = 3
-    counts[:service_parameters_sets] = 5
-    counts
-  end
-
   def new_amazon_ems
     FactoryBot.create(:ems_amazon_with_vcr_authentication, :provider_region => 'eu-central-1')
   end
