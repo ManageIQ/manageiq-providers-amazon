@@ -324,13 +324,4 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     assert_common
     assert_mapped_tags_on_template
   end
-
-  def table_counts_from_api
-    counts                           = super
-    counts[:flavor]                  = counts[:flavor] + 5 # Graph refresh collect all flavors, not filtering them by known_flavors
-    counts[:service_instances]       = 3
-    counts[:service_offerings]       = 3
-    counts[:service_parameters_sets] = 5
-    counts
-  end
 end
