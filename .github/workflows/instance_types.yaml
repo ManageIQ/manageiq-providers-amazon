@@ -1,0 +1,26 @@
+name: Update Instance Types
+
+on:
+  schedule:
+  - cron: '0 0 * * 0'
+
+jobs:
+  update-instance-types:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up system
+      run: bin/before_install
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+        bundler-cache: true
+    - name: Run instance_types rake task
+      run: bundle exec rake aws:extract:instance_types
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v4
+      with:
+        add-paths: db/fixtures/aws_instance_types.yml
+        commit-message: Update AWS instance_types
+        title: Update AWS instance_types
