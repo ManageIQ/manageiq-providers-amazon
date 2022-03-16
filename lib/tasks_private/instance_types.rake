@@ -16,7 +16,7 @@ namespace 'aws:extract' do
 
     def instances
       require 'open-uri'
-      URI.open("https://raw.githubusercontent.com/powdahound/ec2instances.info/master/www/instances.json") do |io|
+      URI.open("https://instances.vantage.sh/instances.json") do |io|
         JSON.parse(io.read)
       end
     end
