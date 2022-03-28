@@ -24,6 +24,33 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer
     end
   end
 
+  def self.params_for_create(_ems)
+    {
+      :fields => [
+        {
+          :component  => 'text-field',
+          :name       => 'name',
+          :id         => 'name',
+          :label      => _('Container Name'),
+          :isRequired => true,
+          :validate   => [{:type => 'required'}],
+        },
+        {
+          :component    => 'select',
+          :name         => 'provider_region',
+          :id           => 'provider_region',
+          :label        => _('Region'),
+          :isRequired   => true,
+          :includeEmpty => true,
+          :validate     => [{:type => 'required'}],
+          :options      => ManageIQ::Providers::Amazon::Regions.all.map do |region|
+            {:label => region[:description], :value => region[:name]}
+          end
+        }
+      ]
+    }
+  end
+
   def provider_object(connection = nil)
     connect(connection).bucket(ems_ref)
   end
@@ -45,11 +72,8 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer
 
   def self.raw_cloud_object_store_container_create(ext_management_system, options)
     # frontend stores name as :name, but amazon expects it as :bucket
-    options[:bucket] = options.delete(:name) unless options[:name].nil?
-
-    region = options[:create_bucket_configuration][:location_constraint]
-    connection = ext_management_system.connect(:region => region)
-    bucket = connection.create_bucket(options)
+    connection = ext_management_system.connect(:region => options[:region])
+    bucket = connection.create_bucket(:bucket => options[:name], :create_bucket_configuration => {:location_constraint => options[:region]})
     {
       :key                   => bucket.name,
       :ems_ref               => bucket.name,
