@@ -1,4 +1,6 @@
 class ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer < ::CloudObjectStoreContainer
+  supports :create
+
   supports :delete do
     unless ext_management_system
       unsupported_reason_add(:delete, _("The Storage Container is not connected to an active %{table}") % {

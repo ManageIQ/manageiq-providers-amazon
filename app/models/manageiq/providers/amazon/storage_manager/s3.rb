@@ -5,7 +5,6 @@ class ManageIQ::Providers::Amazon::StorageManager::S3 < ManageIQ::Providers::Sto
   require_nested :Refresher
 
   supports :object_storage
-  supports :cloud_object_store_container_create
 
   include ManageIQ::Providers::Amazon::ManagerMixin
 
