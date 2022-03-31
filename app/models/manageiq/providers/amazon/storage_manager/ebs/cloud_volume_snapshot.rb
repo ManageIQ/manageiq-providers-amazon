@@ -1,6 +1,5 @@
 class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot < ::CloudVolumeSnapshot
   supports :create
-  supports :update
   supports :delete
 
   def self.raw_create_snapshot(cloud_volume, options = {})
