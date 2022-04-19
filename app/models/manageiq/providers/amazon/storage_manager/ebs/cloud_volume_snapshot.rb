@@ -1,29 +1,8 @@
 class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot < ::CloudVolumeSnapshot
   supports :create
-  supports :update
   supports :delete
 
-  def self.create_snapshot_queue(userid, cloud_volume, options = {})
-    ext_management_system = cloud_volume.try(:ext_management_system)
-    task_opts = {
-      :action => "creating volume snapshot in #{ext_management_system.inspect} for #{cloud_volume.inspect} with #{options.inspect}",
-      :userid => userid
-    }
-
-    queue_opts = {
-      :class_name  => cloud_volume.class.name,
-      :instance_id => cloud_volume.id,
-      :method_name => 'create_volume_snapshot',
-      :priority    => MiqQueue::HIGH_PRIORITY,
-      :role        => 'ems_operations',
-      :zone        => my_zone(ext_management_system),
-      :args        => [options]
-    }
-
-    MiqTask.generic_action_with_callback(task_opts, queue_opts)
-  end
-
-  def self.create_snapshot(cloud_volume, options = {})
+  def self.raw_create_snapshot(cloud_volume, options = {})
     raise ArgumentError, _("cloud_volume cannot be nil") if cloud_volume.nil?
     ext_management_system = cloud_volume.try(:ext_management_system)
     raise ArgumentError, _("ext_management_system cannot be nil") if ext_management_system.nil?

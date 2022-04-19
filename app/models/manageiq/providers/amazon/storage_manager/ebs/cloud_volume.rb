@@ -87,14 +87,6 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
     end
   end
 
-  def create_volume_snapshot(options)
-    ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.create_snapshot(self, options)
-  end
-
-  def create_volume_snapshot_queue(userid, options)
-    ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolumeSnapshot.create_snapshot_queue(userid, self, options)
-  end
-
   def provider_object(connection = nil)
     connection ||= ext_management_system.connect
     connection.volume(ems_ref)
