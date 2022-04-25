@@ -1,5 +1,6 @@
 class ManageIQ::Providers::Amazon::CloudManager::CloudDatabase < ::CloudDatabase
   supports :create
+  supports :delete
 
   def self.params_for_create
     {
@@ -78,6 +79,15 @@ class ManageIQ::Providers::Amazon::CloudManager::CloudDatabase < ::CloudDatabase
     end
   rescue => e
     _log.error("cloud_database=[#{name}], error: #{e}")
+    raise
+  end
+
+  def raw_delete_cloud_database
+    with_provider_connection(:service => :RDS) do |connection|
+      connection.client.delete_db_instance(:db_instance_identifier => name, :skip_final_snapshot => true)
+    end
+  rescue => err
+    _log.error("cloud database=[#{name}], error: #{err}")
     raise
   end
 end

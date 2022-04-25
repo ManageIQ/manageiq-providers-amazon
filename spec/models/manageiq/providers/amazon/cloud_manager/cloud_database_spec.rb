@@ -4,7 +4,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::CloudDatabase do
   end
 
   let(:cloud_database) do
-    FactoryBot.create(:cloud_database_amazon, :ext_management_system => ems)
+    FactoryBot.create(:cloud_database_amazon, :ext_management_system => ems, :name => "test-db")
   end
 
   describe 'cloud database actions' do
@@ -35,6 +35,13 @@ describe ManageIQ::Providers::Amazon::CloudManager::CloudDatabase do
                                                              :database => "mysql",
                                                              :username => "test123",
                                                              :password => "test456"})
+      end
+    end
+
+    context '#delete_cloud_database' do
+      it 'deletes the cloud database' do
+        expect(rds_client).to receive(:delete_db_instance).with(:db_instance_identifier => cloud_database.name, :skip_final_snapshot => true)
+        cloud_database.delete_cloud_database
       end
     end
   end
