@@ -69,6 +69,7 @@ class ManageIQ::Providers::Amazon::CloudManager::CloudDatabase < ::CloudDatabase
   end
 
   def self.raw_create_cloud_database(ext_management_system, options)
+    options.symbolize_keys!
     ext_management_system.with_provider_connection(:service => :RDS) do |connection|
       connection.client.create_db_instance(:db_instance_identifier => options[:name],
                                            :db_instance_class      => options[:flavor],
