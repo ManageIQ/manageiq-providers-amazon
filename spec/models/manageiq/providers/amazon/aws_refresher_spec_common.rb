@@ -30,6 +30,11 @@ module AwsRefresherSpecCommon
     }
   ].freeze
 
+  def flavors_count
+    aws_instance_types_path = ManageIQ::Providers::Amazon::Engine.root.join("db/fixtures/aws_instance_types.yml")
+    YAML.load_file(aws_instance_types_path).keys.count
+  end
+
   def stub_refresh_settings(settings)
     # TODO(lsmola) extract the batch sizes to the settings and stub the settings instead
     # Lower batch sizes to test multiple batches for each collection
