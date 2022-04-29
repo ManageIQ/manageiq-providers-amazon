@@ -25,6 +25,7 @@ jobs:
         add-paths: db/fixtures/aws_instance_types.yml
         commit-message: Update AWS instance_types
         branch: update_aws_instance_types
+        push-to-fork: miq-bot/manageiq-providers-amazon
         title: Update AWS instance_types
         body: Update the saved list of AWS instance_types from https://instances.vantage.sh/instances.json
         token: ${{ secrets.DEPLOY_TOKEN }}
