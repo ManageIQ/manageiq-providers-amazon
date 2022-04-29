@@ -139,7 +139,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Refresher do
     {
       :auth_private_key                  => test_counts[:key_pair_count],
       :ext_management_system             => expected_ext_management_systems_count,
-      :flavor                            => 479,
+      :flavor                            => flavors_count,
       :availability_zone                 => 5,
       :vm_or_template                    => vm_count_plus_disconnect_inv + image_count_plus_disconnect_inv,
       :vm                                => vm_count_plus_disconnect_inv,
