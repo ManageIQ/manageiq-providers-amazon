@@ -24,3 +24,4 @@ jobs:
         add-paths: db/fixtures/aws_instance_types.yml
         commit-message: Update AWS instance_types
         title: Update AWS instance_types
+        token: ${{ secrets.DEPLOY_TOKEN }}
