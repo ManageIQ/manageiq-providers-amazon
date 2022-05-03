@@ -8,13 +8,13 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
   supports :update do
     unsupported_reason_add(:update, _("the volume is not connected to an active provider")) unless ext_management_system
   end
-  supports :attach_volume do
-    unsupported_reason_add(:attach_volume, _("the volume is not connected to an active provider")) unless ext_management_system
-    unsupported_reason_add(:attach_volume, _("the volume status is '%{status}' but should be 'available'") % {:status => status}) unless status == "available"
+  supports :attach do
+    unsupported_reason_add(:attach, _("the volume is not connected to an active provider")) unless ext_management_system
+    unsupported_reason_add(:attach, _("the volume status is '%{status}' but should be 'available'") % {:status => status}) unless status == "available"
   end
-  supports :detach_volume do
-    unsupported_reason_add(:detach_volume, _("the volume is not connected to an active provider")) unless ext_management_system
-    unsupported_reason_add(:detach_volume, _("the volume status is '%{status}' but should be 'in-use'") % {:status => status}) unless status == "in-use"
+  supports :detach do
+    unsupported_reason_add(:detach, _("the volume is not connected to an active provider")) unless ext_management_system
+    unsupported_reason_add(:detach, _("the volume status is '%{status}' but should be 'in-use'") % {:status => status}) unless status == "in-use"
   end
 
   CLOUD_VOLUME_TYPES = {
