@@ -290,6 +290,21 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs::CloudVolume < ::CloudVol
     }
   end
 
+  def params_for_attach
+    {
+      :fields => [
+        {
+          :component  => 'text-field',
+          :name       => 'device_mountpoint',
+          :id         => 'device_mountpoint',
+          :label      => _('Device Mountpoint'),
+          :isRequired => true,
+          :validate   => [{:type => 'required'}],
+        },
+      ]
+    }
+  end
+
   private
 
   def modify_volume_options(options = {})
