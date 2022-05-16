@@ -265,10 +265,6 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     %w(default smartstate_docker)
   end
 
-  def supports_authentication?(authtype)
-    supported_auth_types.include?(authtype.to_s)
-  end
-
   def self.catalog_types
     {"amazon" => N_("Amazon")}
   end
