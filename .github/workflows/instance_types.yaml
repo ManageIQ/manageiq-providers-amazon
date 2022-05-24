@@ -28,6 +28,7 @@ jobs:
         author: ManageIQ Bot <bot@manageiq.org>
         committer: ManageIQ Bot <bot@manageiq.org>
         delete-branch: true
+        labels: enhancement
         push-to-fork: miq-bot/manageiq-providers-amazon
         title: Update AWS instance_types
         body: Update the saved list of AWS instance_types from https://instances.vantage.sh/instances.json
