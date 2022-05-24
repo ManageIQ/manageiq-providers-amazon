@@ -25,6 +25,8 @@ jobs:
         add-paths: db/fixtures/aws_instance_types.yml
         commit-message: Update AWS instance_types
         branch: update_aws_instance_types
+        author: ManageIQ Bot <bot@manageiq.org>
+        committer: ManageIQ Bot <bot@manageiq.org>
         delete-branch: true
         push-to-fork: miq-bot/manageiq-providers-amazon
         title: Update AWS instance_types
