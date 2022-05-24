@@ -3,7 +3,7 @@ name: Update Instance Types
 on:
   workflow_dispatch:
   schedule:
-  - cron: '0 0 * * *'
+  - cron: '0 0 * * 0'
 
 jobs:
   update-instance-types:
@@ -25,7 +25,10 @@ jobs:
         add-paths: db/fixtures/aws_instance_types.yml
         commit-message: Update AWS instance_types
         branch: update_aws_instance_types
+        author: ManageIQ Bot <bot@manageiq.org>
+        committer: ManageIQ Bot <bot@manageiq.org>
         delete-branch: true
+        labels: enhancement
         push-to-fork: miq-bot/manageiq-providers-amazon
         title: Update AWS instance_types
         body: Update the saved list of AWS instance_types from https://instances.vantage.sh/instances.json
