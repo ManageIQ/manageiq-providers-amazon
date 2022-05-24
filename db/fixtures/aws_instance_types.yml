@@ -5402,6 +5402,34 @@ i4i.large:
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
+i4i.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I4I Metal
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 32212254720000
+  :instance_store_size_gb: 30000.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 8
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1099511627776
+  :memory_gb: 1024.0
+  :name: i4i.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
 i4i.xlarge:
   :architecture:
   - :x86_64
@@ -9929,7 +9957,7 @@ r5.8xlarge:
   :memory_gb: 256.0
   :name: r5.8xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 32
   :virtualization_type:
@@ -14053,6 +14081,34 @@ x2idn.32xlarge:
   :vcpu: 128
   :virtualization_type: []
   :vpc_only: true
+x2idn.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: X2IDN Metal
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 2199023255552
+  :memory_gb: 2048.0
+  :name: x2idn.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Icelake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
 x2iedn.16xlarge:
   :architecture:
   - :x86_64
@@ -14219,6 +14275,34 @@ x2iedn.8xlarge:
   :physical_processor: Intel Xeon Scalable (Icelake)
   :processor_clock_speed: 3.5 GHz
   :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+x2iedn.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: X2IEDN Metal
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 4398046511104
+  :memory_gb: 4096.0
+  :name: x2iedn.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Icelake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
   :virtualization_type: []
   :vpc_only: true
 x2iedn.xlarge:
