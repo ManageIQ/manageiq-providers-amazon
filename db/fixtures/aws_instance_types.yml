@@ -3039,6 +3039,286 @@ c6i.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+c6id.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6ID 12xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 3060164198400
+  :instance_store_size_gb: 2850.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 103079215104
+  :memory_gb: 96.0
+  :name: c6id.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+c6id.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6ID 16xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: c6id.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+c6id.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6ID 24xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 6120328396800
+  :instance_store_size_gb: 5700.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: c6id.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+c6id.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6ID Double Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 508953624576
+  :instance_store_size_gb: 474.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: c6id.2xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+c6id.32xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6ID 32xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: c6id.32xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
+c6id.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6ID Quadruple Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 1020054732800
+  :instance_store_size_gb: 950.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: c6id.4xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+c6id.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6ID Eight Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 2040109465600
+  :instance_store_size_gb: 1900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: c6id.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+c6id.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6ID Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 126701535232
+  :instance_store_size_gb: 118.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 4294967296
+  :memory_gb: 4.0
+  :name: c6id.large
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+c6id.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6ID Metal
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: c6id.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
+c6id.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6ID Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 254476812288
+  :instance_store_size_gb: 237.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: c6id.xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
 c7g.12xlarge:
   :architecture:
   - :arm64
@@ -6663,7 +6943,7 @@ m5.12xlarge:
   :memory_gb: 192.0
   :name: m5.12xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 48
   :virtualization_type:
@@ -6721,7 +7001,7 @@ m5.24xlarge:
   :memory_gb: 384.0
   :name: m5.24xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 96
   :virtualization_type:
@@ -6779,7 +7059,7 @@ m5.4xlarge:
   :memory_gb: 64.0
   :name: m5.4xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 16
   :virtualization_type:
@@ -6837,7 +7117,7 @@ m5.large:
   :memory_gb: 8.0
   :name: m5.large
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 2
   :virtualization_type:
@@ -6895,7 +7175,7 @@ m5.xlarge:
   :memory_gb: 16.0
   :name: m5.xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 4
   :virtualization_type:
@@ -9402,6 +9682,286 @@ m6i.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+m6id.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6ID 12xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 3060164198400
+  :instance_store_size_gb: 2850.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: m6id.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+m6id.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6ID 16xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: m6id.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+m6id.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6ID 24xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 6120328396800
+  :instance_store_size_gb: 5700.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: m6id.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+m6id.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6ID Double Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 508953624576
+  :instance_store_size_gb: 474.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: m6id.2xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+m6id.32xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6ID 32xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: m6id.32xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
+m6id.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6ID Quadruple Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 1020054732800
+  :instance_store_size_gb: 950.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: m6id.4xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+m6id.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6ID Eight Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 2040109465600
+  :instance_store_size_gb: 1900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: m6id.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+m6id.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6ID Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 126701535232
+  :instance_store_size_gb: 118.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: m6id.large
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+m6id.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6ID Metal
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: m6id.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
+m6id.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6ID Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 254476812288
+  :instance_store_size_gb: 237.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: m6id.xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
 mac1.metal:
   :architecture:
   - :x86_64_mac
@@ -9683,6 +10243,34 @@ p4d.24xlarge:
   :memory: 1236950581248
   :memory_gb: 1152.0
   :name: p4d.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8275L
+  :processor_clock_speed: 3 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+p4de.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: P4DE 24xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: 
+  :family: GPU instance
+  :instance_store_size: 8589934592000
+  :instance_store_size_gb: 8000.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 8
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1236950581248
+  :memory_gb: 1152.0
+  :name: p4de.24xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275L
   :processor_clock_speed: 3 GHz
@@ -10036,7 +10624,7 @@ r5.12xlarge:
   :memory_gb: 384.0
   :name: r5.12xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 48
   :virtualization_type:
@@ -10152,7 +10740,7 @@ r5.4xlarge:
   :memory_gb: 128.0
   :name: r5.4xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 16
   :virtualization_type:
@@ -10210,7 +10798,7 @@ r5.large:
   :memory_gb: 16.0
   :name: r5.large
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 2
   :virtualization_type:
@@ -10268,7 +10856,7 @@ r5.xlarge:
   :memory_gb: 32.0
   :name: r5.xlarge
   :network_performance: :very_high
-  :physical_processor: Intel Xeon Platinum 8175 (Skylake)
+  :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 4
   :virtualization_type:
@@ -12517,6 +13105,286 @@ r6i.xlarge:
   :memory: 34359738368
   :memory_gb: 32.0
   :name: r6i.xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
+r6id.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6ID 12xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 3060164198400
+  :instance_store_size_gb: 2850.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: r6id.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+r6id.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6ID 16xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: r6id.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+r6id.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6ID 24xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 6120328396800
+  :instance_store_size_gb: 5700.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: r6id.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+r6id.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6ID Double Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 508953624576
+  :instance_store_size_gb: 474.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: r6id.2xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+r6id.32xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6ID 32xlarge
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1099511627776
+  :memory_gb: 1024.0
+  :name: r6id.32xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
+r6id.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6ID Quadruple Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 1020054732800
+  :instance_store_size_gb: 950.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: r6id.4xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+r6id.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6ID Eight Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 2040109465600
+  :instance_store_size_gb: 1900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: r6id.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+r6id.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6ID Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 126701535232
+  :instance_store_size_gb: 118.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: r6id.large
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+r6id.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6ID Metal
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1099511627776
+  :memory_gb: 1024.0
+  :name: r6id.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
+r6id.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6ID Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 254476812288
+  :instance_store_size_gb: 237.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: r6id.xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon 8375C (Ice Lake)
   :processor_clock_speed: 3.5 GHz
