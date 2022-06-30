@@ -10,7 +10,8 @@ class ManageIQ::Providers::Amazon::CloudManager::CloudDatabase < ::CloudDatabase
           :id         => 'name',
           :name       => 'name',
           :label      => _('Cloud Database Name'),
-          :isRequired => true
+          :isRequired => true,
+          :validate   => [{:type => 'required'}],
         },
         {
           :component  => 'text-field',
@@ -30,6 +31,7 @@ class ManageIQ::Providers::Amazon::CloudManager::CloudDatabase < ::CloudDatabase
           :label        => _('Cloud Database Instance Class'),
           :includeEmpty => true,
           :isRequired   => true,
+          :validate     => [{:type => 'required'}],
           :options      => ManageIQ::Providers::Amazon::DatabaseTypes.all.map do |db|
             {
               :label => db[:name],
@@ -44,6 +46,7 @@ class ManageIQ::Providers::Amazon::CloudManager::CloudDatabase < ::CloudDatabase
           :label        => _('Cloud Database'),
           :includeEmpty => true,
           :isRequired   => true,
+          :validate     => [{:type => 'required'}],
           :options      => ["aurora", "aurora-mysql", "aurora-postgresql", "mariadb", "postgres", "mysql", "oracle-ee", "oracle-ee-cdb", "oracle-se2", "oracle-se2-cdb", "sqlserver-ee", "sqlserver-se", "sqlserver-ex", "sqlserver-web"].map do |db|
             {
               :label => db,
