@@ -206,7 +206,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
       persister.cloud_database_flavors.build(
         :ems_ref => flavor[:name],
         :name    => flavor[:name],
-        :enabled => true,
+        :enabled => !flavor[:deprecated],
         :cpus    => flavor[:vcpu],
         :memory  => flavor[:memory]
       )
