@@ -1726,7 +1726,7 @@ module AwsRefresherSpecCommon
       :ems_ref => "db.r3.large",
       :type    => "ManageIQ::Providers::Amazon::CloudManager::CloudDatabaseFlavor",
       :cpus    => 2,
-      :memory  => 16106127360
+      :memory  => 16374562816
     )
   end
 
