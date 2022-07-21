@@ -2,7 +2,7 @@ class ManageIQ::Providers::Amazon::CloudManager::CloudDatabase < ::CloudDatabase
   supports :create
   supports :delete
 
-  def self.params_for_create
+  def self.params_for_create(ems)
     {
       :fields => [
         {
@@ -32,7 +32,7 @@ class ManageIQ::Providers::Amazon::CloudManager::CloudDatabase < ::CloudDatabase
           :includeEmpty => true,
           :isRequired   => true,
           :validate     => [{:type => 'required'}],
-          :options      => ManageIQ::Providers::Amazon::DatabaseTypes.all.map do |db|
+          :options      => ems.cloud_database_flavors.active.map do |db|
             {
               :label => db[:name],
               :value => db[:name],
