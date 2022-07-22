@@ -59,6 +59,8 @@ class ManageIQ::Providers::Amazon::CloudManager::CloudDatabase < ::CloudDatabase
           :id        => 'username',
           :name      => 'username',
           :label     => _('Master Username'),
+          :isRequired => true,
+          :validate   => [{:type => 'required'}],
         },
         {
           :component => 'password-field',
@@ -66,6 +68,8 @@ class ManageIQ::Providers::Amazon::CloudManager::CloudDatabase < ::CloudDatabase
           :id        => 'password',
           :name      => 'password',
           :label     => _('Master Password'),
+          :isRequired => true,
+          :validate   => [{:type => 'required'}],
         },
       ],
     }
