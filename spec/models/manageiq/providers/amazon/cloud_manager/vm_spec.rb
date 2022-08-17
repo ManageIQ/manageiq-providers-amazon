@@ -43,7 +43,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Vm do
     end
   end
 
-  context "#is_available?" do
+  context "#supports?" do
     let(:power_state_on)        { "running" }
     let(:power_state_suspended) { "pending" }
 
