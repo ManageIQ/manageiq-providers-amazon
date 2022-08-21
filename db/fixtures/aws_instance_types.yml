@@ -2703,34 +2703,6 @@ c6gn.medium:
   :vcpu: 1
   :virtualization_type: []
   :vpc_only: true
-c6gn.metal:
-  :architecture:
-  - :x86_64
-  :cluster_networking: 
-  :current_generation: true
-  :current_version: true
-  :description: C6GN Metal
-  :ebs_only: true
-  :ebs_optimized_available: false
-  :enhanced_networking: true
-  :family: Compute optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
-  :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
-  :memory: 137438953472
-  :memory_gb: 128.0
-  :name: c6gn.metal
-  :network_performance: :very_high
-  :physical_processor: AWS Graviton2 Processor
-  :processor_clock_speed: 2.5 GHz
-  :vcpu: 64
-  :virtualization_type: []
-  :vpc_only: true
 c6gn.xlarge:
   :architecture:
   - :arm64
