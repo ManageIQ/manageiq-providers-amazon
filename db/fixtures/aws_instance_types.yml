@@ -4114,6 +4114,35 @@ g2.2xlarge:
   :vcpu: 8
   :virtualization_type: []
   :vpc_only: false
+g2.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: false
+  :current_version: true
+  :deprecated: true
+  :description: G2 Eight Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: false
+  :enhanced_networking: 
+  :family: GPU instance
+  :instance_store_size: 257698037760
+  :instance_store_size_gb: 240.0
+  :instance_store_type: SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: 
+  :intel_turbo: true
+  :memory: 64424509440
+  :memory_gb: 60.0
+  :name: g2.8xlarge
+  :network_performance: :high
+  :physical_processor: Intel Xeon E5-2670 (Sandy Bridge)
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: false
 g3.16xlarge:
   :architecture:
   - :x86_64
