@@ -181,16 +181,16 @@ describe Authenticator::Amazon do
         end
 
         it "records two successful audit entries" do
-          expect(AuditEvent).to receive(:success).with(
+          expect(AuditEvent).to receive(:success).with({
             :event   => 'authenticate_amazon',
             :userid  => username,
             :message => "User #{username} successfully validated by Amazon IAM",
-          )
-          expect(AuditEvent).to receive(:success).with(
+          })
+          expect(AuditEvent).to receive(:success).with({
             :event   => 'authenticate_amazon',
             :userid  => username,
             :message => "Authentication successful for user #{username}",
-          )
+          })
           expect(AuditEvent).not_to receive(:failure)
           authenticate
         end
@@ -217,16 +217,16 @@ describe Authenticator::Amazon do
         end
 
         it "records two successful audit entries" do
-          expect(AuditEvent).to receive(:success).with(
+          expect(AuditEvent).to receive(:success).with({
             :event   => 'authenticate_amazon',
             :userid  => username,
             :message => "User #{username} successfully validated by Amazon IAM",
-          )
-          expect(AuditEvent).to receive(:success).with(
+          })
+          expect(AuditEvent).to receive(:success).with({
             :event   => 'authenticate_amazon',
             :userid  => username,
             :message => "Authentication successful for user #{username}",
-          )
+          })
           expect(AuditEvent).not_to receive(:failure)
           authenticate
         end
@@ -293,11 +293,11 @@ describe Authenticator::Amazon do
       end
 
       it "records one failing audit entry" do
-        expect(AuditEvent).to receive(:failure).with(
+        expect(AuditEvent).to receive(:failure).with({
           :event   => 'authenticate_amazon',
           :userid  => username,
           :message => "Authentication failed for userid #{username}",
-        )
+        })
         expect(AuditEvent).not_to receive(:success)
         authenticate rescue nil
       end
@@ -325,11 +325,11 @@ describe Authenticator::Amazon do
         end
 
         it "records one failing audit entry" do
-          expect(AuditEvent).to receive(:failure).with(
+          expect(AuditEvent).to receive(:failure).with({
             :event   => 'authenticate_amazon',
             :userid  => username,
             :message => "Authentication failed for userid #{username}",
-          )
+          })
           expect(AuditEvent).not_to receive(:success)
           authenticate rescue nil
         end
@@ -347,16 +347,16 @@ describe Authenticator::Amazon do
         end
 
         it "records one successful and one failing audit entry" do
-          expect(AuditEvent).to receive(:success).with(
+          expect(AuditEvent).to receive(:success).with({
             :event   => 'authenticate_amazon',
             :userid  => username,
             :message => "User #{username} successfully validated by Amazon IAM",
-          )
-          expect(AuditEvent).to receive(:failure).with(
+          })
+          expect(AuditEvent).to receive(:failure).with({
             :event   => 'authenticate_amazon',
             :userid  => username,
             :message => "User #{username} authenticated but not defined in EVM",
-          )
+          })
           authenticate rescue nil
         end
 
@@ -377,21 +377,21 @@ describe Authenticator::Amazon do
         end
 
         it "records three successful audit entries" do
-          expect(AuditEvent).to receive(:success).with(
+          expect(AuditEvent).to receive(:success).with({
             :event   => 'authenticate_amazon',
             :userid  => username,
             :message => "User #{username} successfully validated by Amazon IAM",
-          )
-          expect(AuditEvent).to receive(:success).with(
+          })
+          expect(AuditEvent).to receive(:success).with({
             :event   => 'authorize',
             :userid  => username,
             :message => "User creation successful for User: userNameType with ID: #{username}",
-          )
-          expect(AuditEvent).to receive(:success).with(
+          })
+          expect(AuditEvent).to receive(:success).with({
             :event   => 'authenticate_amazon',
             :userid  => username,
             :message => "Authentication successful for user #{username}",
-          )
+          })
           expect(AuditEvent).not_to receive(:failure)
           authenticate
         end
@@ -417,26 +417,26 @@ describe Authenticator::Amazon do
           end
 
           it "records three successful audit entries plus one failure" do
-            expect(AuditEvent).to receive(:success).with(
+            expect(AuditEvent).to receive(:success).with({
               :event   => 'authenticate_amazon',
               :userid  => username,
               :message => "User #{username} successfully validated by Amazon IAM",
-            )
-            expect(AuditEvent).to receive(:success).with(
+            })
+            expect(AuditEvent).to receive(:success).with({
               :event   => 'authenticate_amazon',
               :userid  => username,
               :message => "Authentication successful for user #{username}",
-            )
-            expect(AuditEvent).to receive(:success).with(
+            })
+            expect(AuditEvent).to receive(:success).with({
               :event   => 'authorize',
               :userid  => username,
               :message => "User creation successful for User: userNameType with ID: #{username}",
-            )
-            expect(AuditEvent).to receive(:failure).with(
+            })
+            expect(AuditEvent).to receive(:failure).with({
               :event   => 'authorize',
               :userid  => username,
               :message => "Authentication failed for userid #{username}, unable to match user's group membership to an EVM role",
-            )
+            })
             authenticate
           end
 
