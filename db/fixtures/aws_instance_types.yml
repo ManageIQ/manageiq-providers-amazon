@@ -14497,6 +14497,62 @@ t4g.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+trn1.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: TRN1 Double Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 508953624576
+  :instance_store_size_gb: 474.0
+  :instance_store_type: SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: trn1.2xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Icelake)
+  :processor_clock_speed: Up to 3.5 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+trn1.32xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: TRN1 32xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: trn1.32xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Icelake)
+  :processor_clock_speed: Up to 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
 u-12tb1.112xlarge:
   :architecture:
   - :x86_64
@@ -14569,9 +14625,9 @@ u-18tb1.metal:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 19791209299968
   :memory_gb: 18432.0
   :name: u-18tb1.metal
@@ -14597,9 +14653,9 @@ u-24tb1.metal:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 26388279066624
   :memory_gb: 24576.0
   :name: u-24tb1.metal
