@@ -267,14 +267,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :flavor              => persister.flavors.lazy_find(flavor[:name]),
         :genealogy_parent    => persister.miq_templates.lazy_find(instance['image_id']),
         :key_pairs           => [persister.auth_key_pairs.lazy_find(instance['key_name'])].compact,
-        :location            => persister.networks.lazy_find({
-                                                               :hardware    => persister.hardwares.lazy_find(:vm_or_template => lazy_vm),
-                                                               :description => "public"
-                                                             },
-                                                             {
-                                                               :key     => :hostname,
-                                                               :default => 'unknown'
-                                                             }),
+        :location            => persister.networks.lazy_find(
+          {
+            :hardware    => persister.hardwares.lazy_find(:vm_or_template => lazy_vm),
+            :description => "public"
+          },
+          :key     => :hostname,
+          :default => 'unknown'
+        ),
         :orchestration_stack => persister.orchestration_stacks.lazy_find(
           get_from_tags(instance, "aws:cloudformation:stack-id")
         ),
