@@ -647,6 +647,14 @@ db.r5b.12xlarge:
   :name: db.r5b.12xlarge
   :network_performance: :very_high
   :vcpu: 48
+db.r5b.12xlarge.tpc2.mem2x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 824633720832.0
+  :name: db.r5b.12xlarge.tpc2.mem2x
+  :network_performance: :very_high
+  :vcpu: 48
 db.r5b.16xlarge:
   :deprecated: false
   :ebs_optimized: true
@@ -671,6 +679,30 @@ db.r5b.2xlarge:
   :name: db.r5b.2xlarge
   :network_performance: :very_high
   :vcpu: 8
+db.r5b.2xlarge.tpc1.mem2x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 137438953472.0
+  :name: db.r5b.2xlarge.tpc1.mem2x
+  :network_performance: :very_high
+  :vcpu: 8
+db.r5b.2xlarge.tpc2.mem4x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 274877906944.0
+  :name: db.r5b.2xlarge.tpc2.mem4x
+  :network_performance: :very_high
+  :vcpu: 8
+db.r5b.2xlarge.tpc2.mem8x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 549755813888.0
+  :name: db.r5b.2xlarge.tpc2.mem8x
+  :network_performance: :very_high
+  :vcpu: 8
 db.r5b.4xlarge:
   :deprecated: false
   :ebs_optimized: true
@@ -679,12 +711,52 @@ db.r5b.4xlarge:
   :name: db.r5b.4xlarge
   :network_performance: :very_high
   :vcpu: 16
+db.r5b.4xlarge.tpc2.mem2x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 274877906944.0
+  :name: db.r5b.4xlarge.tpc2.mem2x
+  :network_performance: :very_high
+  :vcpu: 16
+db.r5b.4xlarge.tpc2.mem3x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 412316860416.0
+  :name: db.r5b.4xlarge.tpc2.mem3x
+  :network_performance: :very_high
+  :vcpu: 16
+db.r5b.4xlarge.tpc2.mem4x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 549755813888.0
+  :name: db.r5b.4xlarge.tpc2.mem4x
+  :network_performance: :very_high
+  :vcpu: 16
+db.r5b.6xlarge.tpc2.mem4x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 824633720832.0
+  :name: db.r5b.6xlarge.tpc2.mem4x
+  :network_performance: :very_high
+  :vcpu: 24
 db.r5b.8xlarge:
   :deprecated: false
   :ebs_optimized: true
   :family: Memory optimized
   :memory: 274877906944.0
   :name: db.r5b.8xlarge
+  :network_performance: :very_high
+  :vcpu: 32
+db.r5b.8xlarge.tpc2.mem3x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 824633720832.0
+  :name: db.r5b.8xlarge.tpc2.mem3x
   :network_performance: :very_high
   :vcpu: 32
 db.r5b.large:
@@ -695,12 +767,36 @@ db.r5b.large:
   :name: db.r5b.large
   :network_performance: :very_high
   :vcpu: 2
+db.r5b.large.tpc1.mem2x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 34359738368.0
+  :name: db.r5b.large.tpc1.mem2x
+  :network_performance: :very_high
+  :vcpu: 2
 db.r5b.xlarge:
   :deprecated: false
   :ebs_optimized: true
   :family: Memory optimized
   :memory: 34359738368.0
   :name: db.r5b.xlarge
+  :network_performance: :very_high
+  :vcpu: 4
+db.r5b.xlarge.tpc2.mem2x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 68719476736.0
+  :name: db.r5b.xlarge.tpc2.mem2x
+  :network_performance: :very_high
+  :vcpu: 4
+db.r5b.xlarge.tpc2.mem4x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 137438953472.0
+  :name: db.r5b.xlarge.tpc2.mem4x
   :network_performance: :very_high
   :vcpu: 4
 db.r5d.12xlarge:
