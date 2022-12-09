@@ -36,4 +36,4 @@ jobs:
         push-to-fork: miq-bot/manageiq-providers-amazon
         title: Update AWS instance_types
         body: Update the saved list of AWS instance_types from https://instances.vantage.sh/instances.json
-        token: ${{ secrets.DEPLOY_TOKEN }}
+        token: ${{ secrets.PR_TOKEN }}
