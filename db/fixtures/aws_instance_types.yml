@@ -10485,8 +10485,8 @@ m6in.16xlarge:
   :intel_avx: true
   :intel_avx2: true
   :intel_turbo: true
-  :memory: 137438953472
-  :memory_gb: 128.0
+  :memory: 274877906944
+  :memory_gb: 256.0
   :name: m6in.16xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon 8375C (Ice Lake)
@@ -14838,8 +14838,8 @@ r6in.4xlarge:
   :intel_avx: true
   :intel_avx2: true
   :intel_turbo: true
-  :memory: 34359738368
-  :memory_gb: 32.0
+  :memory: 137438953472
+  :memory_gb: 128.0
   :name: r6in.4xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon 8375C (Ice Lake)
@@ -14866,8 +14866,8 @@ r6in.8xlarge:
   :intel_avx: true
   :intel_avx2: true
   :intel_turbo: true
-  :memory: 68719476736
-  :memory_gb: 64.0
+  :memory: 274877906944
+  :memory_gb: 256.0
   :name: r6in.8xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon 8375C (Ice Lake)
