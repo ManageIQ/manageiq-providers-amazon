@@ -2,6 +2,8 @@ class ManageIQ::Providers::Amazon::CloudManager::Vm < ManageIQ::Providers::Cloud
   include_concern 'Operations'
   include_concern 'ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared'
 
+  supports :capture
+
   POWER_STATES = {
     "running"       => "on",
     "powering_up"   => "powering_up",
