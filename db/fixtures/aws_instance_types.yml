@@ -3515,6 +3515,34 @@ c6in.large:
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
+c6in.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C6IN Metal
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: c6in.metal
+  :network_performance: :200000_megabit
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
 c6in.xlarge:
   :architecture:
   - :x86_64
@@ -3739,6 +3767,34 @@ c7g.medium:
   :vcpu: 1
   :virtualization_type: []
   :vpc_only: true
+c7g.metal:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7G Metal
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: c7g.metal
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
 c7g.xlarge:
   :architecture:
   - :arm64
@@ -3811,7 +3867,7 @@ cr1.8xlarge:
   :family: Memory optimized
   :instance_store_size: 257698037760
   :instance_store_size_gb: 240.0
-  :instance_store_type: SSD
+  :instance_store_type: 
   :instance_store_volumes: 2
   :intel_aes_ni: true
   :intel_avx: 
@@ -3837,8 +3893,8 @@ d2.2xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Storage optimized
-  :instance_store_size: 12884901888000
-  :instance_store_size_gb: 12000.0
+  :instance_store_size: 13194139533312
+  :instance_store_size_gb: 12288.0
   :instance_store_type: 
   :instance_store_volumes: 6
   :intel_aes_ni: true
@@ -3866,8 +3922,8 @@ d2.4xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Storage optimized
-  :instance_store_size: 25769803776000
-  :instance_store_size_gb: 24000.0
+  :instance_store_size: 26388279066624
+  :instance_store_size_gb: 24576.0
   :instance_store_type: 
   :instance_store_volumes: 12
   :intel_aes_ni: true
@@ -3895,8 +3951,8 @@ d2.8xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Storage optimized
-  :instance_store_size: 51539607552000
-  :instance_store_size_gb: 48000.0
+  :instance_store_size: 52776558133248
+  :instance_store_size_gb: 49152.0
   :instance_store_type: 
   :instance_store_volumes: 24
   :intel_aes_ni: true
@@ -3924,8 +3980,8 @@ d2.xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Storage optimized
-  :instance_store_size: 6442450944000
-  :instance_store_size_gb: 6000.0
+  :instance_store_size: 6597069766656
+  :instance_store_size_gb: 6144.0
   :instance_store_type: 
   :instance_store_volumes: 3
   :intel_aes_ni: true
@@ -3955,7 +4011,7 @@ d3.2xlarge:
   :family: Storage optimized
   :instance_store_size: 12756052869120
   :instance_store_size_gb: 11880.0
-  :instance_store_type: 
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 6
   :intel_aes_ni: true
   :intel_avx: true
@@ -3983,7 +4039,7 @@ d3.4xlarge:
   :family: Storage optimized
   :instance_store_size: 25512105738240
   :instance_store_size_gb: 23760.0
-  :instance_store_type: 
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 12
   :intel_aes_ni: true
   :intel_avx: true
@@ -4011,7 +4067,7 @@ d3.8xlarge:
   :family: Storage optimized
   :instance_store_size: 51024211476480
   :instance_store_size_gb: 47520.0
-  :instance_store_type: 
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 24
   :intel_aes_ni: true
   :intel_avx: true
@@ -4039,7 +4095,7 @@ d3.xlarge:
   :family: Storage optimized
   :instance_store_size: 6378026434560
   :instance_store_size_gb: 5940.0
-  :instance_store_type: 
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 3
   :intel_aes_ni: true
   :intel_avx: true
@@ -4067,7 +4123,7 @@ d3en.12xlarge:
   :family: Storage optimized
   :instance_store_size: 360261856788480
   :instance_store_size_gb: 335520.0
-  :instance_store_type: 
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 24
   :intel_aes_ni: true
   :intel_avx: true
@@ -4095,7 +4151,7 @@ d3en.2xlarge:
   :family: Storage optimized
   :instance_store_size: 60043642798080
   :instance_store_size_gb: 55920.0
-  :instance_store_type: 
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
@@ -4123,7 +4179,7 @@ d3en.4xlarge:
   :family: Storage optimized
   :instance_store_size: 120087285596160
   :instance_store_size_gb: 111840.0
-  :instance_store_type: 
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 8
   :intel_aes_ni: true
   :intel_avx: true
@@ -4146,12 +4202,12 @@ d3en.6xlarge:
   :current_version: true
   :description: D3EN 6xlarge
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Storage optimized
   :instance_store_size: 180130928394240
   :instance_store_size_gb: 167760.0
-  :instance_store_type: 
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 12
   :intel_aes_ni: true
   :intel_avx: true
@@ -4179,7 +4235,7 @@ d3en.8xlarge:
   :family: Storage optimized
   :instance_store_size: 240174571192320
   :instance_store_size_gb: 223680.0
-  :instance_store_type: 
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 16
   :intel_aes_ni: true
   :intel_avx: true
@@ -4207,7 +4263,7 @@ d3en.xlarge:
   :family: Storage optimized
   :instance_store_size: 30021821399040
   :instance_store_size_gb: 27960.0
-  :instance_store_type: 
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 2
   :intel_aes_ni: true
   :intel_avx: true
@@ -4233,8 +4289,8 @@ dl1.24xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Machine Learning ASIC Instances
-  :instance_store_size: 4294967296
-  :instance_store_size_gb: 4.0
+  :instance_store_size: 4294967296000
+  :instance_store_size_gb: 4000.0
   :instance_store_type: NVMe SSD
   :instance_store_volumes: 4
   :intel_aes_ni: true
@@ -4490,7 +4546,7 @@ g3s.xlarge:
   :current_version: true
   :description: G3S Extra Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: GPU instance
   :instance_store_size: 0
@@ -5366,8 +5422,8 @@ hs1.8xlarge:
   :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Storage optimized
-  :instance_store_size: 51539607552000
-  :instance_store_size_gb: 48000.0
+  :instance_store_size: 52776558133248
+  :instance_store_size_gb: 49152.0
   :instance_store_type: 
   :instance_store_volumes: 24
   :intel_aes_ni: true
@@ -10193,14 +10249,14 @@ m6idn.12xlarge:
   :current_generation: true
   :current_version: true
   :description: M6IDN 12xlarge
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 3060164198400
+  :instance_store_size_gb: 2850.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -10221,14 +10277,14 @@ m6idn.16xlarge:
   :current_generation: true
   :current_version: true
   :description: M6IDN 16xlarge
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -10249,14 +10305,14 @@ m6idn.24xlarge:
   :current_generation: true
   :current_version: true
   :description: M6IDN 24xlarge
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 6120328396800
+  :instance_store_size_gb: 5700.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -10277,14 +10333,14 @@ m6idn.2xlarge:
   :current_generation: true
   :current_version: true
   :description: M6IDN Double Extra Large
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 508953624576
+  :instance_store_size_gb: 474.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -10305,14 +10361,14 @@ m6idn.32xlarge:
   :current_generation: true
   :current_version: true
   :description: M6IDN 32xlarge
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -10333,14 +10389,14 @@ m6idn.4xlarge:
   :current_generation: true
   :current_version: true
   :description: M6IDN Quadruple Extra Large
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 1020054732800
+  :instance_store_size_gb: 950.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -10361,14 +10417,14 @@ m6idn.8xlarge:
   :current_generation: true
   :current_version: true
   :description: M6IDN Eight Extra Large
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 2040109465600
+  :instance_store_size_gb: 1900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -10389,14 +10445,14 @@ m6idn.large:
   :current_generation: true
   :current_version: true
   :description: M6IDN Large
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 126701535232
+  :instance_store_size_gb: 118.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -10410,6 +10466,34 @@ m6idn.large:
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
+m6idn.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6IDN Metal
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: m6idn.metal
+  :network_performance: :200000_megabit
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
 m6idn.xlarge:
   :architecture:
   - :x86_64
@@ -10417,14 +10501,14 @@ m6idn.xlarge:
   :current_generation: true
   :current_version: true
   :description: M6IDN Extra Large
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 254476812288
+  :instance_store_size_gb: 237.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -10662,6 +10746,34 @@ m6in.large:
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
+m6in.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M6IN Metal
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: m6in.metal
+  :network_performance: :200000_megabit
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
 m6in.xlarge:
   :architecture:
   - :x86_64
@@ -10726,7 +10838,7 @@ mac2.metal:
   :current_version: true
   :description: MAC2 Metal
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
   :instance_store_size: 0
@@ -14434,14 +14546,14 @@ r6idn.12xlarge:
   :current_generation: true
   :current_version: true
   :description: R6IDN 12xlarge
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 3060164198400
+  :instance_store_size_gb: 2850.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -14462,14 +14574,14 @@ r6idn.16xlarge:
   :current_generation: true
   :current_version: true
   :description: R6IDN 16xlarge
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -14490,14 +14602,14 @@ r6idn.24xlarge:
   :current_generation: true
   :current_version: true
   :description: R6IDN 24xlarge
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 6120328396800
+  :instance_store_size_gb: 5700.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -14518,14 +14630,14 @@ r6idn.2xlarge:
   :current_generation: true
   :current_version: true
   :description: R6IDN Double Extra Large
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 508953624576
+  :instance_store_size_gb: 474.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -14546,14 +14658,14 @@ r6idn.32xlarge:
   :current_generation: true
   :current_version: true
   :description: R6IDN 32xlarge
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -14574,14 +14686,14 @@ r6idn.4xlarge:
   :current_generation: true
   :current_version: true
   :description: R6IDN Quadruple Extra Large
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 1020054732800
+  :instance_store_size_gb: 950.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -14602,14 +14714,14 @@ r6idn.8xlarge:
   :current_generation: true
   :current_version: true
   :description: R6IDN Eight Extra Large
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 2040109465600
+  :instance_store_size_gb: 1900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -14630,14 +14742,14 @@ r6idn.large:
   :current_generation: true
   :current_version: true
   :description: R6IDN Large
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 126701535232
+  :instance_store_size_gb: 118.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -14651,6 +14763,34 @@ r6idn.large:
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
+r6idn.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6IDN Metal
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1099511627776
+  :memory_gb: 1024.0
+  :name: r6idn.metal
+  :network_performance: :200000_megabit
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
 r6idn.xlarge:
   :architecture:
   - :x86_64
@@ -14658,14 +14798,14 @@ r6idn.xlarge:
   :current_generation: true
   :current_version: true
   :description: R6IDN Extra Large
-  :ebs_only: true
+  :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 254476812288
+  :instance_store_size_gb: 237.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -14901,6 +15041,34 @@ r6in.large:
   :physical_processor: Intel Xeon 8375C (Ice Lake)
   :processor_clock_speed: 3.5 GHz
   :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+r6in.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R6IN Metal
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1099511627776
+  :memory_gb: 1024.0
+  :name: r6in.metal
+  :network_performance: :200000_megabit
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 128
   :virtualization_type: []
   :vpc_only: true
 r6in.xlarge:
@@ -15770,7 +15938,7 @@ trn1.2xlarge:
   :family: Machine Learning ASIC Instances
   :instance_store_size: 508953624576
   :instance_store_size_gb: 474.0
-  :instance_store_type: SSD
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx: true
@@ -15798,7 +15966,7 @@ trn1.32xlarge:
   :family: Machine Learning ASIC Instances
   :instance_store_size: 8160437862400
   :instance_store_size_gb: 7600.0
-  :instance_store_type: SSD
+  :instance_store_type: NVMe SSD
   :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
