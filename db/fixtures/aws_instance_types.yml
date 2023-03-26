@@ -3523,7 +3523,7 @@ c6in.metal:
   :current_version: true
   :description: C6IN Metal
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -3537,7 +3537,7 @@ c6in.metal:
   :memory: 274877906944
   :memory_gb: 256.0
   :name: c6in.metal
-  :network_performance: :200000_megabit
+  :network_performance: :very_high
   :physical_processor: Intel Xeon 8375C (Ice Lake)
   :processor_clock_speed: 3.5 GHz
   :vcpu: 128
@@ -10473,14 +10473,14 @@ m6idn.metal:
   :current_generation: true
   :current_version: true
   :description: M6IDN Metal
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -10488,7 +10488,7 @@ m6idn.metal:
   :memory: 549755813888
   :memory_gb: 512.0
   :name: m6idn.metal
-  :network_performance: :200000_megabit
+  :network_performance: :very_high
   :physical_processor: Intel Xeon 8375C (Ice Lake)
   :processor_clock_speed: 3.5 GHz
   :vcpu: 128
@@ -10754,7 +10754,7 @@ m6in.metal:
   :current_version: true
   :description: M6IN Metal
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
   :instance_store_size: 0
@@ -10768,7 +10768,7 @@ m6in.metal:
   :memory: 549755813888
   :memory_gb: 512.0
   :name: m6in.metal
-  :network_performance: :200000_megabit
+  :network_performance: :very_high
   :physical_processor: Intel Xeon 8375C (Ice Lake)
   :processor_clock_speed: 3.5 GHz
   :vcpu: 128
@@ -15022,14 +15022,14 @@ r6idn.metal:
   :current_generation: true
   :current_version: true
   :description: R6IDN Metal
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -15037,7 +15037,7 @@ r6idn.metal:
   :memory: 1099511627776
   :memory_gb: 1024.0
   :name: r6idn.metal
-  :network_performance: :200000_megabit
+  :network_performance: :very_high
   :physical_processor: Intel Xeon 8375C (Ice Lake)
   :processor_clock_speed: 3.5 GHz
   :vcpu: 128
@@ -15303,7 +15303,7 @@ r6in.metal:
   :current_version: true
   :description: R6IN Metal
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
@@ -15317,7 +15317,7 @@ r6in.metal:
   :memory: 1099511627776
   :memory_gb: 1024.0
   :name: r6in.metal
-  :network_performance: :200000_megabit
+  :network_performance: :very_high
   :physical_processor: Intel Xeon 8375C (Ice Lake)
   :processor_clock_speed: 3.5 GHz
   :vcpu: 128
