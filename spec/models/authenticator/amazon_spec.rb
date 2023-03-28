@@ -435,7 +435,7 @@ describe Authenticator::Amazon do
             expect(AuditEvent).to receive(:failure).with({
               :event   => 'authorize',
               :userid  => username,
-              :message => "Authentication failed for userid #{username}, unable to match user's group membership to an EVM role",
+              :message => "Authentication failed for userid #{username}, unable to match user's group membership to an EVM role. The incoming groups are: #{aws_group_name}",
             })
             authenticate
           end
