@@ -6522,6 +6522,118 @@ inf1.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+inf2.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: INF2 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: inf2.24xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.95 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+inf2.48xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: INF2 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: inf2.48xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.95 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+inf2.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: INF2 Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: inf2.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.95 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+inf2.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: INF2 Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: inf2.xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.95 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
 is4gen.2xlarge:
   :architecture:
   - :arm64
@@ -16482,6 +16594,34 @@ trn1.32xlarge:
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Icelake)
   :processor_clock_speed: Up to 3.5 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
+trn1n.32xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: TRN1N 32xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: trn1n.32xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Icelake)
+  :processor_clock_speed: 3.5 GHz
   :vcpu: 128
   :virtualization_type: []
   :vpc_only: true
