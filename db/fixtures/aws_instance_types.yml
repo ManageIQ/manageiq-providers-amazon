@@ -6018,6 +6018,174 @@ i3en.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+i4g.16xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I4G 16xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 16106127360000
+  :instance_store_size_gb: 15000.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: i4g.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+i4g.2xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I4G Double Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 2013265920000
+  :instance_store_size_gb: 1875.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: i4g.2xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+i4g.4xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I4G Quadruple Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 4026531840000
+  :instance_store_size_gb: 3750.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: i4g.4xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+i4g.8xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I4G Eight Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 8053063680000
+  :instance_store_size_gb: 7500.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: i4g.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+i4g.large:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I4G Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 502511173632
+  :instance_store_size_gb: 468.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: i4g.large
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+i4g.xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I4G Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 1006096089088
+  :instance_store_size_gb: 937.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: i4g.xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
 i4i.16xlarge:
   :architecture:
   - :x86_64
