@@ -3823,6 +3823,230 @@ c7g.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+c7gn.12xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7GN 12xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 103079215104
+  :memory_gb: 96.0
+  :name: c7gn.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+c7gn.16xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7GN 16xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: c7gn.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+c7gn.2xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7GN Double Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: c7gn.2xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+c7gn.4xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7GN Quadruple Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: c7gn.4xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+c7gn.8xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7GN Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: c7gn.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+c7gn.large:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7GN Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 4294967296
+  :memory_gb: 4.0
+  :name: c7gn.large
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+c7gn.medium:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7GN Medium
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 2147483648
+  :memory_gb: 2.0
+  :name: c7gn.medium
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 1
+  :virtualization_type: []
+  :vpc_only: true
+c7gn.xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7GN Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: c7gn.xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
 cc2.8xlarge:
   :architecture:
   - :x86_64
@@ -5409,6 +5633,90 @@ h1.8xlarge:
   :vcpu: 32
   :virtualization_type:
   - :hvm
+  :vpc_only: true
+hpc7g.16xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: HPC7G 16xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: hpc7g.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+hpc7g.4xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: HPC7G Quadruple Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: hpc7g.4xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+hpc7g.8xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: HPC7G Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: hpc7g.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 32
+  :virtualization_type: []
   :vpc_only: true
 hs1.8xlarge:
   :architecture:
