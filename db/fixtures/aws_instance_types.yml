@@ -18599,7 +18599,7 @@ u-18tb1.112xlarge:
   :current_version: true
   :description: U-18TB1 112xlarge
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
@@ -18627,7 +18627,7 @@ u-24tb1.112xlarge:
   :current_version: true
   :description: U-24TB1 112xlarge
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
