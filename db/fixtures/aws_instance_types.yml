@@ -17625,6 +17625,230 @@ r7gd.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+r7iz.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7IZ 12xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: r7iz.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3900 MHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+r7iz.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7IZ 16xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: r7iz.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3900 MHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+r7iz.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7IZ Double Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: r7iz.2xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3900 MHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+r7iz.32xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7IZ 32xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 1099511627776
+  :memory_gb: 1024.0
+  :name: r7iz.32xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3900 MHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
+r7iz.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7IZ Quadruple Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: r7iz.4xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3900 MHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+r7iz.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7IZ Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: r7iz.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3900 MHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+r7iz.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7IZ Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: r7iz.large
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3900 MHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+r7iz.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7IZ Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: r7iz.xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3900 MHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
 t1.micro:
   :architecture:
   - :i386
