@@ -49,6 +49,20 @@ describe ManageIQ::Providers::Amazon::CloudManager do
     expect(described_class.description).to eq('Amazon EC2')
   end
 
+  context "#pause!" do
+    let(:zone) { FactoryBot.create(:zone) }
+    let(:ems)  { FactoryBot.create(:ems_amazon, :zone => zone) }
+
+    include_examples "ExtManagementSystem#pause!"
+  end
+
+  context "#resume!" do
+    let(:zone) { FactoryBot.create(:zone) }
+    let(:ems)  { FactoryBot.create(:ems_amazon, :zone => zone) }
+
+    include_examples "ExtManagementSystem#resume!"
+  end
+
   describe ".params_for_create" do
     it "dynamically adjusts to new regions" do
       r1_data = {
