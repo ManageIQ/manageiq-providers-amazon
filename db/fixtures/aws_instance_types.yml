@@ -19369,7 +19369,7 @@ u-12tb1.metal:
   :memory: 13194139533312
   :memory_gb: 12288.0
   :name: u-12tb1.metal
-  :network_performance: :na
+  :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Skylake)
   :processor_clock_speed: 
   :vcpu: 448
@@ -19403,6 +19403,34 @@ u-18tb1.112xlarge:
   :vcpu: 448
   :virtualization_type: []
   :vpc_only: true
+u-18tb1.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: U-18TB1 Metal
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 19791209299968
+  :memory_gb: 18432.0
+  :name: u-18tb1.metal
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8280L (Cascade Lake)
+  :processor_clock_speed: 
+  :vcpu: 448
+  :virtualization_type: []
+  :vpc_only: true
 u-24tb1.112xlarge:
   :architecture:
   - :x86_64
@@ -19425,6 +19453,34 @@ u-24tb1.112xlarge:
   :memory: 26388279066624
   :memory_gb: 24576.0
   :name: u-24tb1.112xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8280L (Cascade Lake)
+  :processor_clock_speed: 
+  :vcpu: 448
+  :virtualization_type: []
+  :vpc_only: true
+u-24tb1.metal:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: U-24TB1 Metal
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 26388279066624
+  :memory_gb: 24576.0
+  :name: u-24tb1.metal
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8280L (Cascade Lake)
   :processor_clock_speed: 
@@ -19537,7 +19593,7 @@ u-6tb1.metal:
   :memory: 6597069766656
   :memory_gb: 6144.0
   :name: u-6tb1.metal
-  :network_performance: :na
+  :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Skylake)
   :processor_clock_speed: 
   :vcpu: 448
@@ -19593,7 +19649,7 @@ u-9tb1.metal:
   :memory: 9895604649984
   :memory_gb: 9216.0
   :name: u-9tb1.metal
-  :network_performance: :na
+  :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Skylake)
   :processor_clock_speed: 
   :vcpu: 448
