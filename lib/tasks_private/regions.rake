@@ -25,13 +25,16 @@ namespace 'aws:extract' do
       dns_suffix = partition['dnsSuffix']
       regions_info = partition['regions']
 
-      partition['services'][service_name]['endpoints'].each_key do |region_name|
+      endpoints = partition.dig("services", service_name, "endpoints")
+      next if endpoints.nil?
+
+      endpoints.each_key do |region_name|
         raise "Repetitive region name: #{region_name}" if memo.key?(region_name)
 
         memo[region_name] = {
           :name        => region_name,
           :hostname    => "#{service_name}.#{region_name}.#{dns_suffix}",
-          :description => regions_info.fetch(region_name).fetch('description'),
+          :description => regions_info.dig(region_name, "description") || region_name
         }.freeze
       end
     end

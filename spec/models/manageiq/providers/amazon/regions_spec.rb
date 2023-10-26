@@ -7,9 +7,13 @@ describe ManageIQ::Providers::Amazon::Regions do
 
     # https://docs.aws.amazon.com/general/latest/gr/rande.html - see quotes below
     atypical_regions = [
-      'ap-northeast-3', # "To request access to the Asia Pacific (Osaka-Local) Region, contact..."
       'ap-east-1',      # "you must manually enable before you can use..."
-      'eu-south-1'
+      'ap-south-2',
+      'ap-southeast-3',
+      'ap-southeast-4',
+      'eu-central-2',
+      'eu-south-1',
+      'eu-south-2'
     ]
 
     current_regions = described_class.regions.reject do |name, _config|
@@ -21,6 +25,8 @@ describe ManageIQ::Providers::Amazon::Regions do
     online_regions = VCR.use_cassette(described_class.name.underscore) do
       ems.connect.client.describe_regions.to_h[:regions]
     end
+
+    online_regions.each { |r| r.delete(:opt_in_status) }
 
     # sort for better diff
     [current_regions, online_regions].each do |regions|
