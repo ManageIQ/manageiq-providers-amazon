@@ -7,19 +7,20 @@ http_interactions:
       encoding: UTF-8
       string: Action=DescribeRegions&Version=2016-11-15
     headers:
-      Content-Type:
-      - application/x-www-form-urlencoded; charset=utf-8
       Accept-Encoding:
       - ''
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
       User-Agent:
-      - aws-sdk-ruby2/2.9.44 ruby/2.4.5 x86_64-linux resources
+      - aws-sdk-ruby3/3.185.1 ua/2.0 api/ec2#1.415.0 os/linux md/x86_64 lang/ruby#3.0.4
+        md/3.0.4 cfg/retry-mode#legacy
       X-Amz-Date:
-      - 20190509T231013Z
+      - 20231026T162404Z
       X-Amz-Content-Sha256:
       - 903451d1f3cda66f6ac7101b5810af53eb3ce6b47c5162b0b2238ce9086b6a0d
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20190509/us-east-1/ec2/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=fe4dafecc2e13539f2af9f3cc25f17b8b1c266cd60a242d2632ab8c6ee5eec11
+      - AWS4-HMAC-SHA256 Credential=AMAZON_CLIENT_ID/20231026/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=01ebe4b9679997634675392ff52a639f2dc9f6b86e66c96e9734f404fbd1782f
       Content-Length:
       - '41'
       Accept:
@@ -29,14 +30,20 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      X-Amzn-Requestid:
+      - e2992a30-f339-453b-a4bf-990779b6fe15
+      Cache-Control:
+      - no-cache, no-store
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - accept-encoding
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '2711'
-      Vary:
-      - accept-encoding
+      - '3875'
       Date:
-      - Thu, 09 May 2019 23:10:14 GMT
+      - Thu, 26 Oct 2023 16:24:03 GMT
       Server:
       - AmazonEC2
     body:
@@ -44,74 +51,95 @@ http_interactions:
       string: |-
         <?xml version="1.0" encoding="UTF-8"?>
         <DescribeRegionsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
-            <requestId>a85db9b9-485d-4e18-ae70-c00d846119f4</requestId>
+            <requestId>e2992a30-f339-453b-a4bf-990779b6fe15</requestId>
             <regionInfo>
-                <item>
-                    <regionName>eu-north-1</regionName>
-                    <regionEndpoint>ec2.eu-north-1.amazonaws.com</regionEndpoint>
-                </item>
                 <item>
                     <regionName>ap-south-1</regionName>
                     <regionEndpoint>ec2.ap-south-1.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
+                </item>
+                <item>
+                    <regionName>eu-north-1</regionName>
+                    <regionEndpoint>ec2.eu-north-1.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>eu-west-3</regionName>
                     <regionEndpoint>ec2.eu-west-3.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>eu-west-2</regionName>
                     <regionEndpoint>ec2.eu-west-2.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>eu-west-1</regionName>
                     <regionEndpoint>ec2.eu-west-1.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
+                </item>
+                <item>
+                    <regionName>ap-northeast-3</regionName>
+                    <regionEndpoint>ec2.ap-northeast-3.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>ap-northeast-2</regionName>
                     <regionEndpoint>ec2.ap-northeast-2.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>ap-northeast-1</regionName>
                     <regionEndpoint>ec2.ap-northeast-1.amazonaws.com</regionEndpoint>
-                </item>
-                <item>
-                    <regionName>sa-east-1</regionName>
-                    <regionEndpoint>ec2.sa-east-1.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>ca-central-1</regionName>
                     <regionEndpoint>ec2.ca-central-1.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
+                </item>
+                <item>
+                    <regionName>sa-east-1</regionName>
+                    <regionEndpoint>ec2.sa-east-1.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>ap-southeast-1</regionName>
                     <regionEndpoint>ec2.ap-southeast-1.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>ap-southeast-2</regionName>
                     <regionEndpoint>ec2.ap-southeast-2.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>eu-central-1</regionName>
                     <regionEndpoint>ec2.eu-central-1.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>us-east-1</regionName>
                     <regionEndpoint>ec2.us-east-1.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>us-east-2</regionName>
                     <regionEndpoint>ec2.us-east-2.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>us-west-1</regionName>
                     <regionEndpoint>ec2.us-west-1.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
                 <item>
                     <regionName>us-west-2</regionName>
                     <regionEndpoint>ec2.us-west-2.amazonaws.com</regionEndpoint>
+                    <optInStatus>opt-in-not-required</optInStatus>
                 </item>
             </regionInfo>
         </DescribeRegionsResponse>
-    http_version: 
-  recorded_at: Thu, 09 May 2019 23:10:14 GMT
-recorded_with: VCR 3.0.3
+    http_version:
+  recorded_at: Thu, 26 Oct 2023 16:24:04 GMT
+recorded_with: VCR 5.1.0
