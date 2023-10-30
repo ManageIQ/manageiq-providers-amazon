@@ -7312,6 +7312,34 @@ i4g.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+i4i.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I4I 12xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 12079595520000
+  :instance_store_size_gb: 11250.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 3
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: i4i.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
 i4i.16xlarge:
   :architecture:
   - :x86_64
@@ -7338,6 +7366,34 @@ i4i.16xlarge:
   :physical_processor: Intel Xeon 8375C (Ice Lake)
   :processor_clock_speed: 3.5 GHz
   :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+i4i.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: I4I 24xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 24159191040000
+  :instance_store_size_gb: 22500.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 6
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: i4i.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon 8375C (Ice Lake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 96
   :virtualization_type: []
   :vpc_only: true
 i4i.2xlarge:
@@ -13437,6 +13493,34 @@ mac1.metal:
   :network_performance: :very_high
   :physical_processor: Intel Core i7-8700B CPU
   :processor_clock_speed: 3.2 GHz
+  :vcpu: 12
+  :virtualization_type: []
+  :vpc_only: true
+mac2-m2.metal:
+  :architecture:
+  - :arm64_mac
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: MAC2-M2 Metal
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 25769803776
+  :memory_gb: 24.0
+  :name: mac2-m2.metal
+  :network_performance: :very_high
+  :physical_processor: Apple M2 Chip
+  :processor_clock_speed: 3.49 GHz
   :vcpu: 12
   :virtualization_type: []
   :vpc_only: true
