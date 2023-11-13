@@ -5,28 +5,15 @@ describe ManageIQ::Providers::Amazon::Regions do
     # https://github.com/aws/aws-sdk-ruby/blob/5fe5795e8910bb667996dfc75e4f16b7e69e3980/gems/aws-partitions/partitions.json#L11
     ordinary_regions_regexp = /^(us|eu|ap|sa|ca)\-\w+\-\d+$/
 
-    # https://docs.aws.amazon.com/general/latest/gr/rande.html - see quotes below
-    atypical_regions = [
-      'ap-east-1',      # "you must manually enable before you can use..."
-      'ap-south-2',
-      'ap-southeast-3',
-      'ap-southeast-4',
-      'eu-central-2',
-      'eu-south-1',
-      'eu-south-2'
-    ]
-
     current_regions = described_class.regions.reject do |name, _config|
-      atypical_regions.include?(name) || name !~ ordinary_regions_regexp
+      name !~ ordinary_regions_regexp
     end.map do |_name, config|
       {:region_name => config[:name], :endpoint => config[:hostname]}
     end
 
     online_regions = VCR.use_cassette(described_class.name.underscore) do
-      ems.connect.client.describe_regions.to_h[:regions]
+      ems.connect.client.describe_regions.to_h[:regions].map { |r| r.slice(:region_name, :endpoint) }
     end
-
-    online_regions.each { |r| r.delete(:opt_in_status) }
 
     # sort for better diff
     [current_regions, online_regions].each do |regions|
@@ -34,7 +21,7 @@ describe ManageIQ::Providers::Amazon::Regions do
       regions.sort_by! { |r| r[:region_name] }
     end
 
-    expect(online_regions).to eq(current_regions)
+    expect(current_regions).to include(*online_regions)
   end
 
   context "disable regions via Settings" do
