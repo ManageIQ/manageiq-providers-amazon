@@ -1,5 +1,5 @@
 class ManageIQ::Providers::Amazon::AgentCoordinatorWorker::Runner < MiqWorker::Runner
-  include_concern 'ResponseThread'
+  include ResponseThread
   def do_before_work_loop
     @coordinators = self.class.all_agent_coordinators_in_zone
     @coordinators.each(&:cleanup_agents)

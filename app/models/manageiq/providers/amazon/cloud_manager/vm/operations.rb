@@ -1,8 +1,7 @@
 module ManageIQ::Providers::Amazon::CloudManager::Vm::Operations
   extend ActiveSupport::Concern
-
-  include_concern 'Guest'
-  include_concern 'Power'
+  include Guest
+  include Power
 
   included do
     supports :terminate do
