@@ -2,8 +2,6 @@ class ManageIQ::Providers::Amazon::AgentCoordinatorWorker < MiqWorker
   include ProviderWorkerMixin
   include MiqWorker::ReplicaPerWorker
 
-  require_nested :Runner
-
   self.required_roles = ['smartproxy']
   self.workers        = 1
 

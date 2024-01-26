@@ -1,6 +1,4 @@
 class ManageIQ::Providers::Amazon::CloudManager::OrchestrationStack < ManageIQ::Providers::CloudManager::OrchestrationStack
-  require_nested :Status
-
   def self.raw_create_stack(orchestration_manager, stack_name, template, options = {})
     options = format_v2_options(options)
     orchestration_manager.with_provider_connection(:service => :CloudFormation) do |service|

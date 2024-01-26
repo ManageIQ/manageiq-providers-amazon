@@ -1,17 +1,4 @@
 class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::NetworkManager
-  require_nested :CloudNetwork
-  require_nested :CloudSubnet
-  require_nested :FloatingIp
-  require_nested :LoadBalancer
-  require_nested :LoadBalancerHealthCheck
-  require_nested :LoadBalancerListener
-  require_nested :LoadBalancerPool
-  require_nested :LoadBalancerPoolMember
-  require_nested :NetworkPort
-  require_nested :NetworkRouter
-  require_nested :Refresher
-  require_nested :SecurityGroup
-
   include ManageIQ::Providers::Amazon::ManagerMixin
 
   # Auth and endpoints delegations, editing of this type of manager must be disabled
