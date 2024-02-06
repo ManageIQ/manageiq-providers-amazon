@@ -1,4 +1,4 @@
 module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared
   extend ActiveSupport::Concern
-  include_concern 'Scanning'
+  include Scanning
 end
