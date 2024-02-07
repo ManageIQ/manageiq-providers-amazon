@@ -213,7 +213,7 @@ c1.xlarge:
   :deprecated: true
   :description: C1 High-CPU Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 1803886264320
@@ -243,7 +243,7 @@ c3.2xlarge:
   :deprecated: true
   :description: C3 High-CPU Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 171798691840
@@ -274,7 +274,7 @@ c3.4xlarge:
   :deprecated: true
   :description: C3 High-CPU Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 343597383680
@@ -368,7 +368,7 @@ c3.xlarge:
   :deprecated: true
   :description: C3 High-CPU Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 85899345920
@@ -559,7 +559,7 @@ c5.12xlarge:
   :name: c5.12xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275L
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 48
   :virtualization_type:
   - :hvm
@@ -588,7 +588,7 @@ c5.18xlarge:
   :name: c5.18xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 72
   :virtualization_type:
   - :hvm
@@ -617,7 +617,7 @@ c5.24xlarge:
   :name: c5.24xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275L
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 96
   :virtualization_type:
   - :hvm
@@ -646,7 +646,7 @@ c5.2xlarge:
   :name: c5.2xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 8
   :virtualization_type:
   - :hvm
@@ -675,7 +675,7 @@ c5.4xlarge:
   :name: c5.4xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 16
   :virtualization_type:
   - :hvm
@@ -704,7 +704,7 @@ c5.9xlarge:
   :name: c5.9xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 36
   :virtualization_type:
   - :hvm
@@ -733,7 +733,7 @@ c5.large:
   :name: c5.large
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 2
   :virtualization_type:
   - :hvm
@@ -762,7 +762,7 @@ c5.metal:
   :name: c5.metal
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275L
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 96
   :virtualization_type:
   - :hvm
@@ -791,7 +791,7 @@ c5.xlarge:
   :name: c5.xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -820,7 +820,7 @@ c5a.12xlarge:
   :name: c5a.12xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 48
   :virtualization_type: []
   :vpc_only: true
@@ -848,7 +848,7 @@ c5a.16xlarge:
   :name: c5a.16xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 64
   :virtualization_type: []
   :vpc_only: true
@@ -876,7 +876,7 @@ c5a.24xlarge:
   :name: c5a.24xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 96
   :virtualization_type: []
   :vpc_only: true
@@ -904,7 +904,7 @@ c5a.2xlarge:
   :name: c5a.2xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
@@ -932,7 +932,7 @@ c5a.4xlarge:
   :name: c5a.4xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 16
   :virtualization_type: []
   :vpc_only: true
@@ -960,7 +960,7 @@ c5a.8xlarge:
   :name: c5a.8xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 32
   :virtualization_type: []
   :vpc_only: true
@@ -988,7 +988,7 @@ c5a.large:
   :name: c5a.large
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
@@ -1016,7 +1016,7 @@ c5a.xlarge:
   :name: c5a.xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
@@ -1044,7 +1044,7 @@ c5ad.12xlarge:
   :name: c5ad.12xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 48
   :virtualization_type: []
   :vpc_only: true
@@ -1072,7 +1072,7 @@ c5ad.16xlarge:
   :name: c5ad.16xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 64
   :virtualization_type: []
   :vpc_only: true
@@ -1100,7 +1100,7 @@ c5ad.24xlarge:
   :name: c5ad.24xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 96
   :virtualization_type: []
   :vpc_only: true
@@ -1128,7 +1128,7 @@ c5ad.2xlarge:
   :name: c5ad.2xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
@@ -1156,7 +1156,7 @@ c5ad.4xlarge:
   :name: c5ad.4xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 16
   :virtualization_type: []
   :vpc_only: true
@@ -1184,7 +1184,7 @@ c5ad.8xlarge:
   :name: c5ad.8xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 32
   :virtualization_type: []
   :vpc_only: true
@@ -1212,7 +1212,7 @@ c5ad.large:
   :name: c5ad.large
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
@@ -1240,7 +1240,7 @@ c5ad.xlarge:
   :name: c5ad.xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R32
-  :processor_clock_speed: 2.8 GHz
+  :processor_clock_speed: 3.3 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
@@ -1268,7 +1268,7 @@ c5d.12xlarge:
   :name: c5d.12xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275L
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 48
   :virtualization_type:
   - :hvm
@@ -1297,7 +1297,7 @@ c5d.18xlarge:
   :name: c5d.18xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 72
   :virtualization_type:
   - :hvm
@@ -1326,7 +1326,7 @@ c5d.24xlarge:
   :name: c5d.24xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275L
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 96
   :virtualization_type:
   - :hvm
@@ -1355,7 +1355,7 @@ c5d.2xlarge:
   :name: c5d.2xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 8
   :virtualization_type:
   - :hvm
@@ -1384,7 +1384,7 @@ c5d.4xlarge:
   :name: c5d.4xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 16
   :virtualization_type:
   - :hvm
@@ -1413,7 +1413,7 @@ c5d.9xlarge:
   :name: c5d.9xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 36
   :virtualization_type:
   - :hvm
@@ -1442,7 +1442,7 @@ c5d.large:
   :name: c5d.large
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 2
   :virtualization_type:
   - :hvm
@@ -1471,7 +1471,7 @@ c5d.metal:
   :name: c5d.metal
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275L
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 96
   :virtualization_type:
   - :hvm
@@ -1500,7 +1500,7 @@ c5d.xlarge:
   :name: c5d.xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8124M
-  :processor_clock_speed: 3 GHz
+  :processor_clock_speed: 3.4 GHz
   :vcpu: 4
   :virtualization_type:
   - :hvm
@@ -1725,7 +1725,7 @@ c6a.12xlarge:
   :name: c6a.12xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 48
   :virtualization_type: []
   :vpc_only: true
@@ -1753,7 +1753,7 @@ c6a.16xlarge:
   :name: c6a.16xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 64
   :virtualization_type: []
   :vpc_only: true
@@ -1781,7 +1781,7 @@ c6a.24xlarge:
   :name: c6a.24xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 96
   :virtualization_type: []
   :vpc_only: true
@@ -1809,7 +1809,7 @@ c6a.2xlarge:
   :name: c6a.2xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
@@ -1837,7 +1837,7 @@ c6a.32xlarge:
   :name: c6a.32xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 128
   :virtualization_type: []
   :vpc_only: true
@@ -1865,7 +1865,7 @@ c6a.48xlarge:
   :name: c6a.48xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
@@ -1893,7 +1893,7 @@ c6a.4xlarge:
   :name: c6a.4xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 16
   :virtualization_type: []
   :vpc_only: true
@@ -1921,7 +1921,7 @@ c6a.8xlarge:
   :name: c6a.8xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 32
   :virtualization_type: []
   :vpc_only: true
@@ -1949,7 +1949,7 @@ c6a.large:
   :name: c6a.large
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
@@ -1977,7 +1977,7 @@ c6a.metal:
   :name: c6a.metal
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
@@ -2005,7 +2005,7 @@ c6a.xlarge:
   :name: c6a.xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
@@ -4837,6 +4837,62 @@ c7i.large:
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
+c7i.metal-24xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7I Metal-24xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: c7i.metal-24xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+c7i.metal-48xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7I Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: c7i.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
 c7i.xlarge:
   :architecture:
   - :x86_64
@@ -4928,12 +4984,13 @@ d2.2xlarge:
   :architecture:
   - :x86_64
   :cluster_networking: 
-  :current_generation: true
+  :current_generation: false
   :current_version: true
+  :deprecated: true
   :description: D2 Double Extra Large
   :ebs_only: false
   :ebs_optimized_available: true
-  :enhanced_networking: true
+  :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 13194139533312
   :instance_store_size_gb: 12288.0
@@ -4957,12 +5014,13 @@ d2.4xlarge:
   :architecture:
   - :x86_64
   :cluster_networking: 
-  :current_generation: true
+  :current_generation: false
   :current_version: true
+  :deprecated: true
   :description: D2 Quadruple Extra Large
   :ebs_only: false
   :ebs_optimized_available: true
-  :enhanced_networking: true
+  :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 26388279066624
   :instance_store_size_gb: 24576.0
@@ -4986,12 +5044,13 @@ d2.8xlarge:
   :architecture:
   - :x86_64
   :cluster_networking: 
-  :current_generation: true
+  :current_generation: false
   :current_version: true
+  :deprecated: true
   :description: D2 Eight Extra Large
   :ebs_only: false
   :ebs_optimized_available: true
-  :enhanced_networking: true
+  :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 52776558133248
   :instance_store_size_gb: 49152.0
@@ -5015,12 +5074,13 @@ d2.xlarge:
   :architecture:
   - :x86_64
   :cluster_networking: 
-  :current_generation: true
+  :current_generation: false
   :current_version: true
+  :deprecated: true
   :description: D2 Extra Large
   :ebs_only: false
   :ebs_optimized_available: true
-  :enhanced_networking: true
+  :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 6597069766656
   :instance_store_size_gb: 6144.0
@@ -5444,7 +5504,7 @@ g2.2xlarge:
   :deprecated: true
   :description: G2 Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: GPU instance
   :instance_store_size: 64424509440
@@ -6576,7 +6636,7 @@ i2.2xlarge:
   :deprecated: true
   :description: I2 Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 1717986918400
@@ -6606,7 +6666,7 @@ i2.4xlarge:
   :deprecated: true
   :description: I2 Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 3435973836800
@@ -6696,7 +6756,7 @@ i2.xlarge:
   :deprecated: true
   :description: I2 Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 858993459200
@@ -8161,7 +8221,7 @@ m1.large:
   :deprecated: true
   :description: M1 General Purpose Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 901943132160
@@ -8253,7 +8313,7 @@ m1.xlarge:
   :deprecated: true
   :description: M1 General Purpose Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 1803886264320
@@ -8283,7 +8343,7 @@ m2.2xlarge:
   :deprecated: true
   :description: M2 High Memory Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 912680550400
@@ -8313,7 +8373,7 @@ m2.4xlarge:
   :deprecated: true
   :description: M2 High Memory Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 1803886264320
@@ -8373,7 +8433,7 @@ m3.2xlarge:
   :deprecated: true
   :description: M3 General Purpose Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 171798691840
@@ -8466,7 +8526,7 @@ m3.xlarge:
   :deprecated: true
   :description: M3 General Purpose Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 85899345920
@@ -10356,7 +10416,7 @@ m6a.12xlarge:
   :name: m6a.12xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 48
   :virtualization_type: []
   :vpc_only: true
@@ -10384,7 +10444,7 @@ m6a.16xlarge:
   :name: m6a.16xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 64
   :virtualization_type: []
   :vpc_only: true
@@ -10412,7 +10472,7 @@ m6a.24xlarge:
   :name: m6a.24xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 96
   :virtualization_type: []
   :vpc_only: true
@@ -10440,7 +10500,7 @@ m6a.2xlarge:
   :name: m6a.2xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
@@ -10468,7 +10528,7 @@ m6a.32xlarge:
   :name: m6a.32xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 128
   :virtualization_type: []
   :vpc_only: true
@@ -10496,7 +10556,7 @@ m6a.48xlarge:
   :name: m6a.48xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
@@ -10524,7 +10584,7 @@ m6a.4xlarge:
   :name: m6a.4xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 16
   :virtualization_type: []
   :vpc_only: true
@@ -10552,7 +10612,7 @@ m6a.8xlarge:
   :name: m6a.8xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 32
   :virtualization_type: []
   :vpc_only: true
@@ -10580,7 +10640,7 @@ m6a.large:
   :name: m6a.large
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
@@ -10608,7 +10668,7 @@ m6a.metal:
   :name: m6a.metal
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
@@ -10636,7 +10696,7 @@ m6a.xlarge:
   :name: m6a.xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
@@ -13440,6 +13500,62 @@ m7i.large:
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
+m7i.metal-24xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M7I Metal-24xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: m7i.metal-24xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+m7i.metal-48xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: M7I Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: m7i.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
 m7i.xlarge:
   :architecture:
   - :x86_64
@@ -13522,6 +13638,34 @@ mac2-m2.metal:
   :physical_processor: Apple M2 Chip
   :processor_clock_speed: 3.49 GHz
   :vcpu: 12
+  :virtualization_type: []
+  :vpc_only: true
+mac2-m2pro.metal:
+  :architecture:
+  - :arm64_mac
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: MAC2-M2PRO Metal
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: mac2-m2pro.metal
+  :network_performance: :very_high
+  :physical_processor: Apple M2 Pro
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 20
   :virtualization_type: []
   :vpc_only: true
 mac2.metal:
@@ -13848,7 +13992,7 @@ r3.2xlarge:
   :deprecated: true
   :description: R3 High-Memory Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 171798691840
@@ -13878,7 +14022,7 @@ r3.4xlarge:
   :deprecated: true
   :description: R3 High-Memory Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 343597383680
@@ -13968,7 +14112,7 @@ r3.xlarge:
   :deprecated: true
   :description: R3 High-Memory Extra Large
   :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 85899345920
@@ -14888,9 +15032,9 @@ r5b.12xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 412316860416
   :memory_gb: 384.0
   :name: r5b.12xlarge
@@ -14916,9 +15060,9 @@ r5b.16xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 549755813888
   :memory_gb: 512.0
   :name: r5b.16xlarge
@@ -14944,9 +15088,9 @@ r5b.24xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 824633720832
   :memory_gb: 768.0
   :name: r5b.24xlarge
@@ -14972,9 +15116,9 @@ r5b.2xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 68719476736
   :memory_gb: 64.0
   :name: r5b.2xlarge
@@ -15000,9 +15144,9 @@ r5b.4xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 137438953472
   :memory_gb: 128.0
   :name: r5b.4xlarge
@@ -15028,9 +15172,9 @@ r5b.8xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 274877906944
   :memory_gb: 256.0
   :name: r5b.8xlarge
@@ -15056,9 +15200,9 @@ r5b.large:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 17179869184
   :memory_gb: 16.0
   :name: r5b.large
@@ -15084,9 +15228,9 @@ r5b.metal:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 824633720832
   :memory_gb: 768.0
   :name: r5b.metal
@@ -15112,9 +15256,9 @@ r5b.xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 34359738368
   :memory_gb: 32.0
   :name: r5b.xlarge
@@ -15653,9 +15797,9 @@ r5n.12xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 412316860416
   :memory_gb: 384.0
   :name: r5n.12xlarge
@@ -15681,9 +15825,9 @@ r5n.16xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 549755813888
   :memory_gb: 512.0
   :name: r5n.16xlarge
@@ -15709,9 +15853,9 @@ r5n.24xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 824633720832
   :memory_gb: 768.0
   :name: r5n.24xlarge
@@ -15737,9 +15881,9 @@ r5n.2xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 68719476736
   :memory_gb: 64.0
   :name: r5n.2xlarge
@@ -15765,9 +15909,9 @@ r5n.4xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 137438953472
   :memory_gb: 128.0
   :name: r5n.4xlarge
@@ -15793,9 +15937,9 @@ r5n.8xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 274877906944
   :memory_gb: 256.0
   :name: r5n.8xlarge
@@ -15821,9 +15965,9 @@ r5n.large:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 17179869184
   :memory_gb: 16.0
   :name: r5n.large
@@ -15849,9 +15993,9 @@ r5n.metal:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 824633720832
   :memory_gb: 768.0
   :name: r5n.metal
@@ -15877,9 +16021,9 @@ r5n.xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 34359738368
   :memory_gb: 32.0
   :name: r5n.xlarge
@@ -15913,7 +16057,7 @@ r6a.12xlarge:
   :name: r6a.12xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 48
   :virtualization_type: []
   :vpc_only: true
@@ -15941,7 +16085,7 @@ r6a.16xlarge:
   :name: r6a.16xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 64
   :virtualization_type: []
   :vpc_only: true
@@ -15969,7 +16113,7 @@ r6a.24xlarge:
   :name: r6a.24xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 96
   :virtualization_type: []
   :vpc_only: true
@@ -15997,7 +16141,7 @@ r6a.2xlarge:
   :name: r6a.2xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
@@ -16025,7 +16169,7 @@ r6a.32xlarge:
   :name: r6a.32xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 128
   :virtualization_type: []
   :vpc_only: true
@@ -16053,7 +16197,7 @@ r6a.48xlarge:
   :name: r6a.48xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
@@ -16081,7 +16225,7 @@ r6a.4xlarge:
   :name: r6a.4xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 16
   :virtualization_type: []
   :vpc_only: true
@@ -16109,7 +16253,7 @@ r6a.8xlarge:
   :name: r6a.8xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 32
   :virtualization_type: []
   :vpc_only: true
@@ -16137,7 +16281,7 @@ r6a.large:
   :name: r6a.large
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
@@ -16165,7 +16309,7 @@ r6a.metal:
   :name: r6a.metal
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
@@ -16193,7 +16337,7 @@ r6a.xlarge:
   :name: r6a.xlarge
   :network_performance: :very_high
   :physical_processor: AMD EPYC 7R13 Processor
-  :processor_clock_speed: 2.95 GHz
+  :processor_clock_speed: 3.6 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
@@ -18857,6 +19001,62 @@ r7i.large:
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
+r7i.metal-24xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7I Metal-24xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: r7i.metal-24xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+r7i.metal-48xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7I Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1649267441664
+  :memory_gb: 1536.0
+  :name: r7i.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
 r7i.xlarge:
   :architecture:
   - :x86_64
@@ -18901,15 +19101,15 @@ r7iz.12xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 412316860416
   :memory_gb: 384.0
   :name: r7iz.12xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
-  :processor_clock_speed: 3900 MHz
+  :processor_clock_speed: 3.9 GHz
   :vcpu: 48
   :virtualization_type: []
   :vpc_only: true
@@ -18929,15 +19129,15 @@ r7iz.16xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 549755813888
   :memory_gb: 512.0
   :name: r7iz.16xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
-  :processor_clock_speed: 3900 MHz
+  :processor_clock_speed: 3.9 GHz
   :vcpu: 64
   :virtualization_type: []
   :vpc_only: true
@@ -18957,15 +19157,15 @@ r7iz.2xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 68719476736
   :memory_gb: 64.0
   :name: r7iz.2xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
-  :processor_clock_speed: 3900 MHz
+  :processor_clock_speed: 3.9 GHz
   :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
@@ -18985,15 +19185,15 @@ r7iz.32xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 1099511627776
   :memory_gb: 1024.0
   :name: r7iz.32xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
-  :processor_clock_speed: 3900 MHz
+  :processor_clock_speed: 3.9 GHz
   :vcpu: 128
   :virtualization_type: []
   :vpc_only: true
@@ -19013,15 +19213,15 @@ r7iz.4xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 137438953472
   :memory_gb: 128.0
   :name: r7iz.4xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
-  :processor_clock_speed: 3900 MHz
+  :processor_clock_speed: 3.9 GHz
   :vcpu: 16
   :virtualization_type: []
   :vpc_only: true
@@ -19041,15 +19241,15 @@ r7iz.8xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 274877906944
   :memory_gb: 256.0
   :name: r7iz.8xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
-  :processor_clock_speed: 3900 MHz
+  :processor_clock_speed: 3.9 GHz
   :vcpu: 32
   :virtualization_type: []
   :vpc_only: true
@@ -19069,16 +19269,72 @@ r7iz.large:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 17179869184
   :memory_gb: 16.0
   :name: r7iz.large
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
-  :processor_clock_speed: 3900 MHz
+  :processor_clock_speed: 3.9 GHz
   :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+r7iz.metal-16xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7IZ Metal-16xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: r7iz.metal-16xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+r7iz.metal-32xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7IZ Metal-32xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1099511627776
+  :memory_gb: 1024.0
+  :name: r7iz.metal-32xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 128
   :virtualization_type: []
   :vpc_only: true
 r7iz.xlarge:
@@ -19097,15 +19353,15 @@ r7iz.xlarge:
   :instance_store_type: 
   :instance_store_volumes: 0
   :intel_aes_ni: true
-  :intel_avx: 
-  :intel_avx2: 
-  :intel_turbo: 
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
   :memory: 34359738368
   :memory_gb: 32.0
   :name: r7iz.xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
-  :processor_clock_speed: 3900 MHz
+  :processor_clock_speed: 3.9 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
