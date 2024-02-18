@@ -47,6 +47,10 @@ ca-central-1:
   :name: ca-central-1
   :hostname: ec2.ca-central-1.amazonaws.com
   :description: Canada (Central)
+ca-west-1:
+  :name: ca-west-1
+  :hostname: ec2.ca-west-1.amazonaws.com
+  :description: Canada West (Calgary)
 eu-central-1:
   :name: eu-central-1
   :hostname: ec2.eu-central-1.amazonaws.com
@@ -83,6 +87,10 @@ fips-ca-central-1:
   :name: fips-ca-central-1
   :hostname: ec2.fips-ca-central-1.amazonaws.com
   :description: fips-ca-central-1
+fips-ca-west-1:
+  :name: fips-ca-west-1
+  :hostname: ec2.fips-ca-west-1.amazonaws.com
+  :description: fips-ca-west-1
 fips-us-east-1:
   :name: fips-us-east-1
   :hostname: ec2.fips-us-east-1.amazonaws.com
