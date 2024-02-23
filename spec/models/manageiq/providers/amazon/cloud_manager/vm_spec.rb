@@ -102,10 +102,10 @@ describe ManageIQ::Providers::Amazon::CloudManager::Vm do
     end
   end
 
-  describe "#supports_terminate?" do
+  describe "#supports(:terminate)?" do
     context "when connected to a provider" do
       it "returns true" do
-        expect(vm.supports_terminate?).to be_truthy
+        expect(vm.supports?(:terminate)).to be_truthy
       end
     end
 
@@ -113,7 +113,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::Vm do
       let(:archived_vm) { FactoryBot.create(:vm_amazon) }
 
       it "returns false" do
-        expect(archived_vm.supports_terminate?).to be_falsey
+        expect(archived_vm.supports?(:terminate)).to be_falsey
         expect(archived_vm.unsupported_reason(:terminate)).to eq("The VM is not connected to an active Provider")
       end
     end
