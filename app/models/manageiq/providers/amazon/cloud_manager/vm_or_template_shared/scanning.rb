@@ -4,12 +4,7 @@ module ManageIQ::Providers::Amazon::CloudManager::VmOrTemplateShared::Scanning
   require 'scanning_operations_mixin'
 
   included do
-    supports :smartstate_analysis do
-      feature_supported, reason = check_feature_support('smartstate_analysis')
-      unless feature_supported
-        unsupported_reason_add(:smartstate_analysis, reason)
-      end
-    end
+    supports(:smartstate_analysis) { unsupported_reason(:action) }
   end
 
   def scan_job_class
