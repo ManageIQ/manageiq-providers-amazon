@@ -24,7 +24,7 @@ jobs:
     - name: Update rds db instance types
       run: bundle exec rake aws:extract:database_types
     - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v5
+      uses: peter-evans/create-pull-request@v6
       with:
         add-paths: |
           config/regions.yml
