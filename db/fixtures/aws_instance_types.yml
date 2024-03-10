@@ -4361,6 +4361,34 @@ c7gd.medium:
   :vcpu: 1
   :virtualization_type: []
   :vpc_only: true
+c7gd.metal:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7GD Metal
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: c7gd.metal
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
 c7gd.xlarge:
   :architecture:
   - :arm64
@@ -13115,14 +13143,14 @@ m7gd.metal:
   :current_generation: true
   :current_version: true
   :description: M7GD Metal
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: General purpose
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type: 
-  :instance_store_volumes: 0
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
   :intel_aes_ni: true
   :intel_avx: 
   :intel_avx2: 
@@ -18775,6 +18803,34 @@ r7gd.medium:
   :physical_processor: AWS Graviton3 Processor
   :processor_clock_speed: 2.5 GHz
   :vcpu: 1
+  :virtualization_type: []
+  :vpc_only: true
+r7gd.metal:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R7GD Metal
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: r7gd.metal
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton3 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 64
   :virtualization_type: []
   :vpc_only: true
 r7gd.xlarge:
