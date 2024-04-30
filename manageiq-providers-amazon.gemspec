@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "aws-sdk-servicecatalog",       "~> 1.0"
   spec.add_dependency "aws-sdk-sns",                  "~> 1.0"
   spec.add_dependency "aws-sdk-sqs",                  "~> 1.0"
-  spec.add_dependency "net-scp",                      "~> 1.2"
+  spec.add_dependency "net-scp",                      ">= 1.2", "<5"
 
   spec.add_development_dependency "manageiq-style"
   spec.add_development_dependency "simplecov", ">= 0.21.2"
