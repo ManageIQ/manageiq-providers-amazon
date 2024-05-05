@@ -975,14 +975,6 @@ db.r5b.12xlarge:
   :name: db.r5b.12xlarge
   :network_performance: :very_high
   :vcpu: 48
-db.r5b.12xlarge.tpc2.mem2x:
-  :deprecated: false
-  :ebs_optimized: false
-  :family: Memory optimized
-  :memory: 824633720832.0
-  :name: db.r5b.12xlarge.tpc2.mem2x
-  :network_performance: :very_high
-  :vcpu: 48
 db.r5b.16xlarge:
   :deprecated: false
   :ebs_optimized: true
