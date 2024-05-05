@@ -5559,14 +5559,14 @@ g2.2xlarge:
   :current_version: true
   :deprecated: true
   :description: G2 Double Extra Large
-  :ebs_only: false
+  :ebs_only: true
   :ebs_optimized_available: false
   :enhanced_networking: 
   :family: GPU instance
-  :instance_store_size: 64424509440
-  :instance_store_size_gb: 60.0
-  :instance_store_type: SSD
-  :instance_store_volumes: 1
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: 
@@ -5588,14 +5588,14 @@ g2.8xlarge:
   :current_version: true
   :deprecated: true
   :description: G2 Eight Extra Large
-  :ebs_only: false
+  :ebs_only: true
   :ebs_optimized_available: false
   :enhanced_networking: 
   :family: GPU instance
-  :instance_store_size: 257698037760
-  :instance_store_size_gb: 240.0
-  :instance_store_type: SSD
-  :instance_store_volumes: 2
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: 
@@ -6452,6 +6452,287 @@ g5g.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+g6.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G6 Graphics and Machine Learning GPU 12xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 16320875724800
+  :instance_store_size_gb: 15200.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 206158430208
+  :memory_gb: 192.0
+  :name: g6.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+g6.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G6 Graphics and Machine Learning GPU 16xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: g6.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+g6.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G6 Graphics and Machine Learning GPU 24xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 16320875724800
+  :instance_store_size_gb: 15200.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: g6.24xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+g6.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G6 Graphics and Machine Learning GPU Double Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 483183820800
+  :instance_store_size_gb: 450.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: g6.2xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+g6.48xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G6 Graphics and Machine Learning GPU 48xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 65283502899200
+  :instance_store_size_gb: 60800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 8
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: g6.48xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+g6.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G6 Graphics and Machine Learning GPU Quadruple Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 644245094400
+  :instance_store_size_gb: 600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: g6.4xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+g6.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G6 Graphics and Machine Learning GPU Eight Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 966367641600
+  :instance_store_size_gb: 900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: g6.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+g6.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: G6 Graphics and Machine Learning GPU Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 268435456000
+  :instance_store_size_gb: 250.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: g6.xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
+gr6.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: Gr6 Graphics and Machine Learning GPU High RAM ratio Quadruple Extra
+    Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 644245094400
+  :instance_store_size_gb: 600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: gr6.4xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R32
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+gr6.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: Gr6 Graphics and Machine Learning GPU High RAM ratio Eight Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 966367641600
+  :instance_store_size_gb: 900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: gr6.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R32
+  :processor_clock_speed: 2.6 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
 h1.16xlarge:
   :architecture:
   - :x86_64
@@ -6567,6 +6848,174 @@ h1.8xlarge:
   :vcpu: 32
   :virtualization_type:
   - :hvm
+  :vpc_only: true
+hpc6a.48xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: HPC6A 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: hpc6a.48xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.95 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+hpc6id.32xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: HPC6ID 32xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1099511627776
+  :memory_gb: 1024.0
+  :name: hpc6id.32xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Icelake)
+  :processor_clock_speed: 3.5 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+hpc7a.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: HPC7A 12xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: hpc7a.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R14 Processor
+  :processor_clock_speed: 3.7 GHz
+  :vcpu: 24
+  :virtualization_type: []
+  :vpc_only: true
+hpc7a.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: HPC7A 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: hpc7a.24xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R14 Processor
+  :processor_clock_speed: 3.7 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+hpc7a.48xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: HPC7A 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: hpc7a.48xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R14 Processor
+  :processor_clock_speed: 3.7 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+hpc7a.96xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: HPC7A 96xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: hpc7a.96xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R14 Processor
+  :processor_clock_speed: 3.7 GHz
+  :vcpu: 192
+  :virtualization_type: []
   :vpc_only: true
 hpc7g.16xlarge:
   :architecture:
@@ -14018,14 +14467,14 @@ p4de.24xlarge:
   :current_generation: true
   :current_version: true
   :description: P4DE 24xlarge
-  :ebs_only: false
+  :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 8589934592000
-  :instance_store_size_gb: 8000.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 8
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
