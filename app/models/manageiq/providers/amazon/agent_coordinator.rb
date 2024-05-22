@@ -1,6 +1,5 @@
 require 'yaml'
 require 'open3'
-require 'net/scp'
 require 'tempfile'
 require 'linux_admin'
 require 'awesome_spawn'
@@ -148,6 +147,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
   private
 
   def scp_file(ip, username, auth_key, local_file, remote_file)
+    require 'net/scp'
     Net::SCP.upload!(ip, username, local_file, remote_file, :ssh => {:key_data => auth_key})
   rescue => err
     _log.error(err.message)

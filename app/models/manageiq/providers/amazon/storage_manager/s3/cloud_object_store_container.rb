@@ -3,24 +3,19 @@ class ManageIQ::Providers::Amazon::StorageManager::S3::CloudObjectStoreContainer
 
   supports :delete do
     unless ext_management_system
-      unsupported_reason_add(:delete, _("The Storage Container is not connected to an active %{table}") % {
+      _("The Storage Container is not connected to an active %{table}") % {
         :table => ui_lookup(:table => "ext_management_systems")
-      })
+      }
     end
   end
 
   supports :cloud_object_store_container_clear do
-    unless ext_management_system
-      unsupported_reason_add(
-        :cloud_object_store_container_clear,
-        _("The Storage Container is not connected to an active %{table}") % {
-          :table => ui_lookup(:table => "ext_management_systems")
-        }
-      )
-    end
-
-    unless cloud_object_store_objects.count.positive?
-      unsupported_reason_add(:cloud_object_store_container_clear, _("The Storage Container is already empty"))
+    if !ext_management_system
+      _("The Storage Container is not connected to an active %{table}") % {
+        :table => ui_lookup(:table => "ext_management_systems")
+      }
+    elsif !cloud_object_store_objects.count.positive?
+      _("The Storage Container is already empty")
     end
   end
 
