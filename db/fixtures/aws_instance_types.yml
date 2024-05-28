@@ -4669,6 +4669,146 @@ c7gn.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+c7i-flex.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7I-FLEX Double Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: c7i-flex.2xlarge
+  :network_performance: :up_to_12500_megabit
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+c7i-flex.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7I-FLEX Quadruple Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: c7i-flex.4xlarge
+  :network_performance: :up_to_12500_megabit
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+c7i-flex.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7I-FLEX Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: c7i-flex.8xlarge
+  :network_performance: :up_to_12500_megabit
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+c7i-flex.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7I-FLEX Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 4294967296
+  :memory_gb: 4.0
+  :name: c7i-flex.large
+  :network_performance: :up_to_12500_megabit
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+c7i-flex.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: C7I-FLEX Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: c7i-flex.xlarge
+  :network_performance: :up_to_12500_megabit
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
 c7i.12xlarge:
   :architecture:
   - :x86_64
