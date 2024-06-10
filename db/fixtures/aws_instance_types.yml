@@ -21312,6 +21312,118 @@ u-9tb1.metal:
   :vcpu: 448
   :virtualization_type: []
   :vpc_only: true
+u7i-12tb.224xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: U7I-12TB 224xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 13194139533312
+  :memory_gb: 12288.0
+  :name: u7i-12tb.224xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 2.9 GHz
+  :vcpu: 896
+  :virtualization_type: []
+  :vpc_only: true
+u7in-16tb.224xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: U7IN-16TB 224xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 17592186044416
+  :memory_gb: 16384.0
+  :name: u7in-16tb.224xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 2.9 GHz
+  :vcpu: 896
+  :virtualization_type: []
+  :vpc_only: true
+u7in-24tb.224xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: U7IN-24TB 224xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 26388279066624
+  :memory_gb: 24576.0
+  :name: u7in-24tb.224xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 2.9 GHz
+  :vcpu: 896
+  :virtualization_type: []
+  :vpc_only: true
+u7in-32tb.224xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: U7IN-32TB 224xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 35184372088832
+  :memory_gb: 32768.0
+  :name: u7in-32tb.224xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
+  :processor_clock_speed: 2.9 GHz
+  :vcpu: 896
+  :virtualization_type: []
+  :vpc_only: true
 unknown:
   :architecture: []
   :cluster_networking: 
