@@ -14285,6 +14285,35 @@ mac1.metal:
   :vcpu: 12
   :virtualization_type: []
   :vpc_only: true
+mac2-m1ultra.metal:
+  :architecture:
+  - :arm64_mac
+  :cluster_networking: 
+  :current_generation: false
+  :current_version: true
+  :deprecated: true
+  :description: MAC2-M1ULTRA Metal
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: 
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: mac2-m1ultra.metal
+  :network_performance: :very_high
+  :physical_processor: Apple silicon M1 Ultra
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 20
+  :virtualization_type: []
+  :vpc_only: true
 mac2-m2.metal:
   :architecture:
   - :arm64_mac
