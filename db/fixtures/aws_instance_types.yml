@@ -14294,7 +14294,7 @@ mac2-m1ultra.metal:
   :deprecated: true
   :description: MAC2-M1ULTRA Metal
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 0
