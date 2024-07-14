@@ -6603,8 +6603,8 @@ g6.12xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 16320875724800
-  :instance_store_size_gb: 15200.0
+  :instance_store_size: 4037269258240
+  :instance_store_size_gb: 3760.0
   :instance_store_type: NVMe SSD
   :instance_store_volumes: 4
   :intel_aes_ni: true
@@ -6631,8 +6631,8 @@ g6.16xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 4080218931200
-  :instance_store_size_gb: 3800.0
+  :instance_store_size: 2018634629120
+  :instance_store_size_gb: 1880.0
   :instance_store_type: NVMe SSD
   :instance_store_volumes: 2
   :intel_aes_ni: true
@@ -6659,8 +6659,8 @@ g6.24xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 16320875724800
-  :instance_store_size_gb: 15200.0
+  :instance_store_size: 4037269258240
+  :instance_store_size_gb: 3760.0
   :instance_store_type: NVMe SSD
   :instance_store_volumes: 4
   :intel_aes_ni: true
@@ -6715,8 +6715,8 @@ g6.48xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 65283502899200
-  :instance_store_size_gb: 60800.0
+  :instance_store_size: 8074538516480
+  :instance_store_size_gb: 7520.0
   :instance_store_type: NVMe SSD
   :instance_store_volumes: 8
   :intel_aes_ni: true
@@ -20092,6 +20092,342 @@ r7iz.xlarge:
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
   :processor_clock_speed: 3.9 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
+r8g.12xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G 12xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: r8g.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+r8g.16xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G 16xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: r8g.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+r8g.24xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: r8g.24xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+r8g.2xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Double Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: r8g.2xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+r8g.48xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 1649267441664
+  :memory_gb: 1536.0
+  :name: r8g.48xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+r8g.4xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Quadruple Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: r8g.4xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+r8g.8xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: r8g.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+r8g.large:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: r8g.large
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+r8g.medium:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Medium
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: r8g.medium
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 1
+  :virtualization_type: []
+  :vpc_only: true
+r8g.metal-24xl:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Metal-24xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: r8g.metal-24xl
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+r8g.metal-48xl:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 1649267441664
+  :memory_gb: 1536.0
+  :name: r8g.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+r8g.xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: r8g.xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
