@@ -213,7 +213,7 @@ c1.xlarge:
   :deprecated: true
   :description: C1 High-CPU Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 1803886264320
@@ -243,7 +243,7 @@ c3.2xlarge:
   :deprecated: true
   :description: C3 High-CPU Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 171798691840
@@ -274,7 +274,7 @@ c3.4xlarge:
   :deprecated: true
   :description: C3 High-CPU Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 343597383680
@@ -368,7 +368,7 @@ c3.xlarge:
   :deprecated: true
   :description: C3 High-CPU Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 85899345920
@@ -4677,7 +4677,7 @@ c7i-flex.2xlarge:
   :current_version: true
   :description: C7I-FLEX Double Extra Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -4705,7 +4705,7 @@ c7i-flex.4xlarge:
   :current_version: true
   :description: C7I-FLEX Quadruple Extra Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -4733,7 +4733,7 @@ c7i-flex.8xlarge:
   :current_version: true
   :description: C7I-FLEX Eight Extra Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -4761,7 +4761,7 @@ c7i-flex.large:
   :current_version: true
   :description: C7I-FLEX Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -4789,7 +4789,7 @@ c7i-flex.xlarge:
   :current_version: true
   :description: C7I-FLEX Extra Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -5844,7 +5844,7 @@ g3s.xlarge:
   :current_version: true
   :description: G3S Extra Large
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
   :instance_store_size: 0
@@ -6997,7 +6997,7 @@ hpc6a.48xlarge:
   :current_version: true
   :description: HPC6A 48xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7025,7 +7025,7 @@ hpc6id.32xlarge:
   :current_version: true
   :description: HPC6ID 32xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7053,7 +7053,7 @@ hpc7a.12xlarge:
   :current_version: true
   :description: HPC7A 12xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7081,7 +7081,7 @@ hpc7a.24xlarge:
   :current_version: true
   :description: HPC7A 24xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7109,7 +7109,7 @@ hpc7a.48xlarge:
   :current_version: true
   :description: HPC7A 48xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7137,7 +7137,7 @@ hpc7a.96xlarge:
   :current_version: true
   :description: HPC7A 96xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7281,7 +7281,7 @@ i2.2xlarge:
   :deprecated: true
   :description: I2 Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 1717986918400
@@ -7311,7 +7311,7 @@ i2.4xlarge:
   :deprecated: true
   :description: I2 Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 3435973836800
@@ -7401,7 +7401,7 @@ i2.xlarge:
   :deprecated: true
   :description: I2 Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 858993459200
@@ -8866,7 +8866,7 @@ m1.large:
   :deprecated: true
   :description: M1 General Purpose Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 901943132160
@@ -8958,7 +8958,7 @@ m1.xlarge:
   :deprecated: true
   :description: M1 General Purpose Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 1803886264320
@@ -8988,7 +8988,7 @@ m2.2xlarge:
   :deprecated: true
   :description: M2 High Memory Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 912680550400
@@ -9018,7 +9018,7 @@ m2.4xlarge:
   :deprecated: true
   :description: M2 High Memory Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 1803886264320
@@ -9078,7 +9078,7 @@ m3.2xlarge:
   :deprecated: true
   :description: M3 General Purpose Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 171798691840
@@ -9171,7 +9171,7 @@ m3.xlarge:
   :deprecated: true
   :description: M3 General Purpose Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 85899345920
@@ -14637,7 +14637,7 @@ p4de.24xlarge:
   :current_version: true
   :description: P4DE 24xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: GPU instance
   :instance_store_size: 0
@@ -14694,7 +14694,7 @@ r3.2xlarge:
   :deprecated: true
   :description: R3 High-Memory Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 171798691840
@@ -14724,7 +14724,7 @@ r3.4xlarge:
   :deprecated: true
   :description: R3 High-Memory Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 343597383680
@@ -14814,7 +14814,7 @@ r3.xlarge:
   :deprecated: true
   :description: R3 High-Memory Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 85899345920
@@ -21377,7 +21377,7 @@ u-12tb1.metal:
   :current_version: true
   :description: U-12TB1 Metal
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
@@ -21433,7 +21433,7 @@ u-18tb1.metal:
   :current_version: true
   :description: U-18TB1 Metal
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
@@ -21489,7 +21489,7 @@ u-24tb1.metal:
   :current_version: true
   :description: U-24TB1 Metal
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
@@ -21601,7 +21601,7 @@ u-6tb1.metal:
   :current_version: true
   :description: U-6TB1 Metal
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
@@ -21657,7 +21657,7 @@ u-9tb1.metal:
   :current_version: true
   :description: U-9TB1 Metal
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
