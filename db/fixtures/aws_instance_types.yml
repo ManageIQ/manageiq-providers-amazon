@@ -213,7 +213,7 @@ c1.xlarge:
   :deprecated: true
   :description: C1 High-CPU Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 1803886264320
@@ -243,7 +243,7 @@ c3.2xlarge:
   :deprecated: true
   :description: C3 High-CPU Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 171798691840
@@ -274,7 +274,7 @@ c3.4xlarge:
   :deprecated: true
   :description: C3 High-CPU Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 343597383680
@@ -368,7 +368,7 @@ c3.xlarge:
   :deprecated: true
   :description: C3 High-CPU Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Compute optimized
   :instance_store_size: 85899345920
@@ -4677,7 +4677,7 @@ c7i-flex.2xlarge:
   :current_version: true
   :description: C7I-FLEX Double Extra Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -4705,7 +4705,7 @@ c7i-flex.4xlarge:
   :current_version: true
   :description: C7I-FLEX Quadruple Extra Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -4733,7 +4733,7 @@ c7i-flex.8xlarge:
   :current_version: true
   :description: C7I-FLEX Eight Extra Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -4761,7 +4761,7 @@ c7i-flex.large:
   :current_version: true
   :description: C7I-FLEX Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -4789,7 +4789,7 @@ c7i-flex.xlarge:
   :current_version: true
   :description: C7I-FLEX Extra Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -5844,7 +5844,7 @@ g3s.xlarge:
   :current_version: true
   :description: G3S Extra Large
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
   :instance_store_size: 0
@@ -6603,8 +6603,8 @@ g6.12xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 16320875724800
-  :instance_store_size_gb: 15200.0
+  :instance_store_size: 4037269258240
+  :instance_store_size_gb: 3760.0
   :instance_store_type: NVMe SSD
   :instance_store_volumes: 4
   :intel_aes_ni: true
@@ -6631,8 +6631,8 @@ g6.16xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 4080218931200
-  :instance_store_size_gb: 3800.0
+  :instance_store_size: 2018634629120
+  :instance_store_size_gb: 1880.0
   :instance_store_type: NVMe SSD
   :instance_store_volumes: 2
   :intel_aes_ni: true
@@ -6659,8 +6659,8 @@ g6.24xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 16320875724800
-  :instance_store_size_gb: 15200.0
+  :instance_store_size: 4037269258240
+  :instance_store_size_gb: 3760.0
   :instance_store_type: NVMe SSD
   :instance_store_volumes: 4
   :intel_aes_ni: true
@@ -6715,8 +6715,8 @@ g6.48xlarge:
   :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 65283502899200
-  :instance_store_size_gb: 60800.0
+  :instance_store_size: 8074538516480
+  :instance_store_size_gb: 7520.0
   :instance_store_type: NVMe SSD
   :instance_store_volumes: 8
   :intel_aes_ni: true
@@ -6997,7 +6997,7 @@ hpc6a.48xlarge:
   :current_version: true
   :description: HPC6A 48xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7025,7 +7025,7 @@ hpc6id.32xlarge:
   :current_version: true
   :description: HPC6ID 32xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7053,7 +7053,7 @@ hpc7a.12xlarge:
   :current_version: true
   :description: HPC7A 12xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7081,7 +7081,7 @@ hpc7a.24xlarge:
   :current_version: true
   :description: HPC7A 24xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7109,7 +7109,7 @@ hpc7a.48xlarge:
   :current_version: true
   :description: HPC7A 48xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7137,7 +7137,7 @@ hpc7a.96xlarge:
   :current_version: true
   :description: HPC7A 96xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -7281,7 +7281,7 @@ i2.2xlarge:
   :deprecated: true
   :description: I2 Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 1717986918400
@@ -7311,7 +7311,7 @@ i2.4xlarge:
   :deprecated: true
   :description: I2 Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 3435973836800
@@ -7401,7 +7401,7 @@ i2.xlarge:
   :deprecated: true
   :description: I2 Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Storage optimized
   :instance_store_size: 858993459200
@@ -8866,7 +8866,7 @@ m1.large:
   :deprecated: true
   :description: M1 General Purpose Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 901943132160
@@ -8958,7 +8958,7 @@ m1.xlarge:
   :deprecated: true
   :description: M1 General Purpose Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 1803886264320
@@ -8988,7 +8988,7 @@ m2.2xlarge:
   :deprecated: true
   :description: M2 High Memory Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 912680550400
@@ -9018,7 +9018,7 @@ m2.4xlarge:
   :deprecated: true
   :description: M2 High Memory Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 1803886264320
@@ -9078,7 +9078,7 @@ m3.2xlarge:
   :deprecated: true
   :description: M3 General Purpose Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 171798691840
@@ -9171,7 +9171,7 @@ m3.xlarge:
   :deprecated: true
   :description: M3 General Purpose Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: General purpose
   :instance_store_size: 85899345920
@@ -14637,7 +14637,7 @@ p4de.24xlarge:
   :current_version: true
   :description: P4DE 24xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: GPU instance
   :instance_store_size: 0
@@ -14694,7 +14694,7 @@ r3.2xlarge:
   :deprecated: true
   :description: R3 High-Memory Double Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 171798691840
@@ -14724,7 +14724,7 @@ r3.4xlarge:
   :deprecated: true
   :description: R3 High-Memory Quadruple Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 343597383680
@@ -14814,7 +14814,7 @@ r3.xlarge:
   :deprecated: true
   :description: R3 High-Memory Extra Large
   :ebs_only: false
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: 
   :family: Memory optimized
   :instance_store_size: 85899345920
@@ -20095,6 +20095,342 @@ r7iz.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+r8g.12xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G 12xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 412316860416
+  :memory_gb: 384.0
+  :name: r8g.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+r8g.16xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G 16xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 549755813888
+  :memory_gb: 512.0
+  :name: r8g.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+r8g.24xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: r8g.24xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+r8g.2xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Double Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 68719476736
+  :memory_gb: 64.0
+  :name: r8g.2xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+r8g.48xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 1649267441664
+  :memory_gb: 1536.0
+  :name: r8g.48xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+r8g.4xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Quadruple Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: r8g.4xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+r8g.8xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: r8g.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+r8g.large:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 17179869184
+  :memory_gb: 16.0
+  :name: r8g.large
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+r8g.medium:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Medium
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 8589934592
+  :memory_gb: 8.0
+  :name: r8g.medium
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 1
+  :virtualization_type: []
+  :vpc_only: true
+r8g.metal-24xl:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Metal-24xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: r8g.metal-24xl
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+r8g.metal-48xl:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 1649267441664
+  :memory_gb: 1536.0
+  :name: r8g.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+r8g.xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking: 
+  :current_generation: true
+  :current_version: true
+  :description: R8G Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type: 
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: 
+  :intel_avx2: 
+  :intel_turbo: 
+  :memory: 34359738368
+  :memory_gb: 32.0
+  :name: r8g.xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
 t1.micro:
   :architecture:
   - :i386
@@ -21041,7 +21377,7 @@ u-12tb1.metal:
   :current_version: true
   :description: U-12TB1 Metal
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
@@ -21097,7 +21433,7 @@ u-18tb1.metal:
   :current_version: true
   :description: U-18TB1 Metal
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
@@ -21153,7 +21489,7 @@ u-24tb1.metal:
   :current_version: true
   :description: U-24TB1 Metal
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
@@ -21265,7 +21601,7 @@ u-6tb1.metal:
   :current_version: true
   :description: U-6TB1 Metal
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
@@ -21321,7 +21657,7 @@ u-9tb1.metal:
   :current_version: true
   :description: U-9TB1 Metal
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Memory optimized
   :instance_store_size: 0
