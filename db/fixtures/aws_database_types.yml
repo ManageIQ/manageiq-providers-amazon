@@ -1303,6 +1303,14 @@ db.r6i.12xlarge:
   :name: db.r6i.12xlarge
   :network_performance: :18.75_gbps
   :vcpu: 48
+db.r6i.12xlarge.tpc2.mem2x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 824633720832.0
+  :name: db.r6i.12xlarge.tpc2.mem2x
+  :network_performance: :37.5_gbps
+  :vcpu: 48
 db.r6i.16xlarge:
   :deprecated: false
   :ebs_optimized: false
@@ -1390,6 +1398,14 @@ db.r6i.4xlarge.tpc2.mem4x:
   :memory: 549755813888.0
   :name: db.r6i.4xlarge.tpc2.mem4x
   :network_performance: :25_gbps
+  :vcpu: 16
+db.r6i.4xlarge.tpc2.mem8x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 1099511627776.0
+  :name: db.r6i.4xlarge.tpc2.mem8x
+  :network_performance: :50_gbps
   :vcpu: 16
 db.r6i.6xlarge.tpc2.mem4x:
   :deprecated: false
