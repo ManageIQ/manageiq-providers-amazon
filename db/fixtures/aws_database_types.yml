@@ -192,12 +192,12 @@ db.m5.large:
   :network_performance: :very_high
   :vcpu: 2
 db.m5.xlarge:
-  :deprecated: false
-  :ebs_optimized: true
+  :deprecated: true
+  :ebs_optimized: false
   :family: General purpose
   :memory: 17179869184.0
   :name: db.m5.xlarge
-  :network_performance: :very_high
+  :network_performance:
   :vcpu: 4
 db.m5d.12xlarge:
   :deprecated: false
@@ -384,12 +384,12 @@ db.m6i.12xlarge:
   :network_performance: :18.75_gbps
   :vcpu: 48
 db.m6i.16xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: General purpose
   :memory: 274877906944.0
   :name: db.m6i.16xlarge
-  :network_performance: :25_gbps
+  :network_performance:
   :vcpu: 64
 db.m6i.24xlarge:
   :deprecated: false
@@ -400,12 +400,12 @@ db.m6i.24xlarge:
   :network_performance: :37.5_gbps
   :vcpu: 96
 db.m6i.2xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: General purpose
   :memory: 34359738368.0
   :name: db.m6i.2xlarge
-  :network_performance: :up_to_12.5_gbps
+  :network_performance:
   :vcpu: 8
 db.m6i.32xlarge:
   :deprecated: false
@@ -424,28 +424,28 @@ db.m6i.4xlarge:
   :network_performance: :up_to_12.5_gbps
   :vcpu: 16
 db.m6i.8xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: General purpose
   :memory: 137438953472.0
   :name: db.m6i.8xlarge
-  :network_performance: :12.5_gbps
+  :network_performance:
   :vcpu: 32
 db.m6i.large:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: General purpose
   :memory: 8589934592.0
   :name: db.m6i.large
-  :network_performance: :up_to_12.5_gbps
+  :network_performance:
   :vcpu: 2
 db.m6i.xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: General purpose
   :memory: 17179869184.0
   :name: db.m6i.xlarge
-  :network_performance: :up_to_12.5_gbps
+  :network_performance:
   :vcpu: 4
 db.m6id.12xlarge:
   :deprecated: false
@@ -912,12 +912,12 @@ db.r5.6xlarge.tpc2.mem4x:
   :network_performance: :very_high
   :vcpu: 24
 db.r5.8xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 274877906944.0
   :name: db.r5.8xlarge
-  :network_performance: :very_high
+  :network_performance:
   :vcpu: 32
 db.r5.8xlarge.tpc2.mem3x:
   :deprecated: false
@@ -992,12 +992,12 @@ db.r5b.24xlarge:
   :network_performance: :very_high
   :vcpu: 96
 db.r5b.2xlarge:
-  :deprecated: false
-  :ebs_optimized: true
+  :deprecated: true
+  :ebs_optimized: false
   :family: Memory optimized
   :memory: 68719476736.0
   :name: db.r5b.2xlarge
-  :network_performance: :very_high
+  :network_performance:
   :vcpu: 8
 db.r5b.2xlarge.tpc1.mem2x:
   :deprecated: false
@@ -1024,12 +1024,12 @@ db.r5b.2xlarge.tpc2.mem8x:
   :network_performance: :very_high
   :vcpu: 8
 db.r5b.4xlarge:
-  :deprecated: false
-  :ebs_optimized: true
+  :deprecated: true
+  :ebs_optimized: false
   :family: Memory optimized
   :memory: 137438953472.0
   :name: db.r5b.4xlarge
-  :network_performance: :very_high
+  :network_performance:
   :vcpu: 16
 db.r5b.4xlarge.tpc2.mem2x:
   :deprecated: false
@@ -1080,12 +1080,12 @@ db.r5b.8xlarge.tpc2.mem3x:
   :network_performance: :very_high
   :vcpu: 32
 db.r5b.large:
-  :deprecated: false
-  :ebs_optimized: true
+  :deprecated: true
+  :ebs_optimized: false
   :family: Memory optimized
   :memory: 17179869184.0
   :name: db.r5b.large
-  :network_performance: :very_high
+  :network_performance:
   :vcpu: 2
 db.r5b.large.tpc1.mem2x:
   :deprecated: false
@@ -1096,12 +1096,12 @@ db.r5b.large.tpc1.mem2x:
   :network_performance: :very_high
   :vcpu: 2
 db.r5b.xlarge:
-  :deprecated: false
-  :ebs_optimized: true
+  :deprecated: true
+  :ebs_optimized: false
   :family: Memory optimized
   :memory: 34359738368.0
   :name: db.r5b.xlarge
-  :network_performance: :very_high
+  :network_performance:
   :vcpu: 4
 db.r5b.xlarge.tpc2.mem2x:
   :deprecated: false
@@ -1320,12 +1320,12 @@ db.r6i.16xlarge:
   :network_performance: :25_gbps
   :vcpu: 64
 db.r6i.24xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 824633720832.0
   :name: db.r6i.24xlarge
-  :network_performance: :37.5_gbps
+  :network_performance:
   :vcpu: 96
 db.r6i.2xlarge:
   :deprecated: false
@@ -1360,12 +1360,12 @@ db.r6i.2xlarge.tpc2.mem8x:
   :network_performance: :25_gbps
   :vcpu: 8
 db.r6i.32xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 1099511627776.0
   :name: db.r6i.32xlarge
-  :network_performance: :50_gbps
+  :network_performance:
   :vcpu: 128
 db.r6i.4xlarge:
   :deprecated: false
@@ -1416,12 +1416,12 @@ db.r6i.6xlarge.tpc2.mem4x:
   :network_performance: :37.5_gbps
   :vcpu: 24
 db.r6i.8xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 274877906944.0
   :name: db.r6i.8xlarge
-  :network_performance: :12.5_gbps
+  :network_performance:
   :vcpu: 32
 db.r6i.8xlarge.tpc2.mem3x:
   :deprecated: false
@@ -1440,12 +1440,12 @@ db.r6i.8xlarge.tpc2.mem4x:
   :network_performance: :50_gbps
   :vcpu: 32
 db.r6i.large:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 17179869184.0
   :name: db.r6i.large
-  :network_performance: :up_to_12.5_gbps
+  :network_performance:
   :vcpu: 2
 db.r6i.large.tpc1.mem2x:
   :deprecated: false
@@ -1456,12 +1456,12 @@ db.r6i.large.tpc1.mem2x:
   :network_performance: :up_to_12.5_gbps
   :vcpu: 2
 db.r6i.xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 34359738368.0
   :name: db.r6i.xlarge
-  :network_performance: :up_to_12.5_gbps
+  :network_performance:
   :vcpu: 4
 db.r6i.xlarge.tpc2.mem2x:
   :deprecated: false
@@ -2096,36 +2096,36 @@ db.x2iedn.8xlarge:
   :network_performance: :25_gbps
   :vcpu: 32
 db.x2iedn.xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 137438953472.0
   :name: db.x2iedn.xlarge
-  :network_performance: :up_to_25_gbps
+  :network_performance:
   :vcpu: 4
 db.x2iezn.12xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 1649267441664.0
   :name: db.x2iezn.12xlarge
-  :network_performance: :100_gbps
+  :network_performance:
   :vcpu: 48
 db.x2iezn.2xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 274877906944.0
   :name: db.x2iezn.2xlarge
-  :network_performance: :up_to_25_gbps
+  :network_performance:
   :vcpu: 8
 db.x2iezn.4xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 549755813888.0
   :name: db.x2iezn.4xlarge
-  :network_performance: :up_to_25_gbps
+  :network_performance:
   :vcpu: 16
 db.x2iezn.6xlarge:
   :deprecated: false
