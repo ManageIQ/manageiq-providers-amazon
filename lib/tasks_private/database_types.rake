@@ -8,7 +8,9 @@ namespace 'aws:extract' do
     end
 
     results = instances.map do |instance|
-      network_performance = if instance["networkPerformance"].match?(/(\d+ Gigabit)/)
+      network_performance = if instance["networkPerformance"].nil?
+                              nil
+                            elsif instance["networkPerformance"].match?(/(\d+ Gigabit)/)
                               :very_high
                             else
                               instance["networkPerformance"].downcase.tr(' ', '_').to_sym
