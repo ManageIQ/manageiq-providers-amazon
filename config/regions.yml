@@ -43,6 +43,10 @@ ap-southeast-4:
   :name: ap-southeast-4
   :hostname: ec2.ap-southeast-4.amazonaws.com
   :description: Asia Pacific (Melbourne)
+ap-southeast-5:
+  :name: ap-southeast-5
+  :hostname: ec2.ap-southeast-5.amazonaws.com
+  :description: Asia Pacific (Malaysia)
 ca-central-1:
   :name: ca-central-1
   :hostname: ec2.ca-central-1.amazonaws.com
