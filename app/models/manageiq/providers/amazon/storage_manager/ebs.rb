@@ -26,6 +26,10 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::St
   supports :cloud_volume
   supports :cloud_volume_create
 
+  class << self
+    delegate :refresh_ems, :to => ManageIQ::Providers::Amazon::CloudManager
+  end
+
   def self.ems_type
     @ems_type ||= "ec2_ebs_storage".freeze
   end

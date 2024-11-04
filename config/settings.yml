@@ -85,6 +85,9 @@
     :inventory_collections:
       :saver_strategy: batch
   :ec2_network:
+    # Disable scheduled full refresh for the network manager as this will be
+    # refreshed automatically by the parent cloud manager.
+    :refresh_interval: 0
     :inventory_collections:
       :saver_strategy: batch
   :eks:
@@ -97,6 +100,9 @@
     :inventory_collections:
       :saver_strategy: batch
   :ec2_ebs_storage:
+    # Disable scheduled full refresh for the storage manager as this will be
+    # refreshed automatically by the parent cloud manager.
+    :refresh_interval: 0
     :inventory_collections:
       :saver_strategy: batch
 :http_proxy:

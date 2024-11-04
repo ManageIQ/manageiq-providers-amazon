@@ -18,6 +18,10 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
            :to        => :parent_manager,
            :allow_nil => true
 
+  class << self
+    delegate :refresh_ems, :to => ManageIQ::Providers::Amazon::CloudManager
+  end
+
   def self.ems_type
     @ems_type ||= "ec2_network".freeze
   end
