@@ -127,6 +127,10 @@ me-south-1:
   :name: me-south-1
   :hostname: ec2.me-south-1.amazonaws.com
   :description: Middle East (Bahrain)
+mx-central-1:
+  :name: mx-central-1
+  :hostname: ec2.mx-central-1.amazonaws.com
+  :description: Mexico (Central)
 sa-east-1:
   :name: sa-east-1
   :hostname: ec2.sa-east-1.amazonaws.com
