@@ -34,14 +34,6 @@ class ManageIQ::Providers::Amazon::NetworkManager < ManageIQ::Providers::Network
     false
   end
 
-  def self.default_blacklisted_event_names
-    %w(
-      ConfigurationSnapshotDeliveryCompleted
-      ConfigurationSnapshotDeliveryStarted
-      ConfigurationSnapshotDeliveryFailed
-    )
-  end
-
   def self.display_name(number = 1)
     n_('Network Provider (Amazon)', 'Network Providers (Amazon)', number)
   end
