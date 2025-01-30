@@ -108,7 +108,7 @@ class ManageIQ::Providers::Amazon::CloudManager < ManageIQ::Providers::CloudMana
     false
   end
 
-  def self.default_blacklisted_event_names
+  def self.filtered_event_names
     Settings.ems.ems_amazon.blacklisted_event_names
   end
 
