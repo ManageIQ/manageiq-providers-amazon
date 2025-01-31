@@ -1437,11 +1437,8 @@ module AwsRefresherSpecCommon
             "owner"               => "EmsRefreshSpecProductWithNoPortfolioOwner",
             "product_id"          => "prod-4v6rc4hwaiiha",
             "distributor"         => "",
-            "support_url"         => nil,
-            "support_email"       => nil,
             "has_default_path"    => false,
             "short_description"   => "EmsRefreshSpecProductWithNoPortfolio desc",
-            "support_description" => nil
           }
         },
         "deleted_on"  => nil,
@@ -1511,11 +1508,8 @@ module AwsRefresherSpecCommon
             "owner"               => "EmsRefreshSpecProductWithRulesowner",
             "product_id"          => "prod-cei2spnzu24lq",
             "distributor"         => "EmsRefreshSpecProductWithRulesVendor",
-            "support_url"         => nil,
-            "support_email"       => nil,
             "has_default_path"    => false,
             "short_description"   => "EmsRefreshSpecProductWithRules desc",
-            "support_description" => nil
           }
         },
         "deleted_on"  => nil,
