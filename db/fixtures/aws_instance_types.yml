@@ -6139,6 +6139,34 @@ f2.48xlarge:
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
+f2.6xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: F2 6xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: FPGA Instances
+  :instance_store_size: 1009317314560
+  :instance_store_size_gb: 940.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 274877906944
+  :memory_gb: 256.0
+  :name: f2.6xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.95 GHz
+  :vcpu: 24
+  :virtualization_type: []
+  :vpc_only: true
 g2.2xlarge:
   :architecture:
   - :x86_64
