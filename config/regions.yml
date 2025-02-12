@@ -179,3 +179,11 @@ us-isob-east-1:
   :name: us-isob-east-1
   :hostname: ec2.us-isob-east-1.sc2s.sgov.gov
   :description: US ISOB East (Ohio)
+us-isof-east-1:
+  :name: us-isof-east-1
+  :hostname: ec2.us-isof-east-1.csp.hci.ic.gov
+  :description: US ISOF EAST
+us-isof-south-1:
+  :name: us-isof-south-1
+  :hostname: ec2.us-isof-south-1.csp.hci.ic.gov
+  :description: US ISOF SOUTH
