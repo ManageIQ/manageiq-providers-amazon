@@ -404,7 +404,7 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
         :name    => service_offering.product_view_summary.name,
         :ems_ref => service_offering.product_view_summary.product_id,
         :extra   => {
-          :product_view_summary => service_offering.product_view_summary,
+          :product_view_summary => service_offering.product_view_summary.to_h,
           :status               => service_offering.status,
           :product_arn          => service_offering.product_arn,
           :created_time         => service_offering.created_time,
