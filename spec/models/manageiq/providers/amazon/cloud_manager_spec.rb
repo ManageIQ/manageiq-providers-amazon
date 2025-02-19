@@ -49,6 +49,12 @@ describe ManageIQ::Providers::Amazon::CloudManager do
     expect(described_class.description).to eq('Amazon EC2')
   end
 
+  it ".filtered_event_names" do
+    expect(described_class.filtered_event_names).to match_array(
+      %w(ConfigurationSnapshotDeliveryCompleted ConfigurationSnapshotDeliveryStarted ConfigurationSnapshotDeliveryFailed)
+    )
+  end
+
   context "#pause!" do
     let(:zone) { FactoryBot.create(:zone) }
     let(:ems)  { FactoryBot.create(:ems_amazon, :zone => zone) }

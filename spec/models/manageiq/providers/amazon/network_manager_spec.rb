@@ -21,16 +21,6 @@ describe ManageIQ::Providers::Amazon::NetworkManager do
       expect(described_class.hostname_required?).to eq(false)
     end
 
-    it "returns the expected value for the default_blacklisted_event_names method" do
-      array = %w(
-        ConfigurationSnapshotDeliveryCompleted
-        ConfigurationSnapshotDeliveryStarted
-        ConfigurationSnapshotDeliveryFailed
-      )
-
-      expect(described_class.default_blacklisted_event_names).to eq(array)
-    end
-
     it "returns the expected value for the display_name method" do
       expect(described_class.display_name).to eq('Network Provider (Amazon)')
       expect(described_class.display_name(2)).to eq('Network Providers (Amazon)')
