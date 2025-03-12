@@ -39,7 +39,7 @@ describe Authenticator::Amazon do
   def aws_get_user_is_root!(resource)
     response = resource.client.stub_data(
       :get_user,
-      :user => {:arn => 'arn:aws:iam::123456789:root'}
+      :user => {:arn => 'arn:aws:iam::123456789:root', :user_id => 'root', :user_name => 'Root', :path => '/', :create_date => Time.now.utc}
     )
     resource.client.stub_responses(:get_user, response)
   end
@@ -58,7 +58,12 @@ describe Authenticator::Amazon do
   end
 
   def aws_allow_list_groups!(resource)
-    response = resource.client.stub_data(:list_groups_for_user, :groups => [:group_name => aws_group_name])
+    response = resource.client.stub_data(
+      :list_groups_for_user,
+      :groups => [
+        {:arn => "arn:aws:group::123456789:group", :path => "/#{aws_group_name}", :group_id => "1", :group_name => aws_group_name, :create_date => Time.now.utc}
+      ]
+    )
     resource.client.stub_responses(:list_groups_for_user, response)
   end
 
