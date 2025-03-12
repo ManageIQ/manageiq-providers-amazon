@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "aws-sdk-core",                 "~> 3.114"
+  spec.add_dependency "aws-sdk-core",                 "~> 3.114", "< 3.220.1"
   spec.add_dependency "aws-sdk-cloudformation",       "~> 1.0"
   spec.add_dependency "aws-sdk-cloudwatch",           "~> 1.0"
   spec.add_dependency "aws-sdk-ec2",                  "~> 1.0"
