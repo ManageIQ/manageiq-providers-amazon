@@ -9361,6 +9361,34 @@ i8g.2xlarge:
   :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
+i8g.48xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: I8G 48xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 48318382080000
+  :instance_store_size_gb: 45000.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 12
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 1649267441664
+  :memory_gb: 1536.0
+  :name: i8g.48xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
 i8g.4xlarge:
   :architecture:
   - :arm64
