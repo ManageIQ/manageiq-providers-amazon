@@ -15963,7 +15963,7 @@ mac2-m2.metal:
   :network_performance: :very_high
   :physical_processor: Apple M2 Chip
   :processor_clock_speed: 3.49 GHz
-  :vcpu: 12
+  :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
 mac2-m2pro.metal:
@@ -15991,7 +15991,7 @@ mac2-m2pro.metal:
   :network_performance: :very_high
   :physical_processor: Apple M2 Pro
   :processor_clock_speed: 3.5 GHz
-  :vcpu: 20
+  :vcpu: 12
   :virtualization_type: []
   :vpc_only: true
 mac2.metal:
@@ -16020,7 +16020,7 @@ mac2.metal:
   :physical_processor: Apple M1 chip with 8-core CPU, 8-core GPU, and 16-core Neural
     Engine
   :processor_clock_speed: 3.2 GHz
-  :vcpu: 12
+  :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
 p2.16xlarge:
@@ -16031,7 +16031,7 @@ p2.16xlarge:
   :current_version: true
   :description: P2 General Purpose GPU 16xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: GPU instance
   :instance_store_size: 0
@@ -16060,7 +16060,7 @@ p2.8xlarge:
   :current_version: true
   :description: P2 General Purpose GPU Eight Extra Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: GPU instance
   :instance_store_size: 0
@@ -16089,7 +16089,7 @@ p2.xlarge:
   :current_version: true
   :description: P2 General Purpose GPU Extra Large
   :ebs_only: true
-  :ebs_optimized_available: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: GPU instance
   :instance_store_size: 0
@@ -16344,14 +16344,14 @@ p5en.48xlarge:
   :current_generation: true
   :current_version: true
   :description: P5EN 48xlarge
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 32641751449600
+  :instance_store_size_gb: 30400.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 8
   :intel_aes_ni: true
   :intel_avx:
   :intel_avx2:
