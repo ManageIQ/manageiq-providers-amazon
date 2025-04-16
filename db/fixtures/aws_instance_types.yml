@@ -7298,7 +7298,7 @@ g6e.12xlarge:
   :cluster_networking:
   :current_generation: true
   :current_version: true
-  :description: G6E 12xlarge
+  :description: G6e Graphics and Machine Learning GPU 12xlarge
   :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
@@ -7326,7 +7326,7 @@ g6e.16xlarge:
   :cluster_networking:
   :current_generation: true
   :current_version: true
-  :description: G6E 16xlarge
+  :description: G6e Graphics and Machine Learning GPU 16xlarge
   :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
@@ -7354,7 +7354,7 @@ g6e.24xlarge:
   :cluster_networking:
   :current_generation: true
   :current_version: true
-  :description: G6E 24xlarge
+  :description: G6e Graphics and Machine Learning GPU 24xlarge
   :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
@@ -7382,7 +7382,7 @@ g6e.2xlarge:
   :cluster_networking:
   :current_generation: true
   :current_version: true
-  :description: G6E Double Extra Large
+  :description: G6e Graphics and Machine Learning GPU Double Extra Large
   :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
@@ -7410,7 +7410,7 @@ g6e.48xlarge:
   :cluster_networking:
   :current_generation: true
   :current_version: true
-  :description: G6E 48xlarge
+  :description: G6e Graphics and Machine Learning GPU 48xlarge
   :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
@@ -7438,7 +7438,7 @@ g6e.4xlarge:
   :cluster_networking:
   :current_generation: true
   :current_version: true
-  :description: G6E Quadruple Extra Large
+  :description: G6e Graphics and Machine Learning GPU Quadruple Extra Large
   :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
@@ -7466,7 +7466,7 @@ g6e.8xlarge:
   :cluster_networking:
   :current_generation: true
   :current_version: true
-  :description: G6E Eight Extra Large
+  :description: G6e Graphics and Machine Learning GPU Eight Extra Large
   :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
@@ -7494,7 +7494,7 @@ g6e.xlarge:
   :cluster_networking:
   :current_generation: true
   :current_version: true
-  :description: G6E Extra Large
+  :description: G6e Graphics and Machine Learning GPU Extra Large
   :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
@@ -9219,6 +9219,62 @@ i7ie.large:
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
   :processor_clock_speed: 4 GHz
   :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+i7ie.metal-24xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: I7IE Metal-24xl
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 64424509440000
+  :instance_store_size_gb: 60000.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 8
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: i7ie.metal-24xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Emerald Rapids)
+  :processor_clock_speed: 4 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+i7ie.metal-48xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: I7IE Metal-48xl
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 128849018880000
+  :instance_store_size_gb: 120000.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 16
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1649267441664
+  :memory_gb: 1536.0
+  :name: i7ie.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Emerald Rapids)
+  :processor_clock_speed: 4 GHz
+  :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
 i7ie.xlarge:
@@ -16315,7 +16371,7 @@ p5e.48xlarge:
   :cluster_networking:
   :current_generation: true
   :current_version: true
-  :description: P5E 48xlarge
+  :description: P5e High Performance Computing GPU 48xlarge
   :ebs_only: true
   :ebs_optimized_available: false
   :enhanced_networking: true
@@ -16343,7 +16399,7 @@ p5en.48xlarge:
   :cluster_networking:
   :current_generation: true
   :current_version: true
-  :description: P5EN 48xlarge
+  :description: P5en High Performance Computing GPU 48xlarge
   :ebs_only: false
   :ebs_optimized_available: true
   :enhanced_networking: true
