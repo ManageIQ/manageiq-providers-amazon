@@ -9021,7 +9021,7 @@ i7ie.12xlarge:
   :name: i7ie.12xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
-  :processor_clock_speed: 4 GHz
+  :processor_clock_speed: 3.2 GHz
   :vcpu: 48
   :virtualization_type: []
   :vpc_only: true
@@ -9049,7 +9049,7 @@ i7ie.18xlarge:
   :name: i7ie.18xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
-  :processor_clock_speed: 4 GHz
+  :processor_clock_speed: 3.2 GHz
   :vcpu: 72
   :virtualization_type: []
   :vpc_only: true
@@ -9077,7 +9077,7 @@ i7ie.24xlarge:
   :name: i7ie.24xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
-  :processor_clock_speed: 4 GHz
+  :processor_clock_speed: 3.2 GHz
   :vcpu: 96
   :virtualization_type: []
   :vpc_only: true
@@ -9105,7 +9105,7 @@ i7ie.2xlarge:
   :name: i7ie.2xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
-  :processor_clock_speed: 4 GHz
+  :processor_clock_speed: 3.2 GHz
   :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
@@ -9133,7 +9133,7 @@ i7ie.3xlarge:
   :name: i7ie.3xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
-  :processor_clock_speed: 4 GHz
+  :processor_clock_speed: 3.2 GHz
   :vcpu: 12
   :virtualization_type: []
   :vpc_only: true
@@ -9161,7 +9161,7 @@ i7ie.48xlarge:
   :name: i7ie.48xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
-  :processor_clock_speed: 4 GHz
+  :processor_clock_speed: 3.2 GHz
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
@@ -9189,7 +9189,7 @@ i7ie.6xlarge:
   :name: i7ie.6xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
-  :processor_clock_speed: 4 GHz
+  :processor_clock_speed: 3.2 GHz
   :vcpu: 24
   :virtualization_type: []
   :vpc_only: true
@@ -9217,7 +9217,7 @@ i7ie.large:
   :name: i7ie.large
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
-  :processor_clock_speed: 4 GHz
+  :processor_clock_speed: 3.2 GHz
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
@@ -9245,7 +9245,7 @@ i7ie.metal-24xl:
   :name: i7ie.metal-24xl
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
-  :processor_clock_speed: 4 GHz
+  :processor_clock_speed: 3.2 GHz
   :vcpu: 96
   :virtualization_type: []
   :vpc_only: true
@@ -9273,7 +9273,7 @@ i7ie.metal-48xl:
   :name: i7ie.metal-48xl
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
-  :processor_clock_speed: 4 GHz
+  :processor_clock_speed: 3.2 GHz
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
@@ -9301,7 +9301,7 @@ i7ie.xlarge:
   :name: i7ie.xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Emerald Rapids)
-  :processor_clock_speed: 4 GHz
+  :processor_clock_speed: 3.2 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
