@@ -1669,6 +1669,6 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventTargetParser do
   def create_ems_event(path)
     event = ManageIQ::Providers::Amazon::CloudManager::EventCatcher::Stream.new(double).send(:parse_event, response(path))
     event_hash = ManageIQ::Providers::Amazon::CloudManager::EventParser.event_to_hash(event, @ems.id)
-    EmsEvent.add(@ems.id, event_hash)
+    EmsEvent.add(@ems.id, event_hash.deep_symbolize_keys)
   end
 end

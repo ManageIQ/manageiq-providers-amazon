@@ -53,13 +53,13 @@ module ManageIQ::Providers::Amazon::CloudManager::EventParser
     end
 
     log_header = "ems_id: [#{ems_id}] " unless ems_id.nil?
-    _log.debug("#{log_header}event: [#{event[:message]}]")
+    _log.debug("#{log_header}event: [#{event_hash[:message]}]")
 
     event_hash
   end
 
   def self.parse_vm_ref(event)
-    resource_type = event["configurationItem"]["resourceType"]
+    resource_type = event.fetch_path("configurationItem", "resourceType")
     # other ways to find the VM?
     event.fetch_path("configurationItem", "resourceId") if resource_type == "AWS::EC2::Instance"
   end
