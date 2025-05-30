@@ -22,12 +22,12 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
   def parse_ems_event_targets(event)
     target_collection = InventoryRefresh::TargetCollection.new(:manager => event.ext_management_system, :event => event)
 
-    case event.full_data["event_source"]
+    case event.full_data[:event_source].to_sym
     when :cloud_watch_api
       collect_cloudwatch_api_references!(target_collection,
-                                         event.full_data.fetch_path("detail", "requestParameters") || {})
+                                         event.full_data.fetch_path(:detail, :requestParameters) || {})
       collect_cloudwatch_api_references!(target_collection,
-                                         event.full_data.fetch_path("detail", "responseElements") || {})
+                                         event.full_data.fetch_path(:detail, :responseElements) || {})
     when :cloud_watch_ec2
       collect_cloudwatch_ec2_references!(target_collection, event.full_data)
     when :cloud_watch_ec2_ebs_snapshot
@@ -52,19 +52,19 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
   end
 
   def collect_cloudwatch_ec2_references!(target_collection, event_data)
-    instance_id = event_data.fetch_path("detail", "instance-id")
+    instance_id = event_data.fetch_path(:detail, :"instance-id")
     add_target(target_collection, :vms, instance_id) if instance_id
   end
 
   def collect_cloudwatch_ec2_ebs_snapshot_references!(target_collection, event_data)
-    if (snapshot_id = event_data.fetch_path('detail', 'snapshot_id'))
+    if (snapshot_id = event_data.fetch_path(:detail, :snapshot_id))
       add_target(target_collection, :cloud_volume_snapshots, snapshot_id.split('/').last)
     end
   end
 
   def collect_config_references!(target_collection, event_data)
-    resource_type = event_data.fetch_path("configurationItem", "resourceType")
-    resource_id   = event_data.fetch_path("configurationItem", "resourceId")
+    resource_type = event_data.fetch_path(:configurationItem, :resourceType)
+    resource_id   = event_data.fetch_path(:configurationItem, :resourceId)
     target_class  = case resource_type
                     when "AWS::EC2::Instance"
                       :vms
@@ -92,33 +92,33 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
     raise "Depth 20 reached when scanning EmsEvent for Targets" if depth > 20
 
     # Cloud
-    add_target(target_collection, :vms, event_data["instanceId"]) if event_data["instanceId"]
-    add_target(target_collection, :miq_templates, event_data["imageId"]) if event_data["imageId"]
-    add_name_target(target_collection, :key_pairs, event_data["keyName"]) if event_data["keyName"]
-    add_target(target_collection, :orchestration_stacks, event_data["stackId"]) if event_data["stackId"]
-    add_target(target_collection, :orchestration_stacks, event_data["stackName"]) if event_data["stackName"]
+    add_target(target_collection, :vms, event_data[:instanceId]) if event_data[:instanceId]
+    add_target(target_collection, :miq_templates, event_data[:imageId]) if event_data[:imageId]
+    add_name_target(target_collection, :key_pairs, event_data[:keyName]) if event_data[:keyName]
+    add_target(target_collection, :orchestration_stacks, event_data[:stackId]) if event_data[:stackId]
+    add_target(target_collection, :orchestration_stacks, event_data[:stackName]) if event_data[:stackName]
     # Network
-    add_target(target_collection, :cloud_networks, event_data["vpcId"]) if event_data["vpcId"]
-    add_target(target_collection, :cloud_networks, event_data.fetch_path("vpc", "vpcId")) if event_data.fetch_path("vpc", "vpcId")
-    if event_data.fetch_path("EnableVpcClassicLinkDnsSupportRequest", "VpcId")
-      add_target(target_collection, :cloud_networks, event_data.fetch_path("EnableVpcClassicLinkDnsSupportRequest", "VpcId"))
+    add_target(target_collection, :cloud_networks, event_data[:vpcId]) if event_data[:vpcId]
+    add_target(target_collection, :cloud_networks, event_data.fetch_path(:vpc, :vpcId)) if event_data.fetch_path(:vpc, :vpcId)
+    if event_data.fetch_path(:EnableVpcClassicLinkDnsSupportRequest, :VpcId)
+      add_target(target_collection, :cloud_networks, event_data.fetch_path(:EnableVpcClassicLinkDnsSupportRequest, :VpcId))
     end
-    add_target(target_collection, :cloud_subnets, event_data["subnetId"]) if event_data["subnetId"]
-    add_target(target_collection, :network_ports, event_data["networkInterfaceId"]) if event_data["networkInterfaceId"]
-    add_target(target_collection, :security_groups, event_data["groupId"]) if event_data["groupId"]
-    add_target(target_collection, :floating_ips, event_data["allocationId"]) if event_data["allocationId"]
-    add_target(target_collection, :floating_ips, event_data["publicIp"]) if event_data["publicIp"]
-    add_target(target_collection, :load_balancers, event_data["loadBalancerName"]) if event_data["loadBalancerName"]
+    add_target(target_collection, :cloud_subnets, event_data[:subnetId]) if event_data[:subnetId]
+    add_target(target_collection, :network_ports, event_data[:networkInterfaceId]) if event_data[:networkInterfaceId]
+    add_target(target_collection, :security_groups, event_data[:groupId]) if event_data[:groupId]
+    add_target(target_collection, :floating_ips, event_data[:allocationId]) if event_data[:allocationId]
+    add_target(target_collection, :floating_ips, event_data[:publicIp]) if event_data[:publicIp]
+    add_target(target_collection, :load_balancers, event_data[:loadBalancerName]) if event_data[:loadBalancerName]
     # Block Storage
 
-    volume_id = event_data["volumeId"] || event_data.dig("ModifyVolumeResponse", "volumeModification", "volumeId")
+    volume_id = event_data[:volumeId] || event_data.dig(:ModifyVolumeResponse, :volumeModification, :volumeId)
     add_target(target_collection, :cloud_volumes, volume_id) if volume_id
 
-    add_target(target_collection, :cloud_volume_snapshots, event_data["snapshotId"]) if event_data["snapshotId"]
+    add_target(target_collection, :cloud_volume_snapshots, event_data[:snapshotId]) if event_data[:snapshotId]
 
     # Service Catalog
-    add_target(target_collection, :service_offerings, event_data["productId"]) if event_data["productId"]
-    add_target(target_collection, :service_instances, event_data["provisionedProductId"]) if event_data["provisionedProductId"]
+    add_target(target_collection, :service_offerings, event_data[:productId]) if event_data[:productId]
+    add_target(target_collection, :service_instances, event_data[:provisionedProductId]) if event_data[:provisionedProductId]
 
     # TODO(lsmola) how to handle tagging? Tagging affects e.g. a name of any resource, but contains only a generic
     # resourceID
@@ -130,19 +130,19 @@ class ManageIQ::Providers::Amazon::CloudManager::EventTargetParser
     # mapping and refresh also snapshot?
 
     # Collect nested references
-    collect_cloudwatch_api_references!(target_collection, event_data["networkInterface"], depth + 1) if event_data["networkInterface"]
-    collect_cloudwatch_api_references!(target_collection, event_data["recordDetail"], depth + 1) if event_data["recordDetail"]
+    collect_cloudwatch_api_references!(target_collection, event_data[:networkInterface], depth + 1) if event_data[:networkInterface]
+    collect_cloudwatch_api_references!(target_collection, event_data[:recordDetail], depth + 1) if event_data[:recordDetail]
 
-    (event_data.fetch_path("groupSet", "items") || []).each do |x|
+    (event_data.fetch_path(:groupSet, :items) || []).each do |x|
       collect_cloudwatch_api_references!(target_collection, x, depth + 1)
     end
-    (event_data.fetch_path("instancesSet", "items") || []).each do |x|
+    (event_data.fetch_path(:instancesSet, :items) || []).each do |x|
       collect_cloudwatch_api_references!(target_collection, x, depth + 1)
     end
-    (event_data.fetch_path("instances") || []).each do |x|
+    (event_data.fetch_path(:instances) || []).each do |x|
       collect_cloudwatch_api_references!(target_collection, x, depth + 1)
     end
-    (event_data.fetch_path("networkInterfaceSet", "items") || []).each do |x|
+    (event_data.fetch_path(:networkInterfaceSet, :items) || []).each do |x|
       collect_cloudwatch_api_references!(target_collection, x, depth + 1)
     end
   end
