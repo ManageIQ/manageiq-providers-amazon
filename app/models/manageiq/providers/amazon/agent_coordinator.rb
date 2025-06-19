@@ -391,7 +391,10 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
 
       unless route_tables.empty?
         _log.debug("Found route tables #{route_tables} on the gateway [#{igw_ids.first}]")
-        subnets = route_tables.map { |rt| rt.associations.first.subnet_id }
+        # From AWS docs: checks if associated with a subnet_id or is the main route table
+        subnets = route_tables.any? do |rt|
+          rt.associations.any? { |assoc| assoc.subnet_id.present? || assoc.main }
+        end
 
         # Now the gateway is proved to have associated route and subnet
         return true if subnets.any?
@@ -411,7 +414,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
       _log.info("KeyPair #{keypair_name} will be created!")
       # Delete from Aws if existing
       ec2.key_pair(keypair_name).try(:delete)
-      ManageIQ::Providers::CloudManager::AuthKeyPair.create_key_pair(@ems.id, :name => keypair_name)
+      ManageIQ::Providers::CloudManager::AuthKeyPair.create_key_pair(@ems.id, "name" => keypair_name)
     end
   end
 
@@ -425,7 +428,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
     ssa_profile.wait_until_exists
 
     find_or_create_role(role_name)
-    ssa_profile.add_role(:role_name => role_name) if ssa_profile.roles.empty?
+    ssa_profile.add_role(:role_name => role_name) if ssa_profile.roles.count.zero?
 
     ssa_profile
   end
