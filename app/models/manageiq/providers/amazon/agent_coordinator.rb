@@ -392,7 +392,7 @@ class ManageIQ::Providers::Amazon::AgentCoordinator
       unless route_tables.empty?
         _log.debug("Found route tables #{route_tables} on the gateway [#{igw_ids.first}]")
         # From AWS docs: checks if associated with a subnet_id or is the main route table
-        subnets = route_tables.any? do |rt|
+        subnets = route_tables.select do |rt|
           rt.associations.any? { |assoc| assoc.subnet_id.present? || assoc.main }
         end
 
