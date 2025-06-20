@@ -14,13 +14,11 @@ class ManageIQ::Providers::Amazon::StorageManager::Ebs < ManageIQ::Providers::St
            :hostname,
            :default_endpoint,
            :endpoints,
-           :cloud_tenants,
-           :volume_availability_zones,
            :to        => :parent_manager,
            :allow_nil => true
 
-  virtual_has_many :cloud_tenants
-  virtual_has_many :volume_availability_zones
+  virtual_has_many :cloud_tenants, :through => :parent_manager
+  virtual_has_many :volume_availability_zones, :through => :parent_manager
 
   supports :block_storage
   supports :cloud_volume
