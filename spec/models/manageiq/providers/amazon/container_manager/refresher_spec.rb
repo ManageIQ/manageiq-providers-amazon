@@ -44,6 +44,7 @@ describe ManageIQ::Providers::Amazon::ContainerManager::Refresher do
     def assert_specific_container_project
       container_project = ems.container_projects.find_by(:name => "kube-system")
       expect(container_project).to have_attributes(
+        :type             => "ManageIQ::Providers::Amazon::ContainerManager::ContainerProject",
         :name             => "kube-system",
         :resource_version => "4"
       )
