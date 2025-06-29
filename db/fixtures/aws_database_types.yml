@@ -784,12 +784,12 @@ db.m7i.large:
   :network_performance: :very_high
   :vcpu: 2
 db.m7i.xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: General purpose
   :memory: 17179869184.0
   :name: db.m7i.xlarge
-  :network_performance: :very_high
+  :network_performance:
   :vcpu: 4
 db.m8g.12xlarge:
   :deprecated: false
@@ -1896,12 +1896,12 @@ db.r7g.xlarge:
   :network_performance: :very_high
   :vcpu: 4
 db.r7i.12xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 412316860416.0
   :name: db.r7i.12xlarge
-  :network_performance: :very_high
+  :network_performance:
   :vcpu: 48
 db.r7i.16xlarge:
   :deprecated: false
