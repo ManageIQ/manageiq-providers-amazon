@@ -261,9 +261,7 @@ c3.2xlarge:
   :physical_processor: Intel Xeon E5-2680 v2 (Ivy Bridge)
   :processor_clock_speed: 2.8 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
-  - :paravirtual
+  :virtualization_type: []
   :vpc_only: false
 c3.4xlarge:
   :architecture:
@@ -292,9 +290,7 @@ c3.4xlarge:
   :physical_processor: Intel Xeon E5-2680 v2 (Ivy Bridge)
   :processor_clock_speed: 2.8 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
-  - :paravirtual
+  :virtualization_type: []
   :vpc_only: false
 c3.8xlarge:
   :architecture:
@@ -323,9 +319,7 @@ c3.8xlarge:
   :physical_processor: Intel Xeon E5-2680 v2 (Ivy Bridge)
   :processor_clock_speed: 2.8 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
-  - :paravirtual
+  :virtualization_type: []
   :vpc_only: false
 c3.large:
   :architecture:
@@ -355,9 +349,7 @@ c3.large:
   :physical_processor: Intel Xeon E5-2680 v2 (Ivy Bridge)
   :processor_clock_speed: 2.8 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
-  - :paravirtual
+  :virtualization_type: []
   :vpc_only: false
 c3.xlarge:
   :architecture:
@@ -386,9 +378,7 @@ c3.xlarge:
   :physical_processor: Intel Xeon E5-2680 v2 (Ivy Bridge)
   :processor_clock_speed: 2.8 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
-  - :paravirtual
+  :virtualization_type: []
   :vpc_only: false
 c4.2xlarge:
   :architecture:
@@ -416,8 +406,7 @@ c4.2xlarge:
   :physical_processor: Intel Xeon E5-2666 v3 (Haswell)
   :processor_clock_speed: 2.9 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c4.4xlarge:
   :architecture:
@@ -445,8 +434,7 @@ c4.4xlarge:
   :physical_processor: Intel Xeon E5-2666 v3 (Haswell)
   :processor_clock_speed: 2.9 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c4.8xlarge:
   :architecture:
@@ -474,8 +462,7 @@ c4.8xlarge:
   :physical_processor: Intel Xeon E5-2666 v3 (Haswell)
   :processor_clock_speed: 2.9 GHz
   :vcpu: 36
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c4.large:
   :architecture:
@@ -503,8 +490,7 @@ c4.large:
   :physical_processor: Intel Xeon E5-2666 v3 (Haswell)
   :processor_clock_speed: 2.9 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c4.xlarge:
   :architecture:
@@ -532,8 +518,7 @@ c4.xlarge:
   :physical_processor: Intel Xeon E5-2666 v3 (Haswell)
   :processor_clock_speed: 2.9 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5.12xlarge:
   :architecture:
@@ -561,8 +546,7 @@ c5.12xlarge:
   :physical_processor: Intel Xeon Platinum 8275L
   :processor_clock_speed: 3.4 GHz
   :vcpu: 48
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5.18xlarge:
   :architecture:
@@ -590,8 +574,7 @@ c5.18xlarge:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 72
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5.24xlarge:
   :architecture:
@@ -619,8 +602,7 @@ c5.24xlarge:
   :physical_processor: Intel Xeon Platinum 8275L
   :processor_clock_speed: 3.4 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5.2xlarge:
   :architecture:
@@ -648,8 +630,7 @@ c5.2xlarge:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5.4xlarge:
   :architecture:
@@ -677,8 +658,7 @@ c5.4xlarge:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5.9xlarge:
   :architecture:
@@ -706,8 +686,7 @@ c5.9xlarge:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 36
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5.large:
   :architecture:
@@ -735,8 +714,7 @@ c5.large:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5.metal:
   :architecture:
@@ -764,8 +742,7 @@ c5.metal:
   :physical_processor: Intel Xeon Platinum 8275L
   :processor_clock_speed: 3.4 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5.xlarge:
   :architecture:
@@ -793,8 +770,7 @@ c5.xlarge:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5a.12xlarge:
   :architecture:
@@ -1270,8 +1246,7 @@ c5d.12xlarge:
   :physical_processor: Intel Xeon Platinum 8275L
   :processor_clock_speed: 3.4 GHz
   :vcpu: 48
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5d.18xlarge:
   :architecture:
@@ -1299,8 +1274,7 @@ c5d.18xlarge:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 72
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5d.24xlarge:
   :architecture:
@@ -1328,8 +1302,7 @@ c5d.24xlarge:
   :physical_processor: Intel Xeon Platinum 8275L
   :processor_clock_speed: 3.4 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5d.2xlarge:
   :architecture:
@@ -1357,8 +1330,7 @@ c5d.2xlarge:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5d.4xlarge:
   :architecture:
@@ -1386,8 +1358,7 @@ c5d.4xlarge:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5d.9xlarge:
   :architecture:
@@ -1415,8 +1386,7 @@ c5d.9xlarge:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 36
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5d.large:
   :architecture:
@@ -1444,8 +1414,7 @@ c5d.large:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5d.metal:
   :architecture:
@@ -1473,8 +1442,7 @@ c5d.metal:
   :physical_processor: Intel Xeon Platinum 8275L
   :processor_clock_speed: 3.4 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5d.xlarge:
   :architecture:
@@ -1502,8 +1470,7 @@ c5d.xlarge:
   :physical_processor: Intel Xeon Platinum 8124M
   :processor_clock_speed: 3.4 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 c5n.18xlarge:
   :architecture:
@@ -2707,6 +2674,34 @@ c6gn.medium:
   :physical_processor: AWS Graviton2 Processor
   :processor_clock_speed: 2.5 GHz
   :vcpu: 1
+  :virtualization_type: []
+  :vpc_only: true
+c6gn.metal:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C6GN Metal
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 137438953472
+  :memory_gb: 128.0
+  :name: c6gn.metal
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton2 Processor
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 64
   :virtualization_type: []
   :vpc_only: true
 c6gn.xlarge:
@@ -5931,8 +5926,7 @@ d2.2xlarge:
   :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 d2.4xlarge:
   :architecture:
@@ -5961,8 +5955,7 @@ d2.4xlarge:
   :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 d2.8xlarge:
   :architecture:
@@ -5991,8 +5984,7 @@ d2.8xlarge:
   :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 36
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 d2.xlarge:
   :architecture:
@@ -6021,8 +6013,7 @@ d2.xlarge:
   :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 d3.2xlarge:
   :architecture:
@@ -6332,6 +6323,34 @@ dl1.24xlarge:
   :vcpu: 96
   :virtualization_type: []
   :vpc_only: true
+dl2q.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: DL2Q 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Machine Learning ASIC Instances
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768.0
+  :name: dl2q.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Platinum 8259 (Cascade Lake)
+  :processor_clock_speed: 2.5 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
 f1.16xlarge:
   :architecture:
   - :x86_64
@@ -6358,8 +6377,7 @@ f1.16xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 f1.2xlarge:
   :architecture:
@@ -6387,8 +6405,7 @@ f1.2xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 f1.4xlarge:
   :architecture:
@@ -6416,8 +6433,7 @@ f1.4xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 f2.12xlarge:
   :architecture:
@@ -6587,8 +6603,7 @@ g3.16xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 g3.4xlarge:
   :architecture:
@@ -6616,8 +6631,7 @@ g3.4xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 g3.8xlarge:
   :architecture:
@@ -6645,8 +6659,7 @@ g3.8xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 g3s.xlarge:
   :architecture:
@@ -7935,8 +7948,7 @@ h1.16xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 h1.2xlarge:
   :architecture:
@@ -7964,8 +7976,7 @@ h1.2xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 h1.4xlarge:
   :architecture:
@@ -7993,8 +8004,7 @@ h1.4xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 h1.8xlarge:
   :architecture:
@@ -8022,8 +8032,7 @@ h1.8xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 hpc6a.48xlarge:
   :architecture:
@@ -8335,8 +8344,7 @@ i2.2xlarge:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 i2.4xlarge:
   :architecture:
@@ -8365,8 +8373,7 @@ i2.4xlarge:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 i2.8xlarge:
   :architecture:
@@ -8395,8 +8402,7 @@ i2.8xlarge:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 i2.large:
   :architecture:
@@ -8425,8 +8431,7 @@ i2.large:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 i2.xlarge:
   :architecture:
@@ -8455,8 +8460,7 @@ i2.xlarge:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 i3.16xlarge:
   :architecture:
@@ -8484,8 +8488,7 @@ i3.16xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 i3.2xlarge:
   :architecture:
@@ -8513,8 +8516,7 @@ i3.2xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 i3.4xlarge:
   :architecture:
@@ -8542,8 +8544,7 @@ i3.4xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 i3.8xlarge:
   :architecture:
@@ -8571,8 +8572,7 @@ i3.8xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 i3.large:
   :architecture:
@@ -8600,8 +8600,7 @@ i3.large:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 i3.metal:
   :architecture:
@@ -8629,8 +8628,7 @@ i3.metal:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 72
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 i3.xlarge:
   :architecture:
@@ -8658,8 +8656,7 @@ i3.xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 i3en.12xlarge:
   :architecture:
@@ -11028,9 +11025,7 @@ m3.2xlarge:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
-  - :paravirtual
+  :virtualization_type: []
   :vpc_only: false
 m3.large:
   :architecture:
@@ -11059,9 +11054,7 @@ m3.large:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
-  - :paravirtual
+  :virtualization_type: []
   :vpc_only: false
 m3.medium:
   :architecture:
@@ -11090,9 +11083,7 @@ m3.medium:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 1
-  :virtualization_type:
-  - :hvm
-  - :paravirtual
+  :virtualization_type: []
   :vpc_only: false
 m3.xlarge:
   :architecture:
@@ -11121,9 +11112,7 @@ m3.xlarge:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
-  - :paravirtual
+  :virtualization_type: []
   :vpc_only: false
 m4.10xlarge:
   :architecture:
@@ -11151,8 +11140,7 @@ m4.10xlarge:
   :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 40
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m4.16xlarge:
   :architecture:
@@ -11180,8 +11168,7 @@ m4.16xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m4.2xlarge:
   :architecture:
@@ -11209,8 +11196,7 @@ m4.2xlarge:
   :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m4.4xlarge:
   :architecture:
@@ -11238,8 +11224,7 @@ m4.4xlarge:
   :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m4.large:
   :architecture:
@@ -11267,8 +11252,7 @@ m4.large:
   :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m4.xlarge:
   :architecture:
@@ -11296,8 +11280,7 @@ m4.xlarge:
   :physical_processor: Intel Xeon E5-2676 v3 (Haswell)
   :processor_clock_speed: 2.4 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5.12xlarge:
   :architecture:
@@ -11325,8 +11308,7 @@ m5.12xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 48
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5.16xlarge:
   :architecture:
@@ -11354,8 +11336,7 @@ m5.16xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5.24xlarge:
   :architecture:
@@ -11383,8 +11364,7 @@ m5.24xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5.2xlarge:
   :architecture:
@@ -11412,8 +11392,7 @@ m5.2xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5.4xlarge:
   :architecture:
@@ -11441,8 +11420,7 @@ m5.4xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5.8xlarge:
   :architecture:
@@ -11470,8 +11448,7 @@ m5.8xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5.large:
   :architecture:
@@ -11499,8 +11476,7 @@ m5.large:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5.metal:
   :architecture:
@@ -11528,8 +11504,7 @@ m5.metal:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5.xlarge:
   :architecture:
@@ -11557,8 +11532,7 @@ m5.xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5a.12xlarge:
   :architecture:
@@ -12034,8 +12008,7 @@ m5d.12xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 48
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5d.16xlarge:
   :architecture:
@@ -12063,8 +12036,7 @@ m5d.16xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5d.24xlarge:
   :architecture:
@@ -12092,8 +12064,7 @@ m5d.24xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5d.2xlarge:
   :architecture:
@@ -12121,8 +12092,7 @@ m5d.2xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5d.4xlarge:
   :architecture:
@@ -12150,8 +12120,7 @@ m5d.4xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5d.8xlarge:
   :architecture:
@@ -12179,8 +12148,7 @@ m5d.8xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5d.large:
   :architecture:
@@ -12208,8 +12176,7 @@ m5d.large:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5d.metal:
   :architecture:
@@ -12237,8 +12204,7 @@ m5d.metal:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5d.xlarge:
   :architecture:
@@ -12266,8 +12232,7 @@ m5d.xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 m5dn.12xlarge:
   :architecture:
@@ -17085,8 +17050,7 @@ p2.16xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 p2.8xlarge:
   :architecture:
@@ -17114,8 +17078,7 @@ p2.8xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 p2.xlarge:
   :architecture:
@@ -17143,8 +17106,7 @@ p2.xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 p3.16xlarge:
   :architecture:
@@ -17172,8 +17134,7 @@ p3.16xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 p3.2xlarge:
   :architecture:
@@ -17201,8 +17162,7 @@ p3.2xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 p3.8xlarge:
   :architecture:
@@ -17230,8 +17190,7 @@ p3.8xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 p3dn.24xlarge:
   :architecture:
@@ -17401,6 +17360,34 @@ p5en.48xlarge:
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
+p6-b200.48xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: P6-B200 High Performance and Machine Learning GPU 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 2199023255552
+  :memory_gb: 2048.0
+  :name: p6-b200.48xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Emerald Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
 r3.2xlarge:
   :architecture:
   - :x86_64
@@ -17428,8 +17415,7 @@ r3.2xlarge:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 r3.4xlarge:
   :architecture:
@@ -17458,8 +17444,7 @@ r3.4xlarge:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 r3.8xlarge:
   :architecture:
@@ -17488,8 +17473,7 @@ r3.8xlarge:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 r3.large:
   :architecture:
@@ -17518,8 +17502,7 @@ r3.large:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 r3.xlarge:
   :architecture:
@@ -17548,8 +17531,7 @@ r3.xlarge:
   :physical_processor: Intel Xeon E5-2670 v2 (Ivy Bridge)
   :processor_clock_speed: 2.5 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: false
 r4.16xlarge:
   :architecture:
@@ -17577,8 +17559,7 @@ r4.16xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r4.2xlarge:
   :architecture:
@@ -17606,8 +17587,7 @@ r4.2xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r4.4xlarge:
   :architecture:
@@ -17635,8 +17615,7 @@ r4.4xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r4.8xlarge:
   :architecture:
@@ -17664,8 +17643,7 @@ r4.8xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r4.large:
   :architecture:
@@ -17693,8 +17671,7 @@ r4.large:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r4.xlarge:
   :architecture:
@@ -17722,8 +17699,7 @@ r4.xlarge:
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5.12xlarge:
   :architecture:
@@ -17751,8 +17727,7 @@ r5.12xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 48
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5.16xlarge:
   :architecture:
@@ -17780,8 +17755,7 @@ r5.16xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5.24xlarge:
   :architecture:
@@ -17809,8 +17783,7 @@ r5.24xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5.2xlarge:
   :architecture:
@@ -17838,8 +17811,7 @@ r5.2xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5.4xlarge:
   :architecture:
@@ -17867,8 +17839,7 @@ r5.4xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5.8xlarge:
   :architecture:
@@ -17896,8 +17867,7 @@ r5.8xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5.large:
   :architecture:
@@ -17925,8 +17895,7 @@ r5.large:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5.metal:
   :architecture:
@@ -17954,8 +17923,7 @@ r5.metal:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5.xlarge:
   :architecture:
@@ -17983,8 +17951,7 @@ r5.xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5a.12xlarge:
   :architecture:
@@ -18712,8 +18679,7 @@ r5d.12xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 48
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5d.16xlarge:
   :architecture:
@@ -18741,8 +18707,7 @@ r5d.16xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5d.24xlarge:
   :architecture:
@@ -18770,8 +18735,7 @@ r5d.24xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5d.2xlarge:
   :architecture:
@@ -18799,8 +18763,7 @@ r5d.2xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5d.4xlarge:
   :architecture:
@@ -18828,8 +18791,7 @@ r5d.4xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5d.8xlarge:
   :architecture:
@@ -18857,8 +18819,7 @@ r5d.8xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5d.large:
   :architecture:
@@ -18886,8 +18847,7 @@ r5d.large:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5d.metal:
   :architecture:
@@ -18915,8 +18875,7 @@ r5d.metal:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 96
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5d.xlarge:
   :architecture:
@@ -18944,8 +18903,7 @@ r5d.xlarge:
   :physical_processor: Intel Xeon Platinum 8175
   :processor_clock_speed: 3.1 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 r5dn.12xlarge:
   :architecture:
@@ -23540,8 +23498,7 @@ t2.2xlarge:
   :physical_processor: Intel Xeon Family
   :processor_clock_speed: Up to 3.3 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 t2.large:
   :architecture:
@@ -23569,8 +23526,7 @@ t2.large:
   :physical_processor: Intel Xeon Family
   :processor_clock_speed: Up to 3.3 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 t2.medium:
   :architecture:
@@ -23599,8 +23555,7 @@ t2.medium:
   :physical_processor: Intel Xeon Family
   :processor_clock_speed: Up to 3.3 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 t2.micro:
   :architecture:
@@ -23629,8 +23584,7 @@ t2.micro:
   :physical_processor: Intel Xeon Family
   :processor_clock_speed: Up to 3.3 GHz
   :vcpu: 1
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 t2.nano:
   :architecture:
@@ -23659,8 +23613,7 @@ t2.nano:
   :physical_processor: Intel Xeon Family
   :processor_clock_speed: Up to 3.3 GHz
   :vcpu: 1
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 t2.small:
   :architecture:
@@ -23689,8 +23642,7 @@ t2.small:
   :physical_processor: Intel Xeon Family
   :processor_clock_speed: Up to 3.3 GHz
   :vcpu: 1
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 t2.xlarge:
   :architecture:
@@ -23718,8 +23670,7 @@ t2.xlarge:
   :physical_processor: Intel Xeon Family
   :processor_clock_speed: Up to 3.3 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 t3.2xlarge:
   :architecture:
@@ -24425,12 +24376,13 @@ u-12tb1.112xlarge:
   :architecture:
   - :x86_64
   :cluster_networking:
-  :current_generation: true
+  :current_generation: false
   :current_version: true
+  :deprecated: true
   :description: U-12TB1 112xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
-  :enhanced_networking: true
+  :ebs_optimized_available: false
+  :enhanced_networking:
   :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
@@ -24481,12 +24433,13 @@ u-18tb1.112xlarge:
   :architecture:
   - :x86_64
   :cluster_networking:
-  :current_generation: true
+  :current_generation: false
   :current_version: true
+  :deprecated: true
   :description: U-18TB1 112xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
-  :enhanced_networking: true
+  :ebs_optimized_available: false
+  :enhanced_networking:
   :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
@@ -24537,12 +24490,13 @@ u-24tb1.112xlarge:
   :architecture:
   - :x86_64
   :cluster_networking:
-  :current_generation: true
+  :current_generation: false
   :current_version: true
+  :deprecated: true
   :description: U-24TB1 112xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
-  :enhanced_networking: true
+  :ebs_optimized_available: false
+  :enhanced_networking:
   :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
@@ -24705,12 +24659,13 @@ u-9tb1.112xlarge:
   :architecture:
   - :x86_64
   :cluster_networking:
-  :current_generation: true
+  :current_generation: false
   :current_version: true
+  :deprecated: true
   :description: U-9TB1 112xlarge
   :ebs_only: true
-  :ebs_optimized_available: true
-  :enhanced_networking: true
+  :ebs_optimized_available: false
+  :enhanced_networking:
   :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
@@ -25059,8 +25014,7 @@ x1.16xlarge:
   :physical_processor: High Frequency Intel Xeon E7-8880 v3 (Haswell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 x1.32xlarge:
   :architecture:
@@ -25088,8 +25042,7 @@ x1.32xlarge:
   :physical_processor: High Frequency Intel Xeon E7-8880 v3 (Haswell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 128
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 x1e.16xlarge:
   :architecture:
@@ -25117,8 +25070,7 @@ x1e.16xlarge:
   :physical_processor: High Frequency Intel Xeon E7-8880 v3 (Haswell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 64
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 x1e.2xlarge:
   :architecture:
@@ -25146,8 +25098,7 @@ x1e.2xlarge:
   :physical_processor: High Frequency Intel Xeon E7-8880 v3 (Haswell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 x1e.32xlarge:
   :architecture:
@@ -25175,8 +25126,7 @@ x1e.32xlarge:
   :physical_processor: High Frequency Intel Xeon E7-8880 v3 (Haswell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 128
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 x1e.4xlarge:
   :architecture:
@@ -25204,8 +25154,7 @@ x1e.4xlarge:
   :physical_processor: High Frequency Intel Xeon E7-8880 v3 (Haswell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 16
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 x1e.8xlarge:
   :architecture:
@@ -25233,8 +25182,7 @@ x1e.8xlarge:
   :physical_processor: High Frequency Intel Xeon E7-8880 v3 (Haswell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 32
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 x1e.xlarge:
   :architecture:
@@ -25262,8 +25210,7 @@ x1e.xlarge:
   :physical_processor: High Frequency Intel Xeon E7-8880 v3 (Haswell)
   :processor_clock_speed: 2.3 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 x2gd.12xlarge:
   :architecture:
@@ -26383,8 +26330,7 @@ z1d.12xlarge:
   :physical_processor: Intel Xeon Platinum 8151
   :processor_clock_speed: 4 GHz
   :vcpu: 48
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 z1d.2xlarge:
   :architecture:
@@ -26412,8 +26358,7 @@ z1d.2xlarge:
   :physical_processor: Intel Xeon Platinum 8151
   :processor_clock_speed: 4 GHz
   :vcpu: 8
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 z1d.3xlarge:
   :architecture:
@@ -26441,8 +26386,7 @@ z1d.3xlarge:
   :physical_processor: Intel Xeon Platinum 8151
   :processor_clock_speed: 4 GHz
   :vcpu: 12
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 z1d.6xlarge:
   :architecture:
@@ -26470,8 +26414,7 @@ z1d.6xlarge:
   :physical_processor: Intel Xeon Platinum 8151
   :processor_clock_speed: 4 GHz
   :vcpu: 24
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 z1d.large:
   :architecture:
@@ -26499,8 +26442,7 @@ z1d.large:
   :physical_processor: Intel Xeon Platinum 8151
   :processor_clock_speed: 4 GHz
   :vcpu: 2
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 z1d.metal:
   :architecture:
@@ -26528,8 +26470,7 @@ z1d.metal:
   :physical_processor: Intel Xeon Platinum 8151
   :processor_clock_speed: 4 GHz
   :vcpu: 48
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true
 z1d.xlarge:
   :architecture:
@@ -26557,6 +26498,5 @@ z1d.xlarge:
   :physical_processor: Intel Xeon Platinum 8151
   :processor_clock_speed: 4 GHz
   :vcpu: 4
-  :virtualization_type:
-  - :hvm
+  :virtualization_type: []
   :vpc_only: true

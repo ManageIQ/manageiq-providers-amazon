@@ -7,6 +7,10 @@ ap-east-1:
   :name: ap-east-1
   :hostname: ec2.ap-east-1.amazonaws.com
   :description: Asia Pacific (Hong Kong)
+ap-east-2:
+  :name: ap-east-2
+  :hostname: ec2.ap-east-2.amazonaws.com
+  :description: Asia Pacific (Taipei)
 ap-northeast-1:
   :name: ap-northeast-1
   :hostname: ec2.ap-northeast-1.amazonaws.com
