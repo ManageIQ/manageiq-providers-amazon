@@ -10,12 +10,12 @@ describe ManageIQ::Providers::Amazon::ContainerManager::Refresher do
     end
 
     let!(:ems) do
-      hostname = Rails.application.secrets.amazon_eks[:hostname]
-      cluster_name = Rails.application.secrets.amazon_eks[:cluster_name]
+      hostname = VcrSecrets.amazon_eks.hostname
+      cluster_name = VcrSecrets.amazon_eks.cluster_name
 
       FactoryBot.create(:ems_amazon_eks, :hostname => hostname, :port => 443, :uid_ems => cluster_name, :zone => zone).tap do |ems|
-        client_id  = Rails.application.secrets.amazon_eks[:client_id]
-        client_key = Rails.application.secrets.amazon_eks[:client_secret]
+        client_id  = VcrSecrets.amazon_eks.client_id
+        client_key = VcrSecrets.amazon_eks.client_secret
 
         ems.update_authentication(:default => {:userid => client_id, :password => client_key})
       end

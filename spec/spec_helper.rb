@@ -11,10 +11,7 @@ require "manageiq/providers/amazon"
 VCR.configure do |config|
   config.ignore_hosts 'codeclimate.com' if ENV['CI']
   config.cassette_library_dir = File.join(ManageIQ::Providers::Amazon::Engine.root, 'spec/vcr_cassettes')
-  config.define_cassette_placeholder(Rails.application.secrets.amazon_eks_defaults[:hostname]) do
-    Rails.application.secrets.amazon_eks[:hostname]
-  end
-  config.define_cassette_placeholder(Rails.application.secrets.amazon_defaults[:client_id]) do
-    Rails.application.secrets.amazon[:client_id]
-  end
+
+  VcrSecrets.define_all_cassette_placeholders(config, :amazon)
+  VcrSecrets.define_all_cassette_placeholders(config, :amazon_eks)
 end
