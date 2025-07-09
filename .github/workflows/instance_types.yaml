@@ -34,6 +34,7 @@ jobs:
         branch: update_aws_instance_types
         author: ManageIQ Bot <bot@manageiq.org>
         committer: ManageIQ Bot <bot@manageiq.org>
+        assignees: agrare
         delete-branch: true
         labels: enhancement
         push-to-fork: miq-bot/manageiq-providers-amazon
