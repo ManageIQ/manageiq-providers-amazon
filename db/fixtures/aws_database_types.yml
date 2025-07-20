@@ -1512,12 +1512,12 @@ db.r6i.32xlarge:
   :network_performance: :very_high
   :vcpu: 128
 db.r6i.4xlarge:
-  :deprecated: false
+  :deprecated: true
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 137438953472.0
   :name: db.r6i.4xlarge
-  :network_performance: :very_high
+  :network_performance:
   :vcpu: 16
 db.r6i.4xlarge.tpc2.mem2x:
   :deprecated: false
