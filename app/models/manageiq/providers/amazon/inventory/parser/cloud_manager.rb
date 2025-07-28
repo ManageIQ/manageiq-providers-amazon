@@ -315,24 +315,27 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::CloudManager < ManageIQ::P
     hardware_network(persister_hardware,
                      instance['private_ip_address'].presence,
                      instance['private_dns_name'].presence,
+                     nil,
                      "private")
 
     hardware_network(persister_hardware,
                      instance['public_ip_address'].presence,
                      instance['public_dns_name'].presence,
+                     instance['ipv_6_address'].presence,
                      "public")
   end
 
-  def hardware_network(persister_hardware, ip_address, hostname, description)
-    unless ip_address.blank?
-      persister.networks.find_or_build_by(
-        :hardware    => persister_hardware,
-        :description => description
-      ).assign_attributes(
-        :ipaddress => ip_address,
-        :hostname  => hostname,
-      )
-    end
+  def hardware_network(persister_hardware, ip_address, hostname, ipv6_address, description)
+    return if ip_address.blank? && ipv6_address.blank?
+
+    persister.networks.find_or_build_by(
+      :hardware    => persister_hardware,
+      :description => description
+    ).assign_attributes(
+      :ipaddress   => ip_address,
+      :ipv6address => ipv6_address,
+      :hostname    => hostname,
+    )
   end
 
   def hardware_disks(persister_hardware, instance, flavor)
