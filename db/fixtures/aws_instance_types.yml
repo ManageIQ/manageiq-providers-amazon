@@ -8609,14 +8609,14 @@ i3.metal:
   :current_generation: true
   :current_version: true
   :description: I3 High I/O Metal
-  :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_only: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Storage optimized
-  :instance_store_size: 16320875724800
-  :instance_store_size_gb: 15200.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 8
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -17367,14 +17367,14 @@ p6-b200.48xlarge:
   :current_generation: true
   :current_version: true
   :description: P6-B200 High Performance and Machine Learning GPU 48xlarge
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 32641751449600
+  :instance_store_size_gb: 30400.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 8
   :intel_aes_ni: true
   :intel_avx:
   :intel_avx2:
