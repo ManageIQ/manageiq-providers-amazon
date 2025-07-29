@@ -69,9 +69,12 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
   def cloud_subnets
     collector.cloud_subnets.each do |subnet|
+      cidr   = subnet['cidr_block']
+      cidr ||= subnet['ipv_6_cidr_block_association_set']&.pluck('ipv_6_cidr_block')&.compact&.first
+
       persister_cloud_subnet = persister.cloud_subnets.find_or_build(subnet['subnet_id']).assign_attributes(
         :name              => get_from_tags(subnet, 'name') || subnet['subnet_id'],
-        :cidr              => subnet['cidr_block'],
+        :cidr              => cidr,
         :status            => subnet['state'].try(:to_s),
         :availability_zone => persister.availability_zones.lazy_find(subnet['availability_zone']),
         :cloud_network     => persister.cloud_networks.lazy_find(subnet['vpc_id']),
