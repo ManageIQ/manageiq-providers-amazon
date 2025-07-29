@@ -300,6 +300,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
         )
       end
 
+      network_port['ipv_6_addresses']&.each do |address|
+        persister.cloud_subnet_network_ports.find_or_build_by(
+          :address      => address['ipv_6_address'],
+          :cloud_subnet => persister.cloud_subnets.lazy_find(network_port['subnet_id']),
+          :network_port => persister_network_port
+        )
+      end
+
       public_ips(network_port)
     end
   end
