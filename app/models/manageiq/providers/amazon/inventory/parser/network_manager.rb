@@ -69,9 +69,12 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
 
   def cloud_subnets
     collector.cloud_subnets.each do |subnet|
+      cidr   = subnet['cidr_block']
+      cidr ||= subnet.dig('ipv_6_cidr_block_association_set', 0, 'ipv_6_cidr_block')
+
       persister_cloud_subnet = persister.cloud_subnets.find_or_build(subnet['subnet_id']).assign_attributes(
         :name              => get_from_tags(subnet, 'name') || subnet['subnet_id'],
-        :cidr              => subnet['cidr_block'],
+        :cidr              => cidr,
         :status            => subnet['state'].try(:to_s),
         :availability_zone => persister.availability_zones.lazy_find(subnet['availability_zone']),
         :cloud_network     => persister.cloud_networks.lazy_find(subnet['vpc_id']),
@@ -292,6 +295,14 @@ class ManageIQ::Providers::Amazon::Inventory::Parser::NetworkManager < ManageIQ:
       network_port['private_ip_addresses'].each do |address|
         persister.cloud_subnet_network_ports.find_or_build_by(
           :address      => address['private_ip_address'],
+          :cloud_subnet => persister.cloud_subnets.lazy_find(network_port['subnet_id']),
+          :network_port => persister_network_port
+        )
+      end
+
+      network_port['ipv_6_addresses']&.each do |address|
+        persister.cloud_subnet_network_ports.find_or_build_by(
+          :address      => address['ipv_6_address'],
           :cloud_subnet => persister.cloud_subnets.lazy_find(network_port['subnet_id']),
           :network_port => persister_network_port
         )
