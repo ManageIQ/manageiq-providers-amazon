@@ -17836,6 +17836,34 @@ p5.48xlarge:
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
+p5.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: P5 Quadruple Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 274877906944
+  :memory_gb: 256
+  :name: p5.4xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 7R13 Processor
+  :processor_clock_speed: 2.95 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
 p5e.48xlarge:
   :architecture:
   - :x86_64
