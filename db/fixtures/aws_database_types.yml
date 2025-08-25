@@ -378,7 +378,7 @@ db.m6gd.xlarge:
 db.m6i.12xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: General purpose
   :memory: 206158430208.0
   :name: db.m6i.12xlarge
   :network_performance: :very_high
@@ -386,7 +386,7 @@ db.m6i.12xlarge:
 db.m6i.16xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: General purpose
   :memory: 274877906944.0
   :name: db.m6i.16xlarge
   :network_performance: :very_high
@@ -394,7 +394,7 @@ db.m6i.16xlarge:
 db.m6i.24xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: General purpose
   :memory: 412316860416.0
   :name: db.m6i.24xlarge
   :network_performance: :very_high
@@ -410,7 +410,7 @@ db.m6i.2xlarge:
 db.m6i.32xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: General purpose
   :memory: 549755813888.0
   :name: db.m6i.32xlarge
   :network_performance: :very_high
@@ -418,7 +418,7 @@ db.m6i.32xlarge:
 db.m6i.4xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: General purpose
   :memory: 68719476736.0
   :name: db.m6i.4xlarge
   :network_performance: :very_high
@@ -762,7 +762,7 @@ db.m7i.48xlarge:
 db.m7i.4xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: General purpose
   :memory: 68719476736.0
   :name: db.m7i.4xlarge
   :network_performance: :very_high
@@ -1458,7 +1458,7 @@ db.r6i.12xlarge.tpc2.mem2x:
 db.r6i.16xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: Memory optimized
   :memory: 549755813888.0
   :name: db.r6i.16xlarge
   :network_performance: :very_high
@@ -1506,7 +1506,7 @@ db.r6i.2xlarge.tpc2.mem8x:
 db.r6i.32xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: Memory optimized
   :memory: 1099511627776.0
   :name: db.r6i.32xlarge
   :network_performance: :very_high
@@ -1602,7 +1602,7 @@ db.r6i.large.tpc1.mem2x:
 db.r6i.xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: Memory optimized
   :memory: 34359738368.0
   :name: db.r6i.xlarge
   :network_performance: :very_high
@@ -1906,7 +1906,7 @@ db.r7i.12xlarge:
 db.r7i.16xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: Memory optimized
   :memory: 549755813888.0
   :name: db.r7i.16xlarge
   :network_performance: :very_high
@@ -2346,7 +2346,7 @@ db.x2iedn.16xlarge:
 db.x2iedn.24xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: Memory optimized
   :memory: 3298534883328.0
   :name: db.x2iedn.24xlarge
   :network_performance: :very_high
@@ -2354,7 +2354,7 @@ db.x2iedn.24xlarge:
 db.x2iedn.2xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: Memory optimized
   :memory: 274877906944.0
   :name: db.x2iedn.2xlarge
   :network_performance: :very_high
@@ -2362,7 +2362,7 @@ db.x2iedn.2xlarge:
 db.x2iedn.32xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: Memory optimized
   :memory: 4398046511104.0
   :name: db.x2iedn.32xlarge
   :network_performance: :very_high
@@ -2370,7 +2370,7 @@ db.x2iedn.32xlarge:
 db.x2iedn.4xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: Memory optimized
   :memory: 549755813888.0
   :name: db.x2iedn.4xlarge
   :network_performance: :very_high
@@ -2386,7 +2386,7 @@ db.x2iedn.8xlarge:
 db.x2iedn.xlarge:
   :deprecated: false
   :ebs_optimized: false
-  :family: AWS Inbound
+  :family: Memory optimized
   :memory: 137438953472.0
   :name: db.x2iedn.xlarge
   :network_performance: :very_high
