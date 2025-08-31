@@ -51,6 +51,10 @@ ap-southeast-5:
   :name: ap-southeast-5
   :hostname: ec2.ap-southeast-5.amazonaws.com
   :description: Asia Pacific (Malaysia)
+ap-southeast-6:
+  :name: ap-southeast-6
+  :hostname: ec2.ap-southeast-6.amazonaws.com
+  :description: Asia Pacific (New Zealand)
 ap-southeast-7:
   :name: ap-southeast-7
   :hostname: ec2.ap-southeast-7.amazonaws.com
