@@ -18282,6 +18282,62 @@ m8i.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+mac-m4.metal:
+  :architecture:
+  - :arm64_mac
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: MAC-M4 Metal
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 2040109465600
+  :instance_store_size_gb: 1900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 25769803776
+  :memory_gb: 24
+  :name: mac-m4.metal
+  :network_performance: :very_high
+  :physical_processor: Apple silicon m4
+  :processor_clock_speed: 4.4 GHz
+  :vcpu: 10
+  :virtualization_type: []
+  :vpc_only: true
+mac-m4pro.metal:
+  :architecture:
+  - :arm64_mac
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: MAC-M4PRO Metal
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 2040109465600
+  :instance_store_size_gb: 1900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 51539607552
+  :memory_gb: 48
+  :name: mac-m4pro.metal
+  :network_performance: :very_high
+  :physical_processor: Apple silicon M4 pro
+  :processor_clock_speed: 4.5 GHz
+  :vcpu: 14
+  :virtualization_type: []
+  :vpc_only: true
 mac1.metal:
   :architecture:
   - :x86_64_mac
