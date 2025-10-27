@@ -187,6 +187,10 @@ us-isob-east-1:
   :name: us-isob-east-1
   :hostname: ec2.us-isob-east-1.sc2s.sgov.gov
   :description: US ISOB East (Ohio)
+us-isob-west-1:
+  :name: us-isob-west-1
+  :hostname: ec2.us-isob-west-1.sc2s.sgov.gov
+  :description: US ISOB West
 eu-isoe-west-1:
   :name: eu-isoe-west-1
   :hostname: ec2.eu-isoe-west-1.cloud.adc-e.uk
