@@ -1991,6 +1991,30 @@ db.r7i.2xlarge:
   :name: db.r7i.2xlarge
   :network_performance: :very_high
   :vcpu: 8
+db.r7i.2xlarge.tpc2.mem4x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 274877906944.0
+  :name: db.r7i.2xlarge.tpc2.mem4x
+  :network_performance: :very_high
+  :vcpu: 8
+db.r7i.2xlarge.tpc2.mem8x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 549755813888.0
+  :name: db.r7i.2xlarge.tpc2.mem8x
+  :network_performance: :very_high
+  :vcpu: 8
+db.r7i.3xlarge.tpc2.mem4x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 412316860416.0
+  :name: db.r7i.3xlarge.tpc2.mem4x
+  :network_performance: :very_high
+  :vcpu: 12
 db.r7i.48xlarge:
   :deprecated: false
   :ebs_optimized: false
@@ -2007,12 +2031,68 @@ db.r7i.4xlarge:
   :name: db.r7i.4xlarge
   :network_performance: :very_high
   :vcpu: 16
+db.r7i.4xlarge.tpc2.mem2x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 274877906944.0
+  :name: db.r7i.4xlarge.tpc2.mem2x
+  :network_performance: :very_high
+  :vcpu: 16
+db.r7i.4xlarge.tpc2.mem3x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 412316860416.0
+  :name: db.r7i.4xlarge.tpc2.mem3x
+  :network_performance: :very_high
+  :vcpu: 16
+db.r7i.4xlarge.tpc2.mem4x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 549755813888.0
+  :name: db.r7i.4xlarge.tpc2.mem4x
+  :network_performance: :very_high
+  :vcpu: 16
+db.r7i.6xlarge.tpc2.mem2x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 412316860416.0
+  :name: db.r7i.6xlarge.tpc2.mem2x
+  :network_performance: :very_high
+  :vcpu: 24
+db.r7i.6xlarge.tpc2.mem4x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 824633720832.0
+  :name: db.r7i.6xlarge.tpc2.mem4x
+  :network_performance: :very_high
+  :vcpu: 24
 db.r7i.8xlarge:
   :deprecated: false
   :ebs_optimized: false
   :family: Memory optimized
   :memory: 274877906944.0
   :name: db.r7i.8xlarge
+  :network_performance: :very_high
+  :vcpu: 32
+db.r7i.8xlarge.tpc2.mem2x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 549755813888.0
+  :name: db.r7i.8xlarge.tpc2.mem2x
+  :network_performance: :very_high
+  :vcpu: 32
+db.r7i.8xlarge.tpc2.mem3x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 824633720832.0
+  :name: db.r7i.8xlarge.tpc2.mem3x
   :network_performance: :very_high
   :vcpu: 32
 db.r7i.large:
@@ -2045,6 +2125,22 @@ db.r7i.xlarge:
   :family: Memory optimized
   :memory: 34359738368.0
   :name: db.r7i.xlarge
+  :network_performance: :very_high
+  :vcpu: 4
+db.r7i.xlarge.tpc2.mem2x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 68719476736.0
+  :name: db.r7i.xlarge.tpc2.mem2x
+  :network_performance: :very_high
+  :vcpu: 4
+db.r7i.xlarge.tpc2.mem4x:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 137438953472.0
+  :name: db.r7i.xlarge.tpc2.mem4x
   :network_performance: :very_high
   :vcpu: 4
 db.r8g.12xlarge:
