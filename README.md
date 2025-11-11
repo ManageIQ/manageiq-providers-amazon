@@ -1,6 +1,6 @@
 # ManageIQ::Providers::Amazon
 
-[![CI](https://github.com/ManageIQ/manageiq-providers-amazon/actions/workflows/ci.yaml/badge.svg?branch=spassky)](https://github.com/ManageIQ/manageiq-providers-amazon/actions/workflows/ci.yaml)
+[![CI](https://github.com/ManageIQ/manageiq-providers-amazon/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/ManageIQ/manageiq-providers-amazon/actions/workflows/ci.yaml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/61cfeaf47807735b8bd8/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/61cfeaf47807735b8bd8/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-providers-amazon/test_coverage)
 
