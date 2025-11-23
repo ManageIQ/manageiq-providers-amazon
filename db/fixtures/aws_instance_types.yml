@@ -19768,6 +19768,34 @@ p6-b200.48xlarge:
   :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
+p6-b300.48xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: P6-B300 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: GPU instance
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2:
+  :intel_turbo: true
+  :memory: 4398046511104
+  :memory_gb: 4096
+  :name: p6-b300.48xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Emerald Rapids)
+  :processor_clock_speed: 3.2 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
 p6e-gb200.36xlarge:
   :architecture:
   - :x86_64
