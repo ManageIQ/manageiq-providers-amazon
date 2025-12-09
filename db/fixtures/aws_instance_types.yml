@@ -5168,6 +5168,342 @@ c7i.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+c8a.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A 12xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 103079215104
+  :memory_gb: 96
+  :name: c8a.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+c8a.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A 16xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 137438953472
+  :memory_gb: 128
+  :name: c8a.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+c8a.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 206158430208
+  :memory_gb: 192
+  :name: c8a.24xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+c8a.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A Double Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 17179869184
+  :memory_gb: 16
+  :name: c8a.2xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+c8a.48xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: c8a.48xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+c8a.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A Quadruple Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 34359738368
+  :memory_gb: 32
+  :name: c8a.4xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+c8a.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 68719476736
+  :memory_gb: 64
+  :name: c8a.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+c8a.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 4294967296
+  :memory_gb: 4
+  :name: c8a.large
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+c8a.medium:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A Medium
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 2147483648
+  :memory_gb: 2
+  :name: c8a.medium
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 1
+  :virtualization_type: []
+  :vpc_only: true
+c8a.metal-24xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A Metal-24xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 206158430208
+  :memory_gb: 192
+  :name: c8a.metal-24xl
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+c8a.metal-48xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: c8a.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+c8a.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8A Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 8589934592
+  :memory_gb: 8
+  :name: c8a.xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
 c8g.12xlarge:
   :architecture:
   - :arm64
@@ -9685,13 +10021,13 @@ i3.metal:
   :intel_avx: true
   :intel_avx2: true
   :intel_turbo: true
-  :memory: 549755813888
-  :memory_gb: 512
+  :memory: 523986010112
+  :memory_gb: 488
   :name: i3.metal
   :network_performance: :very_high
   :physical_processor: Intel Xeon E5-2686 v4 (Broadwell)
   :processor_clock_speed: 2.3 GHz
-  :vcpu: 72
+  :vcpu: 64
   :virtualization_type: []
   :vpc_only: true
 i3.xlarge:
@@ -28679,8 +29015,8 @@ u7i-12tb.224xlarge:
   :intel_avx: true
   :intel_avx2: true
   :intel_turbo: true
-  :memory: 9895604649984
-  :memory_gb: 9216
+  :memory: 13194139533312
+  :memory_gb: 12288
   :name: u7i-12tb.224xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Sapphire Rapids)
@@ -29914,6 +30250,230 @@ x2iezn.metal:
   :physical_processor: Intel Xeon Platinum 8252
   :processor_clock_speed: 4.5 GHz
   :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+x8aedz.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8AEDZ 12xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 1649267441664
+  :memory_gb: 1536
+  :name: x8aedz.12xlarge
+  :network_performance: :37500_megabit
+  :physical_processor: AMD EPYC 9R05 Processor
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+x8aedz.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8AEDZ 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 3298534883328
+  :memory_gb: 3072
+  :name: x8aedz.24xlarge
+  :network_performance: :75000_megabit
+  :physical_processor: AMD EPYC 9R05 Processor
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+x8aedz.3xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8AEDZ 3xlarge
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: x8aedz.3xlarge
+  :network_performance: :up_to_18750_megabit
+  :physical_processor: AMD EPYC 9R05 Processor
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 12
+  :virtualization_type: []
+  :vpc_only: true
+x8aedz.6xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8AEDZ 6xlarge
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 824633720832
+  :memory_gb: 768
+  :name: x8aedz.6xlarge
+  :network_performance: :18750_megabit
+  :physical_processor: AMD EPYC 9R05 Processor
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 24
+  :virtualization_type: []
+  :vpc_only: true
+x8aedz.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8AEDZ Large
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 68719476736
+  :memory_gb: 64
+  :name: x8aedz.large
+  :network_performance: :up_to_18750_megabit
+  :physical_processor: AMD EPYC 9R05 Processor
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+x8aedz.metal-12xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8AEDZ Metal-12xl
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 1649267441664
+  :memory_gb: 1536
+  :name: x8aedz.metal-12xl
+  :network_performance: :37500_megabit
+  :physical_processor: AMD EPYC 9R05 Processor
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+x8aedz.metal-24xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8AEDZ Metal-24xl
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 3298534883328
+  :memory_gb: 3072
+  :name: x8aedz.metal-24xl
+  :network_performance: :75000_megabit
+  :physical_processor: AMD EPYC 9R05 Processor
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+x8aedz.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8AEDZ Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: false
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 137438953472
+  :memory_gb: 128
+  :name: x8aedz.xlarge
+  :network_performance: :up_to_18750_megabit
+  :physical_processor: AMD EPYC 9R05 Processor
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
 x8g.12xlarge:
