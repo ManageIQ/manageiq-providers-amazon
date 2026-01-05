@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "aws-sdk-core",                 "~> 3.114"
   spec.add_dependency "aws-sdk-cloudformation",       "~> 1.0"
-  spec.add_dependency "aws-sdk-cloudwatch",           "~> 1.0"
+  spec.add_dependency "aws-sdk-cloudwatch",           "~> 1.125.0"
   spec.add_dependency "aws-sdk-ec2",                  "~> 1.0"
   spec.add_dependency "aws-sdk-elasticloadbalancing", "~> 1.0"
   spec.add_dependency "aws-sdk-iam",                  "~> 1.0"
