@@ -1,7 +1,7 @@
 require_relative "../aws_helper"
 
 describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
-  let(:vm_name) { 'amazon-perf-vm' }
+  let(:vm_name) { 'i-00bbde5716f0d890b' }
 
   let(:ems) { FactoryBot.create(:ems_amazon_with_authentication) }
   let(:vm)  { FactoryBot.build(:vm_amazon, :ems_ref => vm_name, :ext_management_system => ems) }
@@ -24,16 +24,14 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
     end
 
     it "handles when nothing is collected" do
-      stubbed_responses = {
-        :cloudwatch => {
-          :list_metrics => {}
-        }
-      }
+      stubbed_responses = {:cloudwatch => {:list_metrics => {:metrics => []}}}
+
       with_aws_stubbed(stubbed_responses) do
-        expect(vm.perf_collect_metrics('realtime')).to eq([
-                                                            {"amazon-perf-vm" => described_class::VIM_STYLE_COUNTERS},
-                                                            {"amazon-perf-vm" => {}}
-                                                          ])
+        expect(vm.perf_collect_metrics('realtime'))
+          .to eq([
+            {vm_name => described_class::VIM_STYLE_COUNTERS},
+            {vm_name => {}}
+          ])
       end
     end
 
@@ -56,15 +54,15 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
       }
       with_aws_stubbed(stubbed_responses) do
         expect(vm.perf_collect_metrics('realtime')).to eq([
-                                                            {"amazon-perf-vm" => described_class::VIM_STYLE_COUNTERS},
-                                                            {"amazon-perf-vm" => {}}
+                                                            {vm_name => described_class::VIM_STYLE_COUNTERS},
+                                                            {vm_name => {}}
                                                           ])
       end
     end
   end
 
   context 'counters gathered' do
-    let(:ems) { FactoryBot.create(:ems_amazon_with_vcr_authentication, :provider_region => 'eu-central-1') }
+    let(:ems) { FactoryBot.create(:ems_amazon_with_vcr_authentication, :provider_region => 'us-east-1') }
 
     subject do
       with_vcr_data(cassette_suffix) do
@@ -75,10 +73,10 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
 
     context 'from linux old way' do
       let(:cassette_suffix) { nil }
-      let(:sample_datetime) { '2018-01-18T08:10:20Z' }
+      let(:sample_datetime) { "2026-01-05T18:05:20Z" }
       let(:expected_metrics) do
         {
-          'mem_usage_absolute_average'   => 8.91695700387728, # 'MemoryUtilization'
+          'mem_usage_absolute_average'   => 35.55896550750705, # 'MemoryUtilization'
           'mem_swapped_absolute_average' => 0.0,              # 'SwapUtilization'
         }
       end
@@ -99,11 +97,11 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
 
     context 'from linux with agent' do
       let(:cassette_suffix) { 'ami2' }
-      let(:sample_datetime) { '2019-04-02T13:58:40Z' }
+      let(:sample_datetime) { '2026-01-05T18:25:20Z' }
       let(:expected_metrics) do
         {
-          'mem_usage_absolute_average'   => 91.47303753181924,  # 'mem_used_percent'
-          'mem_swapped_absolute_average' => 23.339932784777773, # 'swap_used_percent'
+          'mem_usage_absolute_average'   => 35.87130545596793,  # 'mem_used_percent'
+          'mem_swapped_absolute_average' => 0.0, # 'swap_used_percent'
         }
       end
       it { should include expected_metrics }
@@ -111,9 +109,10 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
 
     context 'and stored in the database' do
       let(:vm) { FactoryBot.create(:vm_amazon, :ext_management_system => ems) }
+      let(:cassette_suffix) { 'ami2' }
 
       subject do
-        with_vcr_data { vm.perf_capture('realtime', 4.hours.ago) }
+        with_vcr_data(cassette_suffix) { vm.perf_capture('realtime', 4.hours.ago) }
         vm.metrics.reload.last
       end
 
