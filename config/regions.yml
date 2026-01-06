@@ -203,3 +203,7 @@ us-isof-south-1:
   :name: us-isof-south-1
   :hostname: ec2.us-isof-south-1.csp.hci.ic.gov
   :description: US ISOF SOUTH
+eusc-de-east-1:
+  :name: eusc-de-east-1
+  :hostname: ec2.eusc-de-east-1.amazonaws.eu
+  :description: EU (Germany)
