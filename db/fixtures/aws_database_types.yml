@@ -2357,7 +2357,7 @@ db.r8gd.xlarge:
   :family: Memory optimized
   :memory: 34359738368.0
   :name: db.r8gd.xlarge
-  :network_performance: :up_to_12.5
+  :network_performance: :very_high
   :vcpu: 4
 db.t1.micro:
   :deprecated: true

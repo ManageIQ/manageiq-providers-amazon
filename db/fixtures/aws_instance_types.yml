@@ -19496,7 +19496,7 @@ m8gn.12xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19524,7 +19524,7 @@ m8gn.16xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19552,7 +19552,7 @@ m8gn.24xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19580,7 +19580,7 @@ m8gn.2xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19608,7 +19608,7 @@ m8gn.48xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19636,7 +19636,7 @@ m8gn.4xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19664,7 +19664,7 @@ m8gn.8xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19692,7 +19692,7 @@ m8gn.large:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19720,7 +19720,7 @@ m8gn.medium:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19748,7 +19748,7 @@ m8gn.xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27651,7 +27651,7 @@ r8gn.12xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27679,7 +27679,7 @@ r8gn.16xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27707,7 +27707,7 @@ r8gn.24xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27735,7 +27735,7 @@ r8gn.2xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27763,7 +27763,7 @@ r8gn.48xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27791,7 +27791,7 @@ r8gn.4xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27819,7 +27819,7 @@ r8gn.8xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27847,7 +27847,7 @@ r8gn.large:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27875,7 +27875,7 @@ r8gn.medium:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27903,7 +27903,7 @@ r8gn.metal-24xl:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27931,7 +27931,7 @@ r8gn.metal-48xl:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27959,7 +27959,7 @@ r8gn.xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
