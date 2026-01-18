@@ -7871,7 +7871,7 @@ dl2q.24xlarge:
   :current_version: true
   :description: DL2Q 24xlarge
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Machine Learning ASIC Instances
   :instance_store_size: 0
@@ -9722,7 +9722,7 @@ hpc6a.48xlarge:
   :current_version: true
   :description: HPC6A 48xlarge
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -9749,14 +9749,14 @@ hpc6id.32xlarge:
   :current_generation: true
   :current_version: true
   :description: HPC6ID 32xlarge
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Compute optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 16320875724800
+  :instance_store_size_gb: 15200.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -9778,7 +9778,7 @@ hpc7a.12xlarge:
   :current_version: true
   :description: HPC7A 12xlarge Extra Large
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -9806,7 +9806,7 @@ hpc7a.24xlarge:
   :current_version: true
   :description: HPC7A 24xlarge
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -9834,7 +9834,7 @@ hpc7a.48xlarge:
   :current_version: true
   :description: HPC7A 48xlarge
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -9862,7 +9862,7 @@ hpc7a.96xlarge:
   :current_version: true
   :description: HPC7A 96xlarge
   :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Compute optimized
   :instance_store_size: 0
@@ -19496,7 +19496,7 @@ m8gn.12xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19524,7 +19524,7 @@ m8gn.16xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19552,7 +19552,7 @@ m8gn.24xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19580,7 +19580,7 @@ m8gn.2xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19608,7 +19608,7 @@ m8gn.48xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19636,7 +19636,7 @@ m8gn.4xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19664,7 +19664,7 @@ m8gn.8xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19692,7 +19692,7 @@ m8gn.large:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19720,7 +19720,7 @@ m8gn.medium:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -19748,7 +19748,7 @@ m8gn.xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: General purpose
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -20839,14 +20839,14 @@ p5e.48xlarge:
   :current_generation: true
   :current_version: true
   :description: P5e High Performance Computing GPU 48xlarge
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 32641751449600
+  :instance_store_size_gb: 30400.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 8
   :intel_aes_ni: true
   :intel_avx:
   :intel_avx2:
@@ -20923,14 +20923,14 @@ p6-b300.48xlarge:
   :current_generation: true
   :current_version: true
   :description: P6-B300 48xlarge
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: GPU instance
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 32641751449600
+  :instance_store_size_gb: 30400.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 8
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2:
@@ -27651,7 +27651,7 @@ r8gn.12xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27679,7 +27679,7 @@ r8gn.16xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27707,7 +27707,7 @@ r8gn.24xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27735,7 +27735,7 @@ r8gn.2xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27763,7 +27763,7 @@ r8gn.48xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27791,7 +27791,7 @@ r8gn.4xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27819,7 +27819,7 @@ r8gn.8xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27847,7 +27847,7 @@ r8gn.large:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27875,7 +27875,7 @@ r8gn.medium:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27903,7 +27903,7 @@ r8gn.metal-24xl:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27931,7 +27931,7 @@ r8gn.metal-48xl:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -27959,7 +27959,7 @@ r8gn.xlarge:
   :ebs_only: true
   :ebs_optimized_available: true
   :enhanced_networking: true
-  :family: Compute optimized
+  :family: Memory optimized
   :instance_store_size: 0
   :instance_store_size_gb: 0.0
   :instance_store_type:
@@ -29447,14 +29447,14 @@ trn2.48xlarge:
   :current_generation: true
   :current_version: true
   :description: TRN2 48xlarge
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Machine Learning ASIC Instances
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 4
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
@@ -31071,14 +31071,14 @@ x8aedz.12xlarge:
   :current_generation: true
   :current_version: true
   :description: X8AEDZ 12xlarge Extra Large
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx:
   :intel_avx2:
@@ -31086,7 +31086,7 @@ x8aedz.12xlarge:
   :memory: 1649267441664
   :memory_gb: 1536
   :name: x8aedz.12xlarge
-  :network_performance: :37500_megabit
+  :network_performance: :very_high
   :physical_processor: AMD EPYC 9R05 Processor
   :processor_clock_speed: Up to 5 GHz
   :vcpu: 48
@@ -31099,14 +31099,14 @@ x8aedz.24xlarge:
   :current_generation: true
   :current_version: true
   :description: X8AEDZ 24xlarge
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
   :intel_aes_ni: true
   :intel_avx:
   :intel_avx2:
@@ -31114,7 +31114,7 @@ x8aedz.24xlarge:
   :memory: 3298534883328
   :memory_gb: 3072
   :name: x8aedz.24xlarge
-  :network_performance: :75000_megabit
+  :network_performance: :very_high
   :physical_processor: AMD EPYC 9R05 Processor
   :processor_clock_speed: Up to 5 GHz
   :vcpu: 96
@@ -31127,14 +31127,14 @@ x8aedz.3xlarge:
   :current_generation: true
   :current_version: true
   :description: X8AEDZ 3xlarge
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 1020054732800
+  :instance_store_size_gb: 950.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx:
   :intel_avx2:
@@ -31142,7 +31142,7 @@ x8aedz.3xlarge:
   :memory: 412316860416
   :memory_gb: 384
   :name: x8aedz.3xlarge
-  :network_performance: :up_to_18750_megabit
+  :network_performance: :very_high
   :physical_processor: AMD EPYC 9R05 Processor
   :processor_clock_speed: Up to 5 GHz
   :vcpu: 12
@@ -31155,14 +31155,14 @@ x8aedz.6xlarge:
   :current_generation: true
   :current_version: true
   :description: X8AEDZ 6xlarge
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 2040109465600
+  :instance_store_size_gb: 1900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx:
   :intel_avx2:
@@ -31170,7 +31170,7 @@ x8aedz.6xlarge:
   :memory: 824633720832
   :memory_gb: 768
   :name: x8aedz.6xlarge
-  :network_performance: :18750_megabit
+  :network_performance: :very_high
   :physical_processor: AMD EPYC 9R05 Processor
   :processor_clock_speed: Up to 5 GHz
   :vcpu: 24
@@ -31183,14 +31183,14 @@ x8aedz.large:
   :current_generation: true
   :current_version: true
   :description: X8AEDZ Large
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 169651208192
+  :instance_store_size_gb: 158.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx:
   :intel_avx2:
@@ -31198,7 +31198,7 @@ x8aedz.large:
   :memory: 68719476736
   :memory_gb: 64
   :name: x8aedz.large
-  :network_performance: :up_to_18750_megabit
+  :network_performance: :very_high
   :physical_processor: AMD EPYC 9R05 Processor
   :processor_clock_speed: Up to 5 GHz
   :vcpu: 2
@@ -31211,14 +31211,14 @@ x8aedz.metal-12xl:
   :current_generation: true
   :current_version: true
   :description: X8AEDZ Metal-12xl
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx:
   :intel_avx2:
@@ -31226,7 +31226,7 @@ x8aedz.metal-12xl:
   :memory: 1649267441664
   :memory_gb: 1536
   :name: x8aedz.metal-12xl
-  :network_performance: :37500_megabit
+  :network_performance: :very_high
   :physical_processor: AMD EPYC 9R05 Processor
   :processor_clock_speed: Up to 5 GHz
   :vcpu: 48
@@ -31239,14 +31239,14 @@ x8aedz.metal-24xl:
   :current_generation: true
   :current_version: true
   :description: X8AEDZ Metal-24xl
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 8160437862400
+  :instance_store_size_gb: 7600.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 2
   :intel_aes_ni: true
   :intel_avx:
   :intel_avx2:
@@ -31254,7 +31254,7 @@ x8aedz.metal-24xl:
   :memory: 3298534883328
   :memory_gb: 3072
   :name: x8aedz.metal-24xl
-  :network_performance: :75000_megabit
+  :network_performance: :very_high
   :physical_processor: AMD EPYC 9R05 Processor
   :processor_clock_speed: Up to 5 GHz
   :vcpu: 96
@@ -31267,14 +31267,14 @@ x8aedz.xlarge:
   :current_generation: true
   :current_version: true
   :description: X8AEDZ Extra Large
-  :ebs_only: true
-  :ebs_optimized_available: false
+  :ebs_only: false
+  :ebs_optimized_available: true
   :enhanced_networking: true
   :family: Memory optimized
-  :instance_store_size: 0
-  :instance_store_size_gb: 0.0
-  :instance_store_type:
-  :instance_store_volumes: 0
+  :instance_store_size: 339302416384
+  :instance_store_size_gb: 316.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
   :intel_aes_ni: true
   :intel_avx:
   :intel_avx2:
@@ -31282,7 +31282,7 @@ x8aedz.xlarge:
   :memory: 137438953472
   :memory_gb: 128
   :name: x8aedz.xlarge
-  :network_performance: :up_to_18750_megabit
+  :network_performance: :very_high
   :physical_processor: AMD EPYC 9R05 Processor
   :processor_clock_speed: Up to 5 GHz
   :vcpu: 4
@@ -31621,6 +31621,398 @@ x8g.xlarge:
   :network_performance: :very_high
   :physical_processor: AWS Graviton4 Processor
   :processor_clock_speed: 2.7 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
+x8i.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I 12xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768
+  :name: x8i.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+x8i.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I 16xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1099511627776
+  :memory_gb: 1024
+  :name: x8i.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+x8i.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 1649267441664
+  :memory_gb: 1536
+  :name: x8i.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+x8i.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I Double Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 137438953472
+  :memory_gb: 128
+  :name: x8i.2xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+x8i.32xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I 32xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 2199023255552
+  :memory_gb: 2048
+  :name: x8i.32xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
+x8i.48xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 3298534883328
+  :memory_gb: 3072
+  :name: x8i.48xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+x8i.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I Quadruple Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 274877906944
+  :memory_gb: 256
+  :name: x8i.4xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+x8i.64xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I 64xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 4398046511104
+  :memory_gb: 4096
+  :name: x8i.64xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 256
+  :virtualization_type: []
+  :vpc_only: true
+x8i.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 549755813888
+  :memory_gb: 512
+  :name: x8i.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+x8i.96xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I 96xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 6597069766656
+  :memory_gb: 6144
+  :name: x8i.96xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 384
+  :virtualization_type: []
+  :vpc_only: true
+x8i.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 34359738368
+  :memory_gb: 32
+  :name: x8i.large
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+x8i.metal-48xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 3298534883328
+  :memory_gb: 3072
+  :name: x8i.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+x8i.metal-96xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I Metal-96xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 6597069766656
+  :memory_gb: 6144
+  :name: x8i.metal-96xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 384
+  :virtualization_type: []
+  :vpc_only: true
+x8i.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: X8I Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Memory optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 68719476736
+  :memory_gb: 64
+  :name: x8i.xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
