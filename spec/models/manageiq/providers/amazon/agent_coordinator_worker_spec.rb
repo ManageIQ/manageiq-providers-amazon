@@ -27,7 +27,6 @@ describe ManageIQ::Providers::Amazon::AgentCoordinatorWorker do
 
       context "with smartproxy role enabled" do
         before do
-          server.update(:has_vix_disk_lib => true)
           server.role = "smartproxy"
           server.assigned_server_roles.update(:active => true)
         end
