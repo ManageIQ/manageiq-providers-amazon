@@ -10129,7 +10129,7 @@ gr6.4xlarge:
   :memory_gb: 128
   :name: gr6.4xlarge
   :network_performance: :very_high
-  :physical_processor: AMD EPYC 7R32
+  :physical_processor: AMD EPYC 7R13 Processor
   :processor_clock_speed: 2.6 GHz
   :vcpu: 16
   :virtualization_type: []
@@ -10157,7 +10157,7 @@ gr6.8xlarge:
   :memory_gb: 256
   :name: gr6.8xlarge
   :network_performance: :very_high
-  :physical_processor: AMD EPYC 7R32
+  :physical_processor: AMD EPYC 7R13 Processor
   :processor_clock_speed: 2.6 GHz
   :vcpu: 32
   :virtualization_type: []
@@ -10552,6 +10552,34 @@ hpc7g.8xlarge:
   :physical_processor: AWS Graviton3 Processor
   :processor_clock_speed: 2.6 GHz
   :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+hpc8a.96xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: HPC8A 96xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 824633720832
+  :memory_gb: 768
+  :name: hpc8a.96xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9R45 Processor
+  :processor_clock_speed: 4.5 GHz
+  :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
 hs1.8xlarge:
@@ -19147,6 +19175,258 @@ m8a.xlarge:
   :network_performance: :very_high
   :physical_processor: AMD EPYC 9R45 Processor
   :processor_clock_speed: Up to 4.5 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
+m8azn.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8AZN 12xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 206158430208
+  :memory_gb: 192
+  :name: m8azn.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9575F
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+m8azn.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8AZN 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: m8azn.24xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9575F
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+m8azn.3xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8AZN 3xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 51539607552
+  :memory_gb: 48
+  :name: m8azn.3xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9575F
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 12
+  :virtualization_type: []
+  :vpc_only: true
+m8azn.6xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8AZN 6xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 103079215104
+  :memory_gb: 96
+  :name: m8azn.6xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9575F
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 24
+  :virtualization_type: []
+  :vpc_only: true
+m8azn.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8AZN Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 8589934592
+  :memory_gb: 8
+  :name: m8azn.large
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9575F
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+m8azn.medium:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8AZN Medium
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 4294967296
+  :memory_gb: 4
+  :name: m8azn.medium
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9575F
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 1
+  :virtualization_type: []
+  :vpc_only: true
+m8azn.metal-12xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8AZN Metal-12xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 206158430208
+  :memory_gb: 192
+  :name: m8azn.metal-12xl
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9575F
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+m8azn.metal-24xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8AZN Metal-24xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: m8azn.metal-24xl
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9575F
+  :processor_clock_speed: Up to 5 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+m8azn.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8AZN Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 17179869184
+  :memory_gb: 16
+  :name: m8azn.xlarge
+  :network_performance: :very_high
+  :physical_processor: AMD EPYC 9575F
+  :processor_clock_speed: Up to 5 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
