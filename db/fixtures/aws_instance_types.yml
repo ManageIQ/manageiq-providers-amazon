@@ -12522,6 +12522,34 @@ i8g.metal-24xl:
   :vcpu: 96
   :virtualization_type: []
   :vpc_only: true
+i8g.metal-48xl:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: I8G Metal-48xl
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Storage optimized
+  :instance_store_size: 48318382080000
+  :instance_store_size_gb: 45000.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 12
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 1649267441664
+  :memory_gb: 1536
+  :name: i8g.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.7 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
 i8g.xlarge:
   :architecture:
   - :arm64
@@ -20018,6 +20046,62 @@ m8gb.medium:
   :vcpu: 1
   :virtualization_type: []
   :vpc_only: true
+m8gb.metal-24xl:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8GB Metal-24xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: m8gb.metal-24xl
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+m8gb.metal-48xl:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8GB Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 824633720832
+  :memory_gb: 768
+  :name: m8gb.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
 m8gb.xlarge:
   :architecture:
   - :arm64
@@ -20632,6 +20716,62 @@ m8gn.medium:
   :physical_processor: AWS Graviton4 Processor
   :processor_clock_speed: 2.8 GHz
   :vcpu: 1
+  :virtualization_type: []
+  :vpc_only: true
+m8gn.metal-24xl:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8GN Metal-24xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: m8gn.metal-24xl
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+m8gn.metal-48xl:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: M8GN Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 824633720832
+  :memory_gb: 768
+  :name: m8gn.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton4 Processor
+  :processor_clock_speed: 2.8 GHz
+  :vcpu: 192
   :virtualization_type: []
   :vpc_only: true
 m8gn.xlarge:
