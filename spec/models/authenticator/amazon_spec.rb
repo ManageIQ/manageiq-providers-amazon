@@ -79,7 +79,6 @@ describe Authenticator::Amazon do
     allow(User).to receive(:authenticator).and_return(subject)
 
     miq_group = FactoryBot.create(:miq_group, :description => miq_group_name)
-    allow(MiqLdap).to receive(:using_ldap?) { false }
 
     allow_any_instance_of(described_class).to receive(:aws_connect) do |_instance, access_key_id, _secret_access_key, service|
       service ||= :IAM
