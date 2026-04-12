@@ -975,6 +975,102 @@ db.m8gd.xlarge:
   :name: db.m8gd.xlarge
   :network_performance: :very_high
   :vcpu: 4
+db.m8i.12xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 206158430208.0
+  :name: db.m8i.12xlarge
+  :network_performance: :22500_megabit
+  :vcpu: 48
+db.m8i.16xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 274877906944.0
+  :name: db.m8i.16xlarge
+  :network_performance: :30000_megabit
+  :vcpu: 64
+db.m8i.24xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 412316860416.0
+  :name: db.m8i.24xlarge
+  :network_performance: :40000_megabit
+  :vcpu: 96
+db.m8i.2xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 34359738368.0
+  :name: db.m8i.2xlarge
+  :network_performance: :up_to_15000_megabit
+  :vcpu: 8
+db.m8i.32xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 549755813888.0
+  :name: db.m8i.32xlarge
+  :network_performance: :50000_megabit
+  :vcpu: 128
+db.m8i.48xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 824633720832.0
+  :name: db.m8i.48xlarge
+  :network_performance: :75000_megabit
+  :vcpu: 192
+db.m8i.4xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 68719476736.0
+  :name: db.m8i.4xlarge
+  :network_performance: :up_to_15000_megabit
+  :vcpu: 16
+db.m8i.8xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 137438953472.0
+  :name: db.m8i.8xlarge
+  :network_performance: :15000_megabit
+  :vcpu: 32
+db.m8i.large:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 8589934592.0
+  :name: db.m8i.large
+  :network_performance: :up_to_12500_megabit
+  :vcpu: 2
+db.m8i.metal-48xl:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 824633720832.0
+  :name: db.m8i.metal-48xl
+  :network_performance: :75000_megabit
+  :vcpu: 192
+db.m8i.metal-96xl:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 1649267441664.0
+  :name: db.m8i.metal-96xl
+  :network_performance: :100000_megabit
+  :vcpu: 384
+db.m8i.xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 17179869184.0
+  :name: db.m8i.xlarge
+  :network_performance: :up_to_12500_megabit
+  :vcpu: 4
 db.r3.2xlarge:
   :deprecated: true
   :ebs_optimized: true
@@ -2293,7 +2389,7 @@ db.r8gd.12xlarge:
   :family: Memory optimized
   :memory: 412316860416.0
   :name: db.r8gd.12xlarge
-  :network_performance: :22.5
+  :network_performance: :very_high
   :vcpu: 48
 db.r8gd.16xlarge:
   :deprecated: false
@@ -2317,7 +2413,7 @@ db.r8gd.2xlarge:
   :family: Memory optimized
   :memory: 68719476736.0
   :name: db.r8gd.2xlarge
-  :network_performance: :very_high
+  :network_performance: :up_to_15
   :vcpu: 8
 db.r8gd.48xlarge:
   :deprecated: false
@@ -2358,6 +2454,102 @@ db.r8gd.xlarge:
   :memory: 34359738368.0
   :name: db.r8gd.xlarge
   :network_performance: :very_high
+  :vcpu: 4
+db.r8i.12xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 412316860416.0
+  :name: db.r8i.12xlarge
+  :network_performance: :22500_megabit
+  :vcpu: 48
+db.r8i.16xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 549755813888.0
+  :name: db.r8i.16xlarge
+  :network_performance: :30000_megabit
+  :vcpu: 64
+db.r8i.24xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 824633720832.0
+  :name: db.r8i.24xlarge
+  :network_performance: :40000_megabit
+  :vcpu: 96
+db.r8i.2xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 68719476736.0
+  :name: db.r8i.2xlarge
+  :network_performance: :up_to_15000_megabit
+  :vcpu: 8
+db.r8i.32xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 1099511627776.0
+  :name: db.r8i.32xlarge
+  :network_performance: :50000_megabit
+  :vcpu: 128
+db.r8i.48xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 1649267441664.0
+  :name: db.r8i.48xlarge
+  :network_performance: :75000_megabit
+  :vcpu: 192
+db.r8i.4xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 137438953472.0
+  :name: db.r8i.4xlarge
+  :network_performance: :up_to_15000_megabit
+  :vcpu: 16
+db.r8i.8xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 274877906944.0
+  :name: db.r8i.8xlarge
+  :network_performance: :15000_megabit
+  :vcpu: 32
+db.r8i.large:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 17179869184.0
+  :name: db.r8i.large
+  :network_performance: :up_to_12500_megabit
+  :vcpu: 2
+db.r8i.metal-48xl:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 1649267441664.0
+  :name: db.r8i.metal-48xl
+  :network_performance: :75000_megabit
+  :vcpu: 192
+db.r8i.metal-96xl:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 3298534883328.0
+  :name: db.r8i.metal-96xl
+  :network_performance: :100000_megabit
+  :vcpu: 384
+db.r8i.xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: Memory optimized
+  :memory: 34359738368.0
+  :name: db.r8i.xlarge
+  :network_performance: :up_to_12500_megabit
   :vcpu: 4
 db.t1.micro:
   :deprecated: true
