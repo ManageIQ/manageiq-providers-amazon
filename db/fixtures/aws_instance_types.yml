@@ -7408,6 +7408,370 @@ c8i.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+c8ib.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB 12xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 103079215104
+  :memory_gb: 96
+  :name: c8ib.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB 16xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 137438953472
+  :memory_gb: 128
+  :name: c8ib.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 206158430208
+  :memory_gb: 192
+  :name: c8ib.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB Double Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 17179869184
+  :memory_gb: 16
+  :name: c8ib.2xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.32xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB 32xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 274877906944
+  :memory_gb: 256
+  :name: c8ib.32xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.48xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: c8ib.48xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB Quadruple Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 34359738368
+  :memory_gb: 32
+  :name: c8ib.4xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 68719476736
+  :memory_gb: 64
+  :name: c8ib.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.96xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB 96xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768
+  :name: c8ib.96xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 384
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 4294967296
+  :memory_gb: 4
+  :name: c8ib.large
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.metal-48xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: c8ib.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.metal-96xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB Metal-96xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768
+  :name: c8ib.metal-96xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 384
+  :virtualization_type: []
+  :vpc_only: true
+c8ib.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IB Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 8589934592
+  :memory_gb: 8
+  :name: c8ib.xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
 c8id.12xlarge:
   :architecture:
   - :x86_64
@@ -7766,6 +8130,370 @@ c8id.xlarge:
   :memory: 8589934592
   :memory_gb: 8
   :name: c8id.xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
+c8in.12xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN 12xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 103079215104
+  :memory_gb: 96
+  :name: c8in.12xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+c8in.16xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN 16xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 137438953472
+  :memory_gb: 128
+  :name: c8in.16xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+c8in.24xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 206158430208
+  :memory_gb: 192
+  :name: c8in.24xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+c8in.2xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN Double Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 17179869184
+  :memory_gb: 16
+  :name: c8in.2xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+c8in.32xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN 32xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 274877906944
+  :memory_gb: 256
+  :name: c8in.32xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 128
+  :virtualization_type: []
+  :vpc_only: true
+c8in.48xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: c8in.48xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+c8in.4xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN Quadruple Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 34359738368
+  :memory_gb: 32
+  :name: c8in.4xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+c8in.8xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 68719476736
+  :memory_gb: 64
+  :name: c8in.8xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+c8in.96xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN 96xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768
+  :name: c8in.96xlarge
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 384
+  :virtualization_type: []
+  :vpc_only: true
+c8in.large:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 4294967296
+  :memory_gb: 4
+  :name: c8in.large
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+c8in.metal-48xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: c8in.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+c8in.metal-96xl:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN Metal-96xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 824633720832
+  :memory_gb: 768
+  :name: c8in.metal-96xl
+  :network_performance: :very_high
+  :physical_processor: Intel Xeon Scalable (Granite Rapids)
+  :processor_clock_speed: 3.9 GHz
+  :vcpu: 384
+  :virtualization_type: []
+  :vpc_only: true
+c8in.xlarge:
+  :architecture:
+  - :x86_64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C8IN Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx: true
+  :intel_avx2: true
+  :intel_turbo: true
+  :memory: 8589934592
+  :memory_gb: 8
+  :name: c8in.xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Granite Rapids)
   :processor_clock_speed: 3.9 GHz
