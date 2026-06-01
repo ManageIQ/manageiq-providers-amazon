@@ -24022,6 +24022,34 @@ m8ine.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+mac-m3ultra.metal:
+  :architecture:
+  - :arm64_mac
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: MAC-M3ULTRA Metal
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 274877906944
+  :memory_gb: 256
+  :name: mac-m3ultra.metal
+  :network_performance: :very_high
+  :physical_processor: Apple silicon M3 Ultra
+  :processor_clock_speed: 4 GHz
+  :vcpu: 28
+  :virtualization_type: []
+  :vpc_only: true
 mac-m4.metal:
   :architecture:
   - :arm64_mac
