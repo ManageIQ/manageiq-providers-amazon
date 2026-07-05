@@ -199,7 +199,7 @@ c1.medium:
   :name: c1.medium
   :network_performance: :moderate
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed:
+  :processor_clock_speed: 1.8 GHz
   :vcpu: 2
   :virtualization_type:
   - :paravirtual
@@ -229,7 +229,7 @@ c1.xlarge:
   :name: c1.xlarge
   :network_performance: :high
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed:
+  :processor_clock_speed: 1.8 GHz
   :vcpu: 8
   :virtualization_type:
   - :paravirtual
@@ -8668,6 +8668,622 @@ c8ine.xlarge:
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
+c9g.12xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9G 12xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 103079215104
+  :memory_gb: 96
+  :name: c9g.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+c9g.16xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9G 16xlarge Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 137438953472
+  :memory_gb: 128
+  :name: c9g.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+c9g.24xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9G 24xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 206158430208
+  :memory_gb: 192
+  :name: c9g.24xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+c9g.2xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9G Double Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 17179869184
+  :memory_gb: 16
+  :name: c9g.2xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+c9g.48xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9G 48xlarge
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: c9g.48xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+c9g.4xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9G Quadruple Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 34359738368
+  :memory_gb: 32
+  :name: c9g.4xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+c9g.8xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9G Eight Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 68719476736
+  :memory_gb: 64
+  :name: c9g.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+c9g.large:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9G Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 4294967296
+  :memory_gb: 4
+  :name: c9g.large
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+c9g.medium:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9G Medium
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 2147483648
+  :memory_gb: 2
+  :name: c9g.medium
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 1
+  :virtualization_type: []
+  :vpc_only: true
+c9g.metal-48xl:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9G Metal-48xl
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: c9g.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+c9g.xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9G Extra Large
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 8589934592
+  :memory_gb: 8
+  :name: c9g.xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
+c9gd.12xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9GD 12xlarge Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 3060164198400
+  :instance_store_size_gb: 2850.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 3
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 103079215104
+  :memory_gb: 96
+  :name: c9gd.12xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 48
+  :virtualization_type: []
+  :vpc_only: true
+c9gd.16xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9GD 16xlarge Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 4080218931200
+  :instance_store_size_gb: 3800.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 137438953472
+  :memory_gb: 128
+  :name: c9gd.16xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 64
+  :virtualization_type: []
+  :vpc_only: true
+c9gd.24xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9GD 24xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 6120328396800
+  :instance_store_size_gb: 5700.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 3
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 206158430208
+  :memory_gb: 192
+  :name: c9gd.24xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 96
+  :virtualization_type: []
+  :vpc_only: true
+c9gd.2xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9GD Double Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 508953624576
+  :instance_store_size_gb: 474.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 17179869184
+  :memory_gb: 16
+  :name: c9gd.2xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 8
+  :virtualization_type: []
+  :vpc_only: true
+c9gd.48xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9GD 48xlarge
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 12240656793600
+  :instance_store_size_gb: 11400.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 3
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: c9gd.48xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+c9gd.4xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9GD Quadruple Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 1020054732800
+  :instance_store_size_gb: 950.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 34359738368
+  :memory_gb: 32
+  :name: c9gd.4xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 16
+  :virtualization_type: []
+  :vpc_only: true
+c9gd.8xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9GD Eight Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 2040109465600
+  :instance_store_size_gb: 1900.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 68719476736
+  :memory_gb: 64
+  :name: c9gd.8xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 32
+  :virtualization_type: []
+  :vpc_only: true
+c9gd.large:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9GD Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 126701535232
+  :instance_store_size_gb: 118.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 4294967296
+  :memory_gb: 4
+  :name: c9gd.large
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+c9gd.medium:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9GD Medium
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 63350767616
+  :instance_store_size_gb: 59.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 2147483648
+  :memory_gb: 2
+  :name: c9gd.medium
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 1
+  :virtualization_type: []
+  :vpc_only: true
+c9gd.metal-48xl:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9GD Metal-48xl
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 12240656793600
+  :instance_store_size_gb: 11400.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 3
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 412316860416
+  :memory_gb: 384
+  :name: c9gd.metal-48xl
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 192
+  :virtualization_type: []
+  :vpc_only: true
+c9gd.xlarge:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: C9GD Extra Large
+  :ebs_only: false
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: Compute optimized
+  :instance_store_size: 254476812288
+  :instance_store_size_gb: 237.0
+  :instance_store_type: NVMe SSD
+  :instance_store_volumes: 1
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 8589934592
+  :memory_gb: 8
+  :name: c9gd.xlarge
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 4
+  :virtualization_type: []
+  :vpc_only: true
 cc2.8xlarge:
   :architecture:
   - :x86_64
@@ -14142,7 +14758,7 @@ inf1.24xlarge:
   :name: inf1.24xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275CL (Cascade Lake)
-  :processor_clock_speed:
+  :processor_clock_speed: 3.0 GHz
   :vcpu: 96
   :virtualization_type: []
   :vpc_only: true
@@ -14170,7 +14786,7 @@ inf1.2xlarge:
   :name: inf1.2xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275CL (Cascade Lake)
-  :processor_clock_speed:
+  :processor_clock_speed: 3.0 GHz
   :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
@@ -14198,7 +14814,7 @@ inf1.6xlarge:
   :name: inf1.6xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275CL (Cascade Lake)
-  :processor_clock_speed:
+  :processor_clock_speed: 3.0 GHz
   :vcpu: 24
   :virtualization_type: []
   :vpc_only: true
@@ -14226,7 +14842,7 @@ inf1.xlarge:
   :name: inf1.xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Platinum 8275CL (Cascade Lake)
-  :processor_clock_speed:
+  :processor_clock_speed: 3.0 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
@@ -14535,7 +15151,7 @@ m1.large:
   :name: m1.large
   :network_performance: :moderate
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed:
+  :processor_clock_speed: 1.8 GHz
   :vcpu: 2
   :virtualization_type:
   - :paravirtual
@@ -14566,7 +15182,7 @@ m1.medium:
   :name: m1.medium
   :network_performance: :moderate
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed:
+  :processor_clock_speed: 1.8 GHz
   :vcpu: 1
   :virtualization_type:
   - :paravirtual
@@ -14597,7 +15213,7 @@ m1.small:
   :name: m1.small
   :network_performance: :low
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed:
+  :processor_clock_speed: 1.8 GHz
   :vcpu: 1
   :virtualization_type:
   - :paravirtual
@@ -14627,7 +15243,7 @@ m1.xlarge:
   :name: m1.xlarge
   :network_performance: :high
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed:
+  :processor_clock_speed: 1.8 GHz
   :vcpu: 4
   :virtualization_type:
   - :paravirtual
@@ -14657,7 +15273,7 @@ m2.2xlarge:
   :name: m2.2xlarge
   :network_performance: :moderate
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed:
+  :processor_clock_speed: 2.4 GHz
   :vcpu: 4
   :virtualization_type:
   - :paravirtual
@@ -14687,7 +15303,7 @@ m2.4xlarge:
   :name: m2.4xlarge
   :network_performance: :high
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed:
+  :processor_clock_speed: 2.4 GHz
   :vcpu: 8
   :virtualization_type:
   - :paravirtual
@@ -14717,7 +15333,7 @@ m2.xlarge:
   :name: m2.xlarge
   :network_performance: :moderate
   :physical_processor: Intel Xeon Family
-  :processor_clock_speed:
+  :processor_clock_speed: 2.4 GHz
   :vcpu: 2
   :virtualization_type:
   - :paravirtual
@@ -16990,7 +17606,7 @@ m6g.12xlarge:
   :name: m6g.12xlarge
   :network_performance: :very_high
   :physical_processor: AWS Graviton2 Processor
-  :processor_clock_speed:
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 48
   :virtualization_type: []
   :vpc_only: true
@@ -17018,7 +17634,7 @@ m6g.16xlarge:
   :name: m6g.16xlarge
   :network_performance: :very_high
   :physical_processor: AWS Graviton2 Processor
-  :processor_clock_speed:
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 64
   :virtualization_type: []
   :vpc_only: true
@@ -17046,7 +17662,7 @@ m6g.2xlarge:
   :name: m6g.2xlarge
   :network_performance: :very_high
   :physical_processor: AWS Graviton2 Processor
-  :processor_clock_speed:
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 8
   :virtualization_type: []
   :vpc_only: true
@@ -17074,7 +17690,7 @@ m6g.4xlarge:
   :name: m6g.4xlarge
   :network_performance: :very_high
   :physical_processor: AWS Graviton2 Processor
-  :processor_clock_speed:
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 16
   :virtualization_type: []
   :vpc_only: true
@@ -17102,7 +17718,7 @@ m6g.8xlarge:
   :name: m6g.8xlarge
   :network_performance: :very_high
   :physical_processor: AWS Graviton2 Processor
-  :processor_clock_speed:
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 32
   :virtualization_type: []
   :vpc_only: true
@@ -17130,7 +17746,7 @@ m6g.large:
   :name: m6g.large
   :network_performance: :very_high
   :physical_processor: AWS Graviton2 Processor
-  :processor_clock_speed:
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
@@ -17158,7 +17774,7 @@ m6g.medium:
   :name: m6g.medium
   :network_performance: :very_high
   :physical_processor: AWS Graviton2 Processor
-  :processor_clock_speed:
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 1
   :virtualization_type: []
   :vpc_only: true
@@ -17186,7 +17802,7 @@ m6g.metal:
   :name: m6g.metal
   :network_performance: :very_high
   :physical_processor: AWS Graviton2 Processor
-  :processor_clock_speed:
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 64
   :virtualization_type: []
   :vpc_only: true
@@ -17214,7 +17830,7 @@ m6g.xlarge:
   :name: m6g.xlarge
   :network_performance: :very_high
   :physical_processor: AWS Graviton2 Processor
-  :processor_clock_speed:
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 4
   :virtualization_type: []
   :vpc_only: true
@@ -35199,7 +35815,7 @@ t1.micro:
   :name: t1.micro
   :network_performance: :very_low
   :physical_processor: Variable
-  :processor_clock_speed:
+  :processor_clock_speed: 2.5 GHz
   :vcpu: 1
   :virtualization_type:
   - :paravirtual
@@ -36327,7 +36943,7 @@ u-6tb1.112xlarge:
   :name: u-6tb1.112xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Skylake)
-  :processor_clock_speed:
+  :processor_clock_speed: 2.1 GHz
   :vcpu: 448
   :virtualization_type: []
   :vpc_only: true
@@ -36355,7 +36971,7 @@ u-6tb1.56xlarge:
   :name: u-6tb1.56xlarge
   :network_performance: :very_high
   :physical_processor: Intel Xeon Scalable (Skylake)
-  :processor_clock_speed:
+  :processor_clock_speed: 2.1 GHz
   :vcpu: 224
   :virtualization_type: []
   :vpc_only: true
