@@ -5,7 +5,7 @@ http_interactions:
     uri: https://monitoring.eu-central-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=ListMetrics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-091369dd8a8d470ab&Version=2010-08-01
+      string: Action=ListMetrics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=amazon-perf-vm&Version=2010-08-01
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
@@ -51,7 +51,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -61,7 +61,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -71,7 +71,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -81,7 +81,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -91,7 +91,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -101,7 +101,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -111,7 +111,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -121,7 +121,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -131,7 +131,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -141,7 +141,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -151,7 +151,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -161,7 +161,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -171,7 +171,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -181,7 +181,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -191,7 +191,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -201,7 +201,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -211,7 +211,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -221,7 +221,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -231,7 +231,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -241,7 +241,7 @@ http_interactions:
                 <Dimensions>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                 </Dimensions>
               </member>
@@ -255,7 +255,7 @@ http_interactions:
                   </member>
                   <member>
                     <Name>InstanceId</Name>
-                    <Value>i-091369dd8a8d470ab</Value>
+                    <Value>amazon-perf-vm</Value>
                   </member>
                   <member>
                     <Name>Filesystem</Name>
@@ -276,7 +276,7 @@ http_interactions:
     uri: https://monitoring.eu-central-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-091369dd8a8d470ab&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=DiskReadBytes&Namespace=AWS%2FEC2&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=amazon-perf-vm&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=DiskReadBytes&Namespace=AWS%2FEC2&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
@@ -570,7 +570,7 @@ http_interactions:
     uri: https://monitoring.eu-central-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-091369dd8a8d470ab&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=NetworkOut&Namespace=AWS%2FEC2&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=amazon-perf-vm&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=NetworkOut&Namespace=AWS%2FEC2&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
@@ -864,7 +864,7 @@ http_interactions:
     uri: https://monitoring.eu-central-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-091369dd8a8d470ab&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=NetworkIn&Namespace=AWS%2FEC2&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=amazon-perf-vm&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=NetworkIn&Namespace=AWS%2FEC2&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
@@ -1158,7 +1158,7 @@ http_interactions:
     uri: https://monitoring.eu-central-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-091369dd8a8d470ab&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=DiskWriteBytes&Namespace=AWS%2FEC2&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=amazon-perf-vm&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=DiskWriteBytes&Namespace=AWS%2FEC2&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
@@ -1452,7 +1452,7 @@ http_interactions:
     uri: https://monitoring.eu-central-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-091369dd8a8d470ab&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=CPUUtilization&Namespace=AWS%2FEC2&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=amazon-perf-vm&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=CPUUtilization&Namespace=AWS%2FEC2&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
@@ -1746,7 +1746,7 @@ http_interactions:
     uri: https://monitoring.eu-central-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-091369dd8a8d470ab&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=SwapUtilization&Namespace=System%2FLinux&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=amazon-perf-vm&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=SwapUtilization&Namespace=System%2FLinux&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
@@ -2045,7 +2045,7 @@ http_interactions:
     uri: https://monitoring.eu-central-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=i-091369dd8a8d470ab&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=MemoryUtilization&Namespace=System%2FLinux&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
+      string: Action=GetMetricStatistics&Dimensions.member.1.Name=InstanceId&Dimensions.member.1.Value=amazon-perf-vm&EndTime=2018-01-18T12%3A12%3A24Z&MetricName=MemoryUtilization&Namespace=System%2FLinux&Period=60&StartTime=2018-01-18T08%3A07%3A24Z&Statistics.member.1=Average&Version=2010-08-01
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
