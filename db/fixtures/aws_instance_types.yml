@@ -9774,14 +9774,14 @@ dl1.24xlarge:
   :current_generation: true
   :current_version: true
   :description: DL1 24xlarge
-  :ebs_only: false
-  :ebs_optimized_available: true
+  :ebs_only: true
+  :ebs_optimized_available: false
   :enhanced_networking: true
   :family: Machine Learning ASIC Instances
-  :instance_store_size: 4294967296000
-  :instance_store_size_gb: 4000.0
-  :instance_store_type: NVMe SSD
-  :instance_store_volumes: 4
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
   :intel_aes_ni: true
   :intel_avx: true
   :intel_avx2: true
