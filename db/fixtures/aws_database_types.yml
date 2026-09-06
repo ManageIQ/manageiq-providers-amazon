@@ -891,7 +891,7 @@ db.m8g.12xlarge:
   :deprecated: false
   :ebs_optimized: false
   :family: General purpose
-  :memory: 274877906944.0
+  :memory: 206158430208.0
   :name: db.m8g.12xlarge
   :network_performance: :very_high
   :vcpu: 48
@@ -899,7 +899,7 @@ db.m8g.16xlarge:
   :deprecated: false
   :ebs_optimized: false
   :family: General purpose
-  :memory: 412316860416.0
+  :memory: 274877906944.0
   :name: db.m8g.16xlarge
   :network_performance: :very_high
   :vcpu: 64
@@ -907,7 +907,7 @@ db.m8g.24xlarge:
   :deprecated: false
   :ebs_optimized: false
   :family: General purpose
-  :memory: 549755813888.0
+  :memory: 412316860416.0
   :name: db.m8g.24xlarge
   :network_performance: :very_high
   :vcpu: 96
@@ -2645,7 +2645,7 @@ db.r8gd.xlarge:
   :family: Memory optimized
   :memory: 34359738368.0
   :name: db.r8gd.xlarge
-  :network_performance: :up_to_12.5
+  :network_performance: :very_high
   :vcpu: 4
 db.r8i.12xlarge:
   :deprecated: false
