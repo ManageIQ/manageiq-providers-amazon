@@ -68,6 +68,9 @@
       :log_level: INFO
       :response_thread_sleep_seconds: 10
 
+  :ems_eks:
+    :blacklisted_event_names: []
+
 :ems_refresh:
   :ec2:
     :get_private_images: true
@@ -123,6 +126,7 @@
         :poll: 15.seconds
       :event_catcher_amazon_eks:
         :poll: 1.seconds
+        :rails_worker: false
     :queue_worker_base:
       :ems_metrics_collector_worker:
         :ems_metrics_collector_worker_amazon: {}
