@@ -846,7 +846,15 @@ db.m8a.16xlarge:
   :memory: 274877906944.0
   :name: db.m8a.16xlarge
   :network_performance: :very_high
-  :vcpu: 32
+  :vcpu: 64
+db.m8a.24xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 412316860416.0
+  :name: db.m8a.24xlarge
+  :network_performance: :very_high
+  :vcpu: 96
 db.m8a.2xlarge:
   :deprecated: false
   :ebs_optimized: false
@@ -855,6 +863,14 @@ db.m8a.2xlarge:
   :name: db.m8a.2xlarge
   :network_performance: :very_high
   :vcpu: 4
+db.m8a.48xlarge:
+  :deprecated: false
+  :ebs_optimized: false
+  :family: General purpose
+  :memory: 824633720832.0
+  :name: db.m8a.48xlarge
+  :network_performance: :very_high
+  :vcpu: 192
 db.m8a.4xlarge:
   :deprecated: false
   :ebs_optimized: false
@@ -2449,47 +2465,63 @@ db.r7i.xlarge.tpc2.mem4x:
   :vcpu: 4
 db.r8a.12xlarge:
   :deprecated: false
-  :ebs_optimized: false
+  :ebs_optimized: true
   :family: Memory optimized
   :memory: 412316860416.0
   :name: db.r8a.12xlarge
-  :network_performance: :very_high
-  :vcpu: 24
+  :network_performance: :22500_megabit
+  :vcpu: 48
 db.r8a.16xlarge:
   :deprecated: false
-  :ebs_optimized: false
+  :ebs_optimized: true
   :family: Memory optimized
   :memory: 549755813888.0
   :name: db.r8a.16xlarge
   :network_performance: :very_high
-  :vcpu: 32
+  :vcpu: 64
+db.r8a.24xlarge:
+  :deprecated: false
+  :ebs_optimized: true
+  :family: Memory optimized
+  :memory: 824633720832.0
+  :name: db.r8a.24xlarge
+  :network_performance: :very_high
+  :vcpu: 96
 db.r8a.2xlarge:
   :deprecated: false
-  :ebs_optimized: false
+  :ebs_optimized: true
   :family: Memory optimized
   :memory: 68719476736.0
   :name: db.r8a.2xlarge
+  :network_performance: :up_to_15000_megabit
+  :vcpu: 8
+db.r8a.48xlarge:
+  :deprecated: false
+  :ebs_optimized: true
+  :family: Memory optimized
+  :memory: 1649267441664.0
+  :name: db.r8a.48xlarge
   :network_performance: :very_high
-  :vcpu: 4
+  :vcpu: 192
 db.r8a.4xlarge:
   :deprecated: false
-  :ebs_optimized: false
+  :ebs_optimized: true
   :family: Memory optimized
   :memory: 137438953472.0
   :name: db.r8a.4xlarge
   :network_performance: :very_high
-  :vcpu: 8
+  :vcpu: 16
 db.r8a.8xlarge:
   :deprecated: false
-  :ebs_optimized: false
+  :ebs_optimized: true
   :family: Memory optimized
   :memory: 274877906944.0
   :name: db.r8a.8xlarge
   :network_performance: :very_high
-  :vcpu: 16
+  :vcpu: 32
 db.r8a.large:
   :deprecated: false
-  :ebs_optimized: false
+  :ebs_optimized: true
   :family: Memory optimized
   :memory: 17179869184.0
   :name: db.r8a.large
@@ -2497,11 +2529,11 @@ db.r8a.large:
   :vcpu: 2
 db.r8a.xlarge:
   :deprecated: false
-  :ebs_optimized: false
+  :ebs_optimized: true
   :family: Memory optimized
   :memory: 34359738368.0
   :name: db.r8a.xlarge
-  :network_performance: :very_high
+  :network_performance: :up_to_15000_megabit
   :vcpu: 4
 db.r8g.12xlarge:
   :deprecated: false
