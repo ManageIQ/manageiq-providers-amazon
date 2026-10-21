@@ -53,7 +53,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventParser do
       expect(described_class.event_to_hash(event, nil)).to(
         include(
           :vm_ems_ref => 'i-0aeefa44d61669849',
-          :timestamp  => "2017-01-31T15:55:09Z"
+          :timestamp  => "2017-01-31T15:55:09Z",
+          :message    => "EC2 Instance State-change Notification"
         )
       )
     end
@@ -64,7 +65,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventParser do
       expect(described_class.event_to_hash(event, nil)).to(
         include(
           :vm_ems_ref => 'i-0aeefa44d61669849',
-          :timestamp  => "2017-01-31T15:55:38Z"
+          :timestamp  => "2017-01-31T15:55:38Z",
+          :message    => "EC2 Instance State-change Notification"
         )
       )
     end
@@ -75,7 +77,8 @@ describe ManageIQ::Providers::Amazon::CloudManager::EventParser do
       expect(described_class.event_to_hash(event, nil)).to(
         include(
           :vm_ems_ref => 'i-0aeefa44d61669849',
-          :timestamp  => "2017-01-31T15:52:32Z"
+          :timestamp  => "2017-01-31T15:52:32Z",
+          :message    => "EC2 Instance State-change Notification"
         )
       )
     end
