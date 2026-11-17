@@ -26,7 +26,7 @@ describe ManageIQ::Providers::Amazon::CloudManager::MetricsCapture do
     it "handles when nothing is collected" do
       stubbed_responses = {
         :cloudwatch => {
-          :list_metrics => {}
+          :list_metrics => {:metrics => []}
         }
       }
       with_aws_stubbed(stubbed_responses) do
