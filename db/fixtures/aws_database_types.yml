@@ -2565,7 +2565,7 @@ db.r8a.16xlarge:
   :family: Memory optimized
   :memory: 549755813888.0
   :name: db.r8a.16xlarge
-  :network_performance: :30000_megabit
+  :network_performance: :very_high
   :vcpu: 64
 db.r8a.24xlarge:
   :deprecated: false
@@ -2589,7 +2589,7 @@ db.r8a.48xlarge:
   :family: Memory optimized
   :memory: 1649267441664.0
   :name: db.r8a.48xlarge
-  :network_performance: :75000_megabit
+  :network_performance: :very_high
   :vcpu: 192
 db.r8a.4xlarge:
   :deprecated: false
@@ -2605,7 +2605,7 @@ db.r8a.8xlarge:
   :family: Memory optimized
   :memory: 274877906944.0
   :name: db.r8a.8xlarge
-  :network_performance: :very_high
+  :network_performance: :15000_megabit
   :vcpu: 32
 db.r8a.large:
   :deprecated: false
@@ -2613,7 +2613,7 @@ db.r8a.large:
   :family: Memory optimized
   :memory: 17179869184.0
   :name: db.r8a.large
-  :network_performance: :very_high
+  :network_performance: :up_to_15000_megabit
   :vcpu: 2
 db.r8a.xlarge:
   :deprecated: false
@@ -2621,7 +2621,7 @@ db.r8a.xlarge:
   :family: Memory optimized
   :memory: 34359738368.0
   :name: db.r8a.xlarge
-  :network_performance: :up_to_15000_megabit
+  :network_performance: :very_high
   :vcpu: 4
 db.r8g.12xlarge:
   :deprecated: false
@@ -2749,7 +2749,7 @@ db.r8gd.8xlarge:
   :family: Memory optimized
   :memory: 274877906944.0
   :name: db.r8gd.8xlarge
-  :network_performance: :15
+  :network_performance: :very_high
   :vcpu: 32
 db.r8gd.large:
   :deprecated: false
@@ -2765,7 +2765,7 @@ db.r8gd.xlarge:
   :family: Memory optimized
   :memory: 34359738368.0
   :name: db.r8gd.xlarge
-  :network_performance: :up_to_12.5
+  :network_performance: :very_high
   :vcpu: 4
 db.r8i.12xlarge:
   :deprecated: false

@@ -37336,6 +37336,118 @@ t8i.small:
   :vcpu: 2
   :virtualization_type: []
   :vpc_only: true
+t9g.medium:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: T9G Medium
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 4294967296
+  :memory_gb: 4
+  :name: t9g.medium
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+t9g.micro:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: T9G Micro
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 1073741824
+  :memory_gb: 1
+  :name: t9g.micro
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+t9g.nano:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: T9G Nano
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 536870912
+  :memory_gb: 0.5
+  :name: t9g.nano
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
+t9g.small:
+  :architecture:
+  - :arm64
+  :cluster_networking:
+  :current_generation: true
+  :current_version: true
+  :description: T9G Small
+  :ebs_only: true
+  :ebs_optimized_available: true
+  :enhanced_networking: true
+  :family: General purpose
+  :instance_store_size: 0
+  :instance_store_size_gb: 0.0
+  :instance_store_type:
+  :instance_store_volumes: 0
+  :intel_aes_ni: true
+  :intel_avx:
+  :intel_avx2:
+  :intel_turbo:
+  :memory: 2147483648
+  :memory_gb: 2
+  :name: t9g.small
+  :network_performance: :very_high
+  :physical_processor: AWS Graviton5 Processor
+  :processor_clock_speed: 3.3 GHz
+  :vcpu: 2
+  :virtualization_type: []
+  :vpc_only: true
 trn1.2xlarge:
   :architecture:
   - :x86_64
